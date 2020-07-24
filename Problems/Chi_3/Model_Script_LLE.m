@@ -47,8 +47,6 @@
     % starting point of simulation
 
 %% Temporal Evolution
-   
-    L_L          = L_L.Met.Ev_Start_Point(L_L,1);
     L_L.Sol.Temp = tt(L_L.Eq,L_L.Sol.Temp,L_L.Met.Ev_Met);
 
 
