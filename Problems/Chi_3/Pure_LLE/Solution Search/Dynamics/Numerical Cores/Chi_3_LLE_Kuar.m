@@ -1,4 +1,4 @@
-function k_e = Chi_3_LLE_Kuar(F_Psi,Fac_plus,Fac_minus,Eq)
+function k_e = Chi_3_LLE_Kuar(F_Psi,Fac_plus,Fac_minus,Eq,t)
 
     Psi         =                        ifft(F_Psi.*Fac_minus);
 
