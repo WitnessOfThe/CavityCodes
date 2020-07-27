@@ -27,7 +27,7 @@ function Temporal = Runge_Kuarong_Kerr(F_e,gamma_3,Pump,L,dt,nt,NN,Loops,per_loo
 
     shift_back = exp(-1i*L*dt); 
         
-    h = waitbar(0,'Raman Adaptive Runge 5,%');
+    h       = waitbar(0,'Raman Adaptive Runge 5,%');
     
 %%
     N_t                 = 2^15;

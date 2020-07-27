@@ -1,16 +1,16 @@
-    function L_L = Chi_3_LLE_CW(L_L)
+    function CW = Chi_3_LLE_CW(CW)
     %% Solution of Equation
     % 
     % 
     % 
     %
     %
-        coef       = [L_L.Eq.gamma_3^2,-2*L_L.Eq.delta*L_L.Eq.gamma_3,L_L.Eq.delta.^2+(L_L.Eq.kappa_vector(L_L.In.pump_index)/2).^2,-L_L.Eq.h.^2];
+        coef       = [CW.Eq.gamma_3^2,-2*CW.Eq.delta*CW.Eq.gamma_3,CW.Eq.delta.^2+(CW.Eq.kappa_vector(1)/2).^2,-CW.Eq.h.^2];
       
         psi_amp_sq                        = roots( coef );
         psi_amp_sq(imag(psi_amp_sq) ~= 0) = NaN;
         
-        L_L.Sol.CW.Psi    = L_L.Eq.h./(L_L.Eq.delta - 1i*L_L.Eq.kappa_vector(L_L.In.pump_index)/2 -L_L.Eq.gamma_3*psi_amp_sq);
-%       L_L.Solution.CW.Q      = L_L.Eq.gamma_3*L_L.Raman.mu.*psi_amp_sq;
+        CW.Sol.Psi    = CW.Eq.h./(CW.Eq.delta - 1i*CW.Eq.kappa_vector(1)/2 -CW.Eq.gamma_3*psi_amp_sq);
+%       CW.Solution.CW.Q      = CW.Eq.gamma_3*CW.Raman.mu.*psi_amp_sq;
         
     end

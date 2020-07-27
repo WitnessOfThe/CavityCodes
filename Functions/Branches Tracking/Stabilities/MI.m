@@ -1,26 +1,26 @@
-function L_L = MI(L_L)
+function CW = MI(CW)
     
-    tt  = eig(L_L.Met.MI_Matrix(L_L,1,1));
+    tt  = eig(CW.Met.MI_Matrix(CW,1,1));
     
-    Value = zeros(size(tt,1),L_L.Space.N);
+    Value = zeros(size(tt,1),CW.Space.N);
     
-    for j = 1:size(L_L.Sol.CW.Psi)
+    for j = 1:size(CW.Sol.Psi)
         
-        if ~isnan(L_L.Sol.CW.Psi(j)) 
+        if ~isnan(CW.Sol.Psi(j)) 
             
-            for i = 1:L_L.Space.N
+            for i = 1:CW.Space.N
                 
-                tt = eig(L_L.Met.MI_Matrix(L_L,i,j));
+                tt = eig(CW.Met.MI_Matrix(CW,i,j));
                 
                 Value(i,1:size(tt,1)) = tt;
                 
             end
             
-                L_L.Sol.CW.Stab(j).Value   = Value;
+                Sol.CW.Stab(j).Value   = Value;
                 
         else
            
-           L_L.Sol.CW.Stab(j).Value          = sparse(size(tt,1),L_L.Space.N);
+           CW.Sol.Stab(j).Value          = sparse(size(tt,1),Space.N);
            
         end
        
