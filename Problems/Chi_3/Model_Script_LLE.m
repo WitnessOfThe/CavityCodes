@@ -11,7 +11,7 @@
 %% Define Methods
     L_L.Met.Norm           = @Chi_3_LLE_Normalization; % Method which Apply
     % input parameters to equation
-        
+    
     L_L.CW.Met.MI_Matrix   = @Chi_3_LLE_MI_Matrix;     % Method which define
     % MI matrix to solve
     
@@ -25,10 +25,11 @@
     L_L.In.gamma           = 2*pi*10*1000;        % Nonlinear Coefficent
     L_L.In.kappa           = 2*pi*2*10^3;         % LineWidth 
     L_L.In.norm_coeff      = L_L.In.kappa;        % Normalization Coeff
-    L_L.In.delta           = 2E6*2*pi;            % Detunning
-    L_L.In.P               = 0.1;                 % Power in Watts            
+    L_L.In.delta           = -5.911728395061728e+05*2*pi;            % Detunning
+    L_L.In.P               = 0.45;                 % Power in Watts            
     
 %% Now we need to apply input parameters into  a class
+
     L_L                    = L_L.Met.Norm(L_L); % dispersion of the 
         
 %% Solve for CW and Calculate MI
@@ -36,9 +37,8 @@
     L_L.CW                 =               MI(L_L.CW);
 
 %% Some Methods To Run Dynamics
-
-    % equation to solve in Dynamical Simulation
-    
+ 
+    % equation to solve in Dynamical Simulation    
     % starting point of simulation
     
 %%
@@ -47,8 +47,8 @@
     L_L.Temp.Met.Ev_Save        = @Chi_3_LLE_Dyn_Saving;
     
     L_L.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
-    L_L.Temp.Par.CW_num        = 1;
-    L_L.Temp.Par.dt            = 0.001;
+    L_L.Temp.Par.CW_num        = 3;
+    L_L.Temp.Par.dt            = 2E-4;
     L_L.Temp.Par.s_t           = 10;
     L_L.Temp.Par.T             = 100;
     

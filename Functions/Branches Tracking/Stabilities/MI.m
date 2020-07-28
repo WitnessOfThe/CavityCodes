@@ -1,8 +1,8 @@
 function CW = MI(CW)
     
-    tt  = eig(CW.Met.MI_Matrix(CW,1,1));
+  %  tt  = eig(CW.Met.MI_Matrix(CW,1,1));
     
-    Value = zeros(size(tt,1),CW.Space.N);
+    Value = zeros(CW.Space.N,2);
     
     for j = 1:size(CW.Sol.Psi)
         
@@ -16,11 +16,11 @@ function CW = MI(CW)
                 
             end
             
-                Sol.CW.Stab(j).Value   = Value;
+                CW.Stab(j).Value   = Value;
                 
         else
            
-           CW.Sol.Stab(j).Value          = sparse(size(tt,1),Space.N);
+           CW.Stab(j).Value          = sparse(CW.Space.N,2);
            
         end
        
