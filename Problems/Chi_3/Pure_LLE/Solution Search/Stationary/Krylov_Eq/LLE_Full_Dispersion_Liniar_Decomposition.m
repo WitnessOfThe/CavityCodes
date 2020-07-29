@@ -1,6 +1,6 @@
     function g = LLE_Full_Dispersion_Liniar_Decomposition(x,Psi,L_L)
     
-        mask           = L_L.Eq.Shifted.mask;
+        mask           = L_L.Eq.mask;
         psi_hat        = Psi(1:L_L.Space.N).' + 1i*Psi(L_L.Space.N+1:2*L_L.Space.N).';
         V              = Psi(end);%
         
@@ -22,13 +22,13 @@
     %   Polycof            = L_L.Eq.D./factorial(1:size(L_L.Eq.D(1:end),2));
    %    Polycof(1)         = 0;
  
-       omega_j             = L_L.Eq.Shifted.omega_j;  
+       omega_j             = L_L.Eq.omega_j;  
  
     L                   = (L_L.Eq.delta + omega_j );
         
 %%
         Eq = (1i*L_L.Space.k.'.*V -  1i*L.').*x_psi_hat + ...
-             1i*L_L.Eq.Shifted.gamma_Kerr.'.*fft( 2*abs_psi_2.*x_psi + f_psi.^2.*conj(x_psi) )...
+             1i*L_L.Eq.gamma_Kerr.'.*fft( 2*abs_psi_2.*x_psi + f_psi.^2.*conj(x_psi) )...
                                     + 1i.*L_L.Space.k.'.*x_v_hat.*psi_hat;% ,^
                                 
         g_1(1:L_L.Space.N,1)   = real(Eq);

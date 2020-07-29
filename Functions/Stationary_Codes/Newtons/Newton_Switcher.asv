@@ -1,5 +1,5 @@
-function [x0,eps_f,Output]    = Newton_Switcher(Dir,x0,L_L,Delta,Equation,options)
-warning('off','MATLAB:bicgstabl:tooSmallTolerance');
+function [x0,eps_f,Output]    = Newton_Switcher(x0,L_L)
+
     switch Delta.Newton
         
         case 'fsolve'
@@ -8,12 +8,12 @@ warning('off','MATLAB:bicgstabl:tooSmallTolerance');
             
         case 'Manual'
             
-            [x0,eps_f,Output]   = Newton_Manual(Equation,Dir,L_L,x0,Delta);
+            [x0,eps_f,Output]   = Newton_Manual(L_L,x0);
             
         case 'Bc_Grad'
             
-            [x0,eps_f,Output]   = Newton_Manual_bicgstab(Equation,L_L,x0,Delta);
-             
+            [x0,eps_f,Output]   = Newton_Manual_bicgstab(L_L,x0);
+            
     end
     
 end
@@ -49,11 +49,9 @@ function [x0,eps_f,SolveFlag] = Newton_Manual(Equation,Dir,L_L,x0,Delta)
 
 end
 
-    function [x0,eps_f,SolveFlag] = Newton_Manual_bicgstab(Equation,L_L,x0,Delta)
+    function [x0,eps_f,SolveFlag] = Newton_Manual_bicgstab(L_L,x0)
     
         
-        Liniar_decomp = Delta.Liniar_Decomposition;
-        fun           = Equation(x0,L_L);
         eps_f         =  max(abs(fun));
         
         SolveFlag = 1;
@@ -63,7 +61,7 @@ end
         
         while Check > 1
             
-            [dx,flag,relres,iter,resvec] =  bicgstabl(@(t)Liniar_decomp(t,x0,L_L),Equation(x0,L_L),10^-11,300,@(t)LLE_Full_Dispersion_Predonditioner(t,L_L,x0));%,,,,,,,
+            [dx,flag,relres,iter,resvec] =  bicgstabl(@(t)Liniar_decomp(t,x0,L_L),Equation(x0,L_L),10^-11,300,@(t)LLE_Full_Dispersion_Predonditioner(t,L_L,x0));
             
             x0(1,1:end)     = x0' - dx;
             fun             = Equation(x0,L_L);

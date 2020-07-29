@@ -1,10 +1,10 @@
     function M = LLE_Full_Dispersion_Predonditioner(t,L_L,x0)
     
-        mask           = L_L.Eq.Shifted.mask;
+        mask           = L_L.Eq.mask;
         ddt = 10^4;
         
         
-        L                   = L_L.Eq.Shifted.omega_j  + L_L.Eq.delta ;%omega_j;%;();
+        L                   = L_L.Eq.omega_j  + L_L.Eq.delta ;%omega_j;%;();
         L                   =  (1i.*L_L.Space.k.*x0(end) - 1i*L);
 %%
         L                   =  mask.*( L  );%L_L.Eq.delta +  - 1i*L_L.Eq.kappa/2   %L_L.Eq.delta +       %- 1i*L_L.Eq.Shifted.kappa_vector/2                            

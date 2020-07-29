@@ -1,13 +1,14 @@
 function L_L = Chi_3_LLE_Normalization(L_L)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Define Space 
 
         Fundamental_Constants;
-        L_L.CW.Space = Define_Space_Cavity(2^10,2*pi);
-        L_L.Temp.Space = Define_Space_Cavity(2^10,2*pi);
-%       L_L.Dispersion.D       = L_L.In.D;
+        L_L.CW.Space   = Define_Space_Cavity(L_L.In.N,2*pi);
+        L_L.Temp.Space = Define_Space_Cavity(L_L.In.N,2*pi);
+        L_L.Stat.Space = Define_Space_Cavity(L_L.In.N,2*pi);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
- %      m_p                    = round(L_L.In.omega_p/L_L.In.D(1));
+%% Extract Some Cavity Parameters
         
       L_L.In.omega   =  L_L.In.omega_p;
         
@@ -23,6 +24,7 @@ function L_L = Chi_3_LLE_Normalization(L_L)
         coeff                  = L_L.In.norm_coeff;
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CW Constants
 
         L_L.In.eff_index = 1:L_L.CW.Space.N;
         
@@ -42,6 +44,8 @@ function L_L = Chi_3_LLE_Normalization(L_L)
         L_L.CW.Eq.Raman.mu     = 0.18;
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+%% Temp Constants
+
         L_L.Temp.Eq                = L_L.CW.Eq;
         
         L_L.Temp.Eq.omega_j      =  (L_L.In.omega - L_L.In.omega_p... 
@@ -51,4 +55,11 @@ function L_L = Chi_3_LLE_Normalization(L_L)
         L_L.Temp.Eq.kappa_vector =  ones(1,L_L.Temp.Space.N)*L_L.CW.Eq.kappa;
         L_L.Temp.Eq.mode_range   =  [1:350,(L_L.Temp.Space.N-350):L_L.Temp.Space.N];
         L_L.Temp.Eq.L                    =   L_L.Temp.Eq.omega_j  + L_L.CW.Eq.delta;
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
+%% Stat Constants
+
+        L_L.Stat.Eq                = L_L.Temp.Eq;
+        
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
 end
