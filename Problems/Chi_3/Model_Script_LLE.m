@@ -19,7 +19,7 @@
     % CW equation to solve
     
 %% Define Input Parameters in Physical Units
-    L_L.In.N               = 2^11;
+    L_L.In.N               = 2^10;
     L_L.In.eta             = 0.5;                 % Coupling Regime
     L_L.In.omega_p         = 176E12*2*pi;         % Frequency of The Pump     
     L_L.In.D               = 2*pi*[15E9,1000,0,0];% Dispersion Coefficients
@@ -50,8 +50,8 @@
     L_L.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     L_L.Temp.Par.CW_num        = 3;
     L_L.Temp.Par.dt            = 2E-4;
-    L_L.Temp.Par.s_t           = 1;
-    L_L.Temp.Par.T             = 300;
+    L_L.Temp.Par.s_t           = 0.1;
+    L_L.Temp.Par.T             = 100;
     
 %% Temporal Evolution
 
@@ -84,6 +84,7 @@
 %     Delta_Stationary.Newton_tol,'MaxIterations',Delta_Stationary.Newton_iter,...
 %     'StepTolerance',Delta_Stationary.Newton_tol,'OptimalityTolerance',1E-25);%,
 %%
+% 
     L_L.Stat = Run_Branch_Universal(L_L);
 
 
