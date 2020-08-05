@@ -3,6 +3,8 @@ function L_L = Chi_3_LLE_Normalization(L_L)
 %% Define Space 
 
         Fundamental_Constants;
+        
+        L_L.Space      = Define_Space_Cavity(L_L.In.N,2*pi);
         L_L.CW.Space   = Define_Space_Cavity(L_L.In.N,2*pi);
         L_L.Temp.Space = Define_Space_Cavity(L_L.In.N,2*pi);
         L_L.Stat.Space = Define_Space_Cavity(L_L.In.N,2*pi);

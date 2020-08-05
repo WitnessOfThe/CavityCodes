@@ -19,20 +19,21 @@
     % CW equation to solve
     
 %% Define Input Parameters in Physical Units
+
     L_L.In.N               = 2^10;
     L_L.In.eta             = 0.5;                 % Coupling Regime
-    L_L.In.omega_p         = 176E12*2*pi;         % Frequency of The Pump     
+    L_L.In.omega_p         = 200E12*2*pi;         % Frequency of The Pump     
     L_L.In.D               = 2*pi*[15E9,1000,0,0];% Dispersion Coefficients
     L_L.In.gamma           = 2*pi*10*1000;        % Nonlinear Coefficent
     L_L.In.kappa           = 2*pi*2*10^3;         % LineWidth 
     L_L.In.norm_coeff      = L_L.In.kappa;        % Normalization Coeff
-    L_L.In.delta           = -5.911728395061728e+05*2*pi;            % Detunning
-    L_L.In.P               = 0.45;                 % Power in Watts            
+    L_L.In.delta           = -5.9167e+05*2*pi;            % Detunning
+    L_L.In.P               = 0.4833;                 % Power in Watts            
     
 %% Now we need to apply input parameters into  a class
 
     L_L                    = L_L.Met.Norm(L_L); % dispersion of the 
-        
+
 %% Solve for CW and Calculate MI
     L_L.CW                 = L_L.CW.Met.Solve(L_L.CW);
     L_L.CW                 =               MI(L_L.CW);
@@ -51,7 +52,7 @@
     L_L.Temp.Par.CW_num        = 3;
     L_L.Temp.Par.dt            = 2E-4;
     L_L.Temp.Par.s_t           = 0.1;
-    L_L.Temp.Par.T             = 100;
+    L_L.Temp.Par.T             = 500;
     
 %% Temporal Evolution
 
