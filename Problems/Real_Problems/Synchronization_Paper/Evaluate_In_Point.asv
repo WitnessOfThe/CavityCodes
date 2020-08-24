@@ -83,8 +83,7 @@
     
 %%
     Soliton_At_Point_Full_Disersion_Kerr(L_L)
-    
 %%
-
+% 
     L_L.Stat = Stat_In_Guess_Chi_3_LLE_From_Dyn(L_L.Stat);
 

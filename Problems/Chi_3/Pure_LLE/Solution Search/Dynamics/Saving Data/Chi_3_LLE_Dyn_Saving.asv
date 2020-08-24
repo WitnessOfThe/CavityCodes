@@ -9,8 +9,8 @@ function Temp = Chi_3_LLE_Dyn_Saving( F_e,Temp,ni)
         
     elseif ( mod(ni,Temp.Par.s_t/Temp.Par.dt ) == 0) && (ni ~= 0)
         
-        Temp.Sol.Psi(round(ni*Temp.Par.dt/Temp.Par.s_t),:) = F_e/Temp.Space.N;
-        Temp.Sol.t(  round(ni*Temp.Par.dt/Temp.Par.s_t))   = Temp.Par.dt*ni;
+        Temp.Sol.Psi(floor(ni*Temp.Par.dt/Temp.Par.s_t),:) = F_e/Temp.Space.N;
+        Temp.Sol.t(floor(ni*Temp.Par.dt/Temp.Par.s_t))   = Temp.Par.dt*ni;
         
     toc     
     

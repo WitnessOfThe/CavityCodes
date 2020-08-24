@@ -3,7 +3,7 @@ function [Slv,L_L]   = Soliton_At_Point_Full_Disersion_Kerr(L_L)
     Dir                = Finite_Derivatives(L_L.Space.N,L_L.Space.dphi);
     NN                 = 30;
     
-    kappa_vector = linspace(0,L_L.Eq.kappa_vector(L_L.In.pump_index),NN);
+    kappa_vector = linspace(0,L_L.Eq.kappa_vector(1),NN);
     h_vector     = linspace(0,L_L.Eq.h,NN);
     D3           = linspace(0,L_L.Eq.D(3),NN);
     D4           = linspace(0,L_L.Eq.D(4),NN);
@@ -11,10 +11,10 @@ function [Slv,L_L]   = Soliton_At_Point_Full_Disersion_Kerr(L_L)
     
     D = L_L.Eq.D;
     
-    L_L.Eq.kappa   = 0;
-    L_L.Eq.h       = 0;
-    L_L.Eq.D(3:end)    = 0;        
-    Slv                  = Trials(L_L,Delta.Sol_Flag);
+    L_L.Eq.kappa    = 0;
+    L_L.Eq.h        = 0;
+    L_L.Eq.D(3:end) = 0;        
+    Slv             = Trials(L_L,Delta.Sol_Flag);
     
     Delta.Newton  = 'fsolve';
     

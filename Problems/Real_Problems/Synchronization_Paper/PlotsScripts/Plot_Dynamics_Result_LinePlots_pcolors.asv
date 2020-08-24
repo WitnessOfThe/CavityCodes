@@ -1,0 +1,15 @@
+function Plot_Dynamics_Result_LinePlots_pcolors(Temp)
+%%  
+    tt_1 = proPlot(fftshift(Temp.Space.k),Temp.Sol.t,10*log10(abs(fftshift(Temp.Sol.Psi,2)).^2*2*pi),'PlotType','pcolor');
+    tt_2 = tt_1.addData(Temp.Space.phi,Temp.Sol.t,abs(ifft(Temp.Sol.Psi/Temp.Space.N,[],2)).^2,'PlotType','pcolor' );
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    tt_1 = tt_1.addInset();
+
+    tt_1 = tt_1.changeAxisOptions('XLabelText','$\theta$',...
+                         'YLabelText','Power (W)',...  
+                         'FontSize',18 );
+figure(1);
+tt.plotData();
+    
+
+end
