@@ -38,7 +38,8 @@ function [Slv,L_L]   = Soliton_At_Point_Full_Disersion_Kerr(L_L)
 %            Slv      = Newton_Switcher(Dir,Slv,L_L,Delta,@L_L_Soliton_Kerr,options);
 %            
 %        end    
-% %                         
+% %                  
+
      Slv(2*L_L.Space.N+1) = 0;
 % %         
 % % options                      = optimoptions(@fsolve,'CheckGradients',false,'Display',...
@@ -52,7 +53,7 @@ function [Slv,L_L]   = Soliton_At_Point_Full_Disersion_Kerr(L_L)
 %            Slv            = Newton_Switcher(Dir,Slv,L_L,Delta,@L_L_Soliton_Full_Dispersion,options);
 %             
 %         end
-%         
+
     Delta.Newton      = 'Bc_Grad'; %'fsolve'
     Delta.Newton_tol  = 1E-14;  
 
