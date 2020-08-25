@@ -5,8 +5,6 @@
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define Spatial and Spectral Grid Of the Cavity
-
-%    L_L  = Define_Space_Cavity(L_L,2^10,2*pi);
       
 %% Define Methods
     L_L.Met.Norm           = @Chi_3_LLE_Normalization; % Method which Apply
@@ -27,8 +25,10 @@
     L_L.In.gamma           = 2*pi*10*1000;        % Nonlinear Coefficent
     L_L.In.kappa           = 2*pi*2*10^3;         % LineWidth 
     L_L.In.norm_coeff      = L_L.In.kappa;        % Normalization Coeff
-    L_L.In.delta           = -5.9167e+05*2*pi;            % Detunning
-    L_L.In.P               = 0.4833;                 % Power in Watts            
+    L_L.In.delta           = -6.075e+05*2*pi;  
+    L_L.In.P               = 0.13;           
+%    L_L.In.delta           = -5.9167e+05*2*pi;            % Detunning
+%    L_L.In.P               = 0.4833;                 % Power in Watts            
     
 %% Now we need to apply input parameters into  a class
 
@@ -52,9 +52,9 @@
     
     L_L.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     L_L.Temp.Par.CW_num        = 3;
-    L_L.Temp.Par.dt            = 2E-4;
+    L_L.Temp.Par.dt            = 1E-4;
     L_L.Temp.Par.s_t           = 0.1;
-    L_L.Temp.Par.T             = 250;
+    L_L.Temp.Par.T             = 500;
     
 %% Temporal Evolution
 
@@ -70,21 +70,26 @@
     L_L.Stat.Met.Equation             = @LLE_Full_Dispersion_Equation;
     L_L.Stat.Met.Liniar_Decomposition = @LLE_Full_Dispersion_Liniar_Decomposition;
     L_L.Stat.Met.Preconditioner       = @LLE_Full_Dispersion_Predonditioner;
-    L_L.Stat.Met.InitialGuess         = @Soliton_At_Point_Full_Disersion_Kerr;
+    L_L.Stat.Met.InitialGuess         = @Stat_In_Guess_Chi_3_LLE_From_Dyn;
+    L_L.Stat.Met.Prop_Gen             = @Chi3_LLE_Stat_Prop_Gen;
     
     L_L.Stat.Met.Newton               = @Newton_Manual_bicgstab;%'fsolve'
     L_L.Stat.Par.step_tol             = 1E-10;
     L_L.Stat.Par.Stability            = 'No';
     L_L.Stat.Par.variable             = 'delta';  
-    L_L.Stat.Par.first_step           = 1E-2; %min =1E-4/3
+    L_L.Stat.Par.first_step           = 1; %min =1E-4/3
     L_L.Stat.Par.Newton_iter          = 50;      
-    L_L.Stat.Par.Newton_tol           = 1E-8;  
+    L_L.Stat.Par.Newton_tol           = 1E-9;  
     L_L.Stat.Par.Sol_Flag             = '-';
-    
-%%
-    Soliton_At_Point_Full_Disersion_Kerr(L_L)
+    L_L.Stat.Par.i_max                = 200;
     
 %%
 
-    L_L.Stat = Stat_In_Guess_Chi_3_LLE_From_Dyn(L_L.Stat);
+    L_L = Stat_In_Guess_Chi_3_LLE_From_Dyn(L_L);
 
+%%
+L_L.Temp.Eq.norm_coeff = L_L.In.norm_coeff;
+%%%
+Plot_Dynamics_Result_LinePlots_Fields(L_L.Temp)
+Plot_Dynamics_Result_pcolors(L_L.Temp)
+Plot_Dynamics_Result_LinePlots_Spectrums(L_L.Temp)

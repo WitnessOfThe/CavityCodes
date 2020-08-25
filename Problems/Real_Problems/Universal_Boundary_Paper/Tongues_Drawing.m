@@ -33,6 +33,7 @@
     L_L.In.delta           = -5.9167e+05*2*pi;    % Detunning
     L_L.In.P               = 0.4833;              % Power in Watts            
 %%
+
 %     L_L.In.N               = 2^5;
 %     L_L.In.eta             = 0.5;                 % Coupling Regime
 %     L_L.In.omega_p         = 200E12*2*pi;         % Frequency of The Pump     

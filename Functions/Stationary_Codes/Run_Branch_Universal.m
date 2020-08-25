@@ -1,10 +1,12 @@
 function Stat = Run_Branch_Universal(L_L)
            
     x_0             =   set_up(L_L.Stat);  
-    Slv_start       =   L_L.Stat.Met.InitialGuess(L_L);
+    L_L             =  L_L.Stat.Met.InitialGuess(L_L);
     
-    Stat_1          =   Branch(Slv_start,x_0,L_L.Stat, 1);    
-    Stat_2          =   Branch(Slv_start,x_0,L_L.Stat,-1);
+    Slv_Start       =  [real(L_L.Stat.Sol.Psi_k(end,:))*L_L.Temp.Space.N,imag(L_L.Stat.Sol.Psi_k(end,:))*L_L.Temp.Space.N,L_L.Stat.Sol.V];
+    
+    Stat_1          =   Branch(Slv_Start,x_0,L_L.Stat, 1);    
+    Stat_2          =   Branch(Slv_Start,x_0,L_L.Stat,-1);
     
     Stat            =   [fliplr(Stat_1),Stat_2];
 

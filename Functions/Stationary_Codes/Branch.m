@@ -3,7 +3,7 @@
         Slv        = Slv_start;
         i          = 0;
         Exitflag   = 1;
-        x_step     = Delta.first_step;
+        x_step     = L_L.Par.first_step;
         x          = x_0;
         L_L_1      = L_L;
         
@@ -23,16 +23,16 @@
                         
             Slv_0 = Slv;
             
-            while (Exitflag == 0) && (Delta.step_tol < x_step)
+            while (Exitflag == 0) && (L_L.Par.step_tol < x_step)
                 
                 L_L_1(i)             = step_eq(L_L_1(i),x);
                                        
                 [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,L_L_1(i));
 
-                [i,norm(eps_f),x_step];
+                [i,norm(eps_f),x_step]
                 
                 L_L_1(i).Solution    = struct;
-                L_L_1(i)             = Prop_gen(L_L_1(i),Slv);     
+                L_L_1(i)             = L_L.Met.Prop_Gen(Slv,L_L_1(i));     
                 
                 [Breakflag,L_L_1] = fail_check_step_sizing(L_L_1,i);
                 
@@ -64,12 +64,12 @@
                 
             end
             
-            switch Delta.Stability
+            switch L_L.Par.Stability
                 
                 case 'Yes'
                     
                     L_L_1(i).Sol.Linear_Stability = struct;
-                    L_L_1(i)                      = Stability_Switcher(Dir,Delta,L_L_1(i));
+                    L_L_1(i)                      = Stability_Switcher(L_L_1(i));
                     
                 case 'No'
                     
@@ -98,14 +98,14 @@
             
             Logic.r_3  =  Exitflag == 0;
             Logic.r_4  = 0;%isnan(eps_f);
-            Logic.r_5  = max(abs(L_L(i).Sol.Psi)) - min(abs(L_L(i).Sol.Psi)) < 1E-18;
-            Logic.r_6  = i == Delta.i_max;
-            Logic.r_7 = isequal(Delta.variable,'delta') && L_L(i).Eq.delta <= 0;
-            Logic.r_8 = isequal(Delta.variable,'gamma') && L_L(i).Eq.gamma < 0;
+            Logic.r_5  = max(abs(L_L(i).Sol.Psi_k)) - min(abs(L_L(i).Sol.Psi_k)) < 1E-18;
+            Logic.r_6  = i == L_L(i).Par.i_max;
+%            Logic.r_7 = isequal(L_L.Par.variable,'delta') && L_L(i).Eq.delta <= 0;
+ %           Logic.r_8 = isequal(L_L.Par.variable,'gamma') && L_L(i).Eq.gamma < 0;
             
             L_L(i).Failreason = Logic;
             
-            Flag = (Logic.r_1 || Logic.r_2 || Logic.r_3 || Logic.r_4 || Logic.r_5 || Logic.r_6 || Logic.r_7 || Logic.r_8);
+            Flag = (Logic.r_1 || Logic.r_2 || Logic.r_3 || Logic.r_4 || Logic.r_5 || Logic.r_6 );%|| Logic.r_7 || Logic.r_8
             
         end
         
@@ -113,17 +113,17 @@
 
             Flag =0;
             
-            if i >= 3
+%            if i >= 3
                 
-                Flag = ~(abs(L_L(i).Sol.Amplitude-L_L(i-1).Sol.Amplitude) <= 3*abs(L_L(i-1).Sol.Amplitude-L_L(i-2).Sol.Amplitude));
+ %               Flag = ~(abs(L_L(i).Sol.Amplitude-L_L(i-1).Sol.Amplitude) <= 3*abs(L_L(i-1).Sol.Amplitude-L_L(i-2).Sol.Amplitude));
                 
-            end 
+  %          end 
             
         end
     
         function L_L   = step_eq(L_L,x)
             
-            switch Delta.variable
+            switch L_L.Par.variable
                 
                 case 'delta'
                     
