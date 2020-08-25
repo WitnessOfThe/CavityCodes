@@ -25,7 +25,7 @@
     L_L.In.gamma           = 2*pi*10*1000;        % Nonlinear Coefficent
     L_L.In.kappa           = 2*pi*2*10^3;         % LineWidth 
     L_L.In.norm_coeff      = L_L.In.kappa;        % Normalization Coeff
-    L_L.In.delta           = -6.075e+05*2*pi;  
+    L_L.In.delta           = -6.08e+05*2*pi;  
     L_L.In.P               = 0.13;           
 %    L_L.In.delta           = -5.9167e+05*2*pi;            % Detunning
 %    L_L.In.P               = 0.4833;                 % Power in Watts            

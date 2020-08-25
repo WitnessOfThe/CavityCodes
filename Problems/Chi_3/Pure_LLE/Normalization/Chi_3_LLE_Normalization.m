@@ -1,10 +1,10 @@
-function L_L = Chi_3_LLE_Normalization(L_L)
+function L_L = Chi_3_LLE_Normalization(L_L,N)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define Space 
 
         Fundamental_Constants;
         
-        L_L.Space      = Define_Space_Cavity(L_L.In.N,2*pi);
+        L_L.Space      = Define_Space_Cavity(N,2*pi);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Extract Some Cavity Parameters
@@ -44,7 +44,6 @@ function L_L = Chi_3_LLE_Normalization(L_L)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%        
 %% Temp Constants
 
-        L_L.Eq              = L_L.Eq;
         L_L.Eq.delta        = L_L.In.delta/coeff;
         L_L.Eq.kappa        = L_L.In.kappa/coeff;
         L_L.Eq.gamma_3      = L_L.In.gamma/coeff;

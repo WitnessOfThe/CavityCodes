@@ -1,66 +1,262 @@
-
     clc;
     clear all;
-    format long;
-    
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Define Spatial and Spectral Grid Of the Cavity
-
-%    L_L  = Define_Space_Cavity(L_L,2^10,2*pi);
-      
-%% Define Methods
-    L_L_CaF.Met.Norm           = @Chi_3_LLE_Normalization; % Method which Apply
-    % input parameters to equation
-    
-    L_L_CaF.CW.Met.MI_Matrix   = @Chi_3_LLE_MI_Matrix;     % Method which define
-    % MI matrix to solve
-    
-    L_L_CaF.CW.Met.Solve       = @Chi_3_LLE_CW;            % Method which define
-    % CW equation to solve
     
 %% Define Input Parameters in Physical Units
-    L_L_SiN                 = L_L_CaF;
-    
-    L_L.In.N               = 2^5;
-    L_L.In.eta             = 0.5;                 % Coupling Regime
-    L_L.In.omega_p         = 200E12*2*pi;         % Frequency of The Pump     
-    L_L.In.D               = 2*pi*[15E9,1000,0,0];% Dispersion Coefficients
-    L_L.In.gamma           = 2*pi*10*1000;        % Nonlinear Coefficent
-    L_L.In.kappa           = 2*pi*2*10^3;         % LineWidth 
-    L_L.In.norm_coeff      = L_L.In.kappa;        % Normalization Coeff
-    L_L.In.delta           = -5.9167e+05*2*pi;            % Detunning
-    L_L.In.P               = 0.00000001;                 % Power in Watts            
-    
-%% Now we need to apply input parameters into  a class
 
-    L_L         = L_L.Met.Norm(L_L); % dispersion of the 
-    L_L         = Chi_3_LLE_Finess_Dispersion(L_L);
+    CaF       =  Set_Up_Methods_For_Synchronization_Paper;
+    SiN       =  Set_Up_Methods_For_Synchronization_Paper;
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input Parameters for CaF
+
+    CaF.CW.In         = Params_CaF;
+    CaF.CW.In.kappa   = 2*1E3*2*pi;
+    CaF.CW.In.P       = 0.00000000001; 
+
+%% Input Parameters for SiN
+
+    SiN.CW.In         = Params_SiN;
+    SiN.CW.In.kappa   = 2*10E6*2*pi;
+    SiN.CW.In.P       = 0.00000000001;
 
 %%
-N =2^10;
- delta_vector = linspace(-1E6,1E6,N)*2*pi;
 
+  N = 1000;
+  delta_CaF = linspace(-1E4,1E4,N)*2*pi;
+  Psi_CaF      = zeros(N,3);
+  
 for i =1:N
     
-   L_L.In.delta= delta_vector(i);
-   L_L                    = L_L.Met.Norm(L_L); % dispersion of the    
-   L_L.CW      = L_L.CW.Met.Solve(L_L.CW);
-   Psi(i,:)    = L_L.CW.Sol.Psi;
+   CaF.CW.In.delta = delta_CaF(i);
+   CaF.CW          = CaF.CW.Met.Solve(CaF.CW); % dispersion of the
+   Psi_CaF(i,:)    = CaF.CW.Sol.Psi;
    
 end
 %%
-Psi = abs(Psi)./max(max(abs(Psi)));
+  N = 1000;
+  delta_SiN = linspace(-1E9,1E9,N)*2*pi;
+  Psi_SiN   =     zeros(N,3);
+  
+for i =1:N
+    
+   SiN.CW.In.delta = delta_SiN(i);
+   SiN.CW          = SiN.CW.Met.Solve(SiN.CW); % dispersion of the
+   Psi_SiN(i,:)    = SiN.CW.Sol.Psi;
+   
+end
+
 %%
-figure;
-hold on;
-plot(fliplr(delta_vector)/2/pi,abs(Psi(:,1)).^2,'Color',[1,0,0])
-plot(fliplr(delta_vector)/2/pi,abs(Psi(:,2)).^2,'Color',[1,0,0])
-plot(fliplr(delta_vector)/2/pi,abs(Psi(:,3)).^2,'Color',[1,0,0])
-% 
-% for i = 2:35
-%     shift = 1/2* L_L.In.D(2)/2/pi *i^2;
-%     hold on;
-%     plot(delta_vector/2/pi+shift,abs(Psi(:,1)).^2,'Color',[1,0,0])
-%     plot(delta_vector/2/pi+shift,abs(Psi(:,2)).^2,'Color',[1,0,0])
-%     plot(delta_vector/2/pi+shift,abs(Psi(:,3)).^2,'Color',[1,0,0])
-% end
+    Psi_CaF = abs(Psi_CaF)./max(max(abs(Psi_CaF)));
+    
+    Psi_SiN= abs(Psi_SiN)./max(max(abs(Psi_SiN)));
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+
+    Numbers = -2:2;
+
+    shift = CaF.CW.In.D(1)*i+1/2*CaF.CW.In.D(2)*Numbers(1)^2;    
+    
+    tt_1 = proPlot((delta_CaF+shift)/2/pi/1E9,abs(Psi_CaF(:,3)).^2,[],'Color',[1,0,0]);
+
+    
+for i = Numbers(2:end)
+    
+    shift = CaF.CW.In.D(1)*i+1/2*CaF.CW.In.D(2)*i^2;    
+    tt_1 = tt_1.addData((delta_CaF+shift)/2/pi/1E9,abs(Psi_CaF(:,3)).^2,[],'Color',[1,0,0]);
+    
+end
+
+    tt_1 = tt_1.changeAxisOptions('XLabelText','$\omega-\omega_0$ (GHz)',...
+                         'YLabelText','','YTickLabel','',...  
+                         'FontSize',12,...
+                         'XLim',[-20,35]);
+
+    tt_1 = tt_1.changeFigOptions('Height',7.5/2,...
+                     'Width',18/2);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+
+    Numbers = -2:2;
+    shift = SiN.CW.In.D(1)*Numbers(1)-1/2*SiN.CW.In.D(2)*Numbers(1)^2;    
+    
+    tt_2 = proPlot((delta_SiN+shift)/2/pi/1E12,abs(Psi_SiN(:,3)).^2,[],'Color',[1,0,0]);
+    
+for i = Numbers(2:end)
+    
+    shift = SiN.CW.In.D(1)*i-1/2*SiN.CW.In.D(2)*i^2;    
+    tt_2 = tt_2.addData((delta_SiN+shift)/2/pi/1E12,abs(Psi_SiN(:,3)).^2,[],'Color',[1,0,0]);
+    
+end
+    tt_2 = tt_2.changeAxisOptions('XLabelText','$\omega-\omega_0$ (THz)',...
+                         'YLabelText','','YTickLabel','',...  
+                         'FontSize',12,...
+                         'XLim',[-3,2.5]);
+
+    tt_2= tt_2.changeFigOptions('Height',7.5/2,...
+                     'Width',18/2);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+
+    Numbers = 0:10;
+
+    shift = 1/2*CaF.CW.In.D(2)*Numbers(1)^2;    
+    
+    tt_3  = proPlot((delta_CaF+shift)/2/pi/1E3,abs(Psi_CaF(:,3)).^2,[],'Color',[1,0,0]);
+
+    
+for i = Numbers(2:end)
+    
+    shift = 1/2*CaF.CW.In.D(2)*i^2;    
+    tt_3 = tt_3.addData((delta_CaF+shift)/2/pi/1E3,abs(Psi_CaF(:,3)).^2,[],'Color',[1,0,0]);
+    
+end
+
+    tt_3 = tt_3.changeAxisOptions('XLabelText','$\tilde\omega-\omega_0$ (kHz)',...
+                         'YLabelText','','YTickLabel','',...  
+                         'FontSize',12,...
+                         'XLim',[-5,35]);
+
+    tt_3 = tt_3.changeFigOptions('Height',7.5/2,...
+                     'Width',18/2);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+    Numbers = 0:5;
+    
+    shift = -1/2*SiN.CW.In.D(2)*Numbers(1)^2;    
+    
+    tt_4  = proPlot((delta_SiN+shift)/2/pi/1E6,abs(Psi_SiN(:,3)).^2,[],'Color',[1,0,0]);
+
+    
+for i = Numbers(2:end)
+    
+    shift = -1/2*SiN.CW.In.D(2)*i^2;    
+    tt_4 = tt_4.addData((delta_SiN+shift)/2/pi/1E6,abs(Psi_SiN(:,3)).^2,[],'Color',[1,0,0]);
+    
+end
+
+    tt_4 = tt_4.changeAxisOptions('XLabelText','$\tilde\omega-\omega_0$ (MHz)',...
+                         'YLabelText','','YTickLabel','',...  
+                         'FontSize',12,...
+                         'XLim',[-450,50]);
+
+    tt_4 = tt_4.changeFigOptions('Height',7.5/2,...
+                     'Width',18/2);
+                 
+%%
+figure1=figure;
+cf = conFigure([tt_1,tt_2,tt_3,tt_4], 2,2, 'Height', 7.8, 'Width', 18, 'separation', 1);
+
+
+%%
+annotation(figure1,'textbox',...
+    [0.547293145357315 0.83 0.0502396694214876 0.0983050847457624],...
+    'String','$\omega_{-2}$',...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+annotation(figure1,'textbox',...
+    [0.635528439474962 0.83 0.0502396694214876 0.0983050847457623],...
+    'String','$\omega_{-1}$',...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+annotation(figure1,'textbox',...
+    [0.731955274671851 0.83 0.0502396694214876 0.0983050847457624],...
+    'String','$\omega_0$',...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+annotation(figure1,'textbox',...
+    [0.819740884783665 0.83 0.0502396694214876 0.0983050847457623],...
+    'String',{'$\omega_1$'},...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+annotation(figure1,'textbox',...
+    [0.905873602333495 0.83 0.0502396694214876 0.0983050847457624],...
+    'String','$\omega_2$',...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+
+
+annotation(figure1,'arrow',[0.414876033057851 0.431404958677686],...
+    [0.433898305084746 0.403389830508474],'HeadWidth',2,'HeadLength',4);
+annotation(figure1,'arrow',[0.342148760330578 0.358677685950413],...
+    [0.461016949152542 0.430508474576271],'HeadWidth',2,'HeadLength',4);
+annotation(figure1,'arrow',[0.0760330578512396 0.0611570247933884],...
+    [0.542372881355932 0.488135593220339],'HeadWidth',2,'HeadLength',4);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+annotation(figure1,'doublearrow',[0.558823529411765 0.73],...
+    [0.332203389830508 0.332203389830508],'Head2Width',5,'Head2Length',5,...
+    'Head1Width',5,...
+    'Head1Length',5);
+annotation(figure1,'doublearrow',[0.73 0.85],...
+    [0.332203389830508 0.332203389830508],'Head2Width',5,'Head2Length',5,...
+    'Head1Width',5,...
+    'Head1Length',5);
+
+annotation(figure1,'doublearrow',[0.85 0.927941176470588],...
+    [0.332203389830508 0.332203389830508],'Head2Width',5,'Head2Length',5,...
+    'Head1Width',5,...
+    'Head1Length',5);
+
+annotation(figure1,'textbox',...
+    [0.610528439474961 0.345762711864406 0.0502396694214876 0.0983050847457625],...
+    'String','$\frac{7}{2}|D_2|$',...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+annotation(figure1,'textbox',...
+    [0.761999027710255 0.349152542372881 0.0502396694214874 0.0983050847457624],...
+    'String','$\frac{5}{2}|D_2|$',...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+annotation(figure1,'textbox',...
+    [0.860528439474961 0.349152542372881 0.0502396694214875 0.0983050847457624],...
+    'String','$\frac{3}{2}|D_2|$',...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+%%
+annotation(figure1,'textbox',...
+    [0.317079821161706 0.864406779661016 0.13290860476422 0.0983050847457623],...
+    'String','$D_1+\frac{3}{2}D_2$',...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+annotation(figure1,'textbox',...
+    [0.150909478024451 0.847450836592785 0.0502396694214876 0.0983050847457623],...
+    'String','$2D_1$',...
+    'Interpreter','latex',...
+    'FontSize',14,...
+    'FitBoxToText','off',...
+    'EdgeColor','none');
+
+annotation(figure1,'doublearrow',[0.0544117647058826 0.314560185185185],...
+    [0.840677966101693 0.840677966101693],'Head2Width',5,'Head2Length',5,...
+    'Head1Width',5,...
+    'Head1Length',5);
+annotation(figure1,'doublearrow',[0.314560185185185 0.446851851851852],...
+    [0.840677966101693 0.840677966101693],'Head2Width',5,'Head2Length',5,...
+    'Head1Width',5,...
+    'Head1Length',5);
