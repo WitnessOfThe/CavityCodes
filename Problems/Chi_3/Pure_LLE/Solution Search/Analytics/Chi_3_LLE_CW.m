@@ -1,6 +1,6 @@
-    function CW = Chi_3_LLE_CW(CW)
+    function CW = Chi_3_LLE_CW(CW,N_Mode)
     %% Solution of Equation
-        CW = CW.Met.Norm(CW,2^4);
+        CW = CW.Met.Norm(CW,N_Mode);
         
         coef       = [CW.Eq.gamma_3^2,-2*CW.Eq.delta*CW.Eq.gamma_3,CW.Eq.delta.^2+(CW.Eq.kappa_vector(1)/2).^2,-CW.Eq.h.^2];
       

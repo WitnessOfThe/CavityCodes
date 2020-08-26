@@ -1,5 +1,6 @@
 function L_L = Set_Up_Methods_For_Synchronization_Paper
 
+    L_L.Met.Norm        = @Chi_3_LLE_Normalization; % Method which Apply
     L_L.CW.Met.Norm        = @Chi_3_LLE_Normalization; % Method which Apply
     L_L.Temp.Met.Norm      = @Chi_3_LLE_Normalization; % Method which Apply
     L_L.Stat.Met.Norm      = @Chi_3_LLE_Normalization; % Method which Apply
