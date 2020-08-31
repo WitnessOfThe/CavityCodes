@@ -1,7 +1,7 @@
-function CW = MI(CW)
+function CW = MI(CW,N_mode)
     
-  %  tt  = eig(CW.Met.MI_Matrix(CW,1,1));
-    
+    CW  = CW.Met.Solve(CW,N_mode);
+
     Value = zeros(CW.Space.N,2);
     
     for j = 1:size(CW.Sol.Psi)

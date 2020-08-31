@@ -11,3 +11,4 @@
 %       CW.Solution.CW.Q      = CW.Eq.gamma_3*CW.Raman.mu.*psi_amp_sq;
         
     end
+    

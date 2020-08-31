@@ -1,10 +1,9 @@
 function L_L = Set_Up_Methods_For_Synchronization_Paper
 
-    L_L.Met.Norm        = @Chi_3_LLE_Normalization; % Method which Apply
+    L_L.Met.Norm           = @Chi_3_LLE_Normalization; % Method which Apply
     L_L.CW.Met.Norm        = @Chi_3_LLE_Normalization; % Method which Apply
     L_L.Temp.Met.Norm      = @Chi_3_LLE_Normalization; % Method which Apply
     L_L.Stat.Met.Norm      = @Chi_3_LLE_Normalization; % Method which Apply
-    % input parameters to equation
     
     L_L.CW.Met.MI_Matrix   = @Chi_3_LLE_MI_Matrix;     % Method which define
     % MI matrix to solve
@@ -23,9 +22,9 @@ function L_L = Set_Up_Methods_For_Synchronization_Paper
     L_L.Temp.Met.Ev_Start_Point = @Chi_3_LLE_Start_Point_CW;
     L_L.Temp.Met.Ev_Save        = @Chi_3_LLE_Dyn_Saving;    
 
-    L_L.Temp.Met.Plot.Fields    = @Plot_Dynamics_Result_LinePlots_Fields;
-    L_L.Temp.Met.Plot.Spectrums = @Plot_Dynamics_Result_LinePlots_Spectrums;
-    L_L.Temp.Met.Plot.Carpets   = @Plot_Dynamics_Result_pcolors;
+    L_L.Temp.Met.Plot.Fields               = @Plot_Dynamics_Result_LinePlots_Fields;
+    L_L.Temp.Met.Plot.Spectrums            = @Plot_Dynamics_Result_LinePlots_Spectrums;
+    L_L.Temp.Met.Plot.Carpets              = @Plot_Dynamics_Result_pcolors;
     L_L.Temp.Met.Plot.Integrative_Dynamics = @Plot_Dynamics_Result_Amplitude_Field_Dynamics;
     
 end

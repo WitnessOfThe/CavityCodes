@@ -18,17 +18,18 @@ function CW = Chi_3_LLE_MI_Boundary(CW,N)
            
        end
         
-        if CW.Space.k(i) >= 0 
-            
-           if CW.In.H_MI_Tongue (1,i) > CW.In.H_MI_Tongue (2,i+1)
-               
-                CW.In.H_MI_Tongue (2,i+1:(end/2-1)) = 0;
-                CW.In.H_MI_Tongue (1,i:(end/2-1)) = 0;
-                
-           end
-           
-        end        
+%         if CW.Space.k(i) >= 0 
+%             
+%            if CW.In.H_MI_Tongue (1,i) > CW.In.H_MI_Tongue (2,i+1)
+%                
+%                 CW.In.H_MI_Tongue (2,i+1:(end/2-1)) = 0;
+%                 CW.In.H_MI_Tongue (1,i:(end/2-1)) = 0;
+%                 
+%            end
+%            
+%         end        
     end
+    
     
     CW.In.H_MI_Tongue(CW.In.H_MI_Tongue==0) = NaN;    
     

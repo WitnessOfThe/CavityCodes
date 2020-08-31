@@ -84,16 +84,21 @@
 
 figure;
 hold on;
-for i =1:size(ind_Mode,2)
-    plot(delta_vector,W_MI_vector_1(:,i),'Color',[0,0,1])
+for i =1:20
+ %   plot(delta_vector,W_MI_vector_1(:,i),'Color',[0,0,0])
 
-    plot(delta_vector,W_MI_vector_2(:,i),'Color',[0,0,1])
+ %   plot(delta_vector,W_MI_vector_2(:,i),'Color',[0,0,0])
 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    plot(delta_vector,W_Synch_vector_1(:,i),'Color',[1,0,0])
+%    plot(delta_vector,W_Synch_vector_1(:,i),'Color',[1,0,0])
  
-    plot(delta_vector,W_Synch_vector_2(:,i),'Color',[1,0,0])
+ %   plot(delta_vector,W_Synch_vector_2(:,i),'Color',[0,1,0])
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  plot(delta_vector,G_Synch_vector_1(:,i),'Color',[1,0,0])
+ 
+  plot(delta_vector,G_Synch_vector_2(:,i),'Color',[0,1,0])
+
 end
 xlabel('Detuning Ghz')
 ylabel('Laser Power [W]')
