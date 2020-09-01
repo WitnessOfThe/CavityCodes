@@ -9,9 +9,9 @@
 %% Input Parameters for CaF
 
     L_L.CW.In         = Params_SiN;
-    L_L.CW.In.kappa   =  2*1E8*2*pi;                 
-    L_L.CW.In.delta   = -0.44e+09*2*pi;    
-    L_L.CW.In.P       = 0.02;                 
+    L_L.CW.In.kappa   =  1E8*2*pi;                 
+    L_L.CW.In.delta   = -1.06e+09*2*pi;    
+    L_L.CW.In.P       = 0.3;                 
 
 %%
 

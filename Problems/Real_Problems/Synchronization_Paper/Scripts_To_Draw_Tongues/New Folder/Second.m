@@ -9,7 +9,7 @@
 %% Input Parameters for CaF
 
     L_L.In         = Params_SiN;
-    L_L.In.kappa   =  2*1E8*2*pi;%2*1E3*2*pi;%
+    L_L.In.kappa   =  1E8*2*pi;%2*1E3*2*pi;%
     L_L.In.P       = 0.00000000001; 
 
 %%
@@ -63,8 +63,8 @@ for i = 5:15
     
 end
 for i = 6:15
-% pp4 = pp4.addData(delta_vector,W_MI_vector_1(:,i),[],'Color',[1,0,0]);
- % pp4 = pp4.addData(delta_vector,W_MI_vector_2(:,i),[],'Color',[1,0,0]);
+ pp4 = pp4.addData(delta_vector,W_MI_vector_1(:,i),[],'Color',[1,0,0]);
+  pp4 = pp4.addData(delta_vector,W_MI_vector_2(:,i),[],'Color',[1,0,0]);
 %  pp4 = pp4.addData(delta_vector,W_Synch_vector_1(:,i),[],'Color',[1,0,0]);
  % pp4 = pp4.addData(delta_vector,W_Synch_vector_2(:,i),[],'Color',[1,0,0]);
 end
