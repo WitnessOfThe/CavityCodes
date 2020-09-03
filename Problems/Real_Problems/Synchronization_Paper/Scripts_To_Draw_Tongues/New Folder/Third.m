@@ -67,3 +67,4 @@ figure('Name','SiNTongues')
 pp4.plotData();
 %%
 
+save()

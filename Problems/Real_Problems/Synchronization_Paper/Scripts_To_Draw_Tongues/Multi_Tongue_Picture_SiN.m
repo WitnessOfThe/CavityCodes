@@ -9,7 +9,7 @@
 %% Input Parameters for CaF
 
     L_L.In         = Params_SiN;
-    L_L.In.kappa   =  2*1E9*2*pi;%2*1E3*2*pi;%
+    L_L.In.kappa   =  1E8*2*pi;%2*1E3*2*pi;%
     L_L.In.P       = 0.00000000001; 
 
 %%

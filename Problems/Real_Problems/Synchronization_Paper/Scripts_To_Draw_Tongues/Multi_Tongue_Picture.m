@@ -8,8 +8,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Input Parameters for CaF
 
-    L_L.In         = Params_CaF;
-    L_L.In.kappa   =  2*1E3*2*pi;%2*1E3*2*pi;%
+    L_L.In         = Params_SiN;
+    L_L.In.kappa   =  100E6*2*pi;%2*1E3*2*pi;%
     L_L.In.P       = 0.00000000001; 
 
 %%
@@ -41,8 +41,8 @@
     end
     
 %%
-W_Synch_vector_1(isnan(W_Synch_vector_1)) = 0;
-W_Synch_vector_2(isnan(W_Synch_vector_2)) = 0;
+    W_Synch_vector_1(isnan(W_Synch_vector_1)) = 0;
+    W_Synch_vector_2(isnan(W_Synch_vector_2)) = 0;
 %    plot(delta_vector,W_Synch_vector_1(:,i),'Color',[1,0,0])
  
 %    plot(delta_vector,W_Synch_vector_2(:,i),'Color',[1,0,0])
