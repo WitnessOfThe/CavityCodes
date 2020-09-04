@@ -82,7 +82,7 @@ Power_down(Power_down==0)=NaN;
 Power_up(Power_up==0)=NaN;
 Power_up(Power_up == max(P_vector)) = NaN;
  %      pp4 = pp4.addData(delta_vector_2,min(W_MI_vector_2,[],2),'Color',[1,0,0],'LineWidth',2.5);
-   for i=1:15
+   for i=11:11
          pp4 = pp4.addData(delta_vector_2,W_MI_vector_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
          pp4 = pp4.addData(delta_vector_2,W_MI_vector_2(:,i),'Color',[1,0,0],'LineWidth',2.5);
    end
