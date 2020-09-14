@@ -6,9 +6,9 @@ function L_L =  Chi_3_LLE_Start_Point_CW(L_L)
     
     L_L.CW      = L_L.CW.Met.Mi_Formula(L_L.CW,L_L.Temp.Space.N);    
     
-    L_L.Temp.In.Psi_Start = ones(1,L_L.Temp.Space.N)*1E-18;
+    L_L.Temp.In.Psi_Start = ones(1,L_L.Temp.Space.N)*1E-8;
 	L_L.Temp.In.Psi_Start(L_L.CW.An.Omega_mu(1,:) == 0)    = 1E-2;
-	L_L.Temp.In.Psi_Start( 1:(end/2) )    = -10*L_L.Temp.In.Psi_Start((end/2+1):end);
+	L_L.Temp.In.Psi_Start( 1:(end/2) )    = -1i*10*L_L.Temp.In.Psi_Start( 1:(end/2) );
     
     L_L.Temp.In.Psi_Start(1) = L_L.CW.Sol.Psi(L_L.Temp.Par.CW_num)*L_L.Temp.Space.N;
     L_L.Temp.In.t_start      = 0;

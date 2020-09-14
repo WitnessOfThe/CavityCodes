@@ -8,12 +8,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Input Parameters for CaF
 
-    L_L.CW.In         = Params_SiN;
-    L_L.CW.In.kappa   =  1E8*2*pi;%2*1E3*2*pi;%
+    L_L.CW.In         = Params_CaF;
+    L_L.CW.In.kappa   =  1E3*2*pi;%2*1E3*2*pi;%
     L_L.CW.In.P       = 0.00000000001; 
 
 %%
-  N = 500;   
+  N = 200;   
   N_Mode = 30;
   
   delta_vector  = linspace(-3.8,4,N);
@@ -23,7 +23,7 @@
   tic
   parfor i = 1:N
       CW = L_L.CW;        
-      CW.In.delta =  delta_vector(i)*2*pi*1E9;
+      CW.In.delta =  delta_vector(i)*2*pi*1E6;
       
       for ii = 1:N
           

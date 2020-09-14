@@ -1,4 +1,4 @@
-function  Plot_LLE_Dressed_State(CW,ind)
+function  t_pl = Plot_LLE_Dressed_State(CW,ind)
 
     Dressed_State   = CW.An.Omega_mu;
     Dressed_State_1 = Dressed_State(1,:);%max(Dressed_State,[],2);

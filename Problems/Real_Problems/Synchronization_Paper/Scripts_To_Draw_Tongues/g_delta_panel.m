@@ -8,23 +8,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Input Parameters for CaF
 
-    L_L.CW.In         =  Params_SiN;
-    L_L.CW.In.kappa   =  1E8*2*pi;%2*1E3*2*pi;%
+    L_L.CW.In         =  Params_CaF;
+    L_L.CW.In.kappa   =  1E3*2*pi;%2*1E3*2*pi;%
     L_L.CW.In.P       =  0.000000001; 
 
 %%
-  N = 1000;
+  N = 200;
   NN = N*50;
-  N_Mode = 56;
+  N_Mode = 50;
   
   
   Mumber_Of_Modes = zeros(N);
   tic
-  delta_vector  = linspace(-3.8,3,N);
+  delta_vector  = linspace(-2,2,N);
   g_vector      = linspace(0,1,N);
     
 
-  parfor i = 1:N      
+  parfor i = 1:N
+      
       SiN = L_L;
       SiN.CW.In.delta =  delta_vector(i)*2*pi*1E9;
       SiN.CW          = SiN.Met.T_MI (SiN.CW,N_Mode);
@@ -38,34 +39,34 @@
           
       end
       
-      W_MI_vector_1(i,:)        = SiN.CW.In.g_MI(1,1:20)/(2*pi*1E9);
-      W_MI_vector_2(i,:)        = SiN.CW.In.g_MI(2,1:20)/(2*pi*1E9);
+      W_MI_vector_1(i,:)        = SiN.CW.In.g_MI(1,1:N_Mode/2)/(2*pi*1E9);
+      W_MI_vector_2(i,:)        = SiN.CW.In.g_MI(2,1:N_Mode/2)/(2*pi*1E9);
       
       i
   end
   
 %%
-  L_L.CW.In.kappa   =  1.5E9*2*pi;%2*1E3*2*pi;%
+  L_L.CW.In.kappa   =  1.5E4*2*pi;%2*1E3*2*pi;%
   delta_vector_2 = linspace(min(delta_vector),max(delta_vector),NN);
-  W_MI_vector_1_1 = zeros(NN,size(1:20,2));
-  W_MI_vector_2_1 = zeros(NN,size(1:20,2));
+  W_MI_vector_1_1 = zeros(NN,N_Mode/2);
+  W_MI_vector_2_1 = zeros(NN,N_Mode/2);
+    
+     parfor i = 1:NN
 
- parfor i = 1:NN      
-      
-      SiN = L_L;
-      SiN.CW.In.delta =  delta_vector_2(i)*2*pi*1E9;
-      SiN.CW          = SiN.Met.T_MI (SiN.CW,N_Mode);
-      SiN.CW          = SiN.Met.T_Syn(SiN.CW,N_Mode);      
-      W_MI_vector_1_1(i,:)        = SiN.CW.In.g_MI(1,1:20)/(2*pi*1E9);
-      W_MI_vector_2_1(i,:)        = SiN.CW.In.g_MI(2,1:20)/(2*pi*1E9);
-      
-      i
-  end
+          SiN = L_L;
+          SiN.CW.In.delta =  delta_vector_2(i)*2*pi*1E9;
+          SiN.CW          = SiN.Met.T_MI (SiN.CW,N_Mode);
+          SiN.CW          = SiN.Met.T_Syn(SiN.CW,N_Mode);      
+          W_MI_vector_1_1(i,:)        = SiN.CW.In.g_MI(1,1:N_Mode/2)/(2*pi*1E9);
+          W_MI_vector_2_1(i,:)        = SiN.CW.In.g_MI(2,1:N_Mode/2)/(2*pi*1E9);
+
+          i
+      end
 %%
-  L_L.CW.In.kappa   =  3E8*2*pi;%2*1E3*2*pi;%
+  L_L.CW.In.kappa   =  3E5*2*pi;%2*1E3*2*pi;%
   delta_vector_2 = linspace(min(delta_vector),max(delta_vector),NN);
-  W_MI_vector_1_2 = zeros(NN,size(1:20,2));
-  W_MI_vector_2_2 = zeros(NN,size(1:20,2));
+  W_MI_vector_1_2 = zeros(NN,N_Mode/2);
+  W_MI_vector_2_2 = zeros(NN,N_Mode/2);
 
   parfor i = 1:NN      
       
@@ -73,16 +74,16 @@
       SiN.CW.In.delta =  delta_vector_2(i)*2*pi*1E9;
       SiN.CW          = SiN.Met.T_MI (SiN.CW,N_Mode);
       SiN.CW          = SiN.Met.T_Syn(SiN.CW,N_Mode);      
-      W_MI_vector_1_2(i,:)        = SiN.CW.In.g_MI(1,1:20)/(2*pi*1E9);
-      W_MI_vector_2_2(i,:)        = SiN.CW.In.g_MI(2,1:20)/(2*pi*1E9);
+      W_MI_vector_1_2(i,:)        = SiN.CW.In.g_MI(1,1:N_Mode/2)/(2*pi*1E9);
+      W_MI_vector_2_2(i,:)        = SiN.CW.In.g_MI(2,1:N_Mode/2)/(2*pi*1E9);
       
       i
   end
 %%
-  L_L.CW.In.kappa   =  1E7*2*pi;%2*1E3*2*pi;%
+  L_L.CW.In.kappa   =  1E9*2*pi;%2*1E3*2*pi;%
   delta_vector_2 = linspace(min(delta_vector),max(delta_vector),NN);
-  W_MI_vector_1_3 = zeros(NN,size(1:20,2));
-  W_MI_vector_2_3 = zeros(NN,size(1:20,2));
+  W_MI_vector_1_3 = zeros(NN,N_Mode/2);
+  W_MI_vector_2_3 = zeros(NN,N_Mode/2);
   W_Synch_vector_1_3 = zeros(NN,1);
   W_Synch_vector_2_3 = zeros(NN,1);
 
@@ -93,8 +94,8 @@
       SiN.CW                = SiN.Met.T_MI (SiN.CW,N_Mode);
       SiN.CW                = SiN.Met.T_Syn(SiN.CW,2);   
       
-      W_MI_vector_1_3(i,:)  = SiN.CW.In.g_MI(1,1:20)/(2*pi*1E9);
-      W_MI_vector_2_3(i,:)  = SiN.CW.In.g_MI(2,1:20)/(2*pi*1E9);
+      W_MI_vector_1_3(i,:)  = SiN.CW.In.g_MI(1,1:N_Mode/2)/(2*pi*1E9);
+      W_MI_vector_2_3(i,:)  = SiN.CW.In.g_MI(2,1:N_Mode/2)/(2*pi*1E9);
       W_Synch_vector_1_3(i,:)  = SiN.CW.In.g_Synch(1,1)/(2*pi*1E9);
       W_Synch_vector_2_3(i,:)  = SiN.CW.In.g_Synch(2,1)/(2*pi*1E9);
       
@@ -112,17 +113,17 @@
           pp4 = pp4.addData([delta_vector_2,fliplr(delta_vector_2)],[W_Synch_vector_1_3(:,i);flipud(W_Synch_vector_2_3(:,i))], [], 'PlotType', 'Fill','Color',[0.5,0.5,0.5],'FaceAlpha', 0.5);
     end
           pp4 = pp4.addData(delta_vector_2,min(W_MI_vector_2_1(:,:),[],2),'Color',[1,1,0],'LineWidth',2.5);
-    for i=1:15
+    for i=1:N_Mode/2
           pp4 = pp4.addData(delta_vector_2,W_MI_vector_1_2(:,i),'Color',[0,1,1],'LineWidth',2.5);
           pp4 = pp4.addData(delta_vector_2,W_MI_vector_2_2(:,i),'Color',[0,1,1],'LineWidth',2.5);
     end
-    for i=1:15
+    for i=1:N_Mode/2
           pp4 = pp4.addData(delta_vector_2,W_MI_vector_1_3(:,i),'Color',[1,0,1],'LineWidth',2.5);
           pp4 = pp4.addData(delta_vector_2,W_MI_vector_2_3(:,i),'Color',[1,0,1],'LineWidth',2.5);
     end
     pp4 = pp4.changeAxisOptions('ColorMap', 'parula',...
                           'CAxis', [0,max(max(Mumber_Of_Modes))],'XLabelText','\delta_0 (GHz)','YLabelText',...
-        'g (GHz)','FontSize',15,'XLabelText','$\delta_0$ (GHz)','XLim',[min(delta_vector),3]...
+        'g (GHz)','FontSize',15,'XLabelText','$\delta_0$ (GHz)','XLim',[min(delta_vector),1]...
        ,'YLim',[min(g_vector),max(g_vector)],'Shading','flat');
     pp4 = pp4.changeFigOptions('Height',8,...
                      'Width',18);

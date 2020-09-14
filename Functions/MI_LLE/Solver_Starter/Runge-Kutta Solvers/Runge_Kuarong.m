@@ -1,4 +1,4 @@
-function Res = Runge_Kuarong(Res,N_modes)   
+    function Res = Runge_Kuarong(Res,N_modes)   
 
     Res.Temp         =    Res.Temp.Met.Norm(Res.Temp,N_modes);        
     Res           =    Res.Temp.Met.Ev_Start_Point(Res);
