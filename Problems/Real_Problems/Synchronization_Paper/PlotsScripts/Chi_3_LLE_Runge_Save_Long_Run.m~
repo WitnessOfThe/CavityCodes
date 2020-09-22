@@ -1,0 +1,36 @@
+function Chi_3_LLE_Runge_Save_Long_Run(Path,CaF,Ind,mu)
+
+    for i = 1:length(mu)
+        
+        SaveInd(i)               = find (CaF.Temp.Space.k(CaF.Temp.Eq.mode_range) == mu(i));
+        
+    end
+    
+    Save.Temp.In          = CaF.Temp.In;
+    Save.Temp.Eq          = CaF.Temp.Eq;
+    Save.Temp.Sol.Psi_mu  = CaF.Temp.Sol.Psi(:,SaveInd);
+    Save.Temp.Sol.Psi_end = CaF.Temp.Sol.Psi(end,:);
+    Save.Temp.Sol.t       = CaF.Temp.Sol.t(:);
+    
+    [tt_1,tt_2] = Plot_Dynamics_Result_pcolors(CaF.Temp,1,0);
+    [tt_3,tt_4] = Plot_Dynamics_Result_LinePlots_Spectrums(CaF.Temp,0);
+    
+    CF = conFigure([tt_1,tt_2,tt_3,tt_4],2,2, 'UniformPlots', true, 'Height', 18, 'Width', 18,'Labels',false);
+    h = gcf;
+    
+    if ~exist(strcat(Path,'/jpg'),'dir')
+        
+        mkdir(strcat(Path,'/jpg'))
+        
+    end
+    
+    if ~exist(strcat(Path,'/Data'),'dir')
+        
+        mkdir(strcat(Path,'/Data'))
+        
+    end
+    
+    print(h,strcat(Path,'/jpg/','Power=',num2str(CaF.In.P)),'-djpeg','-r600');
+    close(h);
+    save(strcat(Path,'/Data/',num2str(Ind)),'Save');
+end

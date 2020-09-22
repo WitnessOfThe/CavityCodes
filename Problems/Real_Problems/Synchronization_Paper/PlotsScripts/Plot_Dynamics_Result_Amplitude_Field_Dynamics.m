@@ -1,6 +1,14 @@
 function Plot_Dynamics_Result_Amplitude_Field_Dynamics(Temp,ind_t)
 %%
-   Psi_Space  = ifft(Temp.Sol.Psi,[],2)*Temp.Space.N;
+    Psi_k = zeros(size(Temp.Sol.Psi,1),Temp.Space.N); 
+    
+    for i = 1:size(Temp.Sol.Psi,1)
+        
+        Psi_k(i,Temp.Eq.mode_range) = Temp.Sol.Psi(i,:);
+        
+    end
+
+   Psi_Space  = ifft(Psi_k,[],2)*Temp.Space.N;
    tt_2 = proPlot(Temp.Sol.t(ind_t)/Temp.Eq.norm,(2*real(Psi_Space(ind_t,1)).'));
 %%   
       N_t = size(ind_t,2);

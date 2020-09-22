@@ -24,7 +24,7 @@ function L_L = Set_Up_Methods_For_Synchronization_Paper
     L_L.Temp.Met.Ev_Start_Point = @Chi_3_LLE_Start_Point_CW;
     L_L.Temp.Met.Ev_Save        = @Chi_3_LLE_Dyn_Saving;    
 
-    L_L.Temp.Met.Plot.Fields_Spectrums      = @Plot_Dynamics_Result_LinePlots_Spectrums;
+    L_L.Temp.Met.Plot.Fields_Spectrums     = @Plot_Dynamics_Result_LinePlots_Spectrums;
     L_L.Temp.Met.Plot.Carpets              = @Plot_Dynamics_Result_pcolors;
     L_L.Temp.Met.Plot.Integrative_Dynamics = @Plot_Dynamics_Result_Amplitude_Field_Dynamics;
     

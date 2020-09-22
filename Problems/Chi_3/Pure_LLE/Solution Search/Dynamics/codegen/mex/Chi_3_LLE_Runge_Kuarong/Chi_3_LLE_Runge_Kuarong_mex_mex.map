@@ -1,0 +1,8 @@
+MEX {
+	global:
+		mexFunction;
+		mexfilerequiredapiversion;
+		emlrtMexFcnProperties;
+	local:
+		*;
+};

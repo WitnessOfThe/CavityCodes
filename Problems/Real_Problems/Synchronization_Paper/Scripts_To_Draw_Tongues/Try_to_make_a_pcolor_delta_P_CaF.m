@@ -9,12 +9,12 @@
 %% Input Parameters for CaF
 
     L_L.CW.In         =  Params_CaF;
-    L_L.CW.In.kappa   =  1E3*2*pi;%2*1E3*2*pi;%
+    L_L.CW.In.kappa   =  1E5*2*pi;%2*1E3*2*pi;%
     L_L.CW.In.P       =  0.000000001; 
 
 %%
-  N = 1000;
-  NN = N*50;
+  N      = 1000;
+  NN     = N*50;
   N_Mode = 200;
   
   
@@ -23,9 +23,9 @@
 
   tic
   delta_vector  = linspace(-1,1,N);
-  P_vector      = linspace(0,1,N);
+  P_vector      = linspace(0,0.5,N);
     
-
+%W_MI_vector_2
   parfor i = 1:N
       
       SiN = L_L;
@@ -50,8 +50,8 @@
           
       end
       
-      W_MI_vector_1(i,:)        = SiN.CW.In.g_MI(1,1:N_Mode/2)/(2*pi*1E6);
-      W_MI_vector_2(i,:)        = SiN.CW.In.g_MI(2,1:N_Mode/2)/(2*pi*1E6);
+      W_MI_vector_1(i,:)        = SiN.CW.In.W_MI_Tongue(1,1:N_Mode/2)/(2*pi*1E6);
+      W_MI_vector_2(i,:)        = SiN.CW.In.W_MI_Tongue(2,1:N_Mode/2)/(2*pi*1E6);
       
       i
   end
@@ -96,14 +96,16 @@
 %%
     pp4 = proPlot(delta_vector,P_vector, Mumber_Of_Modes, 'PlotType','pcolor');
     
-     for i= 1:45
-        pp4 = pp4.addData(delta_vector_2,W_MI_vector_1_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
-        pp4 = pp4.addData(delta_vector_2,W_MI_vector_2_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
-     end
+%      for i= 1:46
+%         pp4 = pp4.addData(delta_vector_2,W_MI_vector_1_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
+%         pp4 = pp4.addData(delta_vector_2,W_MI_vector_2_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
+%      end
      pp4 = pp4.addData([delta_vector,fliplr(delta_vector)],[Power_up,fliplr(Power_down)],[], 'PlotType','Fill','Color',[0.4,0.4,0.4],'FaceAlpha', 0.2);
 Power_down(Power_down==0)=NaN;
 Power_up(Power_up==0)=NaN;
 Power_up(Power_up == max(P_vector)) = NaN;
+
+     pp4 = pp4.addData(delta_vector_2,min(W_MI_vector_2_1,[],2),'Color',[1,0,0],'LineWidth',2.5);
 
     pp4 = pp4.addData(delta_vector,Power_up,'Color',[0,0,0],'LineWidth',2.5,'LineStyle','--');
     pp4 = pp4.addData(delta_vector,Power_down,'Color',[0,1,0],'LineWidth',2.5,'LineStyle','--');
@@ -131,6 +133,6 @@ colormap(gca,cmap)
 %h.Label.String         = 'Number of Synchronized Modes';
 %h.Label.Interpreter    = 'latex';
 %h.Location             = 'northoutside';
-save('H:\Documents\MATLAB\Matlab_Repo\Problems\Cavity_Codes\Problems\Real_Problems\Synchronization_Paper\Scripts_To_Draw_Tongues\delta_g_plate_CaF','pp4')
+%save('H:\Documents\MATLAB\Matlab_Repo\Problems\Cavity_Codes\Problems\Real_Problems\Synchronization_Paper\Scripts_To_Draw_Tongues\delta_g_plate_CaF','pp4')
 
 %%

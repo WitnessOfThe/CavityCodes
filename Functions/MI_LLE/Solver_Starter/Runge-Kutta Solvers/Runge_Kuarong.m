@@ -1,7 +1,7 @@
     function Res = Runge_Kuarong(Res,N_modes)   
 
-    Res.Temp         =    Res.Temp.Met.Norm(Res.Temp,N_modes);        
-    Res           =    Res.Temp.Met.Ev_Start_Point(Res);
+    Res.Temp     =    Res.Temp.Met.Norm(Res.Temp,N_modes);        
+    Res          =    Res.Temp.Met.Ev_Start_Point(Res);
     Runge        =               Define_Runge_Coeff(Res.Temp.Par);
     d            =  zeros(Runge.s,size( Res.Temp.In.Psi_Start,2));
     [nt,dt]      =                           ParSim(Res.Temp.Par);
@@ -26,21 +26,19 @@
     
     F_e        = Res.Temp.In.Psi_Start;
     t          = Res.Temp.In.t_start;
+    
+    Res.Temp.Sol.Psi = zeros(Res.Temp.Par.T/Res.Temp.Par.s_t,size(Res.Temp.In.Psi_Start(Res.Temp.Eq.mode_range),2));
+    Res.Temp.Sol.t   = zeros(1,Res.Temp.Par.T/Res.Temp.Par.s_t);
 
     
     for ni = 1:nt 
         
-        F_e           = Runge_Kuarong_step(F_e,dt,t + ni*dt);
+        F_e           = Runge_Kuarong_step(F_e,dt,t + ni*dt,d);
   %     Res.Temp      =   Res.Temp.Met.Ev_Save(F_e,Res.Temp,ni);                       
-     if ni == 0
-%    tic    
-        Res.Temp.Sol.Psi = zeros(Res.Temp.Par.T/Res.Temp.Par.s_t,size(Res.Temp.In.Psi_Start,2));
-        Res.Temp.Sol.t   = zeros(1,Res.Temp.Par.T/Res.Temp.Par.s_t);
-        
-    elseif ( mod(ni,Res.Temp.Par.s_t/Res.Temp.Par.dt ) == 0) && (ni ~= 0)
+     if ( mod(ni,Res.Temp.Par.s_t/Res.Temp.Par.dt ) == 0) && (ni ~= 0)
  %   toc     
         
-        Res.Temp.Sol.Psi(round(ni*Res.Temp.Par.dt/Res.Temp.Par.s_t),:) = F_e/Res.Temp.Space.N;
+        Res.Temp.Sol.Psi(round(ni*Res.Temp.Par.dt/Res.Temp.Par.s_t),:) = F_e(Res.Temp.Eq.mode_range)/Res.Temp.Space.N;
         Res.Temp.Sol.t(  round(ni*Res.Temp.Par.dt/Res.Temp.Par.s_t))   = Res.Temp.Par.dt*ni;
         
 %    tic
@@ -50,7 +48,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    function     E_f    =    Runge_Kuarong_step(B_E,dt,t)
+    function     E_f    =    Runge_Kuarong_step(B_E,dt,t,d)
          
         E_f    =   B_E;    
         E_temp =   B_E;

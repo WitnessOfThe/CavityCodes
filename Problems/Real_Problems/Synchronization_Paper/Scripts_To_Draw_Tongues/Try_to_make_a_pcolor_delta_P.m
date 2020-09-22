@@ -11,13 +11,13 @@
     L_L.CW.In         = Params_SiN;
     L_L.CW.In.kappa   =  1E7*2*pi;%2*1E3*2*pi;%
     L_L.CW.In.P       = 0.00000000001; 
-%%
-  N = 2000;   
+%%z
+  N = 100;   
   N_Mode = 50;
   NN = N*600;
 
-  delta_vector  = linspace(-2,2,N);
-  P_vector      = linspace(0,10,N);
+  delta_vector  = linspace(-0.7,-0.2,N);
+  P_vector      = linspace(0,8,N);
   
   Mumber_Of_Modes = zeros(N);
   Bistability_zone = ones(N);
@@ -81,17 +81,17 @@ pp4 = pp4.addData([delta_vector,fliplr(delta_vector)],[Power_up,fliplr(Power_dow
 Power_down(Power_down==0)=NaN;
 Power_up(Power_up==0)=NaN;
 Power_up(Power_up == max(P_vector)) = NaN;
- %     pp4 = pp4.addData(delta_vector_2,min(W_MI_vector_2,[],2),'Color',[1,0,0],'LineWidth',2.5);
-  for i=1:9
-        pp4 = pp4.addData(delta_vector_2,W_MI_vector_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
-        pp4 = pp4.addData(delta_vector_2,W_MI_vector_2(:,i),'Color',[1,0,0],'LineWidth',2.5);
+%     pp4 = pp4.addData(delta_vector_2,min(W_MI_vector_2,[],2),'Color',[1,0,0],'LineWidth',2.5);
+ for i=1:7
+       pp4 = pp4.addData(delta_vector_2,W_MI_vector_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
+       pp4 = pp4.addData(delta_vector_2,W_MI_vector_2(:,i),'Color',[1,0,0],'LineWidth',2.5);
    end
 pp4 = pp4.addData(delta_vector,Power_up,'Color',[0,0,0],'LineWidth',2.5,'LineStyle','--');
 pp4 = pp4.addData(delta_vector,Power_down,'Color',[0,1,0],'LineWidth',2.5,'LineStyle','--');
     pp4 = pp4.changeAxisOptions('ColorMap', 'parula',...
                           'CAxis', [0,max(max(Mumber_Of_Modes))],'YLabelText',...
         'Power [W]','FontSize',15,'XLabelText','$\delta_0$ (GHz)','XLim',[min(delta_vector),max(delta_vector)]...
-       ,'YLim',[min(P_vector),max(P_vector)],'Shading','flat');
+       ,'YLim',[min(P_vector)-0.1, max(P_vector)],'Shading','flat');
     pp4 = pp4.changeFigOptions('Height',8,...
                      'Width',18);
 %    pp4 = pp4.addData([-2.4,2.8,0,0], [], [], 'PlotType', 'Annotation', 'AnnotationType', 'textbox', 'String', '$|\mu|=14$','FontSize',14,'Color',[1,1,1]);

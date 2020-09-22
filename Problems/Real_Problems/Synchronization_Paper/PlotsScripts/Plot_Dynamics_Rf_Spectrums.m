@@ -1,29 +1,35 @@
-function Plot_Dynamics_Rf_Spectrums(Temp,k_probe,ind_t)
+function [tt_1,tt_2] = Plot_Dynamics_Rf_Spectrums(Temp,k_probe,ind_t)
 %%
     for i=1:size(k_probe,2)
         
-        ind(i) = find(Temp.Space.k == k_probe(i));
+        ind(i) = find(Temp.Space.k(Temp.Eq.mode_range) == k_probe(i));
         
     end
     
-   tt_1 = proPlot(Temp.Sol.t(ind_t)/Temp.Eq.norm,abs(Temp.Sol.Psi(ind_t,ind(1))).^2.' );
+   tt_1 = proPlot(Temp.Sol.t(ind_t)/Temp.Eq.norm,real(Temp.Sol.Psi(ind_t,ind(1))).' );
    
    for i = 2:size(ind,2)
        
-       tt_1 = tt_1.addData(Temp.Sol.t(ind_t)/Temp.Eq.norm,abs(Temp.Sol.Psi(ind_t,ind(i))).^2.' );
+       tt_1 = tt_1.addData(Temp.Sol.t(ind_t)/Temp.Eq.norm,real(Temp.Sol.Psi(ind_t,ind(i))).' );
        
    end
    i=1;
  %%  
-   tt_2 = proPlot(Temp.Sol.t/Temp.Eq.norm, fftshift(10*log10(abs(ifft((Temp.Sol.Psi(:,ind(i))).^2.')/size(Temp.Sol.Psi(:,ind(i)),2)).^2*2*pi)));
-   
    N_t = size(ind_t,2);
    
-   f = [0:N_t/2-1,-N_t/2:-1]/( Temp.Sol.t(ind_t(end)) - Temp.Sol.t(ind_t(1)) )*Temp.Eq.norm/1E6;
+   f = [0:N_t/2-1,-N_t/2:-1]/( Temp.Sol.t(ind_t(end)) - Temp.Sol.t(ind_t(1)) )*Temp.Eq.norm/1E3;
+        dt =  (Temp.Sol.t(ind_t(2)) - Temp.Sol.t(ind_t(1)))/Temp.Eq.norm;
+        tau = ( Temp.Sol.t(ind_t(end)) - Temp.Sol.t(ind_t(1)) )/Temp.Eq.norm;
    
-   for i = 1:size(ind,2)
+   i=1; 
+   Temp_Psi = (ifft(Temp.Sol.Psi(ind_t,ind(i)))*N_t)*dt/tau;
+   tt_2 = proPlot(fftshift(f),fftshift( 10*log10(abs( Temp_Psi).^2*2*pi)));
+   
+   
+   for i = 2:size(ind,2)
        
-       tt_2 = tt_2.addData(fftshift(f),fftshift( 10*log10(abs(ifft((Temp.Sol.Psi(ind_t,ind(i))).^2.')/size(Temp.Sol.Psi(:,ind(i)),2)).^2*2*pi)));
+       Temp_Psi = (ifft(Temp.Sol.Psi(ind_t,ind(i)))*N_t)*dt/tau;
+       tt_2 = tt_2.addData(fftshift(f),fftshift( 10*log10(abs( Temp_Psi).^2*2*pi)) );
        
    end
    
@@ -31,7 +37,7 @@ function Plot_Dynamics_Rf_Spectrums(Temp,k_probe,ind_t)
     tt_1 = tt_1.changeAxisOptions('XLabelText','Time (s)',...
                          'YLabelText','Power (W)',...  
                          'FontSize',13 );
-    tt_2 = tt_2.changeAxisOptions('XLabelText','RF (MHz)',...
+    tt_2 = tt_2.changeAxisOptions('XLabelText','RF (kHz)',...
                          'YLabelText','Power (W)',...  
                          'FontSize',13,'YLim',[-80,10],'XLim',[-250,250] );                     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

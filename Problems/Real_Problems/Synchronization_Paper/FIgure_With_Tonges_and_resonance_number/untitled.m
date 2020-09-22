@@ -38,7 +38,7 @@
       
       W_MI_vector_1 = zeros(NN,size(1:N_Mode/2,2));
       W_MI_vector_2 = zeros(NN,size(1:N_Mode/2,2));
-          
+      SiN =  [];    
   end
    toc
 %%
@@ -60,7 +60,8 @@ tic
       
       SiN.CW      = SiN.CW.Met.Mi_Formula(SiN.CW,N_Mode);          
       Mumber_Of_Modes_D2_Neg(i) = sum( (SiN.CW.An.Omega_mu(1,1:(end/2-1)) == 0 ));
-          
+       SiN =  [];    
+         
   end
 toc
 %%
