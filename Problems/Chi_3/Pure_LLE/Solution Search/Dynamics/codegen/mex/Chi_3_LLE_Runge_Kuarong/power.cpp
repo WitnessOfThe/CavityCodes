@@ -15,10 +15,10 @@
 #include "power.h"
 
 /* Function Definitions */
-void power(const real_T a[1024], real_T y[1024])
+void power(const real_T a[2048], real_T y[2048])
 {
   int32_T k;
-  for (k = 0; k < 1024; k++) {
+  for (k = 0; k < 2048; k++) {
     y[k] = a[k] * a[k];
   }
 }

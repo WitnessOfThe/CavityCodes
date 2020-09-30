@@ -8,10 +8,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Input Parameters for SiN
 
-    N_mode              = 2^8;
+
+    N_mode              = 2^10;
     SiN.Temp.In.omega_p = 200E12*2*pi; 
-    SiN.Temp.In         = Params_SiN;
-    SiN.Temp.In.kappa   = 1E7*2*pi;                 
+    SiN.Temp.In         = Params_CaF;
+    SiN.Temp.In.kappa   = 2E3*2*pi;                 
     SiN.Temp.In.P       = 5;      
     SiN.Temp.In.delta   = 0;
 %%

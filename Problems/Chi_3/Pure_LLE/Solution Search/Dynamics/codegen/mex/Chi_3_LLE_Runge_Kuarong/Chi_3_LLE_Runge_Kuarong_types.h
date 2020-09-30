@@ -25,10 +25,10 @@ typedef struct {
   real_T kappa;
   real_T P;
   real_T delta;
-  real_T omega[1024];
+  real_T omega[2048];
   real_T Finess;
   real_T Fin_D;
-  creal_T Psi_Start[1024];
+  creal_T Psi_Start[2048];
   real_T t_start;
 } struct1_T;
 
@@ -45,9 +45,9 @@ typedef struct {
   real_T N;
   real_T lenght;
   real_T dphi;
-  real_T phi[1024];
+  real_T phi[2048];
   real_T dk;
-  real_T k[1024];
+  real_T k[2048];
 } struct3_T;
 
 typedef struct {
@@ -56,12 +56,12 @@ typedef struct {
   real_T gamma_3;
   real_T D[4];
   real_T h;
-  creal_T omega_j[1024];
-  real_T gamma_Kerr[1024];
-  real_T mask[1024];
-  real_T kappa_vector[1024];
-  real_T mode_range[600];
-  creal_T L[1024];
+  creal_T omega_j[2048];
+  real_T gamma_Kerr[2048];
+  real_T mask[2048];
+  real_T kappa_vector[2048];
+  real_T mode_range[700];
+  creal_T L[2048];
   real_T norm;
 } struct4_T;
 
@@ -74,8 +74,13 @@ typedef struct {
 
 typedef struct {
   struct {
-    creal_T exp_minus_omega_contents[3072];
-    creal_T exp_plus_omega_contents[3072];
+    creal_T exp_minus_omega_contents[6144];
+    creal_T exp_plus_omega_contents[6144];
+    creal_T y[2048];
+    creal_T F_e[2048];
+    creal_T E_temp[2048];
+    creal_T b_exp_plus_omega_contents[2048];
+    creal_T b_exp_minus_omega_contents[2048];
   } f0;
 
   struct {

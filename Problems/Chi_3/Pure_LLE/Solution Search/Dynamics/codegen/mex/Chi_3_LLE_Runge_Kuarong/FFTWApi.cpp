@@ -16,7 +16,7 @@
 #include "emlrt.h"
 
 /* Function Definitions */
-void FFTWApi_fft1d(const creal_T data[1024], boolean_T isInverse, creal_T y[1024])
+void FFTWApi_fft1d(const creal_T data[2048], boolean_T isInverse, creal_T y[2048])
 {
   int32_T b_isInverse;
   emlrtFFTWSetNumThreads(36);
@@ -26,7 +26,7 @@ void FFTWApi_fft1d(const creal_T data[1024], boolean_T isInverse, creal_T y[1024
     b_isInverse = -1;
   }
 
-  emlrtFFTW_1D_C2C((real_T *)&data[0], (real_T *)&y[0], 1, 1024, 1024, 1,
+  emlrtFFTW_1D_C2C((real_T *)&data[0], (real_T *)&y[0], 1, 2048, 2048, 1,
                    b_isInverse);
 }
 

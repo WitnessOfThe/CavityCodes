@@ -1,28 +1,41 @@
 clear all
 %%
-  load('/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Real_Problems/Synchronization_Paper/Dynamics_work/Tongues_Scan/Starter_CaF.mat');
+  load('/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Real_Problems/Synchronization_Paper/Dynamics_work/Tongues_Scan/Starter_CaF_Right_Segment.mat');
 
 %%
 
-d_mu = zeros(44,341);
-ind_t  = 15001:30000;
-
-parfor i =1:44*341
-    if  Sim_zone(i) == 1
-        tt=load(strcat('/home/dp710/Data_Storage/CaF_35_Segment_1_L/Data/',num2str(i),'.mat'));
-        N_t = size(ind_t,2);
-        dt =  (tt.Save.Temp.Sol.t(ind_t(2)) - tt.Save.Temp.Sol.t(ind_t(1)))/tt.Save.Temp.Eq.norm;
-        
-        tau = ( tt.Save.Temp.Sol.t(ind_t(end)) - tt.Save.Temp.Sol.t(ind_t(1)) )/tt.Save.Temp.Eq.norm;
-        f = [0:N_t/2-1,-N_t/2:-1]/tau*2*pi;
-        
-        Temp_Psi_1 = ifft(tt.Save.Temp.Sol.Psi_mu(ind_t,1)).'*N_t*dt/tau;
-        Temp_Psi_2 = ifft(tt.Save.Temp.Sol.Psi_mu(ind_t,2)).'*N_t*dt/tau;
-        
-        omega_mu_p = trapz(f.*abs(Temp_Psi_1).^2)./trapz(abs(Temp_Psi_1).^2);
-        omega_mu_m = trapz(f.*abs(Temp_Psi_2).^2)./trapz(abs(Temp_Psi_2).^2);
-        d_mu(i)    = (omega_mu_p - omega_mu_m)/70;
-        i
-    end
-    
+d_mu_mean = NaN(size(delta_matrix));
+d_mu_std = NaN(size(delta_matrix));
+%t_Save.D_mu = zeros(1,1);
+NN = 1000;
+for i_t = 1:NN
+    ind_t(i_t).ind = [(25001+i_t):(29000+i_t)];
 end
+%t_Save =struct(1,61*347);
+%%
+for i =1:size(delta_matrix,1)*size(delta_matrix,2)
+    
+    if  Sim_zone(i) == 1 && isfile(strcat('/home/dp710/Data_Storage/CaF_35_Segment_2E3_kappa_0.56_0.555/Data/',num2str(i),'.mat')) 
+        
+        tt=load(strcat('/home/dp710/Data_Storage/CaF_35_Segment_2E3_kappa_0.56_0.555/Data/',num2str(i),'.mat'));
+        [a,b] =ind2sub(size(power_matrix),i);
+        for i_t = 1:NN
+            
+            t_Save(a,b).D_mu(i_t)   = d_mu_from_Dyn(tt,ind_t(i_t).ind);
+            
+        end
+            t_Save(a,b).abs_Psi_2_int  = sum(abs(tt.Save.Temp.Sol.Psi_end).^2);                    
+    end
+    i
+end
+%%
+d_mu = abs(d_mu_mean);
+flag_mu= NaN(61,347);
+%flag_mu(d_mu > 1) = 5;
+%flag_mu(d_mu <= 1) = 2;
+%%
+flag_mu(d_mu > 1)= 1;
+flag_mu(d_mu_std >1)= 2;
+flag_mu(d_mu <= 1)= 0;
+%d_mu(d_mu < 10) = -2;
+%%

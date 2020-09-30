@@ -16,10 +16,10 @@
 #include "abs.h"
 
 /* Function Definitions */
-void b_abs(const creal_T x[1024], real_T y[1024])
+void b_abs(const creal_T x[2048], real_T y[2048])
 {
   int32_T k;
-  for (k = 0; k < 1024; k++) {
+  for (k = 0; k < 2048; k++) {
     y[k] = muDoubleScalarHypot(x[k].re, x[k].im);
   }
 }

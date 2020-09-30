@@ -1,4 +1,4 @@
-function [tt_1,tt_2] = Plot_Dynamics_Rf_Spectrums(Temp,k_probe,ind_t)
+function [tt_1,tt_2] = Plot_Dynamics_Rf_Spectrums(Temp,k_probe,ind_t,Flag)
 %%
     for i=1:size(k_probe,2)
         
@@ -39,12 +39,13 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_Spectrums(Temp,k_probe,ind_t)
                          'FontSize',13 );
     tt_2 = tt_2.changeAxisOptions('XLabelText','RF (kHz)',...
                          'YLabelText','Power (W)',...  
-                         'FontSize',13,'YLim',[-80,10],'XLim',[-250,250] );                     
+                         'FontSize',13,'YLim',[-50,10],'XLim',[-4050,4050] );                     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %    tt_1 = tt_1.addInset(tt_1,[0,0,1,1])
-    figure('Name','RF_Spectrums');
-    CF = conFigure([tt_1,tt_2],1,2, 'UniformPlots', true, 'Height', 7, 'Width', 18,'Labels',false);
-
+    if Flag
+          figure('Name','RF_Spectrums');
+        CF = conFigure([tt_1,tt_2],1,2, 'UniformPlots', true, 'Height', 7, 'Width', 18,'Labels',false);
+    end
     
 
 end

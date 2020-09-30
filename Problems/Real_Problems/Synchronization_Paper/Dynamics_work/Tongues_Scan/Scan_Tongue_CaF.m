@@ -18,8 +18,8 @@
   N_Mode = 2^10;
   NN     = N*600;
 
-  delta_vector  = -0.612:1.5E-4:-0.56;
-  P_vector      = 0:0.01:0.6;
+  delta_vector  = -0.6120:1.5E-4:-0.555;
+  P_vector      = .1:0.01:0.65;
   
   N_delta = size(delta_vector,2);
   N_Power = size(P_vector,2);
@@ -42,34 +42,34 @@
     power_matrix = ones(N_Power,N_delta);
 
   tic
-  parfor i = 1:N_delta
-      
-      SiN = L_L;        
-      SiN.CW.In.delta =  delta_vector(i)*2*pi*1E6;
-      
-      for ii = 1:N_Power
-          
-          SiN.CW.In.P  = P_vector(ii);          
-          delta_matrix(ii,i) = delta_vector(i)*2*pi*1E6;
-          power_matrix(ii,i) = P_vector(ii);
-          SiN.CW       = SiN.CW.Met.Solve(SiN.CW,N_Mode);          
-          [~,ind]   = max(abs(SiN.CW.Sol.Psi));
-          SiN.CW.In.g  = SiN.CW.Sol.g(ind)*SiN.CW.Eq.norm;
-          SiN.CW      = SiN.CW.Met.Mi_Formula(SiN.CW,N_Mode);          
-          
-          Mumber_Of_Modes(ii,i) = sum( (SiN.CW.An.Omega_mu(1,1:(end/2-1)) == 0 ));
-          
-          if max(max(real(SiN.CW.An.lambda_mu))) >0 
-              Sim_zone(ii,i) = 1;
-          end
-              
-          if isnan(SiN.CW.Sol.Psi(2))
-              Bistability_zone(ii,i) = 0;
-          end
-      end
-      i
-      SiN = [];
-  end
+%   parfor i = 1:N_delta
+%       
+%       SiN = L_L;        
+%       SiN.CW.In.delta =  delta_vector(i)*2*pi*1E6;
+%       
+%       for ii = 1:N_Power
+%           
+%           SiN.CW.In.P  = P_vector(ii);          
+%           delta_matrix(ii,i) = delta_vector(i)*2*pi*1E6;
+%           power_matrix(ii,i) = P_vector(ii);
+%           SiN.CW       = SiN.CW.Met.Solve(SiN.CW,N_Mode);          
+%           [~,ind]   = max(abs(SiN.CW.Sol.Psi));
+%           SiN.CW.In.g  = SiN.CW.Sol.g(ind)*SiN.CW.Eq.norm;
+%           SiN.CW      = SiN.CW.Met.Mi_Formula(SiN.CW,N_Mode);          
+%           
+%           Mumber_Of_Modes(ii,i) = sum( (SiN.CW.An.Omega_mu(1,1:(end/2-1)) == 0 ));
+%           
+%           if max(max(real(SiN.CW.An.lambda_mu))) >0 
+%               Sim_zone(ii,i) = 1;
+%           end
+%               
+%           if isnan(SiN.CW.Sol.Psi(2))
+%               Bistability_zone(ii,i) = 0;
+%           end
+%       end
+%       i
+%       SiN = [];
+%   end
   toc
   
 %%

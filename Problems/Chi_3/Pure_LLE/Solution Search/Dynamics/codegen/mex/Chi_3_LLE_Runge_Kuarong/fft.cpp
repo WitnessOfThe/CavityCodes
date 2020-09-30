@@ -16,12 +16,12 @@
 #include "FFTWApi.h"
 
 /* Function Definitions */
-void c_fft(const creal_T x[1024], creal_T y[1024])
+void c_fft(const creal_T x[2048], creal_T y[2048])
 {
   FFTWApi_fft1d(x, false, y);
 }
 
-void fft(const creal_T x[1024], creal_T y[1024])
+void fft(const creal_T x[2048], creal_T y[2048])
 {
   FFTWApi_fft1d(x, true, y);
 }

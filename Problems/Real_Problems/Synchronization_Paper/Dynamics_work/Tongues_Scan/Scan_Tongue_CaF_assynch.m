@@ -18,8 +18,8 @@
   N_Mode = 2^10;
   NN     = N*600;
 
-  delta_vector  = -0.612:1.5E-4:-0.56;
-  P_vector      = 0:0.01:0.6;
+  delta_vector  = -0.56:1.5E-4:-0.555;
+  P_vector      = 0:0.01:0.65;
   
   N_delta = size(delta_vector,2);
   N_Power = size(P_vector,2);
@@ -71,10 +71,10 @@
 %       SiN = [];
 %   end
 %   toc
-  load('/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Real_Problems/Synchronization_Paper/Dynamics_work/Tongues_Scan/Starter_CaF_Right.mat')
+  load('/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Real_Problems/Synchronization_Paper/Dynamics_work/Tongues_Scan/Starter_CaF_Right_Segment.mat')
 
 %%
-  Path = '/home/dp710/Data_Storage/CaF_35_Segment_2E3_kappa';
+  Path = '/home/dp710/Data_Storage/CaF_35_Segment_2E3_kappa_0.56_0.555';
 %  Path = 'C:\Users\dp710\Documents\Check_fig\Intersting';
 %h = waitbar(0, 'Waiting...');
   ii = 0;
