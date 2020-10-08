@@ -74,8 +74,8 @@ ii =0;
           
       end
       toc
-      myCluster = parcluster('LocalProfile1');
-      delete(myCluster.Jobs);
+    %  myCluster = parcluster('LocalProfile1');
+    %  delete(myCluster.Jobs);
       ii_1
   end
 %updateWaitbarFuture = afterEach(f, @(~) waitbar(sum(strcmp('finished', {f.State}))/numel(f), h), 1); 

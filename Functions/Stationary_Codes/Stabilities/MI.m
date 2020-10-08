@@ -10,13 +10,14 @@ function CW = MI(CW,N_mode)
             
             for i = 1:CW.Space.N
                 
-                tt = eig(CW.Met.MI_Matrix(CW,i,j));
+                [tt_vect,tt_val] = eig(CW.Met.MI_Matrix(CW,i,j));
                 
-                Value(i,1:size(tt,1)) = tt;
-                
+                Value(i,1:size(tt_val,1)) = diag(tt_val);
+                Vect(i).Vect              = tt_vect;
             end
             
                 CW.Stab(j).Value   = Value;
+                CW.Stab(j).Vector  = Vect;
                 
         else
            

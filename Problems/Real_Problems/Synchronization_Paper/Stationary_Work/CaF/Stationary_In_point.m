@@ -35,9 +35,9 @@
 %% Temporal Coefficients
 
     CaF.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
-    CaF.Temp.Par.dt            = 1E-5;
-    CaF.Temp.Par.s_t           = 0.01; % adoption rate to save data
-    CaF.Temp.Par.T             = 10;
+    CaF.Temp.Par.dt            = (1E-10)*CaF.Temp.Eq.norm;
+    CaF.Temp.Par.s_t           = (1E-8)*CaF.Temp.Eq.norm; % time normalized by norm ceoff
+    CaF.Temp.Par.T             = (1E-3)*CaF.Temp.Eq.norm; %% time normalized by norm ceoff
     CaF.Temp.Par.CW_num        = 3;
     CaF.Temp.Par.dd            = CaF.Temp.Par.T/CaF.Temp.Par.s_t;
     
@@ -50,7 +50,10 @@
     
     CaF = Stat_In_Guess_Chi_3_LLE_From_Dyn(CaF,N_mode);
 
- %%
+ %% Plot Results Of Dynamics
     Plot_Dynamics_Result_LinePlots_Spectrums(CaF.Temp,1)
     CaF.Temp.Met.Plot.Carpets(CaF.Temp,1,1);
+    %
     Plot_Dynamics_Rf_pcolor(CaF.CW,CaF.Temp,[-50,50],301:1000,1)
+%% Plot Results of Stationary
+    Plot_Static_Field_Spectrums(CaF.Stat,1)

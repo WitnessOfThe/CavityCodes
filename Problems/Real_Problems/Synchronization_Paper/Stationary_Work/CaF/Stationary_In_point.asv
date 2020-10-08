@@ -6,14 +6,14 @@
     CaF       =  Set_Up_Methods_For_Synchronization_Paper;
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Input Parameters for SiN
+%% Input Parameters for CaF
 
 
     N_mode              = 2^10;
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.5;
-    CaF.Stat.In.delta   = -0.58E6*2*pi;
+    CaF.Stat.In.P       = 0.4;
+    CaF.Stat.In.delta   = -0.595E6*2*pi;
     
     CaF.Temp.In         = CaF.Stat.In;
 %% Stationary Coefficeints
@@ -35,9 +35,9 @@
 %% Temporal Coefficients
 
     CaF.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
-    CaF.Temp.Par.dt            = 0.5E-5;
-    CaF.Temp.Par.s_t           = 0.01; % adoption 
-    CaF.Temp.Par.T             = 1;
+    CaF.Temp.Par.dt            = 1E-5;
+    CaF.Temp.Par.s_t           = 0.01*CaF.Stat.In.kappa; % adoption rate to save data
+    CaF.Temp.Par.T             = 10/CaF.Stat.In.kappa; %% time normalized by kappa
     CaF.Temp.Par.CW_num        = 3;
     CaF.Temp.Par.dd            = CaF.Temp.Par.T/CaF.Temp.Par.s_t;
     
@@ -48,6 +48,10 @@
     CaF             =                     Chi_3_LLE_Start_Point_CW(CaF);    
     CaF(1).Temp.Sol =    Chi_3_LLE_Runge_Kuarong(CaF.Temp,N_mode,Runge);
     
-    CaF = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW(CaF,N_mode);
+    CaF = Stat_In_Guess_Chi_3_LLE_From_Dyn(CaF,N_mode);
 
  %%
+    Plot_Dynamics_Result_LinePlots_Spectrums(CaF.Temp,1)
+    
+    CaF.Temp.Met.Plot.Carpets(CaF.Temp,1,1);
+    Plot_Dynamics_Rf_pcolor(CaF.CW,CaF.Temp,[-50,50],301:1000,1)
