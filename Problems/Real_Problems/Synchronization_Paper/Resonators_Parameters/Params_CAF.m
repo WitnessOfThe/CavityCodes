@@ -5,4 +5,5 @@ function In = Params_CaF
     In.D           = 2*pi*[15E9,1000,0,0];% Dispersion Coefficients
     In.gamma       = 2*pi*10*1000;        % Nonlinear Coefficent
     In.range       =  300;
+    
 end
