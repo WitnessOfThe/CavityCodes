@@ -24,7 +24,7 @@
 #include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void power(const real_T a[2048], real_T y[2048]);
+extern void power(const real_T a[1024], real_T y[1024]);
 
 #endif
 

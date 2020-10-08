@@ -17,7 +17,7 @@ function  Plot_Dynamics_Rf_Power_and_D1(CW,Temp,ind_t,k)
         
         for  i = 1:size(k,2)
         
-            ind = find(Temp.Space.k == k(i));
+            ind = find(Temp.Space.k(Temp.Eq.mode_range) == k(i));
             k_mat{i} = strcat('$|\mu|$=',num2str(k(i)));
             t_1 = t_1.addData(Temp.Sol.t(ind_t)/Temp.Eq.norm,10*log10(abs(Temp.Sol.Psi(ind_t,ind)).^2*2*pi).');
         end

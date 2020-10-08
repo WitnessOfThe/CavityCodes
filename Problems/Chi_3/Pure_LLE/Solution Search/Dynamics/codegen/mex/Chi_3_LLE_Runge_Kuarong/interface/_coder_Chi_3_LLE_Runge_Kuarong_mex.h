@@ -26,7 +26,7 @@
 /* Function Declarations */
 extern void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs, const
   mxArray *prhs[]);
-extern emlrtCTX mexFunctionCreateRootTLS();
+extern emlrtCTX mexFunctionCreateRootTLS(void);
 
 #endif
 

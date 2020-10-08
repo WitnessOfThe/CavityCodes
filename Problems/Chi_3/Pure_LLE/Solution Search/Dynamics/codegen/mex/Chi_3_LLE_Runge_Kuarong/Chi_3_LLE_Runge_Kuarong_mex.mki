@@ -1,19 +1,19 @@
 # Make settings for Chi_3_LLE_Runge_Kuarong
-CC=gcc
+CC=/usr/bin/gcc
 CFLAGS=-fexceptions -fPIC -fno-omit-frame-pointer -pthread -D_GNU_SOURCE -DMATLAB_MEX_FILE 
 CLIBS=
 COPTIMFLAGS=-O2 -fwrapv -DNDEBUG
 CDEBUGFLAGS=-g
-CXX=/usr/bin/g++
+CXX=g++
 CXXFLAGS=-fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE 
 CXXLIBS=
 CXXOPTIMFLAGS=-O2 -fwrapv -DNDEBUG
 CXXDEBUGFLAGS=-g
-LDFLAGS=-pthread -Wl,--no-undefined  -shared -Wl,--as-needed -Wl,-rpath-link,/usr/local/matlab/r2018b/bin/glnxa64 -L/usr/local/matlab/r2018b/bin/glnxa64 -Wl,-rpath-link,/usr/local/matlab/r2018b/extern/bin/glnxa64 -L/usr/local/matlab/r2018b/extern/bin/glnxa64 -lMatlabDataArray -lmx -lmex -lmat -lm -lstdc++ -Wl,--version-script,/usr/local/matlab/r2018b/extern/lib/glnxa64/mexFunction.map
+LDFLAGS=-pthread -Wl,--no-undefined -Wl,-rpath-link,/usr/local/matlab/r2018b/bin/glnxa64 -shared  -L/usr/local/matlab/r2018b/bin/glnxa64 -lmx -lmex -lmat -lm -lstdc++ -Wl,--version-script,/usr/local/matlab/r2018b/extern/lib/glnxa64/mexFunction.map
 LDOPTIMFLAGS=
 LDDEBUGFLAGS=-g
 Arch=glnxa64
-LD=/usr/bin/g++
+LD=/usr/bin/gcc
 OMPFLAGS=
 OMPLINKFLAGS=
 EMC_COMPILER=gcc

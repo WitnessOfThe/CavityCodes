@@ -12,14 +12,15 @@
     L_L.CW.In.kappa   =  2E3*2*pi;%2*1E3*2*pi;%
     L_L.CW.In.P       = 0.00000000001; 
     L_L.Temp          = L_L.CW;
+    
 %%
 
   N      = 200;   
   N_Mode = 2^10;
   NN     = N*600;
 
-  delta_vector  = -0.6120:1.5E-4:-0.555;
-  P_vector      = .1:0.01:0.65;
+  delta_vector  = -0.4:1.5E-4:0;
+  P_vector      = 0:0.0005:0.07;
   
   N_delta = size(delta_vector,2);
   N_Power = size(P_vector,2);
@@ -42,34 +43,34 @@
     power_matrix = ones(N_Power,N_delta);
 
   tic
-%   parfor i = 1:N_delta
-%       
-%       SiN = L_L;        
-%       SiN.CW.In.delta =  delta_vector(i)*2*pi*1E6;
-%       
-%       for ii = 1:N_Power
-%           
-%           SiN.CW.In.P  = P_vector(ii);          
-%           delta_matrix(ii,i) = delta_vector(i)*2*pi*1E6;
-%           power_matrix(ii,i) = P_vector(ii);
-%           SiN.CW       = SiN.CW.Met.Solve(SiN.CW,N_Mode);          
-%           [~,ind]   = max(abs(SiN.CW.Sol.Psi));
-%           SiN.CW.In.g  = SiN.CW.Sol.g(ind)*SiN.CW.Eq.norm;
-%           SiN.CW      = SiN.CW.Met.Mi_Formula(SiN.CW,N_Mode);          
-%           
-%           Mumber_Of_Modes(ii,i) = sum( (SiN.CW.An.Omega_mu(1,1:(end/2-1)) == 0 ));
-%           
-%           if max(max(real(SiN.CW.An.lambda_mu))) >0 
-%               Sim_zone(ii,i) = 1;
-%           end
-%               
-%           if isnan(SiN.CW.Sol.Psi(2))
-%               Bistability_zone(ii,i) = 0;
-%           end
-%       end
-%       i
-%       SiN = [];
-%   end
+  parfor i = 1:N_delta
+      
+      SiN = L_L;        
+      SiN.CW.In.delta =  delta_vector(i)*2*pi*1E6;
+      
+      for ii = 1:N_Power
+          
+          SiN.CW.In.P  = P_vector(ii);          
+          delta_matrix(ii,i) = delta_vector(i)*2*pi*1E6;
+          power_matrix(ii,i) = P_vector(ii);
+          SiN.CW       = SiN.CW.Met.Solve(SiN.CW,N_Mode);          
+          [~,ind]   = max(abs(SiN.CW.Sol.Psi));
+          SiN.CW.In.g  = SiN.CW.Sol.g(ind)*SiN.CW.Eq.norm;
+          SiN.CW      = SiN.CW.Met.Mi_Formula(SiN.CW,N_Mode);          
+          
+          Mumber_Of_Modes(ii,i) = sum( (SiN.CW.An.Omega_mu(1,1:(end/2-1)) == 0 ));
+          
+          if max(max(real(SiN.CW.An.lambda_mu))) >0 && Mumber_Of_Modes(ii,i) <=1
+              Sim_zone(ii,i) = 1;
+          end
+              
+          if isnan(SiN.CW.Sol.Psi(2))
+              Bistability_zone(ii,i) = 0;
+          end
+      end
+      i
+      SiN = [];
+  end
   toc
   
 %%
@@ -106,9 +107,12 @@
       SiN.CW          = SiN.Met.T_Syn(SiN.CW,N_Mode);      
       W_MI_vector_1(i,:)        = SiN.CW.In.W_MI_Tongue(1,1:N_Mode/2);
       W_MI_vector_2(i,:)        = SiN.CW.In.W_MI_Tongue(2,1:N_Mode/2);
+      
       if SiN.CW.In.delta >0 
+          
            W_MI_vector_1(i,:) = min([W_MI_vector_1(i,:),W_MI_vector_2(i,:)]);
            W_MI_vector_2(i,:) = min([W_MI_vector_1(i,:),W_MI_vector_2(i,:)]);
+           
       end
       i
   end
@@ -122,7 +126,7 @@ pp4 = proPlot(delta_vector,P_vector, Mumber_Of_Modes, 'PlotType','pcolor');
 %Power_up(Power_up==0)=NaN;
 %Power_up(Power_up == max(P_vector)) = NaN;
 
-  for i=35:37
+  for i=1:30
       pp4 = pp4.addData(delta_vector_2,W_MI_vector_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
       pp4 = pp4.addData(delta_vector_2,W_MI_vector_2(:,i),'Color',[1,0,0],'LineWidth',2.5);
   end
@@ -131,7 +135,7 @@ pp4 = proPlot(delta_vector,P_vector, Mumber_Of_Modes, 'PlotType','pcolor');
     pp4 = pp4.changeAxisOptions('ColorMap', 'parula',...
                           'CAxis', [0,max(max(Mumber_Of_Modes))],'YLabelText',...
         'Power [W]','FontSize',15,'XLabelText','$\delta_0$ (GHz)','XLim',[min(delta_vector),max(delta_vector)]...
-       ,'YLim',[min(P_vector)-0.1, max(P_vector)],'Shading','flat');
+       ,'YLim',[min(P_vector)-0.001, max(P_vector)],'Shading','flat');
     pp4 = pp4.changeFigOptions('Height',8,...
                      'Width',18);
                  

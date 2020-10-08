@@ -18,8 +18,8 @@
   N_Mode = 2^10;
   NN     = N*600;
 
-  delta_vector  = -0.612:1.5E-4:-0.56;
-  P_vector      = 0:0.01:0.6;
+  delta_vector  = -0.4:1.5E-4:0;
+  P_vector      = 0:0.0005:0.07;
   
   N_delta = size(delta_vector,2);
   N_Power = size(P_vector,2);
@@ -28,76 +28,54 @@
     L_L.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     L_L.Temp.Par.dt            = 5E-5;
     L_L.Temp.Par.s_t           = 0.01;
-    L_L.Temp.Par.T             = 300;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    L_L.Temp.Par.T             = 200;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     L_L.Temp.Par.CW_num        = 3;
     L_L.Temp.Par.dd            = L_L.Temp.Par.T/L_L.Temp.Par.s_t;
     Runge                      = Define_Runge_Coeff(L_L.Temp.Par);
- %   tt                         = CaF.Temp.Met;
-%   %%  
-%   Mumber_Of_Modes  = zeros(N_Power,N_delta);
-%   Bistability_zone = ones(N_Power,N_delta);
-%   Sim_zone= zeros(N_Power,N_delta);
-%   Bistability_zone = ones(N_Power,N_delta);
-%     delta_matrix = ones(N_Power,N_delta);
-%     power_matrix = ones(N_Power,N_delta);
-% 
-%   tic
-%   parfor i = 1:N_delta
-%       
-%       SiN = L_L;        
-%       SiN.CW.In.delta =  delta_vector(i)*2*pi*1E6;
-%       
-%       for ii = 1:N_Power
-%           
-%           SiN.CW.In.P  = P_vector(ii);          
-%           delta_matrix(ii,i) = delta_vector(i)*2*pi*1E6;
-%           power_matrix(ii,i) = P_vector(ii);
-%           SiN.CW       = SiN.CW.Met.Solve(SiN.CW,N_Mode);          
-%           [~,ind]   = max(abs(SiN.CW.Sol.Psi));
-%           SiN.CW.In.g  = SiN.CW.Sol.g(ind)*SiN.CW.Eq.norm;
-%           SiN.CW      = SiN.CW.Met.Mi_Formula(SiN.CW,N_Mode);          
-%           
-%           Mumber_Of_Modes(ii,i) = sum( (SiN.CW.An.Omega_mu(1,1:(end/2-1)) == 0 ));
-%           
-%           if max(max(real(SiN.CW.An.lambda_mu))) >0 
-%               Sim_zone(ii,i) = 1;
-%           end
-%               
-%           if isnan(SiN.CW.Sol.Psi(2))
-%               Bistability_zone(ii,i) = 0;
-%           end
-%       end
-%       i
-%       SiN = [];
-%   end
-%   toc
-  load('/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Real_Problems/Synchronization_Paper/Dynamics_work/Tongues_Scan/Starter_CaF_Right.mat')
+    load('/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Real_Problems/Synchronization_Paper/Dynamics_work/Tongues_Scan/Starter_CaF_Big_Scan.mat')
 
 %%
-  Path = '/home/dp710/Data_Storage/CaF_35_Segment_2E3_kappa';
+  Path = '/home/dp710/Data_Storage/CaF_Scan_from_0.4_to_0_2_synch_zone';
 %  Path = 'C:\Users\dp710\Documents\Check_fig\Intersting';
 %h = waitbar(0, 'Waiting...');
   ii = 0;
   for i_2 = 1:N_delta
       for i_1 = 1:N_Power
+          
           ii = ii+1;
           Sim_number(i_1,i_2) = ii;
+          
       end
   end
-  for i_1 = 1:N_Power      
-    delete(gcp('nocreate'))
-    p = parpool(70);
-    tic
-    parfor i_2 = 1:N_delta
-        
-        ii = Sim_number(i_1,i_2)
-        Chi_3_LLE_Assynch_Paralell_exec(L_L,delta_matrix(ii),power_matrix(ii),ii,Path,Sim_zone(ii),N_Mode,Runge)
-        
-    end
-    toc
-    i_1
+ii =0;
+ for ii_1 = 1:(round(N_delta*N_Power/1000)+1)
+      
+      Count = 0;
+      
+      while Count < 1000
+          
+          ii = ii+1;
+          
+          if Sim_zone(ii) == 1 && ~isfile(strcat(Path,'/Data/',num2str(ii),'.mat'))   
+              
+              Count = Count +1;
+              ii_bathc(Count) = Sim_number(ii);
+              
+          end
+          
+      end
+      
+      delete(gcp('nocreate'));
+      p = parpool(70);
+      tic
+      parfor i = 1:1000
+          
+          Chi_3_LLE_Assynch_Paralell_exec(L_L,delta_matrix(ii_bathc(i)),power_matrix(ii_bathc(i)),ii_bathc(i),Path,Sim_zone(ii_bathc(i)),N_Mode,Runge)
+          
+      end
+      toc
+      ii_1
   end
-
 %updateWaitbarFuture = afterEach(f, @(~) waitbar(sum(strcmp('finished', {f.State}))/numel(f), h), 1); 
 %%
 % pp4 = proPlot(delta_vector,P_vector, Mumber_Of_Modes, 'PlotType','pcolor');
@@ -136,7 +114,7 @@
     tic
     for i_2 = 1:N_delta
         
-        ii = Sim_number(i_1,i_2)
+        ii = Sim_number(i_1,i_2);
         Left_sim(i_1,i_2) =  Sim_zone(ii) == 1 && ~isfile(strcat(Path,'/Data/',num2str(ii),'.mat')) ; 
     end
     toc

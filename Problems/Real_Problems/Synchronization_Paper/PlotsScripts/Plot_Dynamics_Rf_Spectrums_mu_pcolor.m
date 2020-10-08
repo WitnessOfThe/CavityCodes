@@ -17,7 +17,7 @@ function CF_1 = Plot_Dynamics_Rf_Spectrums_mu_pcolor(CW,Temp,ind_t,k,k_ins)
             ind = find(Temp.Space.k((Temp.Eq.mode_range)) == k(i));
             k_vector(i) =  Temp.Space.k(Temp.Eq.mode_range(Temp.Space.k((Temp.Eq.mode_range)) == k(i)));
             Temp_Psi = fftshift(ifft(Temp.Sol.Psi(ind_t,ind))*N_t)*dt/tau;
-            Psi_mu   = 10*log10(abs(Temp.Sol.Psi(ind_t(end),:)).^2*2*pi);
+            Psi_mu   = 10*log10(abs(Temp.Sol.Psi(ind_t(end-1),:)).^2*2*pi);
             
             t_pl = proPlot(k_vector(i)*ones(1,N_t),fftshift(f),10*log10(abs(Temp_Psi).^2*2*pi).','PlotType','plot3','Color',[0,0,0]);
             t_pl = t_pl.addData(k_vector(i)*ones(1,N_t),fftshift(f),Base_value*ones(1,N_t),'PlotType','plot3','Marker','none','Color',Grid_Color,'LineStyle',':');

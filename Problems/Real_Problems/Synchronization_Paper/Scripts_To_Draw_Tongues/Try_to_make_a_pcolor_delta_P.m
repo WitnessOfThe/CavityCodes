@@ -9,20 +9,21 @@
 %% Input Parameters for CaF
 
     L_L.CW.In         = Params_SiN;
-    L_L.CW.In.kappa   =  1E7*2*pi;%2*1E3*2*pi;%
+    L_L.CW.In.kappa   =  1E8*2*pi;%2*1E3*2*pi;%
     L_L.CW.In.P       = 0.00000000001; 
 %%z
-  N = 100;   
+  N = 1000;   
   N_Mode = 50;
-  NN = N*600;
+  NN = N*60;
 
-  delta_vector  = linspace(-0.7,-0.2,N);
-  P_vector      = linspace(0,8,N);
+  delta_vector  = linspace(-2,1,N);
+  P_vector      = linspace(0,3,N);
   
   Mumber_Of_Modes = zeros(N);
   Bistability_zone = ones(N);
   tic
   parfor i = 1:N
+      
       SiN = L_L;        
       SiN.CW.In.delta =  delta_vector(i)*2*pi*1E9;
       
@@ -38,6 +39,7 @@
           if isnan(SiN.CW.Sol.Psi(2))
               Bistability_zone(ii,i) = 0;
           end
+          
       end
       i       
   end
@@ -45,16 +47,16 @@
 %%
   delta_vector_2 = linspace(min(delta_vector),max(delta_vector),NN);
   
-  W_MI_vector_1 = zeros(NN,size(1:20,2));
-  W_MI_vector_2 = zeros(NN,size(1:20,2));
+  W_MI_vector_1 = zeros(NN,size(1:50,2));
+  W_MI_vector_2 = zeros(NN,size(1:50,2));
 
   parfor i = 1:NN      
       SiN = L_L;
       SiN.CW.In.delta =  delta_vector_2(i)*2*pi*1E9;
       SiN.CW          = SiN.Met.T_MI (SiN.CW,N_Mode);
       SiN.CW          = SiN.Met.T_Syn(SiN.CW,N_Mode);      
-      W_MI_vector_1(i,:)        = SiN.CW.In.W_MI_Tongue(1,1:20);
-      W_MI_vector_2(i,:)        = SiN.CW.In.W_MI_Tongue(2,1:20);
+      W_MI_vector_1(i,:)        = SiN.CW.In.W_MI_Tongue(1,1:50);
+      W_MI_vector_2(i,:)        = SiN.CW.In.W_MI_Tongue(2,1:50);
       if SiN.CW.In.delta >0 
            W_MI_vector_1(i,:) = min([W_MI_vector_1(i,:),W_MI_vector_2(i,:)]);
            W_MI_vector_2(i,:) = min([W_MI_vector_1(i,:),W_MI_vector_2(i,:)]);
@@ -82,7 +84,7 @@ Power_down(Power_down==0)=NaN;
 Power_up(Power_up==0)=NaN;
 Power_up(Power_up == max(P_vector)) = NaN;
 %     pp4 = pp4.addData(delta_vector_2,min(W_MI_vector_2,[],2),'Color',[1,0,0],'LineWidth',2.5);
- for i=1:7
+ for i=1:25
        pp4 = pp4.addData(delta_vector_2,W_MI_vector_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
        pp4 = pp4.addData(delta_vector_2,W_MI_vector_2(:,i),'Color',[1,0,0],'LineWidth',2.5);
    end

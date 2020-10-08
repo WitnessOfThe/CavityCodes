@@ -20,7 +20,7 @@
     SiN.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     SiN.Temp.Par.dt            = 0.1E-5;
     SiN.Temp.Par.s_t           = 0.1E-3;
-    SiN.Temp.Par.T             = 25;
+    SiN.Temp.Par.T             = 150;
     SiN.Temp.Par.CW_num        = 3;
     SiN.Temp.Par.dd            = SiN.Temp.Par.T/SiN.Temp.Par.s_t;
     
@@ -32,7 +32,7 @@
       %          tic  
                 SiN.Temp        =    Chi_3_LLE_Normalization(SiN.Temp,N_mode);        
                 SiN             =               Chi_3_LLE_Start_Point_CW(SiN);    
-                SiN(1).Temp.Sol =    Chi_3_LLE_Runge_Kuarong_mex(SiN.Temp,N_mode,Runge);
+                SiN(1).Temp.Sol =    Chi_3_LLE_Runge_Kuarong_Kapitza(SiN.Temp,N_mode,Runge);
     toc
 %%
 Plot_Dynamics_Result_LinePlots_Spectrums(SiN.Temp,1)

@@ -5,21 +5,21 @@ include Chi_3_LLE_Runge_Kuarong_mex.mki
 
 
 SRC_FILES =  \
-	Chi_3_LLE_Runge_Kuarong_data.cpp \
-	Chi_3_LLE_Runge_Kuarong_initialize.cpp \
-	Chi_3_LLE_Runge_Kuarong_terminate.cpp \
-	Chi_3_LLE_Runge_Kuarong.cpp \
-	ifft.cpp \
-	fft.cpp \
-	FFTWApi.cpp \
-	abs.cpp \
-	power.cpp \
-	fft1.cpp \
-	_coder_Chi_3_LLE_Runge_Kuarong_info.cpp \
-	_coder_Chi_3_LLE_Runge_Kuarong_api.cpp \
-	_coder_Chi_3_LLE_Runge_Kuarong_mex.cpp \
-	Chi_3_LLE_Runge_Kuarong_emxutil.cpp \
-	cpp_mexapi_version.cpp
+	Chi_3_LLE_Runge_Kuarong_data.c \
+	Chi_3_LLE_Runge_Kuarong_initialize.c \
+	Chi_3_LLE_Runge_Kuarong_terminate.c \
+	Chi_3_LLE_Runge_Kuarong.c \
+	ifft.c \
+	fft.c \
+	FFTWApi.c \
+	abs.c \
+	power.c \
+	fft1.c \
+	_coder_Chi_3_LLE_Runge_Kuarong_info.c \
+	_coder_Chi_3_LLE_Runge_Kuarong_api.c \
+	_coder_Chi_3_LLE_Runge_Kuarong_mex.c \
+	Chi_3_LLE_Runge_Kuarong_emxutil.c \
+	c_mexapi_version.c
 
 MEX_FILE_NAME_WO_EXT = Chi_3_LLE_Runge_Kuarong_mex
 MEX_FILE_NAME = $(MEX_FILE_NAME_WO_EXT).mexa64

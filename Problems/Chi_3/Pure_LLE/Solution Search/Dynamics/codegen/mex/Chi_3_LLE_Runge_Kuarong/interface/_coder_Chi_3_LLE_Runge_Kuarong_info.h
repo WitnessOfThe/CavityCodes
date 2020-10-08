@@ -24,8 +24,8 @@
 #include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-MEXFUNCTION_LINKAGE mxArray *emlrtMexFcnProperties();
-extern const mxArray *emlrtMexFcnResolvedFunctionsInfo();
+MEXFUNCTION_LINKAGE mxArray *emlrtMexFcnProperties(void);
+extern const mxArray *emlrtMexFcnResolvedFunctionsInfo(void);
 
 #endif
 

@@ -24,8 +24,8 @@
 #include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void Chi_3_LLE_Runge_Kuarong_atexit();
-extern void Chi_3_LLE_Runge_Kuarong_terminate();
+extern void Chi_3_LLE_Runge_Kuarong_atexit(void);
+extern void Chi_3_LLE_Runge_Kuarong_terminate(void);
 
 #endif
 

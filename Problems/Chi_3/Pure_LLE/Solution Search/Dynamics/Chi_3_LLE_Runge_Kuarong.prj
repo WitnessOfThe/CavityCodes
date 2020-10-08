@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2018b">
-  <configuration build-checksum="4249484549" file="/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution Search/Dynamics/Chi_3_LLE_Runge_Kuarong.prj" location="/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution Search/Dynamics" name="Chi_3_LLE_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="3915452442" file="/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution Search/Dynamics/Chi_3_LLE_Runge_Kuarong.prj" location="/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution Search/Dynamics" name="Chi_3_LLE_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -795,7 +795,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>3926548832</param.AnnotationChecksum>
+    <param.AnnotationChecksum>4125825795</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -804,7 +804,7 @@
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen/mex/Chi_3_LLE_Runge_Kuarong</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>2958910803</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>1264072911</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen/mex/Chi_3_LLE_Runge_Kuarong</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>1978749455</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>Chi_3_LLE_Runge_Kuarong(CaF.Temp,N_mode,Runge);</var.lastCfiTestSnippet>
@@ -846,7 +846,7 @@
     <param.tensorrt.DataPath />
     <param.tensorrt.NumCalibrationBatches>1</param.tensorrt.NumCalibrationBatches>
     <param.cudnn.AutoTuning>true</param.cudnn.AutoTuning>
-    <param.TargetLang>option.TargetLang.CPP</param.TargetLang>
+    <param.TargetLang>option.TargetLang.C</param.TargetLang>
     <param.EnableAutoExtrinsicCalls>true</param.EnableAutoExtrinsicCalls>
     <param.UsePreconditions>false</param.UsePreconditions>
     <param.FeatureFlags />
@@ -953,6 +953,7 @@
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />
       <param.cudnn.AutoTuning />
+      <param.TargetLang />
       <param.EnableAutoExtrinsicCalls />
       <param.UsePreconditions />
       <param.FeatureFlags />
@@ -1001,7 +1002,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}/Chi_3_LLE_Runge_Kuarong.m">
-        <Marker>1601382147233</Marker>
+        <Marker>1601554916686</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
@@ -1104,7 +1105,7 @@
             </type>
             <type typeId="4">
               <Class>double</Class>
-              <Size>1 x 2048</Size>
+              <Size>1 x 1024</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1113,7 +1114,7 @@
             </type>
             <type typeId="5">
               <Class>double</Class>
-              <Size>1 x 2048</Size>
+              <Size>1 x 1024</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1129,7 +1130,7 @@
             </type>
             <type typeId="7">
               <Class>double</Class>
-              <Size>1 x 700</Size>
+              <Size>1 x 600</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
