@@ -27,7 +27,7 @@
 %%
     L_L.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     L_L.Temp.Par.dt            = 5E-5;
-    L_L.Temp.Par.s_t           = 0.01;
+    L_L.Temp.Par.s_t           = 0.005;
     L_L.Temp.Par.T             = 200;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     L_L.Temp.Par.CW_num        = 3;
     L_L.Temp.Par.dd            = L_L.Temp.Par.T/L_L.Temp.Par.s_t;
@@ -35,7 +35,7 @@
     load('/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Real_Problems/Synchronization_Paper/Dynamics_work/Tongues_Scan/Starter_CaF_Big_Scan.mat')
 
 %%
-  Path = '/home/dp710/Data_Storage/CaF_Scan_from_0.4_to_0_2_synch_zone';
+  Path = '/home/dp710/Data_Storage/CaF_Scan_from_0.4_to_0_2_synch_zone_fixed';
 %  Path = 'C:\Users\dp710\Documents\Check_fig\Intersting';
 %h = waitbar(0, 'Waiting...');
   ii = 0;
@@ -48,11 +48,11 @@
       end
   end
 ii =0;
- for ii_1 = 1:(round(N_delta*N_Power/1000)+1)
+ for ii_1 = 1:(round(N_delta*N_Power/210)+1)
       
       Count = 0;
       
-      while Count < 1000
+      while Count < 210
           
           ii = ii+1;
           
@@ -64,11 +64,13 @@ ii =0;
           end
           
       end
-      
+      myCluster = parcluster('LocalProfile1');
+      delete(myCluster.Jobs);
+     
       delete(gcp('nocreate'));
-      p = parpool(70);
+      p = parpool(70)
       tic
-      parfor i = 1:1000
+      parfor i = 1:210
           
           Chi_3_LLE_Assynch_Paralell_exec(L_L,delta_matrix(ii_bathc(i)),power_matrix(ii_bathc(i)),ii_bathc(i),Path,Sim_zone(ii_bathc(i)),N_Mode,Runge)
           

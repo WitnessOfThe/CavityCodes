@@ -48,11 +48,11 @@
       end
   end
 ii =0;
- for ii_1 = 1:(round(N_delta*N_Power/490)+1)
+ for ii_1 = 1:(round(N_delta*N_Power/210)+1)
       
       Count = 0;
       
-      while Count < 490
+      while Count < 210
           
           ii = ii+1;
           
@@ -64,18 +64,18 @@ ii =0;
           end
           
       end
-      
+      myCluster = parcluster('LocalProfile1');
+      delete(myCluster.Jobs);
+     
       delete(gcp('nocreate'));
-      p = parpool(70);
+      p = parpool(70)
       tic
-      parfor i = 1:490
+      parfor i = 1:210
           
           Chi_3_LLE_Assynch_Paralell_exec(L_L,delta_matrix(ii_bathc(i)),power_matrix(ii_bathc(i)),ii_bathc(i),Path,Sim_zone(ii_bathc(i)),N_Mode,Runge)
           
       end
       toc
-    %  myCluster = parcluster('LocalProfile1');
-    %  delete(myCluster.Jobs);
       ii_1
   end
 %updateWaitbarFuture = afterEach(f, @(~) waitbar(sum(strcmp('finished', {f.State}))/numel(f), h), 1); 

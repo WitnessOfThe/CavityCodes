@@ -1,9 +1,9 @@
     function g = LLE_Full_Stability(x,L_L)
     
-        mask           = L_L.Eq.Shifted.mask;
+        mask           = L_L.Eq.mask;
         
-        psi_hat        = L_L.Solution.E_j';
-        V              = L_L.Solution.V;
+        psi_hat        = L_L.Sol.Psi_k'*L_L.Space.N;
+        V              = L_L.Sol.V;
         
         f_psi          = ifft(psi_hat);    
         
@@ -11,12 +11,12 @@
         x_psi                = ifft(x_psi_hat);
         
 
-        omega_j             = L_L.Eq.Shifted.omega_j;  
+        omega_j             = L_L.Eq.omega_j;  
  
        L                   = (L_L.Eq.delta + omega_j );
         
         Eq = (1i*L_L.Space.k.'.*V -  1i*L.').*x_psi_hat + ...
-             1i*L_L.Eq.Shifted.gamma_Kerr.'.*fft( 2*abs(f_psi).^2.*x_psi + f_psi.^2.*conj(x_psi));
+             1i*L_L.Eq.gamma_Kerr.'.*fft( 2*abs(f_psi).^2.*x_psi + f_psi.^2.*conj(x_psi));
                                 
         g_1(1:L_L.Space.N,1)   = real(Eq);
                                         

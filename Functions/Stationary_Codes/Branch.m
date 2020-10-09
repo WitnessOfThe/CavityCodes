@@ -69,12 +69,12 @@
                 case 'Yes'
                     
                     L_L_1(i).Sol.Linear_Stability = struct;
-                    L_L_1(i)                      = Stability_Switcher(L_L_1(i));
+                    L_L_1(i).Stab                 = Stability_Switcher(L_L_1(i));
                     
                 case 'No'
                     
-                    L_L_1(i).Sol.Linear_Stability.E_values  = NaN;
-                    L_L_1(i).Sol.Linear_Stability.E_vectors = NaN;
+                    L_L_1(i).Stab.E_values  = NaN;
+                    L_L_1(i).Stab.E_vectors = NaN;
                     
             end
                                    
