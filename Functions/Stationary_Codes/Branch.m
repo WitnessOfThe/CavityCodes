@@ -31,7 +31,6 @@
 
                 [i,norm(eps_f),x_step]
                 
-                L_L_1(i).Solution    = struct;
                 L_L_1(i)             = L_L.Met.Prop_Gen(Slv,L_L_1(i));     
                 
                 [Breakflag,L_L_1] = fail_check_step_sizing(L_L_1,i);
@@ -86,7 +85,7 @@
             
             if i>=3
                 
-                Logic.r_1 = 0;%isequal(L_L(i).Sol.Amplitude,L_L(i-1).Sol.Amplitude);
+                Logic.r_1 = sum(abs(L_L(i).Sol.Psi_k(2:end))) <= 1E-10;
                 Logic.r_2 = 0; 
                 
             else

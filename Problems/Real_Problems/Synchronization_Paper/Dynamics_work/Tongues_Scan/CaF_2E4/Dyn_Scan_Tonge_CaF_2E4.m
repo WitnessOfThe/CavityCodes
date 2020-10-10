@@ -19,7 +19,7 @@
   NN     = N*600;
 
   delta_vector  = -0.4:1.5E-4:0;
-  P_vector      = 0:0.0005:0.07;
+  P_vector      = 0:0.0003:0.04;
   
   N_delta = size(delta_vector,2);
   N_Power = size(P_vector,2);
@@ -35,7 +35,7 @@
     load('/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Real_Problems/Synchronization_Paper/Dynamics_work/Tongues_Scan/Starter_CaF_Big_Scan.mat')
 
 %%
-  Path = '/home/dp710/Data_Storage/CaF_Scan_from_0.4_to_0_2_synch_zone_fixed';
+  Path = '/home/dp710/Data_Storage/CaF_Scan_2E4_Synch_1_Mode';
 %  Path = 'C:\Users\dp710\Documents\Check_fig\Intersting';
 %h = waitbar(0, 'Waiting...');
   ii = 0;
@@ -68,7 +68,7 @@ ii =0;
       delete(myCluster.Jobs);
      
       delete(gcp('nocreate'));
-      p = parpool(70)
+      p = parpool(32);
       tic
       parfor i = 1:210
           

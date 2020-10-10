@@ -16,6 +16,7 @@
     CaF.Stat.In.delta   = -0.5987E6*2*pi;
     
     CaF.Temp.In         = CaF.Stat.In;
+    
 %% Stationary Coefficeints
 
     CaF.Stat.Par.i_max                = 2000;
@@ -36,6 +37,7 @@
 %% Temporal Coefficients
     
     CaF = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW(CaF,N_mode);
+    
     tic
     CaF.Stat.Stab =    Stability_Switcher(CaF.Stat);
     toc
