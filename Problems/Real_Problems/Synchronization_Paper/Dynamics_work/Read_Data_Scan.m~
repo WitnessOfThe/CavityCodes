@@ -31,7 +31,7 @@ N_p = 141;
 N_d = 521;
 Conv         = NaN(N_p,N_d);
 Power        = NaN(N_p,N_d);
-Power_assym = NaN(N_p,N_d);
+Paower_assym = NaN(N_p,N_d);
 for i_p =1:N_p
     for i_d = 1:N_d
         if ~isempty(t_Save(i_p,i_d).Psi)
@@ -40,9 +40,9 @@ for i_p =1:N_p
             Sum_r            = sum(t_Save(i_p ,i_d).Psi(2:end/2-1));
             Sum_l            = sum(t_Save(i_p ,i_d).Psi(end/2:end));
             if Sum_r>= Sum_l
-                Power_assym( i_p ,i_d) = Sum_r/Sum_l;
+                Paower_assym( i_p ,i_d) = sum(t_Save(i_p ,i_d).Psi(1:end));
             else
-                Power_assym( i_p ,i_d) = Sum_l/Sum_r;
+                Paower_assym( i_p ,i_d) = sum(t_Save(i_p ,i_d).Psi(1:end));
             end
                 
         end
@@ -56,6 +56,3 @@ caxis([0.8,20])
 figure;
 pcolor(delta_matrix(1:N_p,1:N_d),power_matrix(1:N_p,1:N_d),Power);shading flat
 %caxis([0.8,20])
-%%
-figure;
-pcolor(delta_matrix(1:N_p,1:N_d)/2/pi,power_matrix(1:N_p,1:N_d),Power_assym);shading flat

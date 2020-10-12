@@ -137,7 +137,6 @@
                 case 'Pump Power'
                     
                     L_L.Eq.h = x;
-                    L_L.In.P = 4*x.^2/L_L.In.kappa.^2/L_L.In.Finess*pi/L_L.In.eta*L_L.Eq.norm.^2;
                     
             end
             

@@ -1,6 +1,7 @@
 function L_L =  Chi_3_LLE_Start_Point_CW(L_L)
 
     L_L.CW.In           = L_L.Temp.In;
+    
     L_L.CW       = L_L.CW.Met.Solve(L_L.CW,L_L.Temp.Space.N);
     L_L.CW.In.g  = L_L.CW.Sol.g(L_L.Temp.Par.CW_num)*L_L.CW.Eq.norm;
     

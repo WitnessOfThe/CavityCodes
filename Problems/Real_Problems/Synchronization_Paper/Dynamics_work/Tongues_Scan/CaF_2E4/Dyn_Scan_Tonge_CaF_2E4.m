@@ -64,8 +64,8 @@ ii =0;
           end
           
       end
-      myCluster = parcluster('LocalProfile1');
-      delete(myCluster.Jobs);
+   %   myCluster = parcluster('LocalProfile1');
+  %    delete(myCluster.Jobs);
      
       delete(gcp('nocreate'));
       p = parpool(32);

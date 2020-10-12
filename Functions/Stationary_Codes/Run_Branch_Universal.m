@@ -22,7 +22,7 @@ function x_0 = set_up(Stat)
 
             x_0 = Stat.Eq.gamma;
 
-        case 'h'
+        case 'Pump Power'
 
             x_0 = Stat.Eq.h;
 

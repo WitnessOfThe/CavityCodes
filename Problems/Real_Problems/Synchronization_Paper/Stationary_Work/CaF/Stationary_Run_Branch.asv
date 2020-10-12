@@ -12,8 +12,8 @@
     N_mode              = 2^10;
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.2;
-    CaF.Stat.In.delta   = -0.6E6*2*pi;
+    CaF.Stat.In.P       = 0.3;
+    CaF.Stat.In.delta   = -0.59E6*2*pi;
     
     CaF.Temp.In         = CaF.Stat.In;
 %% Stationary Coefficeints
@@ -24,7 +24,7 @@
     CaF.Stat.Met.Newton               = @Newton_Manual_bicgstab;%'fsolve'
     
     CaF.Stat.Par.step_tol             = 1*2*pi/CaF.Stat.In.kappa;
-    CaF.Stat.Par.Stability            = 'Yes';
+    CaF.Stat.Par.Stability            = 'No';
     CaF.Stat.Par.variable             = 'delta';  %%'Pump Power'
     CaF.Stat.Par.first_step           = 1e3*2*pi/CaF.Stat.In.kappa; %min =1E-4/3
     CaF.Stat.Par.Newton_iter          = 300;      
@@ -53,35 +53,4 @@ plot((abs(Mode_Power)))
 
 %%
 
-%%
-    CaF.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
-    CaF.Temp.Par.dt            = 1E-5;
-    CaF.Temp.Par.s_t           = 0.01;
-    CaF.Temp.Par.T             = 50;
-    CaF.Temp.Par.CW_num        = 3;
-    CaF.Temp.Par.dd            = CaF.Temp.Par.T/CaF.Temp.Par.s_t;
-%%
-    CaF.Temp.Met.Ev_Core    = @Chi_3_LLE_Kuar_mex;
-    tic
-    Runge                      = Define_Runge_Coeff(CaF.Temp.Par);
-                CaF.Temp.Met    =                                          [];
-      %          tic  
-                CaF             =               Chi_3_LLE_Start_Point_Stat(CaF,14);    
-                CaF(1).Temp.Sol =    Chi_3_LLE_Runge_Kuarong(CaF.Temp,N_mode,Runge);
-    toc
-%%
-Plot_Dynamics_Result_LinePlots_Spectrums(CaF.Temp,1)
-%%
-%    SiN.Temp.Met.Plot.Integrative_Dynamics(SiN.Temp)
-%%
-    CaF.Temp.Met.Plot.Carpets(CaF.Temp,100)
-%%
-   Plot_Dynamics_Rf_Spectrums_mu(CaF.Temp,20001:25000)
-%%
-    Plot_Dynamics_Rf_Spectrums(CaF.Temp,[-15,15],10001:500000)
-%% 
-i=1;
-   Plot_Dynamics_Rf_Spectrums_mu(CaF(i).CW,CaF(i).Temp,10001:500000)
-%%
-Plot_Dynamics_Repetution_Rate_From_Array(CaF,[6,-6],1001:50000)
-
+  
