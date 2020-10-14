@@ -24,26 +24,26 @@ function CW = Chi_3_LLE_MI_Boundary(CW,N)
 
                end
 
-                if CW.Space.k(i) >= 0 
-                    if CW.In.H_MI_Tongue (2,i) > CW.In.H_MI_Tongue (2,i+1)
-                         CW.In.H_MI_Tongue (1,i) = 0;
-                         CW.In.H_MI_Tongue (2,i) = 0;
-                    else
-                       if CW.In.H_MI_Tongue (1,i) > CW.In.H_MI_Tongue (2,i+1)
-
-                            CW.In.H_MI_Tongue (2,i+1) = 0;
-                            CW.In.H_MI_Tongue (1,i) = 0;
-
-                       end
-                       if CW.In.g_MI (1,i) > CW.In.g_MI(2,i+1)
-
-                          CW.In.g_MI (2,i+1) = 0;
-                          CW.In.g_MI (1,i) = 0;
-
-                       end
-                    end
-
-                end        
+%                 if CW.Space.k(i) >= 0 
+%                     if CW.In.H_MI_Tongue (2,i) > CW.In.H_MI_Tongue (2,i+1)
+%                          CW.In.H_MI_Tongue (1,i) = 0;
+%                          CW.In.H_MI_Tongue (2,i) = 0;
+%                     else
+%                        if CW.In.H_MI_Tongue (1,i) > CW.In.H_MI_Tongue (2,i+1)
+% 
+%                             CW.In.H_MI_Tongue (2,i+1) = 0;
+%                             CW.In.H_MI_Tongue (1,i) = 0;
+% 
+%                        end
+%                        if CW.In.g_MI (1,i) > CW.In.g_MI(2,i+1)
+% 
+%                           CW.In.g_MI (2,i+1) = 0;
+%                           CW.In.g_MI (1,i) = 0;
+% 
+%                        end
+%                     end
+% 
+%                 end        
             end
         end
         if CW.In.D(2) < 0

@@ -24,7 +24,7 @@
     CaF.Stat.Met.Newton               = @Newton_Manual_bicgstab;%'fsolve'
     
     CaF.Stat.Par.step_tol             = 1*2*pi/CaF.Stat.In.kappa;
-    CaF.Stat.Par.Stability            = 'Yes';
+    CaF.Stat.Par.Stability            = 'No';
     CaF.Stat.Par.variable             = 'delta';  %%'Pump Power'
     CaF.Stat.Par.first_step           = 1e3*2*pi/CaF.Stat.In.kappa; %min =1E-4/3
     CaF.Stat.Par.Newton_iter          = 300;      
@@ -46,9 +46,10 @@ for i=1:size(CaF.Stat,2)
    % Eig_value_vector(i,1:12)    = real(CaF.Stat(i).Stab.E_values(1:12));
 end
 figure;
-%plot(delta_vector/2/pi/1E6,(abs(Mode_Power)))
+plot(delta_vector/2/pi/1E6,(abs(Mode_Power)))
+%
+figure;
 plot((abs(Mode_Power)))
-%figure;
 %plot(delta_vector/2/pi/1E6,Eig_value_vector)
 
 %%
@@ -66,7 +67,7 @@ plot((abs(Mode_Power)))
     Runge                      = Define_Runge_Coeff(CaF.Temp.Par);
                 CaF.Temp.Met    =                                          [];
       %          tic  
-                CaF             =               Chi_3_LLE_Start_Point_Stat(CaF,14);    
+                CaF             =               Chi_3_LLE_Start_Point_Stat(CaF,22);    
                 CaF(1).Temp.Sol =    Chi_3_LLE_Runge_Kuarong(CaF.Temp,N_mode,Runge);
     toc
 %%
@@ -74,7 +75,7 @@ Plot_Dynamics_Result_LinePlots_Spectrums(CaF.Temp,1)
 %%
 %    SiN.Temp.Met.Plot.Integrative_Dynamics(SiN.Temp)
 %%
-    CaF.Temp.Met.Plot.Carpets(CaF.Temp,100)
+    CaF.Temp.Met.Plot.Carpets(CaF.Temp,100,1)
 %%
    Plot_Dynamics_Rf_Spectrums_mu(CaF.Temp,20001:25000)
 %%

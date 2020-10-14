@@ -13,7 +13,7 @@
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
     CaF.Stat.In.P       = 0.3;
-    CaF.Stat.In.delta   = -0.6005E6*2*pi;
+    CaF.Stat.In.delta   = -0.60E6*2*pi;
     
     CaF.Temp.In         = CaF.Stat.In;
     
@@ -33,14 +33,17 @@
     CaF.Stat.Par.Newton_tol           = 1E-11;  
     CaF.Stat.Par.i_max                = 200;
     CaF.Stat.Par.CW_num               = 3;
-    
+    %%
+     delta_vector = linspace(-0.6,-0.58,100)*1E6*2*pi; 
+     power_vector = linspace(0.3,0.01,100);
 %% Temporal Coefficients
     
     CaF = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW(CaF,N_mode);
-
-    CaF.Stat.Stab =    Stability_Switcher(CaF.Stat);
+    
+    CaF.Stat.In.Psi_Start = CaF.Stat.Sol.Psi_k;
+    CaF.Stat             =  Chi_3_Stat_Wierd_Pattern_Tracking(CaF.Stat,delta_vector,power_vector);
  %%
-    Plot_Static_Field_Spectrums(CaF.Stat,1);
+    Plot_Static_Field_Spectrums(CaF.Stat(end),1);
     
 %%
     Plot_Static_Field_Stability(CaF.Stat,1)

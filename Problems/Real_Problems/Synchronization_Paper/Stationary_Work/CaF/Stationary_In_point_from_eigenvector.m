@@ -9,7 +9,7 @@
 %% Input Parameters for CaF
 
 
-    N_Mode              = 2^9;
+    N_Mode              = 2^11;
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
     CaF.Stat.In.P       = 0.3;
@@ -30,7 +30,7 @@
     CaF.Stat.Par.variable             = 'delta';  
     CaF.Stat.Par.first_step           = 1; %min =1E-4/3
     CaF.Stat.Par.Newton_iter          = 50;      
-    CaF.Stat.Par.Newton_tol           = 1E-11;  
+    CaF.Stat.Par.Newton_tol           = 1E-10;  
     CaF.Stat.Par.i_max                = 200;
     CaF.Stat.Par.CW_num               = 3;
     
@@ -52,6 +52,7 @@
 %    CaF.Stat.Stab =                          Stability_Switcher(CaF.Stat);
     
  %%
+ 
     Plot_Static_Field_Spectrums(CaF.Stat,1);
     
 %%

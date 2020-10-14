@@ -28,23 +28,17 @@ for i =1:size(delta_matrix,1)*size(delta_matrix,2)
 end
 %%
 N_p = 141;
-N_d = 521;
+N_d = 747;
 Conv         = NaN(N_p,N_d);
 Power        = NaN(N_p,N_d);
 Power_assym = NaN(N_p,N_d);
+k = [0:511,-512:-1];
 for i_p =1:N_p
     for i_d = 1:N_d
         if ~isempty(t_Save(i_p,i_d).Psi)
             Conv( i_p ,i_d) = t_Save( i_p ,i_d).Psi(1)./sum(t_Save(i_p ,i_d).Psi(2:end));
-            Power( i_p ,i_d) = sum(t_Save(i_p ,i_d).Psi(1:end));
-            Sum_r            = sum(t_Save(i_p ,i_d).Psi(2:end/2-1));
-            Sum_l            = sum(t_Save(i_p ,i_d).Psi(end/2:end));
-            if Sum_r>= Sum_l
-                Power_assym( i_p ,i_d) = Sum_r/Sum_l;
-            else
-                Power_assym( i_p ,i_d) = Sum_l/Sum_r;
-            end
-                
+            Power( i_p ,i_d) = sum(t_Save(i_p ,i_d).Psi(1:end));            
+            phi( i_p ,i_d)  =  trapz(k(tt.Save.Temp.Eq.mode_range).*t_Save(i_p ,i_d).Psi(1:end))./trapz(t_Save(i_p ,i_d).Psi(1:end));
         end
     end
 end
@@ -58,4 +52,4 @@ pcolor(delta_matrix(1:N_p,1:N_d),power_matrix(1:N_p,1:N_d),Power);shading flat
 %caxis([0.8,20])
 %%
 figure;
-pcolor(delta_matrix(1:N_p,1:N_d)/2/pi,power_matrix(1:N_p,1:N_d),Power_assym);shading flat
+pcolor(delta_matrix(1:N_p,1:N_d)/2/pi,power_matrix(1:N_p,1:N_d),abs(phi));shading flat
