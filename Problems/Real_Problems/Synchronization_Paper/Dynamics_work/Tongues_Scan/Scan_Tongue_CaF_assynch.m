@@ -64,10 +64,9 @@ ii =0;
           end
           
       end
-%      myCluster = parcluster('LocalProfile1');
-%      delete(myCluster.Jobs);
+      myCluster = parcluster('LocalProfile1');
+      delete(myCluster.Jobs);
      
-      delete(gcp('nocreate'));
       p = parpool(70)
       tic
       parfor i = 1:210
@@ -75,6 +74,7 @@ ii =0;
           Chi_3_LLE_Assynch_Paralell_exec(L_L,delta_matrix(ii_bathc(i)),power_matrix(ii_bathc(i)),ii_bathc(i),Path,Sim_zone(ii_bathc(i)),N_Mode,Runge)
           
       end
+      delete(gcp('nocreate'));
       toc
       ii_1
   end

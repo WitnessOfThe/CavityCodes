@@ -9,8 +9,8 @@
 %% Input Parameters for CaF
 
     L_L.CW.In         =  Params_CaF;
-    L_L.CW.In.kappa   =  1E3*2*pi;%2*1E3*2*pi;%
-    L_L.CW.In.P       =  0.000000001; 
+    L_L.CW.In.kappa   =  1E3*2*pi;
+    L_L.CW.In.P       =  0.0000001; 
 
 %%
   N = 500;
@@ -159,17 +159,3 @@
 %%
 figure;
 pp4.plotData
-cmap = colormap(gca);
-%cmap(1,:) = 1; 
-colormap(gca,cmap)
-%h = colorbar;
-%h = colorbar;
-%h = colorbar;
-%h.FontSize = 15;
-%h.TickLabelInterpreter = 'latex';
-%h.Label.String         = 'Number of Synchronized Modes';
-%h.Label.Interpreter    = 'latex';
-%h.Location             = 'northoutside';
-%save('H:\Documents\MATLAB\Matlab_Repo\Problems\Cavity_Codes\Problems\Real_Problems\Synchronization_Paper\Scripts_To_Draw_Tongues\delta_g_plate','pp4')
-
-%%

@@ -9,11 +9,9 @@
 %% Input Parameters for CaF
 
 
-    N_mode              = 2^10;
+    N_mode              = 2^9;
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.3;
-    CaF.Stat.In.delta   = -0.6005E6*2*pi;
     
     CaF.Temp.In         = CaF.Stat.In;
     
@@ -30,34 +28,73 @@
     CaF.Stat.Par.variable             = 'delta';  
     CaF.Stat.Par.first_step           = 1; %min =1E-4/3
     CaF.Stat.Par.Newton_iter          = 50;      
-    CaF.Stat.Par.Newton_tol           = 1E-11;  
+    CaF.Stat.Par.Newton_tol           = 1E-10;  
     CaF.Stat.Par.i_max                = 200;
     CaF.Stat.Par.CW_num               = 3;
-    %%
- %    delta_vector = 
-%     power_vector = linspace();
+%%
+
+    delta_vector = linspace(-0.02306,-0.03864,50)*1E6*2*pi; 
+    power_vector = linspace(0.0007755,0.00015,50);
+    
 %% Temporal Coefficients
+
+   CaF.Stat.In.P       = power_vector(1);
+   CaF.Stat.In.delta   = delta_vector(1);
+    
+   CaF = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW(CaF,N_mode);
+    
+   CaF_down.Stat             =  Chi_3_Stat_Wierd_Pattern_Tracking(CaF.Stat,delta_vector,power_vector);
+    
+    delta_vector_upp          = fliplr(delta_vector);
+    power_vector_upp          = fliplr(power_vector);
+    
+    CaF.Stat.In.P       = power_vector_upp(1);
+    CaF.Stat.In.delta   = delta_vector_upp(1);
+
     
     CaF = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW(CaF,N_mode);
-    
-    for i = 2:N_Sim
-         CaF.Stat
-         CaF.Stat(i).In.delta = delta_vector(i);
-         CaF.Stat(i).In.Power = power_vector(i);
-         
-         CaF.Stat(i).In.Psi_Start(ind(1))    = CaF.Stat(i-1).Sol.Psi_k;
-         
-         x0                       =  N_mode*[real(CaF.Stat(i).In.Psi_Start),imag(CaF.Stat(i).In.Psi_Start),0];
-         [x,eps_f,SolveFlag]      =    CaF.Stat.Met.Newton(CaF.Stat,x0);
-         CaF.Stat(i)Sol.Flag        = SolveFlag;
-         CaF.Stat(i).Sol.eps         =     eps_f;
-                                   
-         CaF.Stat(i)                 = Chi3_LLE_Stat_Prop_Gen(x,CaF.Stat(i));    
-%         CaF.Stat(i).Stab =    Stability_Switcher(CaF.Stat(i));
-    end
-    
- %%
-    Plot_Static_Field_Spectrums(CaF.Stat,1);
+    CaF.Stat.In.Psi_Start = CaF.Stat.Sol.Psi_k;
+    CaF_up.Stat             =  Chi_3_Stat_Wierd_Pattern_Tracking(CaF.Stat,delta_vector_upp,power_vector_upp);
     
 %%
-    Plot_Static_Field_Stability(CaF.Stat,1)
+parfor i = 1:50
+    CaF.Stat = CaF_up.Stat(i);
+    CaF.Stat.In.Psi_Start = CaF_up.Stat(i).Sol.Psi_k;
+    CaF_Branc_up(i).Stat = Run_Branch_Universal(CaF,N_mode);
+end
+for i = 1:50
+    CaF.Stat = CaF_down.Stat(i);
+    CaF.Stat.In.Psi_Start = CaF_down.Stat(i).Sol.Psi_k;
+    CaF_Branc_down(i).Stat = Run_Branch_Universal(CaF,N_mode);
+end
+ %   Plot_Static_Field_Spectrums(CaF.Stat(1),1);
+    
+%%
+for i_p = 1:50
+    for i_d = 1:size(CaF_Branc_up(i_p).Stat,2)
+        
+      U_10(i_p,i_d) = CaF_Branc_up(i_p).Stat(i_d).Sol.Psi_k(10);
+        
+    end
+end
+%%
+    for i=1:50
+
+        Power_upp(i) = CaF_up.Stat(i).Sol.Psi_k(10);
+        Power_dow(i) = CaF_down.Stat(i).Sol.Psi_k(10);
+
+        U_upp(i,:) = imag(ifft(CaF_up.Stat(i).Sol.Psi_k));
+        U_dow(i,:) = imag(ifft(CaF_down.Stat(i).Sol.Psi_k));
+
+    end
+%%
+    figure;plot(delta_vector,real(Power_dow),delta_vector_upp,real(Power_upp))
+%%
+    figure;mesh(CaF.Stat.Space.phi,delta_vector,U_upp)
+    figure;mesh(CaF.Stat.Space.phi,delta_vector_upp,U_dow)
+%%
+    imag(CaF_up.Stat(100).Sol.Psi_k(10))
+    imag(CaF_up.Stat(100).Sol.Psi_k(end-8))
+
+    imag(CaF_down.Stat(1).Sol.Psi_k(10))
+    imag(CaF_down.Stat(1).Sol.Psi_k(end-8))

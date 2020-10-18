@@ -6,6 +6,7 @@
     CaF       =  Set_Up_Methods_For_Synchronization_Paper;
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %% Input Parameters for CaF
 
 

@@ -28,7 +28,7 @@ for i =1:size(delta_matrix,1)*size(delta_matrix,2)
 end
 %%
 N_p = 141;
-N_d = 747;
+N_d = 795;
 Conv         = NaN(N_p,N_d);
 Power        = NaN(N_p,N_d);
 Power_assym = NaN(N_p,N_d);

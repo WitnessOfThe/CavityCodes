@@ -3,7 +3,7 @@ function Stat =  Chi_3_Stat_Wierd_Pattern_Tracking(Stat,delta_vector,power_vecto
     for i = 1:size(delta_vector,2)
         
         Stat(i).In.delta = delta_vector(i);
-        Stat(i).In.Power = power_vector(i);
+        Stat(i).In.P     = power_vector(i);
         
         Stat(i)     = Stat(i).Met.Norm(Stat(i),Stat(i).Space.N);    
         
@@ -14,7 +14,7 @@ function Stat =  Chi_3_Stat_Wierd_Pattern_Tracking(Stat,delta_vector,power_vecto
         Stat(i).Sol.Flag         =   SolveFlag;
         Stat(i).Sol.eps          =       eps_f;
         
-        [i,eps,SolveFlag]
+        [i,eps_f,SolveFlag]
         
         Stat(i)                  = Chi3_LLE_Stat_Prop_Gen(x,Stat(i));    
       %  Stat(i)                  =    Stability_Switcher(Stat(i));
