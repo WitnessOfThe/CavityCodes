@@ -8,12 +8,15 @@ function [tt_1,tt_2] = Plot_Static_Field_Spectrums(Stat,Flag)
     k = fftshift(Stat.Space.k);
     x_Bound= max( abs(k([ind_Min_y,ind_Max_y])) )+5;
     Psi_k = Stat.Sol.Psi_k;
-    Psi_2 = abs( ifft(Stat.Space.N*Psi_k(1,:))).^2;
-   tt_1 = proPlot(     Stat.Space.phi, Psi_2 );    
+    Psi_2 =  ifft(Stat.Space.N*Psi_k(1,:));
+   tt_1 = proPlot(     Stat.Space.phi, abs(Psi_2).^2 );    
    Write = strcat('V$/2\pi$=',num2str(Stat.Sol.V*Stat.Eq.norm),'Hz');
-   tt_1 = tt_1.addData([-3.14,max(Psi_2 ),0,0], [], [], 'PlotType', 'Annotation', 'AnnotationType', 'textbox','String', Write,'FontSize',18);
+%   tt_1 = tt_1.addData([-3.14,max(Psi_2 ),0,0], [], [], 'PlotType', 'Annotation', 'AnnotationType', 'textbox','String', Write,'FontSize',18);
     
     tt_2 = proPlot(     fftshift(Stat.Space.k),10*log10(fftshift( abs(Psi_k(1,:)).^2*2*pi)),'PlotType','stem','BaseValue',-80,'Marker','none');
+    
+    tt_1 = tt_1.addData(     Stat.Space.phi,real(Psi_2));
+    tt_1 = tt_1.addData(     Stat.Space.phi,imag(Psi_2));
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

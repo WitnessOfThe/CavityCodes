@@ -18,7 +18,7 @@
                 
             end
                         
-            x_step = 1.01*x_step;
+            x_step = 1.1*x_step;
             x     = sg*x_step + x;
                         
             Slv_0 = Slv;
@@ -35,6 +35,15 @@
                 
                 [Breakflag,L_L_1] = fail_check_step_sizing(L_L_1,i);
                 
+                
+                if Breakflag == 1 || (Exitflag <= 0)
+                    
+                    Exitflag = 0;
+                    
+                end
+                
+                [Breakflag,L_L_1] = fail_check(L_L_1,i);
+                
                 if Breakflag == 1 || (Exitflag <= 0)
                     
                     Exitflag = 0;
@@ -45,7 +54,7 @@
                     
                     Slv        = Slv_0;
                     x          = x - sg*x_step;
-                    x_step     = x_step*0.25;
+                    x_step     = x_step*0.1;
                     x          = x + sg*x_step;
                     
                 end
@@ -54,8 +63,9 @@
             end
             
 
+     %      [Breakflag,L_L_1] = fail_check(L_L_1,i);
 
-            [Breakflag,L_L_1] = fail_check(L_L_1,i);
+
             
             if Breakflag == 1
                 
@@ -97,7 +107,7 @@
             
             Logic.r_3  =  Exitflag == 0;
             Logic.r_4  = 0;%isnan(eps_f);
-            Logic.r_5  = max(abs(L_L(i).Sol.Psi_k)) - min(abs(L_L(i).Sol.Psi_k)) < 1E-18;
+            Logic.r_5  = max(abs(L_L(i).Sol.Psi_k)) - min(abs(L_L(i).Sol.Psi_k)) < 1E-10;
             Logic.r_6  = i == L_L(i).Par.i_max;
 %            Logic.r_7 = isequal(L_L.Par.variable,'delta') && L_L(i).Eq.delta <= 0;
  %           Logic.r_8 = isequal(L_L.Par.variable,'gamma') && L_L(i).Eq.gamma < 0;
@@ -137,6 +147,7 @@
                 case 'Pump Power'
                     
                     L_L.Eq.h = x;
+                    L_L.In.h = x*L_L.Eq.norm;
                     L_L.In.P = 4*x.^2/L_L.In.kappa.^2/L_L.In.Finess*pi/L_L.In.eta*L_L.Eq.norm.^2;
                     
             end

@@ -44,5 +44,7 @@ function Chi_3_LLE_Runge_Save_Long_Run(Path,CaF,Ind,mu)
     print(h,strcat(Path,'/jpg/','Power=',num2str(CaF.Temp.In.P),'Delta=',num2str(CaF.Temp.In.delta/2/pi),'.jpg'),'-djpeg','-r300');
     close(h);
     save(strcat(Path,'/Data/',num2str(Ind)),'Save');
-    clear variables
+    clear variables;
+  
+    
 end

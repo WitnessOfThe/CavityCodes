@@ -13,14 +13,18 @@ function L_L = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW(L_L,N_Mode)
     L_L.Stat.In.Psi_Start   = zeros(1,N_Mode)*1E-5;
     
     ind = find(L_L.CW.An.Omega_mu(1,:) == 0);
+    
     if isempty(ind)
+        
         [~,ind] = max(max(real(L_L.CW.An.lambda_mu(:,:)),[],1));
+        
     end
+    
     if ind ~= 1
+        
         L_L.Stat.In.Psi_Start(ind(1))    = 1;
-%        L_L.Stat.In.Psi_Start(2*(ind(1)-1)+1)    = 1E-3;
         L_L.Stat.In.Psi_Start(end-ind(1)+2)    = 1;
- %       L_L.Stat.In.Psi_Start(end-2*(ind(1)-1)+2)    = 1E-3;
+        
     end
     
  %   for i =1:L_L.Stat.Space.N
@@ -34,8 +38,8 @@ function L_L = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW(L_L,N_Mode)
     
     [x,eps_f,SolveFlag]      =    L_L.Stat.Met.Newton(L_L.Stat,x0);
     L_L.Stat.Sol.Flag        = SolveFlag;
-    L_L.Stat.Sol.eps         =     eps_f
-                                   
+    L_L.Stat.Sol.eps         =     eps_f;
+    eps_f                               
     L_L.Stat                 = Chi3_LLE_Stat_Prop_Gen(x,L_L.Stat);    
     
 end

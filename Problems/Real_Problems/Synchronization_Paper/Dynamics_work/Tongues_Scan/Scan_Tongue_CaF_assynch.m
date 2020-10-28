@@ -12,17 +12,18 @@
     L_L.CW.In.kappa   =  2E3*2*pi;%2*1E3*2*pi;%
     L_L.CW.In.P       = 0.00000000001; 
     L_L.Temp          = L_L.CW;
+    
 %%
 
-  N      = 200;   
-  N_Mode = 2^10;
-  NN     = N*600;
+    N      = 200;   
+    N_Mode = 2^10;
+    NN     = N*600;
 
-  delta_vector  = -0.4:1.5E-4:0;
-  P_vector      = 0:0.0005:0.07;
+    delta_vector  = -0.4:1.5E-4:0;
+    P_vector      = 0:0.0005:0.07;
   
-  N_delta = size(delta_vector,2);
-  N_Power = size(P_vector,2);
+    N_delta = size(delta_vector,2);
+    N_Power = size(P_vector,2);
   
 %%
     L_L.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
@@ -48,11 +49,11 @@
       end
   end
 ii =0;
- for ii_1 = 1:(round(N_delta*N_Power/210)+1)
+ for ii_1 = 1:(round(N_delta*N_Power/70)+1)
       
       Count = 0;
       
-      while Count < 210
+      while Count < 70
           
           ii = ii+1;
           
@@ -64,16 +65,21 @@ ii =0;
           end
           
       end
-      myCluster = parcluster('LocalProfile1');
+      
+   %   delete(gcp('nocreate')); 
+     myCluster = parcluster('local');
       delete(myCluster.Jobs);
-     
-      p = parpool(70)
+    
+      p = parpool(70);
+      
       tic
-      parfor i = 1:210
+      
+      parfor i = 1:70
           
           Chi_3_LLE_Assynch_Paralell_exec(L_L,delta_matrix(ii_bathc(i)),power_matrix(ii_bathc(i)),ii_bathc(i),Path,Sim_zone(ii_bathc(i)),N_Mode,Runge)
           
       end
+      
       delete(gcp('nocreate'));
       toc
       ii_1

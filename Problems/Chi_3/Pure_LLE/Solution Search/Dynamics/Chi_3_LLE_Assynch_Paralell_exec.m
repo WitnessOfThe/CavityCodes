@@ -15,4 +15,5 @@ function Chi_3_LLE_Assynch_Paralell_exec(CaF,delta_matrix,power_matrix,ii,Path,S
          %       ii
 
       end
+%      clear functions;
 end

@@ -19,7 +19,7 @@ function [tt_1,tt_2] = Plot_Static_Field_Stability(Stat,Flag)
    tt_2 = proPlot( k,fftshift(10*log10(abs(Pertur).^2))...
        ,'PlotType','stem','BaseValue',max(10*log10(abs(Pertur).^2))-100);    
    
-   tt_3 = proPlot( []); 
+   tt_3 = proPlot( [],[],[]); 
    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

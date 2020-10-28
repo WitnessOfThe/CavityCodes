@@ -9,11 +9,11 @@
 %% Input Parameters for CaF
 
     L_L.CW.In         =  Params_CaF;
-    L_L.CW.In.kappa   =  1E5*2*pi;%2*1E3*2*pi;%
+    L_L.CW.In.kappa   =  2E3*2*pi;%2*1E3*2*pi;%
     L_L.CW.In.P       =  0.000000001; 
 
 %%
-  N      = 1000;
+  N      = 200;
   NN     = N*50;
   N_Mode = 200;
   
@@ -22,8 +22,8 @@
   Bistability_zone = ones(N);
 
   tic
-  delta_vector  = linspace(-1,1,N);
-  P_vector      = linspace(0,0.5,N);
+  delta_vector  = linspace(-0.1,0.1,N);
+  P_vector      = linspace(0,0.005,N);
     
 %W_MI_vector_2
   parfor i = 1:N
@@ -71,12 +71,12 @@
           W_MI_vector_1_1(i,:)        = SiN.CW.In.W_MI_Tongue(1,1:N_Mode/2);
           W_MI_vector_2_1(i,:)        = SiN.CW.In.W_MI_Tongue(2,1:N_Mode/2);
           
-          if SiN.CW.In.delta >0 
-              
-              W_MI_vector_1_1(i,:) = min([W_MI_vector_1_1(i,:),W_MI_vector_2_1(i,:)]);
-              W_MI_vector_2_1(i,:) = min([W_MI_vector_1_1(i,:),W_MI_vector_2_1(i,:)]);
-              
-          end
+%           if SiN.CW.In.delta >0 
+%               
+%               W_MI_vector_1_1(i,:) = min([W_MI_vector_1_1(i,:),W_MI_vector_2_1(i,:)]);
+%               W_MI_vector_2_1(i,:) = min([W_MI_vector_1_1(i,:),W_MI_vector_2_1(i,:)]);
+%               
+%           end
 
           i
       end
@@ -96,10 +96,10 @@
 %%
     pp4 = proPlot(delta_vector,P_vector, Mumber_Of_Modes, 'PlotType','pcolor');
     
-%      for i= 1:46
-%         pp4 = pp4.addData(delta_vector_2,W_MI_vector_1_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
-%         pp4 = pp4.addData(delta_vector_2,W_MI_vector_2_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
-%      end
+     for i= 1:20
+        pp4 = pp4.addData(delta_vector_2,W_MI_vector_1_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
+        pp4 = pp4.addData(delta_vector_2,W_MI_vector_2_1(:,i),'Color',[1,0,0],'LineWidth',2.5);
+     end
      pp4 = pp4.addData([delta_vector,fliplr(delta_vector)],[Power_up,fliplr(Power_down)],[], 'PlotType','Fill','Color',[0.4,0.4,0.4],'FaceAlpha', 0.2);
 Power_down(Power_down==0)=NaN;
 Power_up(Power_up==0)=NaN;
