@@ -10,7 +10,7 @@
 %% Input Parameters for CaF
 
 
-    N_mode              = 2^8;
+    N_mode              = 2^9;
     
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
@@ -28,22 +28,22 @@
  %   Res_Lower.Stat.Par.variable         = 'delta';  %%'Pump Power';
  %   Res_Lower.Stat.Par.first_step       = 0.01; %min =1E-4/3
 
-    CaF.Stat.Par.step_tol         = 0.00001;
-    CaF.Stat.Par.Stability        = 'Yes';
+    CaF.Stat.Par.step_tol         = 0.0001;
+    CaF.Stat.Par.Stability        = 'No';
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
     CaF.Stat.Par.first_step       = 0.1; %min =1E-4/3
     CaF.Stat.Par.Newton_iter      = 30;      
-    CaF.Stat.Par.Newton_tol       = 1E-8;  
-    CaF.Stat.Par.i_max            = 500;
+    CaF.Stat.Par.Newton_tol       = 1E-12;  
+    CaF.Stat.Par.i_max            = 600;
     CaF.Stat.Par.CW_num          = 3;
     
 %%    -4.8268
     [CaF_2D_Upper,CaF_2D_Lower] = Chi3_Stat_Get_Tongues_Branch(CaF,mu,N_mode,72);
 %%    
-Mode_Power_U    = NaN(size(CaF_2D_Upper,2),300);
-delta_vector_U  = NaN(size(CaF_2D_Upper,2),300);
-Power_vector_U  = NaN(size(CaF_2D_Upper,2),300);
-lambda_vector_U = NaN(size(CaF_2D_Upper,2),300);
+Mode_Power_U    = NaN(size(CaF_2D_Upper,2),600);
+delta_vector_U  = NaN(size(CaF_2D_Upper,2),600);
+Power_vector_U  = NaN(size(CaF_2D_Upper,2),600);
+lambda_vector_U = NaN(size(CaF_2D_Upper,2),600);
 
 for i_p = 1:size(CaF_2D_Upper,2)
     
@@ -58,10 +58,10 @@ for i_p = 1:size(CaF_2D_Upper,2)
     end
     
 end
-Mode_Power_L    = NaN(size(CaF_2D_Upper,2),300);
-delta_vector_L  = NaN(size(CaF_2D_Upper,2),300);
-Power_vector_L  = NaN(size(CaF_2D_Upper,2),300);
-lambda_vector_L = NaN(size(CaF_2D_Upper,2),300);
+Mode_Power_L    = NaN(size(CaF_2D_Upper,2),600);
+delta_vector_L  = NaN(size(CaF_2D_Upper,2),600);
+Power_vector_L  = NaN(size(CaF_2D_Upper,2),600);
+lambda_vector_L = NaN(size(CaF_2D_Upper,2),600);
 
 for i_p = 1:size(CaF_2D_Lower,2)
     

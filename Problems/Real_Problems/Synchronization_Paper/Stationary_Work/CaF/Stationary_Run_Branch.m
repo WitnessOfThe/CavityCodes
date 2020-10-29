@@ -37,30 +37,3 @@
     
     CaF_Start = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW_Defined(CaF,N_mode,[10,-10]);   
     
-    CaF.Stat  = CaF_Start.Stat(1);
-    CaF_U.Stat = Run_Branch_Universal(CaF,N_mode);
-    
-    CaF.Stat  = CaF_Start.Stat(2);
-    CaF_L.Stat = Run_Branch_Universal(CaF,N_mode);
-    
-%%
-
-for i=1:size(CaF_U.Stat,2)
-    
-    Mode_Power_U(i,:) = CaF_U.Stat(i).Sol.Psi_k([11]);
-    delta_vector_U(i)    = CaF_U.Stat(i).Eq.delta;
-    Power_vector_U(i)    = CaF_U.Stat(i).In.P;
-    
-end
-
-for i=1:size(CaF_L.Stat,2)
-    
-    Mode_Power_L(i,:)    = CaF_L.Stat(i).Sol.Psi_k([11]);
-    delta_vector_L(i)    = CaF_L.Stat(i).Eq.delta;
-    Power_vector_L(i)    = CaF_L.Stat(i).In.P;
-    
-end
-%%
-figure;
-    plot(Power_vector_L,abs(Mode_Power_L).^2);hold on
-    plot(Power_vector_U,abs(Mode_Power_U).^2)

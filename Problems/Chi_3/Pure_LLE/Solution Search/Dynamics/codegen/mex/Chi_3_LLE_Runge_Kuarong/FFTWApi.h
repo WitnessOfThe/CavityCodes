@@ -24,8 +24,8 @@
 #include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void FFTWApi_fft1d(const creal_T data[1024], boolean_T isInverse, creal_T
-  y[1024]);
+extern void FFTWApi_fft1d(const creal_T data[256], boolean_T isInverse, creal_T
+  y[256]);
 
 #endif
 

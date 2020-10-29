@@ -43,7 +43,7 @@
     CaF.Stat(2).Stab =    Stability_Switcher(CaF.Stat(2));
     
  %%
-    Plot_Static_Field_Spectrums(CaF.Stat(2),2);
+    Plot_Static_Field_Spectrums(CaF.Stat(1),2);
     
 %%
     Plot_Static_Field_Stability(CaF.Stat(2),1)
