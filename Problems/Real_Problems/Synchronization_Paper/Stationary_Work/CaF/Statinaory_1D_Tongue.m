@@ -14,7 +14,7 @@
     
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.0003;
+    CaF.Stat.In.P       = 0.0004;
     CaF.Stat.In.delta   = -CaF.Stat.In.kappa*28;
     
 %%
@@ -25,14 +25,20 @@
     CaF.Stat.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;    
     CaF.Stat.Met.Newton           = @Newton_Manual_bicgstab;%'fsolve'
     
-    CaF.Stat.Par.step_tol         = 0.000001;
-    CaF.Stat.Par.variable         = 'Pump Power';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.01; %min =1E-4/3
- 
-%     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-%     CaF.Stat.Par.first_step       = 0.1; %min =1E-4/3
-%     CaF.Stat.Par.step_tol         = 0.00001;
+%     CaF.Stat.Par.step_tol         = 0.000001;
+%     CaF.Stat.Par.variable         = 'Pump Power';  %%'Pump Power';
+%     CaF.Stat.Par.first_step       = 0.01; %min =1E-4/3
+%     CaF.Stat.Par.bot_boundary     = 0;
+%     CaF.Stat.Par.top_boundary     = 1;
     
+ 
+    CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
+    CaF.Stat.Par.first_step       = 0.1; % step for delta measured in delta/kappa
+    CaF.Stat.Par.step_tol         = 0.00001;
+
+    CaF.Stat.Par.bot_boundary     = -30;
+    CaF.Stat.Par.top_boundary     = -22.5;
+
     CaF.Stat.Par.Stability        = 'Yes';
     CaF.Stat.Par.Newton_iter      = 30;      
     CaF.Stat.Par.Newton_tol       = 1E-13;  
@@ -70,26 +76,26 @@ for i_d = 1:size(CaF_1D_Lower.Stat,2)
 end
 
 
-% figure;
-% plot(delta_vector_U,abs(Mode_Power_U));hold on;
-% plot(delta_vector_L,abs(Mode_Power_L))
-% figure;
-% plot(delta_vector_U,real(lambda_vector_U));hold on;
-% plot(delta_vector_L,real(lambda_vector_L));hold on;
-% figure;
-% plot(delta_vector_U,imag(lambda_vector_U));hold on;
-% plot(delta_vector_L,imag(lambda_vector_L));hold on;
+figure;
+plot(delta_vector_U,abs(Mode_Power_U));hold on;
+plot(delta_vector_L,abs(Mode_Power_L))
+figure;
+plot(delta_vector_U,real(lambda_vector_U));hold on;
+plot(delta_vector_L,real(lambda_vector_L));hold on;
+figure;
+plot(delta_vector_U,imag(lambda_vector_U));hold on;
+plot(delta_vector_L,imag(lambda_vector_L));hold on;
 
-figure;
-plot(Power_vector_U,abs(Mode_Power_U).^2);hold on;
-plot(Power_vector_L,abs(Mode_Power_L).^2)
-figure;
-plot(Power_vector_U,real(lambda_vector_U));hold on;
-plot(Power_vector_L,real(lambda_vector_L));hold on;
-figure;
-plot(Power_vector_U,imag(lambda_vector_U));hold on;
-plot(Power_vector_L,imag(lambda_vector_L));hold on;
-
+% figure;
+% plot(Power_vector_U,abs(Mode_Power_U).^2);hold on;
+% plot(Power_vector_L,abs(Mode_Power_L).^2)
+% figure;
+% plot(Power_vector_U,real(lambda_vector_U));hold on;
+% plot(Power_vector_L,real(lambda_vector_L));hold on;
+% figure;
+% plot(Power_vector_U,imag(lambda_vector_U));hold on;
+% plot(Power_vector_L,imag(lambda_vector_L));hold on;
+% 
 %%
 
     Plot_Static_Field_Spectrums(CaF_1D_Lower(end/2).Stat(1),1);
