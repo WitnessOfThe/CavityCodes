@@ -10,8 +10,8 @@
 
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   =  2E3*2*pi;%2*1E3*2*pi;%
-    CaF.Stat.In.P       = 0.00033;
-    CaF.Stat.In.delta   = -CaF.Stat.In.kappa*28;
+    CaF.Stat.In.P       = 0.0004;
+    CaF.Stat.In.delta   = -CaF.Stat.In.kappa*24;
     
     CaF.Temp          = CaF.Stat;
     CaF.Temp.Met.Ev_Start_Point  = @Chi_3_LLE_Start_Point_Stat;
@@ -19,7 +19,7 @@
 %%
 
   N      = 200;   
-  N_Mode = 2^8;
+  N_Mode = 2^9;
   
   
 %%
@@ -36,18 +36,23 @@
     
 %% Stationary Coefficeints
 
-    CaF.Stat.Par.Equation_string  = 'Kerr_Full_Dispersion';        
-    CaF.Stat.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;    
+F.Stat.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;    
     CaF.Stat.Met.Newton           = @Newton_Manual_bicgstab;%'fsolve'
     
 %     CaF.Stat.Par.step_tol         = 0.000001;
 %     CaF.Stat.Par.variable         = 'Pump Power';  %%'Pump Power';
 %     CaF.Stat.Par.first_step       = 0.01; %min =1E-4/3
+%     CaF.Stat.Par.bot_boundary     = 0;
+%     CaF.Stat.Par.top_boundary     = 1;
+    
  
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.1; %min =1E-4/3
+    CaF.Stat.Par.first_step       = 0.05; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.00001;
-    
+
+    CaF.Stat.Par.bot_boundary     = -30;
+    CaF.Stat.Par.top_boundary     = -18.65;
+
     CaF.Stat.Par.Stability        = 'Yes';
     CaF.Stat.Par.Newton_iter      = 30;      
     CaF.Stat.Par.Newton_tol       = 1E-13;  

@@ -1,16 +1,18 @@
-function [x0,eps_f,Output]    = Newton_Switcher(x0,L_L)
+function [x0,eps_f,Output]    = Newton_Switcher(x0,Stat)
 
+    switch func2str(Stat.Met.Newton)
+        
+        case 'Newton_Manual_bicgstab'
             
-            [x0,eps_f,Output]   = L_L.Met.Newton(L_L,x0);
+            [x0,eps_f,Output]   = Stat.Met.Newton(Stat,x0);
             
+        case 'fsolve'
             
+            Dir                 = Finite_Derivatives(Stat.Space.N,Stat.Space.dphi);
+            [x0,eps_f,Output,~] = Stat.Met.Newton(@(x)Stat.Met.Equation(Dir,Stat,x),x0,Stat.Par.fsolveoptions);
+             eps_f = sum(eps_f);           
+    end
     
 end
 
 
-function [x0,eps_f,Output] = fsolve_man_switch(L_L,x0)
-
-            [x0,eps_f,Output,~] = fsolve(@(x)Equation(Dir,L_L,x),x0,L_L.Stat.Par.options);
-
-    
-end

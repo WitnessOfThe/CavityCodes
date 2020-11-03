@@ -18,9 +18,13 @@ function L_L = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW_Defined(L_L,N_Mode,mu)
     
     
     for i = 1:4
+        
         if i>1 
+            
             L_L.Stat(i) = L_L.Stat(i-1); 
+            
         end
+        
         L_L.Stat(i)                        = L_L.CW.Met.Norm(L_L.Stat(i),N_Mode);    
         L_L.Stat(i).In.Psi_Start           = zeros(1,N_Mode)*1E-10;
         
@@ -30,12 +34,13 @@ function L_L = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW_Defined(L_L,N_Mode,mu)
         L_L.Stat(i).In.Psi_Start(ind(2)) = L_L.CW.Stab(3).Vector(ind(2)).Vect(i);
     
         L_L.Stat(i).In.t_start      = 0;
+        
+         vel =     (imag(L_L.CW.Stab(3).Value(ind(1))) -imag(L_L.CW.Stab(3).Value(ind(2))))/2/mu(1)/L_L.Stat(i).Space.N;
+        x0                       = [real(L_L.Stat(i).In.Psi_Start),imag(L_L.Stat(i).In.Psi_Start),vel ]*L_L.Stat(i).Space.N;
     
-        x0                       = [real(L_L.Stat(i).In.Psi_Start),imag(L_L.Stat(i).In.Psi_Start),0]*L_L.Stat(i).Space.N;
-    
-        [x,eps_f,SolveFlag]      =    L_L.Stat(i).Met.Newton(L_L.Stat(i),x0);
-        L_L.Stat(i).Sol.Flag        = SolveFlag;
-        L_L.Stat(i).Sol.eps         =     eps_f;
+        [x,eps_f,SolveFlag]         =    L_L.Stat(i).Met.Newton(L_L.Stat(i),x0);
+        L_L.Stat(i).Sol.Flag        =                                 SolveFlag;
+        L_L.Stat(i).Sol.eps         =                                    eps_f;
     
         eps_f      
         L_L.Stat(i)                 = Chi3_LLE_Stat_Prop_Gen(x,L_L.Stat(i));    

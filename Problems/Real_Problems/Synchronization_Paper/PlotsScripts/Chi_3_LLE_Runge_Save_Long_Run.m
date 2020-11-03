@@ -24,7 +24,7 @@ function Chi_3_LLE_Runge_Save_Long_Run(Path,CaF,Ind)
     [tt_3,tt_4] = Plot_Dynamics_Result_LinePlots_Spectrums(CaF.Temp,0);
     [tt_5,tt_6] = Plot_Dynamics_Rf_pcolor(CaF.CW,CaF.Temp,[min(CaF.Temp.Space.k(CaF.Temp.Eq.mode_range)):max(CaF.Temp.Space.k(CaF.Temp.Eq.mode_range))],ind_t,0);
     figure;
-    CF = conFigure([tt_1,tt_2,tt_3,tt_4,tt_5,tt_6],2,3, 'UniformPlots', true, 'Height', 18, 'Width', 18,'Labels',false);
+    CF = conFigure([tt_1,tt_2,tt_3,tt_4,tt_5,tt_6],2,3, 'UniformPlots', true, 'Height', 18, 'Width', 25,'Labels',false);
     h = gcf;
     
     if ~exist(strcat(Path,'/jpg'),'dir')
@@ -39,7 +39,7 @@ function Chi_3_LLE_Runge_Save_Long_Run(Path,CaF,Ind)
         
     end
     
-    print(h,strcat(Path,'/jpg/','Power=',num2str(CaF.Temp.In.P),'Delta=',num2str(CaF.Temp.In.delta/2/pi),'.jpg'),'-djpeg','-r300');
+    print(h,strcat(Path,'/jpg/','Power=',num2str(CaF.Temp.In.P),'Delta=',num2str(CaF.Temp.In.delta/CaF.Temp.In.kappa),'.jpg'),'-djpeg','-r300');
     close(h);
     save(strcat(Path,'/Data/',num2str(Ind)),'Save');
     clear variables;

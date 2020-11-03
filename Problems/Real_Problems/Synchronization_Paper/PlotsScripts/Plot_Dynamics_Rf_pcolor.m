@@ -1,6 +1,6 @@
 function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor(CW,Temp,k_probe,ind_t,Flag)
 %%
-    Dressed_State   = CW.An.Omega_mu;
+    Dressed_State   = imag(CW.An.lambda_mu);
     Dressed_State_1 = Dressed_State(1,:);%max(Dressed_State,[],2);
     Dressed_State_2 = Dressed_State(2,:);%min(Dressed_State,[],2);
 
@@ -29,7 +29,7 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor(CW,Temp,k_probe,ind_t,Flag)
 
 
    tt_2 = proPlot(Temp.Space.k(Temp.Eq.mode_range(ind)),fftshift(f), 10*log10(abs( Temp_Psi).^2*2*pi),'PlotType','pcolor','DownSample2DPlot',[5000 5000]);
-   tt_2 = tt_2.addData(Temp.Space.k(Temp.Eq.mode_range((10*log10(Power_mu)>-50))),freq_mu(10*log10(Power_mu)>-50),[],'LineStyle','none','Marker','o','Color',[1,0.5,0.5]);
+   tt_2 = tt_2.addData(Temp.Space.k(Temp.Eq.mode_range((10*log10(Power_mu)>-70))),freq_mu(10*log10(Power_mu)>-70),[],'LineStyle','none','Marker','o','Color',[1,0.5,0.5]);
    tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(Dressed_State_1)/2/pi/1E3,[],'LineWidth',0.5,'Color',[1,0,0]);
    tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(Dressed_State_2)/2/pi/1E3,[],'LineWidth',0.5,'Color',[1,0,0]);
 
@@ -39,16 +39,16 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor(CW,Temp,k_probe,ind_t,Flag)
    
    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    Ylim = [min(freq_mu(10*log10(Power_mu)>-50))-50,max(freq_mu(10*log10(Power_mu)>-50))+50];
-    Xlim = [min(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-50)))-10,max(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-50)))+10];
+    Ylim = [min(freq_mu(10*log10(Power_mu)>-70))-70,max(freq_mu(10*log10(Power_mu)>-70))+70];
+    Xlim = [min(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-70)))-10,max(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-70)))+10];
     tt_2 = tt_2.changeAxisOptions('XLabelText','Mode Number',...
                          'YLabelText','RF frequency (kHz)',...  
-                         'FontSize',13,'CAxis', [-50,max(max(10*log10(abs( Temp_Psi).^2*2*pi)))],'YLim',Ylim,'XLim',Xlim);
+                         'FontSize',13,'CAxis', [-70,max(max(10*log10(abs( Temp_Psi).^2*2*pi)))],'YLim',Ylim,'XLim',Xlim);
     tt_2 = tt_2.changeFigOptions('Height', 11, 'Width', 11,'Labels',false);
 
     tt_1 = tt_1.changeAxisOptions('Axis', 1,'XLabelText','Mode Number',...
                          'YLabelText','Power (db)',...  
-                         'FontSize',13,'YLim', [-50,max(10*log10(Power_mu))+5],'XLim',Xlim);
+                         'FontSize',13,'YLim', [-70,max(10*log10(Power_mu))+5],'XLim',Xlim);
 %     tt_1 = tt_1.changeAxisOptions('Axis', 2,...
 %                                   'YAxisLocation', 'Right',...
 %                                   'XAxisLocation', 'Top',...

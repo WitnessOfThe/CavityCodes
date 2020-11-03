@@ -9,7 +9,7 @@ function [tt_1,tt_2] = Plot_Static_Field_Stability(Stat,Flag)
    
    for i =1:1:1%size(Stat.Stab.E_vectors,2)
        
-       Pertur = Pertur + Stat.Stab.E_vectors(1:Stat.Space.N,i)+ conj(Stat.Stab.E_vectors(Stat.Space.N+1:2*Stat.Space.N,i));
+       Pertur = + Stat.Stab.E_vectors(1:Stat.Space.N,i)+ conj(Stat.Stab.E_vectors(Stat.Space.N+1:2*Stat.Space.N,i));
        
    end
    Y_max = max(10*log10(abs(Pertur).^2));
@@ -25,13 +25,13 @@ function [tt_1,tt_2] = Plot_Static_Field_Stability(Stat,Flag)
 
    tt_1 = tt_1.changeAxisOptions('XLabelText','Re[$\lambda_\mu/2\pi$ (kHz)]',...
                         'YLabelText','Im[$\lambda_\mu/2\pi$ (kHz)]',...  
-                        'FontSize',13,'YLim',[-1000,1000] );
+                        'FontSize',13 );%'YLim',[-1000,1000]
    tt_2 = tt_2.changeAxisOptions('XLabelText','Mode Number',...
                         'YLabelText','Relative Power (db)',...  
                         'FontSize',13,'XLim',[-100,100],'YLim',[Y_max-100,Y_max]);                     
    tt_3 = tt_3.changeAxisOptions('XLabelText','Mode Number',...
                         'YLabelText','Frequency (kHz)',...  
-                        'FontSize',13,'XLim',[-100,100]);                     
+                        'FontSize',13);                   %,'XLim',[-100,100]  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if Flag
         figure('Name','Fields_Spectrums');

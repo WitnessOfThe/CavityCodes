@@ -1,8 +1,11 @@
 function CW = Chi_3_LLE_MI_Boundary(CW,N)
     
     CW = CW.Met.Norm(CW,N);    
-    CW.In.Delta  =     CW.In.delta + 1/2*CW.Space.k.^2*CW.In.D(2);
     
+    CW.In.Delta  =     CW.In.delta ;
+    for i = 2:size(CW.In.D,2)
+        CW.In.Delta = CW.In.Delta+ 1/factorial(i)*CW.Space.k.^i*CW.In.D(i);
+    end
     CW.In.g_MI(1,:) = 2/3*CW.In.Delta + 1/3*sqrt( CW.In.Delta.^2 - 3/4*CW.In.kappa.^2 );
     CW.In.g_MI(2,:) = 2/3*CW.In.Delta - 1/3*sqrt( CW.In.Delta.^2 - 3/4*CW.In.kappa.^2 );
     
