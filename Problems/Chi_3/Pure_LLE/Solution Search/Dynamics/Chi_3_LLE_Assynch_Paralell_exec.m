@@ -1,4 +1,4 @@
-function Chi_3_LLE_Assynch_Paralell_exec(Res,delta_matrix,power_matrix,ii,Path,Sim_zone,N_Mode,Runge)
+function Chi_3_LLE_Assynch_Paralell_exec(Res,delta_matrix,power_matrix,ii,Path,Sim_zone,N_Mode,Runge,CaF_1D_Upper,CaF_1D_Lower,mu)
 
       if Sim_zone == 1 && ~isfile(strcat(Path,'/Data/',num2str(ii),'.mat'))
           
@@ -18,7 +18,7 @@ function Chi_3_LLE_Assynch_Paralell_exec(Res,delta_matrix,power_matrix,ii,Path,S
                 
                 Res(1).Temp.Sol =    Chi_3_LLE_Runge_Kuarong_mex(Res.Temp,N_Mode,Runge);
                 
-                Chi_3_LLE_Runge_Save_Long_Run(Path,Res,ii)
+                Chi_3_LLE_Runge_Save_Long_Run_from_Stat(Path,Res,ii,CaF_1D_Upper,CaF_1D_Lower,mu)
 
       end
       

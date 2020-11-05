@@ -18,7 +18,7 @@
                 
             end
                         
-            x_step = 1.1*x_step;
+            x_step = 1.01*x_step;
             x     = sg*x_step + x;
                         
             Slv_0 = Slv;

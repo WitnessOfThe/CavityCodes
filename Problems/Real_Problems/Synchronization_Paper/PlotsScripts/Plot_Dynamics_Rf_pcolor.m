@@ -33,7 +33,7 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor(CW,Temp,k_probe,ind_t,Flag)
    tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(Dressed_State_1)/2/pi/1E3,[],'LineWidth',0.5,'Color',[1,0,0]);
    tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(Dressed_State_2)/2/pi/1E3,[],'LineWidth',0.5,'Color',[1,0,0]);
 
-   tt_1 = proPlot(Temp.Space.k(Temp.Eq.mode_range),10*log10(Power_mu),[],'PlotType','stem','BaseValue',-50,'Marker','none');
+   tt_1 = proPlot(Temp.Space.k(Temp.Eq.mode_range),10*log10(Power_mu),[],'PlotType','stem','BaseValue',-70,'Marker','none');
   % tt_1 = tt_1.addData(Temp.Space.k(Temp.Eq.mode_range((10*log10(Power_mu)>-50))),freq_mu(10*log10(Power_mu)>-50),[], 'Axis', 2,'LineStyle','none','Marker','o','Color',[1,0.5,0.5]);
    
    

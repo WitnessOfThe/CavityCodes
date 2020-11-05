@@ -43,6 +43,10 @@ function [Res_1D_Upper,Res_1D_Lower] = Chi3_Stat_Get_Branch_Turing(Res,mu,N_mode
             Power_Start       =      0.001;
             Delta_Start       =  -23.11*Res.Stat.In.kappa;
 
+        case 34
+            
+            Power_Start       =     0.15;
+            Delta_Start       =  -280*Res.Stat.In.kappa;
         
     end
     

@@ -60,10 +60,10 @@ function L_L = Chi_3_LLE_Normalization(L_L,N)
     
         L_L.Eq.gamma_Kerr   =  L_L.Eq.gamma_3*ones(1,L_L.Space.N);
         
-        L_L.Eq.mask         =  [ones(1,100),zeros(1,L_L.Space.N-200+1),ones(1,99)];
+        L_L.Eq.mask         =  [ones(1,L_L.In.range),zeros(1,L_L.Space.N-L_L.In.range*2+1),ones(1,L_L.In.range-1)];
         
         L_L.Eq.kappa_vector =  ones(1,L_L.Space.N)*L_L.Eq.kappa;
-        L_L.Eq.mode_range   =  [1:100,(L_L.Space.N-100+1):L_L.Space.N];
+        L_L.Eq.mode_range   =  [1:L_L.In.range,(L_L.Space.N-L_L.In.range+1):L_L.Space.N];
         L_L.Eq.L            =   L_L.Eq.omega_j  + L_L.Eq.delta;
         L_L.Eq.norm         = coeff;
 end

@@ -1,14 +1,11 @@
-    function [Slv,L_L]   = Soliton_At_Point_Full_Disersion_Kerr(L_L,Delta,options)
+    function [L_L]   = Soliton_At_Point_Full_Disersion_Kerr(L_L,Delta,options)
     
         Dir                = Finite_Derivatives(L_L.Space.N,L_L.Space.dphi);
         NN                 = 30;
         
         kappa_vector = linspace(0,L_L.Eq.kappa_vector(L_L.In.pump_index),NN);
         h_vector     = linspace(0,L_L.Eq.h,NN);
-        D3           = linspace(0,L_L.Eq.D(3),NN);
-        D4           = linspace(0,L_L.Eq.D(4),NN);
-%        D5           = linspace(0,L_L.Eq.D5,NN);
-
+        
         D = L_L.Eq.D;
 
         L_L.Eq.kappa   = 0;
