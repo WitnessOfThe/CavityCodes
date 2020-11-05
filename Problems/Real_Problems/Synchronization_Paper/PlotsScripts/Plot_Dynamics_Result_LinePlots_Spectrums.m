@@ -28,7 +28,7 @@ function [tt_1,tt_2] = Plot_Dynamics_Result_LinePlots_Spectrums(Temp,Flag)
                         'FontSize',13,'XLim',[-pi,pi] );
     tt_2 = tt_2.changeAxisOptions('XLabelText','Mode Number',...
                          'YLabelText','Power (db)',...  
-                         'FontSize',13,'YLim',[-70,10*log10(max(max(abs(Temp.Sol.Psi).^2))*2*pi)+5],'XLim',[-x_Bound,x_Bound] );                     
+                         'FontSize',13,'YLim',[-70,10*log10(max(max(abs(Temp.Sol.Psi).^2))*2*pi)+5],'XLim',[-x_Bound,x_Bound],'YTickLabelRotation',90);                     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if Flag
         figure('Name','Fields_Spectrums');

@@ -7,10 +7,11 @@ function Chi_3_LLE_Runge_Save_Long_Run_from_Stat(Path,CaF,Ind,CaF_1D_Upper,CaF_1
     
     for i = 1:size(CaF.Temp.Eq.mode_range,2)
         
-        Power_mu(i)         =  trapz(abs(CaF.Temp.Sol.Psi(ind_t,i)).^2*2*pi)/tau*tau/N_t;
+        Power_mu(i)         = trapz(abs(CaF.Temp.Sol.Psi(ind_t,i)).^2*2*pi)/tau*tau/N_t;
         freq_mu(i)          = trapz(f.*abs(ifft(CaF.Temp.Sol.Psi(ind_t,i))).^2.')./trapz(abs(ifft(CaF.Temp.Sol.Psi(ind_t,i))).^2);
     end
     
+    Save.CW               = CaF.CW;
     Save.Stat             = CaF.Stat;
     Save.Temp.In          = CaF.Temp.In;
     Save.Temp.Eq          = CaF.Temp.Eq;
@@ -21,7 +22,7 @@ function Chi_3_LLE_Runge_Save_Long_Run_from_Stat(Path,CaF,Ind,CaF_1D_Upper,CaF_1
     
     [tt_1,tt_2] = Plot_Dynamics_Result_pcolors(CaF.Temp,1,0);
     [tt_3,tt_4] = Plot_Dynamics_Result_LinePlots_Spectrums(CaF.Temp,0);
-    [tt_5,tt_6] = Plot_Dynamics_Rf_pcolor(CaF.CW,CaF.Temp,[min(CaF.Temp.Space.k(CaF.Temp.Eq.mode_range)):max(CaF.Temp.Space.k(CaF.Temp.Eq.mode_range))],ind_t,0);
+    [tt_5,tt_6] = Plot_Dynamics_Rf_pcolor(CaF.CW,CaF.Stat,CaF.Temp,[min(CaF.Temp.Space.k(CaF.Temp.Eq.mode_range)):max(CaF.Temp.Space.k(CaF.Temp.Eq.mode_range))],ind_t,0);
     [p_wh_1,p_wh_2,p_wh_3]    = Plot_LLE_Static_Branch(CaF.CW,CaF_1D_Upper.Stat,CaF_1D_Lower.Stat,0,1,mu,CaF_1D_Upper(1).Stat(Ind));
     [p_dot_1,p_dot_2]         = Plot_Static_Field_Spectrums(CaF_1D_Upper(1).Stat(Ind),0);
     [p_dot_3,p_dot_4,p_dot_5] = Plot_Static_Field_Stability(CaF_1D_Upper(1).Stat(Ind),0,mu);
