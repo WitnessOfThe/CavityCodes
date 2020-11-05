@@ -10,7 +10,7 @@
 
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   =  2E3*2*pi;%2*1E3*2*pi;%
-    CaF.Stat.In.P       = 0.00023;
+    CaF.Stat.In.P       = 0.00024;
     CaF.Stat.In.delta   = -CaF.Stat.In.kappa*23;
     
     CaF.Temp          = CaF.Stat;
@@ -31,7 +31,7 @@
     CaF.Temp.Par.CW_num        = 3;
     Runge                      = Define_Runge_Coeff(CaF.Temp.Par);
     
-%%
+%% Specify the tongue number
     mu                  = 10; 
     
 %% Stationary Coefficeints
@@ -59,9 +59,12 @@ F.Stat.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;
     CaF.Stat.Par.i_max            = 500;
     CaF.Stat.Par.CW_num          = 3;
     
-%%    -4.8268
+%%    -4.8268x
 
     [CaF_1D_Upper,CaF_1D_Lower] = Chi3_Stat_Get_Branch_Turing(CaF,mu,N_Mode);
+    
+%%
+
     
 %%
   Path = strcat('/home/dp710/Data_Storage/From_Stationary/CaF_mu=',num2str(mu),'_',num2str(CaF.Stat(1).In.D(2)/CaF.Stat(1).In.kappa),'_Upper_Branch_Scan_',CaF.Stat.Par.variable ,'_Start_delta=',num2str(CaF.Stat(1).In.delta/CaF.Stat(1).In.kappa),'_Power=',num2str(CaF.Stat(1).In.P));

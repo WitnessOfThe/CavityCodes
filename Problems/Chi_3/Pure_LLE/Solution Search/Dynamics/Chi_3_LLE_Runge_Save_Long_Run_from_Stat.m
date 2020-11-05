@@ -43,7 +43,7 @@ function Chi_3_LLE_Runge_Save_Long_Run_from_Stat(Path,CaF,Ind,CaF_1D_Upper,CaF_1
     
     print(h,strcat(Path,'/jpg/',Alph_Ind{1},'_Power=',num2str(CaF.Temp.In.P),'Delta=',num2str(CaF.Temp.In.delta/CaF.Temp.In.kappa),'.jpg'),'-djpeg','-r300');
     close(h);
-    save(strcat(Path,'/Data/',num2str(Ind)),'Save');
+    save(strcat(Path,'/Data/',Alph_Ind{1}),'Save');
     clear variables;
   
     

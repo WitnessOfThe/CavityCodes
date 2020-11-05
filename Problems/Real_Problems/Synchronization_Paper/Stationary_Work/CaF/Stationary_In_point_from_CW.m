@@ -13,7 +13,7 @@
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
     CaF.Stat.In.P       = 0.15;
     CaF.Stat.In.delta   = -280*CaF.Stat.In.kappa;
-    mu                  = 34;
+    mu                  = 15;
     CaF.Temp.In         = CaF.Stat.In;
     
 %% Stationary Coefficeints
