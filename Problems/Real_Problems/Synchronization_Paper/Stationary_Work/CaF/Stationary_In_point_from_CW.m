@@ -11,9 +11,10 @@
     N_mode              = 2^10;
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.15;
-    CaF.Stat.In.delta   = -280*CaF.Stat.In.kappa;
-    mu                  = 15;
+    CaF.Stat.In.P       = 1.007;
+    CaF.Stat.In.delta   = -892.25*CaF.Stat.In.kappa;
+    CaF.Temp.In.range   = 400;
+    mu                  = 60;
     CaF.Temp.In         = CaF.Stat.In;
     
 %% Stationary Coefficeints
@@ -37,8 +38,8 @@
     
     CaF = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW_Defined(CaF,N_mode,[ mu ,- mu]);
 
-    CaF.Stat(1).Stab =    Stability_Switcher(CaF.Stat(1));
-    CaF.Stat(2).Stab =    Stability_Switcher(CaF.Stat(2));
+ %   CaF.Stat(1).Stab =    Stability_Switcher(CaF.Stat(1));
+ %   CaF.Stat(2).Stab =    Stability_Switcher(CaF.Stat(2));
     
  %%
  

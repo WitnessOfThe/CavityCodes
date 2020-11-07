@@ -10,29 +10,29 @@
 
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   =  2E3*2*pi;%2*1E3*2*pi;%
-    CaF.Stat.In.P       = 0.0003;
-    CaF.Stat.In.delta   = -CaF.Stat.In.kappa*22;
-    
+    CaF.Stat.In.P       = 0.05;
+    CaF.Stat.In.delta   = -286*CaF.Stat.In.kappa;
+    CaF.Stat.In.range       =  300;
     CaF.Temp          = CaF.Stat;
     CaF.Temp.Met.Ev_Start_Point  = @Chi_3_LLE_Start_Point_Stat;
     
 %%
 
-  N      = 200;   
-  N_Mode = 2^8;
-  
+    N      = 200;   
+    N_Mode = 2^10;
+    proPlot
   
 %%
     CaF.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
-    CaF.Temp.Par.dt            = 5E-4;
+    CaF.Temp.Par.dt            = 0.5E-4;
     CaF.Temp.Par.s_t           = 0.01;
-    CaF.Temp.Par.T             = 500;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    CaF.Temp.Par.T             = 200;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     CaF.Temp.Par.dd            = CaF.Temp.Par.T/CaF.Temp.Par.s_t;
     CaF.Temp.Par.CW_num        = 3;
     Runge                      = Define_Runge_Coeff(CaF.Temp.Par);
     
 %% Specify the tongue number
-    mu                  = 10; 
+    mu                  = 34; 
     
 %% Stationary Coefficeints
 
@@ -47,16 +47,16 @@ F.Stat.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;
     
  
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.05; % step for delta measured in delta/kappa
-    CaF.Stat.Par.step_tol         = 0.01;
+    CaF.Stat.Par.first_step       = 1; % step for delta measured in delta/kappa
+    CaF.Stat.Par.step_tol         = 0.5;
 
-    CaF.Stat.Par.bot_boundary     = -30;
-    CaF.Stat.Par.top_boundary     = 0;
+    CaF.Stat.Par.bot_boundary     = -300;
+    CaF.Stat.Par.top_boundary     = -25;
 
     CaF.Stat.Par.Stability        = 'Yes';
     CaF.Stat.Par.Newton_iter      = 30;      
     CaF.Stat.Par.Newton_tol       = 1E-13;  
-    CaF.Stat.Par.i_max            = 500;
+    CaF.Stat.Par.i_max            = 100;
     CaF.Stat.Par.CW_num          = 3;
     
 %%    -4.8268x
@@ -89,3 +89,12 @@ F.Stat.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;
 %       Chi_3_LLE_Assynch_Paralell_exec(Res,Res.Stat.In.delta,Res.Stat.In.P,i,Path,1,N_Mode,Runge,CaF_1D_Upper,CaF_1D_Lower,mu)
 %           
 %   end
+      Res             = CaF;
+      Res.Temp.In     = Save.Temp.In;
+      Res.Temp        = Chi_3_LLE_Normalization(Res.Temp,N_Mode);       
+      Res.Temp.Met    = [];
+      Res.Temp.In.Psi_Start(Save.Temp.Eq.mode_range) = Save.Temp.Sol.Psi_end*N_mode;         
+      Res.Temp.In.Psi_Start(25:45) =0;         
+      Res.Temp.In.t                                  = Save.Temp.Sol.t(end)*N_mode;         
+      Res.Temp.Sol                                   = Chi_3_LLE_Runge_Kuarong(Res.Temp,N_Mode,Runge);
+ %     Chi_3_LLE_Assynch_Paralell_exec(Res,Res.Stat.In.delta,Res.Stat.In.P,i,Path,1,N_Mode,Runge,CaF_1D_Upper,CaF_1D_Lower,mu)

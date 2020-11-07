@@ -40,7 +40,7 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor(CW,Stat,Temp,k_probe,ind_t,Flag)
    tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(Dressed_State_2)/Temp.In.kappa,[],'LineWidth',0.5,'Color',[1,0,0]);
    
    tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(imag(Stat.Stab.Dres_Spec.lam)/Stat.In.kappa,2),'Color',[0,0,0],'LineStyle','none','Marker','.');    
-   tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(imag(Stat.Stab.Dres_Spec.lam).*L_Re_pos/Stat.In.kappa,2),'Color',[1,0,0],'LineStyle','none','Marker','.');    
+   tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(imag(Stat.Stab.Dres_Spec.lam).*L_Re_pos/Stat.In.kappa,2),'Color',[1,0,0],'LineStyle','none','Marker','.','MarkerSize',6);    
 
    tt_1 = proPlot(Temp.Space.k(Temp.Eq.mode_range),10*log10(Power_mu),[],'PlotType','stem','BaseValue',-70,'Marker','none');
   % tt_1 = tt_1.addData(Temp.Space.k(Temp.Eq.mode_range((10*log10(Power_mu)>-50))),freq_mu(10*log10(Power_mu)>-50),[], 'Axis', 2,'LineStyle','none','Marker','o','Color',[1,0.5,0.5]);
@@ -66,7 +66,7 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor(CW,Stat,Temp,k_probe,ind_t,Flag)
     end    
 
     tt_2 = tt_2.changeAxisOptions('XLabelText','Mode Number',...
-                         'YLabelText','RF frequency/$/kappa$',...  
+                         'YLabelText','RF frequency/$\kappa$',...  
                          'FontSize',13,'YLim',[-Im_Bound,Im_Bound]/Stat.In.kappa,'XLim',Xlim);%,'CAxis', [-70,max(max(10*log10(abs( Temp_Psi).^2*2*pi)))]
     tt_2 = tt_2.changeFigOptions('Height', 11, 'Width', 11,'Labels',false);
 

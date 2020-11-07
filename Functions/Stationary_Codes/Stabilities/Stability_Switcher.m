@@ -40,16 +40,26 @@ function Stab = Stability_Switcher(Stat)
             Pert_vect(10*log10(abs(Pert_vect).^2) > -200)             = 1;
             ii = 0;
             
+            [~,ind_zero] = min(abs(Stab.E_values));
+            
             for i = 1:Stat.Space.N*2
                 
                 if Stab.E_values(i) ~= 0
                     
                     ii = ii + 1;
-                    lam(ii,:) = Stab.E_values(i)*Pert_vect(:,i).';
-                    
+                    if ind_zero ~= i
+                        
+                        lam(ii,:) = Stab.E_values(i)*Pert_vect(:,i).';
+                        
+                    else
+                        
+                        lam(ii,:) = 0*Pert_vect(:,i).';                        
+                        
+                    end                
                 end            
                 
             end
+            
             
             for i =1:Stat.Space.N
                 

@@ -11,18 +11,18 @@
 %% Input Parameters for CaF
 
 
-    N_mode              = 2^8;
+    N_mode              = 2^10;
     
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.00024;
-    CaF.Stat.In.delta   = -CaF.Stat.In.kappa*23;
+    CaF.Stat.In.P       = 0.05;
+    CaF.Stat.In.delta   = -286*CaF.Stat.In.kappa;
     
     CaF.CW.In           = CaF.Stat.In;
     
 %%
 
-    mu                  = 10; 
+    mu                  = 34; 
     
 %% Stationary Coefficeints
 
@@ -38,13 +38,13 @@
     
  
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.1; % step for delta measured in delta/kappa
-    CaF.Stat.Par.step_tol         = 0.024;
+    CaF.Stat.Par.first_step       = 1; % step for delta measured in delta/kappa
+    CaF.Stat.Par.step_tol         = 0.1;
     
 %%%%%%%%%%%%%%%%%%%%%%
 
-    CaF.Stat.Par.bot_boundary     = -30; % bottom boundary for delta to search
-    CaF.Stat.Par.top_boundary     = +50; % top boundary for delta to search
+    CaF.Stat.Par.bot_boundary     = -300; % bottom boundary for delta to search
+    CaF.Stat.Par.top_boundary     = 0; % top boundary for delta to search
 
     CaF.Stat.Par.Stability        = 'Yes';
     CaF.Stat.Par.Newton_iter      = 30;      
@@ -65,7 +65,7 @@
     
     figure('Name','Fields_Spectrums');
     
-    CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_dot_1,p_dot_2,p_dot_3,p_dot_4,p_dot_5],2,4, 'UniformPlots', true, 'Height', 15, 'Width',50,'Labels',false);
+    CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_dot_1,p_dot_2,p_dot_3,p_dot_4,p_dot_5],2,4, 'UniformPlots', true, 'Height', 15, 'Width',40,'Labels',false);
     
 %%
     

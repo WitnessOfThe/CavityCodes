@@ -24,8 +24,8 @@
 #include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void Chi_3_LLE_Runge_Kuarong_api(const mxArray * const prhs[3], int32_T
-  nlhs, const mxArray *plhs[1]);
+extern void Chi_3_LLE_Runge_Kuarong_api(c_Chi_3_LLE_Runge_KuarongStackD *SD,
+  const mxArray * const prhs[3], int32_T nlhs, const mxArray *plhs[1]);
 
 #endif
 

@@ -17,11 +17,11 @@
 #include "fft.h"
 
 /* Function Definitions */
-void b_fft(const creal_T x[256], creal_T y[256])
+void b_fft(const creal_T x[1024], creal_T y[1024])
 {
-  creal_T dcv2[256];
+  creal_T dcv2[1024];
   c_fft(x, dcv2);
-  memcpy(&y[0], &dcv2[0], sizeof(creal_T) << 8);
+  memcpy(&y[0], &dcv2[0], sizeof(creal_T) << 10);
 }
 
 /* End of code generation (fft1.c) */

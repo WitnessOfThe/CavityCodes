@@ -18,12 +18,12 @@
 #include "Chi_3_LLE_Runge_Kuarong_data.h"
 
 /* Function Declarations */
-static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
-  int32_T nrhs, const mxArray *prhs[3]);
+static void c_Chi_3_LLE_Runge_Kuarong_mexFu(c_Chi_3_LLE_Runge_KuarongStackD *SD,
+  int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[3]);
 
 /* Function Definitions */
-static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
-  int32_T nrhs, const mxArray *prhs[3])
+static void c_Chi_3_LLE_Runge_Kuarong_mexFu(c_Chi_3_LLE_Runge_KuarongStackD *SD,
+  int32_T nlhs, mxArray *plhs[1], int32_T nrhs, const mxArray *prhs[3])
 {
   const mxArray *outputs[1];
   emlrtStack st = { NULL,              /* site */
@@ -45,7 +45,7 @@ static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
   }
 
   /* Call the function. */
-  Chi_3_LLE_Runge_Kuarong_api(prhs, nlhs, outputs);
+  Chi_3_LLE_Runge_Kuarong_api(SD, prhs, nlhs, outputs);
 
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, plhs, outputs);
@@ -54,16 +54,21 @@ static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs, const mxArray
                  *prhs[])
 {
+  c_Chi_3_LLE_Runge_KuarongStackD *d_Chi_3_LLE_Runge_KuarongStackD = NULL;
+  d_Chi_3_LLE_Runge_KuarongStackD = (c_Chi_3_LLE_Runge_KuarongStackD *)
+    emlrtMxCalloc(1, 1U * sizeof(c_Chi_3_LLE_Runge_KuarongStackD));
   mexAtExit(Chi_3_LLE_Runge_Kuarong_atexit);
 
   /* Module initialization. */
   Chi_3_LLE_Runge_Kuarong_initialize();
 
   /* Dispatch the entry-point. */
-  c_Chi_3_LLE_Runge_Kuarong_mexFu(nlhs, plhs, nrhs, prhs);
+  c_Chi_3_LLE_Runge_Kuarong_mexFu(d_Chi_3_LLE_Runge_KuarongStackD, nlhs, plhs,
+    nrhs, prhs);
 
   /* Module termination. */
   Chi_3_LLE_Runge_Kuarong_terminate();
+  emlrtMxFree(d_Chi_3_LLE_Runge_KuarongStackD);
 }
 
 emlrtCTX mexFunctionCreateRootTLS(void)
