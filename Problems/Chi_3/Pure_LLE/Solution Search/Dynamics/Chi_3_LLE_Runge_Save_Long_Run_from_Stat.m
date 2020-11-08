@@ -1,6 +1,12 @@
 function Chi_3_LLE_Runge_Save_Long_Run_from_Stat(Path,CaF,Ind,CaF_1D_Upper,CaF_1D_Lower,mu)
 
     ind_t  = round(size(CaF.Temp.Sol.Psi,1)/2+1):size(CaF.Temp.Sol.Psi,1);
+    if mod(size(ind_t,2),2) == 1
+        
+        ind_t  = round(size(CaF.Temp.Sol.Psi,1)/2+2):size(CaF.Temp.Sol.Psi,1);
+        
+    end
+        
     tau = CaF.Temp.Sol.t(ind_t(end)) - CaF.Temp.Sol.t(ind_t(1))/ CaF.Temp.Eq.norm;
     N_t = size(ind_t,2);
     f = [0:N_t/2-1,-N_t/2:-1]/tau*2*pi;

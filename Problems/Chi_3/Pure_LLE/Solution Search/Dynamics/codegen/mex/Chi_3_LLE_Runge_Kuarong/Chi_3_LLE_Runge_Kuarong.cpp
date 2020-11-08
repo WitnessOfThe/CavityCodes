@@ -1101,7 +1101,7 @@ void Chi_3_LLE_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, real_T
 
       st.site = &c_emlrtRSI;
       if ((10.0 * muDoubleScalarLog10(Temp_re) <= -50.0) && (muDoubleScalarRem(r,
-            2.0) == 1.0)) {
+            2.0) == 0.0)) {
         boolean_T exitg2;
         idx.set_size((&n_emlrtRTEI), sp, 1, (Sol->Psi.size(0) -
           static_cast<int32_T>(r)));
