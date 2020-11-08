@@ -1,15 +1,15 @@
-/*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
- *
- * rt_nonfinite.c
- *
- * Code generation for function 'Chi_3_LLE_Runge_Kuarong'
- *
- */
+//
+//  Academic License - for use in teaching, academic research, and meeting
+//  course requirements at degree granting institutions only.  Not for
+//  government, commercial, or other organizational use.
+//
+//  rt_nonfinite.cpp
+//
+//  Code generation for function 'Chi_3_LLE_Runge_Kuarong'
+//
 
-/* Include files */
+
+// Include files
 #include "rt_nonfinite.h"
 #include "matrix.h"
 
@@ -29,4 +29,4 @@ void mex_InitInfAndNan(void)
   mex_rtNaNF = (real32_T)rtNaN;
 }
 
-/* End of code generation (rt_nonfinite.c) */
+// End of code generation (rt_nonfinite.cpp)

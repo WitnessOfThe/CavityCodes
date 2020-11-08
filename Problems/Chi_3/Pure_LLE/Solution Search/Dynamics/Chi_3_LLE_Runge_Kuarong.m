@@ -29,15 +29,21 @@
     for ni = 1:nt 
         
         F_e           = Runge_Kuarong_step(F_e,dt,t + ni*dt,d);%,Runge,exp_plus_omega,exp_minus_omega,Temp,shift_back
-  %     Temp      =   Temp.Met.Ev_Save(F_e,Temp,ni);                       
-     if ( mod(ni,Temp.Par.s_t/Temp.Par.dt ) == 0) && (ni ~= 0)
- %   toc     
+        if ( mod(ni,Temp.Par.s_t/Temp.Par.dt ) == 0) && (ni ~= 0)
         
-        Sol.Psi(round(ni*Temp.Par.dt/Temp.Par.s_t),:) = F_e(Temp.Eq.mode_range)/Temp.Space.N;
-        Sol.t(  round(ni*Temp.Par.dt/Temp.Par.s_t))   = Temp.Par.dt*ni;
+            ind_s                = round(ni*Temp.Par.dt/Temp.Par.s_t);
+            Sol.Psi(ind_s ,:) = F_e(Temp.Eq.mode_range)/Temp.Space.N;
+            Sol.t(  ind_s )   = Temp.Par.dt*ni;
+
+            if 10*log10(sum(abs(Sol.Psi(ind_s,2:end)).^2)) <= -50 && (mod(ind_s,2) ==1)
+
+                    Sol.Psi(ind_s+1:end,:) = [];
+                    Sol.t(ind_s+1:end)     = [];                
+                    break;
+
+            end
         
-%    tic
-   end
+       end
        
     end
 

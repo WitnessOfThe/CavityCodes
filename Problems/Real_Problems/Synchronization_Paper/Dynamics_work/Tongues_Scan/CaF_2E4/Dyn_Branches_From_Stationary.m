@@ -58,7 +58,7 @@
 
     
 %%
-  Path = strcat('C:/Users/dp710/Documents/Data_Storage/Long_CaF_mu=',num2str(mu),'_',num2str(CaF.Stat(1).In.D(2)/CaF.Stat(1).In.kappa),'_Upper_Branch_Scan_',CaF.Stat.Par.variable ,'_Start_delta=',num2str(CaF.Stat(1).In.delta/CaF.Stat(1).In.kappa),'_Power=',num2str(CaF.Stat(1).In.P));
+  Path = strcat('C:/Users/dp710/Documents/Data_Storage/CaF_mu=',num2str(mu),'_',num2str(CaF.Stat(1).In.D(2)/CaF.Stat(1).In.kappa),'_Upper_Branch_Scan_',CaF.Stat.Par.variable ,'_Start_delta=',num2str(CaF.Stat(1).In.delta/CaF.Stat(1).In.kappa),'_Power=',num2str(CaF.Stat(1).In.P));
   delete(gcp('nocreate'));
   parpool(12);
   

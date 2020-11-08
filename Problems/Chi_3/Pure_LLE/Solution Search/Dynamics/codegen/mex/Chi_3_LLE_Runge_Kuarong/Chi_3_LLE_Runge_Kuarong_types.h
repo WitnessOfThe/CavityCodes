@@ -1,65 +1,52 @@
-/*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
- *
- * Chi_3_LLE_Runge_Kuarong_types.h
- *
- * Code generation for function 'Chi_3_LLE_Runge_Kuarong'
- *
- */
+//
+//  Academic License - for use in teaching, academic research, and meeting
+//  course requirements at degree granting institutions only.  Not for
+//  government, commercial, or other organizational use.
+//
+//  Chi_3_LLE_Runge_Kuarong_types.h
+//
+//  Code generation for function 'Chi_3_LLE_Runge_Kuarong'
+//
+
 
 #pragma once
 
-/* Include files */
+// Include files
 #include "rtwtypes.h"
+#include "coder_array.h"
 #include "emlrt.h"
 
-/* Type Definitions */
-#ifndef typedef_struct2_T
-#define typedef_struct2_T
-
-typedef struct {
+// Type Definitions
+struct struct2_T
+{
   char_T Runge_Type[12];
   real_T dt;
   real_T s_t;
   real_T T;
   real_T dd;
   real_T CW_num;
-} struct2_T;
+};
 
-#endif                                 /*typedef_struct2_T*/
-
-#ifndef typedef_struct3_T
-#define typedef_struct3_T
-
-typedef struct {
+struct struct3_T
+{
   real_T N;
   real_T lenght;
   real_T dphi;
   real_T phi[1024];
   real_T dk;
   real_T k[1024];
-} struct3_T;
+};
 
-#endif                                 /*typedef_struct3_T*/
-
-#ifndef typedef_struct5_T
-#define typedef_struct5_T
-
-typedef struct {
+struct struct5_T
+{
   real_T b[9];
   real_T a[3];
   real_T c[3];
   real_T s;
-} struct5_T;
+};
 
-#endif                                 /*typedef_struct5_T*/
-
-#ifndef typedef_struct1_T
-#define typedef_struct1_T
-
-typedef struct {
+struct struct1_T
+{
   real_T eta;
   real_T omega_p;
   real_T D[6];
@@ -73,14 +60,10 @@ typedef struct {
   real_T Fin_D;
   creal_T Psi_Start[1024];
   real_T t_start;
-} struct1_T;
+};
 
-#endif                                 /*typedef_struct1_T*/
-
-#ifndef typedef_struct4_T
-#define typedef_struct4_T
-
-typedef struct {
+struct struct4_T
+{
   real_T delta;
   real_T kappa;
   real_T gamma_3;
@@ -93,67 +76,27 @@ typedef struct {
   real_T mode_range[600];
   creal_T L[1024];
   real_T norm;
-} struct4_T;
+};
 
-#endif                                 /*typedef_struct4_T*/
+struct struct6_T
+{
+  coder::array<creal_T, 2U> Psi;
+  coder::array<creal_T, 2U> t;
+};
 
-#ifndef typedef_emxArray_creal_T
-#define typedef_emxArray_creal_T
-
-typedef struct {
-  creal_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-} emxArray_creal_T;
-
-#endif                                 /*typedef_emxArray_creal_T*/
-
-#ifndef typedef_struct6_T
-#define typedef_struct6_T
-
-typedef struct {
-  emxArray_creal_T *Psi;
-  emxArray_creal_T *t;
-} struct6_T;
-
-#endif                                 /*typedef_struct6_T*/
-
-#ifndef typedef_emxArray_cuint8_T
-#define typedef_emxArray_cuint8_T
-
-typedef struct {
-  cuint8_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-} emxArray_cuint8_T;
-
-#endif                                 /*typedef_emxArray_cuint8_T*/
-
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
-
-typedef struct {
+struct struct0_T
+{
   struct1_T In;
   struct2_T Par;
   struct3_T Space;
   struct4_T Eq;
-} struct0_T;
+};
 
-#endif                                 /*typedef_struct0_T*/
-
-#ifndef typedef_c_Chi_3_LLE_Runge_KuarongStackD
-#define typedef_c_Chi_3_LLE_Runge_KuarongStackD
-
-typedef struct {
+struct c_Chi_3_LLE_Runge_KuarongStackD
+{
   struct {
     struct0_T Temp;
   } f0;
-} c_Chi_3_LLE_Runge_KuarongStackD;
+};
 
-#endif                                 /*typedef_c_Chi_3_LLE_Runge_KuarongStackD*/
-
-/* End of code generation (Chi_3_LLE_Runge_Kuarong_types.h) */
+// End of code generation (Chi_3_LLE_Runge_Kuarong_types.h)

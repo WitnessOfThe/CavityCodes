@@ -3,9 +3,9 @@
 //  course requirements at degree granting institutions only.  Not for
 //  government, commercial, or other organizational use.
 //
-//  fft.h
+//  eml_int_forloop_overflow_check.h
 //
-//  Code generation for function 'fft'
+//  Code generation for function 'eml_int_forloop_overflow_check'
 //
 
 
@@ -23,7 +23,7 @@
 // Function Declarations
 namespace coder
 {
-  void fft(const creal_T x[1024], creal_T y[1024]);
+  void check_forloop_overflow_error(const emlrtStack *sp);
 }
 
-// End of code generation (fft.h)
+// End of code generation (eml_int_forloop_overflow_check.h)

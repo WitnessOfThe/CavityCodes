@@ -3,9 +3,9 @@
 //  course requirements at degree granting institutions only.  Not for
 //  government, commercial, or other organizational use.
 //
-//  fft.h
+//  ref.h
 //
-//  Code generation for function 'fft'
+//  Code generation for function 'ref'
 //
 
 
@@ -20,10 +20,14 @@
 #include <cstdlib>
 #include <cstring>
 
-// Function Declarations
+// Type Definitions
 namespace coder
 {
-  void fft(const creal_T x[1024], creal_T y[1024]);
+  class captured_var
+  {
+   public:
+    creal_T contents[3072];
+  };
 }
 
-// End of code generation (fft.h)
+// End of code generation (ref.h)
