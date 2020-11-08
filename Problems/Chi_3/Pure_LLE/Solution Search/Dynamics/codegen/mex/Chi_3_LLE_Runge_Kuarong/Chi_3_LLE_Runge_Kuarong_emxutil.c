@@ -10,17 +10,17 @@
  */
 
 /* Include files */
-#include <string.h>
-#include "rt_nonfinite.h"
-#include "Chi_3_LLE_Runge_Kuarong.h"
 #include "Chi_3_LLE_Runge_Kuarong_emxutil.h"
+#include "Chi_3_LLE_Runge_Kuarong_types.h"
+#include "rt_nonfinite.h"
+#include <string.h>
 
 /* Function Definitions */
 void emxEnsureCapacity_creal_T(const emlrtStack *sp, emxArray_creal_T *emxArray,
   int32_T oldNumel, const emlrtRTEInfo *srcLocation)
 {
-  int32_T newNumel;
   int32_T i;
+  int32_T newNumel;
   void *newData;
   if (oldNumel < 0) {
     oldNumel = 0;
@@ -42,7 +42,7 @@ void emxEnsureCapacity_creal_T(const emlrtStack *sp, emxArray_creal_T *emxArray,
       if (i > 1073741823) {
         i = MAX_int32_T;
       } else {
-        i <<= 1;
+        i *= 2;
       }
     }
 
@@ -67,8 +67,8 @@ void emxEnsureCapacity_creal_T(const emlrtStack *sp, emxArray_creal_T *emxArray,
 void emxEnsureCapacity_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T
   *emxArray, int32_T oldNumel, const emlrtRTEInfo *srcLocation)
 {
-  int32_T newNumel;
   int32_T i;
+  int32_T newNumel;
   void *newData;
   if (oldNumel < 0) {
     oldNumel = 0;
@@ -90,7 +90,7 @@ void emxEnsureCapacity_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T
       if (i > 1073741823) {
         i = MAX_int32_T;
       } else {
-        i <<= 1;
+        i *= 2;
       }
     }
 
@@ -163,8 +163,8 @@ void emxInit_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray, int32_T
   }
 
   if (doPush) {
-    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
-      emxFree_creal_T);
+    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void *)
+      &emxFree_creal_T);
   }
 
   emxArray = *pEmxArray;
@@ -194,8 +194,8 @@ void emxInit_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T **pEmxArray,
   }
 
   if (doPush) {
-    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void (*)(void *))
-      emxFree_cuint8_T);
+    emlrtPushHeapReferenceStackR2012b(sp, (void *)pEmxArray, (void *)
+      &emxFree_cuint8_T);
   }
 
   emxArray = *pEmxArray;

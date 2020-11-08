@@ -10,11 +10,10 @@
  */
 
 /* Include files */
-#include "rt_nonfinite.h"
-#include "Chi_3_LLE_Runge_Kuarong.h"
 #include "Chi_3_LLE_Runge_Kuarong_terminate.h"
-#include "_coder_Chi_3_LLE_Runge_Kuarong_mex.h"
 #include "Chi_3_LLE_Runge_Kuarong_data.h"
+#include "_coder_Chi_3_LLE_Runge_Kuarong_mex.h"
+#include "rt_nonfinite.h"
 
 /* Function Definitions */
 void Chi_3_LLE_Runge_Kuarong_atexit(void)
@@ -29,6 +28,7 @@ void Chi_3_LLE_Runge_Kuarong_atexit(void)
   emlrtEnterRtStackR2012b(&st);
   emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);
+  emlrtExitTimeCleanup(&emlrtContextGlobal);
 }
 
 void Chi_3_LLE_Runge_Kuarong_terminate(void)

@@ -1,0 +1,17 @@
+LIBRARY Chi_3_LLE_Runge_Kuarong_mex.mexw64
+EXPORTS
+mexFunction
+mexfilerequiredapiversion
+emlrtMexFcnProperties
+Chi_3_LLE_Runge_Kuarong
+Chi_3_LLE_Runge_Kuarong_initialize
+Chi_3_LLE_Runge_Kuarong_terminate
+Chi_3_LLE_Runge_Kuarong_atexit
+emxFree_cuint8_T
+emxEnsureCapacity_cuint8_T
+emxEnsureCapacity_creal_T
+emxInit_cuint8_T
+emxFreeStruct_struct6_T
+emxFree_creal_T
+emxInitStruct_struct6_T
+emxInit_creal_T

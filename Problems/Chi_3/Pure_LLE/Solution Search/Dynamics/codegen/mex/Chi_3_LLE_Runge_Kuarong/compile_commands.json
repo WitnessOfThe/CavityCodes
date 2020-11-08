@@ -1,0 +1,80 @@
+[
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   Chi_3_LLE_Runge_Kuarong_data.c -Fobuild\\win64\\Chi_3_LLE_Runge_Kuarong_data.obj",
+    "file": "Chi_3_LLE_Runge_Kuarong_data.c",
+    "output": "build/win64/Chi_3_LLE_Runge_Kuarong_data.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   rt_nonfinite.c -Fobuild\\win64\\rt_nonfinite.obj",
+    "file": "rt_nonfinite.c",
+    "output": "build/win64/rt_nonfinite.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   Chi_3_LLE_Runge_Kuarong_initialize.c -Fobuild\\win64\\Chi_3_LLE_Runge_Kuarong_initialize.obj",
+    "file": "Chi_3_LLE_Runge_Kuarong_initialize.c",
+    "output": "build/win64/Chi_3_LLE_Runge_Kuarong_initialize.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   Chi_3_LLE_Runge_Kuarong_terminate.c -Fobuild\\win64\\Chi_3_LLE_Runge_Kuarong_terminate.obj",
+    "file": "Chi_3_LLE_Runge_Kuarong_terminate.c",
+    "output": "build/win64/Chi_3_LLE_Runge_Kuarong_terminate.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   Chi_3_LLE_Runge_Kuarong.c -Fobuild\\win64\\Chi_3_LLE_Runge_Kuarong.obj",
+    "file": "Chi_3_LLE_Runge_Kuarong.c",
+    "output": "build/win64/Chi_3_LLE_Runge_Kuarong.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   ifft.c -Fobuild\\win64\\ifft.obj",
+    "file": "ifft.c",
+    "output": "build/win64/ifft.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   fft.c -Fobuild\\win64\\fft.obj",
+    "file": "fft.c",
+    "output": "build/win64/fft.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   interface\\_coder_Chi_3_LLE_Runge_Kuarong_api.c -Fobuild\\win64\\_coder_Chi_3_LLE_Runge_Kuarong_api.obj",
+    "file": "interface/_coder_Chi_3_LLE_Runge_Kuarong_api.c",
+    "output": "build/win64/_coder_Chi_3_LLE_Runge_Kuarong_api.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   interface\\_coder_Chi_3_LLE_Runge_Kuarong_mex.c -Fobuild\\win64\\_coder_Chi_3_LLE_Runge_Kuarong_mex.obj",
+    "file": "interface/_coder_Chi_3_LLE_Runge_Kuarong_mex.c",
+    "output": "build/win64/_coder_Chi_3_LLE_Runge_Kuarong_mex.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   Chi_3_LLE_Runge_Kuarong_emxutil.c -Fobuild\\win64\\Chi_3_LLE_Runge_Kuarong_emxutil.obj",
+    "file": "Chi_3_LLE_Runge_Kuarong_emxutil.c",
+    "output": "build/win64/Chi_3_LLE_Runge_Kuarong_emxutil.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   interface\\_coder_Chi_3_LLE_Runge_Kuarong_info.c -Fobuild\\win64\\_coder_Chi_3_LLE_Runge_Kuarong_info.obj",
+    "file": "interface/_coder_Chi_3_LLE_Runge_Kuarong_info.c",
+    "output": "build/win64/_coder_Chi_3_LLE_Runge_Kuarong_info.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   \"C:\\Program Files\\MATLAB\\R2020b\\extern\\version\\c_mexapi_version.c\" -Fobuild\\win64\\c_mexapi_version.obj",
+    "file": "C:/Program Files/MATLAB/R2020b/extern/version/c_mexapi_version.c",
+    "output": "build/win64/c_mexapi_version.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\\codegen\\mex\\Chi_3_LLE_Runge_Kuarong",
+    "command": "lcc64 -nodeclspec -Zp8 -dll -c -I\"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\include64\" -DMATLAB_MEX_FILE -noregistrylookup -DNDEBUG -I\".\" -I\"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Problems\\Chi_3\\Pure_LLE\\Solution Search\\Dynamics\" -I\".\\interface\" -I\"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I\".\" -DMODEL=Chi_3_LLE_Runge_Kuarong_mex   \"C:\\Program Files\\MATLAB\\R2020b\\sys\\lcc64\\lcc64\\mex\\lccstub.c\" -Fobuild\\win64\\lccstub.obj",
+    "file": "C:/Program Files/MATLAB/R2020b/sys/lcc64/lcc64/mex/lccstub.c",
+    "output": "build/win64/lccstub.obj"
+  }
+]

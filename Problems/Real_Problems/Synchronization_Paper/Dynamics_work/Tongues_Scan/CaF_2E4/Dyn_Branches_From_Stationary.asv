@@ -24,7 +24,7 @@
     CaF.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     CaF.Temp.Par.dt            = 0.5E-4;
     CaF.Temp.Par.s_t           = 0.01;
-    CaF.Temp.Par.T             = 200;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    CaF.Temp.Par.T             = 1;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     CaF.Temp.Par.dd            = CaF.Temp.Par.T/CaF.Temp.Par.s_t;
     CaF.Temp.Par.CW_num        = 3;
     Runge                      = Define_Runge_Coeff(CaF.Temp.Par);
@@ -58,7 +58,7 @@
 
     
 %%
-  Path = strcat('C:/Users/dp710/Documents/Data_Storage/Long_CaF_mu=',num2str(mu),'_',num2str(CaF.Stat(1).In.D(2)/CaF.Stat(1).In.kappa),'_Upper_Branch_Scan_',CaF.Stat.Par.variable ,'_Start_delta=',num2str(CaF.Stat(1).In.delta/CaF.Stat(1).In.kappa),'_Power=',num2str(CaF.Stat(1).In.P));
+  Path = strcat('C:/Users/dp710/Documents/Data_Storage/CaF_mu=',num2str(mu),'_',num2str(CaF.Stat(1).In.D(2)/CaF.Stat(1).In.kappa),'_Upper_Branch_Scan_',CaF.Stat.Par.variable ,'_Start_delta=',num2str(CaF.Stat(1).In.delta/CaF.Stat(1).In.kappa),'_Power=',num2str(CaF.Stat(1).In.P));
   delete(gcp('nocreate'));
   parpool(12);
   
@@ -71,3 +71,21 @@
   end
   
 %%
+%   Path = strcat('/home/dp710/Data_Storage/From_Stationary/CaF_',num2str(CaF.Stat(1).In.D(2)/CaF.Stat(1).In.kappa),'_Lower_Branch_Scan_',CaF.Stat.Par.variable ,'_Start_delta=',num2str(CaF.Stat(1).In.delta/CaF.Stat(1).In.kappa),'_Power=',num2str(CaF.Stat(1).In.P));
+ 
+%   parfor i = 1:size(CaF_1D_Lower.Stat,2)
+%       
+%       Res = CaF;
+%       Res.Stat = CaF_1D_Lower.Stat(i);
+%       Chi_3_LLE_Assynch_Paralell_exec(Res,Res.Stat.In.delta,Res.Stat.In.P,i,Path,1,N_Mode,Runge,CaF_1D_Upper,CaF_1D_Lower,mu)
+%           
+%   end
+      Res             = CaF;
+      Res.Temp.In     = Save.Temp.In;
+      Res.Temp        = Chi_3_LLE_Normalization(Res.Temp,N_Mode);       
+      Res.Temp.Met    = [];
+      Res.Temp.In.Psi_Start(Save.Temp.Eq.mode_range) = Save.Temp.Sol.Psi_end*N_mode;         
+      Res.Temp.In.Psi_Start(25:45) =0;         
+      Res.Temp.In.t                                  = Save.Temp.Sol.t(end)*N_mode;         
+      Res.Temp.Sol                                   = Chi_3_LLE_Runge_Kuarong(Res.Temp,N_Mode,Runge);
+ %     Chi_3_LLE_Assynch_Paralell_exec(Res,Res.Stat.In.delta,Res.Stat.In.P,i,Path,1,N_Mode,Runge,CaF_1D_Upper,CaF_1D_Lower,mu)

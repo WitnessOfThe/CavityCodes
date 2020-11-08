@@ -9,23 +9,18 @@
  *
  */
 
-#ifndef IFFT_H
-#define IFFT_H
+#pragma once
 
 /* Include files */
+#include "rtwtypes.h"
+#include "emlrt.h"
+#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tmwtypes.h"
-#include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void ifft(const creal_T x[1024], creal_T y[1024]);
-
-#endif
+void ifft(const creal_T x[1024], creal_T y[1024]);
 
 /* End of code generation (ifft.h) */

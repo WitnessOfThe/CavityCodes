@@ -34,22 +34,16 @@
     for ni = 1:nt 
         
         F_e           = Runge_Kuarong_step(F_e,dt,t + ni*dt,d);
-        
+  %     Res.Temp      =   Res.Temp.Met.Ev_Save(F_e,Res.Temp,ni);                       
      if ( mod(ni,Res.Temp.Par.s_t/Res.Temp.Par.dt ) == 0) && (ni ~= 0)
-         
+ %   toc     
         ind_s                = round(ni*Res.Temp.Par.dt/Res.Temp.Par.s_t);
         Res.Temp.Sol.Psi(ind_s,:) = F_e(Res.Temp.Eq.mode_range)/Res.Temp.Space.N;
+        if sum(10*log10(abs(Psi(ind_s,2:end)).^2)
         Res.Temp.Sol.t(  ind_s)   = Res.Temp.Par.dt*ni;
         
-        if sum(10*log10(abs(Psi(ind_s,2:end)).^2)) <= -70
-            
-            Res.Temp.Sol.Psi(ind_s+1:end,:) = [];
-            Res.Temp.Sol.t(ind_s+1:end)     = [];
-            break;
-            
-        end
-        
-     end
+%    tic
+   end
        
     end
 
