@@ -8,13 +8,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Input Parameters for CaF
 
-    N_mode              = 2^10;
+    N_mode              = 2^8;
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 1.007;
-    CaF.Stat.In.delta   = -892.25*CaF.Stat.In.kappa;
-    CaF.Temp.In.range   = 400;
-    mu                  = 60;
+    CaF.Stat.In.P       = 0.00002;
+    CaF.Stat.In.delta   = -5.1*CaF.Stat.In.kappa;
+    CaF.Stat.In.range   = 100;
+    mu                  = 5;
     CaF.Temp.In         = CaF.Stat.In;
     
 %% Stationary Coefficeints

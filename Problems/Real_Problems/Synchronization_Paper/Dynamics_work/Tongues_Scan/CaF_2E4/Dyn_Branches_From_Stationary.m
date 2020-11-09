@@ -10,7 +10,7 @@
 
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   =  2E3*2*pi;%2*1E3*2*pi;%
-    CaF.Stat.In.P       = 0.28;
+    CaF.Stat.In.P       = 0.35;
     CaF.Stat.In.delta   = -895*CaF.Stat.In.kappa;
     CaF.Stat.In.range   =  300;
     CaF.Temp            = CaF.Stat;
@@ -22,7 +22,7 @@
   
 %%
     CaF.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
-    CaF.Temp.Par.dt            = 0.5E-4;
+    CaF.Temp.Par.dt            = 0.25E-4;
     CaF.Temp.Par.s_t           = 0.01;
     CaF.Temp.Par.T             = 200;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     CaF.Temp.Par.dd            = CaF.Temp.Par.T/CaF.Temp.Par.s_t;
@@ -38,8 +38,8 @@
     CaF.Stat.Met.Newton           = @Newton_Manual_bicgstab;%'fsolve'
      
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.5; % step for delta measured in delta/kappa
-    CaF.Stat.Par.step_tol         = 0.25;
+    CaF.Stat.Par.first_step       = 0.25; % step for delta measured in delta/kappa
+    CaF.Stat.Par.step_tol         = 0.1;
 
     CaF.Stat.Par.bot_boundary     = -900;
     CaF.Stat.Par.top_boundary     = -870;
