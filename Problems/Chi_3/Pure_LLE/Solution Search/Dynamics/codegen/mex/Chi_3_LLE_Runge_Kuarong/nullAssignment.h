@@ -1,38 +1,30 @@
-//
-//  Academic License - for use in teaching, academic research, and meeting
-//  course requirements at degree granting institutions only.  Not for
-//  government, commercial, or other organizational use.
-//
-//  nullAssignment.h
-//
-//  Code generation for function 'nullAssignment'
-//
-
+/*
+ * Academic License - for use in teaching, academic research, and meeting
+ * course requirements at degree granting institutions only.  Not for
+ * government, commercial, or other organizational use.
+ *
+ * nullAssignment.h
+ *
+ * Code generation for function 'nullAssignment'
+ *
+ */
 
 #pragma once
 
-// Include files
+/* Include files */
+#include "Chi_3_LLE_Runge_Kuarong_types.h"
 #include "rtwtypes.h"
-#include "coder_array.h"
 #include "emlrt.h"
 #include "mex.h"
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// Function Declarations
-namespace coder
-{
-  namespace internal
-  {
-    void make_bitarray(const emlrtStack *sp, int32_T n, const ::coder::array<
-                       int32_T, 2U> &idx, ::coder::array<boolean_T, 2U> &b);
-    void nullAssignment(const emlrtStack *sp, ::coder::array<creal_T, 2U> &x,
-                        const ::coder::array<int32_T, 2U> &idx);
-    int32_T num_true(const emlrtStack *sp, const ::coder::array<boolean_T, 2U>
-                     &b);
-  }
-}
+/* Function Declarations */
+void b_nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
+                      emxArray_int32_T *idx);
+void nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
+                    emxArray_int32_T *idx);
 
-// End of code generation (nullAssignment.h)
+/* End of code generation (nullAssignment.h) */

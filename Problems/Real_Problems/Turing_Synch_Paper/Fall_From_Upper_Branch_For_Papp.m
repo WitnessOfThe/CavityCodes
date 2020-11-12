@@ -78,7 +78,7 @@ ii =0;
       delete(gcp('nocreate')); 
       parpool(70);
         tic
-        parfor i_s =1:70 
+        parfor i_s = 1:70 
             
             SiN_Temp               = SiN_Start(ii_bathc(i_s));
             SiN_Temp.CW.In.P       = Power_Matrix(ii_bathc(i_s));

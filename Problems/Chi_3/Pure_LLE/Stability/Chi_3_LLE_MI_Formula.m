@@ -1,20 +1,14 @@
 function CW = Chi_3_LLE_MI_Formula(CW,N)
     
     CW = CW.Met.Norm(CW,N);    
-    CW.In.Delta_p  =     CW.In.delta ;
-    for i = 2:size(CW.In.D,2)
-        
-        CW.In.Delta_p = CW.In.Delta_p + 1/factorial(i)*CW.Space.k.^i*CW.In.D(i);
-        
-    end
+    ome_rev              = zeros(1,N);
+    ome_rev(2:end/2)     = fliplr(CW.In.omega_int(end/2+2:end));
+    ome_rev(end/2+3:end) = fliplr(CW.In.omega_int(2:end/2-1));
+    ome_rev(1)           = CW.In.omega_int(1);
     
-    CW.In.Delta_m  =     CW.In.delta ;
-    
-    for i = 2:size(CW.In.D,2)
-        
-        CW.In.Delta_m = CW.In.Delta_m + 1/factorial(i)*(-CW.Space.k).^i*CW.In.D(i);
-        
-    end
+    CW.In.Delta_p  = CW.In.delta + CW.In.omega_int;
+    CW.In.Delta_m  = CW.In.delta + ome_rev;
+ 
     
 %     if CW.In.g == 0
 %         

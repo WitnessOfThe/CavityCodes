@@ -11,18 +11,18 @@
 %% Input Parameters for CaF
 
 
-    N_mode              = 2^10;
+    N_mode              = 2^9;
     
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.28;
+    CaF.Stat.In.P       = 0.2715;
     CaF.Stat.In.delta   = -895*CaF.Stat.In.kappa;
     
     CaF.CW.In           = CaF.Stat.In;
     
 %%
-
-    mu                  = 60; 
+    
+    mu                  = 34; 
     
 %% Stationary Coefficeints
 
@@ -38,13 +38,13 @@
     
  
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.5; % step for delta measured in delta/kappa
-    CaF.Stat.Par.step_tol         = 0.25;
+    CaF.Stat.Par.first_step       = 0.05; % step for delta measured in delta/kappa
+    CaF.Stat.Par.step_tol         = 0.01;
     
 %%%%%%%%%%%%%%%%%%%%%%
 
     CaF.Stat.Par.bot_boundary     = -900; % bottom boundary for delta to search
-    CaF.Stat.Par.top_boundary     = -870; % top boundary for delta to search
+    CaF.Stat.Par.top_boundary     = -850; % top boundary for delta to search
 
     CaF.Stat.Par.Stability        = 'Yes';
     CaF.Stat.Par.Newton_iter      = 30;      

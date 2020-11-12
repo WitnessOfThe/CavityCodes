@@ -14,7 +14,7 @@ function Chi_3_LLE_Assynch_Paralell_exec(Res,delta_matrix,power_matrix,ii,Path,S
                 Res.CW.In.g       = Res.CW.Sol.g(Res.Temp.Par.CW_num)*Res.CW.Eq.norm;   
                 Res.CW            = Res.CW.Met.Mi_Formula(Res.CW,Res.Temp.Space.N);   
                 
-                Res             =          Res.Temp.Met.Ev_Start_Point(Res);  
+                Res             =   Res.Temp.Met.Ev_Start_Point(Res);  
                 
                 Res.Temp.Met    =                                       [];
                 
