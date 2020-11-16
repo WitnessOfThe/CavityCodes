@@ -49,8 +49,8 @@
     [CaF_1D_Upper,CaF_1D_Lower] = Chi3_Stat_Get_Branch_Turing_2D(CaF,mu,N_mode,Power_Lim,Delta_Lim,N_Power_Res,N_Delta_Res);
     
 %%
-    ind1 = 2;
-    ind2 = 151;
+    ind1 = 5;
+    ind2 = 141;
     
     [p_wh_1,p_wh_2,p_wh_3]    = Plot_LLE_Static_Branch(CaF.CW,CaF_1D_Upper(ind1).Stat,CaF_1D_Lower(ind1).Stat,0,1,mu,CaF_1D_Upper(ind1).Stat(ind2));
     [p_dot_1,p_dot_2]         = Plot_Static_Field_Spectrums(CaF_1D_Upper(ind1).Stat(ind2),0);
@@ -61,4 +61,4 @@
     CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_dot_1,p_dot_2,p_dot_3,p_dot_4,p_dot_5,p_dot_6],3,4, 'UniformPlots', true, 'Height', 15, 'Width',40,'Labels',false);
     
 %%
-    
+    Plot_LLE_Static_2D_Scan_Tongue(CaF_1D_Upper,CaF_1D_Lower,mu,1)
