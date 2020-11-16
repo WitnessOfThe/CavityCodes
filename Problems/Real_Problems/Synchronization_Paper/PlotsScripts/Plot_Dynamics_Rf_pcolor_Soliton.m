@@ -1,4 +1,4 @@
-function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor(CW,Stat,Temp,k_probe,ind_t,Flag)
+function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor_Soliton(CW,Stat,Temp,k_probe,ind_t,Flag)
 %%
     Dressed_State   = imag(CW.An.lambda_mu);
     Dressed_State_1 = Dressed_State(1,:);%max(Dressed_State,[],2);
@@ -7,7 +7,7 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor(CW,Stat,Temp,k_probe,ind_t,Flag)
     for i=1:size(k_probe,2)
         
         ind(i)      = find(Temp.Space.k(Temp.Eq.mode_range) == k_probe(i));
-       % k_vector(i) = 
+        
     end
 
  %%  
@@ -19,8 +19,9 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor(CW,Stat,Temp,k_probe,ind_t,Flag)
 
     for i = 1:size(Temp.Eq.mode_range,2)
         
-        Power_mu(i)         =  trapz(abs(Temp.Sol.Psi(ind_t,i)).^2*2*pi)/tau*tau/N_t;
-        freq_mu(i)          = trapz(f.*abs(ifft(Temp.Sol.Psi(ind_t,i))).^2.')./trapz(abs(ifft(Temp.Sol.Psi(ind_t,i))).^2);
+        Power_mu(i)   = trapz(abs(Temp.Sol.Psi(ind_t,i)).^2*2*pi)/tau*tau/N_t;
+        freq_mu(i)    = trapz(f.*abs(ifft(Temp.Sol.Psi(ind_t,i))).^2.')./trapz(abs(ifft(Temp.Sol.Psi(ind_t,i))).^2);
+        
     end
    
    i=1; 

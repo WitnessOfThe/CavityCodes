@@ -13,6 +13,7 @@
     CaF.Stat.In.P       = 0.35;
     CaF.Stat.In.delta   = -895*CaF.Stat.In.kappa;
     CaF.Stat.In.range   =  300;
+    
     CaF.Temp            = CaF.Stat;
     CaF.Temp.Met.Ev_Start_Point  = @Chi_3_LLE_Start_Point_Stat;
     
@@ -48,11 +49,11 @@
     CaF.Stat.Par.Newton_iter      = 30;      
     CaF.Stat.Par.Newton_tol       = 1E-13;  
     CaF.Stat.Par.i_max            = 100;
-    CaF.Stat.Par.CW_num          = 3;
+    CaF.Stat.Par.CW_num           = 3;
     
 %%    -4.8268x
 
-    [CaF_1D_Upper,CaF_1D_Lower] = Chi3_Stat_Get_Branch_Turing(CaF,mu,N_Mode);
+    [CaF_1D_Upper,CaF_1D_Lower]   = Chi3_Stat_Get_Branch_Turing(CaF,mu,N_Mode);
     
 %%
 

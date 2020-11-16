@@ -1,3 +1,4 @@
+%%%%
     clc;
     clear all;
     
@@ -14,82 +15,50 @@
     
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.0005779;
-    CaF.Stat.In.delta   = -0.03668E6*2*pi;
+    CaF.Stat.In.P       = 0.5;
+    CaF.Stat.In.delta   = -270*CaF.Stat.In.kappa;   
+    CaF.CW.In           = CaF.Stat.In;
     
+    N_Power_Res         = 10;
+
+    Power_Lim           = [0.21,0.5];     
+    Delta_Lim           = [-288,-263];
+    N_Delta_Res         = 150;
 %%
-    mu                  = 11; 
+    
+    mu                  = 34; 
     
 %% Stationary Coefficeints
+
     CaF.Stat.Par.Equation_string  = 'Kerr_Full_Dispersion';        
     CaF.Stat.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;    
     CaF.Stat.Met.Newton           = @Newton_Manual_bicgstab;%'fsolve'
-%        Res_Lower.Stat.Par.step_tol         = 0.0001;
- %   Res_Lower.Stat.Par.variable         = 'delta';  %%'Pump Power';
- %   Res_Lower.Stat.Par.first_step       = 0.01; %min =1E-4/3
-
-    CaF.Stat.Par.step_tol         = 0.0001;
-    CaF.Stat.Par.Stability        = 'No';
+         
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.1; %min =1E-4/3
+    CaF.Stat.Par.first_step       = 0.1; % step for delta measured in delta/kappa
+    CaF.Stat.Par.step_tol         = 0.01;
+    
+%%%%%%%%%%%%%%%%%%%%%%
+
+    CaF.Stat.Par.Stability        = 'Yes';
     CaF.Stat.Par.Newton_iter      = 30;      
     CaF.Stat.Par.Newton_tol       = 1E-12;  
-    CaF.Stat.Par.i_max            = 600;
-    CaF.Stat.Par.CW_num          = 3;
+    CaF.Stat.Par.CW_num           = 3;
     
-%%    -4.8268
-    [CaF_2D_Upper,CaF_2D_Lower] = Chi3_Stat_Get_Tongues_Branch(CaF,mu,N_mode,72);
-%%    
-Mode_Power_U    = NaN(size(CaF_2D_Upper,2),600);
-delta_vector_U  = NaN(size(CaF_2D_Upper,2),600);
-Power_vector_U  = NaN(size(CaF_2D_Upper,2),600);
-lambda_vector_U = NaN(size(CaF_2D_Upper,2),600);
-
-for i_p = 1:size(CaF_2D_Upper,2)
-    
-    for i_d = 1:size(CaF_2D_Upper(i_p).Stat,2)
-        
-        Mode_Power_U  (i_p,i_d)    = CaF_2D_Upper(i_p).Stat(i_d).Sol.Psi_k([mu+1]);
-        delta_vector_U(i_p,i_d)    = CaF_2D_Upper(i_p).Stat(i_d).Eq.delta;
-        Power_vector_U(i_p,i_d)    = CaF_2D_Upper(i_p).Stat(i_d).In.P;
-        [~,ind]    = max(real(CaF_2D_Upper(i_p).Stat(i_d).Stab.E_values));
-        lambda_vector_U(i_p,i_d)    = CaF_2D_Upper(i_p).Stat(i_d).Stab.E_values(ind);
-        
-    end
-    
-end
-Mode_Power_L    = NaN(size(CaF_2D_Upper,2),600);
-delta_vector_L  = NaN(size(CaF_2D_Upper,2),600);
-Power_vector_L  = NaN(size(CaF_2D_Upper,2),600);
-lambda_vector_L = NaN(size(CaF_2D_Upper,2),600);
-
-for i_p = 1:size(CaF_2D_Lower,2)
-    
-    for i_d = 1:size(CaF_2D_Lower(i_p).Stat,2)
-        
-        Mode_Power_L  (i_p,i_d)    = CaF_2D_Lower(i_p).Stat(i_d).Sol.Psi_k([mu+1]);
-        delta_vector_L(i_p,i_d)    = CaF_2D_Lower(i_p).Stat(i_d).Eq.delta;
-        Power_vector_L(i_p,i_d)    = CaF_2D_Lower(i_p).Stat(i_d).In.P;
-        [~,ind]    = max(real(CaF_2D_Lower(i_p).Stat(i_d).Stab.E_values));
-        lambda_vector_L(i_p,i_d)    = CaF_2D_Lower(i_p).Stat(i_d).Stab.E_values(ind);
-        
-    end
-    
-end
-
-
-figure;
-mesh(delta_vector_U,Power_vector_U,abs(Mode_Power_U));hold on;
-mesh(delta_vector_L,Power_vector_L,abs(Mode_Power_L))
-figure;
-mesh(delta_vector_U,Power_vector_U,real(lambda_vector_U));hold on;
-figure;
-mesh(delta_vector_L,Power_vector_L,real(lambda_vector_L));hold on;
-figure;
-mesh(delta_vector_U,Power_vector_U,imag(lambda_vector_U));hold on;
-figure;
-mesh(delta_vector_L,Power_vector_L,imag(lambda_vector_L));hold on;
-
 %%
-    Plot_Static_Field_Spectrums(CaF_2D_Upper(30).Stat(1),1);
-    Plot_Static_Field_Stability(CaF_2D_Upper(30).Stat(1),1)
+    [CaF_1D_Upper,CaF_1D_Lower] = Chi3_Stat_Get_Branch_Turing_2D(CaF,mu,N_mode,Power_Lim,Delta_Lim,N_Power_Res,N_Delta_Res);
+    
+%%
+    ind1 = 2;
+    ind2 = 151;
+    
+    [p_wh_1,p_wh_2,p_wh_3]    = Plot_LLE_Static_Branch(CaF.CW,CaF_1D_Upper(ind1).Stat,CaF_1D_Lower(ind1).Stat,0,1,mu,CaF_1D_Upper(ind1).Stat(ind2));
+    [p_dot_1,p_dot_2]         = Plot_Static_Field_Spectrums(CaF_1D_Upper(ind1).Stat(ind2),0);
+    [p_dot_3,p_dot_4,p_dot_5,p_dot_6] = Plot_Static_Field_Stability(CaF_1D_Upper(ind1).Stat(ind2),0,mu);
+    
+    figure('Name','Fields_Spectrums');
+    
+    CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_dot_1,p_dot_2,p_dot_3,p_dot_4,p_dot_5,p_dot_6],3,4, 'UniformPlots', true, 'Height', 15, 'Width',40,'Labels',false);
+    
+%%
+    

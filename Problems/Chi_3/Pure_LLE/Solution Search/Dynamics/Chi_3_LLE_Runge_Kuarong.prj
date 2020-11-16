@@ -849,6 +849,7 @@
     <param.objective>option.objective.c</param.objective>
     <param.WorkflowStep>workflowSummary</param.WorkflowStep>
     <param.TestSnippets>
+      <item>Chi_3_LLE_Runge_Kuarong(SiN.Temp,N_Mode,Runge);</item>
       <item>Chi_3_LLE_Runge_Kuarong(Res.Temp,N_Mode,Runge);</item>
       <item>Chi_3_LLE_Runge_Kuarong(CaF.Temp,N_mode,Runge);</item>
     </param.TestSnippets>
@@ -869,7 +870,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>2374077145</param.AnnotationChecksum>
+    <param.AnnotationChecksum>1736250023</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -1096,7 +1097,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi_3_LLE_Runge_Kuarong.m">
-        <Marker>1605188495333</Marker>
+        <Marker>1605280047523</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
@@ -1133,7 +1134,7 @@
               <Field Name="N" typeId="2" />
               <Field Name="lenght" typeId="2" />
               <Field Name="dphi" typeId="2" />
-              <Field Name="phi" typeId="7" />
+              <Field Name="phi" typeId="3" />
               <Field Name="dk" typeId="2" />
               <Field Name="k" typeId="7" />
             </Field>
@@ -1191,10 +1192,10 @@
             </type>
             <type typeId="3">
               <Class>double</Class>
-              <Size>1 x 256</Size>
+              <Size>1 x 1024</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
@@ -1209,10 +1210,10 @@
             </type>
             <type typeId="5">
               <Class>double</Class>
-              <Size>1 x 256</Size>
+              <Size>1 x 1024</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <Complex>true</Complex>
               <Sparse>false</Sparse>
             </type>

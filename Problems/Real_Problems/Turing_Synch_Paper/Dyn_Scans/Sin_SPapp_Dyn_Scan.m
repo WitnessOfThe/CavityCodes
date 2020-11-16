@@ -56,10 +56,7 @@
     SiN.Stat         = Chi3_Stat_LLE_Stat_From_Cons_Soliton(SiN.Stat,N_Mode);
     SiN.Stat         = Chi3_Stat_LLE_Stat_From_Cons_Soliton(SiN.Stat,N_Mode);
     SiN.Stat.Stab =                       Stability_Switcher(SiN.Stat(1));
-    
-%    Plot_Static_Field_Spectrums(SiN.Stat,1);
- %   Plot_Static_Field_Stability(SiN.Stat,1);
-    
+        
 %%    -4.8268
 
     SiN_Soliton_Branch_Up.Stat  = Run_Branch_Universal(SiN.Stat,N_Mode);

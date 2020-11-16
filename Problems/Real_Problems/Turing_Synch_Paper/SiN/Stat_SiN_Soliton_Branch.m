@@ -13,8 +13,8 @@
     
     SiN.Stat.In.kappa   =  100E6*2*pi;
     SiN.CW.In           = SiN.Stat.In;
-    SiN.Stat.In.delta   =  3.5*SiN.Stat.In.kappa;
-    SiN.Stat.In.P       = 0.02;          
+    SiN.Stat.In.delta   =  8*SiN.Stat.In.kappa;
+    SiN.Stat.In.P       = 0.04;          
 
 %% Stationary Coefficeints
     SiN.Stat.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;    
@@ -28,7 +28,7 @@
     
  
     SiN.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    SiN.Stat.Par.first_step       = 0.02; % step for delta measured in delta/kappa
+    SiN.Stat.Par.first_step       = 0.03; % step for delta measured in delta/kappa
     SiN.Stat.Par.step_tol         = 0.001;
 
     SiN.Stat.Par.bot_boundary     = 0;
@@ -61,7 +61,7 @@
     SiN.Stat         = Chi3_Stat_LLE_Stat_From_Cons_Soliton(SiN.Stat,N_Mode);
     SiN_Soliton_Branch_Down.Stat = Run_Branch_Universal(SiN.Stat,N_Mode);  
 %%
-    ind1 = 25;
+    ind1 = 32;
     [p_wh_1,p_wh_2,p_wh_3,p_wh_4]      = Plot_LLE_Static_Branch_Soliton(SiN.CW,SiN_Soliton_Branch_Up.Stat,SiN_Soliton_Branch_Down.Stat,0,1,0,SiN_Soliton_Branch_Up(1).Stat(ind1));
     [p_1,p_2,p_3]                      = Plot_Static_Field_Spectrums_Soliton(SiN_Soliton_Branch_Up.Stat(ind1),0);
     [p_dot_3,p_dot_4,p_dot_5,p_dot_6]  = Plot_Static_Field_Stability_Soliton(SiN_Soliton_Branch_Up.Stat(ind1),0);

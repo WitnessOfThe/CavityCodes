@@ -41,8 +41,8 @@ function [tt_1,tt_2,tt_3,tt_4] = Plot_LLE_Static_Branch_Soliton(CW,Stat_Up,Stat_
        
         CW                = Chi_3_LLE_MI_Boundary(CW,Stat_Up(i_d).Space.N);
         
-        G_MI_Up_1(i_d,:)        = CW.In.g_MI(1,1:mu+1);
-        G_MI_Up_2(i_d,:)        = CW.In.g_MI(2,1:mu+1);
+        G_MI_Up_1(i_d,:)        = CW.In.g_MI(1,40:60);
+        G_MI_Up_2(i_d,:)        = CW.In.g_MI(2,40:60);
 
     end
     

@@ -19,7 +19,7 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor_without_Stat(CW,Temp,k_probe,ind_
 
     for i = 1:size(Temp.Eq.mode_range,2)
         
-        Power_mu(i)         =  trapz(abs(Temp.Sol.Psi(ind_t,i)).^2*2*pi)/tau*tau/N_t;
+        Power_mu(i)         = trapz(abs(Temp.Sol.Psi(ind_t,i)).^2*2*pi)/tau*tau/N_t;
         freq_mu(i)          = trapz(f.*abs(ifft(Temp.Sol.Psi(ind_t,i))).^2.')./trapz(abs(ifft(Temp.Sol.Psi(ind_t,i))).^2);
     end
    
@@ -32,30 +32,30 @@ function [tt_1,tt_2] = Plot_Dynamics_Rf_pcolor_without_Stat(CW,Temp,k_probe,ind_
 
 %   tt_2 = proPlot(Temp.Space.k(Temp.Eq.mode_range(ind)),fftshift(f)/Temp.In.kappa, 10*log10(abs( Temp_Psi).^2*2*pi),'PlotType','pcolor','DownSample2DPlot',[5000 5000]);
    tt_2 =proPlot([],[],[]);
-   tt_2 = tt_2.addData(Temp.Space.k(Temp.Eq.mode_range((10*log10(Power_mu)>-70))),freq_mu(10*log10(Power_mu)>-70)/Temp.In.kappa*2*pi,[],'LineStyle','none','Marker','o','Color',[1,0.5,0.5]);
+   tt_2 = tt_2.addData(Temp.Space.k(Temp.Eq.mode_range((10*log10(Power_mu)>-50))),freq_mu(10*log10(Power_mu)>-50)/Temp.In.kappa*2*pi,[],'LineStyle','none','Marker','o','Color',[1,0.5,0.5]);
    
    tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(Dressed_State_1)/Temp.In.kappa,[],'LineWidth',0.5,'Color',[1,0,0]);
    tt_2 = tt_2.addData(fftshift(CW.Space.k),fftshift(Dressed_State_2)/Temp.In.kappa,[],'LineWidth',0.5,'Color',[1,0,0]);
    
 
-   tt_1 = proPlot(Temp.Space.k(Temp.Eq.mode_range),10*log10(Power_mu),[],'PlotType','stem','BaseValue',-70,'Marker','none');
+   tt_1 = proPlot(Temp.Space.k(Temp.Eq.mode_range),10*log10(Power_mu),[],'PlotType','stem','BaseValue',-50,'Marker','none');
   % tt_1 = tt_1.addData(Temp.Space.k(Temp.Eq.mode_range((10*log10(Power_mu)>-50))),freq_mu(10*log10(Power_mu)>-50),[], 'Axis', 2,'LineStyle','none','Marker','o','Color',[1,0.5,0.5]);
    
    
    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    Ylim = [min(freq_mu(10*log10(Power_mu)>-70))-70,max(freq_mu(10*log10(Power_mu)>-70))+70];
-    Xlim = [min(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-70)))-10,max(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-70)))+10];
+    Ylim = [min(freq_mu(10*log10(Power_mu)>-50))-50,max(freq_mu(10*log10(Power_mu)>-50))+70];
+    Xlim = [min(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-50)))-10,max(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-50)))+10];
     
 
     tt_2 = tt_2.changeAxisOptions('XLabelText','Mode Number',...
                          'YLabelText','RF frequency/$\kappa$',...  
-                         'FontSize',13,'XLim',Xlim);%,'CAxis', [-70,max(max(10*log10(abs( Temp_Psi).^2*2*pi)))]
+                         'FontSize',13,'XLim',Xlim);%,'CAxis', [-50,max(max(10*log10(abs( Temp_Psi).^2*2*pi)))]
     tt_2 = tt_2.changeFigOptions('Height', 11, 'Width', 11,'Labels',false);
 
     tt_1 = tt_1.changeAxisOptions('Axis', 1,'XLabelText','Mode Number',...
                          'YLabelText','Power (db)',...  
-                         'FontSize',13,'YLim', [-70,max(10*log10(Power_mu))+5],'XLim',Xlim);
+                         'FontSize',13,'YLim', [-50,max(10*log10(Power_mu))+5],'XLim',Xlim);
 %     tt_1 = tt_1.changeAxisOptions('Axis', 2,...
 %                                   'YAxisLocation', 'Right',...
 %                                   'XAxisLocation', 'Top',...

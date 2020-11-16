@@ -48,7 +48,7 @@
     CaF             =                     Chi_3_LLE_Start_Point_CW(CaF);    
     CaF(1).Temp.Sol =    Chi_3_LLE_Runge_Kuarong(CaF.Temp,N_mode,Runge);
     
-    CaF = Stat_In_Guess_Chi_3_LLE_From_Dyn(CaF,N_mode);
+    CaF             =      Stat_In_Guess_Chi_3_LLE_From_Dyn(CaF,N_mode);
 
  %% Plot Results Of Dynamics
     Plot_Dynamics_Result_LinePlots_Spectrums(CaF.Temp,1)

@@ -51,7 +51,7 @@ function [tt_1,tt_2,tt_3,tt_4] = Plot_Static_Field_Stability(Stat,Flag,mu)
    tt_4 =  proPlot([],[],[]);
    if size(Stat.Stab.E_vectors,2) >= 2
        Pert_Vect(1:2,1:Stat.Space.N) = Stat.Stab.E_vectors(1:Stat.Space.N,1:2).'+conj(Stat.Stab.E_vectors(Stat.Space.N+1:2*Stat.Space.N,1:2)).';
-       tt_4 = tt_4.addData( k,fftshift( 10*log10(abs(Pert_Vect(1,:)).^2) ),'Color',[0,0,1],'PlotType','stem','BaseValue',-70); 
+       tt_4 = tt_4.addData(      k,fftshift( 10*log10(abs(Pert_Vect(1,:)).^2) ),'Color',[0,0,1],'PlotType','stem','BaseValue',-70); 
        tt_4 = tt_4.addData( k,fftshift( 10*log10(abs(Pert_Vect(2,:)).^2) ),'Color',[1,0,0],'PlotType','stem','BaseValue',-70); 
    end
    Y_Vect_Value = max([10*log10(abs(Pert_Vect(2,:)).^2),10*log10(abs(Pert_Vect(2,:)).^2)]);

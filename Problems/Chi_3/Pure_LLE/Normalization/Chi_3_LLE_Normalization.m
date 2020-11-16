@@ -17,7 +17,8 @@ function L_L = Chi_3_LLE_Normalization(L_L,N)
             L_L.In.D(i)/factorial(i);
            
        end
-
+        L_L.In.omega_int = L_L.In.omega  - L_L.In.omega_p... 
+        - L_L.In.D(1)*L_L.Space.k;
         L_L.In.Finess          = L_L.In.D(1)/L_L.In.kappa;
         L_L.In.Fin_D           = L_L.In.D(2)/L_L.In.kappa;
         if L_L.In.kappa ~= 0
