@@ -1,10 +1,11 @@
-function Plot_LLE_Static_2D_Scan_Tongue(Upper,Lower,mu,Flag)
+function Plot_LLE_Static_2D_Scan_Tongue(Res,Upper,Lower,mu,Flag)
 %%
     
     Mode_U_mu = NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max)+1i*NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max);    
     Num_unstable_U = NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
-    delta_U   =  zeros(size(Upper,2),2*Upper(1).Stat(1).Par.i_max);    
-    Power_U   =  zeros(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
+    delta_U   =  NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max);    
+    Power_U   =  NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
+    G_U   =  NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
     Crossing_trag = zeros(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
     thresholds_power= zeros(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
     
@@ -25,10 +26,33 @@ function Plot_LLE_Static_2D_Scan_Tongue(Upper,Lower,mu,Flag)
           Power_U(i_p,i_d)   = Upper(i_p).Stat(i_d).In.P;
           Num_unstable_U(i_p,i_d)   = sum(real(Upper(i_p).Stat(i_d).Stab.E_values) > 0);
           
+          Res.CW.In.delta    = Upper(i_p).Stat(i_d).In.delta;
+          Res.CW.In.P        = Upper(i_p).Stat(i_d).In.P;
+          
+          Res.CW       = Res.CW.Met.Solve(Res.CW,Upper(i_p).Stat(i_d).Space.N);          
+          [~,ind]       = max(abs(Res.CW.Sol.Psi));
+          G_U(i_p,i_d)  = Res.CW.Sol.g(ind)*Res.CW.Eq.norm/Upper(i_p).Stat(i_d).In.kappa;
+          
       end
       
   end
-    
+  
+  Nd = 1000;
+  delta_G = linspace(min(min(delta_U)),max(max(delta_U)),Nd);
+  
+  for i_d = 1:Nd
+      
+          Res.CW.In.delta    =  delta_G(i_d)*Res.Stat.In.kappa;
+          Res.CW.In.P        = 0.1;
+          
+          Res.CW       = Chi_3_LLE_MI_Boundary(Res.CW,Upper(1).Stat(1).Space.N);
+        
+          G_MI_Up_1(i_d,:)        = Res.CW.In.g_MI(1,mu-2:mu+2)/Res.Stat.In.kappa;
+          G_MI_Up_2(i_d,:)        = Res.CW.In.g_MI(2,mu-2:mu+2)/Res.Stat.In.kappa;
+          
+          W_MI_Up_1(i_d,:)        = Res.CW.In.W_MI_Tongue(1,mu-2:mu+2);
+          W_MI_Up_2(i_d,:)        = Res.CW.In.W_MI_Tongue(2,mu-2:mu+2);
+end 
   for i_p = 1:size(Lower,2)
       
       for i_d = 1:size(Lower(i_p).Stat,2)
@@ -73,7 +97,17 @@ function Plot_LLE_Static_2D_Scan_Tongue(Upper,Lower,mu,Flag)
     for i_p = 1:size(Num_unstable_U,1)
 
         for i_d = 1:size(Num_unstable_U,2)-1
-            if abs(Num_unstable_U(i_p,i_d) - Num_unstable_U(i_p,i_d+1)) ~= 0;
+            if abs(Num_unstable_U(i_p,i_d) - Num_unstable_U(i_p,i_d+1)) ~= 0
+                thresholds_power(i_p,i_d) = 1; 
+            end
+
+        end
+        
+    end
+    for i_d = 1:size(Num_unstable_U,2)
+
+        for i_p = 1:size(Num_unstable_U,1)-1
+            if abs(Num_unstable_U(i_p,i_d) - Num_unstable_U(i_p+1,i_d)) ~= 0
                 thresholds_power(i_p,i_d) = 1; 
             end
 
@@ -81,7 +115,7 @@ function Plot_LLE_Static_2D_Scan_Tongue(Upper,Lower,mu,Flag)
         
     end
     
-    k_max_pcolor(k_max_pcolor == 0) = NaN;    
+%    k_max_pcolor(k_max_pcolor == 0) = NaN;    
     
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,27 +125,49 @@ function Plot_LLE_Static_2D_Scan_Tongue(Upper,Lower,mu,Flag)
     tt_1 = proPlot(delta_L,Power_L,abs(Mode_L_mu).^2,'PlotType','surf');
     tt_1 = tt_1.addData(delta_U,Power_U,abs(Mode_U_mu).^2,'PlotType','surf');
 
-    tt_2 = proPlot(delta_U,Power_U,Num_unstable_U,'PlotType','surf');
+     for i = 1:size(G_MI_Up_1,2)
+        
+        tt_1         = tt_1.addData(delta_G,W_MI_Up_1(:,i),'Color',[0,0,0]);
+        tt_1         = tt_1.addData(delta_G,W_MI_Up_2(:,i),'Color',[0,0,0]);
+        
+    end
+    tt_2 = proPlot(delta_U,Power_U,Num_unstable_U,'PlotType','pcolor');
     
-    tt_3 = proPlot(delta_U,Power_U,abs(k_max_pcolor),'PlotType','surf');
-    
+    tt_3 = proPlot(delta_U,Power_U,abs(thresholds_power),'PlotType','pcolor');
+     for i = 1:size(G_MI_Up_1,2)
+        
+        tt_3         = tt_3.addData(delta_G,W_MI_Up_1(:,i),'Color',[0,0,0]);
+        tt_3         = tt_3.addData(delta_G,W_MI_Up_2(:,i),'Color',[0,0,0]);
+        
+    end
+    tt_4 = proPlot(delta_U,G_U,abs(thresholds_power),'PlotType','pcolor');
+     for i = 1:size(G_MI_Up_1,2)
+        
+        tt_4         = tt_4.addData(delta_G,G_MI_Up_1(:,i),'Color',[0,0,0]);
+        tt_4         = tt_4.addData(delta_G,G_MI_Up_2(:,i),'Color',[0,0,0]);
+        
+    end
+   
 %%
     tt_1 = tt_1.changeAxisOptions('XLabelText','$\delta/\kappa$',...
-                    'YLabelText','$\mathcal{W}$ [W]',...  
-                    'FontSize',13);
+                    'YLabelText','$\psi_\mu^2$',...  
+                    'FontSize',13,'XLim',[min(delta_G),max(delta_G)]);
     tt_2 = tt_2.changeAxisOptions('XLabelText','$\delta/\kappa$',...
                     'YLabelText','$\mathcal{W}$ [W]',...  
-                    'FontSize',13);
-    tt_3 = tt_3.changeAxisOptions('XLabelText','$\delta/\kappa$',...
+                    'FontSize',13,'XLim',[min(delta_G),max(delta_G)]);
+    tt_3 = tt_3.changeAxisOptions('ColorMap',[1,1,1;1,0,0],'XLabelText','$\delta/\kappa$',...
                     'YLabelText','$\mathcal{W}$ [W]',...  
-                    'FontSize',13);
+                    'FontSize',13,'XLim',[min(delta_G),max(delta_G)]);
+    tt_4 = tt_4.changeAxisOptions('ColorMap',[1,1,1;1,0,0],'XLabelText','$\delta/\kappa$',...
+                    'YLabelText','$g/\kappa$',...  
+                    'FontSize',13,'XLim',[min(delta_G),max(delta_G)]);
                 
 %%                
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                
     if Flag
         
         figure('Name','Fields_Spectrums');
-        CF = conFigure([tt_1,tt_2,tt_3],1,3, 'UniformPlots', true, 'Height', 7, 'Width', 18,'Labels',false);
+        CF = conFigure([tt_1,tt_2,tt_3,tt_4],2,3, 'UniformPlots', true, 'Height', 20, 'Width', 20,'Labels',false);
         
     end
 
