@@ -37,6 +37,8 @@
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
     CaF.Stat.Par.first_step       = 0.1; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.01;
+    CaF.Stat.Par.step_inc         = 1;
+    CaF.Stat.Par.step_dec         = 0.5;
     
 %%%%%%%%%%%%%%%%%%%%%%
 

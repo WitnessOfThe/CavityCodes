@@ -18,7 +18,7 @@
                 
             end
                         
-            x_step = 1.01*x_step;
+            x_step = L_L.Par.step_inc*x_step;
             x     = sg*x_step + x;
                         
             Slv_0 = Slv;
@@ -54,7 +54,7 @@
                     
                     Slv        = Slv_0;
                     x          = x - sg*x_step;
-                    x_step     = x_step*0.1;
+                    x_step     = x_step*L_L.Par.step_dec;
                     x          = x + sg*x_step;
                     
                 end
