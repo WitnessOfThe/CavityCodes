@@ -42,7 +42,7 @@ function Stab = Stability_Switcher(Stat)
             ii = 0;
             Stab.E_values(Stab.E_values == 0) = NaN+1i*NaN;
             
-            [~,ind_zero] = min(abs(Stab.E_values),'omitnan');
+            [~,ind_zero] = min(abs(Stab.E_values));
             Stab.E_values(ind_zero) = 0;
             
             for i = 1:Stat.Space.N*2

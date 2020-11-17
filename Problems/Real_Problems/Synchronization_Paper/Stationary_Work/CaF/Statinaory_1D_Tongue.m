@@ -15,7 +15,7 @@
     
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.5;
+    CaF.Stat.In.P       = 0.1;
     CaF.Stat.In.delta   = -270*CaF.Stat.In.kappa;
     
     CaF.CW.In           = CaF.Stat.In;
@@ -38,9 +38,11 @@
     
  
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.1; % step for delta measured in delta/kappa
-    CaF.Stat.Par.step_tol         = 0.01;
-    
+    CaF.Stat.Par.first_step       = 0.2; % step for delta measured in delta/kappa
+    CaF.Stat.Par.step_tol         = 0.05;
+    CaF.Stat.Par.step_inc         = 1;
+    CaF.Stat.Par.step_dec         = 0.5;
+
 %%%%%%%%%%%%%%%%%%%%%%
 
     CaF.Stat.Par.bot_boundary     = -300; % bottom boundary for delta to search
@@ -57,7 +59,7 @@
     [CaF_1D_Upper,CaF_1D_Lower] = Chi3_Stat_Get_Branch_Turing(CaF,mu,N_mode);
     
 %%
-    ind1 = 121;
+    ind1 = 125;
     
     [p_wh_1,p_wh_2,p_wh_3]    = Plot_LLE_Static_Branch(CaF.CW,CaF_1D_Upper.Stat,CaF_1D_Lower.Stat,0,1,mu,CaF_1D_Upper(1).Stat(ind1));
     [p_dot_1,p_dot_2]         = Plot_Static_Field_Spectrums(CaF_1D_Upper(1).Stat(ind1),0);
