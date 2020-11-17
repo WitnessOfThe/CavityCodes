@@ -38,9 +38,11 @@ function Stab = Stability_Switcher(Stat)
             
             Pert_vect(10*log10(abs(Pert_vect).^2) <= -200)            = 0;
             Pert_vect(10*log10(abs(Pert_vect).^2) > -200)             = 1;
+            
             ii = 0;
             Stab.E_values(Stab.E_values == 0) = NaN+1i*NaN;
-            [~,ind_zero] = min(abs(Stab.E_values));
+            
+            [~,ind_zero] = min(abs(Stab.E_values),'omitnan');
             Stab.E_values(ind_zero) = 0;
             
             for i = 1:Stat.Space.N*2

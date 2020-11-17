@@ -19,7 +19,7 @@
     CaF.Stat.In.delta   = -270*CaF.Stat.In.kappa;   
     CaF.CW.In           = CaF.Stat.In;
     
-    N_Power_Res         = 36;
+    N_Power_Res         = 10;
 
     Power_Lim           = [0.22,0.5];     
     Delta_Lim           = [-288,-263];
