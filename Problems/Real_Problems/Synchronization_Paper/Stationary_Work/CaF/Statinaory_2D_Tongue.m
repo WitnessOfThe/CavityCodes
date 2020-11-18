@@ -11,7 +11,7 @@
 %% Input Parameters for CaF
 
 
-    N_mode              = 2^9;
+    N_mode              = 2^8;
     
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
@@ -19,15 +19,15 @@
     CaF.Stat.In.delta   = -285*CaF.Stat.In.kappa;   
     CaF.CW.In           = CaF.Stat.In;
     
-    N_Power_Res         = 36*2;
+    N_Power_Res         = 36*6;
 
     Power_Lim           = [0.1,1];     
-    Delta_Lim           = [-305,-270];
+    Delta_Lim           = [-24.11,-12.65];
     N_Delta_Res         = 150;
     
 %%
     
-    mu                  = 35; 
+    mu                  = 10; 
     
 %% Stationary Coefficeints
 
@@ -36,7 +36,7 @@
     CaF.Stat.Met.Newton           = @Newton_Manual_bicgstab;%'fsolve'
          
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.25; % step for delta measured in delta/kappa
+    CaF.Stat.Par.first_step       = 0.1; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.01;
     CaF.Stat.Par.step_inc         = 1;
     CaF.Stat.Par.step_dec         = 0.5;
@@ -49,7 +49,7 @@
     CaF.Stat.Par.CW_num           = 3;
     
 %%
-    [CaF_1D_Upper,CaF_1D_Lower] = Chi3_Stat_Get_Branch_Turing_2D(CaF,mu,N_mode,Power_Lim,Delta_Lim,N_Power_Res,N_Delta_Res);
+    [CaF_1D_Upper] = Chi3_Stat_Get_Upper_Branch_Turing_2D(CaF,mu,N_mode,Power_Lim,Delta_Lim,N_Power_Res,N_Delta_Res);
     
 %%
     ind1 = 5;
@@ -64,4 +64,4 @@
     CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_dot_1,p_dot_2,p_dot_3,p_dot_4,p_dot_5,p_dot_6],3,4, 'UniformPlots', true, 'Height', 15, 'Width',40,'Labels',false);
     
 %%
-    Plot_LLE_Static_2D_Scan_Tongue(CaF,CaF_1D_Upper,CaF_1D_Lower,mu,1)
+    Plot_LLE_Static_2D_Scan_Upper_Tongue(CaF,CaF_1D_Upper,mu,1)
