@@ -5,8 +5,16 @@ function Stat = Run_Branch_Universal(Stat,N_mode)
     Stat_1          =   Branch([real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k),0]*Stat.Space.N,x_0,Stat, 1);    
     Stat_2          =   Branch([real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k),0]*Stat.Space.N,x_0,Stat,-1);
     
-    Stat            =   [fliplr(Stat_1),Stat_2];
-    
+    if size(Stat_1,2) ~= 0 && size(Stat_2,2) ~= 0 
+        Stat            =   [fliplr(Stat_1),Stat_2];
+    end
+    if size(Stat_1,2) == 0
+        Stat            =   [Stat_2];
+    end
+    if size(Stat_2,2) == 0
+        Stat            =   [fliplr(Stat_1)];
+    end
+ 
 end
 
 function x_0 = set_up(Stat)
