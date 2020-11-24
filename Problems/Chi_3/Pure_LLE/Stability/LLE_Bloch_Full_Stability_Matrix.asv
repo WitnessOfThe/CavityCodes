@@ -1,22 +1,22 @@
-    function g = LLE_Full_Stability(x,L_L)
+    function g = LLE_Bloch_Full_Stability_Matrix(x,L_L)
     
         mask           = L_L.Eq.mask;
         
         psi_hat        = L_L.Sol.Psi_k'*L_L.Space.N;
-        V              = L_L.Sol.V;
+        V              = 0;
         
         f_psi          = ifft(psi_hat);    
         
-        x_psi_hat            = x(1:L_L.Space.N) + 1i*x(L_L.Space.N+1:2*L_L.Space.N);        
-        x_psi                = ifft(x_psi_hat);
+        
+        x_psi_1          = ifft(x(1:L_L.Space.N));
+        x_psi_2          = ifft(x(L_L.Space.N+1:2*L_L.Space.N));
         
 
-        omega_j             = L_L.Eq.omega_j;  
  
-       L                   = (L_L.Eq.delta + omega_j );
+        L                   = L_L.Eq.L + 1/2*L_L.In.n^2*L_L.In.Fin_D+L_L.In.n*L_L.In.Fin_D*L_L.Space.k;
         
         Eq = (1i*L_L.Space.k.'.*V -  1i*L.').*x_psi_hat + ...
-             1i*L_L.Eq.gamma_Kerr.'.*fft( 2*abs(f_psi).^2.*x_psi + f_psi.^2.*conj(x_psi));
+             1i*L_L.Eq.gamma_Kerr.'.*fft( 2*abs(f_psi).^2.*x_psi_1 + f_psi.^2.*conj(x_psi_1));
                                 
         g_1(1:L_L.Space.N,1)   = real(Eq);
                                         

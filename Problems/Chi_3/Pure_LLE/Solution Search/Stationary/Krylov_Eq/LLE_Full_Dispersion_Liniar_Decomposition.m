@@ -22,9 +22,8 @@
     %   Polycof            = L_L.Eq.D./factorial(1:size(L_L.Eq.D(1:end),2));
    %    Polycof(1)         = 0;
  
-       omega_j             = L_L.Eq.omega_j;  
  
-    L                   = (L_L.Eq.delta + omega_j );
+       L                      = L_L.Eq.L ;
         
 %%
         Eq = (1i*L_L.Space.k.'.*V -  1i*L.').*x_psi_hat + ...

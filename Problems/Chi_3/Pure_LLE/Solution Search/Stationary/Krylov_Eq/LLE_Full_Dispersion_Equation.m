@@ -22,7 +22,7 @@
         Nonliniar_term =    1i.*fft(abs_psi_2.*f_psi).*L_L.Eq.gamma_Kerr;
         Pump           =    zeros(1,L_L.Space.N);
         Pump(1)        =    L_L.Eq.h*L_L.Space.N;
-        Liniar_term    =    1i.*(L_L.Space.k.*V - L_L.Eq.delta - omega_j).*psi_hat;%
+        Liniar_term    =    1i.*(L_L.Space.k.*V - L_L.Eq.L ).*psi_hat;%
         
         
         Eq    = Liniar_term + Nonliniar_term +1i*Pump;

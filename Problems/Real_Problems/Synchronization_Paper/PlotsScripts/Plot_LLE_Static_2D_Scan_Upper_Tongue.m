@@ -27,7 +27,7 @@ function Plot_LLE_Static_2D_Scan_Upper_Tongue(Res,Upper,mu,Flag)
           
           Res.CW       = Res.CW.Met.Solve(Res.CW,Upper(i_p).Stat(i_d).Space.N);          
           [~,ind]       = max(abs(Res.CW.Sol.Psi));
-          G_U(i_p,i_d)  = Res.CW.Sol.g(ind)*Res.CW.Eq.norm/Upper(i_p).Stat(i_d).In.kappa;
+          G_U(i_p,i_d)  = Res.CW.Sol.g(ind)*Res.CW.Eq.norm / Upper(i_p).Stat(i_d).In.kappa;
           
       end
       
@@ -112,12 +112,14 @@ end
     tt_2 = proPlot(delta_U,Power_U,Num_unstable_U,'PlotType','pcolor');
     
     tt_3 = proPlot(delta_U,Power_U,abs(thresholds_power),'PlotType','pcolor');
-     for i = 1:size(G_MI_Up_1,2)
+    
+    for i = 1:size(G_MI_Up_1,2)
         
         tt_3         = tt_3.addData(delta_G,W_MI_Up_1(:,i),'Color',[0,0,0]);
         tt_3         = tt_3.addData(delta_G,W_MI_Up_2(:,i),'Color',[0,0,0]);
         
     end
+    
     tt_4 = proPlot(delta_U,G_U,abs(thresholds_power),'PlotType','pcolor');
      for i = 1:size(G_MI_Up_1,2)
         
