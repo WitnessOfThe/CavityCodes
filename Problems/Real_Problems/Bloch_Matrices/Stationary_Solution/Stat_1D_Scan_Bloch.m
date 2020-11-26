@@ -14,9 +14,9 @@
     N_mode              = 2^5;
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       = 0.05;
-    CaF.Stat.In.delta   = -290.5*CaF.Stat.In.kappa;
-    CaF.Stat.In.range   = 2^3;
+    CaF.Stat.In.P       = 0.0004;
+    CaF.Stat.In.delta   = -16.5*CaF.Stat.In.kappa;
+    CaF.Stat.In.range   = 2^4;
    
     CaF.CW.In         = CaF.Stat.In;
     
@@ -24,7 +24,7 @@
     
 %%
     
-    CaF.Stat.In.mu_bl   = 35;
+    CaF.Stat.In.mu_bl   = 10;
     
 %% Stationary Coefficeints
 
@@ -40,19 +40,19 @@
     
  
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.2; % step for delta measured in delta/kappa
+    CaF.Stat.Par.first_step       = 0.5; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.05;
     CaF.Stat.Par.step_inc         = 1;
     CaF.Stat.Par.step_dec         = 0.5;
 
 %%%%%%%%%%%%%%%%%%%%%%
 
-    CaF.Stat.Par.bot_boundary     = -305; % bottom boundary for delta to search
-    CaF.Stat.Par.top_boundary     = -285; % top boundary for delta to search
+    CaF.Stat.Par.bot_boundary     = -20; % bottom boundary for delta to search
+    CaF.Stat.Par.top_boundary     = 150; % top boundary for delta to search
 
     CaF.Stat.Par.Stability        = 'Yes';
     CaF.Stat.Par.Newton_iter      = 30;      
-    CaF.Stat.Par.Newton_tol       = 1E-12;  
+    CaF.Stat.Par.Newton_tol       = 1E-9;  
     CaF.Stat.Par.i_max            = 2000;
     CaF.Stat.Par.CW_num           = 3;
     
@@ -63,7 +63,7 @@
 %%
     ind1 = 94;
     [p_wh_1,p_wh_2,p_wh_3] = Plot_LLE_Bloch_Static_Branch(CaF.CW,CaF_1D_Upper.Stat,CaF_1D_Lower.Stat,0,1,CaF.Stat.In.mu_bl,CaF_1D_Upper(1).Stat(ind1));
-    [p_dot_1,p_dot_2]                 = Plot_Static_Field_Spectrums(CaF_1D_Upper(1).Stat(ind1),0);
+    [p_dot_1,p_dot_2]                 = Plot_Static_Field_Spectrums(CaF_1D_Lower(1).Stat(1),0);
      [tt_1,tt_2,tt_3,tt_4,tt_5,tt_6,tt_7,tt_8,tt_9,tt_10,tt_12,tt_13,tt_14,tt_15] = Plot_LLE_Bloch_Static_Field_Stability(CaF_1D_Upper(1).Stat(ind1),0);
     
     figure('Name','Fields_Spectrums');

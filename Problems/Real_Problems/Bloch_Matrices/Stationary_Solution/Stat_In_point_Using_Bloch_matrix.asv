@@ -11,8 +11,8 @@
     N_mode              = 2^5;
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.P       =4E-6    ;
-    CaF.Stat.In.delta   = 12.4341*CaF.Stat.In.kappa;
+    CaF.Stat.In.P       = 3.25229E-6    ;
+    CaF.Stat.In.delta   = 11.5*CaF.Stat.In.kappa;
     CaF.Stat.In.range   = 2^4;
     CaF.Stat.In.mu_bl   = 10;
     CaF.Stat.Par.CW_num = 1;
@@ -37,16 +37,20 @@
 %% Temporal Coefficients
     
     CaF             = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(CaF,N_mode);
+
+%    CaF.Stat(1).Stab =    Stability_Switcher(CaF.Stat(1));
+%    CaF.Stat(2).Stab =    Stability_Switcher(CaF.Stat(2));
     
  %%
  
   [tt_1_1,tt_1_2] =  Plot_Static_Field_Spectrums(CaF.Stat(1),0);
-  [tt_2_1,tt_2_2] =  Plot_Static_Field_Spectrums(CaF.Stat(2),0);
-  [tt_3_1,tt_3_2] =  Plot_Static_Field_Spectrums(CaF.Stat(3),0);
-  [tt_4_1,tt_4_2] =  Plot_Static_Field_Spectrums(CaF.Stat(4),0);
-  
-   figure('Name','Fields_Spectrums');
-   CF = conFigure([tt_1_1,tt_1_2,tt_2_1,tt_2_2,tt_3_1,tt_3_2,tt_4_1,tt_4_2]...
-       ,4,2, 'UniformPlots', true, 'Height', 14, 'Width', 18,'Labels',false);
+  [tt_2_1,tt_1_2] =  Plot_Static_Field_Spectrums(CaF.Stat(2),0);
+  [tt_3_1,tt_1_2] =  Plot_Static_Field_Spectrums(CaF.Stat(3),0);
+  [tt_1_1,tt_1_2] =  Plot_Static_Field_Spectrums(CaF.Stat(4),0);
+        figure('Name','Fields_Spectrums');
+        CF = conFigure([tt_2,tt_1],1,2, 'UniformPlots', true, 'Height', 7, 'Width', 18,'Labels',false);
     
+%%
+ %  Plot_LLE_Bloch_Static_Field_Stability(CaF.Stat(1),1)
+
 %%

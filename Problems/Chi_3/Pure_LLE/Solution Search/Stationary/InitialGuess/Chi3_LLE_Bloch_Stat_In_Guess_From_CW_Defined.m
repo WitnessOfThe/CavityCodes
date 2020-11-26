@@ -32,8 +32,8 @@ function L_L = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(L_L,N_Mode,mu)
         
         L_L.Stat(i).In.Psi_Start(1)      = L_L.CW.Sol.Psi(L_L.Stat(i).Par.CW_num);    
         
-        L_L.Stat(i).In.Psi_Start(2)   = L_L.CW.Stab(3).Vector(ind(1)).Vect(i);
-        L_L.Stat(i).In.Psi_Start(end) = L_L.CW.Stab(3).Vector(ind(2)).Vect(i);
+        L_L.Stat(i).In.Psi_Start(2)   = L_L.CW.Stab(L_L.Stat(i).Par.CW_num).Vector(ind(1)).Vect(i);
+        L_L.Stat(i).In.Psi_Start(end) = L_L.CW.Stab(L_L.Stat(i).Par.CW_num).Vector(ind(2)).Vect(i);
 
  %      L_L.Stat(i).In.Psi_Start(ind(3)) = L_L.CW.Stab(3).Vector(ind(1)).Vect(i);
  %      L_L.Stat(i).In.Psi_Start(ind(4)) = L_L.CW.Stab(3).Vector(ind(2)).Vect(i);
