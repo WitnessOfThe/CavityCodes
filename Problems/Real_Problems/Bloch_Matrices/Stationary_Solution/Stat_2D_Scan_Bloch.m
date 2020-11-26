@@ -11,19 +11,19 @@
 %% Input Parameters for CaF
 
 
-    N_mode              = 2^5;
+    N_mode              = 2^4;
     
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
     CaF.Stat.In.P       = 0.5;
-    CaF.Stat.In.delta   = -285*CaF.Stat.In.kappa;   
-    CaF.Stat.In.range   = 2^4;
+    CaF.Stat.In.delta   = -280*CaF.Stat.In.kappa;   
+    CaF.Stat.In.range   = 2^3;
     CaF.CW.In           = CaF.Stat.In;
     
-    N_Power_Res         = 36*6;
+    N_Power_Res         = 36*4;
 
     Power_Lim           = [0.1,1];     
-    Delta_Lim           = [-24.11,-12.65];
+    Delta_Lim           = [-305.367,-200];
     N_Delta_Res         = 150;
     
 %%
@@ -38,7 +38,7 @@
          
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
     CaF.Stat.Par.first_step       = 0.1; % step for delta measured in delta/kappa
-    CaF.Stat.Par.step_tol         = 0.01;
+    CaF.Stat.Par.step_tol         = 0.025;
     CaF.Stat.Par.step_inc         = 1;
     CaF.Stat.Par.step_dec         = 0.5;
     
@@ -56,8 +56,8 @@
     ind1 = 5;
     ind2 = 21;
     
-    [p_wh_1,p_wh_2,p_wh_3]    = Plot_LLE_Static_Branch(CaF.CW,CaF_1D_Upper(ind1).Stat,CaF_1D_Lower(ind1).Stat,0,1,mu,CaF_1D_Upper(ind1).Stat(ind2));
-    [p_dot_1,p_dot_2]         = Plot_Static_Field_Spectrums(CaF_1D_Upper(ind1).Stat(ind2),0);
+    [p_wh_1,p_wh_2,p_wh_3]            = Plot_LLE_Static_Branch(CaF.CW,CaF_1D_Upper(ind1).Stat,CaF_1D_Lower(ind1).Stat,0,1,mu,CaF_1D_Upper(ind1).Stat(ind2));
+    [p_dot_1,p_dot_2]                 = Plot_Static_Field_Spectrums(CaF_1D_Upper(ind1).Stat(ind2),0);
     [p_dot_3,p_dot_4,p_dot_5,p_dot_6] = Plot_Static_Field_Stability(CaF_1D_Upper(ind1).Stat(ind2),0,mu);
     
     figure('Name','Fields_Spectrums');
