@@ -21,14 +21,16 @@ function L_L = Set_Up_Methods_For_Bloch_Matrices
     L_L.Stat.Met.Ev_Stat_From_Dyn     = @Stat_In_Guess_Chi_3_LLE_From_Dyn;
     L_L.Stat.Met.Stab_Method          = @LLE_Bloch_Full_Stability;  
     L_L.Stat.Met.Stab_Matrix          = @LLE_Bloch_Full_Stability_Matrix;    
+    L_L.Stat.Met.Sol_In_point         = @Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined;    
     
-    L_L.Temp.Met.Ev_Core        = @Chi_3_LLE_Kuar;          
-    L_L.Temp.Met.Ev_Start_Point = @Chi_3_LLE_Start_Point_CW;
-    L_L.Temp.Met.Ev_Save        = @Chi_3_LLE_Dyn_Saving;    
+    L_L.Temp.Met.Ev_Core              = @Chi_3_LLE_Kuar;          
+    L_L.Temp.Met.Ev_Start_Point       = @Chi_3_LLE_Start_Point_CW;
+    L_L.Temp.Met.Ev_Save              = @Chi_3_LLE_Dyn_Saving;    
 
-    L_L.Temp.Met.Plot.Fields_Spectrums     = @Plot_Dynamics_Result_LinePlots_Spectrums;
-    L_L.Temp.Met.Plot.Carpets              = @Plot_Dynamics_Result_pcolors;
-    L_L.Temp.Met.Plot.Integrative_Dynamics = @Plot_Dynamics_Result_Amplitude_Field_Dynamics;
+%    L_L.Temp.Met.Plot.Fields_Spectrums     = @Plot_Dynamics_Result_LinePlots_Spectrums;
+%    L_L.Temp.Met.Plot.Carpets              = @Plot_Dynamics_Result_pcolors;
+%    L_L.Temp.Met.Plot.Integrative_Dynamics = @Plot_Dynamics_Result_Amplitude_Field_Dynamics;
+    
 end
 
     

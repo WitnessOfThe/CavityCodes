@@ -11,11 +11,12 @@ function [CaF_1D_Upper] =  Chi3_Stat_Get_Upper_Branch_Turing_2D(ReS,mu,N_mode,Po
         
           Res = ReS;          
           Res.CW.In.delta = delta_s_vec(i)*Res.CW.In.kappa;          
-          Res.CW          = Res.Met.T_MI (Res.CW,N_mode);
+          Res.CW          = Res.Met.T_MI (Res.CW,2^8);
           power_s_vec(i)  = Res.CW.In.W_MI_Tongue(1,mu+1)*1;
     end
+    
     delta_s_vec = delta_s_vec + 0.5;
-
+    
     parfor  i = 1:N_Power_Res
         
         Res = ReS; 

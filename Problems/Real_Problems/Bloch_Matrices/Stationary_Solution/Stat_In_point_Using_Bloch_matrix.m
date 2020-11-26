@@ -12,7 +12,7 @@
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
     CaF.Stat.In.P       = 0.15;
-    CaF.Stat.In.delta   = -290*CaF.Stat.In.kappa;
+    CaF.Stat.In.delta   = -290.5*CaF.Stat.In.kappa;
     CaF.Stat.In.range   = 2^5;
     CaF.Stat.In.mu_bl   = 35;
     CaF.Temp.In         = CaF.Stat.In;
@@ -36,7 +36,7 @@
     
 %% Temporal Coefficients
     
-    CaF = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(CaF,N_mode);
+    CaF             = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(CaF,N_mode);
 
     CaF.Stat(1).Stab =    Stability_Switcher(CaF.Stat(1));
     CaF.Stat(2).Stab =    Stability_Switcher(CaF.Stat(2));

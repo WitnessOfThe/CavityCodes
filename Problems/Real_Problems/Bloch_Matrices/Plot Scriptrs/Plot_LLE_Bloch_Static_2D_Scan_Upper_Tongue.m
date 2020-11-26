@@ -1,4 +1,4 @@
-function Plot_LLE_Static_2D_Scan_Upper_Tongue(Res,Upper,mu,Flag)
+function Plot_LLE_Bloch_Static_2D_Scan_Upper_Tongue(Res,Upper,mu,Flag)
 %%
     
     Mode_U_mu = NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max)+1i*NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max);    
@@ -17,11 +17,19 @@ function Plot_LLE_Static_2D_Scan_Upper_Tongue(Res,Upper,mu,Flag)
       
       for i_d = 1:size(Upper(i_p).Stat,2)
           
-          Mode_U_mu(i_p,i_d) = Upper(i_p).Stat(i_d).Sol.Psi_k(mu+1);
+          Mode_U_mu(i_p,i_d) = Upper(i_p).Stat(i_d).Sol.Psi_k(1);
           delta_U(i_p,i_d)   = Upper(i_p).Stat(i_d).In.delta/Upper(i_p).Stat(i_d).In.kappa;
           Power_U(i_p,i_d)   = Upper(i_p).Stat(i_d).In.P;
           
-          Num_unstable_U(i_p,i_d)   = sum(real(Upper(i_p).Stat(i_d).Stab.E_values) > 0);
+          for i_s = 1:size(Upper(i_p).Stat(i_d).Stab,2)
+              
+              Lambda_vec(1+(i_s-1)* Upper(i_p).Stat(i_d).Space.N*2:(i_s)* Upper(i_p).Stat(i_d).Space.N*2) =  Upper(i_p).Stat(i_d).Stab(i_s).E_values;
+%              nu_vec(1+(i_s-1)* Upper(i_p).Stat(i_d).Space.N*2:(i_s)* Upper(i_p).Stat(i_d).Space.N*2)     =    Upper(i_p).Stat(i_d).Stab(i_s).nu*ones(1,Upper(i_p).Stat(i_d).Space.N*2);
+          end
+          
+          [~,re_max_ind]          = maxk(real(Lambda_vec),1);
+          lambda_v_U_max(i_p,i_d) = Lambda_vec(re_max_ind);
+          Num_unstable_U(i_p,i_d) = sum(real(Lambda_vec)>0);
           
           Res.CW.In.delta    = Upper(i_p).Stat(i_d).In.delta;
           Res.CW.In.P        = Upper(i_p).Stat(i_d).In.P;
@@ -42,7 +50,7 @@ function Plot_LLE_Static_2D_Scan_Upper_Tongue(Res,Upper,mu,Flag)
           Res.CW.In.delta    =  delta_G(i_d)*Res.Stat.In.kappa;
           Res.CW.In.P        = 0.1;
           
-          Res.CW       = Chi_3_LLE_MI_Boundary(Res.CW,Upper(1).Stat(1).Space.N);
+          Res.CW       = Chi_3_LLE_MI_Boundary(Res.CW,2^8);
         
           G_MI_Up_1(i_d,:)        = Res.CW.In.g_MI(1,mu-2:mu+2)/Res.Stat.In.kappa;
           G_MI_Up_2(i_d,:)        = Res.CW.In.g_MI(2,mu-2:mu+2)/Res.Stat.In.kappa;

@@ -41,12 +41,8 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch(CW,Stat_Up,Stat_Dw,Flag
         G_MI_Up_2(i_d,:)        = CW.In.g_MI(2,1:mu+1);
         
         for i = 1:size(Stat.Stab,2)
-            
-            Lambda_vec(1+(i-1)*Stat.Space.N*2:(i)*Stat.Space.N*2) = Stat_Up(i_d).Stab(i).E_values;
-            
+            Lambda_vec(1+(i-1)*Stat,) = 
         end
-         [~,re_max_ind]  = maxk(real(Lambda_vec),10);
-         lambda_v_U(:,i_d) = Lambda_vec(re_max_ind);
     end
     
     for i_d = 1:size(Stat_Dw,2)
@@ -55,20 +51,12 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch(CW,Stat_Up,Stat_Dw,Flag
         Mode_P_D  (i_d)   = abs(Stat_Dw(i_d).Sol.Psi_k( Stat_Dw(i_d).Space.k == mu )).^2*Stat_Dw(1).In.gamma;
         delta_v_D(i_d)    = Stat_Dw(i_d).Eq.delta;
         Power_v_D(i_d)    = Stat_Dw(i_d).In.P;
-        for i = 1:size(Stat.Stab,2)
-            
-            Lambda_vec(1+(i-1)*Stat.Space.N*2:(i)*Stat.Space.N*2) = Stat_Dw(i_d).Stab(i).E_values;
-            
-        end
-         [~,re_max_ind]  = maxk(real(Lambda_vec),10);
-         lambda_v_D(:,i_d) = Lambda_vec(re_max_ind);        
     end
     
     
-   lambda_v_U(lambda_v_U == 0 ) = NaN + 1i*NaN;
-   lambda_v_D(lambda_v_D == 0 ) = NaN + 1i*NaN;
-   lambda_v_U(real(lambda_v_U)<=0)= real(lambda_v_U(real(lambda_v_U)<=0));
-   lambda_v_D(real(lambda_v_D)<=0)= real(lambda_v_D(real(lambda_v_D)<=0));
+  %  lambda_v_U(lambda_v_U == 0 ) = NaN + 1i*NaN;
+   % lambda_v_D(lambda_v_D == 0 ) = NaN + 1i*NaN;
+    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     switch Stat_Up(1).Par.variable
@@ -110,14 +98,14 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch(CW,Stat_Up,Stat_Dw,Flag
     tt_1         = tt_1.addData(Stat.In.delta/Stat.In.kappa*ones(1,2),[min(min([Mode_P_U,Mode_P_D])),max(max([Mode_P_U,Mode_P_D]))]*1.1/Stat.In.kappa,'LineStyle',':','Color','m');
     
                     
-   tt_2         = proPlot(     X_D,real(lambda_v_D)/Stat.In.kappa,'Color',[0,0,1],'Marker','.','LineStyle','none');
-   tt_2         = tt_2.addData(X_U,real(lambda_v_U)/Stat.In.kappa,'Color',[1,0,0],'Marker','.','LineStyle','none');
-   tt_2         = tt_2.addData(Stat.In.delta/Stat.In.kappa*ones(1,2),[min(min([real(lambda_v_D),real(lambda_v_U)])),max(max([real(lambda_v_D),real(lambda_v_U)]))]*1.1/Stat.In.kappa,'LineStyle',':','Color','m');
+%    tt_2         = proPlot(     X_D,real(lambda_v_D)/Stat.In.kappa,'Color',[0,0,1],'Marker','.','LineStyle','none');
+%    tt_2         = tt_2.addData(X_U,real(lambda_v_U)/Stat.In.kappa,'Color',[1,0,0],'Marker','.','LineStyle','none');
+%    tt_2         = tt_2.addData(Stat.In.delta/Stat.In.kappa*ones(1,2),[min(min([real(lambda_v_D),real(lambda_v_U)])),max(max([real(lambda_v_D),real(lambda_v_U)]))]*1.1/Stat.In.kappa,'LineStyle',':','Color','m');
     
                     
-   tt_3         = proPlot(     X_D,imag(lambda_v_D)/Stat.In.kappa,'Color',[0,0,1],'Marker','.','LineStyle','none');
-   tt_3         = tt_3.addData(X_U,imag(lambda_v_U)/Stat.In.kappa,'Color',[1,0,0],'Marker','.','LineStyle','none');
-   tt_3         = tt_3.addData(Stat.In.delta/Stat.In.kappa*ones(1,2),[min(min([imag(lambda_v_D),imag(lambda_v_U)])),max(max([imag(lambda_v_D),imag(lambda_v_U)]))]*1.1/Stat.In.kappa,'LineStyle',':','Color','m');
+%    tt_3         = proPlot(     X_D,imag(lambda_v_D)/Stat.In.kappa,'Color',[0,0,1],'Marker','.','LineStyle','none');
+%    tt_3         = tt_3.addData(X_U,imag(lambda_v_U)/Stat.In.kappa,'Color',[1,0,0],'Marker','.','LineStyle','none');
+%    tt_3         = tt_3.addData(Stat.In.delta/Stat.In.kappa*ones(1,2),[min(min([imag(lambda_v_D),imag(lambda_v_U)])),max(max([imag(lambda_v_D),imag(lambda_v_U)]))]*1.1/Stat.In.kappa,'LineStyle',':','Color','m');
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -125,17 +113,17 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch(CW,Stat_Up,Stat_Dw,Flag
                         'YLabelText','g$_{\mu}/\kappa$',...  
                         'FontSize',13,'YLim',[min(min([Mode_P_U,Mode_P_D])),max(max([Mode_P_U,Mode_P_D]))*1.1]/Stat.In.kappa);
                     
-    tt_2         = tt_2.changeAxisOptions('XLabelText',X_Text,...
-                        'YLabelText','Re[$\lambda/\kappa$]',...  
-                        'FontSize',13);
-    tt_3         = tt_3.changeAxisOptions('XLabelText',X_Text,...
-                        'YLabelText','Im[$\lambda/\kappa$]',...  
-                        'FontSize',13);
+%     tt_2         = tt_2.changeAxisOptions('XLabelText',X_Text,...
+%                         'YLabelText','Re[$\lambda/\kappa$]',...  
+%                         'FontSize',13);
+%     tt_3         = tt_3.changeAxisOptions('XLabelText',X_Text,...
+%                         'YLabelText','Im[$\lambda/\kappa$]',...  
+%                         'FontSize',13);
 
 %%
     if Flag
         
-        CF = conFigure([tt_1,tt_2,tt_3],1,3, 'UniformPlots', true, 'Height', 7, 'Width', 15,'Labels',false);
+        CF = conFigure([tt_1],1,1, 'UniformPlots', true, 'Height', 7, 'Width', 10,'Labels',false);
        % ,tt_2,tt_3
     end
 

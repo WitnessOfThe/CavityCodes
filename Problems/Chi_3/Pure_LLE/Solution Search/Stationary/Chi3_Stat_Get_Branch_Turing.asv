@@ -1,4 +1,4 @@
-function [Res_1D_Upper,Res_1D_Lower] = Chi3_Bloch_Stat_Get_Branch_Turing(Res,mu,N_mode)
+function [Res_1D_Upper,Res_1D_Lower] = Chi3_Stat_Get_Branch_Turing(Res,mu,N_mode)
 %  Stat is current resonator
 %  mu is the Tongue number
 %  N_mode is the number of modes
@@ -66,8 +66,8 @@ function [Res_1D_Upper,Res_1D_Lower] = Chi3_Bloch_Stat_Get_Branch_Turing(Res,mu,
 
     Res.Stat.In.delta = Delta_Start;
     Res.Stat.In.P     = Power_Start;    
-    Res_Start         = Res.Stat.(...
-                                                      Res,N_mode);   
+    Res_Start         = Res.Stat.Met.Sol_In_point (...
+                                                      Res,N_mode,[Res.Stat.I,-mu]);   
     
 %%
     NN = 30;

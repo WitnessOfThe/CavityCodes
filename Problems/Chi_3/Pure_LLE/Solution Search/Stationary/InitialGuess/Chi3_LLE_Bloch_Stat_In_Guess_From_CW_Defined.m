@@ -1,4 +1,4 @@
-function L_L = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(L_L,N_Mode)
+function L_L = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(L_L,N_Mode,mu)
 
     L_L.CW.In                       = L_L.Stat.In;
     

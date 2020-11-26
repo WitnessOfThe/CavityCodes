@@ -66,8 +66,8 @@ function [Res_1D_Upper,Res_1D_Lower] = Chi3_Stat_Get_Branch_Turing(Res,mu,N_mode
 
     Res.Stat.In.delta = Delta_Start;
     Res.Stat.In.P     = Power_Start;    
-    Res_Start         = Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW_Defined(...
-                                                      Res,N_mode,[mu,-mu]);   
+    Res_Start         = Res.Stat.Met.Sol_In_point(...
+                                                      Res,N_mode,[Res.Stat.In.mu_bl,-Res.Stat.In.mu_bl]);   
     
 %%
     NN = 30;
