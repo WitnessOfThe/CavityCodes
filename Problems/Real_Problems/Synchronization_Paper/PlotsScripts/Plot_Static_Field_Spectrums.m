@@ -15,7 +15,8 @@ function [tt_1,tt_2] = Plot_Static_Field_Spectrums(Stat,Flag)
     
     tt_1 = proPlot(     Stat.Space.phi, abs(Psi_2).^2 );   
     
-    Write = strcat('V$/2\pi$=',num2str(Stat.Sol.V*Stat.Eq.norm),'Hz');
+%    Write = strcat('V$/2\pi$=',num2str(Stat.Sol.V*Stat.Eq.norm),'Hz');
+     Write = strcat('Err=',num2str(Stat.Sol.eps));
     
     tt_1 = tt_1.addData([-3.14,max(abs(Psi_2).^2),0,0], [], [], 'PlotType', 'Annotation', 'AnnotationType', 'textbox','String', Write,'FontSize',18);
     

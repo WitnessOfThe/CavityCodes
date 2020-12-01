@@ -35,7 +35,7 @@ function [tt_1,tt_2,tt_3,tt_4,tt_5,tt_6,tt_7,tt_8,tt_9,tt_10,tt_12,tt_13,tt_14,t
         Re_Max_nu_m(i,:)     = Max_y;
         ind_Re_max_nu_m(i,:) = ind_m;
         
-        [Max_y,ind_m]        = max(abs(imag(Stat(1).Stab(i).E_values)/Stat(1).In.kappa));
+        [Max_y,ind_m]        = maxk(imag(Stat(1).Stab(i).E_values)/Stat(1).In.kappa,2);
         Im_Max_nu_m(i,:)     = Max_y;
         ind_Im_max_nu_m(i,:) = ind_m;
         

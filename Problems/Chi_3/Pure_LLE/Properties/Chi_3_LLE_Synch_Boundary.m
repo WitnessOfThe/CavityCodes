@@ -1,6 +1,7 @@
-function CW = Chi_3_LLE_Synch_Boundary(CW,N)
+function CW = Chi_3_LLE_Synch_Boundary(CW)
     
-    CW = CW.Met.Norm(CW,N);    
+N                 = CW.In.N_mode;
+        CW = CW.Met.Norm(CW);    
 
     CW.In.Delta  =     CW.In.delta + 1/2*CW.Space.k.^2*CW.In.D(2);
     

@@ -1,6 +1,6 @@
-function CW = Chi_3_LLE_MI_Boundary(CW,N)
-    
-    CW                = CW.Met.Norm(CW,N);        
+function CW = Chi_3_LLE_MI_Boundary(CW)
+    N                 = CW.In.N_mode;
+    CW                = CW.Met.Norm(CW);        
     
     ome_rev              = zeros(1,N);
     ome_rev(2:end/2)     = fliplr(CW.In.omega_int(end/2+2:end));

@@ -16,12 +16,7 @@
         x_psi                = ifft(x_psi_hat);
         
 
-%%                    
-  %    L_L.Eq.D(1)         = 0;
-      
-    %   Polycof            = L_L.Eq.D./factorial(1:size(L_L.Eq.D(1:end),2));
-   %    Polycof(1)         = 0;
- 
+%% 
  
        L                      = L_L.Eq.L ;
         

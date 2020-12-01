@@ -5,10 +5,9 @@ function [Res_1D_Upper] = Chi3_Stat_Get_Single_Branch_Turing(Res,mu,N_mode)
 %  N_Res resolution of finall matrix
 
     Res.Stat.Met.Newton               = @Newton_Manual_bicgstab;
- %   Res.Stat.Par.step_tol             = 0.00001;
     Res.Stat.Par.Newton_iter          = 30;      
     Res.Stat.Par.Newton_tol           = 1E-10;  
-   Res.Stat.Par.CW_num               = 3;
+    Res.Stat.Par.CW_num               = 3;
     
 %%
     
@@ -35,9 +34,10 @@ function [Res_1D_Upper] = Chi3_Stat_Get_Single_Branch_Turing(Res,mu,N_mode)
             
         case 10
             
-            Power_Start       =       0.0005779;
-            Delta_Start       = -0.03668E6*2*pi;
-            
+%            Power_Start       =       0.0005779;
+ %           Delta_Start       = -0.03668E6*2*pi;
+             Power_Start       =     3.25229E-6;
+              Delta_Start       = 12*Res.Stat.In.kappa;
         case 11
             
             Power_Start       =      0.001;

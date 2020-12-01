@@ -9,7 +9,7 @@ function Stat =  Chi_3_Stat_Wierd_Pattern_Tracking(Stat,delta_vector,power_vecto
         
         x0                       =  Stat(i).Space.N*[real(Stat(i).In.Psi_Start),imag(Stat(i).In.Psi_Start),0];
         
-        [x,eps_f,SolveFlag]      = Stat(i).Met.Newton(Stat(i),x0);
+        [x,eps_f,SolveFlag]      = Newton_Switcher(x0,Stat(i));
         
         Stat(i).Sol.Flag         =   SolveFlag;
         Stat(i).Sol.eps          =       eps_f;

@@ -37,8 +37,11 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch(CW,Stat_Up,Stat_Dw,Flag
        
         CW                = Chi_3_LLE_MI_Boundary(CW,2^8);
         
-        G_MI_Up_1(i_d,:)        = CW.In.g_MI(1,1:mu+1);
-        G_MI_Up_2(i_d,:)        = CW.In.g_MI(2,1:mu+1);
+        G_MI_Up_1(i_d,:)        = CW.In.g_MI(1,mu+1);
+        G_MI_Up_2(i_d,:)        = CW.In.g_MI(2,mu+1);
+
+        W_MI_Up_1(i_d,:)        = CW.In.W_MI_Tongue(1,mu+1);
+        W_MI_Up_2(i_d,:)        = CW.In.W_MI_Tongue(2,mu+1);
         
         for i = 1:size(Stat.Stab,2)
             

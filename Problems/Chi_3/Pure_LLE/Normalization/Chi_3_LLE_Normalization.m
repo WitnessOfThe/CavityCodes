@@ -1,9 +1,9 @@
-function L_L = Chi_3_LLE_Normalization(L_L,N)
+function L_L = Chi_3_LLE_Normalization(L_L)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define Space 
 
         Fundamental_Constants;
-        
+        N = L_L.In.N_mode;
         L_L.Space      = Define_Space_Cavity(N,2*pi);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,6 +23,10 @@ function L_L = Chi_3_LLE_Normalization(L_L,N)
     
         L_L.In.Finess          = L_L.In.D(1)/L_L.In.kappa;
         L_L.In.Fin_D           = L_L.In.D(2)/L_L.In.kappa;
+        
+        L_L.In.H            = sqrt(L_L.In.eta*L_L.In.Finess*L_L.In.P/pi);
+        L_L.In.W_Star       = L_L.In.P/L_L.In.H^2;
+        L_L.In.W_WStar      = L_L.In.P/L_L.In.W_Star;
         
         if L_L.In.kappa ~= 0
             

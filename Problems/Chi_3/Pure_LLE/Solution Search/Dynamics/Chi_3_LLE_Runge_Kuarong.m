@@ -93,7 +93,7 @@
 
     k_e         = 1i*Fac_plus.*( Eq.gamma_Kerr.*fft(abs_Psi_2.*Psi )); 
 
-    k_e(1)      = k_e(1) + 1i*Fac_plus(1).*(size(Psi,2)*Eq.h);
+    k_e(1)      = k_e(1) + Fac_plus(1).*(size(Psi,2)*Eq.h);
 
     
 end  

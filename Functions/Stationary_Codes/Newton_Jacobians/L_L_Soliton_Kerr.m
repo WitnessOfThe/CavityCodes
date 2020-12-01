@@ -1,4 +1,4 @@
-    function [f,g] = L_L_Soliton_Kerr(Dir,L_L,x)
+        function [f,g] = L_L_Soliton_Kerr(Dir,L_L,x)
         
 
         N   = size(x,2)/2;

@@ -1,98 +1,35 @@
-function [Res_1D_Upper,Res_1D_Lower] = Chi3_Stat_Get_Branch_Turing(Res,mu,N_mode)
+function Res_Branches = Chi3_Stat_Get_Branch_Turing(Res,Delta_Start)
 %  Stat is current resonator
 %  mu is the Tongue number
 %  N_mode is the number of modes
 %  N_Res resolution of finall matrix
 
-    Res.Stat.Met.Newton               = @Newton_Manual_bicgstab;
- %   Res.Stat.Par.step_tol             = 0.00001;
-    Res.Stat.Par.Newton_iter          = 30;      
-    Res.Stat.Par.Newton_tol           = 1E-10;  
-   Res.Stat.Par.CW_num               = 3;
     
 %%
+    Stat_Start    = Res.Stat.Met.Branch_Starting_points(Res);
     
-    switch mu
-        case 6
-            
-            Power_Start       =                0.00003;
-            Delta_Start       =  -6.601*Res.Stat.In.kappa;
+%%
+    NN = 100;
+    for i_c =1:size(Delta_Start,2)
+        delta_s_vec(i_c,:) = linspace(Stat_Start(i_c).In.delta,Delta_Start(i_c),NN);    
+        power_s_vec(i_c,:) = linspace(Stat_Start(i_c).In.P,Res.Stat.In.P,NN);    
+    end 
+    for i = 1:size(Stat_Start,2)
         
-        case 7
-            
-            Power_Start       =                0.00008054;
-            Delta_Start       =  -7.407*Res.Stat.In.kappa;
-            
-        case 8
-            
-            Power_Start       =      0.0002;
-            Delta_Start       =  -8.28*Res.Stat.In.kappa;
+        Res_Adj(i)                     = Res;
+        Res_Adj(i).Stat                = Stat_Start(i);
+        Res_Adj(i).Stat(end).Met.Newton    = @Newton_Manual_bicgstab; 
+        Res_Adj(i).Stat.In.Psi_Start   = Stat_Start(i).Sol.Psi_k;    
+        Res_Adj(i).Stat                 = Chi_3_Stat_Wierd_Pattern_Tracking(...
+                                 Res_Adj(i).Stat,delta_s_vec(i,:),power_s_vec(i,:));
+    end
+   
+    parfor i = 1:size( Stat_Start,2)
         
-        case 9
-            
-            Power_Start       =      0.00033;
-            Delta_Start       =  -14.32*Res.Stat.In.kappa;
-            
-        case 10
-            
-            Power_Start       =       0.0005779;
-            Delta_Start       = -0.03668E6*2*pi;
-            
-        case 11
-            
-            Power_Start       =      0.001;
-            Delta_Start       =  -23.11*Res.Stat.In.kappa;
-
-        case 34
-            
-            Power_Start       =     0.15;
-            Delta_Start       =  -280*Res.Stat.In.kappa;
-            
-        case 35
-            
-            Power_Start       =     0.15;
-            Delta_Start       =  -298.5*Res.Stat.In.kappa;
-            
-        case 60
-
-            Power_Start       =     1.007;
-            Delta_Start       =  -892.25*Res.Stat.In.kappa;
+        Res_Branches(i) = Res;       
+        Res_Branches(i).Stat = Run_Branch_Universal( Res_Adj(i).Stat(end));          
         
     end
-    
-    Delta_In =  Res.Stat.In.delta; 
-    Power_In =  Res.Stat.In.P;     
-        
-
-    Res.Stat.In.delta = Delta_Start;
-    Res.Stat.In.P     = Power_Start;    
-    Res_Start         = Res.Stat.Met.Sol_In_point (...
-                                                      Res,N_mode,[Res.Stat.I,-mu]);   
-    
-%%
-    NN = 30;
-    
-    delta_vector = linspace(Delta_Start,Delta_In,NN); 
-    power_vector = linspace(Power_Start,Power_In,NN); 
-   
-    Res_Upper                      = Res;
-    Res_Upper.Stat                 = Res_Start.Stat(1);    
-    Res_Upper.Stat.In.Psi_Start    = Res_Start.Stat(1).Sol.Psi_k;    
-    Res_Upper.Stat                 =  Chi_3_Stat_Wierd_Pattern_Tracking(...
-                                 Res_Upper.Stat,delta_vector,power_vector);
-        
-    
-    Res_Lower                           = Res;
-    
-    Res_Lower.Stat                 = Res_Start.Stat(2);    
-    Res_Lower.Stat.In.Psi_Start    = Res_Start.Stat(2).Sol.Psi_k;    
-    Res_Lower.Stat                 =  Chi_3_Stat_Wierd_Pattern_Tracking(...
-                                 Res_Lower.Stat,delta_vector,power_vector);
-                             
-                            
-    Res_1D_Upper(1).Stat = Run_Branch_Universal(Res_Upper.Stat(end),N_mode);  
-    Res_1D_Lower(1).Stat = Run_Branch_Universal(Res_Lower.Stat(end),N_mode);  
-          
 
 end
 

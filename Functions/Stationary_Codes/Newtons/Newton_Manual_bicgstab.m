@@ -21,7 +21,7 @@
         
                 SolveFlag = -1;
                 break;
-            
+                
             end
         
            Check =  sum(abs(fun) > Stat.Par.Newton_tol );

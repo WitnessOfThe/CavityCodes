@@ -93,15 +93,7 @@
         
         function [Flag,L_L] = fail_check(L_L,i)
             
-            if i>=3
-                
-                Logic.r_1 = sum(abs(L_L(i).Sol.Psi_k(2:end))) <= 1E-10;
-                
-            else
-                
-                Logic.r_1 = 0;
-                
-            end
+           Logic.r_1 = sum(abs(L_L(i).Sol.Psi_k(2:end)).^2) <= 1E-9;
             
             Logic.r_2  = ~(L_L(i).Par.top_boundary >= x) ;            
             Logic.r_4  = ~(L_L(i).Par.bot_boundary <= x);

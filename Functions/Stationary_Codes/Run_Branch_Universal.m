@@ -1,4 +1,4 @@
-function Stat = Run_Branch_Universal(Stat,N_mode)
+function Stat = Run_Branch_Universal(Stat)
            
     x_0             =  set_up(Stat);  
         
