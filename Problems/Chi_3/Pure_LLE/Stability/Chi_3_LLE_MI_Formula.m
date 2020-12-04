@@ -1,7 +1,7 @@
-function CW = Chi_3_LLE_MI_Formula(CW,N)
+function CW = Chi_3_LLE_MI_Formula(CW)
     
-    CW = CW.Met.Norm(CW,N);    
-    ome_rev              = zeros(1,N);
+    CW = CW.Met.Norm(CW);    
+    ome_rev              = zeros(1,CW.Space.N);
     ome_rev(2:end/2)     = fliplr(CW.In.omega_int(end/2+2:end));
     ome_rev(end/2+3:end) = fliplr(CW.In.omega_int(2:end/2-1));
     ome_rev(1)           = CW.In.omega_int(1);

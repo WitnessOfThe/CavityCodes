@@ -3,14 +3,14 @@ function L_L = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(L_L)
     L_L.CW.In.delta                 = L_L.Stat.In.delta;
     L_L.CW.In.P                     = L_L.Stat.In.P;
     
-    L_L.Stat                        = L_L.CW.Met.Norm(L_L.Stat,L_L.Stat.In.N_mode);    
-    L_L.CW                          = L_L.CW.Met.Norm(L_L.CW,L_L.CW.In.N_mode);    
+    L_L.Stat                        = L_L.CW.Met.Norm(L_L.Stat);    
+    L_L.CW                          = L_L.CW.Met.Norm(L_L.CW);    
     
     
-    L_L.CW                          = MI(L_L.CW,L_L.CW.In.N_mode);
+    L_L.CW                          = MI(L_L.CW);
     L_L.CW.In.g                     = L_L.CW.Sol.g(L_L.Stat.Par.CW_num)*L_L.Stat.Eq.norm;
     
-    L_L.CW                          = L_L.CW.Met.Mi_Formula(L_L.CW,L_L.CW.In.N_mode); 
+    L_L.CW                          = L_L.CW.Met.Mi_Formula(L_L.CW); 
     
     
     

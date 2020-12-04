@@ -25,8 +25,9 @@ function L_L = Chi_3_LLE_Normalization(L_L)
         L_L.In.Fin_D           = L_L.In.D(2)/L_L.In.kappa;
         
         L_L.In.H            = sqrt(L_L.In.eta*L_L.In.Finess*L_L.In.P/pi);
-        L_L.In.W_Star       = L_L.In.P/L_L.In.H^2;
-        L_L.In.W_WStar      = L_L.In.P/L_L.In.W_Star;
+        L_L.In.W            = pi/(L_L.In.eta*L_L.In.Finess)*L_L.In.H^2;
+        L_L.In.W_Star        = pi/(L_L.In.eta*L_L.In.Finess)*L_L.In.kappa/L_L.In.gamma;
+        L_L.In.W_WStar      = L_L.In.W/ L_L.In.W_Star;
         
         if L_L.In.kappa ~= 0
             

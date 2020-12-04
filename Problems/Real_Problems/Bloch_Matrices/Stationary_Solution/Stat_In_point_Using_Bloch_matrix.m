@@ -10,16 +10,16 @@
 
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.delta   = 10*CaF.Stat.In.kappa;
-    CaF.Stat.In.range   = 2^4;
-    CaF.Stat.In.mu_bl   = 8;   
-    CaF.Stat.Par.CW_num = 2;
+    CaF.Stat.In.delta   = 0.9*CaF.Stat.In.kappa;
+    CaF.Stat.In.range   = 2^6;
+    CaF.Stat.In.mu_bl   = 1;   
+    CaF.Stat.Par.CW_num = 1 ;
     
-    W_WStar             = 3;
-    CaF.Stat.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa);
+    W_WStar             = 0.6;
+    CaF.Stat.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
     
     CaF.CW.In           = CaF.Stat.In;
-    CaF.Stat.In.N_mode  = 2^5;
+    CaF.Stat.In.N_mode  = 2^7;
     CaF.CW.In.N_mode    = 2^8;  
     
 %% Stationary Coefficeints
@@ -34,7 +34,7 @@
     CaF.Stat.Par.Stability            = 'No';
     CaF.Stat.Par.variable             = 'delta';  
     CaF.Stat.Par.first_step           = 1; %min =1E-4/3
-    CaF.Stat.Par.Newton_iter          = 50;      
+    CaF.Stat.Par.Newton_iter          = 100;      
     CaF.Stat.Par.Newton_tol           = 1E-15;  
     CaF.Stat.Par.i_max                = 200;
     CaF.Stat.Par.fsolveoptions        = optimoptions('fsolve','CheckGradients',...
@@ -60,3 +60,4 @@
        ,4,2, 'UniformPlots', true, 'Height', 14, 'Width', 18,'Labels',false);
     
 %%
+

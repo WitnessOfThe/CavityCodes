@@ -18,7 +18,7 @@
                 
             end
                         
-            x_step = L_L.Par.step_inc*x_step;
+            x_step = L_L.Par.step_inc+x_step;
             x     = sg*x_step + x;
                         
             Slv_0 = Slv;

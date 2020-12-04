@@ -1,6 +1,6 @@
-function CW = MI(CW,N_mode)
+function CW = MI(CW)
     
-    CW  = CW.Met.Solve(CW,N_mode);
+    CW  = CW.Met.Solve(CW);
 
     Value = zeros(CW.Space.N,2);
     
