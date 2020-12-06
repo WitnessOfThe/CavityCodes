@@ -24,7 +24,7 @@ function [tt_1,tt_2] = Plot_LLE_Bloch_Static_Multiple_Branches(CW,Stat,Bran,Flag
             G_Mode_P_0(i_b,i_d) = abs(Bran(i_b).Stat(i_d).Sol.Psi_k(1)).^2*Bran(i_b).Stat(i_d).In.gamma/CW.In.kappa;
             G_Mode_P_U(i_b,i_d) = abs(Bran(i_b).Stat(i_d).Sol.Psi_k(2)).^2*Bran(i_b).Stat(i_d).In.gamma/CW.In.kappa;
             G_Mode_P_2U(i_b,i_d) = abs(Bran(i_b).Stat(i_d).Sol.Psi_k(3)).^2*Bran(i_b).Stat(i_d).In.gamma/CW.In.kappa;
-            Power_Sol(i_b,i_d)  = sum(abs(Bran(i_b).Stat(i_d).Sol.Psi_k(:)).^2)*Bran(i_b).Stat(i_d).In.mu_bl  ; 
+            Power_Sol(i_b,i_d)  = sum(abs(Bran(i_b).Stat(i_d).Sol.Psi_k(:)).^2)*Bran(i_b).Stat(i_d).In.gamma/Bran(i_b).Stat(i_d).In.kappa ; 
             delta_v_U (i_b,i_d) = Bran(i_b).Stat(i_d).Eq.delta;  
             
         
@@ -107,8 +107,8 @@ function [tt_1,tt_2] = Plot_LLE_Bloch_Static_Multiple_Branches(CW,Stat,Bran,Flag
     end    
     
                     
-    Point_Detla =    Stat.In.delta*ones(1,10)/Stat.In.kappa; 
-    Height_Re   =   linspace(min(min([G_Mode_P_U,G_Mode_P_U])),max(max([G_Mode_P_U,G_Mode_P_U]))*1.1,10); 
+    Point_Detla   =   Stat.In.delta*ones(1,10)/Stat.In.kappa; 
+    Height_Re     =   linspace(min(min([G_Mode_P_U,G_Mode_P_U])),max(max([G_Mode_P_U,G_Mode_P_U]))*1.1,10); 
     Height_Re_2   =   linspace(min(min(Power_Sol)),max(max(Power_Sol))*1.1,10); 
     
     tt_1 = tt_1.addData(Point_Detla,Height_Re,'Marker','.','LineStyle','-','Color','m');

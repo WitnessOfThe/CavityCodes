@@ -10,6 +10,7 @@ function  Stat =  Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3(Res,Index_Start)
             Delta_Start       =      [-3,-2.34,3,10]*Res.Stat.In.kappa;
             CW_Num            =      [3,3,1,2];
             Sol_Index         =      [1,1,2,4];
+            
         case 5
 
             Power_Start       =      [1.5080e-05, 1.1058e-05,  4.1888e-05, 8.3776e-05 ];
@@ -21,9 +22,9 @@ function  Stat =  Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3(Res,Index_Start)
         case 6
 
             Power_Start       =      [2.5133e-05,2.5133e-05,1.1729e-06 ,8.3776e-05 ];
-            Delta_Start       =      [-7.635,-7.635,6.2,12]*Res.Stat.In.kappa;
+            Delta_Start       =      [-7.635,-7.635,6.2,11.2]*Res.Stat.In.kappa;
             CW_Num            =      [3,3,1,2];
-            Sol_Index         =      [1,3,1,2];
+            Sol_Index         =      [1,3,1,4];
 
         case 7
 
@@ -34,10 +35,10 @@ function  Stat =  Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3(Res,Index_Start)
 
         case 8
 
-            Power_Start       =      [8.2100e-05,8.2100e-05,2.5133e-06,2.5133e-06];
-            Delta_Start       =      [-14.65,-14.65,10,10]*Res.Stat.In.kappa;
+            Power_Start       =      [8.2100e-05,8.9975e-05,2.5133e-06,2.5133e-06];
+            Delta_Start       =      [-14.65,-14.4,10,10]*Res.Stat.In.kappa;
             CW_Num            =      [3,3,1,2];
-            Sol_Index         =      [1,2,1,1];
+            Sol_Index         =      [1,1,1,1];
 
         case 9
 
@@ -56,12 +57,19 @@ function  Stat =  Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3(Res,Index_Start)
             Power_Start       =      0.001;
             Delta_Start       =  -23.11*Res.Stat.In.kappa;
 
+        case 14
+            
+            Power_Start       =   [ 0.,0.000,8.3776e-05,8.3776e-05];
+            Delta_Start       =   [0,0,27.7401,27.743]*Res.Stat.In.kappa;
+            CW_Num            =   [0,0,1,2];
+            Sol_Index         =   [0,0,2,3];
+            
         case 16
 
-            Power_Start       =      [8.3776e-05,8.3776e-05];
-            Delta_Start       =      [35.54,35.54]*Res.Stat.In.kappa;
-            CW_Num            =      [1,2];
-            Sol_Index         =      [1,3];
+            Power_Start       =      [0,0,8.3776e-05,8.3776e-05];
+            Delta_Start       =      [0,0,34.84,34.83]*Res.Stat.In.kappa;
+            CW_Num            =      [0,0,2,2];
+            Sol_Index         =      [0,0,2,1];
             
         case 34
 
@@ -83,6 +91,7 @@ function  Stat =  Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3(Res,Index_Start)
     
     ii =0;
     for i = Index_Start
+        
         ii = ii+1;
         Res_t                 = Res;
         Res_t.Stat.Par.CW_num = CW_Num(i);

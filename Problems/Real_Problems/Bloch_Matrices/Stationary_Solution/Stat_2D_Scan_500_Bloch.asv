@@ -16,19 +16,19 @@
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
     CaF.Stat.In.P       = 0.5;
-    CaF.Stat.In.delta   = -280*CaF.Stat.In.kappa;   
+    CaF.Stat.In.delta   = -20*CaF.Stat.In.kappa;   
     CaF.Stat.In.range   = 2^3;
     CaF.CW.In           = CaF.Stat.In;
     
     N_Power_Res         = 36*4;
-
-    Power_Lim           = [0.1,1];     
-    Delta_Lim           = [-305.367,-200];
+    W_WStar             = 500;
+    Power_Lim           = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;     
+    Delta_Lim           = [-7.5,-7.5,12.81,12.81];
     N_Delta_Res         = 150;
     
 %%
     
-     CaF.Stat.In.mu_bl   = 35;
+     CaF.Stat.In.mu_bl   = 7;
     
 %% Stationary Coefficeints
 
@@ -39,8 +39,8 @@
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
     CaF.Stat.Par.first_step       = 0.1; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.025;
-    CaF.Stat.Par.step_inc         =     1;
-    CaF.Stat.Par.step_dec         =   0.5;
+    CaF.Stat.Par.step_inc         = 1;
+    CaF.Stat.Par.step_dec         = 0.5;
     
 %%%%%%%%%%%%%%%%%%%%%%
 
@@ -50,8 +50,8 @@
     CaF.Stat.Par.CW_num           = 3;
     
 %%
-    CaF_1D_Upper = Chi3_Stat_Get_Upper_Branch_Turing_2D(CaF,CaF.Stat.In.mu_bl,N_mode,Power_Lim,Delta_Lim,N_Power_Res,N_Delta_Res);
-    
+
+    CaF_2D_Upper = Chi3_Stat_Get_Upper_Branch_Turing_2D(CaF,CaF.Stat.In.mu_bl,N_mode,Power_Lim,Delta_Lim,N_Power_Res,N_Delta_Res);
 %%
     ind1 = 5;
     ind2 = 21;
@@ -61,7 +61,6 @@
     [p_dot_3,p_dot_4,p_dot_5,p_dot_6] = Plot_Static_Field_Stability(CaF_1D_Upper(ind1).Stat(ind2),0,mu);
     
     figure('Name','Fields_Spectrums');
-    
     CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_dot_1,p_dot_2,p_dot_3,p_dot_4,p_dot_5,p_dot_6],3,4, 'UniformPlots', true, 'Height', 15, 'Width',40,'Labels',false);
     
 %%
