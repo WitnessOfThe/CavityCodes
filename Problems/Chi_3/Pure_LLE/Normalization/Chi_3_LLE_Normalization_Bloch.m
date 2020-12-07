@@ -3,7 +3,7 @@ function L_L = Chi_3_LLE_Normalization_Bloch(L_L,N)
 %% Define Space 
 
         Fundamental_Constants;
-        
+        N = L_L.In.N_mode;
         L_L.Space      = Define_Space_Cavity(N,2*pi/L_L.In.mu_bl);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

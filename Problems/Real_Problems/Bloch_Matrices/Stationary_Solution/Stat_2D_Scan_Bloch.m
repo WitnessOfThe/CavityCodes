@@ -20,7 +20,7 @@
     CaF.Stat.In.range   = 2^3;
     CaF.CW.In           = CaF.Stat.In;
     
-    N_Power_Res         = 36*4;
+    N_Power_Res         = 36;
 
     Power_Lim           = [0.1,1];     
     Delta_Lim           = [-305.367,-200];

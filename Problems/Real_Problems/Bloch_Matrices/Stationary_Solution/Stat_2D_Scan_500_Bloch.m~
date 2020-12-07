@@ -18,7 +18,7 @@
     CaF.Stat.In.delta   = 70*CaF.Stat.In.kappa;
     
     N_Power_Res         = 36;
-    W_WStar             = [255,700];
+    W_WStar             = 500;
     Power_Lim           = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;     
     
     Delta_Lim           = [-7.5,-7.5,12.81,12.81];
@@ -37,7 +37,7 @@
          
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
     CaF.Stat.Par.first_step       = 0.5; % step for delta measured in delta/kappa
-    CaF.Stat.Par.step_tol         = 0.04;
+    CaF.Stat.Par.step_tol         = 0.01;
     CaF.Stat.Par.step_inc         = 0;
     CaF.Stat.Par.step_dec         = 0.1;
 
@@ -55,7 +55,7 @@
     
     Index    = 1;
     
-    CaF_2D_Upper        = Chi3_Stat_Get_Upper_Branch_Turing_2D(CaF,Power_Lim,Delta_Lim(1),N_Power_Res,N_Delta_Res);
+    CaF_2D_Upper        = Chi3_Stat_Get_Upper_Branch_Turing_2D(CaF,Power_Lim(1),Delta_Lim(1),N_Power_Res,N_Delta_Res);
     
 %%
     ind1 = 5;

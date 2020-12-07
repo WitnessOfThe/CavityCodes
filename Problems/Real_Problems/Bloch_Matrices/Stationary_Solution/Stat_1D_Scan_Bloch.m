@@ -17,8 +17,6 @@
    
     CaF.Stat.In.delta   = -14*CaF.Stat.In.kappa;
     
-   
-        
 %%
     
 %    CaF.Stat.In.mu_bl   = 16;
@@ -41,20 +39,20 @@
     CaF.Stat.Met.Newton           = @fsolve;%'fsolve'
          
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.2; % step for delta measured in delta/kappa
+    CaF.Stat.Par.first_step       = 0.05; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.01;
-    CaF.Stat.Par.step_inc         = 0.;
+    CaF.Stat.Par.step_inc         = 0.01;
     CaF.Stat.Par.step_dec         = 0.8;
 
     CaF.Stat.Par.bot_boundary     = -40; % bottom boundary for delta to search
-    CaF.Stat.Par.top_boundary     =  50; % top boundary for delta to search
+    CaF.Stat.Par.top_boundary     = 3000; % top boundary for delta to search
 
     CaF.Stat.Par.Stability        = 'Yes';
-    CaF.Stat.Par.Newton_iter      = 20;      
+    CaF.Stat.Par.Newton_iter      = 100;      
     CaF.Stat.Par.Newton_tol       = 1E-9;  
     CaF.Stat.Par.i_max            = 4000;
       CaF.Stat.Par.fsolveoptions     = optimoptions('fsolve','CheckGradients',...
-    false,'Display','none','UseParallel',true,'SpecifyObjectiveGradient',true,...
+    false,'Display','iter','UseParallel',true,'SpecifyObjectiveGradient',true,...
     'Algorithm','trust-region-dogleg','FunValCheck','on',...
     'MaxIterations',CaF.Stat.Par.Newton_iter,'StepTolerance',1E-20,'OptimalityTolerance',1E-25);
   
@@ -63,10 +61,10 @@
     W_WStar             = 500;
     CaF.Stat.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
     CaF.CW.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
-    CaF.Stat.In.mu_bl   = 8;
-   Delta_Start         = [-14,-14.65,16,16]*CaF.Stat.In.kappa;%8
+   CaF.Stat.In.mu_bl   = 8;
+   Delta_Start         = [-14,-14,16,16]*CaF.Stat.In.kappa;%8
    Index_Start         = [1,2,3,4];    
-   [CaF_Branches_8_12] = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
+   [CaF_Branches_8] = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
     CaF.Stat.In.mu_bl   = 7;
     Delta_Start         = [-6.3,-6.3,10,13]*CaF.Stat.In.kappa;%8
     Index_Start         = [1,2,3,4];  
@@ -108,17 +106,17 @@
     CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_dot_1,p_dot_2,tt_1,tt_2,tt_3,tt_4,tt_5,tt_6,tt_7,tt_8,tt_9,tt_10,tt_12,tt_13,tt_14,tt_15],5,4, 'UniformPlots', true, 'Height', 20, 'Width',40,'Labels',false);
     
 %%
-ind_br = 3;
+ind_br = 2;
 ind_stat = 150;
 figure;
-Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches_8(ind_br).Stat(ind_stat),CaF_Branches_8(ind_br),1);
+Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches_7(ind_br).Stat(ind_stat),CaF_Branches_7(ind_br),1);
 %%
-ind_stat = 170;
+ind_stat = 150;
 Plot_Static_Field_Spectrums(CaF_Branches_8(ind_br).Stat(ind_stat),1);
 Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches_8(ind_br).Stat(ind_stat),1);
 %%
 Plot_Bloch_Static_Branch_Save_Points(CaF_Branches_8(1),20);
 %%
-    Path = 'C:\Users\dp710\Documents\Data_Storage\Static\Scan_from_500\mu=6\point_4\';
-    Plot_Bloch_Static_Branch_Save_Points(CaF_Branches_6(1),12*4,Path);
+    Path = 'C:\Users\dp710\Documents\Data_Storage\Static\Scan_from_500\mu=8\point_4\';
+    Plot_Bloch_Static_Branch_Save_Points(CaF_Branches_8(4),12*4,Path);
     

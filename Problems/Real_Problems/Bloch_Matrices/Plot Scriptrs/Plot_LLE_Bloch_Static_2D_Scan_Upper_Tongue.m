@@ -1,13 +1,19 @@
 function Plot_LLE_Bloch_Static_2D_Scan_Upper_Tongue(Res,Upper,mu,Flag)
 %%
-    
-    Mode_U_mu = NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max)+1i*NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max);    
-    Num_unstable_U = NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
-    delta_U   =  NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max);    
-    Power_U   =  NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
-    G_U   =  NaN(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
-    Crossing_trag = zeros(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
-    thresholds_power= zeros(size(Upper,2),2*Upper(1).Stat(1).Par.i_max); 
+        for i = 1:size(Upper,2)
+        
+            ind_max(i) = size(Upper(i).Stat,2);
+        
+        end
+i_max=     max(ind_max);
+
+    Mode_U_mu = NaN(size(Upper,2),i_max)+1i*NaN(size(Upper,2),i_max);    
+    Num_unstable_U = NaN(size(Upper,2),i_max); 
+    delta_U   =  NaN(size(Upper,2),i_max);    
+    Power_U   =  NaN(size(Upper,2),i_max); 
+    G_U   =  NaN(size(Upper,2),i_max); 
+    Crossing_trag = zeros(size(Upper,2),i_max); 
+    thresholds_power= zeros(size(Upper,2),i_max); 
        
 %%    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
@@ -17,14 +23,14 @@ function Plot_LLE_Bloch_Static_2D_Scan_Upper_Tongue(Res,Upper,mu,Flag)
       
       for i_d = 1:size(Upper(i_p).Stat,2)
           
-          Mode_U_mu(i_p,i_d) = Upper(i_p).Stat(i_d).Sol.Psi_k(1);
+          Mode_U_mu(i_p,i_d) = Upper(i_p).Stat(i_d).Sol.Psi_k(2);
           delta_U(i_p,i_d)   = Upper(i_p).Stat(i_d).In.delta/Upper(i_p).Stat(i_d).In.kappa;
           Power_U(i_p,i_d)   = Upper(i_p).Stat(i_d).In.P;
           
           for i_s = 1:size(Upper(i_p).Stat(i_d).Stab,2)
               
               Lambda_vec(1+(i_s-1)* Upper(i_p).Stat(i_d).Space.N*2:(i_s)* Upper(i_p).Stat(i_d).Space.N*2) =  Upper(i_p).Stat(i_d).Stab(i_s).E_values;
-%              nu_vec(1+(i_s-1)* Upper(i_p).Stat(i_d).Space.N*2:(i_s)* Upper(i_p).Stat(i_d).Space.N*2)     =    Upper(i_p).Stat(i_d).Stab(i_s).nu*ones(1,Upper(i_p).Stat(i_d).Space.N*2);
+%             nu_vec(1+(i_s-1)* Upper(i_p).Stat(i_d).Space.N*2:(i_s)* Upper(i_p).Stat(i_d).Space.N*2)     =    Upper(i_p).Stat(i_d).Stab(i_s).nu*ones(1,Upper(i_p).Stat(i_d).Space.N*2);
           end
           
           [~,re_max_ind]          = maxk(real(Lambda_vec),1);
@@ -34,7 +40,7 @@ function Plot_LLE_Bloch_Static_2D_Scan_Upper_Tongue(Res,Upper,mu,Flag)
           Res.CW.In.delta    = Upper(i_p).Stat(i_d).In.delta;
           Res.CW.In.P        = Upper(i_p).Stat(i_d).In.P;
           
-          Res.CW       = Res.CW.Met.Solve(Res.CW,Upper(i_p).Stat(i_d).Space.N);          
+          Res.CW       = Res.CW.Met.Solve(Res.CW);          
           [~,ind]       = max(abs(Res.CW.Sol.Psi));
           G_U(i_p,i_d)  = Res.CW.Sol.g(ind)*Res.CW.Eq.norm / Upper(i_p).Stat(i_d).In.kappa;
           
@@ -50,7 +56,7 @@ function Plot_LLE_Bloch_Static_2D_Scan_Upper_Tongue(Res,Upper,mu,Flag)
           Res.CW.In.delta    =  delta_G(i_d)*Res.Stat.In.kappa;
           Res.CW.In.P        = 0.1;
           
-          Res.CW       = Chi_3_LLE_MI_Boundary(Res.CW,2^8);
+          Res.CW       = Chi_3_LLE_MI_Boundary(Res.CW);
         
           G_MI_Up_1(i_d,:)        = Res.CW.In.g_MI(1,mu-2:mu+2)/Res.Stat.In.kappa;
           G_MI_Up_2(i_d,:)        = Res.CW.In.g_MI(2,mu-2:mu+2)/Res.Stat.In.kappa;
@@ -117,6 +123,7 @@ end
 % Mode_L_mu(isnan( Mode_L_mu)) = 0;
 % Mode_U_mu(isnan( Mode_U_mu)) = 0;
 
+    tt_1 = proPlot(delta_U,Power_U,abs(Mode_U_mu).^2,'PlotType','pcolor');
   
     tt_2 = proPlot(delta_U,Power_U,Num_unstable_U,'PlotType','pcolor');
     
@@ -138,6 +145,9 @@ end
     end
    
 %%
+    tt_1 = tt_1.changeAxisOptions('XLabelText','$\delta/\kappa$',...
+                    'YLabelText','$\mathcal{W}$ [W]',...  
+                    'FontSize',13);
     tt_2 = tt_2.changeAxisOptions('XLabelText','$\delta/\kappa$',...
                     'YLabelText','$\mathcal{W}$ [W]',...  
                     'FontSize',13,'XLim',[min(delta_G),max(delta_G)]);
@@ -153,7 +163,7 @@ end
     if Flag
         
         figure('Name','Fields_Spectrums');
-        CF = conFigure([tt_2,tt_3,tt_4],1,3, 'UniformPlots', true, 'Height', 20, 'Width', 20,'Labels',false);
+        CF = conFigure([tt_1,tt_3,tt_4],1,3, 'UniformPlots', true, 'Height', 20, 'Width', 20,'Labels',false);
         
     end
 
