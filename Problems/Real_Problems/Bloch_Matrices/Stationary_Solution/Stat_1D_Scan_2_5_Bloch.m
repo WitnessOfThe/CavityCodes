@@ -12,7 +12,7 @@
 
     CaF.Stat.In         = Params_CaF;    
     CaF.Stat.In.range   = 2^6;
-    CaF.Stat.In.N_mode  = 2^7;
+    CaF.Stat.In.N_mode  = 2^8;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
     CaF.Stat.In.delta   = 70*CaF.Stat.In.kappa;
     
@@ -75,6 +75,9 @@
     CaF_Branches        = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
 
 %%    
+    CaF.Stat.Par.first_step       = 0.01; % step for delta measured in delta/kappa
+    CaF.Stat.Par.step_tol         = 0.001;
+
     CaF.Stat.In.mu_bl   = 2;    
     Index_Start         = [1,2];%1,
     Delta_Start         = [0,1.7]*CaF.Stat.In.kappa;%9.7,   
@@ -206,7 +209,7 @@ Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),1);
 
     Path = 'C:\Users\dp710\Documents\Data_Storage\Static\Scan_from_2.5\mu=2\branch1\';
     tic
-    Plot_Bloch_Static_Branch_Save_Points(CaF_Branches,100,Path,1);
+    Plot_Bloch_Static_Branch_Save_Points(CaF_Branches,50,Path,1);
     toc
 %%
 t = tiledlayout(2,2,'TileSpacing','none','Padding','none');

@@ -72,7 +72,9 @@ function [tt_1,tt_2] = Plot_LLE_Bloch_Static_Field_Stability(Stat,ax)
         stem(Stat.Space.k,10*log10(abs(Stat.Stab(i).E_vectors(1:Stat.Space.N,1)).^2),'Parent',ax(3+i),'BaseValue',Ampl_max-50,'Marker','none');
         stem(Stat.Space.k,10*log10(abs(Stat.Stab(i).E_vectors(Stat.Space.N+1:2*Stat.Space.N,1)).^2),'Parent',ax(3+i+NN),'BaseValue',Ampl_max-50,'Marker','none');
         [~,ind_k_max]= max(abs(Stat.Space.k(10*log10(abs(Stat.Stab(i).E_vectors(1:Stat.Space.N,1)).^2)> Ampl_max-50)));
-        
+        if size(ind_k_max,2) == 0
+            ind_k_max= 1;
+        end
         ax(3+i).YLim = [Ampl_max-50,Ampl_max+1];
         ax(3+i).XLim = [-abs(Stat.Space.k(ind_k_max))-2,abs(Stat.Space.k(ind_k_max))+2];
         

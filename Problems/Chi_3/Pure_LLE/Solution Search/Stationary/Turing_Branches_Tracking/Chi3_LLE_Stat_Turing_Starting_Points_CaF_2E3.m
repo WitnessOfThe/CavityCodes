@@ -34,7 +34,7 @@ function  Stat =  Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3(Res,Index_Start)
             
             Power_Start       =      [4.188790204786390e-07,4.188790204786390e-07];%[8.377580409572782e-05,8.377580409572782e-05,2.345722514680379e-06];
             Delta_Start       =      [0.18,1.85]*Res.Stat.In.kappa;%[9.7,17,3]*Res.Stat.In.kappa;
-            Function_start    =      {@fsolve,@fsolve};%{@Newton_Manual_bicgstab,@fsolve,@fsolve};
+            Function_start    =      {@Newton_Manual_bicgstab,@fsolve};%{@Newton_Manual_bicgstab,@fsolve,@fsolve};
             Pert_Amplitude    =      [0.1,0.1];
             
             CW_Num            =      [1,2];%[2,1,1];

@@ -17,9 +17,15 @@ function L_L = Chi_3_LLE_Normalization_Bloch(L_L,N)
                                                   L_L.In.D(i)/factorial(i);
            
        end
-       
-        L_L.In.omega_int = L_L.In.omega  - L_L.In.omega_p... 
-        - L_L.In.D(1)*L_L.Space.k;
+       L_L.In.omega_int = 0;
+       for i = 2:size(L_L.In.D,2)
+            
+           L_L.In.omega_int = L_L.In.omega_int+(L_L.Space.k).^i.*L_L.In.D(i)/factorial(i);
+           
+%           L_L.In.omega_int = L_L.In.omega  - L_L.In.omega_p... 
+ %           - L_L.In.D(1)*L_L.Space.k;
+    
+       end
     
         L_L.In.Finess          = L_L.In.D(1)/L_L.In.kappa;
         L_L.In.Fin_D           = L_L.In.D(2)/L_L.In.kappa;
@@ -49,8 +55,7 @@ function L_L = Chi_3_LLE_Normalization_Bloch(L_L,N)
         L_L.Eq.h            = 1/2*L_L.In.kappa*sqrt(L_L.In.Finess*L_L.In.P...
              /pi*L_L.In.eta)/coeff;
          
-        L_L.Eq.omega_j      =  (L_L.In.omega - L_L.In.omega_p... 
-        - L_L.In.D(1)*L_L.Space.k)/coeff - 1i*L_L.Eq.kappa/2;  
+        L_L.Eq.omega_j      =   L_L.In.omega_int/coeff- 1i*L_L.Eq.kappa/2;  
     
         L_L.Eq.gamma_Kerr   =  L_L.Eq.gamma_3*ones(1,L_L.Space.N);
         

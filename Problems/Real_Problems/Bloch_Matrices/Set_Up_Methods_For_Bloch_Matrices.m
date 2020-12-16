@@ -14,12 +14,12 @@ function L_L = Set_Up_Methods_For_Bloch_Matrices
     L_L.CW.Met.Mi_Formula         = @Chi_3_LLE_MI_Formula;
     L_L.CW.Met.Plot.Dressed_State = @Plot_LLE_Dressed_State;
     
-    L_L.Stat.Met.Equation              = @LLE_Full_Dispersion_Equation;
-    L_L.Stat.Met.Liniar_Decomposition  = @LLE_Full_Dispersion_Liniar_Decomposition;
-    L_L.Stat.Met.Preconditioner        = @LLE_Full_Dispersion_Predonditioner;
-%     L_L.Stat.Met.Equation              = @LLE_Zero_Velocity_Equation;
-%     L_L.Stat.Met.Liniar_Decomposition  = @LLE_Zero_Vel_Liniar_Decomposition;
-%     L_L.Stat.Met.Preconditioner        = @LLE_Zero_Velocity_Predonditioner;
+%    L_L.Stat.Met.Equation              = @LLE_Full_Dispersion_Equation;
+%    L_L.Stat.Met.Liniar_Decomposition  = @LLE_Full_Dispersion_Liniar_Decomposition;
+%    L_L.Stat.Met.Preconditioner        = @LLE_Full_Dispersion_Predonditioner;
+    L_L.Stat.Met.Equation              = @LLE_Zero_Velocity_Equation;
+    L_L.Stat.Met.Liniar_Decomposition  = @LLE_Zero_Vel_Liniar_Decomposition;
+    L_L.Stat.Met.Preconditioner        = @LLE_Zero_Velocity_Predonditioner;
     L_L.Stat.Met.Newton_Matrix         = @Chi3_LLE_Bloch_Stat_Newton_Matrix;
     
     L_L.Stat.Met.Prop_Gen              = @Chi3_LLE_Stat_Prop_Gen;

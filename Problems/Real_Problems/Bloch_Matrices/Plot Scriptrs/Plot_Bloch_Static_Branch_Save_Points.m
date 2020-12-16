@@ -10,7 +10,7 @@ function Plot_Bloch_Static_Branch_Save_Points(Branch,N_p,Path,ind_branch)
     end
     indexes =    1:index_step:N_B;
 %    indexes(size(Branch(ind_branch).Stat,2)) = size(Branch(ind_branch).Stat,2);
-    parfor i_for = 1:size(indexes,2)
+    for i_for = 53:size(indexes,2)
         
         h =  Create_fig_mu_23(Branch,ind_branch,indexes(i_for));        
         nn =letters(i_for+26*27);
