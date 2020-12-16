@@ -1,6 +1,6 @@
-function Plot_Bloch_Static_Branch_Save_Points(Branch,N_p,Path)
+function Plot_Bloch_Static_Branch_Save_Points(Branch,N_p,Path,ind_branch)
 
-    N_B = size(Branch.Stat,2);
+    N_B = size(Branch(ind_branch).Stat,2);
     index_step = floor(N_B/N_p);
     
     if ~exist(strcat(Path),'dir')
@@ -9,22 +9,92 @@ function Plot_Bloch_Static_Branch_Save_Points(Branch,N_p,Path)
         
     end
     indexes =    1:index_step:N_B;
-    parfor i = 1:N_p
-         i_j  = indexes(i);         
-    	[pb_1,pb_2]      = Plot_LLE_Bloch_Static_Multiple_Branches(Branch.CW,Branch(1).Stat(i_j),Branch,0);
-        [ps_1,ps_2,ps_3] = Plot_LLE_Bloch_Static_Branch_Stability(Branch.CW,Branch.Stat(i_j),Branch,0);
-        [point_1,point_2] = Plot_Static_Field_Spectrums(Branch.Stat(i_j),0);
-        [stp1,stp2,stp3] = Plot_LLE_Bloch_Static_Field_Stability(Branch.Stat(i_j),0);
+%    indexes(size(Branch(ind_branch).Stat,2)) = size(Branch(ind_branch).Stat,2);
+    parfor i_for = 1:size(indexes,2)
         
-        h = figure;        
-        CF = conFigure([pb_1,pb_2,ps_1,ps_2,ps_3,point_1,point_2,stp1,stp2,stp3],2,5, 'UniformPlots', true, 'Height',15, 'Width', 30,'Labels',false);
-        nn =letters(i+26*27);
-        print(gcf,strcat(Path,nn{1},'.png'),'-dpng','-r300');
+        h =  Create_fig_mu_23(Branch,ind_branch,indexes(i_for));        
+        nn =letters(i_for+26*27);
+        
+        savefig(h,strcat(Path,nn{1}));
+        print(h,strcat(Path,nn{1},'.png'),'-dpng','-r300');
         close(h)
     end
     
     
 end
+function h = Create_fig_mu_1(CaF_Branches,ind_branch,ind_stat)
+        h=    figure('Position',[0,0,1400,900],'Color',[1,1,1]);
+
+        Panel = tiledlayout(h,3,8,'TileSpacing','none','Padding','none');
+        ax(1) = nexttile(Panel,1,[1,2]);  
+        ax(2) = nexttile(Panel,3,[1,2]); 
+
+        ax(3) = nexttile(Panel,9,[1,1]);  
+        ax(4) = nexttile(Panel,10,[1,1]);  
+
+        ax(5) = nexttile(Panel,11,[1,2]);  
+        ax(6) = nexttile(Panel,17,[1,2]);  
+        ax(7) = nexttile(Panel,19,[1,2]);  
+
+        ax(8) = nexttile(Panel,13,[1,2]);  
+        ax(9) = nexttile(Panel,15,[1,2]);  
+        ax(10) = nexttile(Panel,21,[1,2]);  
+        ax(11) = nexttile(Panel,23,[1,2]);  
+
+        ax(12) = nexttile(Panel,5,[1,2]);  
+        ax(13) = nexttile(Panel,7,[1,2]);  
+        for i =1:size(ax,2)
+            hold(ax(i),'on');
+        end
+        ind_br   = ind_branch;
+
+        Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(ind_br).CW(1),CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(1:end),ax(1:2));
+        Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
+        Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches(ind_br).Stat(ind_stat),[ax(5:11)]);
+        Plot_LLE_Bloch_Static_Branch_Stability(CaF_Branches(ind_br).CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),ax(12:13));
+
+end
+function h = Create_fig_mu_23(CaF_Branches,ind_branch,ind_stat)
+        h= figure('Position',[0,0,1400,700],'Color',[1,1,1]);
+
+       Panel = tiledlayout(h,3,16,'TileSpacing','none','Padding','none');
+    ax(1) = nexttile(Panel,1,[1,4]);  
+    ax(2) = nexttile(Panel,5,[1,4]); 
+    
+    ax(3) = nexttile(Panel,17,[1,2]);  
+    ax(4) = nexttile(Panel,19,[1,2]);  
+   
+    ax(5) = nexttile(Panel,21,[1,4]);  
+    ax(6) = nexttile(Panel,33,[1,4]);  
+    ax(7) = nexttile(Panel,37,[1,4]);  
+    
+    ax(8) = nexttile(Panel,25,[1,2]);  
+    ax(9) = nexttile(Panel,27,[1,2]);  
+    ax(10) = nexttile(Panel,29,[1,2]);  
+    ax(11) = nexttile(Panel,31,[1,2]); 
+    
+    ax(12) = nexttile(Panel,41,[1,2]);  
+    ax(13) = nexttile(Panel,43,[1,2]);  
+    ax(14) = nexttile(Panel,45,[1,2]);  
+    ax(15) = nexttile(Panel,47,[1,2]);  
+
+    ax(16) = nexttile(Panel,9,[1,2]);  
+    ax(17) = nexttile(Panel,11,[1,2]);  
+    ax(18) = nexttile(Panel,13,[1,2]);  
+    ax(19) = nexttile(Panel,15,[1,2]);  
+    
+    for i =1:size(ax,2)
+        hold(ax(i),'on');
+    end
+        ind_br   = ind_branch;
+
+    Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(ind_br).CW(1),CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(1:end),ax(1:2));
+    Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
+    Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches(ind_br).Stat(ind_stat),[ax(5:15)]);
+    Plot_LLE_Bloch_Static_Branch_Stability(CaF_Branches(ind_br).CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),ax(16:19));
+
+end
+
 function lets = letters(nums)
 lets = arrayfun(@(n)num2char(n),nums,'UniformOutput',0);
 function s = num2char(d)

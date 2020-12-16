@@ -14,7 +14,6 @@
     CaF.Stat.In.range   = 2^6;
     CaF.Stat.In.N_mode  = 2^7;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-   
     CaF.Stat.In.delta   = 70*CaF.Stat.In.kappa;
     
  
@@ -41,42 +40,70 @@
     CaF.Stat.Met.Newton           = @fsolve;%'fsolve'
          
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.5; % step for delta measured in delta/kappa
+    CaF.Stat.Par.first_step       = 0.01; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.001;
-    CaF.Stat.Par.step_inc         = 0.25;
+    CaF.Stat.Par.step_inc         = 0.00;
     CaF.Stat.Par.step_dec         = 0.5;
 
     CaF.Stat.Par.bot_boundary     = -40; % bottom boundary for delta to search
     CaF.Stat.Par.top_boundary     =  602; % top boundary for delta to search
 
     CaF.Stat.Par.Stability        = 'Yes';
-    CaF.Stat.Par.Newton_iter      = 30;      
-    CaF.Stat.Par.Newton_tol       = 1E-10;  
-    CaF.Stat.Par.i_max            = 4000;
-    CaF.Stat.Par.fsolveoptions     = optimoptions('fsolve','CheckGradients',...
+    CaF.Stat.Par.Newton_iter          = 30;      
+    CaF.Stat.Par.Newton_tol           = 1E-10;  
+    CaF.Stat.Par.i_max                = 500;
+    CaF.Stat.Par.fsolveoptions        = optimoptions('fsolve','CheckGradients',...
     false,'Display','none','UseParallel',true,'SpecifyObjectiveGradient',true,...
     'Algorithm','trust-region-dogleg','FunValCheck','on',...
     'MaxIterations',1000,'StepTolerance',1E-20,'OptimalityTolerance',1E-25);
-  
+%  
 %%
     
-    W_WStar             = 500;
+%    W_WStar             = 2.25;
+    W_WStar             = 2.5;
     CaF.Stat.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
-    CaF.CW.In.P         = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
+    CaF.CW.In.P         = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma; 
+    CaF.Stat.In.mu_bl   = 4;    
+    Index_Start         = [1,2];%1,
+    Delta_Start         = [1.63,2.38]*CaF.Stat.In.kappa;%9.7,   
+    CaF_Branches        = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
     
-%%
+%%    
+    CaF.Stat.In.mu_bl   = 3;    
+    Index_Start         = [1,2];%1,
+    Delta_Start         = [0.18,1.85]*CaF.Stat.In.kappa;%9.7,   
+    CaF_Branches        = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
 
-    CaF.Stat.In.mu_bl   = 1;
-    Index_Start         = 1;%1,
-    Delta_Start         = 397*CaF.Stat.In.kappa;%9.7,   
-    CaF_Branches_4      = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
+%%    
+    CaF.Stat.In.mu_bl   = 2;    
+    Index_Start         = [1,2];%1,
+    Delta_Start         = [0,1.7]*CaF.Stat.In.kappa;%9.7,   
+    CaF_Branches        = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
+    
+
+%%    
+    CaF.Stat.In.mu_bl   = 1;    
+    Index_Start         = [1];%1,
+    Delta_Start         = [1.9]*CaF.Stat.In.kappa;%9.7,   
+    CaF_Branches        = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
+%%
+    CaF.Stat.In.mu_bl   = 1;    
+    Index_Start         = [1,2,3,4,5,6,7];%1,
+    Delta_Start         = [1.9,1.5,1.4,2.1,1.81,1.38,1.9]*CaF.Stat.In.kappa;%9.7,   
+    CaF_Branches        = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
+
+%%    
+    CaF.Stat.In.mu_bl   = 1;    
+    Index_Start         = 7;%1,
+    Delta_Start         = [ 1.9]*CaF.Stat.In.kappa;%9.7,   
+    CaF_Branches        = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
     
 %%
 
     CaF.Stat.In.mu_bl   = 3;
     Index_Start         = [1,2,3];%1,
     Delta_Start         = [0,14,10]*CaF.Stat.In.kappa;%9.7,   
-    CaF_Branches_4      = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
+    CaF_Branches      = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
 
     
 %%
@@ -103,7 +130,7 @@
 %    CaF.Stat.Par.step_tol         = 0.002;
     
     CaF.Stat.Par.first_step       = 0.5; % step for delta measured in delta/kappa
-    CaF.Stat.Par.step_tol         = 0.01;
+    CaF.Stat.Par.step_tol         = 0.001;
     Delta_Start         = [16,16]*CaF.Stat.In.kappa;%8
     Index_Start         = [3,4];
     [CaF_Branches_8_34] = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
@@ -146,8 +173,9 @@
    
 %%
     Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches(1).Stat(end-5),1);
+    
 %%
-    ind1 = 4;
+    ind1 = 5;
     [p_wh_1,p_wh_2,p_wh_3]           = Plot_LLE_Bloch_Static_Branch(CaF.CW,CaF_1D_Upper.Stat,CaF_1D_Lower.Stat,0,1,CaF.Stat.In.mu_bl,CaF_1D_Upper(1).Stat(ind1));
     [p_dot_1,p_dot_2]                = Plot_Static_Field_Spectrums(CaF_1D_Lower(1).Stat(1),0);
     [tt_1,tt_2,tt_3,tt_4,tt_5,tt_6,tt_7,tt_8,tt_9,tt_10,tt_12,tt_13,tt_14,tt_15] = Plot_LLE_Bloch_Static_Field_Stability(CaF_1D_Upper(1).Stat(ind1),0);
@@ -155,20 +183,106 @@
     figure('Name','Fields_Spectrums');
     CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_dot_1,p_dot_2,tt_1,tt_2,tt_3,tt_4,tt_5,tt_6,tt_7,tt_8,tt_9,tt_10,tt_12,tt_13,tt_14,tt_15],5,4, 'UniformPlots', true, 'Height', 20, 'Width',40,'Labels',false);
     
+    
+         
 %%
-ind_br   = 3;
-ind_stat = 140;
+
+Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(1).CW,CaF_Branches(1).Stat(1),CaF_Branches(2),1);
+
+%%
+ind_br   = 1;
+ind_stat = 1;
 figure;
-Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches_7(ind_br).Stat(ind_stat),CaF_Branches_7(ind_br),1);
+Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),1);
 
 %%  
-ind_br   = 3;
-ind_stat = 140;
-Plot_Static_Field_Spectrums(CaF_Branches_7(ind_br).Stat(ind_stat),1);
-Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches_7(ind_br).Stat(ind_stat),1);
+ind_br = 1;
+ind_stat = 58;
+Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),1);
+%Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches_4(ind_br).Stat(ind_stat),1);
 %%
     Plot_Bloch_Static_Branch_Save_Points(CaF_Branches_8(1),20);
 %%
-    Path = 'C:\Users\dp710\Documents\Data_Storage\Static\Scan_from_500\mu=6\point_4\';
-    Plot_Bloch_Static_Branch_Save_Points(CaF_Branches_6(1),12*4,Path);
+
+    Path = 'C:\Users\dp710\Documents\Data_Storage\Static\Scan_from_2.5\mu=2\branch1\';
+    tic
+    Plot_Bloch_Static_Branch_Save_Points(CaF_Branches,100,Path,1);
+    toc
+%%
+t = tiledlayout(2,2,'TileSpacing','none','Padding','none');
+[X,Y,Z] = peaks(20);
+surf(X,Y,Z,'Parent',ax(1));
+contour(X,Y,Z,'Parent',ax(2));
+imagesc(Z,'Parent',ax(3));
+plot3(X,Y,Z,'Parent',ax(4));
+%% for mu = 1
+    figure('Position',[0,0,1400,900],'Color',[1,1,1]);
+    Panel = tiledlayout(3,8,'TileSpacing','none','Padding','none');
+    ax(1) = nexttile(Panel,1,[1,2]);  
+    ax(2) = nexttile(Panel,3,[1,2]); 
     
+    ax(3) = nexttile(Panel,9,[1,1]);  
+    ax(4) = nexttile(Panel,10,[1,1]);  
+    
+    ax(5) = nexttile(Panel,11,[1,2]);  
+    ax(6) = nexttile(Panel,17,[1,2]);  
+    ax(7) = nexttile(Panel,19,[1,2]);  
+    
+    ax(8) = nexttile(Panel,13,[1,2]);  
+    ax(9) = nexttile(Panel,15,[1,2]);  
+    ax(10) = nexttile(Panel,21,[1,2]);  
+    ax(11) = nexttile(Panel,23,[1,2]);  
+
+    ax(12) = nexttile(Panel,5,[1,2]);  
+    ax(13) = nexttile(Panel,7,[1,2]);  
+    for i =1:size(ax,2)
+        hold(ax(i),'on');
+    end
+    ind_br   = 1;
+    ind_stat = 40;
+        
+    Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(ind_br).CW(1),CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(1:end),ax(1:2));
+    Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
+    Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches(ind_br).Stat(ind_stat),[ax(5:11)]);
+    Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),ax(12:13));
+
+%% for mu = 2,3
+    figure('Position',[0,0,1400,700],'Color',[1,1,1]);
+    Panel = tiledlayout(3,16,'TileSpacing','none','Padding','none');
+    ax(1) = nexttile(Panel,1,[1,4]);  
+    ax(2) = nexttile(Panel,5,[1,4]); 
+    
+    ax(3) = nexttile(Panel,17,[1,2]);  
+    ax(4) = nexttile(Panel,19,[1,2]);  
+   
+    ax(5) = nexttile(Panel,21,[1,4]);  
+    ax(6) = nexttile(Panel,33,[1,4]);  
+    ax(7) = nexttile(Panel,37,[1,4]);  
+    
+    ax(8) = nexttile(Panel,25,[1,2]);  
+    ax(9) = nexttile(Panel,27,[1,2]);  
+    ax(10) = nexttile(Panel,29,[1,2]);  
+    ax(11) = nexttile(Panel,31,[1,2]); 
+    
+    ax(12) = nexttile(Panel,41,[1,2]);  
+    ax(13) = nexttile(Panel,43,[1,2]);  
+    ax(14) = nexttile(Panel,45,[1,2]);  
+    ax(15) = nexttile(Panel,47,[1,2]);  
+
+    ax(16) = nexttile(Panel,9,[1,2]);  
+    ax(17) = nexttile(Panel,11,[1,2]);  
+    ax(18) = nexttile(Panel,13,[1,2]);  
+    ax(19) = nexttile(Panel,15,[1,2]);  
+    
+    for i =1:size(ax,2)
+        hold(ax(i),'on');
+    end
+    ind_br   = 1;
+    ind_stat = 40;
+        
+    Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(ind_br).CW(1),CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(1:end),ax(1:2));
+    Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
+    Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches(ind_br).Stat(ind_stat),[ax(5:15)]);
+    Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),ax(16:19));
+%%
+

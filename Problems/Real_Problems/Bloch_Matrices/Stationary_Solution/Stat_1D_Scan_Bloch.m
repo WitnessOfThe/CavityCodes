@@ -12,7 +12,7 @@
 
     CaF.Stat.In         = Params_CaF;    
     CaF.Stat.In.range   = 2^6;
-    CaF.Stat.In.N_mode  = 2^7;
+    CaF.Stat.In.N_mode  = 2^8;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
    
     CaF.Stat.In.delta   = -14*CaF.Stat.In.kappa;
@@ -25,7 +25,7 @@
   % Delta_Start         = [35.54,35.54]*CaF.Stat.In.kappa;%16   
   % Delta_Start         = [-14,-14,16,16]*CaF.Stat.In.kappa;%8
    % Delta_Start         = [-6.3,-6.3,10,13]*CaF.Stat.In.kappa;%7
-  %  Delta_Start         = [-6,10.63,12]*CaF.Stat.In.kappa;%6
+  %  Delta_Start             = [-6,10.63,12]*CaF.Stat.In.kappa;%6
 %    Delta_Start         = [-2,5.5,11.65]*CaF.Stat.In.kappa;%5
  %  Delta_Start         = [3]*CaF.Stat.In.kappa;%4
 %%
@@ -39,7 +39,7 @@
     CaF.Stat.Met.Newton           = @fsolve;%'fsolve'
          
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.05; % step for delta measured in delta/kappa
+    CaF.Stat.Par.first_step       = 1; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.01;
     CaF.Stat.Par.step_inc         = 0.01;
     CaF.Stat.Par.step_dec         = 0.8;
@@ -62,8 +62,8 @@
     CaF.Stat.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
     CaF.CW.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
    CaF.Stat.In.mu_bl   = 8;
-   Delta_Start         = [-14,-14,16,16]*CaF.Stat.In.kappa;%8
-   Index_Start         = [1,2,3,4];    
+   Delta_Start         = [16,16]*CaF.Stat.In.kappa;%8
+   Index_Start         = [3,4];    
    [CaF_Branches_8] = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
     CaF.Stat.In.mu_bl   = 7;
     Delta_Start         = [-6.3,-6.3,10,13]*CaF.Stat.In.kappa;%8
@@ -75,7 +75,7 @@
     CaF.Stat.In.mu_bl   = 5;
     Delta_Start         = [-2,5.5,11.65]*CaF.Stat.In.kappa;
     Index_Start         = [2,3,4];    
-    [CaF_Branches_5] = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
+    [CaF_Branches_5]    = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
     Index_Start         = [3,4];    
     CaF.Stat.In.mu_bl   = 4;
     Delta_Start         = [3,10]*CaF.Stat.In.kappa;
@@ -106,12 +106,12 @@
     CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_dot_1,p_dot_2,tt_1,tt_2,tt_3,tt_4,tt_5,tt_6,tt_7,tt_8,tt_9,tt_10,tt_12,tt_13,tt_14,tt_15],5,4, 'UniformPlots', true, 'Height', 20, 'Width',40,'Labels',false);
     
 %%
-ind_br = 2;
-ind_stat = 150;
+ind_br = 1;
+ind_stat = 200;
 figure;
-Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches_7(ind_br).Stat(ind_stat),CaF_Branches_7(ind_br),1);
+Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches_8(ind_br).Stat(ind_stat),CaF_Branches_8(ind_br),1);
 %%
-ind_stat = 150;
+ind_stat = 10;
 Plot_Static_Field_Spectrums(CaF_Branches_8(ind_br).Stat(ind_stat),1);
 Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches_8(ind_br).Stat(ind_stat),1);
 %%

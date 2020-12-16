@@ -1,6 +1,6 @@
 function Stab = LLE_Bloch_Full_Stability(Stat)
             
-    n = [-floor(Stat.In.mu_bl/2):1:floor(Stat.In.mu_bl/2)];
+    n = [0:1:floor(Stat.In.mu_bl/2)];
     
     for i = 1:size(n,2)
         
@@ -22,8 +22,9 @@ function Stab = LLE_Bloch_Full_Stability(Stat)
         [Stab(i).mum,Sort_I] = sort(Stab(i).mum,'ascend');
         
         Stab(i).In.n                  = n(i);
-        Stab(i).E_values              =-1i* diag(E_values_raw)*Stat.Eq.norm;
-        Stab(i).E_vectors             = E_vectors_raw(:,:);
+        Stab(i).E_values              = diag(E_values_raw)*Stat.Eq.norm;
+        [~,in_im]                     = maxk(real(Stab(i).E_values),1);
+        Stab(i).E_vectors             =E_vectors_raw(:,in_im);%;
         
         Stab(i).E_values      = Stab(i).E_values(Sort_I);        
         Stab(i).E_values(Stab(i).E_values == 0 + 1i*0) = NaN+1i*NaN;
@@ -31,7 +32,7 @@ function Stab = LLE_Bloch_Full_Stability(Stat)
             [~,ind_zero ] = min(abs(Stab(i).E_values ));
             Stab(i).E_values(ind_zero)      = 0;
         end
-        Stab(i).E_vectors     = Stab(i).E_vectors(:,Sort_I);
+     %   Stab(i).E_vectors     = Stab(i).E_vectors(:,Sort_I);
 
     end
 

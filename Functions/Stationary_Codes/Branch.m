@@ -93,13 +93,13 @@
         
         function [Flag,L_L] = fail_check(L_L,i)
             
-           Logic.r_1 = sum(abs(L_L(i).Sol.Psi_k(2:end)).^2) <= 1E-9;
+           Logic.r_1 = sum(abs(L_L(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
             
-            Logic.r_2  = ~(L_L(i).Par.top_boundary >= x) ;            
-            Logic.r_4  = ~(L_L(i).Par.bot_boundary <= x);
-            Logic.r_3  =  Exitflag == 0;
-            Logic.r_5  = max(abs(L_L(i).Sol.Psi_k)) - min(abs(L_L(i).Sol.Psi_k)) < 1E-10;
-            Logic.r_6  = i == L_L(i).Par.i_max;
+           Logic.r_2  = ~(L_L(i).Par.top_boundary >= x) ;            
+           Logic.r_4  = ~(L_L(i).Par.bot_boundary <= x);
+           Logic.r_3  =  Exitflag == 0;
+           Logic.r_5  = max(abs(L_L(i).Sol.Psi_k)) - min(abs(L_L(i).Sol.Psi_k)) < 1E-10;
+           Logic.r_6  = i == L_L(i).Par.i_max;
 %            Logic.r_7 = isequal(L_L.Par.variable,'delta') && L_L(i).Eq.delta <= 0;
  %           Logic.r_8 = isequal(L_L.Par.variable,'gamma') && L_L(i).Eq.gamma < 0;
             
