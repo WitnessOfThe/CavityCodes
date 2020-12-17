@@ -130,9 +130,9 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch_Stability(CW,Stat,Bran,
             Im = reshape(lambda_nu(i_k,i_d).Im,1,[]);
             Im(isnan(Im)) = [];
             Max_Im        = reshape(lambda_nu(i_k,i_d).Im_pos_max,1,[]);
-            plot(delta_v_U(i_d),Im,'Marker','.','LineStyle','none','Color',[0,0,1],'Parent',ax);
-            plot(delta_v_U(i_d),lambda_nu(i_k,i_d).Im_pos_Re,'Marker','.','LineStyle','none','Color',[1,0,0],'Parent',ax);
-            plot(delta_v_U(i_d),Max_Im,'Marker','.','LineStyle','none','Color',[0,1,0],'Parent',ax);
+%            plot(delta_v_U(i_d),Im,'Marker','.','LineStyle','none','Color',[0,0,1],'Parent',ax);
+ %           plot(delta_v_U(i_d),lambda_nu(i_k,i_d).Im_pos_Re,'Marker','.','LineStyle','none','Color',[1,0,0],'Parent',ax);
+  %          plot(delta_v_U(i_d),Max_Im,'Marker','.','LineStyle','none','Color',[0,1,0],'Parent',ax);
             
 %            tt_2(i_k) = tt_2(i_k).addData(delta_v_U(i_d),Im,'Marker','.','LineStyle','none','Color',[0,0,1]);
 %            tt_2(i_k) = tt_2(i_k).addData(delta_v_U(i_d),lambda_nu(i_k,i_d).Im_pos_Re,'Marker','.','LineStyle','none','Color',[1,0,0]);

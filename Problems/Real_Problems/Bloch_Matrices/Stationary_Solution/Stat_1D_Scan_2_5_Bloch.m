@@ -11,8 +11,8 @@
 
 
     CaF.Stat.In         = Params_CaF;    
-    CaF.Stat.In.range   = 2^6;
-    CaF.Stat.In.N_mode  = 2^8;
+    CaF.Stat.In.range   = 2^7;
+    CaF.Stat.In.N_mode  = 2^9;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
     CaF.Stat.In.delta   = 70*CaF.Stat.In.kappa;
     

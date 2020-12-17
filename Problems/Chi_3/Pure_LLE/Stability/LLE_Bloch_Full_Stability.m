@@ -28,10 +28,10 @@ function Stab = LLE_Bloch_Full_Stability(Stat)
         
         Stab(i).E_values      = Stab(i).E_values(Sort_I);        
         Stab(i).E_values(Stab(i).E_values == 0 + 1i*0) = NaN+1i*NaN;
-        if n(i) == 0
-            [~,ind_zero ] = min(abs(Stab(i).E_values ));
-            Stab(i).E_values(ind_zero)      = 0;
-        end
+  %      if n(i) == 0
+   %         [~,ind_zero ] = min(abs(Stab(i).E_values ));
+    %        Stab(i).E_values(ind_zero)      = 0;
+    %    end
      %   Stab(i).E_vectors     = Stab(i).E_vectors(:,Sort_I);
 
     end

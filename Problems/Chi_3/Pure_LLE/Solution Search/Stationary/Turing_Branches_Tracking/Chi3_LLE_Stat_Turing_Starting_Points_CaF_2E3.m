@@ -78,7 +78,7 @@ function  Stat =  Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3(Res,Index_Start)
             Delta_Start       =      [-11,-11,1,12.2]*Res.Stat.In.kappa;
             CW_Num            =      [3,3,1,2];
             Sol_Index         =      [1,2,1,1];
-            Function_start    =      {@fsolve,@fsolve,@fsolve,@fsolve};
+            Function_start    =      {@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab};
             Pert_Amplitude    =      [0.8,0.8,0.8,0.8];
 
         case 8

@@ -1,4 +1,4 @@
-function L_L = Chi_3_LLE_Normalization_Bloch(L_L,N)
+function L_L = Chi_3_LLE_Normalization_Bloch(L_L)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define Space 
 
@@ -52,8 +52,7 @@ function L_L = Chi_3_LLE_Normalization_Bloch(L_L,N)
         L_L.Eq.kappa        = L_L.In.kappa/coeff;
         L_L.Eq.gamma_3      = L_L.In.gamma/coeff;
         L_L.Eq.D            = L_L.In.D/coeff;
-        L_L.Eq.h            = 1/2*L_L.In.kappa*sqrt(L_L.In.Finess*L_L.In.P...
-             /pi*L_L.In.eta)/coeff;
+        L_L.Eq.h            = 1/2*L_L.In.kappa*sqrt( L_L.In.H )/coeff;%;*sqrt(L_L.In.gamma/L_L.In.kappa);%%;
          
         L_L.Eq.omega_j      =   L_L.In.omega_int/coeff- 1i*L_L.Eq.kappa/2;  
     

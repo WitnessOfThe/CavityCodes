@@ -11,8 +11,8 @@
 
 
     CaF.Stat.In         = Params_CaF;    
-    CaF.Stat.In.range   = 2^6;
-    CaF.Stat.In.N_mode  = 2^8;
+    CaF.Stat.In.range   = 2^7;
+    CaF.Stat.In.N_mode  = 2^9;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
    
     CaF.Stat.In.delta   = 70*CaF.Stat.In.kappa;
@@ -41,7 +41,7 @@
     CaF.Stat.Met.Newton           = @fsolve;%'fsolve'
          
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 2; % step for delta measured in delta/kappa
+    CaF.Stat.Par.first_step       = 5; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.001;
     CaF.Stat.Par.step_inc         = 0.25;
     CaF.Stat.Par.step_dec         = 0.5;
@@ -139,7 +139,7 @@
         
     end
     ind_br   = 1;
-    ind_stat = 40;
+    ind_stat = 20;
         
 %    Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(ind_br).CW(1),CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(1:end),ax(1:2));
  %   Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
@@ -155,24 +155,13 @@
     ax(3) = nexttile(Panel,9,[1,1]);  
     ax(4) = nexttile(Panel,10,[1,1]);  
     
-    ax(5) = nexttile(Panel,11,[1,2]);  
-    ax(6) = nexttile(Panel,17,[1,2]);  
-    ax(7) = nexttile(Panel,19,[1,2]);  
-    
-    ax(8) = nexttile(Panel,13,[1,2]);  
-    ax(9) = nexttile(Panel,15,[1,2]);  
-    ax(10) = nexttile(Panel,21,[1,2]);  
-    ax(11) = nexttile(Panel,23,[1,2]);  
-
-    ax(12) = nexttile(Panel,5,[1,2]);  
-    ax(13) = nexttile(Panel,7,[1,2]);  
     for i =1:size(ax,2)
         hold(ax(i),'on');
     end
     ind_br   = 1;
     ind_stat = 40;
         
-    Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(ind_br).CW(1),CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(1:end),ax(1:2));
-    Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
+    Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches_7(ind_br).CW(1),CaF_Branches_7(ind_br).Stat(ind_stat),CaF_Branches_7(1:end),ax(1:2));
+    Plot_Static_Field_Spectrums(CaF_Branches_7(ind_br).Stat(ind_stat),ax(3:4));   
     Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches(ind_br).Stat(ind_stat),[ax(5:11)]);
     Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),ax(12:13));

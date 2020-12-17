@@ -10,13 +10,13 @@
 
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
-    CaF.Stat.In.delta   = 1.8*CaF.Stat.In.kappa;
+    CaF.Stat.In.delta   = 2*CaF.Stat.In.kappa;
     CaF.Stat.In.range   = 2^6;
-    CaF.Stat.In.mu_bl   = 1;   
+    CaF.Stat.In.mu_bl   = 7;   
     CaF.Stat.Par.CW_num = 1;
-    CaF.Stat.Par.In.Rel_ampl = 0.45;
+    CaF.Stat.Par.In.Rel_ampl = 0.8;
     
-    W_WStar             = 2.5;
+    W_WStar             = 500;
     CaF.Stat.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
     
     CaF.CW.In           = CaF.Stat.In;
@@ -50,15 +50,22 @@
     CaF             = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(CaF);
     
  %%
- 
-  [tt_1_1,tt_1_2] =  Plot_Static_Field_Spectrums(CaF.Stat(1),0);
-  [tt_2_1,tt_2_2] =  Plot_Static_Field_Spectrums(CaF.Stat(2),0);
-  [tt_3_1,tt_3_2] =  Plot_Static_Field_Spectrums(CaF.Stat(3),0);
-  [tt_4_1,tt_4_2] =  Plot_Static_Field_Spectrums(CaF.Stat(4),0);
-  
-   figure;
-   CF = conFigure([tt_1_1,tt_1_2,tt_2_1,tt_2_2,tt_3_1,tt_3_2,tt_4_1,tt_4_2]...
-       ,4,2, 'UniformPlots', true, 'Height', 14, 'Width', 18,'Labels',false);
+  figure('Position',[0,0,1400,900],'Color',[1,1,1]);
+    Panel = tiledlayout(4,2,'TileSpacing','none','Padding','none');
     
+    ax(1) = nexttile(Panel,1,[1,1]);  
+    ax(2) = nexttile(Panel,2,[1,1]);    
+    ax(3) = nexttile(Panel,3,[1,1]);  
+    ax(4) = nexttile(Panel,4,[1,1]);  
+    ax(5) = nexttile(Panel,5,[1,1]);  
+    ax(6) = nexttile(Panel,6,[1,1]);    
+    ax(7) = nexttile(Panel,7,[1,1]);  
+    ax(8) = nexttile(Panel,8,[1,1]);  
+    
+       Plot_Static_Field_Spectrums(CaF(1).Stat(1),ax(1:2));   
+       Plot_Static_Field_Spectrums(CaF(1).Stat(2),ax(3:4));   
+       Plot_Static_Field_Spectrums(CaF(1).Stat(3),ax(5:6));   
+       Plot_Static_Field_Spectrums(CaF(1).Stat(4),ax(7:8));   
+
 %%
 

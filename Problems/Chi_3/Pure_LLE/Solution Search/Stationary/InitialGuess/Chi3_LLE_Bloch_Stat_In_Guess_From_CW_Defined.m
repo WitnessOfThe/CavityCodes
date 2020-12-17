@@ -42,7 +42,7 @@ function L_L = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(L_L)
         
         vel =   (imag(L_L.CW.Stab(L_L.Stat(i).Par.CW_num).Value(ind(2)))        - imag(L_L.CW.Stab(L_L.Stat(i).Par.CW_num).Value(ind(1))))/2/L_L.Stat(i).In.mu_bl/L_L.Stat(i).Space.N;
         
-        x0  = full([real(L_L.Stat(i).In.Psi_Start),imag(L_L.Stat(i).In.Psi_Start),0]*L_L.Stat(i).Space.N);
+        x0  = full([real(L_L.Stat(i).In.Psi_Start),imag(L_L.Stat(i).In.Psi_Start)]*L_L.Stat(i).Space.N);
     
         [x,eps_f,SolveFlag]         =    Newton_Switcher(x0,L_L.Stat(i));
         L_L.Stat(i).Sol.Flag        =    SolveFlag;
