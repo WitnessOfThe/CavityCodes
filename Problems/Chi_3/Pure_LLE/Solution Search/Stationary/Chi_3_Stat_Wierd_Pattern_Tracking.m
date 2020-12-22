@@ -5,7 +5,7 @@ function Stat =  Chi_3_Stat_Wierd_Pattern_Tracking(Stat,delta_vector,power_vecto
         Stat(i).In.delta = delta_vector(i);
         Stat(i).In.P     = power_vector(i);
         
-        Stat(i)     = Stat(i).Met.Norm(Stat(i),Stat(i).Space.N);    
+        Stat(i)     = Stat(i).Met.Norm(Stat(i));    
         switch func2str(Stat(i).Met.Equation)
             case   'LLE_Zero_Velocity_Equation'
                  x0                       =  Stat(i).Space.N*[real(Stat(i).In.Psi_Start),imag(Stat(i).In.Psi_Start)];        

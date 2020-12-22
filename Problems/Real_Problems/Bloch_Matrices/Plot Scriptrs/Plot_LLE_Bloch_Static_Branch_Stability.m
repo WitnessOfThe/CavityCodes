@@ -22,7 +22,7 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch_Stability(CW,Stat,Bran,
 
         i_b = 1;
         index_m = 1:Stat(1).Space.N*2;
-            Max_Re = -1;
+        Max_Re = -1;
         
         for i_d = 1: size(Bran(i_b).Stat,2)
         
@@ -33,7 +33,7 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch_Stability(CW,Stat,Bran,
                 m_matrix    (i,:) = Bran(i_b).Stat(i_d).Stab(i).mum(1,index_m)/Stat.In.mu_bl;
                 
                 temp_lambda                   = lambda_nu_mu(i,~isnan(lambda_nu_mu(i,:))); 
-                [lambda_nu(i,i_d).Re,i1,i2]   = uniquetol(real(temp_lambda ));
+                [lambda_nu(i,i_d).Re,i1,i2]   = uniquetol(real(temp_lambda ),1E-6);
                 
                 lambda_nu(i,i_d).m_Re         = m_matrix(i,i1);
                 
@@ -44,13 +44,13 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch_Stability(CW,Stat,Bran,
                 lambda_nu(i,i_d).Im_pos_max  = NaN(1);
                 
                 Un_Re_lam_pos               = real(temp_lambda) > 0;
-                Max_Im_pos_Re               = 5;
+                Max_Im_pos_Re               = 100;
                 
                 if sum(real(temp_lambda) > 0) > 0
                                         
-                        lambda_nu(i,i_d).Im_pos_Re  = uniquetol(imag(temp_lambda(Un_Re_lam_pos)));                          
+                        lambda_nu(i,i_d).Im_pos_Re  = uniquetol(imag(temp_lambda(Un_Re_lam_pos)),1E-6);                          
                         [~,ind_max]                 = max(lambda_nu(i,i_d).Re(Un_Re_lam ));                
-                        lambda_nu(i,i_d).Im_pos_max = uniquetol(imag(temp_lambda(1,i2 == Un_Re_lam(ind_max))));
+                        lambda_nu(i,i_d).Im_pos_max = uniquetol(imag(temp_lambda(1,i2 == Un_Re_lam(ind_max))),1E-6);
                         Max_Im_pos_Re = max(max(Max_Im_pos_Re,lambda_nu(i,i_d).Im_pos_Re));
     
                 end
@@ -95,8 +95,11 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch_Stability(CW,Stat,Bran,
 
 %            tt_1(i_k) = tt_1(i_k).addData(delta_v_U(i_d),lambda_nu(i_k,i_d).Re,'Marker','.','LineStyle','none','Color',[0,0,1]);
             plot(delta_v_U(i_d),lambda_nu(i_k,i_d).Re,'Marker','.','LineStyle','none','Color',[0,0,1],'Parent',ax);
-            if max(lambda_nu(i_k,i_d).Re) > 0
+            
+            if max(real(lambda_nu(i_k,i_d).Re)) > 0
+                
                 plot(delta_v_U(i_d),max(lambda_nu(i_k,i_d).Re),'Marker','.','LineStyle','none','Color',[0,1,0],'Parent',ax);
+                
             end        
         end
 
@@ -109,7 +112,6 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch_Stability(CW,Stat,Bran,
 %                             'YLabelText','Re[$\lambda^(k)_{m\mu}$]',...  
 %                             'FontSize',13,'XLim',[min(delta_v_U),max(delta_v_U)]);
          ax.XLabel.String = X_Text;
-         ax.YLabel.String = 'Re[$\lambda_{m\mu}^{(k)}$]';
          ax.YLabel.Interpreter = 'latex';
          ax.XLim        = [min(delta_v_U),max(delta_v_U)];
          ax.YLim        = [-abs( Max_Re)*1.1,abs( Max_Re)*1.1];
@@ -130,56 +132,36 @@ function [tt_1,tt_2,tt_3] = Plot_LLE_Bloch_Static_Branch_Stability(CW,Stat,Bran,
             Im = reshape(lambda_nu(i_k,i_d).Im,1,[]);
             Im(isnan(Im)) = [];
             Max_Im        = reshape(lambda_nu(i_k,i_d).Im_pos_max,1,[]);
-%            plot(delta_v_U(i_d),Im,'Marker','.','LineStyle','none','Color',[0,0,1],'Parent',ax);
- %           plot(delta_v_U(i_d),lambda_nu(i_k,i_d).Im_pos_Re,'Marker','.','LineStyle','none','Color',[1,0,0],'Parent',ax);
-  %          plot(delta_v_U(i_d),Max_Im,'Marker','.','LineStyle','none','Color',[0,1,0],'Parent',ax);
+           plot(delta_v_U(i_d),Im,'Marker','.','LineStyle','none','Color',[0,0,1],'Parent',ax);
+           plot(delta_v_U(i_d),lambda_nu(i_k,i_d).Im_pos_Re,'Marker','.','LineStyle','none','Color',[1,0,0],'Parent',ax);
+           plot(delta_v_U(i_d),Max_Im,'Marker','.','LineStyle','none','Color',[0,1,0],'Parent',ax);
             
-%            tt_2(i_k) = tt_2(i_k).addData(delta_v_U(i_d),Im,'Marker','.','LineStyle','none','Color',[0,0,1]);
-%            tt_2(i_k) = tt_2(i_k).addData(delta_v_U(i_d),lambda_nu(i_k,i_d).Im_pos_Re,'Marker','.','LineStyle','none','Color',[1,0,0]);
-%            tt_2(i_k) = tt_2(i_k).addData(delta_v_U(i_d),Max_Im,'Marker','.','LineStyle','none','Color',[0,1,0]);
+   %        tt_2(i_k) = tt_2(i_k).addData(delta_v_U(i_d),Im,'Marker','.','LineStyle','none','Color',[0,0,1]);
+   %        tt_2(i_k) = tt_2(i_k).addData(delta_v_U(i_d),lambda_nu(i_k,i_d).Im_pos_Re,'Marker','.','LineStyle','none','Color',[1,0,0]);
+    %       tt_2(i_k) = tt_2(i_k).addData(delta_v_U(i_d),Max_Im,'Marker','.','LineStyle','none','Color',[0,1,0]);
             
         end 
         
         Write_1 = strcat('k=',num2str(lambda_nu(i_k,i_d).k));
+        
         text(min(delta_v_U),0, Write_1,'FontSize',18,'Parent',ax,'Interpreter','latex');
-         ax.XLabel.String = X_Text;
-         ax.YLabel.String = 'Im[$\lambda_{m\mu}^{(k)}$]';
-         ax.YLabel.Interpreter = 'latex';
-         ax.XLim        = [min(delta_v_U),max(delta_v_U)];
-         ax.YLim        = [-abs(Max_Im_pos_Re),abs(Max_Im_pos_Re)]*1.1;
-         ax.FontSize             = 13;
-         ax.XLabel.Interpreter   = 'latex';
-         ax.TickLabelInterpreter = 'latex';
+        
+        ax.XLabel.String = X_Text;
+        ax.YLabel.Interpreter = 'latex';
+        ax.XLim        = [min(delta_v_U),max(delta_v_U)];
+        ax.YLim        = [-abs(Max_Im_pos_Re),abs(Max_Im_pos_Re)]*1.1;
+        ax.FontSize             = 13;
+        ax.XLabel.Interpreter   = 'latex';
+        ax.TickLabelInterpreter = 'latex';
         ax.Box =                    'on';
         plot(Stat.Eq.delta*ones(1,2),linspace(-abs(Max_Im_pos_Re)*1.1,abs(Max_Im_pos_Re)*1.1,2),'LineStyle','-','Marker','.','Color','m','Parent',ax);
 
-%        ax.('XLabelText',X_Text,...
- %                           'YLabelText','Im[$\lambda^(k)_{m\mu}$]',...  
- %                           'FontSize',13,'XLim',[min(delta_v_U),max(delta_v_U)]);
-%        tt_2(i_k) =  tt_2(i_k).addData([min(delta_v_U),0,0,0], [], []...
-%           , 'PlotType', 'Annotation', 'AnnotationType',...
-%           'textbox','String', Write_1,'FontSize',18);
         
     end
-    
-  
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  
-%     for i_k = 1:size(lambda_nu,1)
-%         
-%         tt_1(i_k)         = tt_1(i_k).changeAxisOptions('XLabelText',X_Text,...
-%                             'YLabelText','Re[$\lambda^(k)_{m\mu}$]',...  
-%                             'FontSize',13,'XLim',[min(delta_v_U),max(delta_v_U)]);
-% 
-%         tt_2(i_k)         = tt_2(i_k).changeAxisOptions('XLabelText',X_Text,...
-%                             'YLabelText','Im[$\lambda^(k)_{m\mu}$]',...  
-%                             'FontSize',13,'XLim',[min(delta_v_U),max(delta_v_U)]);%'YLim',1.3*[-max(max(abs(Im_max_lambda_v_U)))-1,max(max(abs(Im_max_lambda_v_U)))+1]
-%     end         
-%    tt_3         = tt_3.changeAxisOptions('XLabelText',X_Text,...
-%                       'YLabelText','$\nu$',...  
-%                      'FontSize',13);
+         ax_1(1).YLabel.String = 'Re[$\lambda_{m\mu}^{(k)}$]';
+         ax_1(1+size(lambda_nu,1)).YLabel.String = 'Im[$\lambda_{m\mu}^{(k)}$]';
 
-%%
+  
 
 
 end

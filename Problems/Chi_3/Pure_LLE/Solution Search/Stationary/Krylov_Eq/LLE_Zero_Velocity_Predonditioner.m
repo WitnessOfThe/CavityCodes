@@ -1,6 +1,6 @@
     function M = LLE_Zero_Velocity_Predonditioner(t,L_L,x0)
     
-        ddt = 10^4;        
+        ddt = 10^3;        
         
         L                   =  L_L.Eq.mask.*(- 1i*L_L.Eq.L);
   %%      

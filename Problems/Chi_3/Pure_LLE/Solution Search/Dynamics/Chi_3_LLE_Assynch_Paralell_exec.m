@@ -6,13 +6,13 @@ function Chi_3_LLE_Assynch_Paralell_exec(Res,delta_matrix,power_matrix,ii,Path,S
           
                 Res.Temp.In.delta = delta_matrix;
                 Res.Temp.In.P     = power_matrix;
-                Res.Temp          = Chi_3_LLE_Normalization(Res.Temp,N_Mode);       
+                Res.Temp          = Chi_3_LLE_Normalization(Res.Temp);       
                 
 
                 Res.CW.In         = Res.Temp.In;
-                Res.CW            = Res.CW.Met.Solve(Res.CW,Res.Temp.Space.N);
+                Res.CW            = Res.CW.Met.Solve(Res.CW);
                 Res.CW.In.g       = Res.CW.Sol.g(Res.Temp.Par.CW_num)*Res.CW.Eq.norm;   
-                Res.CW            = Res.CW.Met.Mi_Formula(Res.CW,Res.Temp.Space.N);   
+                Res.CW            = Res.CW.Met.Mi_Formula(Res.CW);   
                 
                 Res             =   Res.Temp.Met.Ev_Start_Point(Res);  
                 

@@ -11,10 +11,7 @@
         x_psi_hat            = x(1:L_L.Space.N) + 1i*x(L_L.Space.N+1:2*L_L.Space.N);
         
         x_psi                = ifft(x_psi_hat);
-        
-
-%% 
- 
+         
         
 %%
         Eq = (-  1i*L_L.Eq.L.').*x_psi_hat + ...
@@ -23,9 +20,7 @@
         g_1(1:L_L.Space.N,1)   = real(Eq);
                                         
         g_2(1:L_L.Space.N,1)   = imag(Eq);
-        
-   %     g_3(1:L_L.Space.N,1)   = ifft(1i.*mask.'.*L_L.Space.k.'.*fft( conj(f_psi).*x_psi + f_psi.*conj(x_psi) ) ,'symmetric');
-        
+                
         g     = [mask.'.*g_1;mask.'.*g_2];%
         
         

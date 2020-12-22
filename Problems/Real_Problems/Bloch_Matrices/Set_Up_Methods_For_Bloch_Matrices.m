@@ -30,8 +30,8 @@ function L_L = Set_Up_Methods_For_Bloch_Matrices
     L_L.Stat.Met.Branch_Starting_points = @Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3;    
     
     L_L.Temp.Met.Ev_Core              = @Chi_3_LLE_Kuar;          
-    L_L.Temp.Met.Ev_Start_Point       = @Chi_3_LLE_Start_Point_CW;
-    L_L.Temp.Met.Ev_Save              = @Chi_3_LLE_Dyn_Saving;    
+    L_L.Temp.Met.Ev_Start_Point       = @Chi3_LLE_Start_Point_Bloch;
+    L_L.Temp.Met.Ev_Save              = @Chi_3_LLE_Dyn_Saving;   
     
 
 %    L_L.Temp.Met.Plot.Fields_Spectrums     = @Plot_Dynamics_Result_LinePlots_Spectrums;

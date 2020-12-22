@@ -12,7 +12,7 @@
 
     CaF.Stat.In         = Params_CaF;    
     CaF.Stat.In.range   = 2^7;
-    CaF.Stat.In.N_mode  = 2^9;
+    CaF.Stat.In.N_mode  = 2^8;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
     CaF.Stat.In.delta   = 70*CaF.Stat.In.kappa;
     
@@ -40,7 +40,7 @@
     CaF.Stat.Met.Newton           = @fsolve;%'fsolve'
          
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 0.01; % step for delta measured in delta/kappa
+    CaF.Stat.Par.first_step       = 0.2; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.001;
     CaF.Stat.Par.step_inc         = 0.00;
     CaF.Stat.Par.step_dec         = 0.5;
@@ -60,7 +60,7 @@
 %%
     
 %    W_WStar             = 2.25;
-    W_WStar             = 2.5;
+    W_WStar             = 40;
     CaF.Stat.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
     CaF.CW.In.P         = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma; 
     CaF.Stat.In.mu_bl   = 4;    
@@ -75,8 +75,8 @@
     CaF_Branches        = Chi3_Stat_Get_Branch_Turing(CaF,Delta_Start,Index_Start);
 
 %%    
-    CaF.Stat.Par.first_step       = 0.01; % step for delta measured in delta/kappa
-    CaF.Stat.Par.step_tol         = 0.001;
+%    CaF.Stat.Par.first_step       = 0.01; % step for delta measured in delta/kappa
+ %   CaF.Stat.Par.step_tol         = 0.001;
 
     CaF.Stat.In.mu_bl   = 2;    
     Index_Start         = [1,2];%1,
@@ -221,6 +221,7 @@ plot3(X,Y,Z,'Parent',ax(4));
 %% for mu = 1
     figure('Position',[0,0,1400,900],'Color',[1,1,1]);
     Panel = tiledlayout(3,8,'TileSpacing','none','Padding','none');
+    
     ax(1) = nexttile(Panel,1,[1,2]);  
     ax(2) = nexttile(Panel,3,[1,2]); 
     
@@ -281,11 +282,16 @@ plot3(X,Y,Z,'Parent',ax(4));
         hold(ax(i),'on');
     end
     ind_br   = 1;
-    ind_stat = 40;
+    ind_stat = 60;
         
+
     Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(ind_br).CW(1),CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(1:end),ax(1:2));
     Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
     Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches(ind_br).Stat(ind_stat),[ax(5:15)]);
     Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),ax(16:19));
+    
 %%
+    f = figure('Position',[0,0,1400,700],'Color',[1,1,1]);
+    Panel = tiledlayout(f,2,4,'TileSpacing','none','Padding','none');
+    sub_Panel = tiledlayout(Panel);
 

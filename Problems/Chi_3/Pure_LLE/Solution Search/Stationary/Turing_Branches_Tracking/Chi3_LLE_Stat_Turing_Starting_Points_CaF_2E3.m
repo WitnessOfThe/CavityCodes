@@ -1,10 +1,6 @@
 function  Stat =  Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3(Res,Index_Start)
 
     switch Res.Stat.In.mu_bl
-%             Power_Start       =      [,, , ];
-%             Delta_Start       =      [,,,]*Res.Stat.In.kappa;
-%             CW_Num            =      [,,,];
-%             Sol_Index         =      [,,,];
         case 1
             
             Power_Start       =      [4.188790204786390e-07,4.188790204786390e-07,2.261946710584651e-07,1.189616418159335e-07,1.440943830446518e-07,4.188790204786390e-07,4.188790204786390e-07,...
@@ -22,33 +18,38 @@ function  Stat =  Chi3_LLE_Stat_Turing_Starting_Points_CaF_2E3(Res,Index_Start)
             
         case 2
             
-            Power_Start       =      [4.188790204786390e-07,4.188790204786390e-07];
-            Delta_Start       =      [0,1.6]*Res.Stat.In.kappa;
-            Function_start    =      {@fsolve,@fsolve};
-            Pert_Amplitude    =      [0.1,0.1];
+           % first 2 for power 2.5
+            Power_Start       =      [4.188790204786390e-07,4.188790204786390e-07,4.188790204786391e-06,4.188790204786391e-06,4.188790204786391e-06,7.539822368615503e-07,7.539822368615503e-07];
+            Delta_Start       =      [0,1.6,...
+                3.4,3.5,4.4,2,2]*Res.Stat.In.kappa;
+            Function_start    =      {@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab};
+            Pert_Amplitude    =      [0.1,0.1,...
+                0.3,0.65,0.7,0.2,0.3];
             
-            CW_Num            =      [3,2];
-            Sol_Index         =      [1,1];
+            CW_Num            =      [3,2,1,1,1,2,2];
+            Sol_Index         =      [1,1,1,2,4,1,1];
             
         case 3
+           % first 2 for power 2.5
+
+            Power_Start       =      [4.188790204786390e-07,4.188790204786390e-07,3.351032163829112e-06,3.351032163829112e-06,7.707373976806958e-07];%[8.377580409572782e-05,8.377580409572782e-05,2.345722514680379e-06];
+            Delta_Start       =      [0.18,1.85,-0.88,3.6,-0.6]*Res.Stat.In.kappa;%[9.7,17,3]*Res.Stat.In.kappa;
+            Function_start    =      {@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab};%{@Newton_Manual_bicgstab,@fsolve,@fsolve};
+            Pert_Amplitude    =      [0.1,0.1,0.2,0.4,0.2];
             
-            Power_Start       =      [4.188790204786390e-07,4.188790204786390e-07];%[8.377580409572782e-05,8.377580409572782e-05,2.345722514680379e-06];
-            Delta_Start       =      [0.18,1.85]*Res.Stat.In.kappa;%[9.7,17,3]*Res.Stat.In.kappa;
-            Function_start    =      {@Newton_Manual_bicgstab,@fsolve};%{@Newton_Manual_bicgstab,@fsolve,@fsolve};
-            Pert_Amplitude    =      [0.1,0.1];
-            
-            CW_Num            =      [1,2];%[2,1,1];
-            Sol_Index         =      [1,1];%[1,1,1];
+            CW_Num            =      [1,2,3,2,3];%[2,1,1];
+            Sol_Index         =      [1,1,1,3,1];%[1,1,1];
             
         case 4
             
-            Power_Start       =      [4.188790204786390e-07,4.188790204786390e-07];%[8.377580409572782e-05,8.377580409572782e-05,2.345722514680379e-06];
-            Delta_Start       =      [1.63,2.38]*Res.Stat.In.kappa;%[9.7,17,3]*Res.Stat.In.kappa;
-            Function_start    =      {@fsolve,@fsolve};%{@Newton_Manual_bicgstab,@fsolve,@fsolve};
-            Pert_Amplitude    =      [0.1,0.1];
+            Power_Start       =      [4.188790204786390e-07,4.188790204786390e-07,3.351032163829112e-06];%[8.377580409572782e-05,8.377580409572782e-05,2.345722514680379e-06];
+            Delta_Start       =      [1.63,2.38,4]*Res.Stat.In.kappa;%[9.7,17,3]*Res.Stat.In.kappa;
+            Function_start    =      {@Newton_Manual_bicgstab,@Newton_Manual_bicgstab,@Newton_Manual_bicgstab};%{@Newton_Manual_bicgstab,@fsolve,@fsolve};
+            Pert_Amplitude    =      [0.1,0.1,0.2];
             
-            CW_Num            =      [1,2];%[2,1,1];
-            Sol_Index         =      [1,1];%[1,1,1];
+            CW_Num            =      [1,2,2];%[2,1,1];
+            Sol_Index         =      [1,1,2];%[1,1,1];
+            % first 2 for power 2.5
             
 %            Power_Start       =      [5.8643e-06,3.518583772020568e-07,2.513274122871834e-06,8.377580409572782e-05,8.377580409572782e-05];
 %            Delta_Start       =      [-3.1,2,3.68,9.792,2.5]*Res.Stat.In.kappa;

@@ -9,18 +9,20 @@
 %% Input Parameters for CaF
 
     CaF.Stat.In         = Params_CaF;
-    CaF.Stat.In.kappa   = 2E3*2*pi;                 
+    CaF.Stat.In.kappa   = 2E3*2*pi;     
+    
     CaF.Stat.In.delta   = 2*CaF.Stat.In.kappa;
     CaF.Stat.In.range   = 2^6;
-    CaF.Stat.In.mu_bl   = 7;   
-    CaF.Stat.Par.CW_num = 1;
-    CaF.Stat.Par.In.Rel_ampl = 0.8;
     
-    W_WStar             = 500;
+    CaF.Stat.In.mu_bl   = 2;   
+    CaF.Stat.Par.CW_num = 1;
+    CaF.Stat.Par.In.Rel_ampl = 1.8;
+    
+    W_WStar             = 25;
     CaF.Stat.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
     
     CaF.CW.In           = CaF.Stat.In;
-    CaF.Stat.In.N_mode  = 2^7;
+    CaF.Stat.In.N_mode  = 2^8;
     CaF.CW.In.N_mode    = 2^8;
     
 %% Stationary Coefficeints
@@ -50,7 +52,7 @@
     CaF             = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(CaF);
     
  %%
-  figure('Position',[0,0,1400,900],'Color',[1,1,1]);
+  figure('Position',[0,0,1400,900]/2,'Color',[1,1,1]);
     Panel = tiledlayout(4,2,'TileSpacing','none','Padding','none');
     
     ax(1) = nexttile(Panel,1,[1,1]);  
@@ -62,10 +64,37 @@
     ax(7) = nexttile(Panel,7,[1,1]);  
     ax(8) = nexttile(Panel,8,[1,1]);  
     
+    for i =1:size(ax,2)
+        
+        hold(ax(i),'on');
+        
+    end
+    
        Plot_Static_Field_Spectrums(CaF(1).Stat(1),ax(1:2));   
        Plot_Static_Field_Spectrums(CaF(1).Stat(2),ax(3:4));   
        Plot_Static_Field_Spectrums(CaF(1).Stat(3),ax(5:6));   
        Plot_Static_Field_Spectrums(CaF(1).Stat(4),ax(7:8));   
 
 %%
-
+% figure('Position',[0,0,1400,900]/2,'Color',[1,1,1]);
+%     Panel = tiledlayout(4,2,'TileSpacing','none','Padding','none');
+%     
+%     ax(1) = nexttile(Panel,1,[1,1]);  
+%     ax(2) = nexttile(Panel,2,[1,1]);    
+%     ax(3) = nexttile(Panel,3,[1,1]);  
+%     ax(4) = nexttile(Panel,4,[1,1]);  
+%     ax(5) = nexttile(Panel,5,[1,1]);  
+%     ax(6) = nexttile(Panel,6,[1,1]);    
+%     ax(7) = nexttile(Panel,7,[1,1]);  
+%     ax(8) = nexttile(Panel,8,[1,1]);  
+%     
+%     for i =1:size(ax,2)
+%         
+%         hold(ax(i),'on');
+%         
+%     end
+%     
+%        Plot_Static_Field_Spectrums(Res_t(1).Stat(1),ax(1:2));   
+%        Plot_Static_Field_Spectrums(Res_t(1).Stat(2),ax(3:4));   
+%        Plot_Static_Field_Spectrums(Res_t(1).Stat(3),ax(5:6));   
+%        Plot_Static_Field_Spectrums(Res_t(1).Stat(4),ax(7:8));   

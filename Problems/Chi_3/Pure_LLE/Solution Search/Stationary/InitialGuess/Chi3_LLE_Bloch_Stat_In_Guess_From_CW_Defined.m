@@ -28,7 +28,7 @@ function L_L = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(L_L)
             
         end
         
-        L_L.Stat(i)                        = L_L.Stat(i).Met.Norm(L_L.Stat(i),L_L.Stat(i).In.N_mode);    
+        L_L.Stat(i)                        = L_L.Stat(i).Met.Norm(L_L.Stat(i));    
         L_L.Stat(i).In.Psi_Start           = zeros(1,L_L.Stat(i).In.N_mode)*1E-10;
         
         L_L.Stat(i).In.Psi_Start(1)    = L_L.CW.Sol.Psi(L_L.Stat(i).Par.CW_num);            

@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2018b">
-  <configuration build-checksum="2042190040" file="C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.prj" location="C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics" name="Chi_3_LLE_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="3037867572" file="C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.prj" location="C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics" name="Chi_3_LLE_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -34,7 +34,7 @@
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
-      <param.VerificationStatus>option.VerificationStatus.FailedTest</param.VerificationStatus>
+      <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
       <param.EnableMexProfiling>false</param.EnableMexProfiling>
       <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
       <param.CustomSourceCode />
@@ -849,6 +849,7 @@
     <param.objective>option.objective.c</param.objective>
     <param.WorkflowStep>workflowSummary</param.WorkflowStep>
     <param.TestSnippets>
+      <item>Chi_3_LLE_Runge_Kuarong(Res.Temp,Res.Temp.In.N_mode,Runge)</item>
       <item>Chi_3_LLE_Runge_Kuarong(SiN.Temp,N_Mode,Runge);</item>
       <item>Chi_3_LLE_Runge_Kuarong(Res.Temp,N_Mode,Runge);</item>
       <item>Chi_3_LLE_Runge_Kuarong(CaF.Temp,N_mode,Runge);</item>
@@ -870,7 +871,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>1736250023</param.AnnotationChecksum>
+    <param.AnnotationChecksum>3173190486</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -879,12 +880,12 @@
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen\mex\Chi_3_LLE_Runge_Kuarong</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>1974021588</var.gc.preBuildChecksum>
-    <var.cfi.lastOutputRoot>codegen/mex/Chi_3_LLE_Runge_Kuarong</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>2153362122</var.cfi.preBuildChecksum>
-    <var.lastCfiTestSnippet>Chi_3_LLE_Runge_Kuarong(CaF.Temp,N_mode,Runge);</var.lastCfiTestSnippet>
+    <var.gc.preBuildChecksum>3037867572</var.gc.preBuildChecksum>
+    <var.cfi.lastOutputRoot>codegen\mex\Chi_3_LLE_Runge_Kuarong</var.cfi.lastOutputRoot>
+    <var.cfi.preBuildChecksum>1468038987</var.cfi.preBuildChecksum>
+    <var.lastCfiTestSnippet>Chi_3_LLE_Runge_Kuarong(Res.Temp,Res.Temp.In.N_mode,Runge)</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;2198469219&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;3429852284&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
     <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
@@ -1097,7 +1098,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi_3_LLE_Runge_Kuarong.m">
-        <Marker>1605280047523</Marker>
+        <Marker>1608651431948</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
@@ -1108,17 +1109,22 @@
             <Field Name="Met" typeId="1" />
             <Field Name="In" typeId="0">
               <Field Name="eta" typeId="2" />
-              <Field Name="omega" typeId="3" />
               <Field Name="omega_p" typeId="2" />
-              <Field Name="D" typeId="4" />
-              <Field Name="omega_int" typeId="3" />
+              <Field Name="D" typeId="3" />
               <Field Name="gamma" typeId="2" />
               <Field Name="range" typeId="2" />
+              <Field Name="N_mode" typeId="2" />
               <Field Name="kappa" typeId="2" />
               <Field Name="delta" typeId="2" />
               <Field Name="P" typeId="2" />
+              <Field Name="omega" typeId="4" />
+              <Field Name="omega_int" typeId="4" />
               <Field Name="Finess" typeId="2" />
               <Field Name="Fin_D" typeId="2" />
+              <Field Name="H" typeId="2" />
+              <Field Name="W" typeId="2" />
+              <Field Name="W_Star" typeId="2" />
+              <Field Name="W_WStar" typeId="2" />
               <Field Name="Psi_Start" typeId="5" />
               <Field Name="t_start" typeId="2" />
             </Field>
@@ -1134,7 +1140,7 @@
               <Field Name="N" typeId="2" />
               <Field Name="lenght" typeId="2" />
               <Field Name="dphi" typeId="2" />
-              <Field Name="phi" typeId="3" />
+              <Field Name="phi" typeId="7" />
               <Field Name="dk" typeId="2" />
               <Field Name="k" typeId="7" />
             </Field>
@@ -1192,16 +1198,16 @@
             </type>
             <type typeId="3">
               <Class>double</Class>
-              <Size>1 x 1024</Size>
+              <Size>1 x 6</Size>
               <Value />
               <InitialValue />
-              <UserDefined>true</UserDefined>
+              <UserDefined>false</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
             <type typeId="4">
               <Class>double</Class>
-              <Size>1 x 2</Size>
+              <Size>1 x 512</Size>
               <Value />
               <InitialValue />
               <UserDefined>false</UserDefined>
@@ -1210,10 +1216,10 @@
             </type>
             <type typeId="5">
               <Class>double</Class>
-              <Size>1 x 1024</Size>
+              <Size>1 x 512</Size>
               <Value />
               <InitialValue />
-              <UserDefined>true</UserDefined>
+              <UserDefined>false</UserDefined>
               <Complex>true</Complex>
               <Sparse>false</Sparse>
             </type>

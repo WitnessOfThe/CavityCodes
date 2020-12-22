@@ -11,7 +11,7 @@
 
 
     CaF.Stat.In         = Params_CaF;    
-    CaF.Stat.In.range   = 2^6;
+    CaF.Stat.In.range   = 2^7;
     CaF.Stat.In.N_mode  = 2^8;
     CaF.Stat.In.kappa   = 2E3*2*pi;                 
    
@@ -41,7 +41,7 @@
     CaF.Stat.Met.Newton           = @fsolve;%'fsolve'
          
     CaF.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    CaF.Stat.Par.first_step       = 2; % step for delta measured in delta/kappa
+    CaF.Stat.Par.first_step       = 5; % step for delta measured in delta/kappa
     CaF.Stat.Par.step_tol         = 0.001;
     CaF.Stat.Par.step_inc         = 0.25;
     CaF.Stat.Par.step_dec         = 0.5;
@@ -130,49 +130,76 @@
 %   CaF_1D_Upper = Chi3_Stat_Get_Single_Branch_Turing(CaF,CaF.Stat.In.mu_bl,N_mode);
 %   CaF_1D_Lower = CaF_1D_Upper;
 %%
- figure('Position',[0,0,1400,900],'Color',[1,1,1]);
-    Panel = tiledlayout(2,6,'TileSpacing','none','Padding','none');
-    for i =1:12
+    figure('Position',[0,0,1400,900],'Color',[1,1,1]);
+
+    Panel = tiledlayout(2,3,'TileSpacing','none','Padding','none');
+    for i =1:6
         
         ax(i) = nexttile(Panel,i,[1,1]);  
         hold(ax(i),'on');
-        
+            
     end
     ind_br   = 1;
-    ind_stat = 40;
+    ind_stat = 10;
         
 %    Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(ind_br).CW(1),CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(1:end),ax(1:2));
- %   Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
-        Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches_7(ind_br).Stat(ind_stat),CaF_Branches_7(ind_br),ax(1:4));
+%    Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
+        Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),ax(1:8));
 
 %%
 
- figure('Position',[0,0,1400,900],'Color',[1,1,1]);
-    Panel = tiledlayout(3,8,'TileSpacing','none','Padding','none');
-    ax(1) = nexttile(Panel,1,[1,2]);  
-    ax(2) = nexttile(Panel,3,[1,2]); 
+    h =  figure('Position',[0,0,1400,700],'Color',[1,1,1]);
+    Panel = tiledlayout(h,6,16,'TileSpacing','none','Padding','none');
     
-    ax(3) = nexttile(Panel,9,[1,1]);  
-    ax(4) = nexttile(Panel,10,[1,1]);  
+    ax(1) = nexttile(Panel,1,[2,4]);  
+    ax(2) = nexttile(Panel,5,[2,4]); 
     
-    ax(5) = nexttile(Panel,11,[1,2]);  
-    ax(6) = nexttile(Panel,17,[1,2]);  
-    ax(7) = nexttile(Panel,19,[1,2]);  
+    ax(3) = nexttile(Panel,33,[2,2]);  
+    ax(4) = nexttile(Panel,35,[2,2]);  
+ %  
+    ax(5) = nexttile(Panel,37,[2,4]);  
+    ax(6) = nexttile(Panel,65,[2,4]);  
+    ax(7) = nexttile(Panel,69,[2,4]);  
     
-    ax(8) = nexttile(Panel,13,[1,2]);  
-    ax(9) = nexttile(Panel,15,[1,2]);  
-    ax(10) = nexttile(Panel,21,[1,2]);  
-    ax(11) = nexttile(Panel,23,[1,2]);  
+    ax(8) = nexttile(Panel,41,[1,2]);  
+    ax(9) = nexttile(Panel,43,[1,2]);  
+    ax(10) = nexttile(Panel,57,[1,2]);  
+    ax(11) = nexttile(Panel,59,[1,2]);
+    
+    ax(12) = nexttile(Panel,45,[1,2]);  
+    ax(13) = nexttile(Panel,47,[1,2]);  
+    ax(14) = nexttile(Panel,61,[1,2]);  
+    ax(15) = nexttile(Panel,63,[1,2]);
 
-    ax(12) = nexttile(Panel,5,[1,2]);  
-    ax(13) = nexttile(Panel,7,[1,2]);  
+    ax(16) = nexttile(Panel,41+32,[1,2]);  
+    ax(17) = nexttile(Panel,43+32,[1,2]);  
+    ax(18) = nexttile(Panel,57+32,[1,2]);  
+    ax(19) = nexttile(Panel,59+32,[1,2]);
+    
+    ax(20) = nexttile(Panel,45+32,[1,2]);  
+    ax(21) = nexttile(Panel,47+32,[1,2]);  
+    ax(22) = nexttile(Panel,61+32,[1,2]);  
+    ax(23) = nexttile(Panel,63+32,[1,2]);
+ %   
+    ax(24) = nexttile(Panel,9,[1,2]);  
+    ax(25) = nexttile(Panel,11,[1,2]);  
+    ax(26) = nexttile(Panel,25,[1,2]);  
+    ax(27) = nexttile(Panel,27,[1,2]);
+    
+    ax(28) = nexttile(Panel,13,[1,2]);  
+    ax(29) = nexttile(Panel,15,[1,2]);  
+    ax(30) = nexttile(Panel,29,[1,2]);  
+    ax(31) = nexttile(Panel,31,[1,2]);
+    
+    
     for i =1:size(ax,2)
         hold(ax(i),'on');
     end
     ind_br   = 1;
-    ind_stat = 40;
+    ind_stat = 76;
         
     Plot_LLE_Bloch_Static_Multiple_Branches(CaF_Branches(ind_br).CW(1),CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(1:end),ax(1:2));
-    Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
-    Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches(ind_br).Stat(ind_stat),[ax(5:11)]);
-    Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),ax(12:13));
+     Plot_Static_Field_Spectrums(CaF_Branches(ind_br).Stat(ind_stat),ax(3:4));   
+    Plot_LLE_Bloch_Static_Field_Stability(CaF_Branches(ind_br).Stat(ind_stat),ax(5:23));
+    Plot_LLE_Bloch_Static_Branch_Stability(CaF.CW,CaF_Branches(ind_br).Stat(ind_stat),CaF_Branches(ind_br),ax(24:end));
+    

@@ -129,18 +129,19 @@
                     
                     L_L.Eq.delta = x;
                     L_L.In.delta = L_L.Eq.norm*L_L.Eq.delta;
-                    L_L          = L_L.Met.Norm(L_L,L_L.Space.N);
+                    L_L          = L_L.Met.Norm(L_L);
+                    
                 case 'kappa'
                     
                     L_L.Eq.kappa = x;
                     L_L.In.kappa = L_L.Eq.norm*L_L.Eq.kappa;
-                    L_L          = L_L.Met.Norm(L_L,L_L.Space.N);
+                    L_L          = L_L.Met.Norm(L_L);
                 case 'Pump Power'
                     
                     L_L.Eq.h = x;
                     L_L.In.h = x*L_L.Eq.norm;
                     L_L.In.P = 4*x.^2/L_L.In.kappa.^2/L_L.In.Finess*pi/L_L.In.eta*L_L.Eq.norm.^2;
-                    L_L          = L_L.Met.Norm(L_L,L_L.Space.N);
+                    L_L          = L_L.Met.Norm(L_L);
 
             end
             

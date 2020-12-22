@@ -21,6 +21,6 @@
 #include <string.h>
 
 /* Function Declarations */
-void ifft(const creal_T x[1024], creal_T y[1024]);
+void ifft(const creal_T x[512], creal_T y[512]);
 
 /* End of code generation (ifft.h) */

@@ -3,7 +3,6 @@
         mask           = 1;% L_L.Eq.mask;
         
         psi_hat        = L_L.Sol.Psi_k.'*L_L.Space.N;
-        V              = 0;
         
         f_psi          = ifft(psi_hat);    
         
@@ -13,8 +12,7 @@
         
 
  
-        L                   = L_L.Eq.L + 1/2*L_L.In.n^2*L_L.In.Fin_D+L_L.In.n*L_L.In.Fin_D*L_L.Space.k...
-            + L_L.Space.k.*V;
+        L                   = L_L.Eq.L + 1/2*L_L.In.n^2*L_L.In.Fin_D+L_L.In.n*L_L.In.Fin_D*L_L.Space.k;
         
         g_1(1:L_L.Space.N,1)    = -1i.*(L.'.*x(1:L_L.Space.N) - ...
              L_L.Eq.gamma_Kerr.'.*fft( 2*abs(f_psi).^2.*x_psi_1 + f_psi.^2.*x_psi_2));

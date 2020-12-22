@@ -47,18 +47,23 @@ typedef struct {
 
 typedef struct {
   real_T eta;
-  real_T omega[1024];
   real_T omega_p;
-  real_T D[2];
-  real_T omega_int[1024];
+  real_T D[6];
   real_T gamma;
   real_T range;
+  real_T N_mode;
   real_T kappa;
   real_T delta;
   real_T P;
+  real_T omega[512];
+  real_T omega_int[512];
   real_T Finess;
   real_T Fin_D;
-  creal_T Psi_Start[1024];
+  real_T H;
+  real_T W;
+  real_T W_Star;
+  real_T W_WStar;
+  creal_T Psi_Start[512];
   real_T t_start;
 } struct1_T;
 
@@ -135,7 +140,7 @@ typedef struct {
   real_T N;
   real_T lenght;
   real_T dphi;
-  real_T phi[1024];
+  emxArray_real_T_1x1024 phi;
   real_T dk;
   emxArray_real_T_1x1024 k;
 } struct3_T;

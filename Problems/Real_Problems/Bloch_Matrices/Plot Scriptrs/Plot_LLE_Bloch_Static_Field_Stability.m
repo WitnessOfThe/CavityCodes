@@ -95,14 +95,12 @@ function [tt_1,tt_2] = Plot_LLE_Bloch_Static_Field_Stability(Stat,ax)
          text(0,0,strcat('Y,k=',num2str(Stat.Stab(i).In.n)),'FontSize',13,'Parent',ax(3+i+3*NN),'Interpreter','latex');
         
          ax(3+i).XLabel.String = 'Mode Number';
-         ax(3+i).YLabel.String = 'Rel Power db';
          ax(3+i).YLabel.Interpreter = 'latex';
          ax(3+i).FontSize             = 13;
          ax(3+i).XLabel.Interpreter   = 'latex';
          ax(3+i).TickLabelInterpreter = 'latex';
          ax(3+i).Box =                    'on';
          ax(3+i+NN).XLabel.String = 'Mode Number';
-         ax(3+i+NN).YLabel.String = 'Rel Power db';
          ax(3+i+NN).YLabel.Interpreter = 'latex';
          ax(3+i+NN).FontSize             = 13;
          ax(3+i+NN).XLabel.Interpreter   = 'latex';
@@ -110,7 +108,6 @@ function [tt_1,tt_2] = Plot_LLE_Bloch_Static_Field_Stability(Stat,ax)
          ax(3+i+NN).Box =                    'on';
          
          ax(3+i+2*NN).XLabel.String = '$\theta$';
-         ax(3+i+2*NN).YLabel.String = 'Abs,Re,Im[$\psi$]';
          ax(3+i+2*NN).YLabel.Interpreter = 'latex';
          ax(3+i+2*NN).FontSize             = 13;
          ax(3+i+2*NN).XLabel.Interpreter   = 'latex';
@@ -118,14 +115,18 @@ function [tt_1,tt_2] = Plot_LLE_Bloch_Static_Field_Stability(Stat,ax)
          ax(3+i+2*NN).Box =                    'on';
          
          ax(3+i+3*NN).XLabel.String = '$\theta$';
-         ax(3+i+3*NN).YLabel.String = 'Abs,Re,Im[$\psi$]';
          ax(3+i+3*NN).YLabel.Interpreter = 'latex';
          ax(3+i+3*NN).FontSize             = 13;
          ax(3+i+3*NN).XLabel.Interpreter   = 'latex';
          ax(3+i+3*NN).TickLabelInterpreter = 'latex';
          ax(3+i+3*NN).Box =                    'on';
     end
-    
+    i=1;
+         ax(3+i+3*NN).YLabel.String = 'Abs,Re,Im[$\psi$]';
+         ax(3+i+NN).YLabel.String = 'Rel Power db';
+         ax(3+i).YLabel.String = 'Rel Power db';
+         ax(3+i+2*NN).YLabel.String = 'Abs,Re,Im[$\psi$]';
+
 %%
      %   tt_2 = tt_2.addData(nu_array,real(lambda),'Color',[0,0,0],'LineStyle','none','Marker','.','MarkerSize',15);
      plot(nu_array,real(lambda),'Color',[0,0,0],'LineStyle','none','Marker','.','MarkerSize',15,'Parent',ax(2));
