@@ -10,23 +10,27 @@
  */
 
 /* Include files */
+#include "Chi_3_LLE_Runge_Kuarong.h"
 #include "_coder_Chi_3_LLE_Runge_Kuarong_mex.h"
-#include "Chi_3_LLE_Runge_Kuarong_data.h"
-#include "Chi_3_LLE_Runge_Kuarong_initialize.h"
 #include "Chi_3_LLE_Runge_Kuarong_terminate.h"
 #include "_coder_Chi_3_LLE_Runge_Kuarong_api.h"
-#include "rt_nonfinite.h"
+#include "Chi_3_LLE_Runge_Kuarong_initialize.h"
+#include "Chi_3_LLE_Runge_Kuarong_data.h"
+
+/* Function Declarations */
+static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
+  int32_T nrhs, const mxArray *prhs[3]);
 
 /* Function Definitions */
-void Chi_3_LLE_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T
-  nrhs, const mxArray *prhs[3])
+static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
+  int32_T nrhs, const mxArray *prhs[3])
 {
+  const mxArray *outputs[1];
   emlrtStack st = { NULL,              /* site */
     NULL,                              /* tls */
     NULL                               /* prev */
   };
 
-  const mxArray *outputs[1];
   st.tls = emlrtRootTLSGlobal;
 
   /* Check for proper number of arguments. */
@@ -41,7 +45,7 @@ void Chi_3_LLE_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T
   }
 
   /* Call the function. */
-  Chi_3_LLE_Runge_Kuarong_api(prhs, outputs);
+  Chi_3_LLE_Runge_Kuarong_api(prhs, nlhs, outputs);
 
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, plhs, outputs);
@@ -50,13 +54,13 @@ void Chi_3_LLE_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs, const mxArray
                  *prhs[])
 {
-  mexAtExit(&Chi_3_LLE_Runge_Kuarong_atexit);
+  mexAtExit(Chi_3_LLE_Runge_Kuarong_atexit);
 
   /* Module initialization. */
   Chi_3_LLE_Runge_Kuarong_initialize();
 
   /* Dispatch the entry-point. */
-  Chi_3_LLE_Runge_Kuarong_mexFunction(nlhs, plhs, nrhs, prhs);
+  c_Chi_3_LLE_Runge_Kuarong_mexFu(nlhs, plhs, nrhs, prhs);
 
   /* Module termination. */
   Chi_3_LLE_Runge_Kuarong_terminate();

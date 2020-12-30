@@ -9,22 +9,25 @@
  *
  */
 
-#pragma once
+#ifndef _CODER_CHI_3_LLE_RUNGE_KUARONG_MEX_H
+#define _CODER_CHI_3_LLE_RUNGE_KUARONG_MEX_H
 
 /* Include files */
-#include "rtwtypes.h"
-#include "emlrt.h"
-#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "tmwtypes.h"
+#include "mex.h"
+#include "emlrt.h"
+#include "rtwtypes.h"
+#include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-void Chi_3_LLE_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T
-  nrhs, const mxArray *prhs[3]);
-MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
-  const mxArray *prhs[]);
-emlrtCTX mexFunctionCreateRootTLS(void);
+extern void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs, const
+  mxArray *prhs[]);
+extern emlrtCTX mexFunctionCreateRootTLS(void);
+
+#endif
 
 /* End of code generation (_coder_Chi_3_LLE_Runge_Kuarong_mex.h) */

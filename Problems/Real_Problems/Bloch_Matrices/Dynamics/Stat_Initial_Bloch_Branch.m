@@ -101,7 +101,7 @@
 %%
   Path = strcat('C:/Users/dp710/Documents/Data_Storage/From_bloch/CaF_mu=',num2str(CaF.Stat(1).In.mu_bl),'_',num2str(CaF.Stat(1).In.D(2)/CaF.Stat(1).In.kappa),'_Upper_Branch_Scan_',CaF.Stat.Par.variable ,'_Start_delta=',num2str(CaF.Stat(1).In.delta/CaF.Stat(1).In.kappa),'_Power=',num2str(W_WStar));
   delete(gcp('nocreate'));
-  parpool(6);
+  parpool();
   Indexes = fliplr(1:3:153);
   parfor Ind = 1:size(Indexes,2)
       

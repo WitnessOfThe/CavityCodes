@@ -33,7 +33,7 @@ function Chi_3_LLE_Runge_Save_Long_Run_from_Stat(Path,CaF,Ind,CaF_1D_Upper,CaF_1
    % [p_dot_1,p_dot_2]         = Plot_Static_Field_Spectrums(CaF_1D_Upper(1).Stat(Ind),0);
     %[p_dot_3,p_dot_4,p_dot_5] = Plot_Static_Field_Stability(CaF_1D_Upper(1).Stat(Ind),0,mu);
     figure;
-    CF = conFigure([tt_1,tt_2,tt_3,tt_4,tt_5,tt_6],4,4, 'UniformPlots', true, 'Height', 20, 'Width', 35,'Labels',false);
+    CF = conFigure([tt_1,tt_2,tt_3,tt_4,tt_5,tt_6],3,2, 'UniformPlots', true, 'Height', 20, 'Width', 35,'Labels',false);
     h = gcf;
     Alph_Ind =    (letters(Ind+26*27))  ;
     if ~exist(strcat(Path,'/jpg'),'dir')

@@ -9,12 +9,13 @@ SRC_FILES =  \
 	Chi_3_LLE_Runge_Kuarong_initialize.c \
 	Chi_3_LLE_Runge_Kuarong_terminate.c \
 	Chi_3_LLE_Runge_Kuarong.c \
-	ifft.c \
+	exp.c \
+	eml_int_forloop_overflow_check.c \
 	fft.c \
 	FFTWApi.c \
-	abs.c \
-	power.c \
-	fft1.c \
+	mod.c \
+	sum.c \
+	nullAssignment.c \
 	_coder_Chi_3_LLE_Runge_Kuarong_info.c \
 	_coder_Chi_3_LLE_Runge_Kuarong_api.c \
 	_coder_Chi_3_LLE_Runge_Kuarong_mex.c \
