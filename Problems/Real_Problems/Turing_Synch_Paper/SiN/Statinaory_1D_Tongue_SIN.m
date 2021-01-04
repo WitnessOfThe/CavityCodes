@@ -17,38 +17,32 @@
     SiN.Stat.In.P       =  0.022;         
     SiN.CW.In           =  SiN.Stat.In;
     SiN.Temp.In         =  SiN.Stat.In;     
-    
-%%
-    
-    mu                  = 44; 
-    
+           
 %% Stationary Coefficeints
 
     SiN.Stat.Par.Equation_string  = 'Kerr_Full_Dispersion';        
     SiN.Stat.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;    
-    SiN.Stat.Met.Newton           = @Newton_Manual_bicgstab;%'fsolve'
-    
-%     CaF.Stat.Par.step_tol         = 0.000001;
-%     CaF.Stat.Par.variable         = 'Pump Power';  %%'Pump Power';
-%     CaF.Stat.Par.first_step       = 0.01; %min =1E-4/3
-%     CaF.Stat.Par.bot_boundary     = 0;
-%     CaF.Stat.Par.top_boundary     = 1;
-    
- 
+    SiN.Stat.Met.Newton           = @fsolve;%'fsolve'
+         
     SiN.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    SiN.Stat.Par.first_step       = 0.01; % step for delta measured in delta/kappa
+    SiN.Stat.Par.first_step       = 0.2; % step for delta measured in delta/kappa
     SiN.Stat.Par.step_tol         = 0.001;
-    
-%%%%%%%%%%%%%%%%%%%%%%
+    SiN.Stat.Par.step_inc         = 0.00;
+    SiN.Stat.Par.step_dec         = 0.5;
 
-    SiN.Stat.Par.bot_boundary     = -900; % bottom boundary for delta to search
-    SiN.Stat.Par.top_boundary     = 50; % top boundary for delta to search
+    SiN.Stat.Par.bot_boundary     = -40; % bottom boundary for delta to search
+    SiN.Stat.Par.top_boundary     =  602; % top boundary for delta to search
 
     SiN.Stat.Par.Stability        = 'Yes';
-    SiN.Stat.Par.Newton_iter      = 30;      
-    SiN.Stat.Par.Newton_tol       = 1E-12;  
-    SiN.Stat.Par.i_max            = 100;
-    SiN.Stat.Par.CW_num           = 3;
+    SiN.Stat.Par.Newton_iter          = 30;      
+    SiN.Stat.Par.Newton_tol           = 1E-10;  
+    SiN.Stat.Par.i_max                = 1000;
+    
+    SiN.Stat.Par.fsolveoptions       = optimoptions('fsolve','CheckGradients',...
+    false,'Display','iter','UseParallel',true,'SpecifyObjectiveGradient',true,...
+    'Algorithm','trust-region-dogleg','FunValCheck','on',...
+    'MaxIterations',1000,'StepTolerance',1E-20,'OptimalityTolerance',1E-25);
+% 
     
 %%
 

@@ -55,12 +55,12 @@ function [f,g] = Chi3_LLE_Bloch_Stat_Newton_Matrix(L_L,x)
         f(N+1:2*N)   =  - L_L.Eq.D(2)/2*L_L.Eq.Dir.d2*x(N+1:2*N)' + L_L.Eq.delta*x(N+1:2*N)' - L_L.Eq.kappa/2*x(1:N)'     - (x(1:N)'.^2 + x(N+1:2*N)'.^2).*x(N+1:2*N)'*L_L.Eq.gamma_3 + L_L.Eq.h;
         
         f = f';
-        
-        g_1_1 = L_L.Eq.D(4)/24*L_L.Eq.Dir.d4 - L_L.Eq.D(2)/2*L_L.Eq.Dir.d2  + L_L.Eq.delta*speye(N,N) - (3*f_r.^2+f_i.^2)*L_L.Eq.gamma_3;
+        %L_L.Eq.D(4)/24*L_L.Eq.Dir.d4
+        g_1_1 =  - L_L.Eq.D(2)/2*L_L.Eq.Dir.d2  + L_L.Eq.delta*speye(N,N) - (3*f_r.^2+f_i.^2)*L_L.Eq.gamma_3;
         g_1_2 =   speye(N,N)*L_L.Eq.kappa/2 - 2*f_r.*f_i*L_L.Eq.gamma_3;
-        
+        % L_L.Eq.D(4)/24*L_L.Eq.Dir.d4  
         g_2_1 = - speye(N,N)*L_L.Eq.kappa/2 - 2*f_r.*f_i*L_L.Eq.gamma_3;
-        g_2_2 = L_L.Eq.D(4)/24*L_L.Eq.Dir.d4 - L_L.Eq.D(2)/2*L_L.Eq.Dir.d2 + speye(N,N)*L_L.Eq.delta - (f_r.^2+3*f_i.^2)*L_L.Eq.gamma_3;
+        g_2_2 = - L_L.Eq.D(2)/2*L_L.Eq.Dir.d2 + speye(N,N)*L_L.Eq.delta - (f_r.^2+3*f_i.^2)*L_L.Eq.gamma_3;
         
         g = [g_1_1,g_1_2;
              g_2_1,g_2_2];

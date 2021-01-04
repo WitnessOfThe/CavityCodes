@@ -1,10 +1,10 @@
-function L_L = Chi_3_LLE_Normalization_Without_D_Coeff(L_L,N)
+function L_L = Chi_3_LLE_Normalization_Without_D_Coeff(L_L)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Define Space 
 
-        Fundamental_Constants;
-        
-        L_L.Space      = Define_Space_Cavity(N,2*pi);
+        Fundamental_Constants;        
+        N = L_L.In.N_mode;
+        L_L.Space      = Define_Space_Cavity(N,2*pi/L_L.In.mu_bl);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Extract Some Cavity Parameters
@@ -12,6 +12,11 @@ function L_L = Chi_3_LLE_Normalization_Without_D_Coeff(L_L,N)
         
         L_L.In.Finess          = L_L.In.D(1)/L_L.In.kappa;
         L_L.In.Fin_D           = L_L.In.D(2)/L_L.In.kappa;
+        
+        L_L.In.H            = sqrt(L_L.In.eta*L_L.In.Finess*L_L.In.P/pi);
+        L_L.In.W            = pi/(L_L.In.eta*L_L.In.Finess)*L_L.In.H^2;
+        L_L.In.W_Star        = pi/(L_L.In.eta*L_L.In.Finess)*L_L.In.kappa/L_L.In.gamma;
+        L_L.In.W_WStar      = L_L.In.W/ L_L.In.W_Star;
         if L_L.In.kappa ~= 0
             coeff                  = L_L.In.kappa;
         else

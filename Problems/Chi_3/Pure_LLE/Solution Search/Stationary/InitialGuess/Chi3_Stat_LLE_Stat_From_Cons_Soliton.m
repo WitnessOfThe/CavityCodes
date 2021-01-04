@@ -1,6 +1,6 @@
-function Stat   = Chi3_Stat_LLE_Stat_From_Cons_Soliton(Stat,N_Mode)
+function Stat   = Chi3_Stat_LLE_Stat_From_Cons_Soliton(Stat)
     
-        Stat               = Stat.Met.Norm(Stat,N_Mode);    
+        Stat               = Stat.Met.Norm(Stat);    
         
         NN                 = 30;
         
@@ -14,6 +14,8 @@ function Stat   = Chi3_Stat_LLE_Stat_From_Cons_Soliton(Stat,N_Mode)
         Stat.Eq.D(3:end)     = 0;        
         Slv                  = Trials(Stat,Stat.Par.Sol_Re_Sign);
         
+        Psi_m               = fft( Slv(1:Stat.Space.N) + 1i*Slv(Stat.Space.N+1:Stat.Space.N*2));
+        Slv                  = [real(Psi_m),imag(Psi_m)];
         Stat.Met.Equation    = @L_L_Soliton_Kerr;
         Stat.Met.Newton      = @fsolve;
         
@@ -38,15 +40,15 @@ function Stat   = Chi3_Stat_LLE_Stat_From_Cons_Soliton(Stat,N_Mode)
 
         Slv(2*Stat.Space.N+1) = 0;
         
-        t  = Slv(1:Stat.Space.N) + 1i*Slv(Stat.Space.N+1:2*Stat.Space.N);
-        t   = fft(t);
+ %       t  = Slv(1:Stat.Space.N) + 1i*Slv(Stat.Space.N+1:2*Stat.Space.N);
+  %      t   = fft(t);
             
-        Slv(1:Stat.Space.N)                =  Stat.Eq.mask.*real(t);
-        Slv(Stat.Space.N+1:Stat.Space.N*2) =  Stat.Eq.mask.*imag(t);
+%        Slv(1:Stat.Space.N)                =  Stat.Eq.mask.*real(Slv(1:Stat.Space.N));
+ %       Slv(Stat.Space.N+1:Stat.Space.N*2) =  Stat.Eq.mask.*imag(Slv(Stat.Space.N+1:Stat.Space.N*2));
            
 
         [Slv,eps_f,Output]                = Newton_Switcher(Slv,Stat);
-           [eps_f,Output]
+        [eps_f,Output]
         Stat(1).Sol.Flag        =                               Output;
         Stat(1).Sol.eps         =                                    eps_f;
 

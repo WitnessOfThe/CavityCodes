@@ -47,10 +47,10 @@
 
     SiN.Stat         = Chi3_Stat_LLE_Stat_From_Cons_Soliton(SiN.Stat);
     SiN.Stat.Stab    = Stability_Switcher(SiN.Stat(1));
-    SiN_Soliton_Branch_Up.Stat    = Run_Branch_Universal(SiN.Stat);
         
 %%    -4.8268
 
+    SiN_Soliton_Branch_Up.Stat    = Run_Branch_Universal(SiN.Stat);
     SiN.Stat.Par.Sol_Re_Sign      = '+';
     SiN.Stat                      = Chi3_Stat_LLE_Stat_From_Cons_Soliton(SiN.Stat);
     SiN_Soliton_Branch_Down.Stat = Run_Branch_Universal(SiN.Stat);  
@@ -61,7 +61,7 @@
     [p_1,p_2,p_3]                      = Plot_Static_Field_Spectrums_Soliton(SiN_Soliton_Branch_Up.Stat(ind1),0);
     [p_dot_3,p_dot_4,p_dot_5,p_dot_6]  = Plot_Static_Field_Stability_Soliton(SiN_Soliton_Branch_Up.Stat(ind1),0);
     
-    figure('Name','Fields_Spectrums')   ;    
+    figure('Name','Fields_Spectrums');
     CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_wh_4,p_1,p_2,p_3,p_dot_3,p_dot_4,p_dot_5,p_dot_6],2,6, 'UniformPlots', true, 'Height', 15, 'Width',40,'Labels',false);
 
 %%    

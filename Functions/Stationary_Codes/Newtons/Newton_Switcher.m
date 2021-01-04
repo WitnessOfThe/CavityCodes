@@ -7,7 +7,7 @@ function [x0,eps_f,Output]    = Newton_Switcher(x0,Stat)
             [x0,eps_f,Output]   = Stat.Met.Newton(Stat,x0);
             
         case 'fsolve'
-            
+                
 %            Stat.Eq.FFT   = dftmtx(Stat.Space.N);
 %            Stat.Eq.IFFT  = conj(Stat.Eq.FFT)/Stat.Space.N;
             Psi_theta           = ifft( x0(1:Stat.Space.N) + 1i*x0(Stat.Space.N+1:Stat.Space.N*2));
