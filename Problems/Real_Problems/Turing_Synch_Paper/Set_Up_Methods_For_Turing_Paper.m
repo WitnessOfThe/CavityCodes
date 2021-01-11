@@ -20,7 +20,7 @@ function L_L = Set_Up_Methods_For_Turing_Paper
     L_L.Stat.Met.Prop_Gen             = @Chi3_LLE_Stat_Prop_Gen;
     L_L.Stat.Met.Ev_Stat_From_Dyn     = @Stat_In_Guess_Chi_3_LLE_From_Dyn;
     L_L.Stat.Met.Newton_Matrix        = @Chi3_LLE_Bloch_Stat_Newton_Matrix;
-    L_L.Stat.Met.Stab_Matrix           = @LLE_Full_Stability_Matrix;    
+    L_L.Stat.Met.Stab_Matrix          = @LLE_Full_Stability_Matrix;    
                                      
     L_L.Temp.Met.Ev_Core        = @Chi_3_LLE_Kuar;          
     L_L.Temp.Met.Ev_Start_Point = @Chi_3_LLE_Start_Point_Stat;

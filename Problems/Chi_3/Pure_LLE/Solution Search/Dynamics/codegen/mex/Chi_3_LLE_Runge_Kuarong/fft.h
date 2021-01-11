@@ -24,8 +24,8 @@
 #include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void b_fft(const creal_T x[512], creal_T y[512]);
-extern void fft(const creal_T x[512], creal_T y[512]);
+extern void b_fft(const creal_T x[256], creal_T y[256]);
+extern void fft(const creal_T x[256], creal_T y[256]);
 
 #endif
 

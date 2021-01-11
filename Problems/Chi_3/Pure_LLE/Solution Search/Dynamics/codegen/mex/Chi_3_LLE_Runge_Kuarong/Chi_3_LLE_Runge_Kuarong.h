@@ -25,7 +25,7 @@
 
 /* Function Declarations */
 extern void Chi_3_LLE_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp,
-  real_T N_modes, const struct5_T *Runge, struct6_T *Sol);
+  const struct5_T *Runge, struct6_T *Sol);
 
 #endif
 

@@ -1,4 +1,4 @@
-function [tt_1,tt_2,tt_3,tt_4] = Plot_Static_Field_Stability_Soliton(Stat,Flag,mu)
+function [tt_1,tt_2,tt_3,tt_4,tt_5] = Plot_Static_Field_Stability_Soliton(Stat,Flag)
 %%  
     k = fftshift(Stat.Space.k);
     Bot_thld = -70;
@@ -49,10 +49,14 @@ function [tt_1,tt_2,tt_3,tt_4] = Plot_Static_Field_Stability_Soliton(Stat,Flag,m
    tt_3 = tt_3.addData( k,fftshift(real(Stat.Stab.Dres_Spec.lam).*L_Re_pos/Stat.In.kappa,2),'Color',[1,0,0],'LineStyle','none','Marker','.'); 
    
    tt_4 =  proPlot([],[],[]);
+   tt_5 =  proPlot([],[],[]);
    if size(Stat.Stab.E_vectors,2) >= 2
-       Pert_Vect(1:2,1:Stat.Space.N) = Stat.Stab.E_vectors(1:Stat.Space.N,1:2).'+conj(Stat.Stab.E_vectors(Stat.Space.N+1:2*Stat.Space.N,1:2)).';
-       tt_4 = tt_4.addData(      k,fftshift( 10*log10(abs(Pert_Vect(1,:)).^2) ),'Color',[0,0,1],'PlotType','stem','BaseValue',-70); 
+       Pert_Vect(1:2,1:Stat.Space.N) = abs(Stat.Stab.E_vectors(1:Stat.Space.N,1:2).')+conj(Stat.Stab.E_vectors(Stat.Space.N+1:2*Stat.Space.N,1:2)).';
+       tt_4 = tt_4.addData( k,fftshift( 10*log10(abs(Pert_Vect(1,:)).^2) ),'Color',[0,0,1],'PlotType','stem','BaseValue',-70); 
        tt_4 = tt_4.addData( k,fftshift( 10*log10(abs(Pert_Vect(2,:)).^2) ),'Color',[1,0,0],'PlotType','stem','BaseValue',-70); 
+       Pert_Vect(1:2,1:Stat.Space.N) = abs(Stat.Stab.E_vectors(Stat.Space.N+1:2*Stat.Space.N,1:2)).';
+       tt_5 = tt_5.addData( k,fftshift( 10*log10(abs(Pert_Vect(1,:)).^2) ),'Color',[0,0,1],'PlotType','stem','BaseValue',-70); 
+       tt_5 = tt_5.addData( k,fftshift( 10*log10(abs(Pert_Vect(2,:)).^2) ),'Color',[1,0,0],'PlotType','stem','BaseValue',-70); 
    end
    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,6 +71,9 @@ function [tt_1,tt_2,tt_3,tt_4] = Plot_Static_Field_Stability_Soliton(Stat,Flag,m
                         'YLabelText','Re[$\lambda_{\mu}/\kappa$]',...  
                         'FontSize',13,'XLim',[-x_Bound,x_Bound],'YLim',[-Re_Bound,Re_Bound]/Stat.In.kappa);                   %,'XLim',[-100,100]  
    tt_4 = tt_4.changeAxisOptions('XLabelText','Mode Number',...
+                        'YLabelText','Eigen vect Amplitude',...  
+                        'FontSize',13,'XLim',[-x_Bound,x_Bound]);                   %,'XLim',[-100,100]  
+  tt_5 = tt_5.changeAxisOptions('XLabelText','Mode Number',...
                         'YLabelText','Eigen vect Amplitude',...  
                         'FontSize',13,'XLim',[-x_Bound,x_Bound]);                   %,'XLim',[-100,100]  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

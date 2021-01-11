@@ -17,11 +17,6 @@
     SiN.Temp.In         = SiN.Stat.In;
     
 %%   
-%     SiN.Stat.Par.step_tol         = 0.000001;
-%    SiN.Stat.Par.variable         = 'Pump Power';  %%'Pump Power';
-%     SiN.Stat.Par.first_step       = 0.01; %min =1E-4/3
-%     SiN.Stat.Par.bot_boundary     = 0;
-%     SiN.Stat.Par.top_boundary     = 1;
    
     SiN.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     SiN.Temp.Par.dt            = 2E-4;
@@ -32,39 +27,6 @@
     SiN.Temp.Par.CW_num        = 1;
     Runge                      = Define_Runge_Coeff(SiN.Temp.Par);
 
- %%
-    SiN.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    SiN.Stat.Par.first_step       = 0.02; % step for delta measured in delta/kappa
-    SiN.Stat.Par.step_tol         = 0.001;
-
-    SiN.Stat.Par.bot_boundary     = 0;
-    SiN.Stat.Par.top_boundary     = 15;
-    
-    SiN.Stat.Par.Sol_Re_Sign      = '-';
-    SiN.Stat.Par.Stability        = 'Yes';
-    SiN.Stat.Par.Newton_iter      = 30;      
-    SiN.Stat.Par.Newton_tol       = 1E-10;  
-    SiN.Stat.Par.i_max            = 500;
-    SiN.Stat.Par.CW_num           = 3;
-    SiN.Stat.Par.fsolveoptions     = optimoptions('fsolve','CheckGradients',...
-    false,'Display','none','UseParallel',true,'SpecifyObjectiveGradient',true,...
-    'Algorithm','trust-region-dogleg'...
- ,'FunctionTolerance',SiN.Stat.Par.Newton_tol,...
-     'MaxIterations',SiN.Stat.Par.Newton_iter,'StepTolerance',1E-20,'OptimalityTolerance',1E-25);
-%%
-
-    SiN.Stat         = Chi3_Stat_LLE_Stat_From_Cons_Soliton(SiN.Stat,N_Mode);
-    SiN.Stat         = Chi3_Stat_LLE_Stat_From_Cons_Soliton(SiN.Stat,N_Mode);
-    SiN.Stat.Stab =                       Stability_Switcher(SiN.Stat(1));
-        
-%%    -4.8268
-
-    SiN_Soliton_Branch_Up.Stat  = Run_Branch_Universal(SiN.Stat,N_Mode);
-    SiN.Stat.Par.Sol_Re_Sign      = '+';
-    SiN.Stat         = Chi3_Stat_LLE_Stat_From_Cons_Soliton(SiN.Stat,N_Mode);
-    SiN_Soliton_Branch_Down.Stat = Run_Branch_Universal(SiN.Stat,N_Mode);  
-    
-%%
 
     
 %%

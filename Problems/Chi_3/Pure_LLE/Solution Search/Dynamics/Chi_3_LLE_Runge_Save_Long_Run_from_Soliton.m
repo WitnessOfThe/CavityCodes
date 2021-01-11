@@ -1,44 +1,50 @@
-function Chi_3_LLE_Runge_Save_Long_Run_from_Soliton(Path,CaF,Ind,CaF_1D_Upper,CaF_1D_Lower,mu)
+function Chi_3_LLE_Runge_Save_Long_Run_from_Soliton(Path,Res,Ind,Res_Branch,full_pic)
 
-    ind_t  = round(size(CaF.Temp.Sol.Psi,1)/2+1):size(CaF.Temp.Sol.Psi,1);
+    ind_t  = round(1*size(Res.Temp.Sol.Psi,1)/4+1):size(Res.Temp.Sol.Psi,1);
+    
     if mod(size(ind_t,2),2) == 1
         
-        ind_t  = round(size(CaF.Temp.Sol.Psi,1)/2+2):size(CaF.Temp.Sol.Psi,1);
+        ind_t  = round(1*size(Res.Temp.Sol.Psi,1)/4+2):size(Res.Temp.Sol.Psi,1);
+            
+   end
         
-    end
-        
-    tau = CaF.Temp.Sol.t(ind_t(end)) - CaF.Temp.Sol.t(ind_t(1))/ CaF.Temp.Eq.norm;
+    tau = Res.Temp.Sol.t(ind_t(end)) - Res.Temp.Sol.t(ind_t(1))/ Res.Temp.Eq.norm;
     N_t = size(ind_t,2);
     f = [0:N_t/2-1,-N_t/2:-1]/tau*2*pi;
     
-    for i = 1:size(CaF.Temp.Eq.mode_range,2)
+    for i = 1:size(Res.Temp.Eq.mode_range,2)
         
-        Power_mu(i)         = trapz(abs(CaF.Temp.Sol.Psi(ind_t,i)).^2*2*pi)/tau*tau/N_t;
-        freq_mu(i)          = trapz(f.*abs(ifft(CaF.Temp.Sol.Psi(ind_t,i))).^2.')./trapz(abs(ifft(CaF.Temp.Sol.Psi(ind_t,i))).^2);
+        Power_mu(i)         = trapz(abs(Res.Temp.Sol.Psi(ind_t,i)).^2*2*pi)/tau*tau/N_t;
+        freq_mu_avg(i)      = trapz(f.*abs(ifft(Res.Temp.Sol.Psi(ind_t,i))).^2.')./trapz(abs(ifft(Res.Temp.Sol.Psi(ind_t,i))).^2);
+        [~,ind]             = max(abs(ifft(Res.Temp.Sol.Psi(ind_t,i))).^2);
+        freq_mu_max(i)      = f(ind);
+        
     end
     
-    Save.CW               = CaF.CW;
-    Save.Stat             = CaF.Stat;
-    Save.Temp.In          = CaF.Temp.In;
-    Save.Temp.Eq          = CaF.Temp.Eq;
-    Save.Temp.Sol.Psi_end = CaF.Temp.Sol.Psi(end,:);
-    Save.Temp.Sol.t       = CaF.Temp.Sol.t(:);
-    Save.Temp.Sol.Power    = Power_mu;
-    Save.Temp.Sol.freq    = freq_mu;
+    Save.CW                 = Res.CW;
+    Save.Stat               = Res.Stat;
+    Save.Temp.In            = Res.Temp.In;
+    Save.Temp.Eq            = Res.Temp.Eq;
+    Save.Temp.Sol.Psi_end   = Res.Temp.Sol.Psi(end,:);
+    Save.Temp.Sol.dt        = Res.Temp.Sol.t(end);
+    Save.Temp.Sol.N_t       = N_t;
     
-    [tt_1,tt_2] = Plot_Dynamics_Result_pcolors(CaF.Temp,1,0);
-    [tt_3,tt_4] = Plot_Dynamics_Result_LinePlots_Spectrums(CaF.Temp,0);
-    [tt_5,tt_6] = Plot_Dynamics_Rf_pcolor_Soliton(CaF.CW,CaF.Stat,CaF.Temp,[min(CaF.Temp.Space.k(CaF.Temp.Eq.mode_range)):max(CaF.Temp.Space.k(CaF.Temp.Eq.mode_range))],ind_t,0);
+    Save.Temp.Sol.Power     = Power_mu;
+    Save.Temp.Sol.freq_avg  = freq_mu_avg;
+    Save.Temp.Sol.freq_max  = freq_mu_max;
     
-    [p_wh_1,p_wh_2,p_wh_3,p_wh_4]      = Plot_LLE_Static_Branch_Soliton(CaF.CW,CaF_1D_Upper.Stat,CaF_1D_Lower.Stat,0,1,0,CaF_1D_Upper(1).Stat(Ind));
-    [p_dot_1,p_dot_2,p_dot_3]          = Plot_Static_Field_Spectrums_Soliton(CaF_1D_Upper.Stat(Ind),0);
-    [p_dot_4,p_dot_5,p_dot_6,p_dot_7]  = Plot_Static_Field_Stability_Soliton(CaF_1D_Upper.Stat(Ind),0);
-    
-%    [p_wh_1,p_wh_2,p_wh_3]    = Plot_LLE_Static_Branch(CaF.CW,CaF_1D_Upper.Stat,CaF_1D_Lower.Stat,0,1,mu,CaF_1D_Upper(1).Stat(Ind));
- %   [p_dot_1,p_dot_2]         = Plot_Static_Field_Spectrums(CaF_1D_Upper(1).Stat(Ind),0);
-  %  [p_dot_3,p_dot_4,p_dot_5] = Plot_Static_Field_Stability(CaF_1D_Upper(1).Stat(Ind),0,mu);
+    [p_wh_1,p_wh_2,~,p_wh_4]         = Plot_LLE_Static_Branch_Soliton(Res.CW,Res_Branch.Stat,Res_Branch.Stat,0,1,Res.Stat);
+    [p_1,p_2,~]                      = Plot_Static_Field_Spectrums_Soliton(Res.Stat,0);
+    [p_dot_3,~,~,p_dot_6,p_dot_7]    = Plot_Static_Field_Stability_Soliton(Res.Stat,0);
+
+    [d1,d2,d3] = Plot_Dynamics_Rf_pcolor_Soliton(Res.Stat,Res.Temp,ind_t,0)   ;
+    [d4,d5]    = Plot_Dynamics_Result_pcolors(Res.Temp,1,0);
+    [d6,d7]    = Plot_Dynamics_Result_LinePlots_Spectrums(Res.Temp,0);
+    full_pic   = full_pic.addData(Res.Stat.Eq.delta,Res.Stat.In.P,[],'Marker','x','Color',[1,0,0],'MarkerSize',6);
+%%      
     figure;
-    CF = conFigure([tt_1,tt_2,tt_3,tt_4,tt_5,tt_6,p_wh_1,p_wh_2,p_wh_3,p_wh_4,p_dot_1,p_dot_2,p_dot_3,p_dot_4,p_dot_5,p_dot_6,p_dot_7],4,5, 'UniformPlots', true, 'Height', 20, 'Width', 35,'Labels',false);
+    
+    CF = conFigure([p_wh_1,p_wh_2,p_wh_4,p_1,p_2,p_dot_3,p_dot_6,p_dot_7,d1,d2,d3,d4,d5,d6,d7,full_pic],2,8, 'UniformPlots', true, 'Height', 20, 'Width', 45,'Labels',false);
     h = gcf;
     Alph_Ind =    (letters(Ind+26*27))  ;
     if ~exist(strcat(Path,'/jpg'),'dir')
@@ -53,7 +59,7 @@ function Chi_3_LLE_Runge_Save_Long_Run_from_Soliton(Path,CaF,Ind,CaF_1D_Upper,Ca
         
     end
     
-    print(h,strcat(Path,'/jpg/',Alph_Ind{1},'_Power=',num2str(CaF.Temp.In.P),'Delta=',num2str(CaF.Temp.In.delta/CaF.Temp.In.kappa),'.jpg'),'-djpeg','-r300');
+    print(h,strcat(Path,'/jpg/',Alph_Ind{1},'_Power=',num2str(Res.Temp.In.P),'Delta=',num2str(Res.Temp.In.delta/Res.Temp.In.kappa),'.jpg'),'-djpeg','-r300');
     close(h);
     save(strcat(Path,'/Data/',Alph_Ind{1}),'Save');
     clear variables;

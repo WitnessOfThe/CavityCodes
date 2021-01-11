@@ -1,29 +1,28 @@
-function Chi_3_LLE_Assynch_Paralell_exec_Sol(Res,delta_matrix,power_matrix,ii,Path,Sim_zone,N_Mode,Runge,CaF_1D_Upper,CaF_1D_Lower,mu)
+function Chi_3_LLE_Assynch_Paralell_exec_Sol(Res_Branch,Path,ii,Res,Runge,full_pic)
 
-    Alph_Ind =    (letters(ii+26*27))  ;
+    Alph_Ind =    (letters(ii+26*27));
 
-      if~isfile(strcat(Path,'/Data/',Alph_Ind{1},'.mat'))
-          
-                Res.Temp.In.delta = delta_matrix;
-                Res.Temp.In.P     = power_matrix;
-                Res.Temp          = Chi_3_LLE_Normalization_Without_D_Coeff(Res.Temp,N_Mode);       
-                
+    if~isfile(strcat(Path,'/Data/',Alph_Ind{1},'.mat'))
 
-                Res.CW.In         = Res.Temp.In;
-                Res.CW            = Res.CW.Met.Solve(Res.CW,Res.Temp.Space.N);
-                Res.CW.In.g       = Res.CW.Sol.g(Res.Temp.Par.CW_num)*Res.CW.Eq.norm;   
-                Res.CW            = Res.CW.Met.Mi_Formula(Res.CW,Res.Temp.Space.N);   
-                
-                Res             =   Res.Temp.Met.Ev_Start_Point(Res);  
-                
-                Res.Temp.Met    =                                       [];
-                
-                Res(1).Temp.Sol =    Chi_3_LLE_Runge_Kuarong_mex(Res.Temp,N_Mode,Runge);
-                
-                Chi_3_LLE_Runge_Save_Long_Run_from_Soliton(Path,Res,ii,CaF_1D_Upper,CaF_1D_Lower,mu)
+        Res.Temp.In       = Res.Stat.In;
+        Res.Temp          = Chi_3_LLE_Normalization_Without_D_Coeff(Res.Temp);       
 
-      end
-      
+
+%         Res.CW.In         = Res.Temp.In;
+%         Res.CW            = Res.CW.Met.Solve(Res.CW);
+%         Res.CW.In.g       = Res.CW.Sol.g(Res.Temp.Par.CW_num)*Res.CW.Eq.norm;   
+%         Res.CW            = Res.CW.Met.Mi_Formula(Res.CW);   
+% 
+        Res             =   Res.Temp.Met.Ev_Start_Point(Res);  
+
+        Res.Temp.Met    =                                       [];
+tic
+        Res(1).Temp.Sol =    Chi_3_LLE_Runge_Kuarong_mex(Res.Temp,Runge);
+toc
+    %    Chi_3_LLE_Runge_Save_Long_Run_from_Soliton(Path,Res,ii,Res_Branch,full_pic)
+
+    end
+      clearvars;
 end
 function lets = letters(nums)
 lets = arrayfun(@(n)num2char(n),nums,'UniformOutput',0);

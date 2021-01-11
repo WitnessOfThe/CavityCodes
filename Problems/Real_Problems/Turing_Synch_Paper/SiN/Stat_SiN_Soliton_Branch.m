@@ -7,13 +7,14 @@
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Input Parameters for SiN  
+
     N_mode              =  2^8;
     SiN.Stat.In         =  Params_SiN_Modes(0, N_mode);    
     SiN.Stat.In.N_mode  =  N_mode;
     SiN.Stat.In.mu_bl   =  1;
-    SiN.Stat.In.kappa   =  100E6*2*pi;
-    SiN.Stat.In.delta   =  3*SiN.Stat.In.kappa;
-    SiN.Stat.In.P       =  0.04;       
+    SiN.Stat.In.kappa   =  125E6*2*pi;
+    SiN.Stat.In.delta   =  3.5*SiN.Stat.In.kappa;
+    SiN.Stat.In.P       =  0.0325;       
     
     SiN.CW.In           =  SiN.Stat.In;
 
@@ -25,7 +26,7 @@
     SiN.Stat.Met.Newton           = @fsolve;%'fsolve'
          
     SiN.Stat.Par.variable         = 'delta';  %%'Pump Power';
-    SiN.Stat.Par.first_step       = 0.2; % step for delta measured in delta/kappa
+    SiN.Stat.Par.first_step       = 0.05; % step for delta measured in delta/kappa
     SiN.Stat.Par.step_tol         = 0.001;
     SiN.Stat.Par.step_inc         = 0.00;
     SiN.Stat.Par.step_dec         = 0.5;
@@ -53,10 +54,10 @@
 
     SiN.Stat.Par.Sol_Re_Sign      = '+';
     SiN.Stat                      = Chi3_Stat_LLE_Stat_From_Cons_Soliton(SiN.Stat);
-    SiN_Soliton_Branch_Down.Stat = Run_Branch_Universal(SiN.Stat);  
+    SiN_Soliton_Branch_Down       = SiN_Soliton_Branch_Up;  
     
 %%
-    ind1 = 32;
+    ind1 = 3;
     [p_wh_1,p_wh_2,p_wh_3,p_wh_4]      = Plot_LLE_Static_Branch_Soliton(SiN.CW,SiN_Soliton_Branch_Up.Stat,SiN_Soliton_Branch_Down.Stat,0,1,0,SiN_Soliton_Branch_Up(1).Stat(ind1));
     [p_1,p_2,p_3]                      = Plot_Static_Field_Spectrums_Soliton(SiN_Soliton_Branch_Up.Stat(ind1),0);
     [p_dot_3,p_dot_4,p_dot_5,p_dot_6]  = Plot_Static_Field_Stability_Soliton(SiN_Soliton_Branch_Up.Stat(ind1),0);

@@ -1,4 +1,4 @@
-    function Sol = Chi_3_LLE_Runge_Kuarong(Temp,N_modes,Runge)   
+    function Sol = Chi_3_LLE_Runge_Kuarong(Temp,Runge)   
 
     d            =  complex(zeros(Runge.s,size( Temp.In.Psi_Start,2)));
     [nt,dt]      =                           ParSim(Temp.Par);
@@ -35,7 +35,7 @@
             Sol.Psi(ind_s ,:) = F_e(Temp.Eq.mode_range)/Temp.Space.N;
             Sol.t(  ind_s )   = Temp.Par.dt*ni;
 
-            if 10*log10(sum(abs(Sol.Psi(ind_s,2:end)).^2)) <= -50 && (mod(ind_s,2) ==0)
+            if 10*log10(sum(abs(Sol.Psi(ind_s,2:end)).^2)) <= -70 && (mod(ind_s,2) ==0)
 
                     Sol.Psi(ind_s+1:end,:) = [];
                     Sol.t(ind_s+1:end)     = [];                

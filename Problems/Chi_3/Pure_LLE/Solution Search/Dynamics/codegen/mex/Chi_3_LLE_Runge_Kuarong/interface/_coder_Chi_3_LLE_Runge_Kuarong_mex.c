@@ -19,11 +19,11 @@
 
 /* Function Declarations */
 static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
-  int32_T nrhs, const mxArray *prhs[3]);
+  int32_T nrhs, const mxArray *prhs[2]);
 
 /* Function Definitions */
 static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
-  int32_T nrhs, const mxArray *prhs[3])
+  int32_T nrhs, const mxArray *prhs[2])
 {
   const mxArray *outputs[1];
   emlrtStack st = { NULL,              /* site */
@@ -34,8 +34,8 @@ static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
   st.tls = emlrtRootTLSGlobal;
 
   /* Check for proper number of arguments. */
-  if (nrhs != 3) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 3, 4,
+  if (nrhs != 2) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 2, 4,
                         23, "Chi_3_LLE_Runge_Kuarong");
   }
 

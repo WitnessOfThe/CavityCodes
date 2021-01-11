@@ -195,23 +195,24 @@ typedef struct emxArray_real_T_1x600 emxArray_real_T_1x600;
 
 typedef struct {
   real_T eta;
+  real_T omega[256];
   real_T omega_p;
-  real_T D[6];
+  real_T D[2];
+  real_T omega_int[256];
   real_T gamma;
   real_T range;
   real_T N_mode;
+  real_T mu_bl;
   real_T kappa;
   real_T delta;
   real_T P;
-  real_T omega[512];
-  real_T omega_int[512];
   real_T Finess;
   real_T Fin_D;
   real_T H;
   real_T W;
   real_T W_Star;
   real_T W_WStar;
-  creal_T Psi_Start[512];
+  creal_T Psi_Start[256];
   real_T t_start;
 } struct1_T;
 
