@@ -9,23 +9,19 @@
  *
  */
 
-#ifndef EXP_H
-#define EXP_H
+#pragma once
 
 /* Include files */
+#include "Chi_3_LLE_Runge_Kuarong_types.h"
+#include "rtwtypes.h"
+#include "emlrt.h"
+#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tmwtypes.h"
-#include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void b_exp(const emlrtStack *sp, emxArray_creal_T *x);
-
-#endif
+void b_exp(const emlrtStack *sp, emxArray_creal_T *x);
 
 /* End of code generation (exp.h) */

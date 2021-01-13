@@ -10,237 +10,249 @@
  */
 
 /* Include files */
-#include "rt_nonfinite.h"
-#include "Chi_3_LLE_Runge_Kuarong.h"
 #include "nullAssignment.h"
-#include "Chi_3_LLE_Runge_Kuarong_emxutil.h"
-#include "eml_int_forloop_overflow_check.h"
 #include "Chi_3_LLE_Runge_Kuarong_data.h"
+#include "Chi_3_LLE_Runge_Kuarong_emxutil.h"
+#include "Chi_3_LLE_Runge_Kuarong_types.h"
+#include "eml_int_forloop_overflow_check.h"
+#include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRSInfo jb_emlrtRSI = { 21, /* lineNo */
+static emlrtRSInfo jb_emlrtRSI = { 22, /* lineNo */
   "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo kb_emlrtRSI = { 25, /* lineNo */
+static emlrtRSInfo kb_emlrtRSI = { 26, /* lineNo */
   "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo lb_emlrtRSI = { 273,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo lb_emlrtRSI = { 274,/* lineNo */
+  "delete_rows",                       /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo mb_emlrtRSI = { 282,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo mb_emlrtRSI = { 283,/* lineNo */
+  "delete_rows",                       /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo nb_emlrtRSI = { 284,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo nb_emlrtRSI = { 285,/* lineNo */
+  "delete_rows",                       /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo ob_emlrtRSI = { 287,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo ob_emlrtRSI = { 288,/* lineNo */
+  "delete_rows",                       /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo pb_emlrtRSI = { 289,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo pb_emlrtRSI = { 290,/* lineNo */
+  "delete_rows",                       /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo qb_emlrtRSI = { 258,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo qb_emlrtRSI = { 259,/* lineNo */
+  "make_bitarray",                     /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo rb_emlrtRSI = { 131,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo rb_emlrtRSI = { 132,/* lineNo */
+  "num_true",                          /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo sb_emlrtRSI = { 12, /* lineNo */
+static emlrtRSInfo sb_emlrtRSI = { 13, /* lineNo */
   "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo tb_emlrtRSI = { 16, /* lineNo */
+static emlrtRSInfo tb_emlrtRSI = { 17, /* lineNo */
   "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo ub_emlrtRSI = { 166,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo ub_emlrtRSI = { 167,/* lineNo */
+  "onearg_null_assignment",            /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo vb_emlrtRSI = { 168,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo vb_emlrtRSI = { 169,/* lineNo */
+  "onearg_null_assignment",            /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRSInfo wb_emlrtRSI = { 171,/* lineNo */
-  "nullAssignment",                    /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pathName */
+static emlrtRSInfo wb_emlrtRSI = { 172,/* lineNo */
+  "onearg_null_assignment",            /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pathName */
 };
 
-static emlrtRTEInfo mb_emlrtRTEI = { 282,/* lineNo */
+static emlrtRTEInfo g_emlrtRTEI = { 297,/* lineNo */
+  1,                                   /* colNo */
+  "delete_rows",                       /* fName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pName */
+};
+
+static emlrtRTEInfo h_emlrtRTEI = { 81,/* lineNo */
+  27,                                  /* colNo */
+  "validate_inputs",                   /* fName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pName */
+};
+
+static emlrtRTEInfo i_emlrtRTEI = { 184,/* lineNo */
   9,                                   /* colNo */
-  "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
+  "onearg_null_assignment",            /* fName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pName */
 };
 
-static emlrtRTEInfo nb_emlrtRTEI = { 297,/* lineNo */
-  5,                                   /* colNo */
-  "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
+static emlrtRTEInfo j_emlrtRTEI = { 85,/* lineNo */
+  27,                                  /* colNo */
+  "validate_inputs",                   /* fName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pName */
 };
 
-static emlrtRTEInfo ob_emlrtRTEI = { 25,/* lineNo */
-  13,                                  /* colNo */
-  "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
-};
-
-static emlrtRTEInfo pb_emlrtRTEI = { 280,/* lineNo */
-  9,                                   /* colNo */
-  "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
-};
-
-static emlrtRTEInfo qb_emlrtRTEI = { 166,/* lineNo */
-  9,                                   /* colNo */
-  "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
-};
-
-static emlrtRTEInfo rb_emlrtRTEI = { 16,/* lineNo */
-  9,                                   /* colNo */
-  "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
-};
-
-static emlrtRTEInfo sb_emlrtRTEI = { 164,/* lineNo */
-  9,                                   /* colNo */
-  "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
-};
-
-static emlrtRTEInfo ac_emlrtRTEI = { 296,/* lineNo */
+static emlrtRTEInfo nb_emlrtRTEI = { 258,/* lineNo */
   1,                                   /* colNo */
   "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pName */
 };
 
-static emlrtRTEInfo bc_emlrtRTEI = { 80,/* lineNo */
-  27,                                  /* colNo */
+static emlrtRTEInfo pb_emlrtRTEI = { 298,/* lineNo */
+  5,                                   /* colNo */
   "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pName */
 };
 
-static emlrtRTEInfo cc_emlrtRTEI = { 183,/* lineNo */
+static emlrtRTEInfo qb_emlrtRTEI = { 281,/* lineNo */
   9,                                   /* colNo */
   "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pName */
 };
 
-static emlrtRTEInfo dc_emlrtRTEI = { 84,/* lineNo */
-  27,                                  /* colNo */
+static emlrtRTEInfo rb_emlrtRTEI = { 17,/* lineNo */
+  9,                                   /* colNo */
   "nullAssignment",                    /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/nullAssignment.m"/* pName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pName */
 };
+
+static emlrtRTEInfo sb_emlrtRTEI = { 165,/* lineNo */
+  9,                                   /* colNo */
+  "nullAssignment",                    /* fName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\nullAssignment.m"/* pName */
+};
+
+/* Function Declarations */
+static void make_bitarray(const emlrtStack *sp, int32_T n, const
+  emxArray_int32_T *idx, emxArray_boolean_T *b);
+static int32_T num_true(const emlrtStack *sp, const emxArray_boolean_T *b);
 
 /* Function Definitions */
+static void make_bitarray(const emlrtStack *sp, int32_T n, const
+  emxArray_int32_T *idx, emxArray_boolean_T *b)
+{
+  emlrtStack b_st;
+  emlrtStack st;
+  int32_T b_b;
+  int32_T k;
+  st.prev = sp;
+  st.tls = sp->tls;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
+  b_b = b->size[0] * b->size[1];
+  b->size[0] = 1;
+  b->size[1] = n;
+  emxEnsureCapacity_boolean_T(sp, b, b_b, &nb_emlrtRTEI);
+  for (b_b = 0; b_b < n; b_b++) {
+    b->data[b_b] = false;
+  }
+
+  b_b = idx->size[1];
+  st.site = &qb_emlrtRSI;
+  if ((1 <= idx->size[1]) && (idx->size[1] > 2147483646)) {
+    b_st.site = &l_emlrtRSI;
+    check_forloop_overflow_error(&b_st);
+  }
+
+  for (k = 0; k < b_b; k++) {
+    b->data[idx->data[k] - 1] = true;
+  }
+}
+
+static int32_T num_true(const emlrtStack *sp, const emxArray_boolean_T *b)
+{
+  emlrtStack b_st;
+  emlrtStack st;
+  int32_T b_b;
+  int32_T k;
+  int32_T n;
+  st.prev = sp;
+  st.tls = sp->tls;
+  b_st.prev = &st;
+  b_st.tls = st.tls;
+  n = 0;
+  b_b = b->size[1];
+  st.site = &rb_emlrtRSI;
+  if ((1 <= b->size[1]) && (b->size[1] > 2147483646)) {
+    b_st.site = &l_emlrtRSI;
+    check_forloop_overflow_error(&b_st);
+  }
+
+  for (k = 0; k < b_b; k++) {
+    n += b->data[k];
+  }
+
+  return n;
+}
+
 void b_nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
                       emxArray_int32_T *idx)
 {
-  boolean_T overflow;
-  int32_T k;
-  boolean_T exitg1;
-  emxArray_boolean_T *b;
-  int32_T nxin;
-  int32_T n;
-  int32_T k0;
-  int32_T nxout;
-  emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
-  emlrtStack d_st;
+  emlrtStack st;
+  emxArray_boolean_T *b;
+  int32_T k;
+  int32_T k0;
+  int32_T nxin;
+  int32_T nxout;
+  boolean_T exitg1;
+  boolean_T p;
   st.prev = sp;
   st.tls = sp->tls;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
-  d_st.prev = &c_st;
-  d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
   st.site = &sb_emlrtRSI;
-  overflow = true;
+  p = true;
   k = 0;
   exitg1 = false;
   while ((!exitg1) && (k <= idx->size[1] - 1)) {
     if (idx->data[k] > x->size[1]) {
-      overflow = false;
+      p = false;
       exitg1 = true;
     } else {
       k++;
     }
   }
 
-  if (!overflow) {
-    emlrtErrorWithMessageIdR2018a(&st, &dc_emlrtRTEI,
-      "MATLAB:subsdeldimmismatch", "MATLAB:subsdeldimmismatch", 0);
+  if (!p) {
+    emlrtErrorWithMessageIdR2018a(&st, &j_emlrtRTEI, "MATLAB:subsdeldimmismatch",
+      "MATLAB:subsdeldimmismatch", 0);
   }
 
   emxInit_boolean_T(&st, &b, 2, &sb_emlrtRTEI, true);
   st.site = &tb_emlrtRSI;
   nxin = x->size[1];
   b_st.site = &ub_emlrtRSI;
-  n = b->size[0] * b->size[1];
-  b->size[0] = 1;
-  b->size[1] = x->size[1];
-  emxEnsureCapacity_boolean_T(&b_st, b, n, &qb_emlrtRTEI);
-  k0 = x->size[1];
-  for (n = 0; n < k0; n++) {
-    b->data[n] = false;
-  }
-
-  k0 = idx->size[1];
-  c_st.site = &qb_emlrtRSI;
-  overflow = ((1 <= idx->size[1]) && (idx->size[1] > 2147483646));
-  if (overflow) {
-    d_st.site = &l_emlrtRSI;
-    check_forloop_overflow_error(&d_st);
-  }
-
-  for (k = 0; k < k0; k++) {
-    b->data[idx->data[k] - 1] = true;
-  }
-
+  make_bitarray(&b_st, x->size[1], idx, b);
   b_st.site = &vb_emlrtRSI;
-  n = 0;
-  k0 = b->size[1];
-  c_st.site = &rb_emlrtRSI;
-  overflow = ((1 <= b->size[1]) && (b->size[1] > 2147483646));
-  if (overflow) {
-    d_st.site = &l_emlrtRSI;
-    check_forloop_overflow_error(&d_st);
-  }
-
-  for (k = 0; k < k0; k++) {
-    n += b->data[k];
-  }
-
-  nxout = x->size[1] - n;
+  nxout = x->size[1] - num_true(&b_st, b);
   k0 = -1;
   b_st.site = &wb_emlrtRSI;
-  overflow = ((1 <= x->size[1]) && (x->size[1] > 2147483646));
-  if (overflow) {
+  if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
     c_st.site = &l_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
@@ -254,63 +266,60 @@ void b_nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
 
   emxFree_boolean_T(&b);
   if (nxout > nxin) {
-    emlrtErrorWithMessageIdR2018a(&st, &cc_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &i_emlrtRTEI,
       "Coder:builtins:AssertionFailed", "Coder:builtins:AssertionFailed", 0);
   }
 
+  nxin = x->size[0] * x->size[1];
   if (1 > nxout) {
     x->size[1] = 0;
   } else {
-    n = x->size[0] * x->size[1];
     x->size[1] = nxout;
-    emxEnsureCapacity_creal_T(&st, x, n, &rb_emlrtRTEI);
   }
 
+  emxEnsureCapacity_creal_T(&st, x, nxin, &rb_emlrtRTEI);
   emlrtHeapReferenceStackLeaveFcnR2012b(sp);
 }
 
 void nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
                     emxArray_int32_T *idx)
 {
-  boolean_T overflow;
-  int32_T k;
-  boolean_T exitg1;
-  int32_T nrowx;
-  int32_T ncolx;
-  emxArray_boolean_T *b;
-  int32_T nrows;
-  int32_T loop_ub;
-  int32_T i;
-  emxArray_creal_T *b_x;
-  emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
-  emlrtStack d_st;
+  emlrtStack st;
+  emxArray_boolean_T *b;
+  emxArray_creal_T *b_x;
+  int32_T i;
+  int32_T j;
+  int32_T k;
+  int32_T ncolx;
+  int32_T nrows;
+  int32_T nrowx;
+  boolean_T exitg1;
+  boolean_T p;
   st.prev = sp;
   st.tls = sp->tls;
   b_st.prev = &st;
   b_st.tls = st.tls;
   c_st.prev = &b_st;
   c_st.tls = b_st.tls;
-  d_st.prev = &c_st;
-  d_st.tls = c_st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
   st.site = &jb_emlrtRSI;
-  overflow = true;
+  p = true;
   k = 0;
   exitg1 = false;
   while ((!exitg1) && (k <= idx->size[1] - 1)) {
     if (idx->data[k] > x->size[0]) {
-      overflow = false;
+      p = false;
       exitg1 = true;
     } else {
       k++;
     }
   }
 
-  if (!overflow) {
-    emlrtErrorWithMessageIdR2018a(&st, &bc_emlrtRTEI,
-      "MATLAB:subsdeldimmismatch", "MATLAB:subsdeldimmismatch", 0);
+  if (!p) {
+    emlrtErrorWithMessageIdR2018a(&st, &h_emlrtRTEI, "MATLAB:subsdeldimmismatch",
+      "MATLAB:subsdeldimmismatch", 0);
   }
 
   st.site = &kb_emlrtRSI;
@@ -319,62 +328,26 @@ void nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
   if (idx->size[1] == 1) {
     nrows = x->size[0] - 1;
     b_st.site = &lb_emlrtRSI;
-    overflow = ((1 <= x->size[1]) && (x->size[1] > 2147483646));
-    if (overflow) {
+    if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
       c_st.site = &l_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
 
-    for (loop_ub = 0; loop_ub < ncolx; loop_ub++) {
+    for (j = 0; j < ncolx; j++) {
       k = idx->data[0];
       for (i = k; i <= nrows; i++) {
-        x->data[(i + x->size[0] * loop_ub) - 1] = x->data[i + x->size[0] *
-          loop_ub];
+        x->data[(i + x->size[0] * j) - 1] = x->data[i + x->size[0] * j];
       }
     }
   } else {
-    emxInit_boolean_T(&st, &b, 2, &pb_emlrtRTEI, true);
+    emxInit_boolean_T(&st, &b, 2, &qb_emlrtRTEI, true);
     b_st.site = &mb_emlrtRSI;
-    k = b->size[0] * b->size[1];
-    b->size[0] = 1;
-    b->size[1] = x->size[0];
-    emxEnsureCapacity_boolean_T(&b_st, b, k, &mb_emlrtRTEI);
-    loop_ub = x->size[0];
-    for (k = 0; k < loop_ub; k++) {
-      b->data[k] = false;
-    }
-
-    nrows = idx->size[1];
-    c_st.site = &qb_emlrtRSI;
-    overflow = ((1 <= idx->size[1]) && (idx->size[1] > 2147483646));
-    if (overflow) {
-      d_st.site = &l_emlrtRSI;
-      check_forloop_overflow_error(&d_st);
-    }
-
-    for (k = 0; k < nrows; k++) {
-      b->data[idx->data[k] - 1] = true;
-    }
-
+    make_bitarray(&b_st, x->size[0], idx, b);
     b_st.site = &nb_emlrtRSI;
-    i = 0;
-    nrows = b->size[1];
-    c_st.site = &rb_emlrtRSI;
-    overflow = ((1 <= b->size[1]) && (b->size[1] > 2147483646));
-    if (overflow) {
-      d_st.site = &l_emlrtRSI;
-      check_forloop_overflow_error(&d_st);
-    }
-
-    for (k = 0; k < nrows; k++) {
-      i += b->data[k];
-    }
-
-    nrows = x->size[0] - i;
+    nrows = x->size[0] - num_true(&b_st, b);
     i = 0;
     b_st.site = &ob_emlrtRSI;
-    overflow = ((1 <= x->size[0]) && (x->size[0] > 2147483646));
-    if (overflow) {
+    if ((1 <= x->size[0]) && (x->size[0] > 2147483646)) {
       c_st.site = &l_emlrtRSI;
       check_forloop_overflow_error(&c_st);
     }
@@ -387,8 +360,8 @@ void nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
           check_forloop_overflow_error(&c_st);
         }
 
-        for (loop_ub = 0; loop_ub < ncolx; loop_ub++) {
-          x->data[i + x->size[0] * loop_ub] = x->data[k + x->size[0] * loop_ub];
+        for (j = 0; j < ncolx; j++) {
+          x->data[i + x->size[0] * j] = x->data[k + x->size[0] * j];
         }
 
         i++;
@@ -399,37 +372,37 @@ void nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
   }
 
   if (nrows > nrowx) {
-    emlrtErrorWithMessageIdR2018a(&st, &ac_emlrtRTEI,
+    emlrtErrorWithMessageIdR2018a(&st, &g_emlrtRTEI,
       "Coder:builtins:AssertionFailed", "Coder:builtins:AssertionFailed", 0);
   }
 
+  emxInit_creal_T(&st, &b_x, 2, &pb_emlrtRTEI, true);
   if (1 > nrows) {
-    loop_ub = 0;
+    ncolx = 0;
   } else {
-    loop_ub = nrows;
+    ncolx = nrows;
   }
 
-  emxInit_creal_T(&st, &b_x, 2, &nb_emlrtRTEI, true);
-  nrows = x->size[1];
+  nrowx = x->size[1] - 1;
   k = b_x->size[0] * b_x->size[1];
-  b_x->size[0] = loop_ub;
-  b_x->size[1] = nrows;
-  emxEnsureCapacity_creal_T(&st, b_x, k, &nb_emlrtRTEI);
-  for (k = 0; k < nrows; k++) {
-    for (i = 0; i < loop_ub; i++) {
-      b_x->data[i + b_x->size[0] * k] = x->data[i + x->size[0] * k];
+  b_x->size[0] = ncolx;
+  b_x->size[1] = nrowx + 1;
+  emxEnsureCapacity_creal_T(&st, b_x, k, &pb_emlrtRTEI);
+  for (k = 0; k <= nrowx; k++) {
+    for (nrows = 0; nrows < ncolx; nrows++) {
+      b_x->data[nrows + b_x->size[0] * k] = x->data[nrows + x->size[0] * k];
     }
   }
 
   k = x->size[0] * x->size[1];
   x->size[0] = b_x->size[0];
   x->size[1] = b_x->size[1];
-  emxEnsureCapacity_creal_T(&st, x, k, &ob_emlrtRTEI);
-  loop_ub = b_x->size[1];
-  for (k = 0; k < loop_ub; k++) {
-    nrows = b_x->size[0];
-    for (i = 0; i < nrows; i++) {
-      x->data[i + x->size[0] * k] = b_x->data[i + b_x->size[0] * k];
+  emxEnsureCapacity_creal_T(&st, x, k, &pb_emlrtRTEI);
+  ncolx = b_x->size[1];
+  for (k = 0; k < ncolx; k++) {
+    nrowx = b_x->size[0];
+    for (nrows = 0; nrows < nrowx; nrows++) {
+      x->data[nrows + x->size[0] * k] = b_x->data[nrows + b_x->size[0] * k];
     }
   }
 

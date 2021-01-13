@@ -9,26 +9,22 @@
  *
  */
 
-#ifndef NULLASSIGNMENT_H
-#define NULLASSIGNMENT_H
+#pragma once
 
 /* Include files */
+#include "Chi_3_LLE_Runge_Kuarong_types.h"
+#include "rtwtypes.h"
+#include "emlrt.h"
+#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tmwtypes.h"
-#include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void b_nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
-  emxArray_int32_T *idx);
-extern void nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
-  emxArray_int32_T *idx);
-
-#endif
+void b_nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
+                      emxArray_int32_T *idx);
+void nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
+                    emxArray_int32_T *idx);
 
 /* End of code generation (nullAssignment.h) */

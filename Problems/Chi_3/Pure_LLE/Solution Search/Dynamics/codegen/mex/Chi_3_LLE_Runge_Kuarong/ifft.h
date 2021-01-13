@@ -3,16 +3,15 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * sum.h
+ * ifft.h
  *
- * Code generation for function 'sum'
+ * Code generation for function 'ifft'
  *
  */
 
 #pragma once
 
 /* Include files */
-#include "Chi_3_LLE_Runge_Kuarong_types.h"
 #include "rtwtypes.h"
 #include "emlrt.h"
 #include "mex.h"
@@ -22,6 +21,6 @@
 #include <string.h>
 
 /* Function Declarations */
-real_T sum(const emlrtStack *sp, const emxArray_real_T *x);
+void ifft(const creal_T x[256], creal_T y[256]);
 
-/* End of code generation (sum.h) */
+/* End of code generation (ifft.h) */

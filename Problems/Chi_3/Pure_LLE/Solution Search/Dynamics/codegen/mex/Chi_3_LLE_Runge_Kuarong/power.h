@@ -3,29 +3,25 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * mod.h
+ * power.h
  *
- * Code generation for function 'mod'
+ * Code generation for function 'power'
  *
  */
 
-#ifndef MOD_H
-#define MOD_H
+#pragma once
 
 /* Include files */
+#include "Chi_3_LLE_Runge_Kuarong_types.h"
+#include "rtwtypes.h"
+#include "emlrt.h"
+#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tmwtypes.h"
-#include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern real_T b_mod(real_T x, real_T y);
+void power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y);
 
-#endif
-
-/* End of code generation (mod.h) */
+/* End of code generation (power.h) */

@@ -10,27 +10,23 @@
  */
 
 /* Include files */
-#include "Chi_3_LLE_Runge_Kuarong.h"
 #include "_coder_Chi_3_LLE_Runge_Kuarong_mex.h"
+#include "Chi_3_LLE_Runge_Kuarong_data.h"
+#include "Chi_3_LLE_Runge_Kuarong_initialize.h"
 #include "Chi_3_LLE_Runge_Kuarong_terminate.h"
 #include "_coder_Chi_3_LLE_Runge_Kuarong_api.h"
-#include "Chi_3_LLE_Runge_Kuarong_initialize.h"
-#include "Chi_3_LLE_Runge_Kuarong_data.h"
-
-/* Function Declarations */
-static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
-  int32_T nrhs, const mxArray *prhs[2]);
+#include "rt_nonfinite.h"
 
 /* Function Definitions */
-static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
-  int32_T nrhs, const mxArray *prhs[2])
+void Chi_3_LLE_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T
+  nrhs, const mxArray *prhs[2])
 {
-  const mxArray *outputs[1];
   emlrtStack st = { NULL,              /* site */
     NULL,                              /* tls */
     NULL                               /* prev */
   };
 
+  const mxArray *outputs[1];
   st.tls = emlrtRootTLSGlobal;
 
   /* Check for proper number of arguments. */
@@ -45,7 +41,7 @@ static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
   }
 
   /* Call the function. */
-  Chi_3_LLE_Runge_Kuarong_api(prhs, nlhs, outputs);
+  Chi_3_LLE_Runge_Kuarong_api(prhs, outputs);
 
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, plhs, outputs);
@@ -54,13 +50,13 @@ static void c_Chi_3_LLE_Runge_Kuarong_mexFu(int32_T nlhs, mxArray *plhs[1],
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs, const mxArray
                  *prhs[])
 {
-  mexAtExit(Chi_3_LLE_Runge_Kuarong_atexit);
+  mexAtExit(&Chi_3_LLE_Runge_Kuarong_atexit);
 
   /* Module initialization. */
   Chi_3_LLE_Runge_Kuarong_initialize();
 
   /* Dispatch the entry-point. */
-  c_Chi_3_LLE_Runge_Kuarong_mexFu(nlhs, plhs, nrhs, prhs);
+  Chi_3_LLE_Runge_Kuarong_mexFunction(nlhs, plhs, nrhs, prhs);
 
   /* Module termination. */
   Chi_3_LLE_Runge_Kuarong_terminate();

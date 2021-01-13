@@ -11,14 +11,14 @@
     CaF.Stat.In         = Params_CaF;
     CaF.Stat.In.kappa   = 2E3*2*pi;     
     
-    CaF.Stat.In.delta   = 2*CaF.Stat.In.kappa;
+    CaF.Stat.In.delta   = -2*CaF.Stat.In.kappa;
     CaF.Stat.In.range   = 2^6;
     
-    CaF.Stat.In.mu_bl   = 2;   
-    CaF.Stat.Par.CW_num = 1;
+    CaF.Stat.In.mu_bl   = 3;   
+    CaF.Stat.Par.CW_num = 3;
     CaF.Stat.Par.In.Rel_ampl = 1.8;
     
-    W_WStar             = 25;
+    W_WStar             = 500;
     CaF.Stat.In.P       = W_WStar*pi/(CaF.Stat.In.eta*CaF.Stat.In.D(1)/CaF.Stat.In.kappa)*CaF.Stat.In.kappa/CaF.Stat.In.gamma;
     
     CaF.CW.In           = CaF.Stat.In;

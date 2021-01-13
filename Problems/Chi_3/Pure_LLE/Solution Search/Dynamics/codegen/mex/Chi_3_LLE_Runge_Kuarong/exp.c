@@ -10,36 +10,34 @@
  */
 
 /* Include files */
-#include "mwmathutil.h"
-#include "rt_nonfinite.h"
-#include "Chi_3_LLE_Runge_Kuarong.h"
 #include "exp.h"
-#include "eml_int_forloop_overflow_check.h"
 #include "Chi_3_LLE_Runge_Kuarong_data.h"
+#include "Chi_3_LLE_Runge_Kuarong_types.h"
+#include "eml_int_forloop_overflow_check.h"
+#include "rt_nonfinite.h"
+#include "mwmathutil.h"
 
 /* Variable Definitions */
-static emlrtRSInfo j_emlrtRSI = { 9,   /* lineNo */
+static emlrtRSInfo j_emlrtRSI = { 10,  /* lineNo */
   "exp",                               /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/elfun/exp.m"/* pathName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\elfun\\exp.m"/* pathName */
 };
 
-static emlrtRSInfo k_emlrtRSI = { 31,  /* lineNo */
+static emlrtRSInfo k_emlrtRSI = { 33,  /* lineNo */
   "applyScalarFunctionInPlace",        /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/applyScalarFunctionInPlace.m"/* pathName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\eml\\+coder\\+internal\\applyScalarFunctionInPlace.m"/* pathName */
 };
 
 /* Function Definitions */
 void b_exp(const emlrtStack *sp, emxArray_creal_T *x)
 {
-  int32_T nx;
-  boolean_T overflow;
-  int32_T k;
-  real_T r;
-  real_T x_im;
-  real_T b_x_im;
-  emlrtStack st;
   emlrtStack b_st;
   emlrtStack c_st;
+  emlrtStack st;
+  real_T d;
+  real_T r;
+  int32_T k;
+  int32_T nx;
   st.prev = sp;
   st.tls = sp->tls;
   st.site = &j_emlrtRSI;
@@ -49,16 +47,14 @@ void b_exp(const emlrtStack *sp, emxArray_creal_T *x)
   c_st.tls = b_st.tls;
   nx = x->size[1];
   b_st.site = &k_emlrtRSI;
-  overflow = ((1 <= x->size[1]) && (x->size[1] > 2147483646));
-  if (overflow) {
+  if ((1 <= x->size[1]) && (x->size[1] > 2147483646)) {
     c_st.site = &l_emlrtRSI;
     check_forloop_overflow_error(&c_st);
   }
 
   for (k = 0; k < nx; k++) {
     if (x->data[k].im == 0.0) {
-      r = x->data[k].re;
-      x->data[k].re = muDoubleScalarExp(r);
+      x->data[k].re = muDoubleScalarExp(x->data[k].re);
       x->data[k].im = 0.0;
     } else if (muDoubleScalarIsInf(x->data[k].im) && muDoubleScalarIsInf(x->
                 data[k].re) && (x->data[k].re < 0.0)) {
@@ -66,10 +62,9 @@ void b_exp(const emlrtStack *sp, emxArray_creal_T *x)
       x->data[k].im = 0.0;
     } else {
       r = muDoubleScalarExp(x->data[k].re / 2.0);
-      x_im = x->data[k].im;
-      b_x_im = x->data[k].im;
-      x->data[k].re = r * (r * muDoubleScalarCos(x_im));
-      x->data[k].im = r * (r * muDoubleScalarSin(b_x_im));
+      d = x->data[k].im;
+      x->data[k].re = r * (r * muDoubleScalarCos(x->data[k].im));
+      x->data[k].im = r * (r * muDoubleScalarSin(d));
     }
   }
 }

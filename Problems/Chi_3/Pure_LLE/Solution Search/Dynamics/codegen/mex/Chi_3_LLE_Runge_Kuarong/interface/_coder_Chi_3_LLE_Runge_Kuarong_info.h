@@ -5,28 +5,16 @@
  *
  * _coder_Chi_3_LLE_Runge_Kuarong_info.h
  *
- * Code generation for function '_coder_Chi_3_LLE_Runge_Kuarong_info'
+ * Code generation for function 'Chi_3_LLE_Runge_Kuarong'
  *
  */
 
-#ifndef _CODER_CHI_3_LLE_RUNGE_KUARONG_INFO_H
-#define _CODER_CHI_3_LLE_RUNGE_KUARONG_INFO_H
+#pragma once
 
 /* Include files */
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "tmwtypes.h"
 #include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
 MEXFUNCTION_LINKAGE mxArray *emlrtMexFcnProperties(void);
-extern const mxArray *emlrtMexFcnResolvedFunctionsInfo(void);
-
-#endif
 
 /* End of code generation (_coder_Chi_3_LLE_Runge_Kuarong_info.h) */

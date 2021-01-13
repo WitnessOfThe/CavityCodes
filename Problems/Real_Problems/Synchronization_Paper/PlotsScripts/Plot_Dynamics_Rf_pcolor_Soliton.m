@@ -24,9 +24,9 @@ function [tt_1,tt_2,tt_3] = Plot_Dynamics_Rf_pcolor_Soliton(Stat,Temp,ind_t,Flag
     Vel = (freq_mu_max(2)-freq_mu_max(1));
     i=1; 
    
-   L_Re_pos              = real(Stat.Stab.Dres_Spec.lam);
-   L_Re_pos(L_Re_pos<=0) = NaN;
-   L_Re_pos(L_Re_pos>=0) = 1;
+%   L_Re_pos              = real(Stat.Stab.Dres_Spec.lam);
+  % L_Re_pos(L_Re_pos<=0) = NaN;
+   %L_Re_pos(L_Re_pos>=0) = 1;
    shift_freq_max = fftshift(freq_mu_max);
    tt_2 = proPlot(fftshift(Temp.Space.k(Temp.Eq.mode_range)),[shift_freq_max(2:end)-shift_freq_max(1:end-1),NaN]/Temp.In.kappa*2*pi );
 %     for i = 1:size(Temp.Eq.mode_range,2)
@@ -47,19 +47,19 @@ function [tt_1,tt_2,tt_3] = Plot_Dynamics_Rf_pcolor_Soliton(Stat,Temp,ind_t,Flag
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     Xlim = [min(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-70)))-10,max(Temp.Space.k(Temp.Eq.mode_range(10*log10(Power_mu)>-70)))+10];
     
-    ind_Bound_Real = find(real(Stat.Stab.E_values) > 0);
+%    ind_Bound_Real = find(real(Stat.Stab.E_values) > 0);
 
-    Im_Bound   = abs(max(imag(Stat.Stab.E_values( ind_Bound_Real)))*1.5)+0;
-    if Im_Bound < 10*Stat.In.kappa
+  %  Im_Bound   = abs(max(imag(Stat.Stab.E_values( ind_Bound_Real)))*1.5)+0;
+ %   if Im_Bound < 10*Stat.In.kappa
         
-        Im_Bound = 10*Stat.In.kappa;
+    %    Im_Bound = 10*Stat.In.kappa;
+     %   
+  %  end
+   %     if  isempty(Im_Bound )
         
-    end
-        if  isempty(Im_Bound )
+  %      Im_Bound = 10*Stat.In.kappa;
         
-        Im_Bound = 10*Stat.In.kappa;
-        
-    end    
+%    end    
 
     tt_2 = tt_2.changeAxisOptions('XLabelText','Mode Number',...
                          'YLabelText','Velocity',...  
