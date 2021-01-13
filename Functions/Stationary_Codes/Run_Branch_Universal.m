@@ -15,7 +15,7 @@ function Stat = Run_Branch_Universal(Stat)
         Stat            =   [fliplr(Stat_1),Stat_2];
     end
     if size(Stat_1,2) == 0
-        Stat            =   [Stat_2];
+        Stat            =   Stat_2;
     end
     if size(Stat_2,2) == 0
         Stat            =   [fliplr(Stat_1)];

@@ -54,7 +54,7 @@
 
     SiN.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     SiN.Temp.Par.dt            = 2E-4;
-    SiN.Temp.Par.s_t           = 0.1;
+    SiN.Temp.Par.s_t           = 0.01;
     SiN.Temp.Par.T             = 2500;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
     SiN.Temp.Par.dd            = SiN.Temp.Par.T/SiN.Temp.Par.s_t;
@@ -84,8 +84,10 @@ end
     for i_p = 1:size(SiN_Soliton,2)
         
         for i_d =1:size(SiN_Soliton(i_p).Stat,2)
+            
             ii = ii+1;
             ii_matrix(i_p,i_d) = ii; 
+            
         end    
         
     end
@@ -98,28 +100,32 @@ Cust        = parcluster('local');
  %Cust = parcluster('local');
 %delete(Cust.Jobs)
  %
- for i_p = 1:size(SiN_Soliton,2)
+ for i_p = 28:size(SiN_Soliton,2)
      
      delete(gcp('nocreate'));
      Cust       = parcluster('local');
-     parpool(70);
+     parpool(30);
      Res_Branch = SiN_Soliton(i_p);
      
      parfor  i_d =1:size(Res_Branch.Stat,2)
-         
-         Res               = SiN;
-         Res.Stat          = Res_Branch.Stat(i_d);
-         Res.Temp.In       = Res.Stat.In;
-         Res.Temp          = Chi_3_LLE_Normalization_Without_D_Coeff(Res.Temp);       
-         Res               = Res.Temp.Met.Ev_Start_Point(Res);  
-         Res.Temp.Met      = [];
+        Alph_Ind =    (letters(ii_matrix(i_p,i_d)+26*27));
 
-         tic
-         Res.Temp.Sol               =Chi_3_LLE_Runge_Kuarong_mex(Res.Temp,Runge);
-         toc
-         
-         Chi_3_LLE_Runge_Save_Long_Run_from_Soliton(Path,Res, ii_matrix(i_p,i_d),Res_Branch,full_pic)
-         
+         if~isfile(strcat(Path,'/Data/',Alph_Ind{1},'.mat'))
+
+             Res               = SiN;
+             Res.Stat          = Res_Branch.Stat(i_d);
+             Res.Temp.In       = Res.Stat.In;
+             Res.Temp          = Chi_3_LLE_Normalization_Without_D_Coeff(Res.Temp);       
+             Res               = Res.Temp.Met.Ev_Start_Point(Res);  
+             Res.Temp.Met      = [];
+
+             tic
+             Res.Temp.Sol               =Chi_3_LLE_Runge_Kuarong_mex(Res.Temp,Runge);
+             toc
+
+             Chi_3_LLE_Runge_Save_Long_Run_from_Soliton(Path,Res, ii_matrix(i_p,i_d),Res_Branch,full_pic)
+         end
+         i_p
      end
      
 %     Comp = findJob(Cust,'State','completed');
@@ -127,3 +133,32 @@ Cust        = parcluster('local');
     delete(Cust.Jobs)
 
  end
+ %%
+ function lets = letters(nums)
+lets = arrayfun(@(n)num2char(n),nums,'UniformOutput',0);
+function s = num2char(d)
+  b = 26;
+  n = max(1,round(log2(d+1)/log2(b)));
+  while (b^n <= d)
+    n = n + 1;
+  end
+  s(n) = rem(d,b);
+  while n > 1
+    n = n - 1;
+    d = floor(d/b);
+    s(n) = rem(d,b);
+  end
+  n = length(s);
+  while (n > 1)
+    if (s(n) <= 0)
+      s(n) = b + s(n);
+      s(n-1) = s(n-1) - 1;
+    end
+    n = n - 1;
+  end
+  s(s<=0) = [];
+  symbols = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  s = reshape(symbols(s),size(s));
+end
+end
+

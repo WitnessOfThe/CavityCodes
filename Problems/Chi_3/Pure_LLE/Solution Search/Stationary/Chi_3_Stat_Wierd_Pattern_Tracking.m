@@ -10,7 +10,7 @@ function Stat =  Chi_3_Stat_Wierd_Pattern_Tracking(Stat,delta_vector,power_vecto
             case   'LLE_Zero_Velocity_Equation'
                  x0                       =  Stat(i).Space.N*[real(Stat(i).In.Psi_Start),imag(Stat(i).In.Psi_Start)];        
             case   'LLE_Full_Dispersion_Equation'
-                 x0                       =  Stat(i).Space.N*[real(Stat(i).In.Psi_Start),imag(Stat(i).In.Psi_Start),0];        
+                 x0                       =  [Stat(i).Space.N*[real(Stat(i).In.Psi_Start),imag(Stat(i).In.Psi_Start)],Stat(i).In.V_Start];        
         end
         [x,eps_f,SolveFlag]      = Newton_Switcher(x0,Stat(i));
         

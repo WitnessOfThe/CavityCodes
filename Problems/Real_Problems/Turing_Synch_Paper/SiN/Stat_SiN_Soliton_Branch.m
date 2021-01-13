@@ -58,9 +58,10 @@
     
 %%
     ind1 = 3;
-    [p_wh_1,p_wh_2,p_wh_3,p_wh_4]      = Plot_LLE_Static_Branch_Soliton(SiN.CW,SiN_Soliton_Branch_Up.Stat,SiN_Soliton_Branch_Down.Stat,0,1,0,SiN_Soliton_Branch_Up(1).Stat(ind1));
-    [p_1,p_2,p_3]                      = Plot_Static_Field_Spectrums_Soliton(SiN_Soliton_Branch_Up.Stat(ind1),0);
-    [p_dot_3,p_dot_4,p_dot_5,p_dot_6]  = Plot_Static_Field_Stability_Soliton(SiN_Soliton_Branch_Up.Stat(ind1),0);
+    ind2  = 10;
+    [p_wh_1,p_wh_2,p_wh_3,p_wh_4]      = Plot_LLE_Static_Branch_Soliton(SiN.CW,SiN_Soliton(ind2).Stat,SiN_Soliton(ind2).Stat,0,1,0,SiN_Soliton(ind2).Stat(ind1));
+    [p_1,p_2,p_3]                      = Plot_Static_Field_Spectrums_Soliton(SiN_Soliton(ind2).Stat(ind1),0);
+    [p_dot_3,p_dot_4,p_dot_5,p_dot_6]  = Plot_Static_Field_Stability_Soliton(SiN_Soliton(ind2).Stat(ind1),0);
     
     figure('Name','Fields_Spectrums')   ;    
     CF = conFigure([p_wh_1,p_wh_2,p_wh_3,p_wh_4,p_1,p_2,p_3,p_dot_3,p_dot_4,p_dot_5,p_dot_6],2,6, 'UniformPlots', true, 'Height', 15, 'Width',40,'Labels',false);
