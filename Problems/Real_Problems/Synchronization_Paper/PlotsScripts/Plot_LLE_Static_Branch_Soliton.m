@@ -27,7 +27,7 @@ function [tt_1,tt_2,tt_3,tt_4] = Plot_LLE_Static_Branch_Soliton(CW,Stat_Up,Stat_
     for i_d = 1:size(Stat_Up,2)
         
     %    Mode_P_U_z(i_d)   = abs(Stat_Up(i_d).Sol.Psi_k( Stat_Up(i_d).Space.k == 0 )).^2*Stat_Up(1).In.gamma;    
-        Mode_P_U  (i_d)   = abs(Stat_Up(i_d).Sol.Psi_k( Stat_Up(i_d).Space.k == mu )).^2*Stat_Up(1).In.gamma;
+        Mode_P_U  (i_d)   = max(abs(ifft(Stat_Up(i_d).Sol.Psi_k*Stat_Up(i_d).Space.N)).^2);
         
         delta_v_U(i_d)    = Stat_Up(i_d).Eq.delta;
         Power_v_U(i_d)    = Stat_Up(i_d).In.P;
@@ -98,7 +98,7 @@ function [tt_1,tt_2,tt_3,tt_4] = Plot_LLE_Static_Branch_Soliton(CW,Stat_Up,Stat_
         
     end
     
-    tt_1         = tt_1.addData(X_U,Mode_P_U/Stat.In.kappa,'Color',[1,0,0]);
+    tt_1         = tt_1.addData(X_U,Mode_P_U,'Color',[1,0,0]);
 %    tt_1         = tt_1.addData(X_D,Mode_P_D/Stat.In.kappa,'Color',[0,0,1]);
     tt_1         = tt_1.addData(Stat.In.delta/Stat.In.kappa*ones(1,2),[min(min([Mode_P_U,Mode_P_D])),max(max([Mode_P_U,Mode_P_D]))]*1.1/Stat.In.kappa,'LineStyle',':','Color','m');
     
@@ -121,7 +121,7 @@ function [tt_1,tt_2,tt_3,tt_4] = Plot_LLE_Static_Branch_Soliton(CW,Stat_Up,Stat_
 
     tt_1         = tt_1.changeAxisOptions('XLabelText',X_Text,...
                         'YLabelText','g$_{\mu}/\kappa$',...  
-                        'FontSize',13,'YLim',[min(min([Mode_P_U,Mode_P_D])),max(max([Mode_P_U,Mode_P_D]))*1.1]/Stat.In.kappa);
+                        'FontSize',13,'YLim',[min(min([Mode_P_U,Mode_P_D])),max(max([Mode_P_U,Mode_P_D]))*1.1]);
                     
     tt_2         = tt_2.changeAxisOptions('XLabelText',X_Text,...
                         'YLabelText','Re[$\lambda/\kappa$]',...  

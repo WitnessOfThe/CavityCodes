@@ -7,8 +7,8 @@ function Stat = Run_Branch_Universal(Stat)
                 Stat_1          =   Branch([real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k)]*Stat.Space.N,x_0,Stat, 1);    
                 Stat_2          =   Branch([real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k)]*Stat.Space.N,x_0,Stat,-1);
             case   'LLE_Full_Dispersion_Equation'
-                Stat_1          =   Branch([real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k),0]*Stat.Space.N,x_0,Stat, 1);    
-                Stat_2          =   Branch([real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k),0]*Stat.Space.N,x_0,Stat,-1);
+                Stat_1          =   Branch([[real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k)]*Stat.Space.N,Stat.Sol.V],x_0,Stat, 1);    
+                Stat_2          =   Branch([[real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k)]*Stat.Space.N,Stat.Sol.V],x_0,Stat,-1);
         end
     
     if size(Stat_1,2) ~= 0 && size(Stat_2,2) ~= 0 
