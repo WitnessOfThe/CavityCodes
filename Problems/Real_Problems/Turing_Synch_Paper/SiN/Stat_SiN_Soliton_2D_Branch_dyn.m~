@@ -57,7 +57,7 @@
 
     SiN.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     SiN.Temp.Par.dt            = 1E-3;
-    SiN.Temp.Par.s_t           = 0.01;
+    SiN.Temp.Par.s_t           = 0.1;
     SiN.Temp.Par.T             = 10000;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
     SiN.Temp.Par.dd            = SiN.Temp.Par.T/SiN.Temp.Par.s_t;
@@ -146,7 +146,7 @@ Cust        = parcluster('local');
 
          if~isfile(strcat(Path,'/Data/',Alph_Ind{1},'.mat'))
 
-             Res               = importdata(strcat(Path,'/Data_Start/',Alph_Ind{1},'.mat'));
+             Res               = importdata(strcat(Path,'/Data_Start/',Alph_Ind{1},'.mat')
              tic
              Res.Temp.Sol               =Chi_3_LLE_Runge_Kuarong_mex(Res.Temp,Runge);
              toc

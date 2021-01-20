@@ -20,9 +20,9 @@
     SiN.CW.In           =  SiN.Stat.In; 
     
 %%
-    NN = 72*3;
+    NN = 72;
     
-    Power_Start_Vector = linspace(0.023,0.05,NN);     
+    Power_Start_Vector = linspace(0.023,0.1,NN);     
     Delta_Start_Vector = linspace(5,8,NN)*SiN.Stat.In.kappa;
     
 %% Stationary Coefficeints
@@ -58,9 +58,9 @@
               73:144;
               145:216;
               217:288];
-    for ii =1:4
+    for ii =1:1
         
-        parfor i = INDEX(ii,:)
+        parfor i =1:72
         Res = SiN;
         
         Delta_Adg_Vector = linspace(Res.Stat.In.delta,Delta_Start_Vector(i),NN);
