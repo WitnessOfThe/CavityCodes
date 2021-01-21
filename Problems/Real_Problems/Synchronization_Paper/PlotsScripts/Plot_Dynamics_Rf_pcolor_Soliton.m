@@ -1,4 +1,4 @@
-function [tt_1,tt_2,tt_3] = Plot_Dynamics_Rf_pcolor_Soliton(Stat,Temp,ind_t,Flag)
+function [tt_1,tt_2,tt_3] = Plot_Dynamics_Rf_pcolor_Soliton(Temp,ind_t,Flag)
 %%
 %    Dressed_State   = imag(CW.An.lambda_mu);
 %    Dressed_State_1 = Dressed_State(1,:);%max(Dressed_State,[],2);

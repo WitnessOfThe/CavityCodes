@@ -872,7 +872,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>4234468467</param.AnnotationChecksum>
+    <param.AnnotationChecksum>3523908733</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -1099,7 +1099,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi_3_LLE_Runge_Kuarong.m">
-        <Marker>1610024193412</Marker>
+        <Marker>1610685281834</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
@@ -1108,64 +1108,64 @@
         <Inputs fileName="Chi_3_LLE_Runge_Kuarong.m" functionName="Chi_3_LLE_Runge_Kuarong" nargout="1">
           <Input Name="Temp" typeId="0">
             <Field Name="Met" typeId="1" />
-            <Field Name="In" typeId="0">
-              <Field Name="eta" typeId="2" />
-              <Field Name="omega" typeId="3" />
-              <Field Name="omega_p" typeId="2" />
-              <Field Name="D" typeId="4" />
-              <Field Name="omega_int" typeId="3" />
-              <Field Name="gamma" typeId="2" />
-              <Field Name="range" typeId="2" />
-              <Field Name="N_mode" typeId="2" />
-              <Field Name="mu_bl" typeId="2" />
-              <Field Name="kappa" typeId="2" />
-              <Field Name="delta" typeId="2" />
-              <Field Name="P" typeId="2" />
-              <Field Name="Finess" typeId="2" />
-              <Field Name="Fin_D" typeId="2" />
-              <Field Name="H" typeId="2" />
-              <Field Name="W" typeId="2" />
-              <Field Name="W_Star" typeId="2" />
-              <Field Name="W_WStar" typeId="2" />
-              <Field Name="Psi_Start" typeId="5" />
-              <Field Name="t_start" typeId="2" />
-            </Field>
             <Field Name="Par" typeId="0">
-              <Field Name="Runge_Type" typeId="6" />
-              <Field Name="dt" typeId="2" />
-              <Field Name="s_t" typeId="2" />
-              <Field Name="T" typeId="2" />
-              <Field Name="dd" typeId="2" />
-              <Field Name="CW_num" typeId="2" />
+              <Field Name="Runge_Type" typeId="2" />
+              <Field Name="dt" typeId="3" />
+              <Field Name="s_t" typeId="3" />
+              <Field Name="T" typeId="3" />
+              <Field Name="dd" typeId="3" />
+              <Field Name="CW_num" typeId="3" />
+            </Field>
+            <Field Name="In" typeId="0">
+              <Field Name="eta" typeId="3" />
+              <Field Name="omega" typeId="4" />
+              <Field Name="omega_p" typeId="3" />
+              <Field Name="D" typeId="5" />
+              <Field Name="omega_int" typeId="4" />
+              <Field Name="gamma" typeId="3" />
+              <Field Name="range" typeId="3" />
+              <Field Name="N_mode" typeId="3" />
+              <Field Name="mu_bl" typeId="3" />
+              <Field Name="kappa" typeId="3" />
+              <Field Name="delta" typeId="3" />
+              <Field Name="P" typeId="3" />
+              <Field Name="Finess" typeId="3" />
+              <Field Name="Fin_D" typeId="3" />
+              <Field Name="H" typeId="3" />
+              <Field Name="W" typeId="3" />
+              <Field Name="W_Star" typeId="3" />
+              <Field Name="W_WStar" typeId="3" />
+              <Field Name="Psi_Start" typeId="6" />
+              <Field Name="t_start" typeId="3" />
             </Field>
             <Field Name="Space" typeId="0">
-              <Field Name="N" typeId="2" />
-              <Field Name="lenght" typeId="2" />
-              <Field Name="dphi" typeId="2" />
+              <Field Name="N" typeId="3" />
+              <Field Name="lenght" typeId="3" />
+              <Field Name="dphi" typeId="3" />
               <Field Name="phi" typeId="7" />
-              <Field Name="dk" typeId="2" />
+              <Field Name="dk" typeId="3" />
               <Field Name="k" typeId="7" />
             </Field>
             <Field Name="Eq" typeId="0">
-              <Field Name="delta" typeId="2" />
-              <Field Name="kappa" typeId="2" />
-              <Field Name="gamma_3" typeId="2" />
+              <Field Name="delta" typeId="3" />
+              <Field Name="kappa" typeId="3" />
+              <Field Name="gamma_3" typeId="3" />
               <Field Name="D" typeId="8" />
-              <Field Name="h" typeId="2" />
+              <Field Name="h" typeId="3" />
               <Field Name="omega_j" typeId="9" />
               <Field Name="gamma_Kerr" typeId="7" />
               <Field Name="mask" typeId="7" />
               <Field Name="kappa_vector" typeId="7" />
               <Field Name="mode_range" typeId="10" />
               <Field Name="L" typeId="9" />
-              <Field Name="norm" typeId="2" />
+              <Field Name="norm" typeId="3" />
             </Field>
           </Input>
           <Input Name="Runge" typeId="0">
             <Field Name="b" typeId="11" />
             <Field Name="a" typeId="12" />
             <Field Name="c" typeId="12" />
-            <Field Name="s" typeId="2" />
+            <Field Name="s" typeId="3" />
           </Input>
           <idpTable>
             <type typeId="0">
@@ -1189,6 +1189,13 @@
               <Sparse>false</Sparse>
             </type>
             <type typeId="2">
+              <Class>char</Class>
+              <Size>1 x 12</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>false</UserDefined>
+            </type>
+            <type typeId="3">
               <Class>double</Class>
               <Size>1 x 1</Size>
               <Value />
@@ -1197,18 +1204,9 @@
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
-            <type typeId="3">
-              <Class>double</Class>
-              <Size>1 x 256</Size>
-              <Value />
-              <InitialValue />
-              <UserDefined>false</UserDefined>
-              <Complex>false</Complex>
-              <Sparse>false</Sparse>
-            </type>
             <type typeId="4">
               <Class>double</Class>
-              <Size>1 x 2</Size>
+              <Size>1 x 256</Size>
               <Value />
               <InitialValue />
               <UserDefined>false</UserDefined>
@@ -1217,19 +1215,21 @@
             </type>
             <type typeId="5">
               <Class>double</Class>
+              <Size>1 x 2</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>false</UserDefined>
+              <Complex>false</Complex>
+              <Sparse>false</Sparse>
+            </type>
+            <type typeId="6">
+              <Class>double</Class>
               <Size>1 x 256</Size>
               <Value />
               <InitialValue />
               <UserDefined>false</UserDefined>
               <Complex>true</Complex>
               <Sparse>false</Sparse>
-            </type>
-            <type typeId="6">
-              <Class>char</Class>
-              <Size>1 x 12</Size>
-              <Value />
-              <InitialValue />
-              <UserDefined>false</UserDefined>
             </type>
             <type typeId="7">
               <Class>double</Class>
