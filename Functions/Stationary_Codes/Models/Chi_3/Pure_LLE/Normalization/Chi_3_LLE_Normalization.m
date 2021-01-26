@@ -7,6 +7,7 @@ function L_L = Chi_3_LLE_Normalization(L_L)
         L_L.Space      = Define_Space_Cavity(N,2*pi);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %% Extract Some Cavity Parameters
         
       L_L.In.omega   =  L_L.In.omega_p;

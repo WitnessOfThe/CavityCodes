@@ -20,7 +20,7 @@
                         
             x_step = L_L.Par.step_inc+x_step;
             x     = sg*x_step + x;
-                        
+                  
             Slv_0 = Slv;
             
             while (Exitflag == 0) && (L_L.Par.step_tol < x_step)
@@ -42,7 +42,7 @@
                     
                 end
                 
-                [Breakflag,L_L_1] = fail_check(L_L_1,i);
+                [Breakflag,L_L_1] = L_L.Met.Newton_Fail_Check(L_L_1,i,x,Exitflag);
                 
                 if Breakflag == 1 || (Exitflag <= 0)
                     
@@ -61,12 +61,7 @@
                 
                 
             end
-            
-
-     %      [Breakflag,L_L_1] = fail_check(L_L_1,i);
-
-
-            
+                       
             if Breakflag == 1
                 
                 break;
@@ -121,30 +116,12 @@
             
         end
     
-        function L_L   = step_eq(L_L,x)
+        function Stat   = step_eq(Stat,x)
             
-            switch L_L.Par.variable
-                
-                case 'delta'
-                    
-                    L_L.Eq.delta = x;
-                    L_L.In.delta = L_L.Eq.norm*L_L.Eq.delta;
-                    L_L          = L_L.Met.Norm(L_L);
-                    
-                case 'kappa'
-                    
-                    L_L.Eq.kappa = x;
-                    L_L.In.kappa = L_L.Eq.norm*L_L.Eq.kappa;
-                    L_L          = L_L.Met.Norm(L_L);
-                case 'Pump Power'
-                    
-                    L_L.Eq.h = x;
-                    L_L.In.h = x*L_L.Eq.norm;
-                    L_L.In.P = 4*x.^2/L_L.In.kappa.^2/L_L.In.Finess*pi/L_L.In.eta*L_L.Eq.norm.^2;
-                    L_L          = L_L.Met.Norm(L_L);
+            Stat.Eq.(Stat.Par.variable) = x;
+            Stat.In.(Stat.Par.variable) = Stat.Eq.norm*Stat.Eq.(Stat.Par.variable);
+            Stat = Stat.Met.Norm(Stat);
 
-            end
-            
         end
       
     end
