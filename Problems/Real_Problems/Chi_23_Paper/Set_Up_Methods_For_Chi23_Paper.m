@@ -1,11 +1,14 @@
 function Res = Set_Up_Methods_For_Chi23_Paper
-
-    Res.CW.Met.Norm        = @Chi23_CW_Normalization;
+  Res.CW.Met.Norm        = @Chi23_CW_Normalization;
     Res.Temp.Met.Norm      = @Chi23_Temp_Normalization;
     Res.Stat.Met.Norm      = @Chi23_Stat_Normalization;
     
 %%    
     Res.CW.Met.Newton_Matrix     = @Chi23_CW_Newton_Matrix;
+    Res.CW.Met.MI                = @Chi23_MI;
+    Res.CW.Met.MI_Matrix         = @Chi2_MI_Matrix;
+    Res.CW.Met.MI_Matrix_Chi2    = @Chi23_MI_Matrix;
+    
     Res.CW.Met.Solve_Chi2        = @Chi2_CW;
     Res.CW.Met.Solve             = @Chi23_Solve_CW_Eq;
     Res.CW.Met.Prop_Gen          = @Chi23_CW_Prop_Gen;
