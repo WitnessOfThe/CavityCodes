@@ -39,19 +39,17 @@ function Res = Set_Up_Methods_For_Chi23_Paper
      
 end
     
-    function [Flag,Stat] = fail_CW_check(Stat,i,x,Exitflag)
-
-       Logic.r_1 = 0;%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
-
-       Logic.r_2  = ~(Stat(i).Par.top_boundary >= x) ;            
-       Logic.r_4  = ~(Stat(i).Par.bot_boundary <= x);
-       Logic.r_3  =  Exitflag == 0;
-       Logic.r_5  = 0;%max(abs(Stat(i).Sol.Psi_)) - min(abs(Stat(i).Sol.Psi_k)) < 1E-10;
-       Logic.r_6  = i == Stat(i).Par.i_max;
-%            Logic.r_7 = isequal(L_L.Par.variable,'delta') && L_L(i).Eq.delta <= 0;
-%           Logic.r_8 = isequal(L_L.Par.variable,'gamma') && L_L(i).Eq.gamma < 0;
-
-        Stat(i).Failreason = Logic;
+    function [Flag] = fail_CW_check(Stat,i,x,Exitflag)
+       if ~(i>=2)
+           Logic.r_1 = 0;%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
+       else
+           Logic.r_1 = abs(Stat(2).Sol.Omega)<abs(Stat(1).Sol.Omega);%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
+       end
+       Logic.r_2  = ~(Stat(end).Par.top_boundary > x) ;            
+       Logic.r_3  =  Exitflag <= 0;
+       Logic.r_4  = ~(Stat(end).Par.bot_boundary < x);
+       Logic.r_5  = 0;
+       Logic.r_6  = i == Stat(1).Par.i_max;
 
         Flag = (Logic.r_1 || Logic.r_2 || Logic.r_3 || Logic.r_4 || Logic.r_5 || Logic.r_6 );%|| Logic.r_7 || Logic.r_8
 
