@@ -55,12 +55,12 @@ clear all
         plot(Sa23(i).delta,1e3*abs(Sa23(i).Psi_e).^2,'Parent',ax(6),'Color',[0,1,0],'LineWidth',1,'LineStyle','--')
     end
 %%
-    load('neg_eps_panel.mat');
+    load('zero_eps_panel.mat');
     
     coef_1 = 2*pi*1E6;
     coef   = 2*pi*1E9;
     
-    for i_c = 1:3
+    for i_c = 2:3
         
         plot(sqrt(Save(i_c).w_wec),Save(i_c).delta23_max/coef_1,'LineStyle','--','Parent',ax(7),'Color',[0,0,0]);hold on;
         plot(sqrt(Save(i_c).w_wec),Save(i_c).delta2_max/coef_1,'LineStyle','-','Parent',ax(7),'Color',[0,0,0]);
@@ -70,22 +70,60 @@ clear all
         
     end
     
+    load('pos_eps_panel.mat');
+    
+    for i_c = 1:2
+        
+        plot(sqrt(Save(i_c).w_wec),Save(i_c).delta23_max/coef_1,'LineStyle','--','Parent',ax(8),'Color',[0,0,0]);hold on;
+        plot(sqrt(Save(i_c).w_wec),Save(i_c).delta2_max/coef_1,'LineStyle','-','Parent',ax(8),'Color',[0,0,0]);
+
+        plot(Save(i_c).delta23_max/coef_1,Save(i_c).Omega23_max/coef,'LineStyle','--','Parent',ax(11),'Color',[0,0,0]);hold on;  
+        plot(Save(i_c).delta2_max/coef_1,Save(i_c).Omega2_max/coef,'LineStyle','-','Parent',ax(11),'Color',[0,0,0]);
+        
+    end
+
+    load('neg_eps_panel.mat');
+    
+    
+    for i_c = 1:2
+        
+%        plot(sqrt(Save(i_c).w_wec),Save(i_c).delta23_max/coef_1,'LineStyle','--','Parent',ax(8),'Color',[0,0,0]);hold on;
+ %       plot(sqrt(Save(i_c).w_wec),Save(i_c).delta2_max/coef_1,'LineStyle','-','Parent',ax(8),'Color',[0,0,0]);
+
+  %      plot(Save(i_c).delta23_max/coef_1,Save(i_c).Omega23_max/coef,'LineStyle','--','Parent',ax(11),'Color',[0,0,0]);hold on;  
+   %     plot(Save(i_c).delta2_max/coef_1,Save(i_c).Omega2_max/coef,'LineStyle','-','Parent',ax(11),'Color',[0,0,0]);
+        
+    end
+    
+        
     
 %%
     ax(1).YLabel.String = 'Power (mW)';
     ax(4).YLabel.String = 'Power (mW)';
 
     
-    ax(7).YLabel.String  = '\Omega';
-%    ax(10).YLabel.String = 'Power (mW)';
+    ax(7).YLabel.String  = '$\delta_{max}/\kappa_f$';
+    ax(7).XLabel.String  = '$\mathcal{H}/\mathcal{H^*}$';
+
+    ax(10).XLabel.String  = '$\delta_{max}/\kappa_f$';
+    ax(10).YLabel.String  = '$\omega_{max}$';
 
     ax(2).XLim          = [-20,5];
     ax(5).XLim          = [-20,5];
     
     ax(3).XLim          = [-5,20];
     ax(6).XLim          = [-5,20];
+
+    ax(7).YLim          = [0,5000];
+    ax(8).YLim          = [-5000,0];
+    ax(9).YLim          = [-5000,0];
     
-%%
+
+    ax(10).XLim          = [0,5000];
+    ax(11).XLim          = [-5000,0];
+    ax(12).XLim          = [-5000,0];
+    
+    %%
     for i = 1:size(ax,2)
        axes_Style(ax(i))
     end
