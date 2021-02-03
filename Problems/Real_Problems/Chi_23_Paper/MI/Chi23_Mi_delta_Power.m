@@ -6,10 +6,10 @@
 %%
     
     Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = -20E9*2*pi;
+    Res.CW.In.eps     = -10E9*2*pi;
     Res.CW.In.delta_o = 0;
-    Res.CW.In.N       = 2^8;
-    Res.CW.In.W       = 70000*Res.CW.In.W_Star;
+    Res.CW.In.N       = 2^6;
+    Res.CW.In.W       = 100000*Res.CW.In.W_Star;
     
 %%
     Res.CW.Par.Equation_string  = 'Chi23_CW';
@@ -38,14 +38,25 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 250;
-    delta_vector        = linspace(10,-2,NN)*Res.CW(1).In.ko;
-    W_Vector            = linspace(1,1E5,NN);
+    NN                  = 72*72;
     
 %%
+    epsilon_vector = 2*pi*[-10E9,-20E9,0,0,-10E6];
+    delta_start    = [-30,-40,-50,50,-50]*Res.CW.In.ko;
+    delta_finsih   = [30,40,50,-50,1]*Res.CW.In.ko;
+    
+    for iii = 1:2
+        
     Mumber_of_modes_1 = NaN(NN);
     Mumber_of_modes_2 = NaN(NN);
+    k1                = NaN(NN);
+    k2                = NaN(NN);
     
+    Res.CW.In.eps       = epsilon_vector(iii);
+    delta_vector        = linspace(delta_start(iii),delta_finsih(iii),NN);
+    W_Vector            = linspace(1,3E5,NN);
+    
+    tic
     
     parfor i_p = 1:NN
         
@@ -68,35 +79,47 @@
             if eps_f > 1E-5
                 break;
             end        
-            [Mumber_of_modes_1(i_p,i_d),Mumber_of_modes_2(i_p,i_d)] =  Evaluate_MI(Res_S);
+            [Mumber_of_modes_1(i_p,i_d),Mumber_of_modes_2(i_p,i_d),k1(i_p,i_d),k2(i_p,i_d)] =  Evaluate_MI(Res_S);
         end
         i_p
     end
     
-    Save.delta_vector       = delta_vector; 
-    Save.W_Vector       = W_Vector;
-    Save.Mumber_of_modes    = Mumber_of_modes_1;
-    Save.Mumber_of_modes    = Mumber_of_modes_2;
+    Save(iii).Res                  = Res;
+    Save(iii).delta_vector         = delta_vector; 
+    Save(iii).W_Vector             = W_Vector;
+    Save(iii).Mumber_of_modes_1    = Mumber_of_modes_1;
+    Save(iii).Mumber_of_modes_2    = Mumber_of_modes_2;
+    Save(iii).k1                   = k1;
+    Save(iii).k2                   = k2;
     
-%%
-    Save.delta_vector         = delta_vector; 
-    Save.W_Vector             = W_Vector;
-    Save.Mumber_of_modes_1    = Mumber_of_modes_1;
-    Save.Mumber_of_modes_2    = Mumber_of_modes_2;
+    toc
+    
+    end
+
 %%    
     figure('Position',[0,0,1000,800/2],'Color',[1,1,1]);
     Panel = tiledlayout(1,2,'TileSpacing','none','Padding','none');   
     
     for i = 1:2
+        
         ax(i) = nexttile(Panel,i,[1,1]);  
         hold(ax(i),'on');
+        
     end
     
     pcolor(Save.delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_1,'Parent',ax(1));shading(ax(1),'interp');
     pcolor(Save.delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_2,'Parent',ax(2));shading(ax(2),'interp');
+    
 %%
 
-function [Mumber1,Mumber2] =  Evaluate_MI(Res)
+    for i = 1
+        
+    figure;
+    pcolor(Save(i).delta_vector/Res.CW.In.ko,Save(i).W_Vector,abs(Save(i).Mumber_of_modes_1));shading(gca,'interp');
+    end
+%%
+
+function [Mumber1,Mumber2,k1,k2] =  Evaluate_MI(Res)
 
     Res.CW2           = Res.CW.Met.Norm(Res.CW);  
     Res.CW23          = Res.CW2;
@@ -106,12 +129,20 @@ function [Mumber1,Mumber2] =  Evaluate_MI(Res)
     
     Res.CW2           = Res.CW.Met.Solve_Chi2(Res.CW2);    
     Res.CW2.Stab      = Chi23_MI(Res.CW2);    
-    Res.CW23.Stab      = Chi23_MI(Res.CW23);
+    Res.CW23.Stab     = Chi23_MI(Res.CW23);
     
     [~,ind]           = min(abs(Res.CW2.Sol.Omega));
     
-    Mumber1            = sum(sum(real(Res.CW2.Stab(ind).Value)>1E-6));
-    Mumber2            = sum(sum(real(Res.CW23.Stab(1).Value)>1E-6));
+    Mumber1           = sum(sum(real(Res.CW2.Stab(ind).Value)>1E-6));
+    Mumber2           = sum(sum(real(Res.CW23.Stab(1).Value)>1E-6));
+    
+    [m_ind1,ind1_t]   = max(real(Res.CW2.Stab(ind).Value),[],1);
+    [~,ind1]          = max(m_ind1);
+    k1                = Res.CW2.Space.k(ind1_t(ind1));
+    
+    [m_ind1,ind1_t]   = max(real(Res.CW23.Stab.Value),[],1);
+    [~,ind1]          = max(m_ind1);
+    k2                = Res.CW23.Space.k(ind1_t(ind1));
     
 end
 
