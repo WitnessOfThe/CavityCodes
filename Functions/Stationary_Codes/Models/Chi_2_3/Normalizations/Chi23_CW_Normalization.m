@@ -7,7 +7,7 @@ function CW = Chi23_CW_Normalization(CW)
         
 %%
 
-    CW.In.delta_e = CW.In.delta_o - CW.In.eps;
+    CW.In.delta_e = 2*CW.In.delta_o - CW.In.eps;
     CW.In.H       = sqrt(CW.In.eta*CW.In.Finess*CW.In.W/pi);    
     norm          = CW.In.ko;
 

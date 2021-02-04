@@ -29,9 +29,10 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.Stat.Met.Equation             = @Chi23_Full_Dispersion_Equation;
     Res.Stat.Met.Liniar_Decomposition = @Chi23_Full_Dispersion_Liniar_Decomposition;
     Res.Stat.Met.Preconditioner       = @Chi23_Full_Dispersion_Preconditioner;
+    Res.Stat.Met.Stab_Matrix          = @Chi23_Linear_Stability;    
+    Res.Stat.Met.Stab_Method          = @Chi23_Stability;
 
 %     L_L.Stat.Met.Ev_Stat_From_Dyn     = @Stat_In_Guess_Chi_3_LLE_From_Dyn;
-%     L_L.Stat.Met.Stab_Matrix          = @LLE_Full_Stability_Matrix;    
 
 %                                      
 %     L_L.Temp.Met.Ev_Core        = @Chi_3_LLE_Kuar;          

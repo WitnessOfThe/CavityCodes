@@ -19,7 +19,7 @@
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-        Pump(1) = 1/2*Stat.Eq.ko*Stat.In.H;
+        Pump(1) = 1/2*Stat.Eq.ko*Stat.In.H*Stat.Space.N;
         
         L1     = -1i*(Stat.Eq.Lo + V*Stat.Space.k).*xo;
         NL1    =  1i*Stat.Eq.gam2o.*fft(xeS.*conj(xoS)) + 1i*Stat.Eq.gam3o.*fft( (abs(xoS).^2 + 2*abs(xeS).^2).*xoS );

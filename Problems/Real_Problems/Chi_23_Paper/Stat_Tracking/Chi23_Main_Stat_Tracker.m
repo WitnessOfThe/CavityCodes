@@ -63,10 +63,16 @@
     
     Slv_Start               = [real(Res.Stat.Sol.Psi_o),imag(Res.Stat.Sol.Psi_o)...
                     ,real(Res.Stat.Sol.Psi_e),imag(Res.Stat.Sol.Psi_e),0]*Res.Stat.Space.N;
+    
     [Slv,eps_f,Exitflag] = Newton_Switcher(Slv_Start,Res.Stat);
-        
+    
+    Res.Stat.Sol.Psi_o   = (Slv(1:Res.Stat.Space.N) + 1i*Slv(Res.Stat.Space.N+1:2*Res.Stat.Space.N))/Res.Stat.Space.N;
+    Res.Stat.Sol.Psi_o   = (Slv(1:Res.Stat.Space.N) + 1i*Slv(Res.Stat.Space.N+1:2*Res.Stat.Space.N))/Res.Stat.Space.N;
+    Res.Stat.Sol.V       = Slv(end);
+    Res.Stat.Stab        = Stability_Switcher(Res.Stat);
+
 %%    
-    function Res = Get_to_point(Res,W,delta)    
+function Res = Get_to_point(Res,W,delta)    
     
     NN = 1000;
     delta_vector          = linspace(delta(1),delta(2),NN);
