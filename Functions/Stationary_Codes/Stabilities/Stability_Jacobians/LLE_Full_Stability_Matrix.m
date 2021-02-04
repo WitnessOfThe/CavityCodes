@@ -2,7 +2,7 @@
     
         mask           = L_L.Eq.mask;
         
-       psi_hat        = L_L.Sol.Psi_k'*L_L.Space.N;
+       psi_hat        = L_L.Sol.Psi_k.'*L_L.Space.N;
         V              = L_L.Sol.V;
         
         f_psi          = ifft(psi_hat);    

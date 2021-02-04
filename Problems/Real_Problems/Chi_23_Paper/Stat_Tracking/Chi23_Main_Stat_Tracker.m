@@ -41,8 +41,8 @@
     W_Finish     = 10000;
     delta_Finish = 3;
     
-    W                 = [10,5.6320e+04];
-    delta             = [10,9.6489];
+    W                 = [10,6.272e+04];
+    delta             = [10,6.167];
     
     Res = Get_to_point(Res,W,delta);
     
@@ -55,8 +55,8 @@
     
     Res.Stat              = Res.Stat.Met.Norm(Res.Stat);
     
-    Res.Stat.Sol.Psi_o    = zeros(1,Res.Stat.Space.N);
-    Res.Stat.Sol.Psi_e    = zeros(1,Res.Stat.Space.N);
+    Res.Stat.Sol.Psi_o    = 1E-10*ones(1,Res.Stat.Space.N);
+    Res.Stat.Sol.Psi_e    = 1E-10*ones(1,Res.Stat.Space.N);
     
     Res.Stat.Sol.Psi_o(1) = Res.CW.Sol.Psi_o;
     Res.Stat.Sol.Psi_e(1) = Res.CW.Sol.Psi_e; 
@@ -67,9 +67,13 @@
     [Slv,eps_f,Exitflag] = Newton_Switcher(Slv_Start,Res.Stat);
     
     Res.Stat.Sol.Psi_o   = (Slv(1:Res.Stat.Space.N) + 1i*Slv(Res.Stat.Space.N+1:2*Res.Stat.Space.N))/Res.Stat.Space.N;
-    Res.Stat.Sol.Psi_o   = (Slv(1:Res.Stat.Space.N) + 1i*Slv(Res.Stat.Space.N+1:2*Res.Stat.Space.N))/Res.Stat.Space.N;
+    Res.Stat.Sol.Psi_e   = (Slv(2*Res.Stat.Space.N+1:3*Res.Stat.Space.N) + 1i*Slv(3*Res.Stat.Space.N+1:4*Res.Stat.Space.N))/Res.Stat.Space.N;
     Res.Stat.Sol.V       = Slv(end);
+    
     Res.Stat.Stab        = Stability_Switcher(Res.Stat);
+    
+    Res.CW.Met.MI_Matrix   = @Chi23_MI_Matrix;
+    Res.CW.Stab            = Chi23_MI(Res.CW);
 
 %%    
 function Res = Get_to_point(Res,W,delta)    

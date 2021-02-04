@@ -10,8 +10,8 @@
         xoS             = ifft(xo);
         xeS             = ifft(xe);
         
-        Psio_hat        = Stat.Sol.Psi_o;
-        Psie_hat        = Stat.Sol.Psi_e;
+        Psio_hat        = Stat.Sol.Psi_o*Stat.Space.N;
+        Psie_hat        = Stat.Sol.Psi_e*Stat.Space.N;
         
         Psio            = ifft(Psio_hat);
         Psie            = ifft(Psie_hat);
