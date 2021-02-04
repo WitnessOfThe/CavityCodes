@@ -10,8 +10,8 @@ function L_L = Set_Up_Methods_For_Synchronization_Paper
     
     L_L.CW.Met.Solve       = @Chi_3_LLE_CW;            % Method which define
     L_L.Met.T_MI           = @Chi_3_LLE_MI_Boundary;
-    L_L.Met.T_Syn          = @Chi_3_LLE_Synch_Boundary;
-    L_L.CW.Met.Mi_Formula      = @Chi_3_LLE_MI_Formula;
+    L_L.Met.T_Syn                 = @Chi_3_LLE_Synch_Boundary;
+    L_L.CW.Met.Mi_Formula         = @Chi_3_LLE_MI_Formula;
     L_L.CW.Met.Plot.Dressed_State = @Plot_LLE_Dressed_State;
     
     L_L.Stat.Met.Equation             = @LLE_Full_Dispersion_Equation;

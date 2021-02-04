@@ -31,22 +31,22 @@
     Res.CW.Par.i_max            = 12000;
     
     Res.CW.Par.fsolveoptions     = optimoptions('fsolve','CheckGradients',...
-    false,'Display','none','UseParallel',false,'SpecifyObjectiveGradient',f alse,...
+    false,'Display','none','UseParallel',false,'SpecifyObjectiveGradient',false,...
     'Algorithm','trust-region-dogleg','FunValCheck','on',...
     'MaxIterations',1000,'FunctionTolerance',10^(-10));
 
 
 %%
 
-    NN = 500;
-    w_wec = linspace(100,1E6^2,NN);
+    NN = 12*13;
+    w_wec = linspace(1000,700^2,NN);
     
-    vec_eps = 2*pi*[0,-10,-100]*1E6;
+    vec_eps = 2*pi*[20,50]*1E9;
     tic
     
-    for i_c = 1:1
+    for i_c = 1:2
         
-        parfor i_w = 1:500
+        parfor i_w = 1:NN
 
             Res_S               = Res;
             Res_S.CW.In.eps      = vec_eps(i_c);
@@ -66,15 +66,15 @@
 %%
 
     figure;
-    for i_c =2:3
+    for i_c =1:3
         hold on;
-       plot(sqrt( Save(i_c).w_wec), Save(i_c).delta23_max/Res.CW.In.k_o);hold on;
-       plot(sqrt( Save(i_c).w_wec), Save(i_c).delta2_max/Res.CW.In.k_o);hold on;
+       plot(sqrt( Save(i_c).w_wec), Save(i_c).delta23_max/Res.CW.In.ko);hold on;
+       plot(sqrt( Save(i_c).w_wec), Save(i_c).delta2_max/Res.CW.In.ko);hold on;
      %   plot(abs(Save(i_c).Omega23_max)-abs(Save(i_c).Omega2_max))
 %        plot(Save(i_c).delta23_max,Save(i_c).Omega23_max);hold on;  
  %       plot(Save(i_c).delta23_max,Save(i_c).Omega23_max);hold on;  
     end
- %   plot(sqrt(w_wec),delta2_max/Res.CW.In.k_o);
+ %   plot(sqrt(w_wec),delta2_max/Res.CW.In.ko);
 %%
 figure;
     plot(delta23_max,Omega23_max);hold on;  
@@ -85,7 +85,7 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max,omega_delta] = max_val(R
 
     Res.CW = Res.CW.Met.Norm(Res.CW);
     
-    inck  = Res.CW.In.k_o*Res.CW.Par.step_tol*101;
+    inck  = Res.CW.In.ko*Res.CW.Par.step_tol*101;
     
     Omega2_max = 0;
     Flag = 0;
@@ -106,7 +106,7 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max,omega_delta] = max_val(R
               delta             = delta-inck;
                inck              = 0.1*inck;
             
-            if Res.CW.Par.step_tol*Res.CW.In.k_o > inck
+            if Res.CW.Par.step_tol*Res.CW.In.ko > inck
                 
                 Flag = 1;
                 
@@ -124,11 +124,11 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max,omega_delta] = max_val(R
     
     
     Res.CW.Par.bot_boundary     = 0;
-    Res.CW.Par.top_boundary     = delta2_max/Res.CW.In.k_o*10;
+    Res.CW.Par.top_boundary     = delta2_max/Res.CW.In.ko*10;
     
     Res.CW.Par.first_step       = Res.CW.Par.step_tol*101;    
     
-    Res.CW.In.delta_o = 0.*Res.CW.In.k_o;     
+    Res.CW.In.delta_o = 0.*Res.CW.In.ko;     
     Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
     
             
@@ -180,7 +180,7 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max,omega_delta] = max_val_p
 
     Res.CW = Res.CW.Met.Norm(Res.CW);
     
-    inck  = Res.CW.In.k_o*Res.CW.Par.first_step/100;
+    inck  = Res.CW.Par.step_tol*1.1;
     
     Omega2_max = 0;
     Flag = 0;
@@ -191,17 +191,17 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max,omega_delta] = max_val_p
         
         ii = ii+1;
         inck              = inck*1.1;
-        delta             = delta+inck;
+        delta             = delta-inck;
         Res.CW.In.delta_o = delta;
         Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
         Omega             = max(abs(Res.CW.Sol.Omega));
         
         if Omega2_max > Omega
             
-              delta             = delta-inck;
+              delta             = delta+inck;
                inck              = 0.1*inck;
             
-            if Res.CW.Par.step_tol*Res.CW.In.k_o/100 > inck
+            if Res.CW.Par.step_tol*Res.CW.In.ko/100 > inck
                 
                 Flag = 1;
                 
@@ -220,14 +220,14 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max,omega_delta] = max_val_p
 %%
     d_start_vec = linspace(0,delta2_max/2,1000);
     W_vec = linspace(1,Res.CW.In.W /Res.CW.In.W_Star,1000);
-    Res.CW.In.delta_o = 1.*Res.CW.In.k_o;     
+    Res.CW.In.delta_o = 1.*Res.CW.In.ko;     
     Res.CW.In.W       = W_vec(1)*Res.CW.In.W_Star;    
     Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
     
          [Slv,eps_f,Exitflag]  = Newton_Switcher([real(Res.CW.Sol.Psi_o(3)),imag(Res.CW.Sol.Psi_o(3)),real(Res.CW.Sol.Psi_e(3)),imag(Res.CW.Sol.Psi_e(3))],Res.CW);
          Res.CW             = Res.CW.Met.Prop_Gen(Slv,Res.CW);        
          
-    for i =1:1000
+    for i = 1:1000
          Res.CW.In.W       = W_vec(i)*Res.CW.In.W_Star;    
          Res.CW.In.delta_o = d_start_vec(i);     
          Res.CW = Res.CW.Met.Norm(Res.CW);
@@ -235,8 +235,8 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max,omega_delta] = max_val_p
          Res.CW             = Res.CW.Met.Prop_Gen(Slv,Res.CW);             
     end
 
-    Res.CW.Par.bot_boundary     = - abs(delta2_max/Res.CW.In.k_o*10);
-    Res.CW.Par.top_boundary     =  abs(delta2_max/Res.CW.In.k_o*10);
+    Res.CW.Par.bot_boundary     = - abs(delta2_max/Res.CW.In.ko*10);
+    Res.CW.Par.top_boundary     =  abs(delta2_max/Res.CW.In.ko*10);
     
     
  %% 
@@ -282,4 +282,4 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max,omega_delta] = max_val_p
             delta2_max = NaN;
         end        
             
-end
+    end

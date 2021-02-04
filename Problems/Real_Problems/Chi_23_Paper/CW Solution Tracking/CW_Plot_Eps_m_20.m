@@ -42,7 +42,7 @@
   %%
   
     NN                  = 1E5;
-    Sa2.delta_vector     = linspace(-5,20,NN)*Res.CW(1).In.k_o;
+    Sa2.delta_vector     = linspace(-5,20,NN)*Res.CW(1).In.ko;
     
     Sa2.U_f_2    =   zeros(NN,3);
     Sa2.U_s_2    =   zeros(NN,3);

@@ -11,10 +11,10 @@ function f  = Chi23_CW_Newton_Matrix(CW,x)
            - CW.Eq.gam3e*(abs(psi_o).^2 + 2*abs(psi_e).^2).*psi_e ...
            -1i*1/2*CW.Eq.ke*psi_e;
       
-      f(1) = real(g(1));
-      f(2) = imag(g(1));
+      f(1) = real(-1i*g(1));
+      f(2) = imag(-1i*g(1));
       
-      f(3) = real(g(2));
-      f(4) = imag(g(2));
+      f(3) = real(-1i*g(2));
+      f(4) = imag(-1i*g(2));
       
 end

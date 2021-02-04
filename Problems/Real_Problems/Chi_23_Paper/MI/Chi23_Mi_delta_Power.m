@@ -116,6 +116,7 @@
         
     figure;
     pcolor(Save(i).delta_vector/Res.CW.In.ko,Save(i).W_Vector,abs(Save(i).Mumber_of_modes_1));shading(gca,'interp');
+    
     end
 %%
 

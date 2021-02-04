@@ -1,5 +1,6 @@
 function Res = Set_Up_Methods_For_Chi23_Paper
-  Res.CW.Met.Norm        = @Chi23_CW_Normalization;
+
+    Res.CW.Met.Norm        = @Chi23_CW_Normalization;
     Res.Temp.Met.Norm      = @Chi23_Temp_Normalization;
     Res.Stat.Met.Norm      = @Chi23_Stat_Normalization;
     
@@ -13,7 +14,8 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.CW.Met.Solve             = @Chi23_Solve_CW_Eq;
     Res.CW.Met.Prop_Gen          = @Chi23_CW_Prop_Gen;
     Res.CW.Met.Newton_Fail_Check = @fail_CW_check;
-
+%    Res.CW.Met.Newton_Matrix     = @Chi23_Stat_Newton_Matrix;
+    
 %     L_L.Stat.Met.Newton_Matrix        = @Chi3_LLE_Bloch_Stat_Newton_Matrix;
 
 %     L_L.CW.Met.MI_Matrix   = @Chi23_MI_Matrix;     % Method which define
@@ -24,10 +26,10 @@ function Res = Set_Up_Methods_For_Chi23_Paper
 %     L_L.CW.Met.Mi_Formula         = @Chi_3_LLE_MI_Formula;
 %     L_L.CW.Met.Plot.Dressed_State = @Plot_LLE_Dressed_State;
 %     
-%     L_L.Stat.Met.Equation             = @LLE_Full_Dispersion_Equation;
-%     L_L.Stat.Met.Liniar_Decomposition = @LLE_Full_Dispersion_Liniar_Decomposition;
+    Res.Stat.Met.Equation             = @Chi23_Full_Dispersion_Equation;
+    Res.Stat.Met.Liniar_Decomposition = @Chi23_Full_Dispersion_Liniar_Decomposition;
+    Res.Stat.Met.Preconditioner       = @Chi23_Full_Dispersion_Preconditioner;
 
-%     L_L.Stat.Met.Preconditioner       = @LLE_Full_Dispersion_Predonditioner;
 %     L_L.Stat.Met.Ev_Stat_From_Dyn     = @Stat_In_Guess_Chi_3_LLE_From_Dyn;
 %     L_L.Stat.Met.Stab_Matrix          = @LLE_Full_Stability_Matrix;    
 
