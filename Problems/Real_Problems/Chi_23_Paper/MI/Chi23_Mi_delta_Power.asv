@@ -6,10 +6,10 @@
 %%
     
     Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = -20E9*2*pi;
+    Res.CW.In.eps     = -10E9*2*pi;
     Res.CW.In.delta_o = 0;
-    Res.CW.In.N       = 2^8;
-    Res.CW.In.W       = 70000*Res.CW.In.W_Star;
+    Res.CW.In.N       = 2^6;
+    Res.CW.In.W       = 100000*Res.CW.In.W_Star;
     
 %%
     Res.CW.Par.Equation_string  = 'Chi23_CW';
@@ -38,14 +38,20 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 250;
-    delta_vector        = linspace(10,-2,NN)*Res.CW(1).In.ko;
-    W_Vector            = linspace(1,1E5,NN);
+    NN                  = 72*2;
     
 %%
-    Mumber_of_modes_1 = NaN(NN);
-    Mumber_of_modes_2 = NaN(NN);
+    epsilon_vector = 2*pi*[-10E9,-20E9,0,0,-10E6];
+    delta_start    = [11,-40,-50,50,-50]*Res.CW.In.ko;
+    delta_finsih   = [0,40,50,-50,1]*Res.CW.In.ko;
     
+    for iii = 1:1
+            
+    Res.CW.In.eps       = epsilon_vector(iii);
+    delta_vector        = linspace(delta_start(iii),delta_finsih(iii),NN);
+    W_Vector            = linspace(1,3E5,NN);
+    
+    tic
     
     parfor i_p = 1:NN
         
@@ -53,7 +59,7 @@
         Res_S.CW.In.W           = W_Vector(i_p)*Res_S.CW.In.W_Star;        
         Res_S.CW                = Res_S.CW.Met.Solve_Chi2(Res_S.CW ); 
         
-        [~,ind]                 = max(abs(Res_S.CW.Sol.Omega));
+        [~,ind]                 = min(abs(Res_S.CW.Sol.Omega));
         
         Res_S.CW.Sol.Omega      =  Res_S.CW.Sol.Omega(ind);    
         Res_S.CW.Sol.Psi_o      =  Res_S.CW.Sol.Psi_o(ind);    
@@ -64,39 +70,58 @@
             Res_S.CW.In.delta_o    = delta_vector(i_d);            
             Res_S.CW               = Res.CW.Met.Norm(Res_S.CW);  
             [Slv,eps_f,Exitflag]   = Newton_Switcher([real(Res_S.CW.Sol.Psi_o(1)),imag(Res_S.CW.Sol.Psi_o(1)),real(Res_S.CW.Sol.Psi_e(1)),imag(Res_S.CW.Sol.Psi_e(1))],Res_S.CW);
-            Res_S.CW               = Res_S.CW.Met.Prop_Gen(Slv,Res_S.CW);          
+            Res_S.CW               = Res_S.CW.Met.Prop_Gen(Slv,Res_S.CW);      
+            
             if eps_f > 1E-5
+                
                 break;
+                
             end        
-            [Mumber_of_modes_1(i_p,i_d),Mumber_of_modes_2(i_p,i_d)] =  Evaluate_MI(Res_S);
+            [Mumber1(i_p,i_d),k1_vec(i_p,i_d).k,lambda1_vec(i_p,i_d).lambda,Vector1_vec(i_p,i_d).Vector...
+                ,Mumber2(i_p,i_d),k2_vec(i_p,i_d).k,lambda2_vec(i_p,i_d).lambda,Vector2_vec(i_p,i_d).Vector] =  Evaluate_MI(Res_S);
         end
         i_p
     end
     
-    Save.delta_vector       = delta_vector; 
-    Save.W_Vector       = W_Vector;
-    Save.Mumber_of_modes    = Mumber_of_modes_1;
-    Save.Mumber_of_modes    = Mumber_of_modes_2;
+    Save(iii).Res                  = Res;
+    Save(iii).delta_vector         = delta_vector; 
+    Save(iii).W_Vector             = W_Vector;
+    Save(iii).Mumber1              = Mumber1;
+    Save(iii).Mumber2              = Mumber2;
+    Save(iii).k1_vec                   = k1_vec;
+    Save(iii).k2_vec                   = k2_vec;
     
-%%
-    Save.delta_vector         = delta_vector; 
-    Save.W_Vector             = W_Vector;
-    Save.Mumber_of_modes_1    = Mumber_of_modes_1;
-    Save.Mumber_of_modes_2    = Mumber_of_modes_2;
+    toc
     
-    figure('Position',[0,0,1000,800/2],'Color',[1,1,1]);
-    Panel = tiledlayout(1,2,'TileSpacing','none','Padding','none');   
-    
-    for i = 1:2
-        ax(i) = nexttile(Panel,i,[1,1]);  
-        hold(ax(i),'on');
     end
+
+%%    
+% delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_2,'Parent',ax(2));shading(ax(2),'interp');
+        for i_p = 1:NN
+            for i_d = 1:NN
+                
+                if ~isnan(Save.k_vec(i_p,i_d).k)
+                    [~,ind]    = max(Save.k_vec(i_p,i_d).k);
+                    
+                    Conv_eff(i_p,i_d) = abs(Vector_vec(i_p,i_d).Vector(2,ind) + Vector_vec(i_p,i_d).Vector(4,ind)).^2/abs(Vector_vec(i_p,i_d).Vector(1,ind)+Vector_vec(i_p,i_d).Vector(3,ind)).^2;
+                    
+                else
+                    Conv_eff(i_p,i_d) = NaN;
+                end
+            end         
+        end
     
-    pcolor(Save.delta_vector,Save.W_Vector,Save.Mumber_of_modes_1,'Parent',ax(1));shading(ax(1),'interp');
-    pcolor(Save.delta_vector,Save.W_Vector,Save.Mumber_of_modes_2,'Parent',ax(2));shading(ax(2),'interp');
 %%
 
-function [Mumber1,Mumber2] =  Evaluate_MI(Res)
+    for i = 1
+        
+    figure;
+    mesh(Save(i).delta_vector/Res.CW.In.ko,Save(i).W_Vector,abs(Save(i).Mumber1));shading(gca,'interp');
+    
+    end
+%%
+
+function [Mumber1,k1,lambda1,Vector1,Mumber2,k2,lambda2,Vector2] =  Evaluate_MI(Res)
 
     Res.CW2           = Res.CW.Met.Norm(Res.CW);  
     Res.CW23          = Res.CW2;
@@ -106,78 +131,44 @@ function [Mumber1,Mumber2] =  Evaluate_MI(Res)
     
     Res.CW2           = Res.CW.Met.Solve_Chi2(Res.CW2);    
     Res.CW2.Stab      = Chi23_MI(Res.CW2);    
-    Res.CW23.Stab      = Chi23_MI(Res.CW23);
+    Res.CW23.Stab     = Chi23_MI(Res.CW23);
     
     [~,ind]           = min(abs(Res.CW2.Sol.Omega));
     
-    Mumber1            = sum(sum(real(Res.CW2.Stab(ind).Value)>1E-6));
-    Mumber2            = sum(sum(real(Res.CW23.Stab(1).Value)>1E-6));
+    Mumber1           = sum(sum(real(Res.CW2.Stab(ind).Value)>1E-6));
+    Mumber2           = sum(sum(real(Res.CW23.Stab(1).Value)>1E-6));
     
+    
+    [i_r,i_c]         = find(Res.CW2.Stab(ind).Value > 0);
+
+    k1      = zeros(1,length(i_r));
+    lambda1 = zeros(1,length(i_r));
+    Vector1 = zeros(4,length(i_r));
+
+    if ~isempty(i_r) > 0
+        for i = 1:length(i_r)
+
+           k1(i)         = Res.CW2.Space.k(i_r(i));
+           lambda1(i)    = Res.CW2.Stab(ind).Value(i_r(i),i_c(i));
+           Vector1(:,i)  = Res.CW2.Stab(ind).Vector(i_r(i)).V(:,i_c(i));
+
+        end
+    end
+    
+    [i_r,i_c]         = find(Res.CW23.Stab.Value > 0);
+
+    k2      = zeros(1,length(i_r));
+    lambda2 = zeros(1,length(i_r));
+    Vector2 = zeros(4,length(i_r));
+
+    if ~isempty(i_r) > 0
+        for i = 1:length(i_r)
+
+           k2(i)         = Res.CW23.Space.k(i_r(i));
+           lambda2(i)    = Res.CW23.Stab.Value(i_r(i),i_c(i));
+           Vector2(:,i)  = Res.CW23.Stab.Vector(i_r(i)).V(:,i_c(i));
+
+        end
+    end
 end
 
-function [Omega2_max,delta2_max,Omega23_max,delta23_max,omega_delta] = max_val_pos(Res)
-
-    W_vec = linspace(1,Res.CW.In.W /Res.CW.In.W_Star,10000);
-    Res.CW.In.delta_o = 0.*Res.CW.In.k_o;     
-    Res.CW.In.W       = W_vec(1)*Res.CW.In.W_Star;    
-    Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
-    
-         [Slv,eps_f,Exitflag]  = Newton_Switcher([real(Res.CW.Sol.Psi_o(3)),imag(Res.CW.Sol.Psi_o(3)),real(Res.CW.Sol.Psi_e(3)),imag(Res.CW.Sol.Psi_e(3))],Res.CW);
-         Res.CW             = Res.CW.Met.Prop_Gen(Slv,Res.CW);             
-    for i =1:10000
-        
-         Res.CW.In.W       = W_vec(i)*Res.CW.In.W_Star;    
-%         Res.CW.In.delta_o = d_start_vec(i);     
-         Res.CW = Res.CW.Met.Norm(Res.CW);
-         [Slv,eps_f,Exitflag]  = Newton_Switcher([real(Res.CW.Sol.Psi_o(1)),imag(Res.CW.Sol.Psi_o(1)),real(Res.CW.Sol.Psi_e(1)),imag(Res.CW.Sol.Psi_e(1))],Res.CW);
-         Res.CW             = Res.CW.Met.Prop_Gen(Slv,Res.CW);             
-    end
-
-    Res.CW.Par.bot_boundary     = - abs(delta2_max/Res.CW.In.k_o*10);
-    Res.CW.Par.top_boundary     = 10;% abs(delta2_max/Res.CW.In.k_o*10);
-    
-    
- %% 
-            
-            Res.CW23            = Res.CW;
-            
-            [~,IND]             =  max(Res.CW.Sol.Omega);
-            Res.CW23.Sol.Psi_o  =  Res.CW.Sol.Psi_o(IND);
-            Res.CW23.Sol.Psi_e  =  Res.CW.Sol.Psi_e(IND);
-            
-            Res.CW23            = Res.CW.Met.Norm(Res.CW23);
-            Res.CW23            = Run_Branch_Universal(Res.CW23);
-
-            delta_vector        = zeros(1,size(Res.CW23,2));
-            Omega23             = zeros(1,size(Res.CW23,2));
-            
-            for j = 1:size(Res.CW23,2)
-
-                delta_vector(j)   = Res.CW23(j).In.delta_o;
-                Omega23(j)        = Res.CW23(j).Sol.Omega;
-
-            end
-            
-            
-    [Omega23_max,i]   = max(Omega23);
-    delta23_max       = delta_vector(i);
-%
-        
-        omega_delta = Omega23_max - Omega2_max;
-        if size(Omega23_max,2) == 0
-            Omega23_max = NaN;
-        end
-
-        if size(Omega2_max,2) == 0
-            Omega2_max = NaN;
-        end
-
-        if size(delta23_max,2) == 0
-            delta23_max = NaN;
-        end
-
-        if size(delta2_max,2) == 0
-            delta2_max = NaN;
-        end        
-            
-end    

@@ -38,23 +38,18 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 72*5;
+    NN                  = 72*10;
     
 %%
     epsilon_vector = 2*pi*[-10E9,-20E9,0,0,-10E6];
-    delta_start    = [15,-40,-50,50,-50]*Res.CW.In.ko;
-    delta_finsih   = [0,40,50,-50,1]*Res.CW.In.ko;
+    delta_start    = [-40,-40,-50,50,-50]*Res.CW.In.ko;
+    delta_finsih   = [4,40,50,-50,1]*Res.CW.In.ko;
     
     for iii = 1:1
-        
-    Mumber_of_modes_1 = NaN(NN);
-    Mumber_of_modes_2 = NaN(NN);
-    k1                = NaN(NN);
-    k2                = NaN(NN);
-    
+            
     Res.CW.In.eps       = epsilon_vector(iii);
     delta_vector        = linspace(delta_start(iii),delta_finsih(iii),NN);
-    W_Vector            = linspace(1,3E5,NN);
+    W_Vector            = linspace(1,150E6,NN);
     
     tic
     
@@ -82,7 +77,8 @@
                 break;
                 
             end        
-            [Mumber_of_modes_1(i_p,i_d),Mumber_of_modes_2(i_p,i_d),k1(i_p,i_d),k2(i_p,i_d)] =  Evaluate_MI(Res_S);
+            [Mumber1(i_p,i_d),k1_vec(i_p,i_d).k,lambda1_vec(i_p,i_d).lambda,Vector1_vec(i_p,i_d).Vector...
+                ,Mumber2(i_p,i_d),k2_vec(i_p,i_d).k,lambda2_vec(i_p,i_d).lambda,Vector2_vec(i_p,i_d).Vector] =  Evaluate_MI(Res_S);
         end
         i_p
     end
@@ -90,43 +86,61 @@
     Save(iii).Res                  = Res;
     Save(iii).delta_vector         = delta_vector; 
     Save(iii).W_Vector             = W_Vector;
-    Save(iii).Mumber_of_modes_1    = Mumber_of_modes_1;
-    Save(iii).Mumber_of_modes_2    = Mumber_of_modes_2;
-    Save(iii).k1                   = k1;
-    Save(iii).k2                   = k2;
-    
-    toc
+    Save(iii).Mumber1              = Mumber1;
+    Save(iii).Mumber2              = Mumber2;
+    Save(iii).k1_vec               = k1_vec;
+    Save(iii).k2_vec               = k2_vec;
+    Save(iii).Vector1              = Vector1_vec;
+    Save(iii).Vector2              = Vector2_vec;
+    toc 
     
     end
 
 %%    
-%     figure('Position',[0,0,1000,800/2],'Color',[1,1,1]);
-%     Panel = tiledlayout(1,2,'TileSpacing','none','Padding','none');   
-%     
-%     for i = 1:2
-%         
-%         ax(i) = nexttile(Panel,i,[1,1]);  
-%         hold(ax(i),'on');
-%         
-%     end
-%     
-%     pcolor(Save.delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_1,'Parent',ax(1));shading(ax(1),'interp');
-%     pcolor(Save.delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_2,'Parent',ax(2));shading(ax(2),'interp');
-    
+% delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_2,'Parent',ax(2));shading(ax(2),'interp');
+        for i_p = 1:NN
+            for i_d = 1:NN
+                
+                if ~isnan(Save.k2_vec(i_p,i_d).k)
+                    [~,ind]    = max(Save.k2_vec(i_p,i_d).k);
+                    
+                    Conv_eff(i_p,i_d) = abs(Vector2_vec(i_p,i_d).Vector(2,ind) + Vector2_vec(i_p,i_d).Vector(4,ind)).^2/abs(Vector2_vec(i_p,i_d).Vector(1,ind)+Vector2_vec(i_p,i_d).Vector(3,ind)).^2;
+                    
+                else
+                    Conv_eff(i_p,i_d) = NaN;
+                end
+            end         
+        end
+   figure;
+    mesh(Save.delta_vector/Res.CW.In.ko,Save.W_Vector,abs(Conv_eff));shading(gca,'interp');
+     
 %%
 
     for i = 1
         
     figure;
-    mesh(Save(i).delta_vector/Res.CW.In.ko,Save(i).W_Vector,abs(Save(i).Mumber_of_modes_2));shading(gca,'interp');
+    mesh(Save(i).delta_vector/Res.CW.In.ko,Save(i).W_Vector,abs(Save(i).Mumber1));shading(gca,'interp');
     
     end
 %%
+    for i = 1:size(ax,2)
+       axes_Style(ax(i))
+    end
+    
+function axes_Style(ax)
 
-function [Mumber1,Mumber2,k1,k2] =  Evaluate_MI(Res)
+     ax.Box      = 'on';
+     ax.FontSize = 15;
+     ax.TickLabelInterpreter = 'latex';
+     ax.XLabel.Interpreter   = 'latex';
+     ax.YLabel.Interpreter   = 'latex';
+     
+end
 
-    k1 = NaN;
-    k2 = NaN;
+%%
+
+function [Mumber1,k1,lambda1,Vector1,Mumber2,k2,lambda2,Vector2] =  Evaluate_MI(Res)
+
     Res.CW2           = Res.CW.Met.Norm(Res.CW);  
     Res.CW23          = Res.CW2;
     
@@ -142,34 +156,43 @@ function [Mumber1,Mumber2,k1,k2] =  Evaluate_MI(Res)
     Mumber1           = sum(sum(real(Res.CW2.Stab(ind).Value)>1E-6));
     Mumber2           = sum(sum(real(Res.CW23.Stab(1).Value)>1E-6));
     
-    [m_ind1,ind1_t]   = max(real(Res.CW2.Stab(ind).Value),[],1);
-    if  max(m_ind1) > 0
-       [~,ind1]          = max(m_ind1);
-        k1                 = Res.CW2.Space.k(ind1_t(ind1));
-        
-        [ValCol,icol]     = max(real(Res.CW2.Stab.Value),[],2);
-        [~,iicol]         = max(ValCol);
-        icol              = icol(iicol);
-        
-        [ValCol,iraw]     = max(real(Res.CW2.Stab.Value),[],1);
-        [~,iiraw]         = max(ValCol);
-        iraw              = iraw(iiraw);
-        Vector_Save1       = Res.CW2.Stab.Vector(iraw).V(:,icol);
+    
+    [i_r,i_c]         = find(Res.CW2.Stab(ind).Value > 0);
+
+    k1      = NaN;
+    lambda1 = NaN;
+    Vector1 = NaN;
+
+    if ~isempty(i_r) > 0
+        k1      = zeros(1,length(i_r));
+        lambda1 = zeros(1,length(i_r));
+        Vector1 = zeros(4,length(i_r));
+        for i = 1:length(i_r)
+
+           k1(i)         = Res.CW2.Space.k(i_r(i));
+           lambda1(i)    = Res.CW2.Stab(ind).Value(i_r(i),i_c(i));
+           Vector1(:,i)  = Res.CW2.Stab(ind).Vector(i_r(i)).V(:,i_c(i));
+
+        end
     end
     
-   [m_ind1,ind1_t]   = max(real(Res.CW23.Stab(ind).Value),[],1);
-    if  max(m_ind1) > 0
-       [~,ind1]          = max(m_ind1);
-        k2                 = Res.CW23.Space.k(ind1_t(ind1));
-        
-        [ValCol,icol]     = max(real(Res.CW23.Stab.Value),[],2);
-        [~,iicol]         = max(ValCol);
-        icol              = icol(iicol);
-        
-        [ValCol,iraw]     = max(real(Res.CW23.Stab.Value),[],1);
-        [~,iiraw]         = max(ValCol);
-        iraw              = iraw(iiraw);
-        Vector_Save2       = Res.CW23.Stab.Vector(iraw).V(:,icol);
+    [i_r,i_c]         = find(Res.CW23.Stab.Value > 0);
+
+    k2      = NaN;
+    lambda2 = NaN;
+    Vector2 = NaN;
+
+    if ~isempty(i_r) > 0
+        k2      = zeros(1,length(i_r));
+        lambda2 = zeros(1,length(i_r));
+        Vector2 = zeros(4,length(i_r));
+        for i = 1:length(i_r)
+
+           k2(i)         = Res.CW23.Space.k(i_r(i));
+           lambda2(i)    = Res.CW23.Stab.Value(i_r(i),i_c(i));
+           Vector2(:,i)  = Res.CW23.Stab.Vector(i_r(i)).V(:,i_c(i));
+
+        end
     end
 end
 

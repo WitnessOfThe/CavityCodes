@@ -38,22 +38,19 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 72*20;
+    NN                  = 72*10;
   %  delta_vector        = linspace(-11,-9,NN)*Res.CW(1).In.ko;
     epsilon_vector      = 2*pi*[-10E9,-20E9,0,-10E6];   
-    omega_max           = [100,100,10,10];
-    delta_max           = [20,100,10,10];
-    delta_min           = [-20,100,10,10];
-%%
+    omega_max           = [150,100,10,10];
+    delta_max           = [9,100,10,10];
+    delta_min           = [-40,100,10,10];
     
+%%
+    tic
     for ii = 1:1
         
-        Mumber_of_modes = NaN(NN);
-%        Vector_Save = NaN(NN);
-         k              = NaN(NN);
-
         Res.CW.In.eps       = epsilon_vector(ii);
-        Omega_Vector        = linspace(0.1,omega_max(ii),NN)*Res.CW.In.Omega_Star;
+        Omega_Vector        = linspace(30,omega_max(ii),NN)*Res.CW.In.Omega_Star;
         delta_vector        = linspace(delta_min(ii),delta_max(ii),NN)*Res.CW(1).In.ko;
 
         parfor i_p = 1:NN
@@ -62,60 +59,77 @@
                 Res_S                   = Res;
                 Res_S.CW.In.delta_o     = delta_vector(i_d);
                 Res_S.CW.Sol.Omega      = Omega_Vector(i_p);         
-                [Mumber_of_modes(i_p,i_d),k(i_p,i_d),Vector_Save(i_p,i_d).V] =  Evaluate_MI(Res_S);
+                [Mumber(i_p,i_d),lambda_vec(i_p,i_d).lambda...
+                    ,k_vec(i_p,i_d).k,Vector_vec(i_p,i_d).Vector] =  Evaluate_MI(Res_S);
             end          
             i_p
         end
         ii
-        Save(ii).Res                  = Res;
+        Res                  = Res;
+        
         Save(ii).delta_vector         = delta_vector; 
         Save(ii).W_Vector             = Omega_Vector;
-        Save(ii).Mumber_of_modes      = Mumber_of_modes;
-        Save(ii).k                    = k;
+        Save(ii).Mumber               = Mumber;
+        Save(ii).lambda_vec           = lambda_vec;
+        Save(ii).k_vec                = k_vec;
+        Save(ii).Vector_vec           = Vector_vec;
         
     end
-    
+    toc
         
 %%
         for i_p = 1:NN
             for i_d = 1:NN
-                if ~isnan(Vector_Save(i_p,i_d).V(1))
-                    Save(ii).Conv_eff(i_p,i_d) = abs(Vector_Save(i_p,i_d).V(2)+Vector_Save(i_p,i_d).V(4)).^2/abs(Vector_Save(i_p,i_d).V(1)+Vector_Save(i_p,i_d).V(3)).^2;
+                
+                if ~isnan(Save.k_vec(i_p,i_d).k)
+                    [~,ind]    = max(Save.k_vec(i_p,i_d).k);
+                    
+                    Conv_eff(i_p,i_d) = abs(Vector_vec(i_p,i_d).Vector(2,ind) + Vector_vec(i_p,i_d).Vector(4,ind)).^2/abs(Vector_vec(i_p,i_d).Vector(1,ind)+Vector_vec(i_p,i_d).Vector(3,ind)).^2;
+                    
                 else
-                    Save(ii).Conv_eff(i_p,i_d) = NaN;
+                    Conv_eff(i_p,i_d) = NaN;
                 end
-            end          
+            end         
         end
 
 %%
-figure;mesh(Save(ii).delta_vector/Res.CW.In.ko,Save(ii).W_Vector/sqrt(2*Res.CW.In.ko*Res.CW.In.ke),abs(Save(ii).Conv_eff));shading interp;
-%%
-for ii = 1
-figure;mesh(Save(ii).delta_vector/Res.CW.In.ko,Save(ii).W_Vector/sqrt(2*Res.CW.In.ko*Res.CW.In.ke),abs(Save(ii).Mumber_of_modes));shading interp;
-end
+
+figure;
+mesh(Save(ii).delta_vector/Res.CW.In.ko,Save(ii).W_Vector/sqrt(2*Res.CW.In.ko*Res.CW.In.ke),abs(Conv_eff));shading interp;
+
 %%
 
-function [Mumber,k,Vector_Save] =  Evaluate_MI(Res)
+for ii = 1
+    figure;pcolor(Save(ii).delta_vector/Res.CW.In.ko,Save(ii).W_Vector/sqrt(2*Res.CW.In.ko*Res.CW.In.ke),abs(Save(ii).Mumber));shading interp;
+end
+
+%%
+    figure;mesh(Save(ii).delta_vector/Res.CW.In.ko,Save(ii).W_Vector/sqrt(2*Res.CW.In.ko*Res.CW.In.ke),log10(Conv_eff));shading interp;
+%%
+
+function [Mumber,lambda,k,Vector] =  Evaluate_MI(Res)
+
     k                 = NaN;
     Vector_Save       = NaN;
     Res.CW            = Res.CW.Met.Norm(Res.CW);
     Res.CW.Stab       = Chi23_MI(Res.CW);
     [~,ind]           = max(abs(Res.CW.Sol.Omega));
-    Mumber            = sum(sum(real(Res.CW.Stab(ind).Value)>1E-6));
+    Mumber            = sum(sum(uniquetol(real(Res.CW.Stab(ind).Value))>1E-6));
     
-    [m_ind1,ind1_t]   = max(real(Res.CW.Stab(ind).Value),[],1);
-    if max(m_ind1) >0
-        [~,ind1]          = max(m_ind1);
-        k                 = Res.CW.Space.k(ind1_t(ind1));
-        
-        [ValCol,icol]     = max(real(Res.CW.Stab.Value),[],2);
-        [~,iicol]         = max(ValCol);
-        icol              = icol(iicol);
-        
-        [ValCol,iraw]     = max(real(Res.CW.Stab.Value),[],1);
-        [~,iiraw]         = max(ValCol);
-        iraw              = iraw(iiraw);
-        Vector_Save       = Res.CW.Stab.Vector(iraw).V(:,icol);
+    [i_r,i_c]         = find(Res.CW.Stab(ind).Value > 0);
+    
+    k      = zeros(1,length(i_r));
+    lambda = zeros(1,length(i_r));
+    Vector = zeros(4,length(i_r));
+    
+    if ~isempty(i_r) > 0
+        for i = 1:length(i_r)
+            
+           k(i)         = Res.CW.Space.k(i_r(i));
+           lambda(i)    = Res.CW.Stab.Value(i_r(i),i_c(i));
+           Vector(:,i)  = Res.CW.Stab.Vector(i_r(i)).V(:,i_c(i));
+            
+        end
     end
 end
     
