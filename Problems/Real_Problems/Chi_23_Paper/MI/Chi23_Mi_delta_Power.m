@@ -38,14 +38,14 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 72*72;
+    NN                  = 72*5;
     
 %%
     epsilon_vector = 2*pi*[-10E9,-20E9,0,0,-10E6];
-    delta_start    = [-30,-40,-50,50,-50]*Res.CW.In.ko;
-    delta_finsih   = [30,40,50,-50,1]*Res.CW.In.ko;
+    delta_start    = [15,-40,-50,50,-50]*Res.CW.In.ko;
+    delta_finsih   = [0,40,50,-50,1]*Res.CW.In.ko;
     
-    for iii = 1:2
+    for iii = 1:1
         
     Mumber_of_modes_1 = NaN(NN);
     Mumber_of_modes_2 = NaN(NN);
@@ -64,7 +64,7 @@
         Res_S.CW.In.W           = W_Vector(i_p)*Res_S.CW.In.W_Star;        
         Res_S.CW                = Res_S.CW.Met.Solve_Chi2(Res_S.CW ); 
         
-        [~,ind]                 = max(abs(Res_S.CW.Sol.Omega));
+        [~,ind]                 = min(abs(Res_S.CW.Sol.Omega));
         
         Res_S.CW.Sol.Omega      =  Res_S.CW.Sol.Omega(ind);    
         Res_S.CW.Sol.Psi_o      =  Res_S.CW.Sol.Psi_o(ind);    
@@ -75,9 +75,12 @@
             Res_S.CW.In.delta_o    = delta_vector(i_d);            
             Res_S.CW               = Res.CW.Met.Norm(Res_S.CW);  
             [Slv,eps_f,Exitflag]   = Newton_Switcher([real(Res_S.CW.Sol.Psi_o(1)),imag(Res_S.CW.Sol.Psi_o(1)),real(Res_S.CW.Sol.Psi_e(1)),imag(Res_S.CW.Sol.Psi_e(1))],Res_S.CW);
-            Res_S.CW               = Res_S.CW.Met.Prop_Gen(Slv,Res_S.CW);          
+            Res_S.CW               = Res_S.CW.Met.Prop_Gen(Slv,Res_S.CW);      
+            
             if eps_f > 1E-5
+                
                 break;
+                
             end        
             [Mumber_of_modes_1(i_p,i_d),Mumber_of_modes_2(i_p,i_d),k1(i_p,i_d),k2(i_p,i_d)] =  Evaluate_MI(Res_S);
         end
@@ -97,31 +100,33 @@
     end
 
 %%    
-    figure('Position',[0,0,1000,800/2],'Color',[1,1,1]);
-    Panel = tiledlayout(1,2,'TileSpacing','none','Padding','none');   
-    
-    for i = 1:2
-        
-        ax(i) = nexttile(Panel,i,[1,1]);  
-        hold(ax(i),'on');
-        
-    end
-    
-    pcolor(Save.delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_1,'Parent',ax(1));shading(ax(1),'interp');
-    pcolor(Save.delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_2,'Parent',ax(2));shading(ax(2),'interp');
+%     figure('Position',[0,0,1000,800/2],'Color',[1,1,1]);
+%     Panel = tiledlayout(1,2,'TileSpacing','none','Padding','none');   
+%     
+%     for i = 1:2
+%         
+%         ax(i) = nexttile(Panel,i,[1,1]);  
+%         hold(ax(i),'on');
+%         
+%     end
+%     
+%     pcolor(Save.delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_1,'Parent',ax(1));shading(ax(1),'interp');
+%     pcolor(Save.delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_2,'Parent',ax(2));shading(ax(2),'interp');
     
 %%
 
     for i = 1
         
     figure;
-    pcolor(Save(i).delta_vector/Res.CW.In.ko,Save(i).W_Vector,abs(Save(i).Mumber_of_modes_1));shading(gca,'interp');
+    mesh(Save(i).delta_vector/Res.CW.In.ko,Save(i).W_Vector,abs(Save(i).Mumber_of_modes_2));shading(gca,'interp');
     
     end
 %%
 
 function [Mumber1,Mumber2,k1,k2] =  Evaluate_MI(Res)
 
+    k1 = NaN;
+    k2 = NaN;
     Res.CW2           = Res.CW.Met.Norm(Res.CW);  
     Res.CW23          = Res.CW2;
     
@@ -138,12 +143,33 @@ function [Mumber1,Mumber2,k1,k2] =  Evaluate_MI(Res)
     Mumber2           = sum(sum(real(Res.CW23.Stab(1).Value)>1E-6));
     
     [m_ind1,ind1_t]   = max(real(Res.CW2.Stab(ind).Value),[],1);
-    [~,ind1]          = max(m_ind1);
-    k1                = Res.CW2.Space.k(ind1_t(ind1));
+    if  max(m_ind1) > 0
+       [~,ind1]          = max(m_ind1);
+        k1                 = Res.CW2.Space.k(ind1_t(ind1));
+        
+        [ValCol,icol]     = max(real(Res.CW2.Stab.Value),[],2);
+        [~,iicol]         = max(ValCol);
+        icol              = icol(iicol);
+        
+        [ValCol,iraw]     = max(real(Res.CW2.Stab.Value),[],1);
+        [~,iiraw]         = max(ValCol);
+        iraw              = iraw(iiraw);
+        Vector_Save1       = Res.CW2.Stab.Vector(iraw).V(:,icol);
+    end
     
-    [m_ind1,ind1_t]   = max(real(Res.CW23.Stab.Value),[],1);
-    [~,ind1]          = max(m_ind1);
-    k2                = Res.CW23.Space.k(ind1_t(ind1));
-    
+   [m_ind1,ind1_t]   = max(real(Res.CW23.Stab(ind).Value),[],1);
+    if  max(m_ind1) > 0
+       [~,ind1]          = max(m_ind1);
+        k2                 = Res.CW23.Space.k(ind1_t(ind1));
+        
+        [ValCol,icol]     = max(real(Res.CW23.Stab.Value),[],2);
+        [~,iicol]         = max(ValCol);
+        icol              = icol(iicol);
+        
+        [ValCol,iraw]     = max(real(Res.CW23.Stab.Value),[],1);
+        [~,iiraw]         = max(ValCol);
+        iraw              = iraw(iiraw);
+        Vector_Save2       = Res.CW23.Stab.Vector(iraw).V(:,icol);
+    end
 end
 

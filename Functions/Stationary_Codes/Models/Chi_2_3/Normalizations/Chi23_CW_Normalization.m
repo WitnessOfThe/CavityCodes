@@ -13,8 +13,7 @@ function CW = Chi23_CW_Normalization(CW)
 
     CW.In.Omega_f    =  CW.In.delta_o - 1i*CW.In.ko/2;
     CW.In.Omega_s    =  8*(CW.In.delta_e - 1i*CW.In.ke/2);
-    CW.In.Omega_Star    =  sqrt(2*CW.In.ke*CW.In.ko);
-    
+     
 %%
     CW.Eq.delta_o         = CW.In.delta_o/norm;
     CW.Eq.delta_e         = CW.In.delta_e/norm;

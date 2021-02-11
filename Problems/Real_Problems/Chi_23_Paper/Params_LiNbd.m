@@ -17,5 +17,6 @@ function In = Params_LiNbd
     
     In.H_Star       = sqrt(In.ko*In.ke/4/In.gam2o/In.gam2e);
     In.W_Star       = (In.H_Star^2*pi/In.eta/In.Finess);
-    
+    In.Omega_Star    =  sqrt(2*In.ke*In.ko);
+  
 end
