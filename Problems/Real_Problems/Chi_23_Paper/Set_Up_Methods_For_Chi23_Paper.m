@@ -26,9 +26,9 @@ function Res = Set_Up_Methods_For_Chi23_Paper
 %     L_L.CW.Met.Mi_Formula         = @Chi_3_LLE_MI_Formula;
 %     L_L.CW.Met.Plot.Dressed_State = @Plot_LLE_Dressed_State;
 %     
-    Res.Stat.Met.Equation             = @Chi23_Full_Dispersion_Equation;
-    Res.Stat.Met.Liniar_Decomposition = @Chi23_Full_Dispersion_Liniar_Decomposition;
-    Res.Stat.Met.Preconditioner       = @Chi23_Full_Dispersion_Preconditioner;
+    Res.Stat.Met.Equation             = @Chi23_Full_Dispersion_Equation_RS;
+    Res.Stat.Met.Liniar_Decomposition = @Chi23_Full_Dispersion_Liniar_Decomposition_RS;
+    Res.Stat.Met.Preconditioner       = @Chi23_Full_Dispersion_Preconditioner_RS;
     Res.Stat.Met.Stab_Matrix          = @Chi23_Linear_Stability;    
     Res.Stat.Met.Stab_Method          = @Chi23_Stability;
 

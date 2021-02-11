@@ -12,6 +12,7 @@ function  M = Chi2_MI_Matrix(CW,i,j)
             Psi_e = CW.Sol.Psi_e;
             
     end
+    
     g_1_1 = CW.Space.k(i).^2*CW.Eq.Do(2)/2-1i*1/2*CW.Eq.ko+CW.Eq.delta_o;
     g_1_2 = -sqrt(2*CW.Eq.gam2o*CW.Eq.gam2e)*Psi_o; 
     g_1_3 = -CW.Eq.gam2o*conj(Psi_e); 
