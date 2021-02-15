@@ -8,8 +8,8 @@
     Res.CW.In         = Params_LiNbd;
     Res.CW.In.eps     = -10E9*2*pi;
     Res.CW.In.delta_o = 0;
-    Res.CW.In.N       = 60;
-    Res.CW.In.W       = 70000*Res.CW.In.W_Star;
+    Res.CW.In.N       = 90;
+    Res.CW.In.W       = 7000*Res.CW.In.W_Star;
     
 %%
     Res.CW.Par.Equation_string  = 'Chi23_CW';
@@ -38,12 +38,12 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 72*10;
+    NN                  = 72*5;
   %  delta_vector        = linspace(-11,-9,NN)*Res.CW(1).In.ko;
     epsilon_vector      = 2*pi*[-10E9,-20E9,0,-10E6];   
     omega_max           = [150,100,10,10];
-    delta_max           = [9,100,10,10];
-    delta_min           = [-40,100,10,10];
+    delta_max           = [40,100,10,10];
+    delta_min           = [150,100,10,10];
     
 %%
     tic
@@ -82,9 +82,9 @@
             for i_d = 1:NN
                 
                 if ~isnan(Save.k_vec(i_p,i_d).k)
-                    [~,ind]    = max(Save.k_vec(i_p,i_d).k);
+                    [~,ind]    = min(Save.k_vec(i_p,i_d).k);
                     
-                    Conv_eff(i_p,i_d) = abs(Vector_vec(i_p,i_d).Vector(2,ind) + Vector_vec(i_p,i_d).Vector(4,ind)).^2/abs(Vector_vec(i_p,i_d).Vector(1,ind)+Vector_vec(i_p,i_d).Vector(3,ind)).^2;
+                    Conv_eff(i_p,i_d) = abs(Vector_vec(i_p,i_d).Vector(2,ind) ).^2/abs(Vector_vec(i_p,i_d).Vector(1,ind)).^2;
                     
                 else
                     Conv_eff(i_p,i_d) = NaN;

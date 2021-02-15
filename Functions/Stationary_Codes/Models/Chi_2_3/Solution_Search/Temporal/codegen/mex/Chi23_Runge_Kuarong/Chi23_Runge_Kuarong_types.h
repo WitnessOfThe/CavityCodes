@@ -72,6 +72,7 @@ typedef struct {
   real_T Finess;
   real_T H_Star;
   real_T W_Star;
+  real_T Omega_Star;
   real_T eps;
   real_T delta_o;
   real_T N;
@@ -81,7 +82,6 @@ typedef struct {
   real_T H;
   creal_T Omega_f;
   creal_T Omega_s;
-  real_T Omega_Star;
   creal_T Psi_Start[512];
   real_T t_start;
 } struct1_T;

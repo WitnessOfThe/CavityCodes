@@ -170,8 +170,8 @@ static void d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
 {
   static const int32_T dims = 0;
   static const char_T *fieldNames[24] = { "eta", "ko", "ke", "gam2o", "gam2e",
-    "gam3o", "gam3e", "Do", "De", "Finess", "H_Star", "W_Star", "eps", "delta_o",
-    "N", "W", "delta", "delta_e", "H", "Omega_f", "Omega_s", "Omega_Star",
+    "gam3o", "gam3e", "Do", "De", "Finess", "H_Star", "W_Star", "Omega_Star",
+    "eps", "delta_o", "N", "W", "delta", "delta_e", "H", "Omega_f", "Omega_s",
     "Psi_Start", "t_start" };
 
   emlrtMsgIdentifier thisId;
@@ -214,36 +214,36 @@ static void d_emlrt_marshallIn(const emlrtStack *sp, const mxArray *u, const
   thisId.fIdentifier = "W_Star";
   y->W_Star = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 11,
     "W_Star")), &thisId);
+  thisId.fIdentifier = "Omega_Star";
+  y->Omega_Star = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0,
+    12, "Omega_Star")), &thisId);
   thisId.fIdentifier = "eps";
-  y->eps = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 12,
+  y->eps = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 13,
     "eps")), &thisId);
   thisId.fIdentifier = "delta_o";
   y->delta_o = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0,
-    13, "delta_o")), &thisId);
+    14, "delta_o")), &thisId);
   thisId.fIdentifier = "N";
-  y->N = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 14, "N")),
+  y->N = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 15, "N")),
     &thisId);
   thisId.fIdentifier = "W";
-  y->W = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 15, "W")),
+  y->W = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 16, "W")),
     &thisId);
   thisId.fIdentifier = "delta";
-  y->delta = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 16,
+  y->delta = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 17,
     "delta")), &thisId);
   thisId.fIdentifier = "delta_e";
   y->delta_e = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0,
-    17, "delta_e")), &thisId);
+    18, "delta_e")), &thisId);
   thisId.fIdentifier = "H";
-  y->H = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 18, "H")),
+  y->H = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 19, "H")),
     &thisId);
   thisId.fIdentifier = "Omega_f";
   y->Omega_f = g_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0,
-    19, "Omega_f")), &thisId);
+    20, "Omega_f")), &thisId);
   thisId.fIdentifier = "Omega_s";
   y->Omega_s = g_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0,
-    20, "Omega_s")), &thisId);
-  thisId.fIdentifier = "Omega_Star";
-  y->Omega_Star = e_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0,
-    21, "Omega_Star")), &thisId);
+    21, "Omega_s")), &thisId);
   thisId.fIdentifier = "Psi_Start";
   h_emlrt_marshallIn(sp, emlrtAlias(emlrtGetFieldR2017b(sp, u, 0, 22,
     "Psi_Start")), &thisId, y->Psi_Start);

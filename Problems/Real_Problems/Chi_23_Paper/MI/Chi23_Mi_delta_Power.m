@@ -38,12 +38,12 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 72*10;
+    NN                  = 72*5;
     
 %%
     epsilon_vector = 2*pi*[-10E9,-20E9,0,0,-10E6];
-    delta_start    = [-40,-40,-50,50,-50]*Res.CW.In.ko;
-    delta_finsih   = [4,40,50,-50,1]*Res.CW.In.ko;
+    delta_start    = [-150,-40,-50,50,-50]*Res.CW.In.ko;
+    delta_finsih   = [-40,40,50,-50,1]*Res.CW.In.ko;
     
     for iii = 1:1
             
