@@ -40,22 +40,37 @@
 %%
     W_Finish     = 10000;
     delta_Finish = 3;
-   
+    NN           = 36;
+    delta_vector = linspace(-76.76,-85,NN) ;
+    Power_vector = linspace(10.2E7,15E7,NN) ;
+    parfor i =1:NN
+        
+       Res_S(i) = Get_The_Branch_for_Power(Res,delta_vector(i),Power_vector(i),100);
+       
+    end
+%%
+    N_max = 0;
+    for i = 1:Res_S
+        N_max = max(N_max,size(Res_S(i).Stat,2));
+    end
+
+%%
+function  Res = Get_The_Branch_for_Power(Res,delta_point,Power_Point,NN)
+
     W_Start           = [1.3E5,111142000];
     delta             = [-100,-78.6];
-    NN                = 100;
-    W_Wector          = linspace(111142000,15e7,NN);
-    delta_track     = linspace(-78.6,-84.5,NN);
+    
+    W_Wector          = linspace(111142000,Power_Point,NN);
+    delta_track       = linspace(-78.6,delta_point,NN);
     Res = Get_to_point(Res,W_Start,delta);
-   
-%%
+    
     Res.Stat.In           = Res.CW.In;
     Res.CW.Met.Equation   = @Chi23_CW;
     
     Res.Stat.Par          = Res.CW.Par;
     Res.Stat.In.mu_bl     = 10;
     
-    Res.Stat.In.N         = 2^9;
+    Res.Stat.In.N         = 2^8;
     Res.Stat.Met.Newton   = @Newton_Manual_bicgstab;%'fsolve'
     
     Res.Stat              = Res.Stat.Met.Norm(Res.Stat);
@@ -115,22 +130,21 @@
 
         [Slv,eps_f,Exitflag]  = Newton_Switcher(Slv,Res.Stat);
 
-
-    
     end
     Res.Stat.Sol.Psi_o   = fft(Slv(1:Res.Stat.Space.N) + 1i*Slv(Res.Stat.Space.N+1:2*Res.Stat.Space.N))/Res.Stat.Space.N;
     Res.Stat.Sol.Psi_e   = fft(Slv(2*Res.Stat.Space.N+1:3*Res.Stat.Space.N) + 1i*Slv(3*Res.Stat.Space.N+1:4*Res.Stat.Space.N))/Res.Stat.Space.N;
     Res.Stat.Sol.V       =  Slv(end);    
     Res.Stat              = Run_Branch_Universal(Res.Stat);
+ end
 %%    
-    for i = 1:116
-        delta_vector(i,:) = Res.Stat(i).Eq.delta_o;
-        v_vector(i,:) = Res.Stat(i).Sol.V;
-        Psi_matrix(i,:) = Res.Stat(i).Sol.Psi_o;
-        Conv_eff(i) = abs(Res.Stat(i).Sol.Psi_e(2)).^2/abs(Res.Stat(i).Sol.Psi_o(2)).^2;
-        Conv_eff_Total(i) = sum(abs(Res.Stat(i).Sol.Psi_e(:)).^2/sum(abs(Res.Stat(i).Sol.Psi_o(:)).^2));
-        E_values(i,1:4)   = maxk(real(Res.Stat(i).Stab.E_values),4);
-    end
+%     for i = 1:116
+%         delta_vector(i,:) = Res.Stat(i).Eq.delta_o;
+%         v_vector(i,:) = Res.Stat(i).Sol.V;
+%         Psi_matrix(i,:) = Res.Stat(i).Sol.Psi_o;
+%         Conv_eff(i) = abs(Res.Stat(i).Sol.Psi_e(2)).^2/abs(Res.Stat(i).Sol.Psi_o(2)).^2;
+%         Conv_eff_Total(i) = sum(abs(Res.Stat(i).Sol.Psi_e(:)).^2/sum(abs(Res.Stat(i).Sol.Psi_o(:)).^2));
+%         E_values(i,1:4)   = maxk(real(Res.Stat(i).Stab.E_values),4);
+%     end
 %%    
 function Res = Get_to_point(Res,W,delta)    
     
