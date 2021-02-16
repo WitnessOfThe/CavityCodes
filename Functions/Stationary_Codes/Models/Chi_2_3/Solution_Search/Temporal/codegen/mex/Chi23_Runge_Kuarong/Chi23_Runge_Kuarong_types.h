@@ -37,9 +37,9 @@ typedef struct {
   real_T N;
   real_T lenght;
   real_T dphi;
-  real_T phi[256];
+  real_T phi[512];
   real_T dk;
-  real_T k[256];
+  real_T k[512];
 } struct3_T;
 
 #endif                                 /*typedef_struct3_T*/
@@ -82,7 +82,7 @@ typedef struct {
   real_T H;
   creal_T Omega_f;
   creal_T Omega_s;
-  creal_T Psi_Start[512];
+  creal_T Psi_Start[1024];
   real_T t_start;
 } struct1_T;
 
@@ -106,10 +106,10 @@ typedef struct {
   real_T De[2];
   real_T d;
   real_T norm;
-  real_T mode_range[512];
-  creal_T Lo[256];
-  creal_T Le[256];
-  creal_T L[512];
+  real_T mode_range[1024];
+  creal_T Lo[512];
+  creal_T Le[512];
+  creal_T L[1024];
 } struct4_T;
 
 #endif                                 /*typedef_struct4_T*/
@@ -162,5 +162,16 @@ typedef struct {
 } struct0_T;
 
 #endif                                 /*typedef_struct0_T*/
+
+#ifndef typedef_Chi23_Runge_KuarongStackData
+#define typedef_Chi23_Runge_KuarongStackData
+
+typedef struct {
+  struct {
+    struct0_T Temp;
+  } f0;
+} Chi23_Runge_KuarongStackData;
+
+#endif                                 /*typedef_Chi23_Runge_KuarongStackData*/
 
 /* End of code generation (Chi23_Runge_Kuarong_types.h) */

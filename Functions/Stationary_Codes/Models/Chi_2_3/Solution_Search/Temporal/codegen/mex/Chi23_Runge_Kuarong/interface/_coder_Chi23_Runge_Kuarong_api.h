@@ -12,6 +12,7 @@
 #pragma once
 
 /* Include files */
+#include "Chi23_Runge_Kuarong_types.h"
 #include "rtwtypes.h"
 #include "emlrt.h"
 #include "mex.h"
@@ -21,7 +22,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void Chi23_Runge_Kuarong_api(const mxArray * const prhs[2], const mxArray *plhs
-  [1]);
+void Chi23_Runge_Kuarong_api(Chi23_Runge_KuarongStackData *SD, const mxArray *
+  const prhs[2], const mxArray *plhs[1]);
 
 /* End of code generation (_coder_Chi23_Runge_Kuarong_api.h) */
