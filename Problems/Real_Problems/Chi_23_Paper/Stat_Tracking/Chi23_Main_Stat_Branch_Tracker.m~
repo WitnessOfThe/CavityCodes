@@ -41,8 +41,8 @@
     W_Finish     = 10000;
     delta_Finish = 3;
     NN           = 72;
-    delta_vector = linspace(-75.76,-85,NN);
-    Power_vector = linspace(7E7,15E7,NN);
+    delta_vector = linspace(-76.76,-85,NN);
+    Power_vector = linspace(10.2E7,15E7,NN);
     
     parfor i =1:NN
         
@@ -72,7 +72,7 @@
 %%
 figure;
 mesh(delta_matrix,W_matrix,Conv_eff);
-zlim([1.3,2])
+zlim(1)
 %%
 function  Res = Get_The_Branch_for_Power(Res,delta_point,Power_Point,NN)
 

@@ -66,7 +66,7 @@ end
        if ~(i>=2)
            Logic.r_1 = 0;%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
        else
-           Logic.r_1 = sum(abs(Stat(2).Sol.Psi_o(2:end)).^2) <= 1E-10;
+           Logic.r_1 = sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) <= 1E-10;
        end
        Logic.r_2  = ~(Stat(end).Par.top_boundary > x) ;            
        Logic.r_3  =  Exitflag <= 0;
