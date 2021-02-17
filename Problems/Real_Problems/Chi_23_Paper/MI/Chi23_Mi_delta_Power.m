@@ -6,7 +6,7 @@
 %%
     
     Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = -10E9*2*pi;
+    Res.CW.In.eps     = -1E9*2*pi;
     Res.CW.In.delta_o = 0;
     Res.CW.In.N       = 2^6;
     Res.CW.In.W       = 100000*Res.CW.In.W_Star;
@@ -38,18 +38,18 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 72*5;
+    NN                  = 72*4;
     
 %%
-    epsilon_vector = 2*pi*[-10E9,-20E9,0,0,-10E6];
-    delta_start    = [-150,-40,-50,50,-50]*Res.CW.In.ko;
-    delta_finsih   = [-40,40,50,-50,1]*Res.CW.In.ko;
+    epsilon_vector = 2*pi*[-2E9,-20E9,0,0,-10E6];
+    delta_start    = [-100,-40,-50,50,-50]*Res.CW.In.ko;
+    delta_finsih   = [20,40,50,-50,1]*Res.CW.In.ko;
     
     for iii = 1:1
             
     Res.CW.In.eps       = epsilon_vector(iii);
     delta_vector        = linspace(delta_start(iii),delta_finsih(iii),NN);
-    W_Vector            = linspace(1,150E6,NN);
+    W_Vector            = linspace(1,10E6,NN);
     
     tic
     
@@ -95,18 +95,19 @@
     toc 
     
     end
-
+%    save(strcat('',)
 %%    
 % delta_vector/Res.CW.In.ko,Save.W_Vector,Save.Mumber_of_modes_2,'Parent',ax(2));shading(ax(2),'interp');
         for i_p = 1:NN
             for i_d = 1:NN
                 
                 if ~isnan(Save.k2_vec(i_p,i_d).k)
-                    [~,ind]    = max(Save.k2_vec(i_p,i_d).k);
+                    [Max_k(i_p,i_d),ind]    = max(Save.k2_vec(i_p,i_d).k);
                     
                     Conv_eff(i_p,i_d) = abs(Vector2_vec(i_p,i_d).Vector(2,ind) + Vector2_vec(i_p,i_d).Vector(4,ind)).^2/abs(Vector2_vec(i_p,i_d).Vector(1,ind)+Vector2_vec(i_p,i_d).Vector(3,ind)).^2;
                     
                 else
+                    Max_k(i_p,i_d)    = NaN;
                     Conv_eff(i_p,i_d) = NaN;
                 end
             end         
@@ -119,7 +120,7 @@
     for i = 1
         
     figure;
-    mesh(Save(i).delta_vector/Res.CW.In.ko,Save(i).W_Vector,abs(Save(i).Mumber1));shading(gca,'interp');
+    mesh(Save(i).delta_vector/Res.CW.In.ko,Save(i).W_Vector,abs(Max_k));shading(gca,'interp');
     
     end
 %%
