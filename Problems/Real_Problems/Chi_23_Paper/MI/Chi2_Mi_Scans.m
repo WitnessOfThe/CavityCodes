@@ -37,12 +37,12 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 72*1/2;
-    epsilon_vector      = 2*pi*[-1E9,-3E9,-5E9,-7E9,-9E9,-10E9];   
-    omega_max           = [30,100,100,150,150,150];
-    delta_max           = [60,80,80,120,120,120];
-    delta_min           = [-60,-80,-80,-120,-120,-120];
-    Power_max_vect      = [1E7,1E7,3E7,6E7,8E7,15E7];
+    NN                  = 72/2;
+    epsilon_vector      = 2*pi*[-10E9,-13E9,-15E9,-17E9,-19E9,-20E9];   
+    omega_max           = [150,150,150,150,150,150];
+    delta_max           = [120,120,120,120,120,120];
+    delta_min           = [-120,-120,-120,-120,-120,-120];
+    Power_max_vect      = [15E7,15E7,15E7,15E7,15E7,15E7];
 %% Omega_Scan
  tic
     for ii = 1:size(epsilon_vector,2)
@@ -57,8 +57,8 @@
                 Res_S                   = Res;
                 Res_S.CW.In.delta_o     = delta_vector(i_d);
                 Res_S.CW.Sol.Omega      = Omega_Vector(i_p);         
-                [Mumber(i_p,i_d),lambda_vec(i_p,i_d).lambda...
-                    ,k_vec(i_p,i_d).k,Vector_vec(i_p,i_d).Vector] =  Evaluate_MI_Omega(Res_S);
+                [Mumber(i_p,i_d),~...
+                    ,~,~] =  Evaluate_MI_Omega(Res_S);
             end          
        
         end
@@ -69,28 +69,31 @@
         Save_Omega(ii).delta_vector         = delta_vector; 
         Save_Omega(ii).W_Vector             = Omega_Vector;
         Save_Omega(ii).Mumber               = Mumber;
-        Save_Omega(ii).lambda_vec           = lambda_vec;
-        Save_Omega(ii).k_vec                = k_vec;
-        Save_Omega(ii).Vector_vec           = Vector_vec;
+%        Save_Omega(ii).lambda_vec           = lambda_vec;
+ %       Save_Omega(ii).k_vec                = k_vec;
+  %      Save_Omega(ii).Vector_vec           = Vector_vec;
         
     end
   toc  
 %%
-tic
+    clear delta_vector W_Vector
     for iii = 1:size(epsilon_vector,2)
+tic
             
     Res.CW.In.eps       = epsilon_vector(iii);
     delta_vector        = linspace(delta_min(iii),delta_max(iii),NN)*Res.CW(1).In.ko;
     W_Vector            = linspace(1,Power_max_vect(iii),NN);
     
-    
+    Mumber1 = NaN(NN);
+    Mumber2 = NaN(NN);
+    Psi_o   =  NaN(NN);
     parfor i_p = 1:NN
         
         Res_S                   = Res;
         Res_S.CW.In.W           = W_Vector(i_p)*Res_S.CW.In.W_Star;        
         Res_S.CW                = Res_S.CW.Met.Solve_Chi2(Res_S.CW ); 
          Ext                    = @max;
-        [~,ind]                 = Ext (abs(Res_S.CW.Sol.Omega));
+        [~,ind]                 = Ext(abs(Res_S.CW.Sol.Omega));
         
         Res_S.CW.Sol.Omega      =  Res_S.CW.Sol.Omega(ind);    
         Res_S.CW.Sol.Psi_o      =  Res_S.CW.Sol.Psi_o(ind);    
@@ -103,13 +106,14 @@ tic
             [Slv,eps_f,Exitflag]   = Newton_Switcher([real(Res_S.CW.Sol.Psi_o(1)),imag(Res_S.CW.Sol.Psi_o(1)),real(Res_S.CW.Sol.Psi_e(1)),imag(Res_S.CW.Sol.Psi_e(1))],Res_S.CW);
             Res_S.CW               = Res_S.CW.Met.Prop_Gen(Slv,Res_S.CW);      
             
+            Psi_o(i_p,i_d)         = Res_S.CW.Sol.Psi_o;
             if eps_f > 1E-8
                 
                 break;
                 
             end        
-            [Mumber1(i_p,i_d),k1_vec(i_p,i_d).k,lambda1_vec(i_p,i_d).lambda,Vector1_vec(i_p,i_d).Vector...
-                ,Mumber2(i_p,i_d),k2_vec(i_p,i_d).k,lambda2_vec(i_p,i_d).lambda,Vector2_vec(i_p,i_d).Vector] =  Evaluate_MI_Power(Res_S,Ext );
+            [Mumber1(i_p,i_d),~,~,~...
+                ,Mumber2(i_p,i_d),~,~,~] =  Evaluate_MI_Power(Res_S,Ext );
         end
     end
     
@@ -118,21 +122,26 @@ tic
     Save_Upper(iii).W_Vector             = W_Vector;
     Save_Upper(iii).Mumber1              = Mumber1;
     Save_Upper(iii).Mumber2              = Mumber2;
-    Save_Upper(iii).k1_vec               = k1_vec;
-    Save_Upper(iii).k2_vec               = k2_vec;
-    Save_Upper(iii).Vector1              = Vector1_vec;
-    Save_Upper(iii).Vector2              = Vector2_vec;
+    Save_Upper(iii).Psio                 = Psi_o;
+ %   Save_Upper(iii).k1_vec               = k1_vec;
+  %  Save_Upper(iii).k2_vec               = k2_vec;
+   % Save_Upper(iii).Vector1              = Vector1_vec;
+    %Save_Upper(iii).Vector2              = Vector2_vec;
     
-    end
     toc 
+    end
   
 %%    
-    for iii = 1:size(epsilon_vector,2)
+     clear delta_vector W_Vector
+   for iii = 1:size(epsilon_vector,2)
             
     Res.CW.In.eps       = epsilon_vector(iii);
     delta_vector        = linspace(delta_max(iii),delta_min(iii),NN)*Res.CW(1).In.ko;
     W_Vector            = linspace(1,Power_max_vect(iii),NN);
     
+    Mumber1 = NaN(NN);
+    Mumber2 = NaN(NN);
+  Psi_o   =  NaN(NN);    
     tic
     
     parfor i_p = 1:NN
@@ -153,14 +162,15 @@ tic
             Res_S.CW               = Res.CW.Met.Norm(Res_S.CW);  
             [Slv,eps_f,Exitflag]   = Newton_Switcher([real(Res_S.CW.Sol.Psi_o(1)),imag(Res_S.CW.Sol.Psi_o(1)),real(Res_S.CW.Sol.Psi_e(1)),imag(Res_S.CW.Sol.Psi_e(1))],Res_S.CW);
             Res_S.CW               = Res_S.CW.Met.Prop_Gen(Slv,Res_S.CW);      
+            Psi_o(i_p,i_d)         = Res_S.CW.Sol.Psi_o;
             
             if eps_f > 1E-8
                 
                 break;
                 
             end        
-            [Mumber1(i_p,i_d),k1_vec(i_p,i_d).k,lambda1_vec(i_p,i_d).lambda,Vector1_vec(i_p,i_d).Vector...
-                ,Mumber2(i_p,i_d),k2_vec(i_p,i_d).k,lambda2_vec(i_p,i_d).lambda,Vector2_vec(i_p,i_d).Vector] =  Evaluate_MI_Power(Res_S,Ext );
+             [Mumber1(i_p,i_d),~,~,~...
+                ,Mumber2(i_p,i_d),~,~,~] =  Evaluate_MI_Power(Res_S,Ext );
         end
     end
     
@@ -169,14 +179,16 @@ tic
     Save_Lower(iii).W_Vector             = W_Vector;
     Save_Lower(iii).Mumber1              = Mumber1;
     Save_Lower(iii).Mumber2              = Mumber2;
-    Save_Lower(iii).k1_vec               = k1_vec;
-    Save_Lower(iii).k2_vec               = k2_vec;
-    Save_Lower(iii).Vector1              = Vector1_vec;
-    Save_Lower(iii).Vector2              = Vector2_vec;
+    Save_Lower(iii).Psio                 = Psi_o;
+    
+   % Save_Lower(iii).k1_vec               = k1_vec;
+ %   Save_Lower(iii).k2_vec               = k2_vec;
+%    Save_Lower(iii).Vector1              = Vector1_vec;
+%    Save_Lower(iii).Vector2              = Vector2_vec;
     toc 
     
     end
-%save(strcat('Mi_Negative_NN=',num2str(NN)),'Save_Lower','Save_Upper','Save_Omega');
+save(strcat('Mi_Negative_NN=',num2str(NN)),'Save_Lower','Save_Upper','Save_Omega');
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [Mumber,lambda,k,Vector] =  Evaluate_MI_Omega(Res)

@@ -86,7 +86,7 @@
                 Stat.Eq.gam3e.*( 2*conj(Psio).*Psie.*xoS + 2*Psio.*Psie.*conj(xoS)...
                 + 2*( abs(Psio).^2 + abs(Psie).^2 ).*xeS + Psie.^2.*conj(xeS))) ;
         
-        Eq1     =-1i* mask.*( L1 + NL1 );
+        Eq1     = -1i*mask.*( L1 + NL1 );
             
         Eq2     = -1i*mask.*( L2 + NL2 );
         

@@ -1,6 +1,6 @@
     
   %%  
-  for ii = 6:6%size(Save_Omega,2)
+  for ii = 8:8%size(Save_Omega,2)
       
     figure('Position',[0,0,1000,800],'Color',[1,1,1]);
     Panel = tiledlayout(3,2,'TileSpacing','none','Padding','none');   
@@ -86,8 +86,7 @@ Left_Resonance.Chi23.WW       = [950952,8318320,22162200,41982000,65905900,79129
 figure;hold on;
 plot(Left_Resonance.epsilon/2/pi/1E9,Left_Resonance.Chi2.WW);
 plot(Left_Resonance.epsilon/2/pi/1E9,Left_Resonance.Chi23.WW);
-xlabel('$\varepsilon$ (GHz)')
-ylabel( '$\mathcal{W}/\mathcal{W}_*$')
+xlabel()
 axes_Style(gca)
 %%
     function axes_Style(ax)

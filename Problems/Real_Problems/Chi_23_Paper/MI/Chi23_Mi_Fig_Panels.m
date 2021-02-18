@@ -38,12 +38,12 @@
        axes_Style(ax(i))
     end
     
-function axes_Style(ax)
+    function axes_Style(ax)
 
-     ax.Box      = 'on';
-     ax.FontSize = 15;
-     ax.TickLabelInterpreter = 'latex';
-     ax.XLabel.Interpreter   = 'latex';
-     ax.YLabel.Interpreter   = 'latex';
-     
-end
+         ax.Box      = 'on';
+         ax.FontSize = 15;
+         ax.TickLabelInterpreter = 'latex';
+         ax.XLabel.Interpreter   = 'latex';
+         ax.YLabel.Interpreter   = 'latex';
+
+    end
