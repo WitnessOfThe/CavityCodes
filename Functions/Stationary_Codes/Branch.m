@@ -122,13 +122,13 @@
             Stat.Met.Equation             = Stat.Met.Equation_Mod;             
             Stat.Met.Liniar_Decomposition = Stat.Met.Liniar_Decomposition_Mod;
             Stat.Met.Preconditioner       = Stat.Met.Preconditioner_Mod;            
-            Stat.Eq.PsioMax               = Stat.Met.Evaluate_trend(L_L_1(i-10:i),1);            
+            Stat.Eq.PsioMax               = Stat.Met.Evaluate_trend(L_L_1(i-3:i),1);            
             [Slv,eps_f,Exitflag]          = Newton_Switcher(Slv,Stat(1));
             
             if eps_f > 1E-6
                 
                 Slv  = [Slv_Start,0];
-                Stat(1).Eq.PsioMax           = Stat(1).Met.Evaluate_trend(L_L_1(i-10:i),-1);            
+                Stat(1).Eq.PsioMax           = Stat(1).Met.Evaluate_trend(L_L_1(i-3:i),-1);            
                 [Slv,eps_f,Exitflag]      = Newton_Switcher(Slv,Stat(1)); 
 
                 

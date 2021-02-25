@@ -59,11 +59,11 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.CW.Par.variable         = 'delta_o';  %%'Pump Power';
     Res.CW.Par.first_step       = 0.05; % step for delta measured in delta/kappa
     Res.CW.Par.step_tol         = 0.001;
-    Res.CW.Par.step_inc         = 0.00;
+    Res.CW.Par.step_inc         = 1;
     Res.CW.Par.step_dec         = 0.5;
-
-    Res.CW.Par.bot_boundary     = -40; % bottom boundary for delta to search
-    Res.CW.Par.top_boundary     =  40; % top boundary for delta to search
+Res.CW.Par.Turning =1;
+    Res.CW.Par.bot_boundary     = -150; % bottom boundary for delta to search
+    Res.CW.Par.top_boundary     =  150; % top boundary for delta to search
     Res.CW.Par.Sol_Re_Sign      = '-';
     Res.CW.Par.Stability        = true;
     Res.CW.Par.Newton_iter      = 20;      

@@ -24,7 +24,8 @@
     
 %%
     Res.Stat.In           = Res.CW.In;
-   
+    Res.Stat.Par.step_tol         = 0.001;
+    Res.Stat.Par.step_inc         = 1;  
     Res.Stat.In.N         = 2^6;
     
     coeff_bound = [0.1,10];
