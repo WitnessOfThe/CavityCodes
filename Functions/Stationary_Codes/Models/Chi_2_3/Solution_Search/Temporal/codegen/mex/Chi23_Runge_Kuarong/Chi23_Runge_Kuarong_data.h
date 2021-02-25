@@ -24,5 +24,6 @@
 extern emlrtCTX emlrtRootTLSGlobal;
 extern const volatile char_T *emlrtBreakCheckR2012bFlagVar;
 extern emlrtContext emlrtContextGlobal;
+extern emlrtRSInfo x_emlrtRSI;
 
 /* End of code generation (Chi23_Runge_Kuarong_data.h) */

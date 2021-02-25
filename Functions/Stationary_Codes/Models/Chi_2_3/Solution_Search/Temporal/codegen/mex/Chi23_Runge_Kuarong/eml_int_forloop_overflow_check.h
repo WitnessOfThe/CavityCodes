@@ -3,9 +3,9 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * _coder_Chi23_Runge_Kuarong_api.h
+ * eml_int_forloop_overflow_check.h
  *
- * Code generation for function '_coder_Chi23_Runge_Kuarong_api'
+ * Code generation for function 'eml_int_forloop_overflow_check'
  *
  */
 
@@ -21,7 +21,6 @@
 #include <string.h>
 
 /* Function Declarations */
-void Chi23_Runge_Kuarong_api(const mxArray * const prhs[2], const mxArray *plhs
-  [1]);
+void check_forloop_overflow_error(const emlrtStack *sp);
 
-/* End of code generation (_coder_Chi23_Runge_Kuarong_api.h) */
+/* End of code generation (eml_int_forloop_overflow_check.h) */

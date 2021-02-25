@@ -18,7 +18,7 @@
     Res.CW.Par.Change_Space     = 0;
     
     Res.CW.Par.variable         = 'delta_o';  %%'Pump Power';
-    Res.CW.Par.first_step       = 0.05; % step for delta measured in delta/kappa
+    Res.CW.Par.first_step       = 0.01; % step for delta measured in delta/kappa
     Res.CW.Par.step_tol         = 0.001;
     Res.CW.Par.step_inc         = 0.00;
     Res.CW.Par.step_dec         = 0.5;

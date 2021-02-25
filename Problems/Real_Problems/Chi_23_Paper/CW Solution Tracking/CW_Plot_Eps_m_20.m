@@ -6,10 +6,10 @@
 %%
     
     Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = -10E9*2*pi;
+    Res.CW.In.eps     = 5E9*2*pi;
     Res.CW.In.delta_o = 0;
     Res.CW.In.N       = 2^2;
-    Res.CW.In.W       = 10^8*Res.CW.In.W_Star;
+    Res.CW.In.W       = 1*10^5*Res.CW.In.W_Star;
     
 %%
 
@@ -41,11 +41,11 @@
 
   %%
   
-    NN                  = 1E5;
-    Sa2.delta_vector     = linspace(-150,-40,NN)*Res.CW(1).In.ko;
+    NN                  = 1E3;
+    Sa2.delta_vector     = linspace(-150,150,NN)*Res.CW(1).In.ko;
     
-    Sa2.U_f_2    =   zeros(NN,3);
-    Sa2.U_s_2    =   zeros(NN,3);
+    Sa2.U_f_2    =   NaN(NN,3);
+    Sa2.U_s_2    =   NaN(NN,3);
     U_f_23       =   zeros(NN,3);
     U_s_23       =   zeros(NN,3);
     
@@ -76,66 +76,66 @@
     Res.CW.In.delta_o = fgr*Res.CW(1).In.ko;
     Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
     
-    for i = 1
-        
-        CWF                 = strcat('CW',num2str(i));
-        Res.(CWF)           = Res.CW;
-        Res.(CWF).Sol.Psi_o = Res.CW.Sol.Psi_o(3);
-        Res.(CWF).Sol.Psi_e = Res.CW.Sol.Psi_e(3);
-        Res.(CWF)           = Run_Branch_Universal( Res.(CWF));
-        
-    end
-    
-    fgr = 3;
-    Res.CW.In.delta_o = fgr*Res.CW(1).In.ko;
-    Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
-    
-    for i = [2:3]   
-        
-        CWF                 = strcat('CW',num2str(i));
-        Res.(CWF)           = Res.CW;
-        Res.(CWF).Sol.Psi_o = Res.CW.Sol.Psi_o(i);
-        Res.(CWF).Sol.Psi_e = Res.CW.Sol.Psi_e(i);
-        Res.(CWF)           = Run_Branch_Universal( Res.(CWF));
-        
-    end
+%     for i = 1
+%         
+%         CWF                 = strcat('CW',num2str(i));
+%         Res.(CWF)           = Res.CW;
+%         Res.(CWF).Sol.Psi_o = Res.CW.Sol.Psi_o(3);
+%         Res.(CWF).Sol.Psi_e = Res.CW.Sol.Psi_e(3);
+%         Res.(CWF)           = Run_Branch_Universal( Res.(CWF));
+%         
+%     end
+%     
+%     fgr = 3;
+%     Res.CW.In.delta_o = fgr*Res.CW(1).In.ko;
+%     Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
+%     
+%     for i = [2:3]   
+%         
+%         CWF                 = strcat('CW',num2str(i));
+%         Res.(CWF)           = Res.CW;
+%         Res.(CWF).Sol.Psi_o = Res.CW.Sol.Psi_o(i);
+%         Res.(CWF).Sol.Psi_e = Res.CW.Sol.Psi_e(i);
+%         Res.(CWF)           = Run_Branch_Universal( Res.(CWF));
+%         
+%     end
 
 
 
 %%
 
-    for i = 1:3
-        
-        CWF                 = strcat('CW',num2str(i));
-        
-        Sa23(i).delta         = NaN(1,size(Res.(CWF),2));
-        Sa23(i).Psi_o         = NaN(1,size(Res.(CWF),2));
-        Sa23(i).Psi_e         = NaN(1,size(Res.(CWF),2));
-        
-        for i_d = 1:size(Res.(CWF),2)
-            
-           Sa23(i).delta(i_d) = Res.(CWF)(i_d).In.delta_o/Res.(CWF)(i_d).In.ko;
-           Sa23(i).Psi_o(i_d) = Res.(CWF)(i_d).Sol.Psi_o;
-           Sa23(i).Psi_e(i_d) = Res.(CWF)(i_d).Sol.Psi_e;
-            
-        end
-        
-    end
-%%
+%     for i = 1:3
+%         
+%         CWF                 = strcat('CW',num2str(i));
+%         
+%         Sa23(i).delta         = NaN(1,size(Res.(CWF),2));
+%         Sa23(i).Psi_o         = NaN(1,size(Res.(CWF),2));
+%         Sa23(i).Psi_e         = NaN(1,size(Res.(CWF),2));
+%         
+%         for i_d = 1:size(Res.(CWF),2)
+%             
+%            Sa23(i).delta(i_d) = Res.(CWF)(i_d).In.delta_o/Res.(CWF)(i_d).In.ko;
+%            Sa23(i).Psi_o(i_d) = Res.(CWF)(i_d).Sol.Psi_o;
+%            Sa23(i).Psi_e(i_d) = Res.(CWF)(i_d).Sol.Psi_e;
+%             
+%         end
+%         
+%     end
+% %%
     figure;hold on;
 
-    for i = 1:1
-        
-        plot(Sa2(i).delta_vector/Res.CW(1).In.ko,abs(Sa2(i).Omega)/sqrt(2*Res.CW.In.ko*Res.CW.In.ke),'LineStyle','--','Color',[1,0,0])
-    
-    end
+%     for i = 1:1
+%         
+%         plot(Sa2(i).delta_vector/Res.CW(1).In.ko,abs(Sa2(i).Omega)/sqrt(2*Res.CW.In.ko*Res.CW.In.ke),'LineStyle','--','Color',[1,0,0])
+%     
+%     end
     
   % plot(delta_vector/Res.CW(1).In.ko,abs(U_f_2).^2,'LineStyle','none','Marker','.','Color',[1,0,0]);hold on;
 
 %%
 figure;
-plot(delta_vector/Res.CW(1).In.ko,abs(U_f_2).^2,'LineStyle','none','Marker','.','Color',[1,0,0]);hold on;
-plot(delta_vector/Res.CW(1).In.ko,abs(U_s_2).^2,'LineStyle','none','Marker','.','Color',[0,1,0]);
+plot(Sa2.delta_vector/Res.CW(1).In.ko,Sa2.Omega/Res.CW.In.Omega_Star,'LineStyle','none','Marker','.','Color',[1,0,0]);hold on;
+%plot(Sa2.delta_vector/Res.CW(1).In.ko,abs(Sa2.U_s_2).^2,'LineStyle','none','Marker','.','Color',[0,1,0]);
 %hold on;plot(delta_vector,abs(U_f_23).^2,'LineStyle','none','Marker','.','Color',[0,0,0]);
     
 %%

@@ -6,7 +6,7 @@
 %%
     
     Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = 50E9*2*pi;
+    Res.CW.In.eps     = 5E9*2*pi;
     Res.CW.In.delta_o = 0;
     Res.CW.In.N       = 2^2;
     Res.CW.In.W       = 70000*Res.CW.In.W_Star;
@@ -40,8 +40,8 @@
 
 
   %%
-    NN                  = 1E5;
-    Sa2.delta_vector        = linspace(-20,20,NN)*Res.CW(1).In.k_o;
+    NN                  = 1E3;
+    Sa2.delta_vector        = linspace(-20,20,NN)*Res.CW(1).In.ko;
     
     Sa2.U_f_2    =   zeros(NN,3);
     Sa2.U_s_2    =   zeros(NN,3);
@@ -59,7 +59,7 @@
     
 %%
     fgr = -0;
-    Res.CW.In.delta_o = fgr*Res.CW(1).In.k_o;
+    Res.CW.In.delta_o = fgr*Res.CW(1).In.ko;
     Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
     
     for i = 1
@@ -73,7 +73,7 @@
     end
     
     fgr = -3;
-    Res.CW.In.delta_o = fgr*Res.CW(1).In.k_o;
+    Res.CW.In.delta_o = fgr*Res.CW(1).In.ko;
     Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
     
     for i = [2:3]
@@ -101,7 +101,7 @@
         
         for i_d = 1:size(Res.(CWF),2)
             
-           Sa23(i).delta(i_d) = Res.(CWF)(i_d).In.delta_o/Res.(CWF)(i_d).In.k_o;
+           Sa23(i).delta(i_d) = Res.(CWF)(i_d).In.delta_o/Res.(CWF)(i_d).In.ko;
            Sa23(i).Psi_o(i_d) = Res.(CWF)(i_d).Sol.Psi_o;
            Sa23(i).Psi_e(i_d) = Res.(CWF)(i_d).Sol.Psi_e;
             
@@ -118,12 +118,12 @@
     
     end
     
-   plot(delta_vector/Res.CW(1).In.k_o,abs(U_f_2).^2,'LineStyle','none','Marker','.','Color',[1,0,0]);hold on;
+   plot(delta_vector/Res.CW(1).In.ko,abs(U_f_2).^2,'LineStyle','none','Marker','.','Color',[1,0,0]);hold on;
 
 %%
 figure;
-plot(delta_vector/Res.CW(1).In.k_o,abs(U_f_2).^2,'LineStyle','none','Marker','.','Color',[1,0,0]);hold on;
-plot(delta_vector/Res.CW(1).In.k_o,abs(U_s_2).^2,'LineStyle','none','Marker','.','Color',[0,1,0]);
+plot(delta_vector/Res.CW(1).In.ko,abs(U_f_2).^2,'LineStyle','none','Marker','.','Color',[1,0,0]);hold on;
+plot(delta_vector/Res.CW(1).In.ko,abs(U_s_2).^2,'LineStyle','none','Marker','.','Color',[0,1,0]);
 %hold on;plot(delta_vector,abs(U_f_23).^2,'LineStyle','none','Marker','.','Color',[0,0,0]);
     
 %%
@@ -151,7 +151,7 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max] = max_val(Res)
     NN = 1E5;
     Res.CW = Res.CW.Met.Norm(Res.CW);
     
-    delta_vector = linspace( Res.CW.Par.bot_boundary, Res.CW.In.H*1.5,NN)*Res.CW.In.k_o;
+    delta_vector = linspace( Res.CW.Par.bot_boundary, Res.CW.In.H*1.5,NN)*Res.CW.In.ko;
     Res.CW2      = Res.CW;
     
     Omega2  = zeros(1,NN); 
@@ -168,7 +168,7 @@ function [Omega2_max,delta2_max,Omega23_max,delta23_max] = max_val(Res)
     [Omega2_max,ind]  = max(Omega2);    
     delta2_max        = delta_vector(ind);
     
-    Res.CW.Par.bot_boundary     = delta2_max/Res.CW.In.k_o; % bottom boundary for delta to search    
+    Res.CW.Par.bot_boundary     = delta2_max/Res.CW.In.ko; % bottom boundary for delta to search    
     Res.CW.In.delta_o = delta2_max;     
     Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
     [~,ind]           = max(abs(Res.CW.Sol.Omega));    

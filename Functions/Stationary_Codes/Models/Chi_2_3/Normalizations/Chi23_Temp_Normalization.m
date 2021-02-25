@@ -2,7 +2,7 @@ function Temp = Chi23_Temp_Normalization(Temp)
 %% Define Space 
 
     Fundamental_Constants;
-    N         = Temp.In.N;
+    N         = Temp.In.N;  
     Temp.Space  = Define_Space_Cavity(N,2*pi);
         
 %%
@@ -35,7 +35,9 @@ function Temp = Chi23_Temp_Normalization(Temp)
     Temp.Eq.d               = (Temp.In.De(1)-Temp.In.Do(1))/norm;
     
     Temp.Eq.norm            = norm;
-    Temp.Eq.mode_range      = [1:2*N];
+    tt = [Temp.Space.k,Temp.Space.k];
+    Temp.Eq.mode_range      =     find( tt < Temp.In.mu_bl*4 | tt > -Temp.In.mu_bl*4);
+    
 %%
     Temp.Eq.Lo              = Temp.Eq.delta_o + Temp.Space.k.^2*1/2*Temp.Eq.Do(2) - 1i*Temp.Eq.ko/2;
     Temp.Eq.Le              = Temp.Eq.delta_e + Temp.Space.k.*Temp.Eq.d + Temp.Space.k.^2*1/2*Temp.Eq.De(2) - 1i*Temp.Eq.ke/2;

@@ -3,15 +3,16 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * _coder_Chi23_Runge_Kuarong_api.h
+ * nullAssignment.h
  *
- * Code generation for function '_coder_Chi23_Runge_Kuarong_api'
+ * Code generation for function 'nullAssignment'
  *
  */
 
 #pragma once
 
 /* Include files */
+#include "Chi23_Runge_Kuarong_types.h"
 #include "rtwtypes.h"
 #include "emlrt.h"
 #include "mex.h"
@@ -21,7 +22,9 @@
 #include <string.h>
 
 /* Function Declarations */
-void Chi23_Runge_Kuarong_api(const mxArray * const prhs[2], const mxArray *plhs
-  [1]);
+void b_nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
+                      emxArray_int32_T *idx);
+void nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
+                    emxArray_int32_T *idx);
 
-/* End of code generation (_coder_Chi23_Runge_Kuarong_api.h) */
+/* End of code generation (nullAssignment.h) */

@@ -27,4 +27,9 @@ emlrtContext emlrtContextGlobal = { true,/* bFirstTime */
   NULL                                 /* fSigMem */
 };
 
+emlrtRSInfo x_emlrtRSI = { 21,         /* lineNo */
+  "eml_int_forloop_overflow_check",    /* fcnName */
+  "C:\\Program Files\\MATLAB\\R2020b\\toolbox\\eml\\lib\\matlab\\eml\\eml_int_forloop_overflow_check.m"/* pathName */
+};
+
 /* End of code generation (Chi23_Runge_Kuarong_data.c) */

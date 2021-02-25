@@ -6,9 +6,9 @@
 %%
     
     Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = -2*pi*10E9;
+    Res.CW.In.eps     = 2*pi*5E9;
     Res.CW.In.delta_o = 0;
-    Res.CW.In.N       = 2^8;
+    Res.CW.In.N       = 2^7;
     Res.CW.In.W       = 100000*Res.CW.In.W_Star;
     
 %%
@@ -19,19 +19,20 @@
     Res.CW.Par.Change_Space     = 0;
     
     Res.CW.Par.variable         = 'delta_o';  %%'Pump Power';
-    Res.CW.Par.first_step       = 0.1; % step for delta measured in delta/kappa
+    Res.CW.Par.first_step       = 0.02; % step for delta measured in delta/kappa
     Res.CW.Par.step_tol         = 0.001;
-    Res.CW.Par.step_inc         = 1;
-    Res.CW.Par.step_dec         = 0.5;
+    Res.CW.Par.step_inc         = 1.01;
+    Res.CW.Par.step_dec         = 0.1;
 
     Res.CW.Par.bot_boundary     = -120; % bottom boundary for delta to search
     Res.CW.Par.top_boundary     =  200; % top boundary for delta to search
     Res.CW.Par.Sol_Re_Sign      = '-';
-    Res.CW.Par.Stability        = false;
-    Res.CW.Par.Newton_iter      = 20;      
-    Res.CW.Par.Newton_tol       = 1E-9;  
+    Res.CW.Par.Stability        = true;
+    Res.CW.Par.Newton_iter      = 25;      
+    Res.CW.Par.Newton_tol       = 1E-10;
     Res.CW.Par.i_max            = 1000;
-    
+    Res.CW.Par.Turning = 0;
+
     Res.CW.Par.fsolveoptions     = optimoptions('fsolve','CheckGradients',...
     false,'Display','none','UseParallel',false,'SpecifyObjectiveGradient',false,...
     'Algorithm','trust-region-dogleg','FunValCheck','on',...
@@ -43,8 +44,9 @@
    
     %    W                 = [1.3E5,6000000];
     %    delta             = [-100,-15];
-     W                 = [1.3E5,105315300];
-      delta             = [100,93];
+    
+    W                = [1.3E3,30E6];
+    delta            = [100,93];
    
     Res = Get_to_point(Res,W,delta);
    
@@ -52,33 +54,42 @@
     Res.Stat.In           = Res.CW.In;
     Res.Stat.Par          = Res.CW.Par;    
     Res.Stat.In.mu_bl     = 43;    
-    Res.Stat.In.N         = 2^7;
+    Res.Stat.In.N         = 2^6;
     Res.Stat.Met.Newton   = @Newton_Manual_bicgstab;%'fsolve'
     
     Res.Stat              = Res.Stat.Met.Norm(Res.Stat);
         
     Res.CW.Met.MI_Matrix   = @Chi23_MI_Matrix;
     Res.CW.Stab            =  Chi23_MI(Res.CW);
-    Res.Stat.Sol.Psi_o     = 1E-10*ones(1,Res.Stat.Space.N);
-    Res.Stat.Sol.Psi_e     = 1E-10*ones(1,Res.Stat.Space.N);
+    Res.Stat.Sol.Psi_o     =  1E-10*ones(1,Res.Stat.Space.N);
+    Res.Stat.Sol.Psi_e     =  1E-10*ones(1,Res.Stat.Space.N);
     
     
     [i_k,i_c] = find(real(Res.CW.Stab.Value) == max(max(real(Res.CW.Stab.Value))));
+    i_k = Res.Stat.In.mu_bl+1;
+    i_k = find(abs(Res.Stat.Space.k) == abs(Res.Stat.Space.k(i_k)));
     
-
+    i_c = zeros(1,2);
+    
+    [~,i_c(1)]  = max(real(Res.CW.Stab.Value(i_k(1),:)) );
+    [~,i_c(2)]  = max(real(Res.CW.Stab.Value(i_k(2),:)) );
+    
     Res.Stat.Sol.Psi_o(1)  = Res.CW.Sol.Psi_o*Res.Stat.Space.N;       
     Res.Stat.Sol.Psi_e(1)  = Res.CW.Sol.Psi_e*Res.Stat.Space.N;      
-    coeff = 1;
-    Res.Stat.Sol.Psi_o(2)  = Res.CW.Stab.Vector(i_k).V(1,i_c)*coeff*Res.Stat.Space.N;       
-    Res.Stat.Sol.Psi_e(2)  = Res.CW.Stab.Vector(i_k).V(2,i_c)*coeff*Res.Stat.Space.N;      
-    Res.Stat.Sol.Psi_o(end)  = Res.CW.Stab.Vector(i_k).V(3,i_c)*coeff*Res.Stat.Space.N;       
-    Res.Stat.Sol.Psi_e(end)  = Res.CW.Stab.Vector(i_k).V(4,i_c)*coeff*Res.Stat.Space.N;      
+    
+    coeff = 1.51;
+    
+    Res.Stat.Sol.Psi_o(2)  = (Res.CW.Stab.Vector(i_k(1)).V(1,i_c(1)) )*coeff*Res.Stat.Space.N;       %+ Res.CW.Stab.Vector(i_k(2)).V(1,i_c(2) )
+    Res.Stat.Sol.Psi_e(2)  = (Res.CW.Stab.Vector(i_k(1)).V(2,i_c(1)) )*coeff*Res.Stat.Space.N;     %+ Res.CW.Stab.Vector(i_k(2)).V(2,i_c(2) )
+    
+    Res.Stat.Sol.Psi_o(end)  = (Res.CW.Stab.Vector(i_k(1)).V(3,i_c(1)) )*coeff*Res.Stat.Space.N;       %+ Res.CW.Stab.Vector(i_k(2)).V(3,i_c(2))
+    Res.Stat.Sol.Psi_e(end)  = (Res.CW.Stab.Vector(i_k(1)).V(4,i_c(1)) )*coeff*Res.Stat.Space.N;    %+ Res.CW.Stab.Vector(i_k(2)).V(4,i_c(2))  
     
     Res.Stat.Sol.Psi_o           = ifft(Res.Stat.Sol.Psi_o);
     Res.Stat.Sol.Psi_e           = ifft(Res.Stat.Sol.Psi_e);
     
     Slv_Start               = [real(Res.Stat.Sol.Psi_o),imag(Res.Stat.Sol.Psi_o)...
-                    ,real(Res.Stat.Sol.Psi_e),imag(Res.Stat.Sol.Psi_e),abs(imag(Res.CW.Stab.Value(i_k,i_c)))/Res.Stat.In.mu_bl];
+                    ,real(Res.Stat.Sol.Psi_e),imag(Res.Stat.Sol.Psi_e),(imag(Res.CW.Stab.Value(i_k(1),i_c(1))))/Res.Stat.In.mu_bl];
     
     [Slv,eps_f,Exitflag] = Newton_Switcher(Slv_Start,Res.Stat);
     
@@ -86,79 +97,192 @@
     Res.Stat.Sol.Psi_e   = fft(Slv(2*Res.Stat.Space.N+1:3*Res.Stat.Space.N) + 1i*Slv(3*Res.Stat.Space.N+1:4*Res.Stat.Space.N))/Res.Stat.Space.N;
     Res.Stat.Sol.V       = Slv(end);
     
-    Res.Stat.Stab        = Stability_Switcher(Res.Stat);
+%    Res.Stat.Stab        = Stability_Switcher(Res.Stat);
 
 %%    
-    Res.Stat              = Run_Branch_Universal(Res.Stat);
+   Res.Stat              = Run_Branch_Universal(Res.Stat);
     
 %%
+    E_Values = zeros(size(Res.Stat,2),10);
+    
     for i = 1:size(Res.Stat,2)
         
         Psi_hat_o(i,:)    = Res.Stat(i).Sol.Psi_o;
         Psi_hat_e(i,:)    = Res.Stat(i).Sol.Psi_e;
-        delta_vector(i) = Res.Stat(i).Eq.delta_o;
+        delta_vector(i)   = Res.Stat(i).Eq.delta_o;
         
+        for j = 1:size(Res.Stat(i).Stab,2)
+            
+           E_Values(i,:) =  maxk([E_Values(i,:).';real(Res.Stat(i).Stab(j).E_values)],10);
+           
+        end
+        
+        if max(E_Values(i,:)) > 1E4
+            
+            Stable(i) = false;
+            
+        else
+            
+            Stable(i) = true;
+            
+        end        
     end
     
     Psi_thetao = ifft(Psi_hat_o,[],2)*Res.Stat(1).Space.N;
     Psi_thetae = ifft(Psi_hat_e,[],2)*Res.Stat(1).Space.N;
+    
     U_maxo     = max(abs(Psi_thetao).^2,[],2);
     U_maxe     = max(abs(Psi_thetae).^2,[],2);
-%%
-    figure('Position',[0,0,1000,800],'Color',[1,1,1]);
-    Panel = tiledlayout(3,2,'TileSpacing','none','Padding','none');   
-    for i = 1:6
+
+    figure('Position',[0,0,1600,900],'Color',[1,1,1]);
+    Panel = tiledlayout(3,5,'TileSpacing','none','Padding','none');  
+    
+    for i = 1:15
+        
         ax(i) = nexttile(Panel,i,[1,1]);  
         hold(ax(i),'on');
+        
     end
-    plot(delta_vector,U_maxo,'Parent',ax(1));
-    plot(delta_vector,U_maxe,'Parent',ax(1));
-    plot(delta_vector,abs(Psi_hat_o(:,2)).^2,'Parent',ax(2));
-    plot(delta_vector,abs(Psi_hat_e(:,2)).^2,'Parent',ax(2));
     
-    ind_show =10;
+    ind_show = [2,Res.Stat(1).Space.N - 1 ];
+    
+    plot(delta_vector,abs(Psi_hat_o(:,1)).^2,'Parent',ax(1));
+    plot(delta_vector,abs(Psi_hat_e(:,1)).^2,'Parent',ax(1));     
+    plot(delta_vector,sum(abs(Psi_hat_o(:,:)).^2,2),'Parent',ax(1));
+    plot(delta_vector,sum(abs(Psi_hat_e(:,:)).^2,2),'Parent',ax(1));
+
+    plot(delta_vector(Stable),abs(Psi_hat_o(Stable,1)).^2,'Parent',ax(1),'LineStyle','none','MarkerSize',20,'Marker','.');
+    plot(delta_vector(Stable),abs(Psi_hat_e(Stable,1)).^2,'Parent',ax(1),'LineStyle','none','MarkerSize',20,'Marker','.');
+    
+    plot(delta_vector(Stable),sum(abs(Psi_hat_o(Stable,:)).^2,2),'Parent',ax(1),'LineStyle','none','MarkerSize',20,'Marker','.');
+    plot(delta_vector(Stable),sum(abs(Psi_hat_e(Stable,:)).^2,2),'Parent',ax(1),'LineStyle','none','MarkerSize',20,'Marker','.');
+    
+    legend(ax(1),'$|\psi^o_{\mu=0}|^2$','$|\psi^e_{\mu=0}|^2$','$\sum|\psi^o_{\mu=0}|^2$','$\sum|\psi^e_{\mu=0}|^2$','Interpreter','latex');
+    
+    plot(delta_vector,abs(Psi_hat_e(:,1)).^2./abs(Psi_hat_o(:,1)).^2,'Parent',ax(2));
+    plot(delta_vector,sum(abs(Psi_hat_e(:,:)).^2,2)./sum(abs(Psi_hat_o(:,:)).^2,2),'Parent',ax(2));
+    
+    plot(delta_vector(Stable),abs(Psi_hat_e(Stable,1)).^2./abs(Psi_hat_o(Stable,1)).^2,'Parent',ax(2),'LineWidth',2,'LineStyle','none','MarkerSize',20,'Marker','.');
+    plot(delta_vector(Stable),sum(abs(Psi_hat_e(Stable,:)).^2,2)./sum(abs(Psi_hat_o(Stable,:)).^2,2),'Parent',ax(2),'LineWidth',2,'LineStyle','none','MarkerSize',20,'Marker','.');
+    
+    legend(ax(2),'$|\psi^e_{\mu=0}|^2/|\psi^o_{\mu=0}|^2$','$\sum|\psi^e_{\mu=0}|^2/\sum|\psi^o_{\mu=0}|^2$','Interpreter','latex');
+    
+    plot(delta_vector,abs(Psi_hat_o(:,2)).^2,'Parent',ax(6));
+    plot(delta_vector,abs(Psi_hat_e(:,2)).^2,'Parent',ax(6));
+    
+    plot(delta_vector(Stable),abs(Psi_hat_o(Stable,2)).^2,'Parent',ax(6),'LineWidth',2,'LineStyle','none','MarkerSize',20,'Marker','.');
+    plot(delta_vector(Stable),abs(Psi_hat_e(Stable,2)).^2,'Parent',ax(6),'LineWidth',2,'LineStyle','none','MarkerSize',20,'Marker','.');
+    
+    legend(ax(6),strcat('$|\psi^o_{\mu=',num2str(Res.Stat(1).Space.k(2)),'}|^2$'),strcat('$|\psi^e_{\mu=',num2str(Res.Stat(1).Space.k(2)),'}|^2$')...
+        ,'Interpreter','latex');
+    
+    plot(delta_vector,abs(Psi_hat_e(:,2)).^2./abs(Psi_hat_o(:,2)).^2,'Parent',ax(7));
+    
+    plot(delta_vector(Stable),abs(Psi_hat_e(Stable,2)).^2./abs(Psi_hat_o(Stable,2)).^2,'Parent',ax(7),'LineWidth',2,'LineStyle','none','MarkerSize',20,'Marker','.');
+    
+    legend(ax(7),strcat('$|\psi^e_{\mu=',num2str(Res.Stat(1).Space.k(2)),'}|^2/|\psi^o_{\mu=',num2str(Res.Stat(1).Space.k(2)),'}|^2$')...
+        ,'Interpreter','latex');
+    
+    plot(delta_vector,abs(Psi_hat_o(:,Res.Stat(1).Space.N)).^2,'Parent',ax(11));
+    plot(delta_vector,abs(Psi_hat_e(:,Res.Stat(1).Space.N)).^2,'Parent',ax(11));
+    
+    plot(delta_vector(Stable),abs(Psi_hat_o(Stable,Res.Stat(1).Space.N)).^2,'Parent',ax(11),'LineStyle','none','MarkerSize',20,'Marker','.');
+    plot(delta_vector(Stable),abs(Psi_hat_e(Stable,Res.Stat(1).Space.N)).^2,'Parent',ax(11),'LineStyle','none','MarkerSize',20,'Marker','.');
+    
+    legend(ax(11),strcat('$|\psi^o_{\mu=',num2str(Res.Stat(1).Space.k(end)),'}|^2$'),strcat('$|\psi^e_{\mu=',num2str(Res.Stat(1).Space.k(end)),'}|^2$')...
+        ,'Interpreter','latex');
+    
+    plot(delta_vector,abs(Psi_hat_e(:,Res.Stat(1).Space.N)).^2./abs(Psi_hat_o(:,Res.Stat(1).Space.N)).^2,'Parent',ax(12));
+    plot(delta_vector(Stable),abs(Psi_hat_e(Stable,Res.Stat(1).Space.N)).^2./abs(Psi_hat_o(Stable,Res.Stat(1).Space.N)).^2,'Parent',ax(12),'LineWidth',2,'LineStyle','none','MarkerSize',20,'Marker','.');
+    
+    legend(ax(12),strcat('$|\psi^e_{\mu=',num2str(Res.Stat(1).Space.k(end)),'}|^2/|\psi^o_{\mu=',num2str(Res.Stat(1).Space.k(end)),'}|^2$')...
+        ,'Interpreter','latex');
+    
+    ind_show = 5;
+    
     plot(Res.Stat(1).Space.phi,abs(Psi_thetae(ind_show,:)),'Parent',ax(3));
     plot(Res.Stat(1).Space.phi,real(Psi_thetae(ind_show,:)),'Parent',ax(3));
     plot(Res.Stat(1).Space.phi,imag(Psi_thetae(ind_show,:)),'Parent',ax(3));
-
     plot(Res.Stat(1).Space.phi,abs(Psi_thetao(ind_show,:)),'Parent',ax(4));
     plot(Res.Stat(1).Space.phi,real(Psi_thetao(ind_show,:)),'Parent',ax(4));
     plot(Res.Stat(1).Space.phi,imag(Psi_thetao(ind_show,:)),'Parent',ax(4));
     
-    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(5),'BaseValue',-70,'Marker','none');
-    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(6),'BaseValue',-70,'Marker','none');
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(5),'BaseValue',-70,'Marker','none','Color',[1,0,0]);
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(5),'BaseValue',-70,'Marker','none','Color',[0,1,0]);
     
-    xlim(ax(5),5*[-Res.Stat(1).Space.k(2),Res.Stat(1).Space.k(2)]);
-    xlim(ax(6),5*[-Res.Stat(1).Space.k(2),Res.Stat(1).Space.k(2)]);
-    ylim(ax(5),[-70,5]);
-    ylim(ax(6),[-70,5]);
+    
+    delta_avg    = (max(delta_vector()) - min(delta_vector))/2+min(delta_vector);
+    
+    [~,ind_show] = mink(abs(delta_vector - delta_avg),2 );
+    ind_show     = ind_show(2);
+    
+    plot(Res.Stat(1).Space.phi,abs(Psi_thetae(ind_show,:)),'Parent',ax(8));
+    plot(Res.Stat(1).Space.phi,real(Psi_thetae(ind_show,:)),'Parent',ax(8));
+    plot(Res.Stat(1).Space.phi,imag(Psi_thetae(ind_show,:)),'Parent',ax(8));
+    
+    plot(Res.Stat(1).Space.phi,abs(Psi_thetao(ind_show,:)),'Parent',ax(9));
+    plot(Res.Stat(1).Space.phi,real(Psi_thetao(ind_show,:)),'Parent',ax(9));
+    plot(Res.Stat(1).Space.phi,imag(Psi_thetao(ind_show,:)),'Parent',ax(9));
+    
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(10),'BaseValue',-70,'Marker','none','Color',[1,0,0]);
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(10),'BaseValue',-70,'Marker','none','Color',[0,1,0]);
 
-    ax(1).YLabel.String = '$max|\psi_\theta|^2$';
-    ax(2).YLabel.String = '$|\psi_\mu|^2$';
+    ind_show = size(Res.Stat,2)-5;
     
+    plot(Res.Stat(1).Space.phi,abs(Psi_thetae(ind_show,:)),'Parent',ax(13));
+    plot(Res.Stat(1).Space.phi,real(Psi_thetae(ind_show,:)),'Parent',ax(13));
+    plot(Res.Stat(1).Space.phi,imag(Psi_thetae(ind_show,:)),'Parent',ax(13));
+    
+    plot(Res.Stat(1).Space.phi,abs(Psi_thetao(ind_show,:)),'Parent',ax(14));
+    plot(Res.Stat(1).Space.phi,real(Psi_thetao(ind_show,:)),'Parent',ax(14));
+    plot(Res.Stat(1).Space.phi,imag(Psi_thetao(ind_show,:)),'Parent',ax(14));
+    
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(15),'BaseValue',-70,'Marker','none','Color',[1,0,0]);
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(15),'BaseValue',-70,'Marker','none','Color',[0,1,0]);
+            
+    ylim(ax(15),[-70,15]);
+    ylim(ax(10),[-70,15]);
+    ylim(ax(5), [-70,15]);
+    
+    xlim(ax(5),  5*[-Res.Stat(1).Space.k(2),Res.Stat(1).Space.k(2)] );
+    xlim(ax(15),10*[-Res.Stat(1).Space.k(2),Res.Stat(1).Space.k(2)] );    
+    xlim(ax(10),15*[-Res.Stat(1).Space.k(2),Res.Stat(1).Space.k(2)] );
+ 
+    legend(ax(3),'$abs[\psi(\theta)]$','$Re[\psi(\theta)]$','$Im[\psi(\theta)]$','Interpreter','latex')
+     
+     
     ax(1).XLabel.String = '$\delta/\kappa_o$';
     ax(2).XLabel.String = '$\delta/\kappa_o$';
+    ax(6).XLabel.String = '$\delta/\kappa_o$';
+    ax(7).XLabel.String = '$\delta/\kappa_o$';
+    ax(11).XLabel.String = '$\delta/\kappa_o$';
+    ax(12).XLabel.String = '$\delta/\kappa_o$';
 
-    
-    ax(3).YLabel.String = '$\psi_\theta$';
-    ax(4).YLabel.String = '$\psi_\theta$';
     ax(3).XLabel.String = '$\theta$';
     ax(4).XLabel.String = '$\theta$';
-   
-    ax(5).XLabel.String =  'Mode Number';
-    ax(6).XLabel.String =  'Mode Number';
+    ax(8).XLabel.String = '$\theta$';
+    ax(9).XLabel.String = '$\theta$';
+    ax(13).XLabel.String = '$\theta$';
+    ax(14).XLabel.String = '$\theta$';
+
+    ax(5).XLabel.String  = '$\mu$';
+    ax(10).XLabel.String = '$\mu$';
+    ax(15).XLabel.String = '$\mu$';
     
-    ax(5).YLabel.String = 'Power (db)';
-    ax(6).YLabel.String = 'Power (db)';
+    ax(5).YLabel.String  = 'Power (db)';
+    ax(10).YLabel.String = 'Power (db)';
+    ax(15).YLabel.String = 'Power (db)';
     
     for i = 1:size(ax,2)
-       axes_Style(ax(i))
+        
+       axes_Style(ax(i));
+       
     end
     
     function axes_Style(ax)
 
-         ax.Box      = 'on';
-         ax.FontSize = 15;
+         ax.Box                  = 'on';
+         ax.FontSize             = 15;
          ax.TickLabelInterpreter = 'latex';
          ax.XLabel.Interpreter   = 'latex';
          ax.YLabel.Interpreter   = 'latex';

@@ -51,7 +51,7 @@
     Res.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     Res.Temp.Par.dt            = 1E-5/2;
     Res.Temp.Par.s_t           = 0.1;
-    Res.Temp.Par.T             = 50;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    Res.Temp.Par.T             = 1;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
     Res.Temp.Par.dd            = Res.Temp.Par.T/Res.Temp.Par.s_t;
     Res.Temp.Par.CW_num        = 1;

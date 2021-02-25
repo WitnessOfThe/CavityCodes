@@ -3,9 +3,9 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * _coder_Chi23_Runge_Kuarong_api.h
+ * mod.h
  *
- * Code generation for function '_coder_Chi23_Runge_Kuarong_api'
+ * Code generation for function 'mod'
  *
  */
 
@@ -21,7 +21,6 @@
 #include <string.h>
 
 /* Function Declarations */
-void Chi23_Runge_Kuarong_api(const mxArray * const prhs[2], const mxArray *plhs
-  [1]);
+real_T b_mod(real_T x, real_T y);
 
-/* End of code generation (_coder_Chi23_Runge_Kuarong_api.h) */
+/* End of code generation (mod.h) */
