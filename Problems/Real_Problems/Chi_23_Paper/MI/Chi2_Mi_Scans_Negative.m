@@ -37,24 +37,24 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 72*3;
+    NN                  = 72*8;
 %    epsilon_vector      = 2*pi*[-1E9,-3E9,-5E9,-7E9,-9E9,-10E9,-15E9,-20E9];   
  %   omega_max           = [30,100,100,150,150,150,150,150];
   %  delta_min           = [70,80,80,120,120,120,120,120];
    % delta_max           = [-70,-80,-80,-120,-120,-120,-120,-120];
     %Power_max_vect      = [1E7,1E7,3E7,6E7,8E7,15E7,20E7,30E7];
-    epsilon_vector      = 2*pi*[1E9,2E9,3E9,4E9,5E9,10E9,20E9];   
-    omega_max           = [150,150,150,150,150,150,150];
-    delta_min           = [-150,-150,-150,-150,-150,-150,-150];
-    delta_max           = [150,150,150,150,150,150,150,150];
-    Power_max_vect      = [5E7,5E7,5E7,5E7,5E7,5E7,5E7];
+    epsilon_vector      = 2*pi*[-5E9];   
+    omega_max           = [40];
+    delta_min           = [-1];
+    delta_max           = [6];
+    Power_max_vect      = [3E4];
 %% Omega_Scan
  tic
     for ii = 1:size(epsilon_vector,2)
         
         Res.CW.In.eps       = epsilon_vector(ii);
         Omega_Vector        = linspace(10,omega_max(ii),NN)*Res.CW.In.Omega_Star;
-        delta_vector        = linspace(delta_max(ii),delta_min(ii),NN)*Res.CW(1).In.ko;
+        delta_vector        = linspace(delta_min(ii),delta_max(ii),NN)*Res.CW(1).In.ko;
 
         parfor i_p = 1:NN
             for i_d = 1:NN
@@ -86,7 +86,7 @@
 tic
             
     Res.CW.In.eps       = epsilon_vector(iii);
-    delta_vector        = linspace(delta_max(iii),delta_min(iii),NN)*Res.CW(1).In.ko;
+    delta_vector        = linspace(delta_min(iii),delta_max(iii),NN)*Res.CW(1).In.ko;
     W_Vector            = linspace(1,Power_max_vect(iii),NN);
     
     Mumber1 = NaN(NN);
@@ -141,13 +141,12 @@ tic
    for iii = 1:size(epsilon_vector,2)
             
     Res.CW.In.eps       = epsilon_vector(iii);
-    delta_vector        = linspace(delta_min(iii),delta_max(iii),NN)*Res.CW(1).In.ko;
+    delta_vector        = linspace(delta_max(iii),1,NN)*Res.CW(1).In.ko;
     W_Vector            = linspace(1,Power_max_vect(iii),NN);
     
     Mumber1 = NaN(NN);
     Mumber2 = NaN(NN);
-    Psi_o   =  NaN(NN);    
-    
+  Psi_o   =  NaN(NN);    
     tic
     
     parfor i_p = 1:NN
@@ -194,7 +193,7 @@ tic
     toc 
     
     end
-save(strcat('Mi_Pos_zoom_NN=',num2str(NN)),'Save_Lower','Save_Upper','Save_Omega');%,'_eps=',num2str(Res.CW.In.eps/2/pi)
+save(strcat('Mi_Negative_Zoom_NN=',num2str(NN)),'Save_Lower','Save_Upper','Save_Omega');
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [Mumber,lambda,k,Vector] =  Evaluate_MI_Omega(Res)
