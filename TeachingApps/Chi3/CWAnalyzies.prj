@@ -1,0 +1,153 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration file="C:\Users\dp710\Documents\GitHub\CavityCodes\TeachingApps\Chi3\CWAnalyzies.prj" location="C:\Users\dp710\Documents\GitHub\CavityCodes\TeachingApps\Chi3" name="CWAnalyzies" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>CWAnalyzies</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark>Danila Puzyrev</param.authnamewatermark>
+    <param.email>dp710@bath.ac.uk</param.email>
+    <param.company />
+    <param.summary />
+    <param.description />
+    <param.screenshot />
+    <param.guid />
+    <param.installpath.string>\CWAnalyzies\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\CWAnalyzies\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\CWAnalyzies\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\CWAnalyzies\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\CWAnalyzies</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.native.matlab>false</param.native.matlab>
+    <param.checkbox>false</param.checkbox>
+    <param.example />
+    <param.help.text>Syntax 
+	  -? 
+	 
+ Input Arguments 
+	 -?  print help on how to use the application 
+	 input arguments</param.help.text>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.company />
+      <param.description />
+      <param.screenshot />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.install.notes />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.native.matlab />
+      <param.checkbox />
+      <param.example />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\CWAnalyzies.mlapp</file>
+    </fileset.main>
+    <fileset.resources />
+    <fileset.package />
+    <fileset.depfun>
+      <file>C:\Users\dp710\Documents\GitHub\betterFigures\conFigure.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\betterFigures\conFigureOptions.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\betterFigures\proPlot.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\betterFigures\proPlotOptions.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\betterFigures\updateStruct.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Define_Space_Cavity.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Finite_dif\Fundamental_Constants.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Normalization\Chi_3_LLE_Normalization.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Properties\Chi_3_LLE_MI_Boundary.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Properties\Chi_3_LLE_Synch_Boundary.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Analytics\Chi_3_LLE_CW.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics\Numerical Cores\Chi_3_LLE_Kuar.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics\Saving Data\Chi_3_LLE_Dyn_Saving.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics\Starting Points For Dynamics\Chi_3_LLE_Start_Point_CW.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Stationary\Chi3_LLE_Stat_Prop_Gen.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Stationary\InitialGuess\Stat_In_Guess_Chi_3_LLE_From_Dyn.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Stationary\Krylov_Eq\LLE_Full_Dispersion_Equation.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Stationary\Krylov_Eq\LLE_Full_Dispersion_Liniar_Decomposition.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Stationary\Krylov_Eq\LLE_Full_Dispersion_Predonditioner.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Stability\Chi_3_LLE_MI_Formula.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Stability\Chi_3_LLE_MI_Matrix.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Stability\LLE_Full_Stability.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Stabilities\Stability_Jacobians\LLE_Full_Stability_Matrix.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Real_Problems\Synchronization_Paper\PlotsScripts\Plot_Dynamics_Result_Amplitude_Field_Dynamics.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Real_Problems\Synchronization_Paper\PlotsScripts\Plot_Dynamics_Result_LinePlots_Spectrums.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Real_Problems\Synchronization_Paper\PlotsScripts\Plot_Dynamics_Result_pcolors.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Real_Problems\Synchronization_Paper\PlotsScripts\Plot_LLE_Dressed_State.m</file>
+      <file>C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Real_Problems\Synchronization_Paper\Set_Up_Methods_For_Synchronization_Paper.m</file>
+    </fileset.depfun>
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\CWAnalyzies\for_testing" name="CWAnalyzies.exe" optional="false">C:\Users\dp710\Documents\GitHub\CavityCodes\TeachingApps\Chi3\CWAnalyzies\for_testing\CWAnalyzies.exe</file>
+      <file location="${PROJECT_ROOT}\CWAnalyzies\for_testing" name="readme.txt" optional="true">C:\Users\dp710\Documents\GitHub\CavityCodes\TeachingApps\Chi3\CWAnalyzies\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\CWAnalyzies\for_testing" name="splash.png" optional="false">C:\Users\dp710\Documents\GitHub\CavityCodes\TeachingApps\Chi3\CWAnalyzies\for_testing\splash.png</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2020b</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+        <toolbox name="gpucoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <gpucoder>
+          <enabled>true</enabled>
+        </gpucoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

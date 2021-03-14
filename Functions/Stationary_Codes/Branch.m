@@ -12,7 +12,8 @@
             L_L_1(iii) =  L_L;
             
         end
-        Turn_Count = 0;
+        Turn = 0;
+         i_turn = 0;
         while Exitflag ~= 0
             
             Exitflag = 0;
@@ -26,8 +27,8 @@
                         
             Slv_0 = Slv;
             Breakflag = 1;
-            
-            while (L_L.Par.step_tol < x_step) && Breakflag == 1 
+           
+            while  Breakflag == 1 
                 
                 x_step     =  L_L.Par.step_inc*x_step;
                 x          = x + sg*x_step;
@@ -41,13 +42,26 @@
                 
                 if i>= 2
                     
-                    [Breakflag,Logic] = L_L.Met.Newton_Fail_Check(L_L_1(i-1:i),i,x,Exitflag);
-               %     L_L_1(i-1).Fail_Check  = Logic;
+                    [Breakflag,Logic] = L_L.Met.Newton_Fail_Check(L_L_1(i-1:i),i,x,Exitflag,x_step);
+            
                 else
                     
                     [Breakflag,Logic] = L_L.Met.Newton_Fail_Check(L_L_1(i),i,x,Exitflag);
                     
                 end
+                
+                L_L_1(i).Logic = Logic;
+                
+                if Logic.rCW 
+                    Exitflag = 0;
+                    break;
+                end
+
+                if Logic.r_tol == 1
+                    Exitflag = 0;
+                    break;
+                end
+                
                 if Breakflag == 1 
                     
                     Slv        = Slv_0;
@@ -55,8 +69,17 @@
                     x_step     = x_step*L_L.Par.step_dec;            
                    
                 end
+                if Logic.r_9 && L_L.Par.Turning == 1
+                    Turn = 1;
+                    i_turn = i_turn +1; 
+                    if i_turn > 1
+                        Turn =0;
+                        Exitflag = 0;
+                        break;
+                    end
+                end
                 
-                if (L_L.Par.step_tol > x_step) && Breakflag == 1 && L_L.Par.Turning == 1 && Logic(1).r_1 ~= 1 && Turn_Count == 0
+                if Turn == 1
                 
                     L_L_1(i)   = step_eq(L_L_1(i),x);
                     [Slv,sg,L_L_Turn]               = Turning_Regime(Slv,sg,L_L_1(i));                 
@@ -64,18 +87,13 @@
                     i  = i + 1;
                     L_L_1(i) = L_L_Turn(end);
                     
-                    x_step = L_L.Par.step_tol*3.01;
                     sg   = - sg;
-                    Turn_Count = 1;
+                    Turn = 0;
 
-                    L_L_1(i).Met.Equation             = L_L.Met.Equation;             
-                    L_L_1(i).Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition;
-                    L_L_1(i).Met.Preconditioner       = L_L.Met.Preconditioner;            
                     [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,L_L_1(i));
                     L_L_1(i)             = L_L.Met.Prop_Gen(Slv,L_L_1(i));     
                     
                 end
-                
             end
                        
             
@@ -119,38 +137,36 @@
         function [Slv,sg,Stat] = Turning_Regime(Slv_Start,sg,Stat)
             Slv  = [Slv_Start,0];
             
-            Stat.Met.Equation             = Stat.Met.Equation_Mod;             
-            Stat.Met.Liniar_Decomposition = Stat.Met.Liniar_Decomposition_Mod;
-            Stat.Met.Preconditioner       = Stat.Met.Preconditioner_Mod;            
-            Stat.Eq.PsioMax               = Stat.Met.Evaluate_trend(L_L_1(i-3:i),1);            
-            [Slv,eps_f,Exitflag]          = Newton_Switcher(Slv,Stat(1));
+            Stat.Met.Equation             = L_L.Met.Equation_Mod;             
+            Stat.Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition_Mod;
+            Stat.Met.Preconditioner       = L_L.Met.Preconditioner_Mod;            
+            Stat.Eq.PsioMax               = L_L.Met.Evaluate_trend(L_L_1(i-3:i),1);            
             
-            if eps_f > 1E-6
+            ii = 1;
+            Flag = 0;
+            
+            while Flag == 0
                 
-                Slv  = [Slv_Start,0];
-                Stat(1).Eq.PsioMax           = Stat(1).Met.Evaluate_trend(L_L_1(i-3:i),-1);            
-                [Slv,eps_f,Exitflag]      = Newton_Switcher(Slv,Stat(1)); 
-
+                ii                    = ii + 1;
+                Stat(ii)              =  Stat(ii-1);
+                [Slv,eps_f,Exitflag]  = Newton_Switcher(Slv,Stat(ii)); 
+                Stat(ii)              = confirm_step_eq(Slv,Stat(ii));
+                Stat(ii)              = Stat(ii).Met.Prop_Gen(Slv, Stat(ii)); 
+                Stat(ii).Eq.PsioMax   = Stat(ii).Met.Evaluate_trend(Stat(ii-1:ii),ii);            
                 
+                if ii >= 2
+                    [Flag,Logic] = Stat(ii).Met.Newton_Turning_Fail_Check(Stat(ii-1:ii),ii,Exitflag);
+                else
+                    [Flag,Logic] = Stat(ii).Met.Newton_Turning_Fail_Check(Stat(ii),ii,Exitflag);
+                end
+                Stat(ii).Logic  = Logic;
             end
             
-            ii=1;
-            
-                Stat(ii+1)            = Stat(1);
-                Stat(ii+1)            = confirm_step_eq(Slv,Stat(2));
-                Stat(ii+1)            = Stat(ii+1).Met.Prop_Gen(Slv,Stat(2));     
-                Stat(ii+1).Eq.PsioMax = Stat(ii).Met.Evaluate_trend(Stat(1:2),1);
-                
-            for ii = 2:15
-                
-                [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,Stat(ii));                 
-                Stat(ii+1)           = Stat(ii);
-                Stat(ii+1)           = confirm_step_eq(Slv,Stat(ii+1));
-                Stat(ii+1)           = Stat(ii+1).Met.Prop_Gen(Slv,Stat(ii+1));     
-                Stat(ii+1).Eq.PsioMax  = Stat(ii).Met.Evaluate_trend(Stat(ii:ii+1),1);
-                
-            end
+            Stat(end).Met.Equation             = L_L.Met.Equation;             
+            Stat(end).Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition;
+            Stat(end).Met.Preconditioner       = L_L.Met.Preconditioner;            
             Slv(end) = [];
-        end
+            
+            end
     end
     

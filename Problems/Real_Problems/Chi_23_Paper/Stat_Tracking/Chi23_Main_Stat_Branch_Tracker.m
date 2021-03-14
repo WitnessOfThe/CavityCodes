@@ -6,7 +6,7 @@
 %%
     
     Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = -2*pi*10E9;
+    Res.CW.In.eps     = 2*pi*25E9;
     Res.CW.In.delta_o = 0;
     Res.CW.In.N       = 2^6;
     Res.CW.In.W       = 100000*Res.CW.In.W_Star;

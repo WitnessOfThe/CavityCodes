@@ -11,19 +11,20 @@
         while Check > 0
             
             [dx,flag,relres,iter,resvec] =  bicgstabl(@(t)Stat.Met.Liniar_Decomposition...
-                (t,x0,Stat),Stat.Met.Equation(x0,Stat),10^-10,1000,@(t)Stat.Met.Preconditioner(t,Stat,x0));%%,...
+                (t,x0,Stat),Stat.Met.Equation(x0,Stat),10^-12,300,@(t)Stat.Met.Preconditioner(t,Stat,x0));%%,...
  %                %
             %
             x0(1,1:end)     = x0.' - dx;
             fun             = Stat.Met.Equation(x0,Stat);
             eps_f           = sum(abs(fun));
             
-            if j == Stat.Par.Newton_iter
+            if j == Stat.Par.Newton_iter || eps_f > 1E4
         
                 SolveFlag = -1;
                 break;
                 
             end
+                
         
            Check =  sum(abs(fun) > Stat.Par.Newton_tol );
            j = j+1;

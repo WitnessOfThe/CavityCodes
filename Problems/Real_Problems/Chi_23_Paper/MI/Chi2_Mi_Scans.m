@@ -37,17 +37,23 @@
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
 
 %%
-    NN                  = 72*3;
+    NN                  = 72*2;
 %    epsilon_vector      = 2*pi*[-1E9,-3E9,-5E9,-7E9,-9E9,-10E9,-15E9,-20E9];   
  %   omega_max           = [30,100,100,150,150,150,150,150];
   %  delta_min           = [70,80,80,120,120,120,120,120];
    % delta_max           = [-70,-80,-80,-120,-120,-120,-120,-120];
     %Power_max_vect      = [1E7,1E7,3E7,6E7,8E7,15E7,20E7,30E7];
-    epsilon_vector      = 2*pi*[1E9,2E9,3E9,4E9,5E9,10E9,20E9];   
-    omega_max           = [150,150,150,150,150,150,150];
-    delta_min           = [-150,-150,-150,-150,-150,-150,-150];
-    delta_max           = [150,150,150,150,150,150,150,150];
-    Power_max_vect      = [5E7,5E7,5E7,5E7,5E7,5E7,5E7];
+%     epsilon_vector      = 2*pi*[1E9,2E9,3E9,4E9,5E9,10E9,20E9];   
+%     omega_max           = [150,150,150,150,150,150,150];
+%     delta_min           = [-150,-150,-150,-150,-150,-150,-150];
+%     delta_max           = [150,150,150,150,150,150,150,150];
+%     Power_max_vect      = [5E7,5E7,5E7,5E7,5E7,5E7,5E7];
+    epsilon_vector      = 2*pi*[5E9];   
+    omega_max           = [500];
+    delta_min           = [-200];
+    delta_max           = [0.5];
+    Power_max_vect      = [2E8];
+
 %% Omega_Scan
  tic
     for ii = 1:size(epsilon_vector,2)

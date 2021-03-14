@@ -80,6 +80,7 @@
     toc
     
 %% Plot Dynamics
+indt = 1;
     indmu = 16;
     figure('Position',[0,0,1000,800/2],'Color',[1,1,1]);
     
@@ -89,14 +90,14 @@
     ax(2) = nexttile(Panel,3,[1,1]);hold(ax(2),'on');  
     ax(3) = nexttile(Panel,4,[1,1]);hold(ax(3),'on');  
     
-    plot(Res.Temp.Sol.t, (abs(Res.Temp.Sol.Psio(:,indmu)).^2),'Parent',ax(1));
-    plot(Res.Temp.Sol.t, (abs(Res.Temp.Sol.Psie(:,indmu)).^2),'Parent',ax(1));
+    plot(ResSave(indt).Temp.Sol.t, (abs(ResSave(indt).Temp.Sol.Psio(:,indmu)).^2),'Parent',ax(1));
+    plot(ResSave(indt).Temp.Sol.t, (abs(ResSave(indt).Temp.Sol.Psie(:,indmu)).^2),'Parent',ax(1));
 
   %  plot(Res.Temp.Sol.t, sum(abs(Res.Temp.Sol.Psio(:,[indmu,end-11])).^2,2),'Parent',ax(1));
   %  plot(Res.Temp.Sol.t, sum(abs(Res.Temp.Sol.Psie(:,[indmu,end-11])).^2,2),'Parent',ax(1));
 
-    plot(fftshift(Res.Temp.Space.k),fftshift(10*log10(abs(Res.Temp.Sol.Psio(end-1,:)).^2 )),'Parent',ax(2),'Color',[1,0,0]); 
-    plot(fftshift(Res.Temp.Space.k),fftshift(10*log10(abs(Res.Temp.Sol.Psie(end-1,:)).^2 )),'Parent',ax(3),'Color',[0,1,0]); 
+    plot(fftshift(ResSave(indt).Temp.Space.k),fftshift(10*log10(abs(ResSave(indt).Temp.Sol.Psio(end-1,:)).^2 )),'Parent',ax(2),'Color',[1,0,0]); 
+    plot(fftshift(ResSave(indt).Temp.Space.k),fftshift(10*log10(abs(ResSave(indt).Temp.Sol.Psie(end-1,:)).^2 )),'Parent',ax(3),'Color',[0,1,0]); 
 
     ax(1).XLabel.String = '$t,(s \cdot k_o)$';
     ax(1).YLabel.String = '$|\psi_\mu|^2$';

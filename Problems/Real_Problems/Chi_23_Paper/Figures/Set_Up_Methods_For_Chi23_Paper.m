@@ -40,6 +40,7 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.Stat.Met.Stab_Method          = @Chi23_Bloch_Stability;
     Res.Stat.Met.Prop_Gen             = @Chi23_Stat_Prop_Gen;
     Res.Stat.Met.Newton_Fail_Check    = @fail_Stat_check;
+    Res.Stat.Met.Newton_Turning_Fail_Check   = @fail_Stat_Turning_check;
 %     L_L.Stat.Met.Ev_Stat_From_Dyn     = @Stat_In_Guess_Chi_3_LLE_From_Dyn;
 
 %                                      
@@ -60,7 +61,7 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.CW.Par.first_step       = 0.05; % step for delta measured in delta/kappa
     Res.CW.Par.step_tol         = 0.001;
     Res.CW.Par.step_inc         = 1;
-    Res.CW.Par.step_dec         = 0.5;
+    Res.CW.Par.step_dec         = 0.1;
 Res.CW.Par.Turning =1;
     Res.CW.Par.bot_boundary     = -150; % bottom boundary for delta to search
     Res.CW.Par.top_boundary     =  150; % top boundary for delta to search
@@ -68,7 +69,7 @@ Res.CW.Par.Turning =1;
     Res.CW.Par.Stability        = true;
     Res.CW.Par.Newton_iter      = 20;      
     Res.CW.Par.Newton_tol       = 1E-10;  
-    Res.CW.Par.i_max            = 1000;
+    Res.CW.Par.i_max            = 10000;
     
     Res.CW.Par.fsolveoptions     = optimoptions('fsolve','CheckGradients',...
     false,'Display','none','UseParallel',false,'SpecifyObjectiveGradient',false,...
@@ -96,21 +97,47 @@ end
         Flag = (Logic.r_1 || Logic.r_2 || Logic.r_3 || Logic.r_4 || Logic.r_5 || Logic.r_6 );%|| Logic.r_7 || Logic.r_8
 
     end
-     function [Flag,Logic] = fail_Stat_check(Stat,i,x,Exitflag)
+     function [Flag,Logic] = fail_Stat_check(Stat,i,x,Exitflag,x_step)
      
+           Logic.rCW = sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-6;
+           Logic.r_8 =0;
+           Logic.r_9 =0;
+           Logic.Dir.current  = NaN;
+           Logic.Dir.dif = NaN;
+              Logic.r_tol     = 0;
        if ~(i>=2)
            
-           Logic.r_1 = 0;%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
+           Logic.r_5 = 0;%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
+           Logic.r_7 = 0;%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
+           
        else
-           Logic.r_1 = sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) <= 1E-10;
+           
+           Logic.Dir.current = (max( abs( ifft(Stat(2).Sol.Psi_o)*Stat(2).Space.N).^2 ) - ... 
+           max( abs( ifft(Stat(1).Sol.Psi_o)*Stat(1).Space.N ).^2 ) )/...
+           (Stat(2).Eq.(Stat(2).Par.variable) - Stat(1).Eq.(Stat(1).Par.variable));
+           
+           Logic.r_5 = sum(abs(Stat(2).Sol.Psi_o(2:end)).^2)/sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) > 1.1 || sum(abs(Stat(2).Sol.Psi_o(2:end)).^2)/sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) < 0.9;
+           Logic.r_7 = abs(Stat(2).Sol.Psi_o(1)).^2/abs(Stat(1).Sol.Psi_o(1)).^2 > 1.1 || abs(Stat(2).Sol.Psi_o(1)).^2/abs(Stat(1).Sol.Psi_o(1)).^2 < 0.9;
+           
+           if i >= 3
+               Logic.r_5 = 0;%sum(abs(Stat(2).Sol.Psi_o(2:end)).^2)/sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) > 1.1 || sum(abs(Stat(2).Sol.Psi_o(2:end)).^2)/sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) < 0.9;
+               Logic.r_7 = 0;%abs(Stat(2).Sol.Psi_o(1)).^2/abs(Stat(1).Sol.Psi_o(1)).^2 > 1.1 || abs(Stat(2).Sol.Psi_o(1)).^2/abs(Stat(1).Sol.Psi_o(1)).^2 < 0.9;
+               
+               Logic.Dir.dif = abs(abs(Stat(1).Logic.Dir.current) - abs(Logic.Dir.current)); 
+               Logic.r_8     = Logic.Dir.dif > 0.5*abs(Logic.Dir.current);
+               Logic.r_9     = abs(Logic.Dir.current) > 20 || x_step < Stat(1).Par.step_tol;
+                Logic.r_tol     = x_step < Stat(1).Par.step_tol;
+           end
+           
        end
+       
        Logic.r_2  = ~(Stat(end).Par.top_boundary > x) ;            
        Logic.r_3  =  Exitflag <= 0;
        Logic.r_4  = ~(Stat(end).Par.bot_boundary < x);
-       Logic.r_5  = 0;
        Logic.r_6  = i == Stat(1).Par.i_max;
-
-        Flag = (Logic.r_1 || Logic.r_2 || Logic.r_3 || Logic.r_4 || Logic.r_5 || Logic.r_6 );%|| Logic.r_7 || Logic.r_8
+       
+ 
+        Flag = (Logic.rCW || Logic.r_2 || Logic.r_3 || Logic.r_4 || Logic.r_5 || Logic.r_6 || Logic.r_7 || Logic.r_8 || Logic.r_tol );%|| Logic.r_7 
 
     end
     function PsioMax =  Peak_Trend(Stat,sg)
@@ -122,4 +149,44 @@ end
             
         end
         PsioMax  = Peak_Val(end)+sg*(Peak_Val(end) - Peak_Val(end-1));
+    end
+     function [Flag,Logic] = fail_Stat_Turning_check(Stat,i,Exitflag)
+     
+           Logic.rCW = sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-6;
+           Logic.r_8 =0;
+           Logic.r_9 =0;
+           Logic.Dir.current  = NaN;
+           Logic.Dir.dif = NaN;
+       if ~(i>=2)
+           
+           Logic.r_5 = 0;%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
+           Logic.r_7 = 0;%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
+           
+       else
+           
+           Logic.Dir.current =(max( abs( ifft(Stat(2).Sol.Psi_o)*Stat(2).Space.N).^2 ) - ... 
+           max( abs( ifft(Stat(1).Sol.Psi_o)*Stat(1).Space.N ).^2 ) )/...
+           (Stat(2).Eq.(Stat(2).Par.variable) - Stat(1).Eq.(Stat(1).Par.variable));
+           
+           Logic.r_5 = sum(abs(Stat(2).Sol.Psi_o(2:end)).^2)/sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) > 1.1 || sum(abs(Stat(2).Sol.Psi_o(2:end)).^2)/sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) < 0.9;
+           Logic.r_7 = abs(Stat(2).Sol.Psi_o(1)).^2/abs(Stat(1).Sol.Psi_o(1)).^2 > 1.1 || abs(Stat(2).Sol.Psi_o(1)).^2/abs(Stat(1).Sol.Psi_o(1)).^2 < 0.9;
+           
+           if i >= 3
+               Logic.r_5 = 0;%sum(abs(Stat(2).Sol.Psi_o(2:end)).^2)/sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) > 1.1 || sum(abs(Stat(2).Sol.Psi_o(2:end)).^2)/sum(abs(Stat(1).Sol.Psi_o(2:end)).^2) < 0.9;
+               Logic.r_7 = 0;%abs(Stat(2).Sol.Psi_o(1)).^2/abs(Stat(1).Sol.Psi_o(1)).^2 > 1.1 || abs(Stat(2).Sol.Psi_o(1)).^2/abs(Stat(1).Sol.Psi_o(1)).^2 < 0.9;
+               
+               Logic.Dir.dif = abs(abs(Stat(1).Logic.Dir.current) - abs(Logic.Dir.current)); 
+               Logic.r_8 = 0;
+               Logic.r_9 = abs(Logic.Dir.current) < 0.01;
+                
+           end
+           
+       end
+       
+       Logic.r_3  =  Exitflag <= 0;
+       Logic.r_6  = i == Stat(1).Par.i_max;
+       
+ 
+        Flag = (Logic.rCW || Logic.r_3 || Logic.r_5 || Logic.r_6 || Logic.r_7 || Logic.r_8|| Logic.r_9);%|| Logic.r_7 
+
     end

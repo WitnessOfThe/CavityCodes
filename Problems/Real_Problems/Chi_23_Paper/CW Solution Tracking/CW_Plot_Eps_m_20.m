@@ -6,10 +6,10 @@
 %%
     
     Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = 5E9*2*pi;
+    Res.CW.In.eps     = 100E9*2*pi;
     Res.CW.In.delta_o = 0;
     Res.CW.In.N       = 2^2;
-    Res.CW.In.W       = 1*10^5*Res.CW.In.W_Star;
+    Res.CW.In.W       = 10E5*Res.CW.In.W_Star;
     
 %%
 
@@ -41,8 +41,8 @@
 
   %%
   
-    NN                  = 1E3;
-    Sa2.delta_vector     = linspace(-150,150,NN)*Res.CW(1).In.ko;
+    NN                  = 1E4;
+    Sa2.delta_vector     = linspace(-100,20,NN)*Res.CW(1).In.ko;
     
     Sa2.U_f_2    =   NaN(NN,3);
     Sa2.U_s_2    =   NaN(NN,3);
@@ -50,7 +50,7 @@
     U_s_23       =   zeros(NN,3);
     
     for i =1:NN
-        
+         
         Res.CW.In.delta_o = Sa2.delta_vector(i);
         Res.CW            = Res.CW.Met.Solve_Chi2(Res.CW);
         Sa2.U_f_2(i,:)    = Res.CW.Sol.Psi_o;
@@ -122,8 +122,7 @@
 %         
 %     end
 % %%
-    figure;hold on;
-
+   
 %     for i = 1:1
 %         
 %         plot(Sa2(i).delta_vector/Res.CW(1).In.ko,abs(Sa2(i).Omega)/sqrt(2*Res.CW.In.ko*Res.CW.In.ke),'LineStyle','--','Color',[1,0,0])
@@ -133,8 +132,9 @@
   % plot(delta_vector/Res.CW(1).In.ko,abs(U_f_2).^2,'LineStyle','none','Marker','.','Color',[1,0,0]);hold on;
 
 %%
-figure;
-plot(Sa2.delta_vector/Res.CW(1).In.ko,Sa2.Omega/Res.CW.In.Omega_Star,'LineStyle','none','Marker','.','Color',[1,0,0]);hold on;
+ax(1) = gca;
+hold on;
+plot(Sa2.delta_vector/Res.CW(1).In.ko,Sa2.Omega/Res.CW.In.Omega_Star,'Parent',ax(1),'LineStyle','none','Marker','.','Color','m');hold on;
 %plot(Sa2.delta_vector/Res.CW(1).In.ko,abs(Sa2.U_s_2).^2,'LineStyle','none','Marker','.','Color',[0,1,0]);
 %hold on;plot(delta_vector,abs(U_f_23).^2,'LineStyle','none','Marker','.','Color',[0,0,0]);
     

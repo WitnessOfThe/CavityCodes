@@ -16,8 +16,8 @@
 #include "emlrt.h"
 
 /* Type Definitions */
-#ifndef typedef_struct2_T
-#define typedef_struct2_T
+#ifndef typedef_struct1_T
+#define typedef_struct1_T
 
 typedef struct {
   char_T Runge_Type[12];
@@ -26,9 +26,9 @@ typedef struct {
   real_T T;
   real_T dd;
   real_T CW_num;
-} struct2_T;
+} struct1_T;
 
-#endif                                 /*typedef_struct2_T*/
+#endif                                 /*typedef_struct1_T*/
 
 #ifndef typedef_struct3_T
 #define typedef_struct3_T
@@ -56,8 +56,8 @@ typedef struct {
 
 #endif                                 /*typedef_struct5_T*/
 
-#ifndef typedef_struct1_T
-#define typedef_struct1_T
+#ifndef typedef_struct2_T
+#define typedef_struct2_T
 
 typedef struct {
   real_T eta;
@@ -76,8 +76,8 @@ typedef struct {
   real_T eps;
   real_T delta_o;
   real_T N;
-  real_T mu_bl;
   real_T W;
+  real_T mu_bl;
   real_T delta;
   real_T delta_e;
   real_T H;
@@ -85,9 +85,9 @@ typedef struct {
   creal_T Omega_s;
   creal_T Psi_Start[512];
   real_T t_start;
-} struct1_T;
+} struct2_T;
 
-#endif                                 /*typedef_struct1_T*/
+#endif                                 /*typedef_struct2_T*/
 
 #ifndef typedef_struct4_T
 #define typedef_struct4_T
@@ -219,8 +219,8 @@ typedef struct emxArray_boolean_T emxArray_boolean_T;
 #define typedef_struct0_T
 
 typedef struct {
-  struct1_T In;
-  struct2_T Par;
+  struct1_T Par;
+  struct2_T In;
   struct3_T Space;
   struct4_T Eq;
 } struct0_T;
