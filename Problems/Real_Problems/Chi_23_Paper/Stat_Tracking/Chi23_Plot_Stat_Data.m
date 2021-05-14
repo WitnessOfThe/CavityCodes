@@ -1,12 +1,16 @@
+PlotSome(Res)
+
+function PlotSome(Res)
     E_Values = zeros(size(Res.Stat,2),10);
-    clear delta_vector
+    clear delta_vector;
     for i = 1:size(Res.Stat,2)
         
         Psi_hat_o(i,:)    = Res.Stat(i).Sol.Psi_o;
         Psi_hat_e(i,:)    = Res.Stat(i).Sol.Psi_e;
-  %      delta_vector(i)   = Res.Stat(i).In.eps/2/pi/1E9;
+       delta_vector(i)   = Res.Stat(i).In.eps/2/pi/1E9;
        delta_vector(i)   = Res.Stat(i).Eq.delta_o;
-        V_vector(i)       = Res.Stat(i).Sol.V;
+     %  delta_vector(i)   = Res.Stat(i).In.W/Res.Stat(i).In.W_Star;
+        V_vector(i)       = Res.Stat(i).Sol.V; %Res.Stat(i).Sol.V;
         
         for j = 1:size(Res.Stat(i).Stab,2)
             
@@ -14,7 +18,7 @@
            
         end
         
-        if max(E_Values(i,:)) > 1E2
+        if max(E_Values(i,:)) > 1E3
             
             Stable(i) = false;
             if max(E_Values(i,:)) == real(min(Res.Stat(i).Stab(1).E_values))
@@ -111,8 +115,8 @@
     plot(Res.Stat(1).Space.phi,real(Psi_thetao(ind_show,:)),'Parent',ax(4));
     plot(Res.Stat(1).Space.phi,imag(Psi_thetao(ind_show,:)),'Parent',ax(4));
     
-    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(5),'BaseValue',-70,'Marker','none','Color',[1,0,0]);
-    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(5),'BaseValue',-70,'Marker','none','Color',[0,1,0]);
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(5),'BaseValue',-100,'Marker','none','Color',[1,0,0]);
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(5),'BaseValue',-100,'Marker','none','Color',[0,1,0]);
     ax(5).YLabel.String = strcat('Power (db)',Str_x,'=',num2str(delta_vector(ind_show)));
    
     
@@ -129,8 +133,8 @@
     plot(Res.Stat(1).Space.phi,real(Psi_thetao(ind_show,:)),'Parent',ax(9));
     plot(Res.Stat(1).Space.phi,imag(Psi_thetao(ind_show,:)),'Parent',ax(9));
     
-    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(10),'BaseValue',-70,'Marker','none','Color',[1,0,0]);
-    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(10),'BaseValue',-70,'Marker','none','Color',[0,1,0]);
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(10),'BaseValue',-100,'Marker','none','Color',[1,0,0]);
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(10),'BaseValue',-100,'Marker','none','Color',[0,1,0]);
     ax(10).YLabel.String = strcat('Power (db)',Str_x,'=',num2str(delta_vector(ind_show)));
 
     ind_show = size(Res.Stat,2)-5;
@@ -143,13 +147,13 @@
     plot(Res.Stat(1).Space.phi,real(Psi_thetao(ind_show,:)),'Parent',ax(14));
     plot(Res.Stat(1).Space.phi,imag(Psi_thetao(ind_show,:)),'Parent',ax(14));
     
-    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(15),'BaseValue',-70,'Marker','none','Color',[1,0,0]);
-    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(15),'BaseValue',-70,'Marker','none','Color',[0,1,0]);
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_o(ind_show,:)).^2),'Parent',ax(15),'BaseValue',-100,'Marker','none','Color',[1,0,0]);
+    stem(Res.Stat(1).Space.k,10*log10(abs(Psi_hat_e(ind_show,:)).^2),'Parent',ax(15),'BaseValue',-100,'Marker','none','Color',[0,1,0]);
     ax(15).YLabel.String = strcat('Power (db)',Str_x,'=',num2str(delta_vector(ind_show)));
             
-    ylim(ax(15),[-70,15]);
-    ylim(ax(10),[-70,15]);
-    ylim(ax(5), [-70,15]);
+    ylim(ax(15),[-100,15]);
+    ylim(ax(10),[-100,15]);
+    ylim(ax(5), [-100,15]);
     
     xlim(ax(5),  80*[-Res.Stat(1).Space.k(2),Res.Stat(1).Space.k(2)] );
     xlim(ax(15),80*[-Res.Stat(1).Space.k(2),Res.Stat(1).Space.k(2)] );    
@@ -201,4 +205,4 @@
          ax.YLabel.Interpreter   = 'latex';
 
     end
-    
+end

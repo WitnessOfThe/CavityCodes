@@ -1,27 +1,18 @@
     clear all;
 
 %%
+    Res = Set_Up_Methods_For_Chi23_Paper;
     
 %%
-    NN = 1E4;
-    
-    eps_Vec = [100]*1E9;
-    hold on;
-    for i = 1:3
-        
-        Res = Set_Up_Methods_For_Chi23_Paper;
-        Res.CW.In         = Params_LiNbd;
-        Res.CW.In.eps     = eps_Vec(i)*2*pi;
-        Res.CW.In.N       = 2^2;
-        Res.CW.In.W       = 1E5*Res.CW.In.W_Star;
-        
-        Br = Chi2_Get_CW_Point2Point(Res.CW,[-100,20]*Res.CW.In.ko,NN);  
-        
-        plot(Br.delta_vector/Res.CW.In.ko,Br.Omega(:,1)/Res.CW.In.Omega_Star,'Color',[1,0,0])
-        plot(Br.delta_vector/Res.CW.In.ko,Br.Omega(:,2)/Res.CW.In.Omega_Star,'Color',[1,0,0])
-        plot(Br.delta_vector/Res.CW.In.ko,Br.Omega(:,3)/Res.CW.In.Omega_Star,'Color',[1,0,0])
-        
-    end
+    NN = 1E5;
+    eps_Vec = [5,25,50,10]
+    Res.CW.In         = Params_LiNbd;
+    Res.CW.In.eps     = 25E9*2*pi;
+    Res.CW.In.delta_o = 0;
+    Res.CW.In.N       = 2^2;
+    Res.CW.In.W       = 1E5*Res.CW.In.W_Star;
+
+    Br = Chi2_Get_CW_Point2Point(Res.CW,[-100,20)],NN);    
     
 %%
 

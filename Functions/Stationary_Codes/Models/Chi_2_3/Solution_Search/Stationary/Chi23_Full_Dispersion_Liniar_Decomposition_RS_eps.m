@@ -1,4 +1,4 @@
-    function f = Chi23_Full_Dispersion_Liniar_Decomposition_RS_delta(x,Psi,Stat)
+    function f = Chi23_Full_Dispersion_Liniar_Decomposition_RS_eps(x,Psi,Stat)
                 
         xo                  = (x(1:Stat.Space.N) +...
                                          1i*x(Stat.Space.N+1:2*Stat.Space.N)).';
@@ -6,7 +6,7 @@
                                          1i*x(3*Stat.Space.N+1:4*Stat.Space.N)).';
         
         xV                   = x(end-1);   %    
-        xd                   = x(end);   %    
+        xepsilon             = x(end);   %    
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18,23 +18,23 @@
         
         
         V               = Psi(end-1);
-        delta           = Psi(end);
+        depsilon         = Psi(end);
         
         [~,ind_real]     = max(real(Psio));
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         
-        L1      = ifft( fft(xo).*(Stat.Eq.Lo + delta - V*Stat.Space.k) + ...
-                                          - Stat.Space.k.*xV.*fft(Psio) ) + xd.*Psio;
+        L1      = ifft( fft(xo).*(Stat.Eq.Lo  - V*Stat.Space.k) + ...
+                                          - Stat.Space.k.*xV.*fft(Psio) );
         
         NL1     =  - (Stat.Eq.gam2o.*( Psie.*conj(xo) + conj(Psio).*xe ) +...
                   Stat.Eq.gam3o.*(...
                  2*(abs(Psio).^2 + abs(Psie).^2 ).*xo + Psio.^2.*conj(xo) + ...
                          2*conj(Psie).*Psio.*xo + 2*Psio.*Psie.*conj(xe)));
         
-        L2      = ifft( fft(xe).*(Stat.Eq.Le + 2*delta- V*Stat.Space.k)  ...
-                                    - Stat.Space.k.*xV.*fft(Psie) )+ 2*xd.*Psie;
+        L2      = ifft( fft(xe).*(Stat.Eq.Le -  depsilon- V*Stat.Space.k)  ...
+                                    - Stat.Space.k.*xV.*fft(Psie) )- xepsilon.*Psie;
         
         NL2     =  - (Stat.Eq.gam2e.*( 2*Psio.*xo ) +...
                  Stat.Eq.gam3e.*( 2*conj(Psio).*Psie.*xo + 2*Psio.*Psie.*conj(xo)...

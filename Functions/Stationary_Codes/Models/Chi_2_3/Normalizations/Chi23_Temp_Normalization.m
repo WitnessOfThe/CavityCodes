@@ -36,7 +36,7 @@ function Temp = Chi23_Temp_Normalization(Temp)
     
     Temp.Eq.norm            = norm;
     tt = [Temp.Space.k,Temp.Space.k];
-    Temp.Eq.mode_range      =     find( tt < Temp.In.mu_bl*4 | tt > -Temp.In.mu_bl*4);
+    Temp.Eq.mode_range      =     find( tt < 150 & tt > -150);
     
 %%
     Temp.Eq.Lo              = Temp.Eq.delta_o + Temp.Space.k.^2*1/2*Temp.Eq.Do(2) - 1i*Temp.Eq.ko/2;

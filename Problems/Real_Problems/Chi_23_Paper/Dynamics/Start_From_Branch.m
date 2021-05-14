@@ -17,7 +17,7 @@
     W_Finish     = 10000;
     delta_Finish = 3;
     
-    W                 = [1.3E5,23E6];
+    W                 = [1.3E5,2.3E5];
     delta             = [-100,-53.5];
     
     Res.CW            = Chi23_CW_Track_fromLower2Point(Res.CW,W,delta);
@@ -25,7 +25,7 @@
 %%
     Res.Stat.In           = Res.CW.In;
    
-    Res.Stat.In.N         = 2^6;
+    Res.Stat.In.N         = 2^8;
     
     coeff_bound = [0.1,10];
     Flag = false;

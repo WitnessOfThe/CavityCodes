@@ -19,7 +19,7 @@
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    F_e        = Temp.In.Psi_Start;
+    F_e        = complex(Temp.In.Psi_Start);
     t          = Temp.In.t_start;
     
     Sol.Psio = complex(zeros(Temp.Par.dd,Temp.Space.N));

@@ -5,7 +5,7 @@ function CW = Chi23_CW_Track_fromLower2Point(CW,W,delta)
     W_vector              = linspace(W(1),W(2),NN);
     
     CW.In.W               = W(1)*CW.In.W_Star;        
-    CW.In.delta           = delta(1)*CW.In.ko;        
+    CW.In.delta_o         = delta(1)*CW.In.ko;        
     
     CW                    = CW.Met.Solve_Chi2(CW); 
 

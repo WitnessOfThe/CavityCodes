@@ -52,16 +52,7 @@
                 
                 L_L_1(i).Logic = Logic;
                 
-                if Logic.rCW 
-                    Exitflag = 0;
-                    break;
-                end
-
-                if Logic.r_tol == 1
-                    Exitflag = 0;
-                    break;
-                end
-                
+                 
                 if Breakflag == 1 
                     
                     Slv        = Slv_0;
@@ -69,31 +60,42 @@
                     x_step     = x_step*L_L.Par.step_dec;            
                    
                 end
-                if Logic.r_9 && L_L.Par.Turning == 1
-                    Turn = 1;
-                    i_turn = i_turn +1; 
-                    if i_turn > 1
-                        Turn =0;
-                        Exitflag = 0;
-                        break;
-                    end
+                if Logic.rCW &&  Logic.r_tol
+                    Exitflag = 0;
+                    break;
                 end
-                
-                if Turn == 1
-                
-                    L_L_1(i)   = step_eq(L_L_1(i),x);
-                    [Slv,sg,L_L_Turn]               = Turning_Regime(Slv,sg,L_L_1(i));                 
-                    
-                    i  = i + 1;
-                    L_L_1(i) = L_L_Turn(end);
-                    
-                    sg   = - sg;
-                    Turn = 0;
 
-                    [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,L_L_1(i));
-                    L_L_1(i)             = L_L.Met.Prop_Gen(Slv,L_L_1(i));     
-                    
+
+                if Logic.r_tol == 1
+                    Exitflag = 0;
+                    break;
                 end
+                
+%                 if Logic.r_9 && L_L.Par.Turning == 1
+%                     Turn = 1;
+%                     i_turn = i_turn +1; 
+%                     if i_turn > 1
+%                         Turn =0;
+%                         Exitflag = 0;
+%                         break;
+%                     end
+%                 end
+%                 
+%                 if Turn == 1
+%                 
+%                     L_L_1(i)   = step_eq(L_L_1(i),x);
+%                     [Slv,sg,L_L_Turn]               = Turning_Regime(Slv,sg,L_L_1(i));                 
+%                     
+%                     i  = i + 1;
+%                     L_L_1(i) = L_L_Turn(end);
+%                     
+%                     sg   = - sg;
+%                     Turn = 0;
+% 
+%                     [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,L_L_1(i));
+%                     L_L_1(i)             = L_L.Met.Prop_Gen(Slv,L_L_1(i));     
+%                     
+%                 end
             end
                        
             

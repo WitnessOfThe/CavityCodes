@@ -6,10 +6,10 @@
 %%
     
     Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = 2*pi*25E9;
+    Res.CW.In.eps     = -2*pi*5E9;
     Res.CW.In.delta_o = 0;
-     Res.CW.In.N       = 2^8;
-    Res.CW.In.mu_bl     = 1;     
+     Res.CW.In.N      = 2^8;
+    Res.CW.In.mu_bl   = 5;     
     Res.CW.In.W       = 100000*Res.CW.In.W_Star;
     
 %%
@@ -17,8 +17,8 @@
     W_Finish     = 10000;
     delta_Finish = 3;
     
-    W                 = [1.3E2,23000];
-    delta             = [-100,-2.8951];
+    W                 = [1.3E2,5E7];%6.8088e+05
+    delta             = [-100,-55 ];%-11.6907
     
     Res.CW            = Chi23_CW_Track_fromLower2Point(Res.CW,W,delta);
     
@@ -35,15 +35,18 @@
 %     Res.Stat.In.N         = 2^6;
 
     Res.Stat.In           = Res.CW.In;
-    Res.Stat.Par.Turning    = 0;
+    Res.Stat.Par.Newton_tol       = 1E-10;  
+     Res.Stat.Par.Turning    = 0;
     Res.Stat.Par.variable         = 'delta_o';  %%'Pump Power';
     Res.Stat.Par.bot_boundary     =  -100; % bottom boundary for delta to search
     Res.Stat.Par.top_boundary     =  100; % top boundary for delta to search
     
-    Res.Stat.Par.first_step         = 0.01;
-    Res.Stat.Par.step_tol         = 1E-4;
-    Res.Stat.Par.step_inc         = 1.01;  
-    Res.Stat.In.N         = 2^8;
+     Res.Stat.Par.Stability = 1;
+    Res.Stat.Par.Newton_iter       = 100;
+    Res.Stat.Par.first_step       = 0.1;
+    Res.Stat.Par.step_tol         = 1E-2;
+    Res.Stat.Par.step_inc         = 1.1;  
+    Res.Stat.In.N                 = 2^8;
     
     coeff_bound = [0.0001,1];
     Flag = false;
@@ -51,8 +54,8 @@
     while Flag == 0
         
         coeff       = coeff_bound(1) + (coeff_bound(2) - coeff_bound(1))/2;
-        Res                 = Chi23_Turing_From_CW(Res,coeff,1);
-        ii                  = ii + 1;
+        Res                 = Chi23_Turing_From_CW(Res,coeff,2);
+        ii                  = ii + 1
         Logic.p1            = Res.Stat.Sol.Exitflag >= 0;
         Logic.p2            = sum(abs(Res.Stat.Sol.Psi_o(2:end))) > 1E-3;
         
@@ -79,14 +82,14 @@
         end
         
     end
-    
-    Res.Stat              = Run_Branch_Universal(Res.Stat);
-    
+        Res.Stat              = Run_Branch_Universal(Res.Stat);
+
 %%    
-    NN = 200;
-    delta_vector = linspace(delta(2),-30,NN);
-    Power_vector = linspace(W(2),13E5,NN);
-    eps_vector   = linspace(Res.Stat.In.eps,30E9*2*pi,NN);
+    NN = 500;
+    delta_vector = linspace(-2.0884,-7,NN);%W(2)delta(2)
+    Power_vector = linspace(23E3,1E5,NN);
+    eps_vector   = linspace(Res.Stat.In.eps,Res.Stat.In.eps,NN);
+    
     Psi_o           = ifft(Res.Stat.Sol.Psi_o*Res.Stat.Space.N);
     Psi_e           = ifft(Res.Stat.Sol.Psi_e*Res.Stat.Space.N);
   
@@ -100,7 +103,7 @@
 
          
         [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,Res.Stat);
-        eps_f
+        [i,eps_f]
     end
 %     for i = 1:NN
 %         
@@ -118,22 +121,23 @@
     Res.Stat.Sol.eps_f   = eps_f;
     Res.Stat.Sol.Exitflag= Exitflag;
   
-    Res1.Stat              = Run_Branch_Universal(Res.Stat);
 %%
-for i = 1:size(Res1.Stat,2)
+clear delta_vector
+
+for i = 1:size(Res.Stat,2)
         
 
-  %      delta_vector(i)   = Res.Stat(i).In.eps/2/pi/1E9;
-       delta_(i)   = Res1.Stat(i).Eq.delta_o;
-       Max_vector(i)     =  max(abs(ifft(Res1.Stat(i).Sol.Psi_o*Res1.Stat(i).Space.N)).^2);
-       Logic_vector(i)     = Res1.Stat(i).Logic.Dir.dif;
-       Logic_vector2(i)     = abs(Res1.Stat(i).Logic.Dir.current)*0.1;
+        delta_vector(i)   = Res.Stat(i).In.delta_o/Res.Stat(i).In.ko;
+      % delta_(i)   = Res1.Stat(i).Eq.delta_o;
+       Max_vector(i)     =  max(abs(ifft(Res.Stat(i).Sol.Psi_o*Res.Stat(i).Space.N)).^2);
+    %   Logic_vector(i)     = Res1.Stat(i).Logic.Dir.dif;
+     %  Logic_vector2(i)     = abs(Res1.Stat(i).Logic.Dir.current)*0.1;
 end
-    figure;plot(delta_,Max_vector)
+    figure;plot(delta_vector,Max_vector)
 
-    figure;plot(delta_, Logic_vector, delta_,Logic_vector2)
+%    figure;plot(delta_vector,Max_vector)
 %%    
-    Res.Stat = Res1.Stat(10);
+    Res.Stat = Res.Stat;
     Res.Stat.In           = Res.CW.In;
     Res.Stat.Par.Turning    = 0;
     Res.Stat.Par.variable         = 'delta_o';  %%'Pump Power';
@@ -147,27 +151,47 @@ end
     Res2.Stat              = Run_Branch_Universal(Res.Stat);
     
 %%
-
-    for i = 83
-        Res.Temp.In                = Res.Stat(i).In;    
-        Res.Temp.Par.Runge_Type    = 'Runge SSPRK3';        
-        Res.Temp.Par.dt            = 2E-5;
-        Res.Temp.Par.s_t           = 0.01;
-        Res.Temp.Par.T             = 100;%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+   eps_vec     = [25E9,20E9,15E9,10E9]*2*pi;
+ %  delt_vec     = -20.8265*ones(1,6);
+   index_start = 1*ones(1,4);
+     ResMet = Set_Up_Methods_For_Chi23_Paper;
   
-        Res.Temp.Par.dd            = Res.Temp.Par.T/Res.Temp.Par.s_t;
-        Res.Temp.Par.CW_num        = 1;
-        Runge                      = Define_Runge_Coeff(Res.Temp.Par);
+   parfor i = 1:4
+        
+        ReSave(i)               = ResMet;
+        ReSave(i).Temp.In       = Res.Stat(index_start(i)).In;
+    %    ReSave(i).Temp.In.delta_o       = delt_vec(i)*ReSave(i).Temp.In.ko;
+        ReSave(i).Temp.In.eps           =  eps_vec(i);
+        
+        ReSave(i).Temp.Par.Runge_Type    = 'Runge SSPRK3';        
+        ReSave(i).Temp.Par.dt            = 1E-5;
+        ReSave(i).Temp.Par.s_t           = 0.001;
+        ReSave(i).Temp.Par.T             = 30; %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+        ReSave(i).Temp.Par.dd            = ReSave(i).Temp.Par.T/ReSave(i).Temp.Par.s_t;
+        ReSave(i).Temp.Par.CW_num        = 1;
+        Runge                            = Define_Runge_Coeff(ReSave(i).Temp.Par);
 
  
-        Res.Temp.In.N     = 2^8;
-        Res.Temp          = Res.Temp.Met.Norm(Res.Temp);   
-        Res.Temp          = Chi23_StartFromBloch(Res.Stat(i),Res.Temp);   
-        Res.Temp.Met      = [];
+         ReSave(i).Temp.In.N     = 2^8;
+         ReSave(i).Temp          =  ReSave(i).Temp.Met.Norm( ReSave(i).Temp);   
+         ReSave(i).Temp.Eq.Lo    =  ReSave(i).Temp.Eq.Lo - Res.Stat(index_start(i)).Sol.V*ReSave(i).Temp.Space.k;
+         ReSave(i).Temp.Eq.Le    =  ReSave(i).Temp.Eq.Le - Res.Stat(index_start(i)).Sol.V*ReSave(i).Temp.Space.k;
+         ReSave(i).Temp.Eq.L               = [ReSave(i).Temp.Eq.Lo,ReSave(i).Temp.Eq.Le]; 
+         ReSave(i).Temp.In.Psi_Start = [Res.Stat(index_start(i)).Sol.Psi_o,Res.Stat(index_start(i)).Sol.Psi_e]*ReSave(i).Temp.In.N  ;
+         ReSave(i).Temp.In.t_start = 0;
+         ReSave(i).Temp.Met      = [];
+        
+   end
+ 
+   parfor i = 1:4
+        
 
         tic
-        Res.Temp.Sol      = Chi23_Runge_Kuarong_mex(Res.Temp,Runge);
+         ReSave(i).Temp.Sol      = Chi23_Runge_Kuarong_mex( ReSave(i).Temp,Runge);
         toc
+        
     end
     
 %% Plot Dynamics
