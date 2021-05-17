@@ -223,7 +223,7 @@
                     absstep = max(abs(ifft(Stat(ii).Sol.Psi_o*Stat(ii).Space.N)).^2) ...
                         -  max(abs(ifft(Stat(ii-1).Sol.Psi_o*Stat(ii-1).Space.N)).^2);
                     if absstep == 0 
-                        absstep = 1E-8*sign(Stat(1).Logic.Dir.y2-Stat(1).Logic.Dir.y1);
+                        absstep = 1E-8*sign(Stat().Logic.Dir.y2-Stat(end).Logic.Dir.y1);
                     end
                     Stat(ii).Eq.PsioMax = max(abs(ifft(Stat(ii).Sol.Psi_o*Stat(ii).Space.N)).^2) ...
                          + absstep*smcoeff;                 
