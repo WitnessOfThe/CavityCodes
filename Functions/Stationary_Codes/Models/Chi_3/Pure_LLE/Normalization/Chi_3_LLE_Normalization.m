@@ -7,7 +7,6 @@ function L_L = Chi_3_LLE_Normalization(L_L)
         L_L.Space      = Define_Space_Cavity(N,2*pi);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %% Extract Some Cavity Parameters
         
       L_L.In.omega   =  L_L.In.omega_p;
@@ -27,7 +26,7 @@ function L_L = Chi_3_LLE_Normalization(L_L)
         
         L_L.In.H            = sqrt(L_L.In.eta*L_L.In.Finess*L_L.In.P/pi);
         L_L.In.W            = pi/(L_L.In.eta*L_L.In.Finess)*L_L.In.H^2;
-        L_L.In.W_Star        = pi/(L_L.In.eta*L_L.In.Finess)*L_L.In.kappa/L_L.In.gamma;
+        L_L.In.W_Star       = pi/(L_L.In.eta*L_L.In.Finess)*L_L.In.kappa/L_L.In.gamma;
         L_L.In.W_WStar      = L_L.In.W/ L_L.In.W_Star;
         
         if L_L.In.kappa ~= 0
@@ -36,7 +35,7 @@ function L_L = Chi_3_LLE_Normalization(L_L)
             
         else
             
-             coeff                  = L_L.In.D(1);
+            coeff                  = L_L.In.D(1);
              
         end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -10,7 +10,7 @@
         
 
         Check = sum(abs(fun) > Stat.Par.Newton_tol );
-        while Check > 0||abs(fun(end)) >= 5E-16
+        while Check > 0%||abs(fun(end)) >= 5E-16
   %      [Stat.Eq.abs_psi2,Stat.Eq.ind] = max(abs(x0(1:Stat.Space.N)+1i*x0(Stat.Space.N+1:2*Stat.Space.N)).^2);
         
   %          [Stat.Eq.abs_psi2,Stat.Eq.ind] = max(abs(x0(1:Stat.Space.N)+1i*x0(Stat.Space.N+1:2*Stat.Space.N)).^2);

@@ -1,0 +1,72 @@
+    clc;
+    clear all;
+    warning('off')
+%% Define Input Parameters in Physical Units
+
+    R       =  Set_Up_Methods_For_Bloch_Matrices;
+    
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input Parameters for CaF
+
+    R.Stat.In              = Params_SiN_For_Crytal_Paper;%Params_SiN_For_Crytal_Paper;    
+    R.Stat.In.mu_bl        = 5;   
+    R.Stat.Par.CW_num      = 3;
+    
+    W_WStar             = 3;   
+    
+    R.Stat.In.P       = W_WStar*pi/(R.Stat.In.eta*R.Stat.In.D(1)/R.Stat.In.kappa)*R.Stat.In.kappa/R.Stat.In.gamma;    
+    R.CW.In           = R.Stat.In;
+    
+    R.Stat.In.N_mode  = 2^6;
+    R.CW.In.N_mode    = 2^6;
+    
+%% Stationary Coefficeints
+
+    R.Stat.Par.i_max                = 2000;
+    R.Stat.Par.Equation_string      = 'Kerr_Full_Dispersion';    
+    R.Stat.Met.Newton               = @Newton_Manual_bicgstab;
+
+    R.Stat(1).Par.Newton_tol       = 3E-11;  
+    R.Stat(1).Par.Turning          =    0;
+    R.Stat(1).Par.variable         = 'delta';  %%'Pump Power';
+    R.Stat(1).Par.bot_boundary     = -1E8; % bottom boundary for delta to search in normalized units
+    R.Stat(1).Par.top_boundary     =  1E8; % top boundary for delta to search in normalized units
+    
+    R.Stat(1).Par.Stability        = 0;
+    
+    R.Stat(1).Par.Newton_iter      = 200;
+    R.Stat(1).Par.first_step       = 1E-4;
+    R.Stat(1).Par.max_step         = 0.01;
+    R.Stat(1).Par.step_dec         = 0.2;
+    R.Stat(1).Par.step_tol         = 1E-9;
+    R.Stat(1).Par.step_inc         = 1.1;  
+    R.Stat.Par.i_max               = 500;
+
+%%    
+    R.CW.In.delta    = R.CW.In.kappa*2;
+
+    R = Chi3_Stat_StartFromCW(R);
+    R.Stat.Stab                 = Stability_Switcher(R.Stat);
+    
+    R.Stat  = R.Stat.Met.Norm(R.Stat);
+    x_0     = R.Stat.Eq.(R.Stat.Par.variable);
+    
+%%
+    
+function Stat  = ChangeFD(Stat,delta,Fd)    
+
+        Stat.In.kappa     = Stat.In.D(2)/FdVector(ifd);
+        Stat.In.delta     = Stat.In.kappa*delta;
+        Stat.In.P         = Stat*pi/(Stat.In.eta*Stat.In.D(1)/Stat.In.kappa)*Stat.In.kappa/Stat.In.gamma; 
+        
+        x0                   = [real(L_L.Stat(ifd).In.Psi_k),imag(Stat(ifd).In.Psi_k),0]*Stat.Space.N;
+        Stat                 = Stat.Met.Norm(Stat);    
+            
+        [x,eps_f,SolveFlag]  =         Newton_Switcher(x0,Stat);
+        
+        Stat.Sol.Exitflag    =                       SolveFlag;
+        Stat.Sol.eps         =                           eps_f;
+        Stat                 =       Stat.Met.Prop_Gen(x,Stat);    
+end
+    
+    

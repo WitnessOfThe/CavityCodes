@@ -29,7 +29,7 @@
                                         
         g_2(1:L_L.Space.N,1)   = imag(Eq);
         
-        g_3(1:L_L.Space.N,1)   = ifft(1i.*mask.'.*L_L.Space.k.'.*fft( conj(f_psi).*x_psi + f_psi.*conj(x_psi) ) ,'symmetric');
+        g_3(1:L_L.Space.N,1)   = ifft(1i.*mask.'.*L_L.Space.k.'.*fft( f_psi.*conj(x_psi)+x_psi.*conj(f_psi) ) ,'symmetric');
         
         g     = [mask.'.*g_1;mask.'.*g_2;g_3(max_ind)];%
         

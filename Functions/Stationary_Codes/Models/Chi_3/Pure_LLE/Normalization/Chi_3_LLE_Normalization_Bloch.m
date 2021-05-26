@@ -21,10 +21,7 @@ function L_L = Chi_3_LLE_Normalization_Bloch(L_L)
        for i = 2:size(L_L.In.D,2)
             
            L_L.In.omega_int = L_L.In.omega_int+(L_L.Space.k).^i.*L_L.In.D(i)/factorial(i);
-           
-%           L_L.In.omega_int = L_L.In.omega  - L_L.In.omega_p... 
- %           - L_L.In.D(1)*L_L.Space.k;
-    
+               
        end
     
         L_L.In.Finess          = L_L.In.D(1)/L_L.In.kappa;
@@ -64,6 +61,6 @@ function L_L = Chi_3_LLE_Normalization_Bloch(L_L)
         L_L.Eq.kappa_vector =  ones(1,L_L.Space.N)*L_L.Eq.kappa;
         L_L.Eq.mode_range   =  [1:L_L.In.range,(L_L.Space.N-L_L.In.range+1):L_L.Space.N];
         L_L.Eq.L            =   L_L.Eq.omega_j  + L_L.Eq.delta;
-        L_L.Eq.norm         = coeff;
+        L_L.Eq.norm         =  coeff;
         
 end

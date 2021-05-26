@@ -4,16 +4,16 @@ warning('off');
     
 %%
 %     
-%     Res.CW.In         = Params_LiNbd;
-%     Res.CW.In.eps     = 2*pi*23E9; 
-%     Res.CW.In.delta_o = 3.18*Res.CW.In.ko;%-1.785*Res.CW.In.ko
-%     Res.CW.In.W       = 333E-6;%5E5*Res.CW.In.W_Star;%2E4*Res.CW.In.W_Star;
-%     Res.CW.In.N       = 2^8;
+     Res.CW.In         = Params_LiNbd;
+     Res.CW.In.eps     = 2*pi*5E9; 
+     Res.CW.In.delta_o = 12*Res.CW.In.ko;%-1.785*Res.CW.In.ko
+     Res.CW.In.W       = 10E-3;%5E5*Res.CW.In.W_Star;%2E4*Res.CW.In.W_Star;
+     Res.CW.In.N       = 2^8;
 
-     Res.Stat.In.N     = 2^8;
+     Res.Stat.In.N     = 2^6;
      
 %    
-%     Res.CW.In.mu_bl   = 1; %% Control Bloch State_munber
+     Res.CW.In.mu_bl   = 15; %% Control Bloch State_munber
 %     
  %    Br                   = Chi2_Get_CW_Point2Point(Res.CW,-[8*Res.CW.In.ko,0*Res.CW.In.ko],1000);    
   % figure;hold on;
@@ -33,7 +33,7 @@ warning('off');
 %     Res.Stat.Par.step_inc         = 1.1;      
 %     Res.Stat.In.N         = 2^6;
 
-    Res.Stat(1).Par.Newton_tol       = 1E-12;  
+    Res.Stat(1).Par.Newton_tol       = 1.5E-11;  
     Res.Stat(1).Par.Turning          =    0;
     Res.Stat(1).Par.variable         = 'delta_o';  %%'Pump Power';
     Res.Stat(1).Par.bot_boundary     = -1E8; % bottom boundary for delta to search in normalized units
@@ -43,26 +43,26 @@ warning('off');
     
     Res.Stat(1).Par.Newton_iter      = 200;
     Res.Stat(1).Par.first_step       = 1E-2;
-    Res.Stat(1).Par.max_step         = 0.1;
+    Res.Stat(1).Par.max_step         = 1;
     Res.Stat(1).Par.step_dec         = 0.1;
     Res.Stat(1).Par.step_tol         = 1E-9;
     Res.Stat(1).Par.step_inc         = 1.1;  
-    Res.Stat.Par.i_max               = 10000;
+    Res.Stat.Par.i_max               = 400;
         
 %    Res.Stat.In.N                 = 2^7;   
     
 
 %%    
-%     Res = Start_From_CW(Res,0);
+     Res = Start_From_CW(Res,0);
 
-    load('Soliton_25.mat');
-    Res.Stat = Start_From_Temp(ResSave(1).Temp,Res.Stat,1);
+%    load('Soliton_25.mat');
+  %  Res.Stat = Start_From_Temp(ResSave(1).Temp,Res.Stat,1);
  %   Res.Stat = Run_Branch_Universal_Turning(Res.Stat);
 
    
    Res.Stat = Res.Stat.Met.Norm(Res.Stat);
    x_0 = Res.Stat.Eq.(Res.Stat.Par.variable);
-   Stat_1  =   BranchTurning([real(ifft(Res.Stat.Sol.Psi_o)),imag(ifft(Res.Stat.Sol.Psi_o)),real(ifft(Res.Stat.Sol.Psi_e)),imag(ifft(Res.Stat.Sol.Psi_e)),Res.Stat.Sol.V/Res.Stat.Space.N]*Res.Stat.Space.N,x_0,Res.Stat, 1);
+   Stat_1  =   BranchTurning([real(ifft(Res.Stat.Sol.Psi_o)),imag(ifft(Res.Stat.Sol.Psi_o)),real(ifft(Res.Stat.Sol.Psi_e)),imag(ifft(Res.Stat.Sol.Psi_e)),Res.Stat.Sol.V/Res.Stat.Space.N]*Res.Stat.Space.N,x_0,Res.Stat, -1);
 %   Stat_2  =   BranchTurning([real(ifft(Stat.Sol.Psi_o)),imag(ifft(Stat.Sol.Psi_o)),real(ifft(Stat.Sol.Psi_e)),imag(ifft(Stat.Sol.Psi_e))Stat.Sol.V/Stat.Space.N]*Stat.Space.N,x_0,Stat,-1);
 %%
     ii = 997;
@@ -297,7 +297,7 @@ figure;pcolor(Res.Stat(1).Space.phi,deltao ,abs(PsiO));shading interp
   end  
   function Res = Start_From_CW(Res,muh)
   
-    coeff_bound_s = [1E-10,0.32];
+    coeff_bound_s = [1E-10,10];
     Flag = false;
         
     W                 = [1.3E4, Res.CW.In.W/ Res.CW.In.W_Star];

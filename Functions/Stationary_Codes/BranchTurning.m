@@ -81,7 +81,14 @@
                 end
                                 
                 if Logic.TurnTime  == 1 && FlagReduce == 0
-                                        
+                                        Exitflag = 0;
+                            break;          
+      
+                       for it = 1:size(L_L_1,2)
+                         maxvec(it) = real(L_L_1(it).Sol.Psi_k(1));
+                         devec(it) =  L_L_1(it).Eq.(L_L_1(it).Par.variable);
+                      end
+
                      [Slv,L_L_Turn]    = Turning_Regime(Slv,L_L_1(i));
                      
                      if size(L_L_Turn,2) == 1
@@ -118,7 +125,6 @@
                 
                 case 1
                     
-                    L_L_1(i).Sol.Linear_Stability = struct;
                     L_L_1(i).Stab                 = Stability_Switcher(L_L_1(i));
                     
                 case 0
@@ -137,27 +143,29 @@
         
     
         function Stat   = step_eq(Stat,x)
-            
-            Stat.Eq.(Stat.Par.variable) = x;
-            Stat.In.(Stat.Par.variable) = Stat.Eq.norm*Stat.Eq.(Stat.Par.variable);
-            Stat = Stat.Met.Norm(Stat);
-
+            switch Stat.Par.variable
+                case 'Fin_D'
+                            Stat.In.Fin_D     = x;
+                            Stat.In.kappa     = Stat.In.D(2)/Stat.In.Fin_D;
+                            Stat.In.delta     = Stat.In.kappa*Stat.Eq.delta;
+                            Stat.In.P         = Stat.In.W_WStar*pi/(Stat.In.eta*Stat.In.D(1)/Stat.In.kappa)*Stat.In.kappa/Stat.In.gamma; 
+                            Stat = Stat.Met.Norm(Stat);
+                otherwise
+                    
+                    Stat.Eq.(Stat.Par.variable) = x;
+                    Stat.In.(Stat.Par.variable) = Stat.Eq.norm*Stat.Eq.(Stat.Par.variable);
+                    Stat = Stat.Met.Norm(Stat);
+                    
+            end
         end
-        function Stat  = confirm_step_eq(Slv,Stat)
-            
-            Stat.Eq.(Stat.Par.variable) = Stat.Eq.(Stat.Par.variable)+ Slv(end);
-            Stat.In.(Stat.Par.variable) = Stat.Eq.norm*Stat.Eq.(Stat.Par.variable);
-            Stat                        = Stat.Met.Norm(Stat);
-
-        end
-    
+       
         function [Slv,Stat] = Turning_Regime(Slv_Start,Stat)
-            Slv  = [Slv_Start,0];
+            Slv  = [0,Slv_Start(2:end)];
             
             Stat.Met.Equation             = L_L.Met.Equation_Mod;             
             Stat.Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition_Mod;
             Stat.Met.Preconditioner       = L_L.Met.Preconditioner_Mod;            
-            
+         %   Stat.Par.Newton_tol           = 1e-11;
             ii = 1;
             Flag = 0;
             
@@ -166,89 +174,94 @@
                     + Stat.Logic.Dir.y3-Stat.Logic.Dir.y2; 
             else
                                Stat(ii).Eq.PsioMax = Stat(ii).Logic.Dir.y3 ...
-                    + (Stat.Logic.Dir.y2-Stat.Logic.Dir.y1)/10; 
+                    + (Stat.Logic.Dir.y2-Stat.Logic.Dir.y1); 
             end
             
-            smcoeff   = 1;
+            smcoeff   = 1.1;
             
             while ii < 1400
                 
                 ii                    = ii + 1;
                 Stat(ii)              = Stat(ii-1);         
-                
+                Slv_prev = Slv;
                 [Slv,eps_f,Exitflag]  = Newton_Switcher(Slv,Stat(ii)); 
                 [ii,eps_f,Exitflag]
                 
-                Stat(ii)              = confirm_step_eq(Slv,Stat(ii));
                 Stat(ii)              = Stat(ii).Met.Prop_Gen(Slv,Stat(ii));                 
                 
                  if ii == 2
-                    [~,~,Stat(ii).Logic] = L_L.Met.Newton_Fail_Check(Stat(ii-1:ii)...
+                    [~,~,LogicT] = L_L.Met.Newton_Fail_Check(Stat(ii-1:ii)...
                         ,ii,abs(Stat(ii).Eq.(Stat(ii).Par.variable)-Stat(ii-1).Eq.(Stat(ii-1).Par.variable)));
                  end        
                  if ii > 2
-                    [~,~,Stat(ii).Logic] = L_L.Met.Newton_Fail_Check(Stat(ii-2:ii)...
+                    [~,~,LogicT] = L_L.Met.Newton_Fail_Check(Stat(ii-2:ii)...
                         ,ii,abs(Stat(ii).Eq.(Stat(ii).Par.variable)-Stat(ii-1).Eq.(Stat(ii-1).Par.variable)));
                  end
                  
+                 Stat(ii).Logic = LogicT;
                  Stat(ii).Logic.Turning = 1;
                  
                  
-                 if abs(Stat(ii).Logic.Dir.d12) < 0.5 && ii > 10
+                 if abs(Stat(ii).Logic.Dir.d11) < 1 && ii > 10
                      break;
                  end       
                  if Stat(ii).Logic.rCW 
                      break;
                  end                        
-%                  if eps_f > 1
-%                      Stat(ii) = [];
-%                      ii = ii-1;
-%                      break;
-%                  end                        
-                 if eps_f > 1E-8
+                 if eps_f > Stat(1).Par.Newton_tol 
                      Stat(ii) = [];
                      ii = ii-1;
-                     Slv = [real(ifft(Stat(end).Sol.Psi_o)),imag(ifft(Stat(end).Sol.Psi_o)),real(ifft(Stat(end).Sol.Psi_e)),imag(ifft(Stat(end).Sol.Psi_e)),Stat(end).Sol.V/Stat(end).Space.N,0]*Stat(end).Space.N;
+                     Slv = Slv_prev;
                      smcoeff = smcoeff*0.1;
                      if smcoeff <= 1E-10
                           break;
                      end
                  else
                      
-                     smcoeff = smcoeff*1.01;
+                     smcoeff = smcoeff;
                      
                  end
-                 if ii >=2
+                 if ii >=3
                      
-                    absstep = max(abs(ifft(Stat(ii).Sol.Psi_o*Stat(ii).Space.N)).^2) ...
-                        -  max(abs(ifft(Stat(ii-1).Sol.Psi_o*Stat(ii-1).Space.N)).^2);
+                    absstep = Stat(ii).Logic.Dir.y3 - Stat(ii).Logic.Dir.y2;
+                    
                     if absstep == 0 
-                        absstep = 1E-8*sign(Stat(1).Logic.Dir.y2-Stat(1).Logic.Dir.y1);
+                        absstep = 1E-9*sign(Stat(1).Logic.Dir.y2-Stat(1).Logic.Dir.y1);
                     end
-                    Stat(ii).Eq.PsioMax = max(abs(ifft(Stat(ii).Sol.Psi_o*Stat(ii).Space.N)).^2) ...
-                         + absstep*smcoeff;                 
+                    
+                    Stat(ii).Eq.PsioMax = Stat(ii).Logic.Dir.y3  + absstep*smcoeff;                 
+    
+                 end
+                if  ii == 2
                      
-                 else
-                     
-                    Stat(ii).Eq.PsioMax = Stat(ii).Logic.Dir.y3 ...
-                    + (Stat.Logic.Dir.y2-Stat.Logic.Dir.y1)*smcoeff; 
+                    Stat(ii).Eq.PsioMax = Stat(ii).Logic.Dir.y2 ...
+                    + (Stat(ii).Logic.Dir.y2-Stat(ii).Logic.Dir.y1)*smcoeff; 
                 
                  end
+                 if  ii == 1
+                     
+                Stat(ii).Eq.PsioMax = Stat(ii).Logic.Dir.y3 ...
+                    + (Stat.Logic.Dir.y3-Stat.Logic.Dir.y2)*smcoeff; 
+                
+                 end
+                  
             end
  %% if something wrong
+            devec =  [];   
+            maxvec = [];
             for it = 1:size(Stat,2)
-                maxvec(it) = max(abs(ifft(Stat(it).Sol.Psi_o*Stat(end).Space.N)).^2);
+                maxvec(it) = real(Stat(it).Sol.Psi_k(1));
                 devec(it) =  Stat(it).Eq.(Stat(it).Par.variable);
             end
             
             %%
             Stat(end).Met.Equation             = L_L.Met.Equation;             
             Stat(end).Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition;
-            Stat(end).Met.Preconditioner       = L_L.Met.Preconditioner;            
-            Slv(end) = [];
+            Stat(end).Met.Preconditioner       = L_L.Met.Preconditioner;    
             
+            Slv(1)                             = Stat(end).Eq.PsioMax*Stat(end).Space.N;
             [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,Stat(end));
-            Stat(end)              = Stat(end).Met.Prop_Gen(Slv,Stat(end));                 
+            Stat(end)            = Stat(end).Met.Prop_Gen(Slv,Stat(end));                 
 
             
         end
