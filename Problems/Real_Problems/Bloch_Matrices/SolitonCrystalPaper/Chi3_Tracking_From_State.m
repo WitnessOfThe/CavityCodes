@@ -9,7 +9,7 @@
 %% Input Parameters for CaF
 
     R.Stat.In              = Params_SiN_For_Crytal_Paper;%Params_SiN_For_Crytal_Paper;    
-    R.Stat.In.mu_bl        = 5;   
+    R.Stat.In.mu_bl        = 10;   
     R.Stat.Par.CW_num      = 3;
     
     W_WStar             = 3;   
@@ -39,7 +39,7 @@
     R.Stat(1).Par.max_step         = 0.01;
     R.Stat(1).Par.step_dec         = 0.2;
     R.Stat(1).Par.step_tol         = 1E-9;
-    R.Stat(1).Par.step_inc         = 1.1;  
+    R.Stat(1).Par.step_inc         = 1.7;  
     R.Stat.Par.i_max               = 500;
 
 %%    
@@ -51,16 +51,9 @@
     R.Stat  = R.Stat.Met.Norm(R.Stat);
     x_0     = R.Stat.Eq.(R.Stat.Par.variable);
     
-    Stat_1  =   BranchTurning([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k),0]*R.Stat.Space.N,x_0,R.Stat,1);
-    Stat_2  =   BranchTurning([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k),0]*R.Stat.Space.N,x_0,R.Stat,-1);
-
-%%
-     Stat1 = Chi3_Start_FromBlochVector(R.Stat,3);
-%%
- Psi = TransferToResontor(Stat_2(1).Sol.Psi_k,Stat_2(1).In.mu_bl);
-
-%%
-    parfor i =1:1:size(Stat_2,2)
+    Stat_1  =   BranchTurning([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,1);
+    Stat_2  =   BranchTurning([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,-1);
+  parfor i =1:1:size(Stat_2,2)
          Stat_2(i).Stab                 = Stability_Switcher(Stat_2(i));
          i             
     end
@@ -69,6 +62,13 @@
          Stat_1(i).Stab                 = Stability_Switcher(Stat_1(i));
          i
     end
+  
+%%
+     Stat1 = Chi3_Start_FromBlochVector(R.Stat,3);
+%%
+ Psi = TransferToResontor(Stat_2(1).Sol.Psi_k,Stat_2(1).In.mu_bl);
+
+%%
     
 %%
     fstable = figure('Position',[0,0,1400,900]/2,'Color',[1,1,1]);
@@ -117,8 +117,8 @@
     
   %  Plot_Static_Branch(Stat_1,axb);
   %  Plot_Static_Branch(Stat_2,axb);
-   Plot_Static_Branch_Stable(Stat_1,axb);
-   Plot_Static_Branch_Stable(Stat_2,axb);
+   Plot_Static_Branch_Stable(Stat,axb);
+ %  Plot_Static_Branch_Stable(Stat_2,axb);
    axb(3).YLim  = [-0.05,0.05];
    clear f1
    clear axb
@@ -143,7 +143,7 @@
     
        Plot_Static_Field_Spectrums(Stat_1(1),ax(1:2));   
        Plot_Static_Field_Spectrums(Stat_1(end),ax(3:4));   
-       Plot_Static_Field_Spectrums(Stat_2(1),ax(5:6));   
+       Plot_Static_Field_Spectrums(Stat_2(end),ax(5:6));   
    clear f1
    clear ax
    clear Panel
@@ -225,7 +225,7 @@ function  Plot_Static_Branch_Stable(Stat_1,ax)
     ReLambda = NaN(size(Stat_1,2),100);
     for i = 1:size(Stat_1,2)
         
-        Peak(i)       = max(abs(ifft(Stat_1(i).Sol.Psi_k.*Stat_1(i).Space.N)).^2);
+        Peak(i)       = sum(abs(ifft(Stat_1(i).Sol.Psi_k.*Stat_1(i).Space.N)).^2);
         SmParam(i)    = real(Stat_1(i).Sol.V);
         delta(i)      = Stat_1(i).Eq.delta;
         ReLambda(i,:) = maxk(real(reshape(Stat_1(i).Stab.Values.', 1, [])),100);
@@ -235,7 +235,7 @@ function  Plot_Static_Branch_Stable(Stat_1,ax)
         end
     end
     
-    plot(delta,Peak,'Color',[0,0,0],'LineWidth',1,'Parent',ax(1),'LineStyle','--');
+    plot(delta,Peak*Stat_1(1).In.gamma/Stat_1(1).In.kappa,'Color',[0,0,0],'LineWidth',1,'Parent',ax(1),'LineStyle','--');
     plot(delta,SmParam,'Color',[0,0,0],'LineWidth',1,'Parent',ax(2),'LineStyle','--');
     plot(delta,ReLambda.'/Stat_1(i).In.kappa,'Color',[0,0,0],'LineStyle','none','Marker','.','MarkerSize',15,'Parent',ax(3));
     
@@ -246,7 +246,7 @@ function  Plot_Static_Branch_Stable(Stat_1,ax)
     deltaS             = delta;
     deltaS(Stable==0)  = NaN;
     
-    plot(deltaS,PeakS,'Color',[0,0,0],'LineWidth',2,'Parent',ax(1));
+    plot(deltaS,PeakS*Stat_1(1).In.gamma/Stat_1(1).In.kappa,'Color',[0,0,0],'LineWidth',2,'Parent',ax(1));
     plot(deltaS,SmParamS,'Color',[0,0,0],'LineWidth',2,'Parent',ax(2));
     
     

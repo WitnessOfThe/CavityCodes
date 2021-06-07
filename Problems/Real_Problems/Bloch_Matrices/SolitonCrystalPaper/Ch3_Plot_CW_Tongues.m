@@ -14,9 +14,9 @@
           
 %%
 
-    NN                  = 10000;
-    delta_vector        = CW.In.kappa*linspace(-5,11,NN);
-    W_WStar             = 2;
+    NN                  = 1000;
+    delta_vector        = CW.In.kappa*linspace(-6,6,NN);
+    W_WStar             = 8;
     CW.In.P             = W_WStar*pi/(CW.In.eta*CW.In.D(1)/CW.In.kappa)*CW.In.kappa/CW.In.gamma;  
     CW.In.N_mode         = 2^8;
     
@@ -29,8 +29,8 @@
     hold(ax,'on');
     
     plot(R.d/CW.In.kappa,R.g/CW.In.kappa,'LineStyle','none','Marker','.','Parent',ax,'Color','m');
-    
-    for ii =1:89
+% %     
+    for ii =1:30
         
         plot(delta_vector/CW.In.kappa,R.Tongue_b1(:,ii)/CW.In.kappa,'Color',[0,0,0],'LineWidth',0.25,'Parent',ax);
         plot(delta_vector/CW.In.kappa,R.Tongue_b2(:,ii)/CW.In.kappa,'Color',[0.00,0.00,1.00],'LineWidth',0.5,'Parent',ax);
@@ -39,16 +39,27 @@
         plot(delta_vector(idd)/CW.In.kappa,R.Tongue_b2(idd,ii)/CW.In.kappa,'Marker','.','MarkerSize',10,'Parent',ax,'Color',[0,0,1]);        
     end
 %     for ii =1:13
+% 
+%         [~,idd] = min(abs(R.Tongue_b1(:,ii).'/CW.In.kappa - R.g1/CW.In.kappa));
+%         plot(delta_vector(idd)/CW.In.kappa,R.Tongue_b1(idd,ii)/CW.In.kappa,'Marker','.','MarkerSize',10,'Parent',ax,'Color',[0,0,0]);        
+%     end
+%     for ii =14:15
+% 
+%         [~,idd] = min(abs(R.Tongue_b1(:,ii).'/CW.In.kappa - R.g3/CW.In.kappa));
+%         plot(delta_vector(idd)/CW.In.kappa,R.Tongue_b1(idd,ii)/CW.In.kappa,'Marker','.','MarkerSize',10,'Parent',ax,'Color',[0,0,0]);        
+%     end
+    
+%     for ii =1:13
 %         [~,idd] = min(abs(R.Tongue_b1(:,ii).'/CW.In.kappa - R.g1/CW.In.kappa));
 %         plot(delta_vector(idd)/CW.In.kappa,R.Tongue_b1(idd,ii)/CW.In.kappa,'Marker','.','MarkerSize',10,'Parent',ax,'Color',[0,0,0]);
-%     end
-%     for ii =29:60
+% %     end
+%     for ii = 30:60
 %         
 %         plot(delta_vector/CW.In.kappa,R.Tongue_b1(:,ii)/CW.In.kappa,'Color',[0,0,0],'LineWidth',0.25,'Parent',ax);
 %         plot(delta_vector/CW.In.kappa,R.Tongue_b2(:,ii)/CW.In.kappa,'Color',[0,0,0],'LineWidth',0.25,'Parent',ax);
 %         
 %     end
-    
+%     
     ax.YLim = [0,W_WStar*1.1];
     ax.XLim = [min( delta_vector ),max( delta_vector )]/CW.In.kappa;
     
@@ -93,6 +104,8 @@ function Res = Get_CW_Tongues(CW,delta_vector,NN)
     Res.g2(isnan( Res.g2)) = 0;
     Res.g1 = Res.g(1,:);
     Res.g1(isnan( Res.g1)) = 0;
+    Res.g3 = Res.g(3,:);
+    Res.g3(isnan( Res.g3)) = 0;
     
     g1 = Res.g(1,:);
     d1 = delta_vector;

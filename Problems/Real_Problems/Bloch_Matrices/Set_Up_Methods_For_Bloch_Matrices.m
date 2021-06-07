@@ -96,7 +96,7 @@ end
                                               
                    end
 
-                   Logic.TurnTime      = abs(Logic.Dir.d12) > 300 && Logic.Smooth == 0;
+                   Logic.TurnTime      = abs(Logic.Dir.d12) > 100 && Logic.Smooth == 0;
                    
                    if Logic.Dir.d12 == 0
                        Logic.TurnTime     = 1;
