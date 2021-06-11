@@ -16,11 +16,11 @@
     
 %%
     
-    Res.CW.In         = Params_LiNbd;
-    Res.CW.In.eps     = -Res.CW.In.ko*50;%-Res.CW.In.ko*10;
+    Res.CW.In         = Params_AlN;
+    Res.CW.In.eps     = 0;%-Res.CW.In.ko*10;
     Res.CW.In.delta_o = Res.CW.In.ko*9.5;
     Res.CW.In.N       = 2^8;
-    Res.CW.In.W       = 2E5*Res.CW.In.W_Star;
+    Res.CW.In.W       = 200*Res.CW.In.W_Star;
     Res.CW.In.mu_bl   = 1;
     
 %%
@@ -54,7 +54,7 @@
   %%
     
     Res.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
-    Res.Temp.Par.dt            = 1E-5;
+    Res.Temp.Par.dt            = 1E-4;
     Res.Temp.Par.s_t           = 0.01;
     Res.Temp.Par.T             = 100;
     
@@ -63,8 +63,8 @@
     Runge                      = Define_Runge_Coeff(Res.Temp.Par);
     
  %%
-    delta_vector      = linspace(-17.8,16,6);
-    delta_stary       = -15*ones(1,length(delta_vector));
+    delta_vector      = linspace(2.412,2.644,12);
+    delta_stary       = 0*ones(1,length(delta_vector));
     NN = length(delta_vector);
     Power_vector      = ones(1,NN)*Res.CW.In.W/Res.CW.In.W_Star;
     
@@ -139,14 +139,9 @@
     
 %   Res.Stat.Stab          = Stability_Switcher(Res.Stat);
 %%
-        Plot_Res_temp(ResSave(1));   
+        Plot_Res_temp(ResSave(102));   
 %%
-    for i=1:size(ResSave,2)
-        delta(i)    = ResSave(i).Temp.Eq.delta_o;
-        PowerF(i)= sum(abs(ResSave(i).Temp.Sol.Psio(end-1,2:end)).^2);
-    end
-figure;
-plot( PowerF,'LineStyle','none','Marker','.')
+    for i=1:size
 %% гауссов импульс умножить на кусок пси потом фурье (фу) (функция вигнера xfrog) 
 
 %%
@@ -180,9 +175,9 @@ end
 
 function Plot_Res_temp(ResSave)
 
-    indmu = 1;
+    indmu = 23;
     indt  = 1;
-    ind_t = [size(ResSave.Temp.Sol.Psio,1)/2+1:1:size(ResSave.Temp.Sol.Psio,1)];
+    ind_t = [1:1:size(ResSave.Temp.Sol.Psio,1)];
     Nt    = size(ind_t,2);
     T     = ( ResSave(indt).Temp.Sol.t(ind_t(end)) - ResSave(indt).Temp.Sol.t(ind_t(1)) );
     dt    =   ResSave(indt).Temp.Sol.t(ind_t(end)) - ResSave(indt).Temp.Sol.t(ind_t(end-1));
@@ -217,8 +212,8 @@ function Plot_Res_temp(ResSave)
     ax(7) = nexttile(Panel,8,[1,1]);hold(ax(7),'on');  
     
   %  plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psie(1:end-1,:)).^2,2),'Parent',ax(1),'Color',[0,1,0]);
-  %  plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psio(1:end-1,2:end)).^2,2),'Parent',ax(1),'Color',[1,0,0]);
-    plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psie(1:end-1,1)).^2,2),'Parent',ax(1),'Color',[0,1,0]);
+    plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psio(1:end-1,indmu)).^2,2),'Parent',ax(1),'Color',[1,0,0]);
+    plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psie(1:end-1,indmu)).^2,2),'Parent',ax(1),'Color',[0,1,0]);
 
    % ylim(ax(1),[0,sum(abs(ResSave(indt).Temp.Sol.Psio(end-1,:)).^2*1.4,2)])
     
@@ -258,23 +253,10 @@ function Plot_Res_temp(ResSave)
     
     caxis(ax(6),[-100,4]);
     caxis(ax(7),[-100,4]);
-    
-   ff= figure('Position',[0,0,1000,800]/2,'Color',[1,1,1]);
-    
-   Panel1 = tiledlayout(1,2,'TileSpacing','none','Padding','none','Parent',ff);   
-   axx(1) = nexttile(Panel1,1,[1,1]);hold(axx(1),'on');  
-   axx(2) = nexttile(Panel1,2,[1,1]);hold(axx(2),'on');  
-   
-   pcolor(ResSave(indt).Temp.Space.phi,ResSave(indt).Temp.Sol.t(ind_t),abs(PsiO(ind_t,:)).^2,'Parent',axx(1));
-   pcolor(ResSave(indt).Temp.Space.phi,ResSave(indt).Temp.Sol.t(ind_t),abs(PsiE(ind_t,:)).^2,'Parent',axx(2));
-   
+   figure;pcolor(ResSave(indt).Temp.Space.phi,ResSave(indt).Temp.Sol.t(ind_t),abs(PsiO(ind_t,:)).^2);shading interp;
    for i = 1:size(ax,2)
       axes_Style(ax(i));
       shading(ax(i),'flat');
-   end
-   for i = 1:size(axx,2)
-      axes_Style(axx(i));
-      shading(axx(i),'interp');
    end
 
 end    

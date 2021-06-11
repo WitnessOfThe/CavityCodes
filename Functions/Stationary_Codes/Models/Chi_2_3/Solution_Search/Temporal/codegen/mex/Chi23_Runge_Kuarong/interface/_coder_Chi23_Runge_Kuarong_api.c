@@ -18,7 +18,7 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-static emlrtRTEInfo x_emlrtRTEI = { 1, /* lineNo */
+static emlrtRTEInfo j_emlrtRTEI = { 1, /* lineNo */
   1,                                   /* colNo */
   "_coder_Chi23_Runge_Kuarong_api",    /* fName */
   ""                                   /* pName */
@@ -656,7 +656,7 @@ void Chi23_Runge_Kuarong_api(const mxArray * const prhs[2], const mxArray *plhs
   struct6_T Sol;
   st.tls = emlrtRootTLSGlobal;
   emlrtHeapReferenceStackEnterFcnR2012b(&st);
-  emxInitStruct_struct6_T(&st, &Sol, &x_emlrtRTEI, true);
+  emxInitStruct_struct6_T(&st, &Sol, &j_emlrtRTEI, true);
 
   /* Marshall function inputs */
   emlrt_marshallIn(&st, emlrtAliasP(prhs[0]), "Temp", &Temp);

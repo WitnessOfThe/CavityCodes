@@ -74,17 +74,35 @@
 %     end
 %%
 
-load('60_Crystal');
 %%
 for i = 1:88
     Stat = Rm(i).Stat;
-    save(strcat('C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Real_Problems\Bloch_Matrices\SolitonCrystalPaper\Crystals\Starters\',num2str(i)),'Stat');
+    save(strcat('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/Starters/',num2str(i)),'Stat');
     i
 end
 %%
-    parfor i = 1:88
-        ChangeCrystal(i)
+    ii = [1,73];
+    for i =  1:80
+       warning('off');
+        tic
+        S(i) =  ReadCrystal(i);
+        toc
+        i
     end
+%%
+
+%%
+for i =1:88
+    Cr{i} = matfile(strcat('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/Branches/',num2str(i)));
+end
+%%
+       load(strcat('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/',num2str(13)));
+%%       
+       parfor ii = 1:size(Stat,2)
+           ChangeDeltaFromFDCrystal(Stat(ii),13,ii)
+       end
+%%
+    ChangeCrystal(13)
 %%
     f1 = figure('Position',[0,0,700,300],'Color',[1,1,1]);
     
@@ -131,24 +149,90 @@ end
     clear ax
     clear Panel   
 %%
+    ChangeCrystal(13)
+%%
+function S = ReadCrystal(i)
+
+    load(strcat('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/Branches13DeltaRemSS/',num2str(i)));
+    
+    S.Stable    = zeros(1,size(Stat,2));
+    S.PeakPower = zeros(1,size(Stat,2));
+    S.FD        = zeros(1,size(Stat,2));
+    
+       parfor ist =1:size(Stat,2)
+           tic
+           Stat(ist).Stab                 = Stability_Switcher( Stat(ist));
+           toc
+       end
+       save(strcat('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/Branches13DeltaRemSS/',num2str(i)),'Stat');
+
+    for is = 1:size(Stat,2)
+        S.PeakPower(is) = max(abs(ifft(Stat(is).Sol.Psi_k*Stat(is).Space.N)).^2);
+        
+        S.FD(is)        = Stat(is).In.Fin_D;
+        S.delta(is)     = Stat(is).Eq.delta;
+        
+        [ReL]             = max(max(real(Stat(is).Stab.Values)));
+        [indRelR,indRelC] = find(real(Stat(is).Stab.Values) == ReL);
+        if ReL > 1
+                   S.Stable(is) =  Stat(is).Stab.k(indRelR);
+
+%              if abs(imag(Stat(is).Stab.Values(indRel))) > 1
+%                  S.Stable(is)    = 1;
+%              else
+%                  S.Stable(is)    = 2;
+%              end
+        else
+             S.Stable(is)    = 0;
+        end
+    end
+
+end
 function ChangeCrystal(i)
        warning('off');
-       load(strcat('C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Real_Problems\Bloch_Matrices\SolitonCrystalPaper\Crystals\Starters\',num2str(i)));
+%       load(strcat('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/Starters/',num2str(i)));
+   %    Stat(1).In.delta       = 1.95*Stat.In.kappa;
        
+load('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/Branches13DeltaRem/140.mat')
+Stat = Stat(320);
+       
+       Stat(1).Par.variable       = 'Fin_D';
        Stat(1).Par.first_step       = 1E-6;
-       Stat(1).Par.i_max            = 1000;
+       Stat(1).Par.max_step         = 2E-4;
+       Stat(1).Par.i_max            = 3000;
        Stat(1).Par.step_tol         = 1E-9;
        Stat(1).Par.step_inc         = 1.1;  
-       
+       Stat(1).Par.Newton_iter      = 100;  
+       Stat(1).Par.Newton_tol      = 1E-12;  
+       Stat.Sol.Stab            = [];
+       Stat =Stat(1).Met.Norm(Stat);
        x_0      = Stat.In.Fin_D;
-       Stat  =   BranchTurning([real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k)]*Stat.Space.N,x_0,Stat,1);
+       Stat  =   BranchTurning([real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k)]*Stat.Space.N,x_0,Stat,-1);
        
-       for ist =1:size(Stat,2)
-           
+       parfor ist =1:size(Stat,2)
+           tic
           Stat(ist).Stab                 = Stability_Switcher( Stat(ist));
-           
+           toc
        end
-       save(strcat('C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Real_Problems\Bloch_Matrices\SolitonCrystalPaper\Crystals\Branches\',num2str(i)),'Stat');
+%       save(strcat('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/',num2str(i)),'Stat');
+       save(strcat('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/',num2str(i)),'/','Stat');
+
+end
+function ChangeDeltaFromFDCrystal(Stat,i,ii)
+       warning('off');
+       
+       Stat(1).Par.variable       = 'delta';
+       Stat(1).Par.first_step       = 1E-3;
+       Stat(1).Par.max_step         = 0.01;
+       Stat(1).Par.i_max            = 3000;
+       Stat(1).Par.step_tol         = 1E-5;
+       Stat(1).Par.step_inc         = 1.1;  
+       Stat(1).Par.Stability        = 0;
+%       Stat.Sol.Stab                = [];
+%       x_0      = Stat.Eq.delta;
+ %      Stat  =   BranchTurning([real(Stat.Sol.Psi_k),imag(Stat.Sol.Psi_k)]*Stat.Space.N,x_0,Stat,1);
+       Stat = Run_Branch_Universal_Turning(Stat);
+       save(strcat('/home/dp710/GitHub/CavityCodes/Problems/Real_Problems/Bloch_Matrices/SolitonCrystalPaper/Crystals/Branches13DeltaRemSS/',num2str(ii)),'Stat');
 
 end
  function axes_Style(ax)

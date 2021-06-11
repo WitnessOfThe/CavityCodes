@@ -41,14 +41,14 @@
             
             Sol.t(  ind_s )   = Temp.Par.dt*ni;
 
-            if 10*log10(sum(abs(Sol.Psio(ind_s,2:end)).^2)) <= -100 && (mod(ind_s,2) == 0)
-
-                    Sol.Psio(ind_s+1:end,:) = [];
-                    Sol.Psie(ind_s+1:end,:) = [];
-                    Sol.t(ind_s+1:end)     = [];                
-                    break;
-
-            end
+%             if 10*log10(sum(abs(Sol.Psio(ind_s,2:end)).^2)) <= -100 && (mod(ind_s,2) == 0)
+% 
+%                     Sol.Psio(ind_s+1:end,:) = [];
+%                     Sol.Psie(ind_s+1:end,:) = [];
+%                     Sol.t(ind_s+1:end)     = [];                
+%                     break;
+% 
+%             end
         
        end
        

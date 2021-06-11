@@ -5,39 +5,14 @@
     
 %%
     
-    Res.CW.In         = Params_LiNbd;
+    Res.CW.In         = Params_AlN;
     Res.CW.In.delta_o = 0;
     Res.CW.In.N       = 150;
     Res.CW.In.W       = 7000*Res.CW.In.W_Star;
-%%
-    Res.CW.Par.Equation_string  = 'Chi23_CW';
-    Res.CW.Met.Equation         = @Chi23_CW;
-    Res.CW.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;    
-    Res.CW.Met.Newton           = @fsolve;%'fsolve'
-    Res.CW.Par.Change_Space     = 0;
+    NNP               = 1000/2;%
+    NND               = 1000/2;%
     
-    Res.CW.Par.variable         = 'delta_o';  %%'Pump Power';
-    Res.CW.Par.first_step       = 0.05; % step for delta measured in delta/kappa
-    Res.CW.Par.step_tol         = 0.001;
-    Res.CW.Par.step_inc         = 0.00;
-    Res.CW.Par.step_dec         = 0.5;
-
-    Res.CW.Par.bot_boundary     = -40; % bottom boundary for delta to search
-    Res.CW.Par.top_boundary     =  40; % top boundary for delta to search
-    Res.CW.Par.Sol_Re_Sign      = '-';
-    Res.CW.Par.Stability        = false;
-    Res.CW.Par.Newton_iter      = 30;      
-    Res.CW.Par.Newton_tol       = 1E-10;  
-    Res.CW.Par.i_max            = 1000;
     
-    Res.CW.Par.fsolveoptions     = optimoptions('fsolve','CheckGradients',...
-    false,'Display','none','UseParallel',false,'SpecifyObjectiveGradient',false,...
-    'Algorithm','trust-region-dogleg','FunValCheck','on',...
-    'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
-
-%%
-    NNP                  = 72*20;%
-    NND                  = 72*20;%*4
 %    epsilon_vector      = 2*pi*[-1E9,-10E9,-5E9,-7E9,-9E9,-10E9,-15E9,-20E9];   
  %   omega_max           = [30,100,100,150,150,150,150,150];
   %  delta_min           = [70,80,80,120,1220,120,120,120];
@@ -53,45 +28,42 @@
 %     delta_min           = [-40,-20,-20,-20];
 %     delta_max           = [20,10,10,10];
 %     Power_max_vect      = [10E7];
-    epsilon_vector      = 2*pi*[25E9];   
-    omega_max           = 1.5;
-    delta_min           = [-15];
-    delta_max           = [20];
-    Power_max_vect      = [10E7];
+
+    kvector             = [0:50];
+    epsilon_vector      = -120;   
+    omega_max           =  40*2;
+    delta_min           = -40;
+    delta_max           =  90;
+    Save_Omega          = GetMiOmegaPlane(Res,epsilon_vector,omega_max,delta_max,delta_min,kvector,NNP,NND);
+%%
+%     Res.CW.Par.Equation_string  = 'Chi23_CW';
+%     Res.CW.Met.Equation         = @Chi23_CW;
+%     Res.CW.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;    
+%     Res.CW.Met.Newton           = @fsolve;%'fsolve'
+%     Res.CW.Par.Change_Space     = 0;
+%     
+%     Res.CW.Par.variable         = 'delta_o';  %%'Pump Power';
+%     Res.CW.Par.first_step       = 0.05; % step for delta measured in delta/kappa
+%     Res.CW.Par.step_tol         = 0.001;
+%     Res.CW.Par.step_inc         = 0.00;
+%     Res.CW.Par.step_dec         = 0.5;
+% 
+%     Res.CW.Par.bot_boundary     = -40; % bottom boundary for delta to search
+%     Res.CW.Par.top_boundary     =  40; % top boundary for delta to search
+%     Res.CW.Par.Sol_Re_Sign      = '-';
+%     Res.CW.Par.Stability        = false;
+%     Res.CW.Par.Newton_iter      = 30;      
+%     Res.CW.Par.Newton_tol       = 1E-10;  
+%     Res.CW.Par.i_max            = 1000;
+%     
+%     Res.CW.Par.fsolveoptions     = optimoptions('fsolve','CheckGradients',...
+%     false,'Display','none','UseParallel',false,'SpecifyObjectiveGradient',false,...
+%     'Algorithm','trust-region-dogleg','FunValCheck','on',...
+%     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
+
+%%
 
 %% Omega_Scan
- tic
-    for ii = 1:1
-        
-        Res.CW.In.eps       = epsilon_vector(ii);
-        Omega_Vector        = linspace(0,omega_max(ii),NNP)*2*pi*1E9;
-        delta_vector        = linspace(delta_max(ii),delta_min(ii),NND)*Res.CW(1).In.ko;
-        
-        parfor i_p = 1:NNP
-            
-            for i_d = 1:NND
-
-                Res_S                   = Res;
-                Res_S.CW.In.delta_o     = delta_vector(i_d);
-                Res_S.CW.Sol.Omega      = Omega_Vector(i_p);         
-                [Mumber(i_p,i_d),k(i_p,i_d).k, ~,~] =  Evaluate_MI_Omega(Res_S);
-                %
-            end  
-            
-        end
-%        ii
-        
-        Save_Omega(ii).Res                  = Res;        
-        Save_Omega(ii).delta_vector         = delta_vector; 
-        Save_Omega(ii).W_Vector             = Omega_Vector;
-        Save_Omega(ii).Mumber               = Mumber;
-        Save_Omega(ii).k                    = k;
- %       Save_Omega(ii).lambda_vec           = lambda;
- %       Save_Omega(ii).k_vec                = k_vec;
-  %      Save_Omega(ii).Vector_vec           = Vectors;
-        
-    end
-  toc  
   save(strcat('Mi_Omega_Turing','eps=p25m25','Delta=m100p100'),'Save_Omega');%,'_eps=',num2str(Res.CW.In.eps/2/pi)
 %%
     clear delta_vector W_Vector
@@ -241,38 +213,88 @@ tic
 
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-function [Mumber,k,value,vectors] =  Evaluate_MI_Omega(Res)
-    
-    Res.CW            = Res.CW.Met.Norm(Res.CW);
-    Res.CW.Stab       = Chi23_MI(Res.CW);
-    [~,ind]           = max(abs(Res.CW.Sol.Omega));
-    Mumber            = sum(sum(uniquetol(real(Res.CW.Stab(ind).Value))>1E-6));
-    
-    
-    if Mumber > 0
-        
-        [ir,ic]         = find(Res.CW.Stab(ind).Value > 0);  
-        
-        k               = Res.CW.Space.k(ir);
-        k               = k(k>=0);               
-        vectors         = zeros(4,length(ir));
-        value           = zeros(1,length(ir));
-        
-        for iv = 1:length(ir)
+function Save_Omega = GetMiOmegaPlane(Res,epsilon_vector,omega_max,delta_max,delta_min,kvector,NNP,NND)
 
-            value(iv)     = Res.CW.Stab(ind).Value(ir(iv),ic(iv));
-            vectors(:,iv) = Res.CW.Stab(ind).Vector(ir(iv)).V(:,ic(iv));
+    for ii = 1:size(epsilon_vector,2)
+        
+        Res.CW.In.eps       = epsilon_vector(ii)*Res.CW.In.ko;
+        Omega_Vector        = linspace(0,omega_max(ii),NNP)*Res.CW.In.Omega_Star;
+        delta_vector        = linspace(delta_max(ii),delta_min(ii),NND)*Res.CW(1).In.ko;
 
+        Save_Omega(ii).epsilon = epsilon_vector(ii);
+        Save_Omega(ii).delta   = delta_vector;
+        Save_Omega(ii).Omega   = Omega_Vector;
+        
+        for ik =1:size(kvector,2)
+            
+            CW              = Res.CW;
+            CW.In.kMI       = kvector(ik); 
+            Mumber          = zeros(NNP,NND);
+            ReLam           = zeros(NNP,NND);
+            
+            parfor i_p = 1:NNP
+                CWW = CW;
+                for i_d = 1:NND
+
+                    CWW.In.delta_o     = delta_vector(i_d);
+                    CWW.Sol.Omega      = Omega_Vector(i_p);      
+                    
+                    [Mumber(i_p,i_d),ReLam(i_p,i_d), ~] =  Evaluate_MI_Omega(CWW);
+                    %
+                end  
+
+            end
+            
+            kMI(ik).Res                  = Res;        
+            kMI(ik).Mumber               = Mumber;
+            
         end
         
-        
-    else
-                
-        value     = NaN;
-        k         = NaN;        
-        vectors   = NaN;
+        Save_Omega(ii).kMI = kMI;
         
     end
+
+end
+function [Mumber,ReLam,ImLam] =  Evaluate_MI_Omega(CW)
+    
+    CW            = CW.Met.Norm(CW);
+    CW.Stab       = Chi23_MI(CW);
+%    [~,1]       = max(abs(CW.Sol.Omega));
+    ReLam         = max(real(CW.Stab.Value));
+    ImLam         = uniquetol(imag(CW.Stab.Value));
+    
+    if ReLam > 1E-6
+        Mumber = 1;
+    else
+        Mumber = 0;
+    end
+%    Mumber        = sum(sum(uniquetol(real(Res.CW.Stab(ind).Value))>1E-6));
+    
+    
+%     if Mumber > 0
+%         
+%         [ir,ic]         = find(Res.CW.Stab(ind).Value > 0);  
+%         
+%         k               = Res.CW.Space.k(ir);
+%         k               = k(k>=0);               
+%         vectors         = zeros(4,length(ir));
+%         value           = zeros(1,length(ir));
+%         
+%         for iv = 1:length(ir)
+% 
+%             value(iv)     = Res.CW.Stab(ind).Value(ir(iv),ic(iv));
+%             vectors(:,iv) = Res.CW.Stab(ind).Vector(ir(iv)).V(:,ic(iv));
+% 
+%         end
+%         
+%         
+%     else
+%                 
+%         value     = NaN;
+%         k         = NaN;        
+%         vectors   = NaN;
+%         
+%     end
 end
     
 

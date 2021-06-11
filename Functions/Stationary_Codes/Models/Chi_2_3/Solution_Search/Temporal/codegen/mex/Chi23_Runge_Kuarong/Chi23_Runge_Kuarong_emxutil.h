@@ -22,37 +22,20 @@
 #include <string.h>
 
 /* Function Declarations */
-void emxEnsureCapacity_boolean_T(const emlrtStack *sp, emxArray_boolean_T
-  *emxArray, int32_T oldNumel, const emlrtRTEInfo *srcLocation);
 void emxEnsureCapacity_creal_T(const emlrtStack *sp, emxArray_creal_T *emxArray,
   int32_T oldNumel, const emlrtRTEInfo *srcLocation);
 void emxEnsureCapacity_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T
   *emxArray, int32_T oldNumel, const emlrtRTEInfo *srcLocation);
-void emxEnsureCapacity_int32_T(const emlrtStack *sp, emxArray_int32_T *emxArray,
-  int32_T oldNumel, const emlrtRTEInfo *srcLocation);
-void emxEnsureCapacity_real_T(const emlrtStack *sp, emxArray_real_T *emxArray,
-  int32_T oldNumel, const emlrtRTEInfo *srcLocation);
 void emxFreeStruct_struct6_T(struct6_T *pStruct);
-void emxFree_boolean_T(emxArray_boolean_T **pEmxArray);
 void emxFree_creal_T(emxArray_creal_T **pEmxArray);
 void emxFree_cuint8_T(emxArray_cuint8_T **pEmxArray);
-void emxFree_int32_T(emxArray_int32_T **pEmxArray);
-void emxFree_real_T(emxArray_real_T **pEmxArray);
 void emxInitStruct_struct6_T(const emlrtStack *sp, struct6_T *pStruct, const
   emlrtRTEInfo *srcLocation, boolean_T doPush);
-void emxInit_boolean_T(const emlrtStack *sp, emxArray_boolean_T **pEmxArray,
-  int32_T numDimensions, const emlrtRTEInfo *srcLocation, boolean_T doPush);
 void emxInit_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray, int32_T
                      numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
                      doPush);
 void emxInit_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T **pEmxArray,
                       int32_T numDimensions, const emlrtRTEInfo *srcLocation,
                       boolean_T doPush);
-void emxInit_int32_T(const emlrtStack *sp, emxArray_int32_T **pEmxArray, int32_T
-                     numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
-                     doPush);
-void emxInit_real_T(const emlrtStack *sp, emxArray_real_T **pEmxArray, int32_T
-                    numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
-                    doPush);
 
 /* End of code generation (Chi23_Runge_Kuarong_emxutil.h) */
