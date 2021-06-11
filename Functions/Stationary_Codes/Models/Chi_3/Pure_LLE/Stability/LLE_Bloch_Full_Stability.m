@@ -1,8 +1,8 @@
 function Stab = LLE_Bloch_Full_Stability(Stat)
     if Stat.In.mu_bl ~= 1
-       Stab.k      = [-floor(Stat.In.mu_bl):1:floor(Stat.In.mu_bl)];    
+%        Stab.k      = [-floor(Stat.In.mu_bl):1:floor(Stat.In.mu_bl)];    
 
-%        Stab.k      = [0:1:floor(Stat.In.mu_bl)/2];    
+        Stab.k      = [0:1:floor(Stat.In.mu_bl)/2];    
         Stab.Values = zeros(size(Stab.k,2),2*Stat.Space.N);
     else
         Stab.k      = 0;    

@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * fft.h
+ * FFTWApi.h
  *
- * Code generation for function 'fft'
+ * Code generation for function 'FFTWApi'
  *
  */
 
-#ifndef FFT_H
-#define FFT_H
+#ifndef FFTWAPI_H
+#define FFTWAPI_H
 
 /* Include files */
 #include <math.h>
@@ -24,9 +24,9 @@
 #include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void c_fft(const creal_T x[256], creal_T y[256]);
-extern void fft(const creal_T x[256], creal_T y[256]);
+extern void FFTWApi_fft1d(const creal_T data[256], boolean_T isInverse, creal_T
+  y[256]);
 
 #endif
 
-/* End of code generation (fft.h) */
+/* End of code generation (FFTWApi.h) */

@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * fft.h
+ * nullAssignment.h
  *
- * Code generation for function 'fft'
+ * Code generation for function 'nullAssignment'
  *
  */
 
-#ifndef FFT_H
-#define FFT_H
+#ifndef NULLASSIGNMENT_H
+#define NULLASSIGNMENT_H
 
 /* Include files */
 #include <math.h>
@@ -24,9 +24,11 @@
 #include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void c_fft(const creal_T x[256], creal_T y[256]);
-extern void fft(const creal_T x[256], creal_T y[256]);
+extern void b_nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
+  emxArray_int32_T *idx);
+extern void nullAssignment(const emlrtStack *sp, emxArray_creal_T *x, const
+  emxArray_int32_T *idx);
 
 #endif
 
-/* End of code generation (fft.h) */
+/* End of code generation (nullAssignment.h) */

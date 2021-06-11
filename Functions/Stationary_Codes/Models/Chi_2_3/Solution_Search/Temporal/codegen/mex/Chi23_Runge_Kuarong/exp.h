@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * fft.h
+ * exp.h
  *
- * Code generation for function 'fft'
+ * Code generation for function 'exp'
  *
  */
 
-#ifndef FFT_H
-#define FFT_H
+#ifndef EXP_H
+#define EXP_H
 
 /* Include files */
 #include <math.h>
@@ -24,9 +24,8 @@
 #include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void c_fft(const creal_T x[256], creal_T y[256]);
-extern void fft(const creal_T x[256], creal_T y[256]);
+extern void b_exp(creal_T x[512]);
 
 #endif
 
-/* End of code generation (fft.h) */
+/* End of code generation (exp.h) */

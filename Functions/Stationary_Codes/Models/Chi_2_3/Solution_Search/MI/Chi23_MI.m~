@@ -6,7 +6,7 @@ function Stab = Chi23_MI(CW)
         
         if ~isnan(CW.Sol.Omega(j)) 
             
-            for i = 1:size(CW.In.kMI,2)
+            for i = 1:CW.Space.N
                 
                 Stab(j).Vector(i).V = zeros(4,4);
                 [tt_vect,tt_val] = eig(CW.Met.MI_Matrix(CW,i,j));
@@ -17,7 +17,7 @@ function Stab = Chi23_MI(CW)
             end                
         else
            
-           Stab(j).Value    = sparse(size(CW.In.kMI,2),2);
+           Stab(j).Value    = sparse(CW.Space.N,2);
            Stab(j).Vector   = NaN;
            
         end

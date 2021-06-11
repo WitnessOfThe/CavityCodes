@@ -5,36 +5,33 @@
     
 %%
     
-    Res.CW.In         = Params_AlN;
+    Res.CW.In         = Params_LiNbd;
     Res.CW.In.delta_o = 0;
     Res.CW.In.N       = 150;
     Res.CW.In.W       = 7000*Res.CW.In.W_Star;
-    NNP               = 1000/2;%
-    NND               = 1000/2;%
+    
+    NNP               = 750;%
+    NND               = 750;%
     
     
-%    epsilon_vector      = 2*pi*[-1E9,-10E9,-5E9,-7E9,-9E9,-10E9,-15E9,-20E9];   
- %   omega_max           = [30,100,100,150,150,150,150,150];
-  %  delta_min           = [70,80,80,120,1220,120,120,120];
-   % delta_max           = [-70,-80,-80,-120,-120,-120,-120,-120];
-    %Power_max_vect      = [1E7,1E7,3E7,6E7,8E7,15E7,20E7,30E7];
-%     epsilon_vector      = 2*pi*[1E9,2E9,3E9,4E9,5E9,10E9,20E9];   
-%     omega_max           = [150,150,150,150,150,150,150];
-%     delta_min           = [-150,-150,-150,-150,-150,-150,-150];
-%     delta_max           = [150,150,150,150,150,150,150,150];
-%     Power_max_vect      = [5E7,5E7,5E7,5E7,5E7,5E7,5E7];
-%     epsilon_vector      = 2*pi*[5E9,100E9,150E9,200E9]*10;   
-%     omega_max           = [320,320,320,320]*3;    
-%     delta_min           = [-40,-20,-20,-20];
-%     delta_max           = [20,10,10,10];
-%     Power_max_vect      = [10E7];
-
-    kvector             = [0:50];
-    epsilon_vector      = -120;   
-    omega_max           =  40*2;
-    delta_min           = -40;
-    delta_max           =  90;
-    Save_Omega          = GetMiOmegaPlane(Res,epsilon_vector,omega_max,delta_max,delta_min,kvector,NNP,NND);
+    kvector             = [0:100];
+    epsilon_vector      =  [-50,0,5,50]*Res.CW.In.ko;   
+    
+    omega_max           =  50;
+    g_max               =  50;
+    
+    delta_min           = -50;
+    delta_max           =  50;
+    for i =1:4
+    tic
+    Save_Omega(i)          = GetMiGPlane(Res,epsilon_vector(i),g_max,delta_max,delta_min,kvector,NNP,NND);
+    toc
+    end    
+%     for i =1:20
+%     tic
+%     Save_Omega(i)          = GetMiOmegaPlane(Res,epsilon_vector(i),omega_max,delta_max,delta_min,kvector,NNP,NND);
+%     toc
+%     end
 %%
 %     Res.CW.Par.Equation_string  = 'Chi23_CW';
 %     Res.CW.Met.Equation         = @Chi23_CW;
@@ -217,7 +214,7 @@ function Save_Omega = GetMiOmegaPlane(Res,epsilon_vector,omega_max,delta_max,del
 
     for ii = 1:size(epsilon_vector,2)
         
-        Res.CW.In.eps       = epsilon_vector(ii)*Res.CW.In.ko;
+        Res.CW.In.eps       = epsilon_vector(ii);
         Omega_Vector        = linspace(0,omega_max(ii),NNP)*Res.CW.In.Omega_Star;
         delta_vector        = linspace(delta_max(ii),delta_min(ii),NND)*Res.CW(1).In.ko;
 
@@ -255,13 +252,59 @@ function Save_Omega = GetMiOmegaPlane(Res,epsilon_vector,omega_max,delta_max,del
     end
 
 end
-function [Mumber,ReLam,ImLam] =  Evaluate_MI_Omega(CW)
+function Save_Omega = GetMiGPlane(Res,epsilon_vector,g_max,delta_max,delta_min,kvector,NNP,NND)
+
+    for ii = 1:size(epsilon_vector,2)
+        
+        Res.CW.In.eps       = epsilon_vector(ii);
+        delta_vector        = linspace(delta_max(ii),delta_min(ii),NND)*Res.CW(1).In.ko;
+        g_vector            = linspace(0.001,g_max(ii),NNP)*Res.CW(1).In.ko;
+        
+        Save_Omega(ii).epsilon = epsilon_vector(ii);
+        Save_Omega(ii).delta   = delta_vector;
+        Save_Omega(ii).G       = g_vector;
+        
+        for ik =1:size(kvector,2)
+            
+            CW              = Res.CW;
+            CW.In.kMI       = kvector(ik); 
+            Mumber          = zeros(NNP,NND);
+            ReLam           = zeros(NNP,NND);
+            
+            parfor i_p = 1:NNP
+                CWW = CW;
+                for i_d = 1:NND
+
+                    CWW.In.delta_o     = delta_vector(i_d);
+                    CWW            = CWW.Met.Norm(CWW);
+                    
+                    CWW.Sol.Omega      = abs(sqrt(abs(CWW.In.Omega_s)*g_vector(i_p)));      
+                    
+                    [Mumber(i_p,i_d),ReMax(i_p,i_d)] =  Evaluate_MI_Omega(CWW);
+                    %
+                end  
+
+            end
+            
+            kMI(ik).Res                  = Res;        
+            kMI(ik).Mumber               = Mumber;
+            kMI(ik).ReMax               = ReMax;
+            
+        end
+        
+        Save_Omega(ii).kMI = kMI;
+        
+    end
+
+end
+function [Mumber,Lam] =  Evaluate_MI_Omega(CW)
     
     CW            = CW.Met.Norm(CW);
     CW.Stab       = Chi23_MI(CW);
 %    [~,1]       = max(abs(CW.Sol.Omega));
-    ReLam         = max(real(CW.Stab.Value));
-    ImLam         = uniquetol(imag(CW.Stab.Value));
+    [ReLam]         = max(real(CW.Stab.Value),[],'all');
+    [i1,i2]     = find(real(CW.Stab.Value) == ReLam);
+    Lam         = CW.Stab.Value(i1(1),i2(1));
     
     if ReLam > 1E-6
         Mumber = 1;

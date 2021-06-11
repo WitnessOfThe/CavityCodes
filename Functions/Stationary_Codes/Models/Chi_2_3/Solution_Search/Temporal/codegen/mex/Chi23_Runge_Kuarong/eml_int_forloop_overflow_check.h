@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * fft.h
+ * eml_int_forloop_overflow_check.h
  *
- * Code generation for function 'fft'
+ * Code generation for function 'eml_int_forloop_overflow_check'
  *
  */
 
-#ifndef FFT_H
-#define FFT_H
+#ifndef EML_INT_FORLOOP_OVERFLOW_CHECK_H
+#define EML_INT_FORLOOP_OVERFLOW_CHECK_H
 
 /* Include files */
 #include <math.h>
@@ -24,9 +24,8 @@
 #include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void c_fft(const creal_T x[256], creal_T y[256]);
-extern void fft(const creal_T x[256], creal_T y[256]);
+extern void check_forloop_overflow_error(const emlrtStack *sp);
 
 #endif
 
-/* End of code generation (fft.h) */
+/* End of code generation (eml_int_forloop_overflow_check.h) */

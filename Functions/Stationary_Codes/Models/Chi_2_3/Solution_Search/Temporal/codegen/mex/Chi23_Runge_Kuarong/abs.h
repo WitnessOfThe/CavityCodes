@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * fft.h
+ * abs.h
  *
- * Code generation for function 'fft'
+ * Code generation for function 'abs'
  *
  */
 
-#ifndef FFT_H
-#define FFT_H
+#ifndef ABS_H
+#define ABS_H
 
 /* Include files */
 #include <math.h>
@@ -24,9 +24,8 @@
 #include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void c_fft(const creal_T x[256], creal_T y[256]);
-extern void fft(const creal_T x[256], creal_T y[256]);
+extern void b_abs(const creal_T x[256], real_T y[256]);
 
 #endif
 
-/* End of code generation (fft.h) */
+/* End of code generation (abs.h) */

@@ -81,9 +81,9 @@
                 end
                                 
                 if Logic.TurnTime  == 1 && FlagReduce == 0
-%                                         Exitflag = 0;
-%                             break;          
-%       
+                                        Exitflag = 0;
+                            break;          
+      
                        for it = 1:size(L_L_1,2)
                          maxvec(it) = real(L_L_1(it).Sol.Psi_k(1));
                          devec(it) =  L_L_1(it).Eq.(L_L_1(it).Par.variable);

@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * fft.h
+ * mod.h
  *
- * Code generation for function 'fft'
+ * Code generation for function 'mod'
  *
  */
 
-#ifndef FFT_H
-#define FFT_H
+#ifndef MOD_H
+#define MOD_H
 
 /* Include files */
 #include <math.h>
@@ -24,9 +24,9 @@
 #include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void c_fft(const creal_T x[256], creal_T y[256]);
-extern void fft(const creal_T x[256], creal_T y[256]);
+extern real_T b_mod(real_T x, real_T y);
+extern real_T c_mod(real_T x);
 
 #endif
 
-/* End of code generation (fft.h) */
+/* End of code generation (mod.h) */
