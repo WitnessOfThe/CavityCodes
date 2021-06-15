@@ -8,8 +8,14 @@ function Temp = Chi23_Temp_Normalization(Temp)
 %%
 
     Temp.In.delta_e = 2*Temp.In.delta_o - Temp.In.eps;
-    Temp.In.H       = sqrt(Temp.In.eta*Temp.In.Finess*Temp.In.W/pi);    
-    Temp.Eq.H       = sqrt(Temp.In.eta*Temp.In.Finess*Temp.In.W/pi);    
+    
+    Temp.In.Finess_e = Temp.In.De(1)/Temp.In.ke;
+    Temp.In.H_f    = sqrt(Temp.In.eta*Temp.In.Finess*Temp.In.W/pi);    
+    Temp.In.H_s    = sqrt(Temp.In.eta*Temp.In.Finess_e*Temp.In.W/pi);  
+
+    Temp.Eq.H_f    = sqrt(Temp.In.eta*Temp.In.Finess*Temp.In.W/pi);    
+    Temp.Eq.H_s    = sqrt(Temp.In.eta*Temp.In.Finess_e*Temp.In.W/pi);  
+    
     norm          = Temp.In.ko;
 
     Temp.In.Omega_f    =  Temp.In.delta_o - 1i*Temp.In.ko/2;

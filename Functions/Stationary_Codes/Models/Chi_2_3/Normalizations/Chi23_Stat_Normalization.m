@@ -8,13 +8,17 @@ function Stat = Chi23_Stat_Normalization(Stat)
 %%
 
     Stat.In.delta_e = 2*Stat.In.delta_o - Stat.In.eps;
-    Stat.In.H       = sqrt(Stat.In.eta*Stat.In.Finess*Stat.In.W/pi);    
     norm            = Stat.In.ko;%Stat.In.ko;
 
     Stat.In.Omega_f       =     Stat.In.delta_o - 1i*Stat.In.ko/2;
     Stat.In.Omega_s       =  8*(Stat.In.delta_e - 1i*Stat.In.ke/2);
     Stat.In.Omega_Star    =  sqrt(2*Stat.In.ke*Stat.In.ko);
     
+    Stat.In.Finess_e = Stat.In.De(1)/Stat.In.ke;
+     
+    Stat.In.H_f    = sqrt(Stat.In.eta*Stat.In.Finess*Stat.In.W/pi);    
+    Stat.In.H_s    = sqrt(Stat.In.eta*Stat.In.Finess_e*Stat.In.W/pi);   
+   
 %%
     Stat.Eq.delta_o         = Stat.In.delta_o/norm;
     Stat.Eq.delta_e         = Stat.In.delta_e/norm;

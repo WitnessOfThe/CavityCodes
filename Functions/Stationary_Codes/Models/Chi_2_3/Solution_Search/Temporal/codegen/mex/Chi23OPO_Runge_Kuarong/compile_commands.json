@@ -1,0 +1,110 @@
+[
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   Chi23OPO_Runge_Kuarong_data.c -o build/win64/Chi23OPO_Runge_Kuarong_data.o",
+    "file": "Chi23OPO_Runge_Kuarong_data.c",
+    "output": "build/win64/Chi23OPO_Runge_Kuarong_data.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   rt_nonfinite.c -o build/win64/rt_nonfinite.o",
+    "file": "rt_nonfinite.c",
+    "output": "build/win64/rt_nonfinite.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   Chi23OPO_Runge_Kuarong_initialize.c -o build/win64/Chi23OPO_Runge_Kuarong_initialize.o",
+    "file": "Chi23OPO_Runge_Kuarong_initialize.c",
+    "output": "build/win64/Chi23OPO_Runge_Kuarong_initialize.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   Chi23OPO_Runge_Kuarong_terminate.c -o build/win64/Chi23OPO_Runge_Kuarong_terminate.o",
+    "file": "Chi23OPO_Runge_Kuarong_terminate.c",
+    "output": "build/win64/Chi23OPO_Runge_Kuarong_terminate.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   Chi23OPO_Runge_Kuarong.c -o build/win64/Chi23OPO_Runge_Kuarong.o",
+    "file": "Chi23OPO_Runge_Kuarong.c",
+    "output": "build/win64/Chi23OPO_Runge_Kuarong.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   ifft.c -o build/win64/ifft.o",
+    "file": "ifft.c",
+    "output": "build/win64/ifft.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   fft.c -o build/win64/fft.o",
+    "file": "fft.c",
+    "output": "build/win64/fft.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   mod.c -o build/win64/mod.o",
+    "file": "mod.c",
+    "output": "build/win64/mod.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   eml_int_forloop_overflow_check.c -o build/win64/eml_int_forloop_overflow_check.o",
+    "file": "eml_int_forloop_overflow_check.c",
+    "output": "build/win64/eml_int_forloop_overflow_check.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   abs.c -o build/win64/abs.o",
+    "file": "abs.c",
+    "output": "build/win64/abs.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   power.c -o build/win64/power.o",
+    "file": "power.c",
+    "output": "build/win64/power.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   sum.c -o build/win64/sum.o",
+    "file": "sum.c",
+    "output": "build/win64/sum.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   nullAssignment.c -o build/win64/nullAssignment.o",
+    "file": "nullAssignment.c",
+    "output": "build/win64/nullAssignment.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   interface/_coder_Chi23OPO_Runge_Kuarong_api.c -o build/win64/_coder_Chi23OPO_Runge_Kuarong_api.o",
+    "file": "interface/_coder_Chi23OPO_Runge_Kuarong_api.c",
+    "output": "build/win64/_coder_Chi23OPO_Runge_Kuarong_api.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   interface/_coder_Chi23OPO_Runge_Kuarong_mex.c -o build/win64/_coder_Chi23OPO_Runge_Kuarong_mex.o",
+    "file": "interface/_coder_Chi23OPO_Runge_Kuarong_mex.c",
+    "output": "build/win64/_coder_Chi23OPO_Runge_Kuarong_mex.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   Chi23OPO_Runge_Kuarong_emxutil.c -o build/win64/Chi23OPO_Runge_Kuarong_emxutil.o",
+    "file": "Chi23OPO_Runge_Kuarong_emxutil.c",
+    "output": "build/win64/Chi23OPO_Runge_Kuarong_emxutil.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   interface/_coder_Chi23OPO_Runge_Kuarong_info.c -o build/win64/_coder_Chi23OPO_Runge_Kuarong_info.o",
+    "file": "interface/_coder_Chi23OPO_Runge_Kuarong_info.c",
+    "output": "build/win64/_coder_Chi23OPO_Runge_Kuarong_info.o"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong",
+    "command": "C:\\ProgramData\\MATLAB\\SupportPackages\\R2020b\\3P.instrset\\mingw_w64.instrset\\bin\\gcc -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" -I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23OPO_Runge_Kuarong\\interface\" -I \"C:\\Program Files\\MATLAB\\R2020b\\extern\\include\" -I \".\" -DMODEL=Chi23OPO_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1   \"C:/Program Files/MATLAB/R2020b/extern/version/c_mexapi_version.c\" -o build/win64/c_mexapi_version.o",
+    "file": "C:/Program Files/MATLAB/R2020b/extern/version/c_mexapi_version.c",
+    "output": "build/win64/c_mexapi_version.o"
+  }
+]

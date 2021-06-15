@@ -155,7 +155,7 @@ end
                                               
                    end
 
-                   Logic.TurnTime      = abs(Logic.Dir.d12) > 20 && Logic.Smooth == 0;
+                   Logic.TurnTime      = abs(Logic.Dir.d12) > 50 && Logic.Smooth == 0;
                    if Logic.Dir.d12 == 0
                        Logic.TurnTime     = 1;
                    end

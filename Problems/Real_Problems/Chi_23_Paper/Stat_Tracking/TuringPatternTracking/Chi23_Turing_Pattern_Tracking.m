@@ -7,14 +7,6 @@
     
     Res.CW.In         = Params_LiNbd;
     Res.CW.In.eps     = 2*pi*23E9; 
-%   Res.CW.In.delta_o = -10.122*Res.CW.In.ko;%-1.785*Res.CW.In.ko
-%   Res.CW.In.W       = 3.1E6*Res.CW.In.W_Star;%2E4*Res.CW.In.W_Star;
-%    Res.CW.In.delta_o = 12* Res.CW.In.ko;%-1.785*Res.CW.In.ko
-%    Res.CW.In.W       = 3.1E6*Res.CW.In.W_Star;%2E4*Res.CW.In.W_Star;
-%     Res.CW.In.delta_o = -40.13*Res.CW.In.ko;%-1.785*Res.CW.In.ko
-%     Res.CW.In.W       = 3.1E7*Res.CW.In.W_Star;%2E4*Res.CW.In.W_Star;
-%   Res.CW.In.delta_o = -10.122*Res.CW.In.ko;%-1.785*Res.CW.In.ko
-%   Res.CW.In.W       = 3.1E6*Res.CW.In.W_Star;%2E4*Res.CW.In.W_Star;
 
     Res.CW.In.delta_o = 3.18*Res.CW.In.ko;%-1.785*Res.CW.In.ko
     Res.CW.In.W       = 333E-6;%5E5*Res.CW.In.W_Star;%2E4*Res.CW.In.W_Star;
@@ -22,23 +14,8 @@
     Res.Stat.In.N     = 2^8;
    
     Res.CW.In.mu_bl   = 1;
- %    Br                   = Chi2_Get_CW_Point2Point(Res.CW,-[8*Res.CW.In.ko,0*Res.CW.In.ko],1000);    
-  % figure;hold on;
-  %plot(Br.delta_vector/Res.CW.In.ko,Br.Omega(:,1)/2/pi/1E6,'Color','m','LineWidth',2);
-  %plot(Br.delta_vector/Res.CW.In.ko,Br.Omega(:,2)/2/pi/1E6,'Color','m','LineWidth',2);
-  %plot(Br.delta_vector/Res.CW.In.ko,Br.Omega(:,3)/2/pi/1E6,'Color','m','LineWidth',2);
-% 
+    
 %%
-%     Res.Stat.In           = Res.CW.In;
-%     Res.Stat.Par.Turning    = 0;
-%     Res.Stat.Par.variable         = 'eps';  %%'Pump Power';
-%     Res.Stat.Par.bot_boundary     =  100; % bottom boundary for delta to search
-%     Res.Stat.Par.top_boundary     =  30000; % top boundary for delta to search
-%     
-%     Res.Stat.Par.first_step         = 10;
-%     Res.Stat.Par.step_tol         = 0.01;
-%     Res.Stat.Par.step_inc         = 1.1;      
-%     Res.Stat.In.N         = 2^6;
 
     Res.Stat(1).Par.Newton_tol       = 5E-13;  
     Res.Stat(1).Par.Turning          =    0;
@@ -295,59 +272,7 @@ figure;pcolor(Res.Stat(1).Space.phi,deltao ,abs(PsiO));shading interp
   end  
   function Res = Start_From_CW(Res,muh)
   
-    coeff_bound_s = [1E-10,0.32];
-    Flag = false;
-        
-    W                 = [1.3E4, Res.CW.In.W/ Res.CW.In.W_Star];
-    delta             = [10,Res.CW.In.delta_o/Res.CW.In.ko];
-    
-    Res.CW            = Chi23_CW_Track_fromLower2Point(Res.CW,W,delta);
-    
-    N                 = Res.Stat.In.N;
-    Res.Stat.In       = Res.CW.In;
-    Res.Stat.In.N     = N;    
-    
-    for i_try = 1:2
-        
-        coeff_bound = coeff_bound_s;
-            ii   = 0;
-        
-        while Flag == 0
-
-            coeff               = coeff_bound(1) + (coeff_bound(2) - coeff_bound(1))/2;
-            Res                 = Chi23_Turing_From_CW(Res,coeff,i_try,muh);
-            ii                  = ii + 1;
-            Logic.p1            = Res.Stat.Sol.Exitflag >= 0;
-            Logic.p2            = sum(abs(Res.Stat.Sol.Psi_o(2:end))) > 1E-3;
-
-            if (Logic.p1 && Logic.p2) || (ii == 30)
-                Flag =1;
-                break;
-
-            end
-
-            if Logic.p1 == 1 && Logic.p2 == 0
-
-                coeff_bound(1) = coeff;
-
-            end
-            if Logic.p1 == 0 && Logic.p2 == 1
-
-                coeff_bound(2) = coeff;
-
-            end
-            if Logic.p1 == 0 && Logic.p2 == 0
-
-                coeff_bound(2) = coeff;
-
-            end
-
-        end
-        if Flag ~= 0
-            break;
-        end
-    end
-
+ 
   end
   function Stat = ChangePower(Stat,Power_vec)
   

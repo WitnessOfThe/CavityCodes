@@ -14,6 +14,7 @@
         CW.Sol.Omega    = sqrt(Omega);        
         CW.Sol.Psi_o    = CW.Sol.Omega./CW.In.Omega_Star*CW.In.H_Star;
         CW.Sol.Psi_e    = CW.Sol.Omega.^2/CW.In.Omega_s/CW.In.gam2o;
+        CW.Sol.g        = CW.In.gam2o.*abs(CW.Sol.Psi_e);        
         
     end
     

@@ -1,4 +1,4 @@
-    function Sol = Chi23_Runge_Kuarong(Temp,Runge)   
+    function Sol = Chi23OPO_Runge_Kuarong(Temp,Runge)   
 
     d            =  complex(zeros(Runge.s,2*Temp.Space.N));
     [nt,dt]      =                        ParSim(Temp.Par);
@@ -103,7 +103,7 @@
     k_e(1:N)    = 1i*Fac_plus(1:N).*(fft(Eq.gam2o.*conj(Psio).*Psie +  Eq.gam3o.*(abs(Psio).^2 + 2*abs(Psie).^2).*Psio )  );
     k_e(N+1:2*N)= 1i*Fac_plus(N+1:2*N).*(fft(Eq.gam2e.*Psio.^2 +Eq.gam3e.*(2*abs(Psio).^2 + abs(Psie).^2).*Psie)  );
     
-    k_e(1)      = k_e(1) + N*Fac_plus(1).*1/2*Eq.ko*Eq.H_f;
+    k_e(N+1)      = k_e(N+1) + N*Fac_plus(N+1).*1/2*Eq.ke*Eq.H_s;
 
     
 end  

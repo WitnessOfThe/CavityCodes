@@ -8,12 +8,15 @@ function CW = Chi23_CW_Normalization(CW)
 %%
 
     CW.In.delta_e = 2*CW.In.delta_o - CW.In.eps;
-    CW.In.H       = sqrt(CW.In.eta*CW.In.Finess*CW.In.W/pi);    
+    CW.In.Finess_e = CW.In.De(1)/CW.In.ke;
+    CW.In.H_f    = sqrt(CW.In.eta*CW.In.Finess*CW.In.W/pi);    
+    CW.In.H_s    = sqrt(CW.In.eta*CW.In.Finess_e*CW.In.W/pi);   
+    
     norm          = CW.In.ko;
 
-    CW.In.Omega_f    =  CW.In.delta_o - 1i*CW.In.ko/2;
+    CW.In.Omega_f    =     CW.In.delta_o - 1i*CW.In.ko/2;
     CW.In.Omega_s    =  8*(CW.In.delta_e - 1i*CW.In.ke/2);
-     
+        
 %%
     CW.Eq.delta_o         = CW.In.delta_o/norm;
     CW.Eq.delta_e         = CW.In.delta_e/norm;
@@ -31,6 +34,7 @@ function CW = Chi23_CW_Normalization(CW)
     CW.Eq.Do              = CW.In.Do/norm;% Dispersion Coefficients,-4E3
     CW.Eq.De              = CW.In.De/norm;% Dispersion Coefficients,-4E3
     CW.Eq.d               = (CW.In.De(1)-CW.In.Do(1))/norm;
+    CW.In.d               = (CW.In.De(1)-CW.In.Do(1));
     
     CW.Eq.norm            = norm;
     
