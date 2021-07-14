@@ -14,7 +14,7 @@ clear all
         Peak = S(i).PeakPower;
         FD(~S(i).Stable) = NaN;
         Peak(~S(i).Stable) = NaN;
-        plot(i*ones(size(S(i).PeakPower,2)),FD,'Parent',ax(1),'LineWidth',1,'LineStyle','-','Color',[0.64,0.08,0.18]);
+        plot(i*ones(size(S(i).PeakPower,2)),FD,'Parent',ax(1),'LineWidth',1,'LineStyle','-','Color',[0,0.,0.]);
         FD(~S(i).Stable) = [];
         if ~isempty(FD) 
             plot(i,FD(end),'Parent',ax(1),'Marker','.','MarkerSize',10,'Color',[0.64,0.08,0.18]);
@@ -23,6 +23,7 @@ clear all
         
     end
 %
+%%
     ax.XLabel.String = '$\hat \mu$';
     ax.YLabel.String = '$\mathcal{F}_d$';
     ax.YScale  = 'log';

@@ -5,7 +5,6 @@
         xe                  = (x(2*Stat.Space.N+1:3*Stat.Space.N) +...
                                          1i*x(3*Stat.Space.N+1:4*Stat.Space.N)).';
         
-        xV                   = x(end);   %    
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -19,15 +18,26 @@
                 
         V               = Stat.Sol.V;
        % mu                 = Stat.Space.k ;
-         mu                 = Stat.Space.k  + Stat.In.n;
- %       mu(Stat.Space.k>0) =  mu(Stat.Space.k>0) +Stat.In.n;
-   %     mu(Stat.Space.k<0) =  mu(Stat.Space.k<0) +Stat.In.n;
-        Lo      = ( Stat.Eq.delta_o +                  mu.^2*1/2*Stat.Eq.Do(2) - 1i*Stat.Eq.ko/2 - V* mu );
-        Le      = ( Stat.Eq.delta_e +  mu.*Stat.Eq.d + mu.^2*1/2*Stat.Eq.De(2) - 1i*Stat.Eq.ke/2 - V* mu );
-               
+       
+         mu              = Stat.Space.k  + Stat.In.n;
+%       mu(Stat.Space.k>0) =  mu(Stat.Space.k>0) +Stat.In.n;
+%       mu(Stat.Space.k<0) =  mu(Stat.Space.k<0) +Stat.In.n;
+
+        Lo      = Stat.Eq.Lo + Stat.Space.k*Stat.In.n*Stat.Eq.Do(2) +Stat.In.n.^2*Stat.Eq.Do(2)/2 - V*mu;%-Stat.Sol.V.*(Stat.In.n + Stat.Space.k);   %Stat.Eq.mask.*(Stat.Eq.delta_o + mu.^2*1/2*Stat.Eq.Do(2) - 1i*Stat.Eq.ko/2- V*mu);
+        Le      = Stat.Eq.Le + Stat.Space.k*Stat.In.n*Stat.Eq.De(2) +Stat.In.n.^2*Stat.Eq.De(2)/2 +...
+        + Stat.Eq.d.*Stat.In.n - V*mu;%-Stat.Sol.V.*(Stat.In.n + Stat.Space.k);%Stat.Eq.mask.*(Stat.Eq.delta_e + mu.*Stat.Eq.d + mu.^2*1/2*Stat.Eq.De(2) - 1i*Stat.Eq.ke/2- V*mu);
+%         if Stat.In.n > 0
+%             mu              = Stat.Space.k  + Stat.In.n;
+%             Lo              = Stat.Eq.mask.*(Stat.Eq.delta_o + mu .^2*1/2*Stat.Eq.Do(2)  - V*mu - 1i*Stat.Eq.ko/2);
+%             Le              = Stat.Eq.mask.*(Stat.Eq.delta_e + mu *Stat.Eq.d + mu .^2*1/2*Stat.Eq.De(2)   - V*mu- 1i*Stat.Eq.ke/2);
+%         else
+%             mu              = Stat.Space.k  + Stat.In.n;
+%             Lo              = Stat.Eq.mask.*(Stat.Eq.delta_o + mu .^2*1/2*Stat.Eq.Do(2)  - V*mu - 1i*Stat.Eq.ko/2);
+%             Le              = Stat.Eq.mask.*(Stat.Eq.delta_e + mu *Stat.Eq.d + mu .^2*1/2*Stat.Eq.De(2)   - V*mu- 1i*Stat.Eq.ke/2);
+%         end      
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-       L1      = ifft( fft(xo).*(Lo) );
+        L1      = ifft( fft(xo).*(Lo) );
         
         NL1     =  - (Stat.Eq.gam2o.*( Psie.*conj(xo) + conj(Psio).*xe ) +...
                  Stat.Eq.gam3o.*(...
@@ -50,6 +60,7 @@
         Eq2I(1:Stat.Space.N,1) = imag(Eq2);
         
         f       = [Eq1R;Eq1I;Eq2R;Eq2I];%\;
+
 %         mask                = Stat.Eq.mask;%[ones(1,Stat.In.N/2-Stat.Space.N/4),zeros(1,Stat.Space.N/4),zeros(1,Stat.Space.N/4),ones(1,Stat.In.N/2-Stat.Space.N/4)];
 %             
 %         xo                  = mask.*(x(1:Stat.Space.N) +...
@@ -78,8 +89,9 @@
 %         V               = Stat.Sol.V;
 %         
 %         mu      = (Stat.Space.k + Stat.In.n);
-%         Lo      = Stat.Eq.mask.*(Stat.Eq.delta_o + mu.^2*1/2*Stat.Eq.Do(2) - 1i*Stat.Eq.ko/2- V*mu);
-%         Le      = Stat.Eq.mask.*(Stat.Eq.delta_e + mu.*Stat.Eq.d + mu.^2*1/2*Stat.Eq.De(2) - 1i*Stat.Eq.ke/2- V*mu);
+%         
+%         Lo      = Stat.Eq.Lo + Stat.Space.k*Stat.In.n*Stat.Eq.Do(2) +Stat.In.n.^2*Stat.Eq.Do(2)/2 - V*mu;%-Stat.Sol.V.*(Stat.In.n + Stat.Space.k);   %Stat.Eq.mask.*(Stat.Eq.delta_o + mu.^2*1/2*Stat.Eq.Do(2) - 1i*Stat.Eq.ko/2- V*mu);
+%         Le      = Stat.Eq.Le + Stat.Space.k*Stat.In.n*Stat.Eq.De(2) +Stat.In.n.^2*Stat.Eq.De(2)/2 + Stat.Eq.d.*Stat.In.n- V*mu;%-Stat.Sol.V.*(Stat.In.n + Stat.Space.k);%Stat.Eq.mask.*(Stat.Eq.delta_e + mu.*Stat.Eq.d + mu.^2*1/2*Stat.Eq.De(2) - 1i*Stat.Eq.ke/2- V*mu);
 %         
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 

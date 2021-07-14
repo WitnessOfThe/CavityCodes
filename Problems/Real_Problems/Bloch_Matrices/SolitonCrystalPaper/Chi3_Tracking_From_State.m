@@ -1,6 +1,7 @@
     clc;
     clear all;
-    warning('off')
+    warning('off');
+    
 %% Define Input Parameters in Physical Units
 
     R       =  Set_Up_Methods_For_Bloch_Matrices;

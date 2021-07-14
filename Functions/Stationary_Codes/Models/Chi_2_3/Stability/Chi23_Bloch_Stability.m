@@ -1,6 +1,6 @@
 function Stab = Chi23_Bloch_Stability(Stat)
             
-    n = 0;% [-floor(Stat.In.mu_bl/2):1:floor(Stat.In.mu_bl/2)];
+     n = 0;% [-floor(Stat.In.mu_bl*8):1:floor(Stat.In.mu_bl*8)];
     if Stat.In.mu_bl == 1 || Stat.In.mu_bl == 0
         i =1;
         Stat.In.n                     = n(i);
@@ -35,6 +35,32 @@ function Stab = Chi23_Bloch_Stability(Stat)
      %   Stab(i).E_vectors     = Stab(i).E_vectors(:,Sort_I);
 
     end
+   
+%   if Stat.In.mu_bl <2
+%      for i =1:size(n,2)
+%         Stat.In.n                     = n(i);
+%         
+%        [E_vectors_raw,E_values_raw]  = eigs(@(x)Stat.Met.Stab_Matrix(x,Stat)...
+%            ,4*Stat.Space.N,4*Stat.Space.N,'largestreal');
+%        
+%         E_vectors                     = (E_vectors_raw(1:Stat.Space.N,:))...
+%             + conj( E_vectors_raw(Stat.Space.N+1:2*Stat.Space.N,:));
+%         Stab(i).mum = zeros(1,size(E_vectors,2));
+%         
+%         for i_k = 1:size(E_vectors,2)
+%             
+%             [~,Ind]       = max(abs(E_vectors(:,i_k)));
+%             Stab(i).mum(1,i_k) = Stat.Space.k(Ind);
+%             
+%         end
+%         
+%         [Stab(i).mum,Sort_I] = sort(Stab(i).mum,'ascend');
+%         
+%         Stab(i).In.n                  = n(i);
+%         Stab(i).E_values              = diag(E_values_raw)*Stat.Eq.norm;
+%         
+%    
+%     end
     if Stat.In.mu_bl > 1
         
             Stat     = Stat(1);

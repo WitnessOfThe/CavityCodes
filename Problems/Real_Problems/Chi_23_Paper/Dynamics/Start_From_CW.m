@@ -139,14 +139,14 @@
     
 %   Res.Stat.Stab          = Stability_Switcher(Res.Stat);
 %%
-        Plot_Res_temp(ResSave(1));   
+        Plot_Res_temp(ResSave(116));   
 %%
     for i=1:size(ResSave,2)
         delta(i)    = ResSave(i).Temp.Eq.delta_o;
         PowerF(i)= sum(abs(ResSave(i).Temp.Sol.Psio(end-1,2:end)).^2);
     end
 figure;
-plot( PowerF,'LineStyle','none','Marker','.')
+plot(delta,PowerF,'LineStyle','none','Marker','.')
 %% гауссов импульс умножить на кусок пси потом фурье (фу) (функция вигнера xfrog) 
 
 %%
@@ -217,8 +217,8 @@ function Plot_Res_temp(ResSave)
     ax(7) = nexttile(Panel,8,[1,1]);hold(ax(7),'on');  
     
   %  plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psie(1:end-1,:)).^2,2),'Parent',ax(1),'Color',[0,1,0]);
-  %  plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psio(1:end-1,2:end)).^2,2),'Parent',ax(1),'Color',[1,0,0]);
-    plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psie(1:end-1,1)).^2,2),'Parent',ax(1),'Color',[0,1,0]);
+   plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psio(1:end-1,2:end)).^2,2),'Parent',ax(1),'Color',[1,0,0]);
+  %  plot(ResSave(indt).Temp.Sol.t(1:end-1),  sum(abs(ResSave(indt).Temp.Sol.Psie(1:end-1,1)).^2,2),'Parent',ax(1),'Color',[0,1,0]);
 
    % ylim(ax(1),[0,sum(abs(ResSave(indt).Temp.Sol.Psio(end-1,:)).^2*1.4,2)])
     

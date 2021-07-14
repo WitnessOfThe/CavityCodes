@@ -1,6 +1,6 @@
 function Save = Chi23_CW_OPO_Lorentian(CW,W,delta)
     
-    NN = 5000;
+    NN = 10000;
     Save.delta_vector          = linspace(delta(1),delta(2),NN);
     Save.W_vector              = linspace(W(1),W(2),NN);
     

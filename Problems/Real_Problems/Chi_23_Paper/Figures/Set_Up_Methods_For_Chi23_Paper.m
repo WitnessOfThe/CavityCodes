@@ -168,7 +168,7 @@ end
                end
            end
              
-           Logic.rCW         = sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
+           Logic.rCW         = 0;%sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
            Logic.MaxIter     = i > Stat(1).Par.i_max;           
            FlagReduce        = (Logic.Smooth + Logic.Resid) > 0 ;
            FlagStop          = Logic.MaxIter + Logic.rCW + Logic.Stop;
