@@ -1,9 +1,3 @@
-% Res.Stat           = Res.Stat(1);
-% Res.Stat.In        = Res.Temp.In;
-% Res.Stat.Sol.Psi_o = Res.Temp.Sol.Psio(end-1,:);
-% Res.Stat.Sol.Psi_e = Res.Temp.Sol.Psie(end-1,:);
-% Res.Stat.Sol.V     = 0;
-% Res.Stat.Stab      = [];
 % Res.Stat.Logic     = [];
 %%
 % $x^2+e^{\pi i}$
@@ -41,6 +35,7 @@
     Power_vector      = ones(1,NN)*Res.CW.In.W /   Res.CW.In.W_Star;
     delta_stary       = 50*ones(1,NN);
     ii                = 0;
+    
     parfor i =1:NN
         R = Res;
         W                 = [R.CW.In.W/R.CW.In.W_Star,Power_vector(i)];

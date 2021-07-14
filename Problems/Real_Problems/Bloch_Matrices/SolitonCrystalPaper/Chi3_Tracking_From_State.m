@@ -53,7 +53,7 @@
     
     Stat_1  =   BranchTurning([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,1);
     Stat_2  =   BranchTurning([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,-1);
-  parfor i =1:1:size(Stat_2,2)
+    parfor i =1:1:size(Stat_2,2)
          Stat_2(i).Stab                 = Stability_Switcher(Stat_2(i));
          i             
     end

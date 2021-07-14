@@ -24,7 +24,7 @@
 #include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void b_abs(const creal_T x[256], real_T y[256]);
+extern void b_abs(const creal_T x[128], real_T y[128]);
 
 #endif
 

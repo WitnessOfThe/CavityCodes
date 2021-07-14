@@ -9,19 +9,24 @@
  *
  */
 
-#pragma once
+#ifndef POWER_H
+#define POWER_H
 
 /* Include files */
-#include "Chi23OPO_Runge_Kuarong_types.h"
-#include "rtwtypes.h"
-#include "emlrt.h"
-#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "tmwtypes.h"
+#include "mex.h"
+#include "emlrt.h"
+#include "rtwtypes.h"
+#include "Chi23OPO_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-void power(const emlrtStack *sp, const emxArray_real_T *a, emxArray_real_T *y);
+extern void b_power(const creal_T a[256], creal_T y[256]);
+extern void power(const real_T a[256], real_T y[256]);
+
+#endif
 
 /* End of code generation (power.h) */

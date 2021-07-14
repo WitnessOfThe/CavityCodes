@@ -24,8 +24,8 @@
 #include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void b_power(const creal_T a[256], creal_T y[256]);
-extern void power(const real_T a[256], real_T y[256]);
+extern void b_power(const creal_T a[128], creal_T y[128]);
+extern void power(const real_T a[128], real_T y[128]);
 
 #endif
 

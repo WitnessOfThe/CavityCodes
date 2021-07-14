@@ -16,12 +16,12 @@
 #include "exp.h"
 
 /* Function Definitions */
-void b_exp(creal_T x[512])
+void b_exp(creal_T x[256])
 {
   int32_T k;
   real_T r;
   real_T x_im;
-  for (k = 0; k < 512; k++) {
+  for (k = 0; k < 256; k++) {
     if (x[k].im == 0.0) {
       x[k].re = muDoubleScalarExp(x[k].re);
       x[k].im = 0.0;

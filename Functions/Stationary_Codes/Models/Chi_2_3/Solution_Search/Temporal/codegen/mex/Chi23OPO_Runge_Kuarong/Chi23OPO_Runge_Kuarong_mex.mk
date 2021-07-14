@@ -1,30 +1,28 @@
 MATLAB_ROOT = /usr/local/matlab/r2018b
-MAKEFILE = Chi23_Runge_Kuarong_mex.mk
+MAKEFILE = Chi23OPO_Runge_Kuarong_mex.mk
 
-include Chi23_Runge_Kuarong_mex.mki
+include Chi23OPO_Runge_Kuarong_mex.mki
 
 
 SRC_FILES =  \
-	Chi23_Runge_Kuarong_data.c \
-	Chi23_Runge_Kuarong_initialize.c \
-	Chi23_Runge_Kuarong_terminate.c \
-	Chi23_Runge_Kuarong.c \
+	Chi23OPO_Runge_Kuarong_data.c \
+	Chi23OPO_Runge_Kuarong_initialize.c \
+	Chi23OPO_Runge_Kuarong_terminate.c \
+	Chi23OPO_Runge_Kuarong.c \
 	exp.c \
-	eml_int_forloop_overflow_check.c \
 	ifft.c \
+	fft.c \
 	FFTWApi.c \
 	abs.c \
 	power.c \
 	fft1.c \
-	mod.c \
-	nullAssignment.c \
-	_coder_Chi23_Runge_Kuarong_info.c \
-	_coder_Chi23_Runge_Kuarong_api.c \
-	_coder_Chi23_Runge_Kuarong_mex.c \
-	Chi23_Runge_Kuarong_emxutil.c \
+	_coder_Chi23OPO_Runge_Kuarong_info.c \
+	_coder_Chi23OPO_Runge_Kuarong_api.c \
+	_coder_Chi23OPO_Runge_Kuarong_mex.c \
+	Chi23OPO_Runge_Kuarong_emxutil.c \
 	c_mexapi_version.c
 
-MEX_FILE_NAME_WO_EXT = Chi23_Runge_Kuarong_mex
+MEX_FILE_NAME_WO_EXT = Chi23OPO_Runge_Kuarong_mex
 MEX_FILE_NAME = $(MEX_FILE_NAME_WO_EXT).mexa64
 TARGET = $(MEX_FILE_NAME)
 
@@ -53,7 +51,7 @@ SYS_INCLUDE = $(ML_INCLUDES)
 
 # Additional includes
 
-SYS_INCLUDE += -I "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong"
+SYS_INCLUDE += -I "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23OPO_Runge_Kuarong"
 SYS_INCLUDE += -I "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal"
 SYS_INCLUDE += -I "./interface"
 SYS_INCLUDE += -I "$(MATLAB_ROOT)/extern/include"
@@ -115,7 +113,7 @@ CPPFLAGS = $(CXX_FLAGS) -std=c++11   $(USER_INCLUDE) $(SYS_INCLUDE)
 %.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/%.c
 	$(CC) $(CCFLAGS) "$<"
 
-%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong/%.c
+%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23OPO_Runge_Kuarong/%.c
 	$(CC) $(CCFLAGS) "$<"
 
 %.$(OBJEXT) : interface/%.c
@@ -126,7 +124,7 @@ CPPFLAGS = $(CXX_FLAGS) -std=c++11   $(USER_INCLUDE) $(SYS_INCLUDE)
 %.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/%.cpp
 	$(CXX) $(CPPFLAGS) "$<"
 
-%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong/%.cpp
+%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23OPO_Runge_Kuarong/%.cpp
 	$(CXX) $(CPPFLAGS) "$<"
 
 %.$(OBJEXT) : interface/%.cpp
@@ -137,7 +135,7 @@ CPPFLAGS = $(CXX_FLAGS) -std=c++11   $(USER_INCLUDE) $(SYS_INCLUDE)
 %.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/%.cu
 	$(CC) $(CCFLAGS) "$<"
 
-%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong/%.cu
+%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23OPO_Runge_Kuarong/%.cu
 	$(CC) $(CCFLAGS) "$<"
 
 %.$(OBJEXT) : interface/%.cu

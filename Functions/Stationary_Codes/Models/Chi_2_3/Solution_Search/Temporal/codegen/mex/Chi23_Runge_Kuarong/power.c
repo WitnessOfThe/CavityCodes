@@ -15,19 +15,19 @@
 #include "power.h"
 
 /* Function Definitions */
-void b_power(const creal_T a[256], creal_T y[256])
+void b_power(const creal_T a[128], creal_T y[128])
 {
   int32_T k;
-  for (k = 0; k < 256; k++) {
+  for (k = 0; k < 128; k++) {
     y[k].re = a[k].re * a[k].re - a[k].im * a[k].im;
     y[k].im = a[k].re * a[k].im + a[k].im * a[k].re;
   }
 }
 
-void power(const real_T a[256], real_T y[256])
+void power(const real_T a[128], real_T y[128])
 {
   int32_T k;
-  for (k = 0; k < 256; k++) {
+  for (k = 0; k < 128; k++) {
     y[k] = a[k] * a[k];
   }
 }

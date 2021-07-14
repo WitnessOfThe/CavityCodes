@@ -41,6 +41,7 @@ function Res = Set_Up_Methods_For_Bloch_Matrices
     Res.Stat.Met.Newton_Fail_Check    = @fail_Stat_check;
         
 end
+ 
    function [FlagReduce,FlagStop,Logic] = fail_Stat_check(Stat,i,x_step)
      
            
@@ -59,8 +60,8 @@ end
                Logic.Dir.y2 = real(Stat(2).Sol.Psi_k(1));
                Logic.Dir.y1 = real(Stat(1).Sol.Psi_k(1));
                
-               Logic.Dir.x2 = Stat(2).In.(Stat(2).Par.variable);
-               Logic.Dir.x1 = Stat(1).In.(Stat(2).Par.variable);
+               Logic.Dir.x2 = Stat(2).Eq.(Stat(2).Par.variable);
+               Logic.Dir.x1 = Stat(1).Eq.(Stat(2).Par.variable);
                
                Logic.Dir.d11 = (Logic.Dir.y2 - Logic.Dir.y1)/(Logic.Dir.x2 - Logic.Dir.x1)/Logic.Dir.y1 ;
            
@@ -71,20 +72,20 @@ end
                    Logic.Dir.y3  = real(Stat(3).Sol.Psi_k(1));
 
                    
-                   Logic.Dir.x3  = Stat(3).In.(Stat(3).Par.variable);
+                   Logic.Dir.x3  = Stat(3).Eq.(Stat(3).Par.variable);
                    Logic.Dir.d12 = (Logic.Dir.y3 - Logic.Dir.y2)/(Logic.Dir.x3 - Logic.Dir.x2)/Logic.Dir.y1 ;                   
                    Logic.Dir.d2  = (Logic.Dir.d12 - Logic.Dir.d11)/(Logic.Dir.x3 - Logic.Dir.x1);
                    
-%                        
+                       
                    if  sign(Logic.Dir.d12) == sign(Logic.Dir.d11) 
-                       if abs(Logic.Dir.d11) <=1
+                       if Logic.Dir.d11 <=1
                           Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.2;
                        end
-                       if abs(Logic.Dir.d11) > 1
+                       if Logic.Dir.d11 > 1
                            if abs(Logic.Dir.d12) >= abs(Logic.Dir.d11)
-                                Logic.Smooth      = abs(Logic.Dir.d12)/abs(Logic.Dir.d11) >= 1.3;
+                                Logic.Smooth      = abs(Logic.Dir.d12)/abs(Logic.Dir.d11) >= 1.1;
                            else
-                                Logic.Smooth      = abs(Logic.Dir.d11)/abs(Logic.Dir.d12) >= 1.3;
+                                Logic.Smooth      = abs(Logic.Dir.d11)/abs(Logic.Dir.d12) >= 1.1;
                            end
                        end
                        
@@ -92,11 +93,11 @@ end
                    
                    if  sign(Logic.Dir.d12) ~= sign(Logic.Dir.d11)
                       
-                       Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.3;
+                       Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.1;
                                               
                    end
 
-                   Logic.TurnTime      = abs(Logic.Dir.d12) > 100 && Logic.Smooth == 0;
+                   Logic.TurnTime      = abs(Logic.Dir.d12) > 15 && Logic.Smooth == 0;
                    
                    if Logic.Dir.d12 == 0
                        Logic.TurnTime     = 1;
@@ -115,81 +116,6 @@ end
            FlagReduce        = (Logic.Smooth + Logic.Resid+ Logic.rCW) > 0 ;
            FlagStop          = Logic.MaxIter  + Logic.Stop;
      end
-
-%    function [FlagReduce,FlagStop,Logic] = fail_Stat_check(Stat,i,x_step)
-%      
-%            
-%            Logic.Dir.d2    = NaN;
-%            Logic.Dir.d11   = NaN;
-%            Logic.Dir.d12   = NaN;
-%            
-%            Logic.Smooth    = 0;
-%            Logic.zero_step = 0;
-%            Logic.TurnTime  = 0;
-%            Logic.Stop      = 0;
-%            Logic.Resid     =   Stat(end).Sol.eps_f > Stat(end).Par.Newton_tol;
-%            
-%            if i >= 2
-%                
-%                Logic.Dir.y2 = real(Stat(2).Sol.Psi_k(1));
-%                Logic.Dir.y1 = real(Stat(1).Sol.Psi_k(1));
-%                
-%                Logic.Dir.x2 = Stat(2).Eq.(Stat(2).Par.variable);
-%                Logic.Dir.x1 = Stat(1).Eq.(Stat(2).Par.variable);
-%                
-%                Logic.Dir.d11 = (Logic.Dir.y2 - Logic.Dir.y1)/(Logic.Dir.x2 - Logic.Dir.x1)/Logic.Dir.y1 ;
-%            
-%                Logic.zero_step   = x_step == 0;
-%                
-%                if i >= 3
-% 
-%                    Logic.Dir.y3  = real(Stat(3).Sol.Psi_k(1));
-% 
-%                    
-%                    Logic.Dir.x3  = Stat(3).Eq.(Stat(3).Par.variable);
-%                    Logic.Dir.d12 = (Logic.Dir.y3 - Logic.Dir.y2)/(Logic.Dir.x3 - Logic.Dir.x2)/Logic.Dir.y1 ;                   
-%                    Logic.Dir.d2  = (Logic.Dir.d12 - Logic.Dir.d11)/(Logic.Dir.x3 - Logic.Dir.x1);
-%                    
-%                        
-%                    if  sign(Logic.Dir.d12) == sign(Logic.Dir.d11) 
-%                        if Logic.Dir.d11 <=1
-%                           Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.2;
-%                        end
-%                        if Logic.Dir.d11 > 1
-%                            if abs(Logic.Dir.d12) >= abs(Logic.Dir.d11)
-%                                 Logic.Smooth      = abs(Logic.Dir.d12)/abs(Logic.Dir.d11) >= 1.1;
-%                            else
-%                                 Logic.Smooth      = abs(Logic.Dir.d11)/abs(Logic.Dir.d12) >= 1.1;
-%                            end
-%                        end
-%                        
-%                    end
-%                    
-%                    if  sign(Logic.Dir.d12) ~= sign(Logic.Dir.d11)
-%                       
-%                        Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.1;
-%                                               
-%                    end
-% 
-%                    Logic.TurnTime      = abs(Logic.Dir.d12) > 15 && Logic.Smooth == 0;
-%                    
-%                    if Logic.Dir.d12 == 0
-%                        Logic.TurnTime     = 1;
-%                    end
-%                    if isnan(Logic.Dir.d12)
-%                        Logic.TurnTime     = 1;
-%                    end
-%                    if isinf(Logic.Dir.d12)
-%                        Logic.TurnTime     = 1;
-%                    end
-%                end
-%            end
-%              
-%            Logic.rCW         = sum(abs(Stat(end).Sol.Psi_k(2:end)).^2) <= 1E-10;
-%            Logic.MaxIter     = i > Stat(1).Par.i_max;           
-%            FlagReduce        = (Logic.Smooth + Logic.Resid+ Logic.rCW) > 0 ;
-%            FlagStop          = Logic.MaxIter  + Logic.Stop;
-%      end
-%     
+    
     
     

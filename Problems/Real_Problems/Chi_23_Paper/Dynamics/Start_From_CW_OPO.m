@@ -1,13 +1,3 @@
-% Res.Stat           = Res.Stat(1);
-% Res.Stat.In        = Res.Temp.In;
-% Res.Stat.Sol.Psi_o = Res.Temp.Sol.Psio(end-1,:);
-% Res.Stat.Sol.Psi_e = Res.Temp.Sol.Psie(end-1,:);
-% Res.Stat.Sol.V     = 0;
-% Res.Stat.Stab      = [];
-% Res.Stat.Logic     = [];
-%%
-% $x^2+e^{\pi i}$
-
 %%
     clear all;
 
@@ -16,33 +6,265 @@
     
 %%
     
-    Res.CW.In         = Params_LiNbd_FR_OPO;
-    Res.CW.In.eps     = Res.CW.In.ko*0;%-Res.CW.In.ko*10;
-    Res.CW.In.delta_o = -Res.CW.In.ko*0;
-    Res.CW.In.N       = 2^8;
-    Res.CW.In.W       = 1E3*Res.CW.In.Ws_Star;
-    Res.CW.In.mu_bl   = 1;
-    
+    Res.CW.In         = Params_LiNbd;
+    Res.CW.In.eps     = Res.CW.In.ko;%-Res.CW.In.ko*10;
+    Res.CW.In.delta_o = Res.CW.In.ko;
+    Res.CW.In.N       = 2^7;
+    Res.CW.In.kMI     = [0:30];
     
 %%
     
     Res.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
-    Res.Temp.Par.dt            = 5E-5;
+    Res.Temp.Par.dt            = 2E-5;
     Res.Temp.Par.s_t           = 0.01;
-    Res.Temp.Par.T             = 50;
+    Res.Temp.Par.T             = 20;
     
     Res.Temp.Par.dd            = Res.Temp.Par.T/Res.Temp.Par.s_t;
     Res.Temp.Par.CW_num        = 1;
     Runge                      = Define_Runge_Coeff(Res.Temp.Par);
     
  %%
-    NN =1;
-    for i = 1:NN
+ eps_vector = [10]*Res.CW.In.ko;
+ 
+ for ieps = 1:size(eps_vector,2)
+     
+    Res.CW.In.eps = eps_vector(ieps);
+    
+    SPEPS = strcat('/home/dp710/DataGit/Chi23/Dynamics/CWScans/NoOPOStartEps',num2str(eps_vector(ieps)/Res.CW.In.ko),'/');
+    
+    dd = [-13:0.1:32]; 
+    W  = [3.5,5.5,7.5].^2*Res.CW.In.ko.^2/Res.CW.In.gam2o.^2/Res.CW.In.eta/Res.CW.In.Finess_e*pi/Res.CW.In.Ws_Star;
+    
+    for ip = 1:size(W,2)
         
-        ResSave(i) = Res;
+        NN = size(dd,2);
+        SP = strcat(SPEPS,'Power',num2str(round(W(ip))),'/');
         
-        ResSave(i).CW            = Chi2_CW_OPOSingleField(Res.CW);
+        for iCW = 1:1
+
+            switch iCW
+
+            case 1
+
+                Res.CW.In.W = Res.CW.In.Ws_Star*W(ip);
+
+            case 2
+
+                Res.CW.In.W = Res.CW.In.Ws_Star*W;
+
+            case 3
+
+                Res.CW.In.W = Res.CW.In.Wf_Star*W*15.5;
+
+            end               
+            parfor id = 1:NN
+
+                R                 = Res;
+                R.CW.In.delta_o   = (R.CW.In.ko*dd(id)+R.CW.In.eps)/2;            
+                Run(id) = CreateStartingPoints(R,id,iCW,SP);
+
+
+            end
+            Rn(ieps).R(ip).RunD = Run;
+        end
+    end
+ end
+%%    
+    p = gcp;
+    for ieps =1:size(eps_vector,2)
+        SPEPS = strcat('/home/dp710/DataGit/Chi23/Dynamics/CWScans/NoOPOStartEps',num2str(eps_vector(ieps)/Res.CW.In.ko),'/');
         
+        for iCW = 1:1
+            
+            for ip =1:size(W,2)            
+                SP = strcat(SPEPS,'Power',num2str(round(W(ip))),'/');
+                
+                indRun = find(Rn(ieps).R(ip).RunD==0);
+                parfor id = 1:size(indRun,2)
+                    
+                     RunStartingPoints(indRun(id),iCW,SP);
+                    
+                end    
+                
+                indRun = find(Rn(ieps).R(ip).RunD>0);
+                parfor id = 1:size(indRun,2)
+                    
+                     RunStartingPoints(indRun(id),iCW,SP);
+                    
+                end    
+            end
+        end
+        
+    end
+     
+
+
+%%
+function RunStartingPoints(id,iCW,SPS)
+    warning('off')
+    switch iCW
+        
+        case 1
+            
+            SP = strcat(SPS,'SinOPO/Out/');
+            SPI = strcat(SPS,'SinOPO/In/');
+            if ~exist(SP,'dir')
+                mkdir(SP)
+            end
+            
+            
+            
+        case 2
+            
+            SP = strcat(SPS,'DbOPO/Out/');
+            SPI = strcat(SPS,'DbOPO/In/');
+            if ~exist(SP,'dir')
+                mkdir(SP)
+            end
+            
+            
+        case 3
+            
+            SP = strcat(SPS,'SH/Out/');
+            SPI = strcat(SPS,'SH/In/');
+            if ~exist(SP,'dir')
+                mkdir(SP)
+            end
+            
+            
+    end
+    
+    ResSave = importdata(strcat(SPI,num2str(id),'.mat'));
+    
+    Runge                      = Define_Runge_Coeff(ResSave.Temp.Par);
+
+    ResSave.Temp.In       = ResSave.CW.In;
+
+    ResSave.Temp          = ResSave.Temp.Met.Norm(ResSave.Temp);   
+    ResSave.Temp          = Chi23_Temp_Start_CW(ResSave.Temp,ResSave.CW);
+
+    ResSave.Temp.Met      = [];
+    
+    if isnan(ResSave.CW.Sol.Psi_o)
+        save(strcat(SP,num2str(id)),'ResSave'); 
+    else
+        if max(max(real(ResSave.CW.Stab.Value))) > 0
+            switch iCW
+
+                case 1
+
+                    tic
+                    ResSave.Temp.Sol      = Chi23OPO_Runge_Kuarong_mex(ResSave.Temp,Runge);
+                    iCW
+                    id
+                    toc
+
+                case 2
+
+                    ResSave.Temp.In = rmfield(ResSave.Temp.In,'Deltasmu');
+                    ResSave.Temp.In = rmfield(ResSave.Temp.In,'Deltafmu');
+                    ResSave.Temp.In = rmfield(ResSave.Temp.In,'g_mu');
+
+                    ResSave.CW.In = rmfield(ResSave.CW.In,'Deltasmu');
+                    ResSave.CW.In = rmfield(ResSave.CW.In,'Deltafmu');
+                    ResSave.CW.In = rmfield(ResSave.CW.In,'g_mu');
+
+                    ResSave.CW.Sol = rmfield(ResSave.CW.Sol,'PsiF');
+                    ResSave.CW.Sol = rmfield(ResSave.CW.Sol,'PsiS');
+                    ResSave.CW.Sol = rmfield(ResSave.CW.Sol,'expA');
+                    tic
+                    ResSave.Temp.Sol      = Chi23OPO_Runge_Kuarong_mex(ResSave.Temp,Runge);
+                    iCW
+                    id
+                    toc
+
+                case 3
+
+
+                    tic
+                    ResSave.Temp.Sol      = Chi23_Runge_Kuarong_mex(ResSave.Temp,Runge);
+                    iCW
+                    id
+                    toc
+
+            end
+        end
+        save(strcat(SP,num2str(id)),'ResSave'); 
+    end
+end
+function Run =  CreateStartingPoints(R,id,iCW,SP)
+
+
+    switch iCW
+        
+        case 1
+            
+            R.CW.In.mu_bl   = 0;
+            R.CW            = Chi2_CW_OPOSingleField(R.CW);
+            R.CW.Stab       = Chi23_MI(R.CW);
+            SP = strcat(SP,'SinOPO/In/');
+            
+            if ~exist(SP,'dir')
+                mkdir(SP)
+            end
+            
+            save(strcat(SP,num2str(id),'.mat'),'R');
+            
+        case 2
+            
+            R.CW.In.mu_bl   = 0;
+            R.CW            = Chi23_Stat_OPO_AnalyticsTurings(R.CW);
+            
+            R.CW.Sol.Psi_o  = R.CW.Sol.PsiF(1);
+            R.CW.Sol.Psi_e  = R.CW.Sol.PsiS(1);
+            
+            R.CW.Stab       = Chi23_MI(R.CW);
+
+            SP = strcat(SP,'DbOPO/In/');
+            
+            if ~exist(SP,'dir')
+                mkdir(SP)
+            end
+            
+            save(strcat(SP,num2str(id)),'R');
+            
+        case 3
+            
+            R.CW.In.mu_bl   = 0;
+            
+            R.CW            = Chi2_CW(R.CW);
+                        
+            [~,ind] = max(R.CW.Sol.g);
+
+            R.CW.Sol.Omega    = R.CW.Sol.Omega(ind);        
+            R.CW.Sol.Psi_o    = R.CW.Sol.Psi_o(ind);
+            R.CW.Sol.Psi_e    = R.CW.Sol.Psi_e(ind);
+            R.CW.Sol.g        = R.CW.Sol.g(ind);        
+              
+            R.CW.Stab         = Chi23_MI(R.CW);
+            SP = strcat(SP,'SH/In/');
+            
+            if ~exist(SP,'dir')
+                mkdir(SP)
+            end
+            
+            save(strcat(SP,num2str(id)),'R');
+    end
+    if  max(max(real(R.CW.Stab.Value))) > 0 
+        Run = 1;
+    else
+        Run = 0;
+    end
+
+end
+function SaveRes(ResSave)
+        save(strcat('/home/dp710/DataGit/Chi23/Dynamics/OPOCWScansNew/eps0_power',num2str(ResSave(1).Temp.In.W/ResSave(1).Temp.In.Ws_Star)),'ResSave')
+end
+function ResSave = RunDyn(ResSave)
+
+        i=1;
+        Runge                      = Define_Runge_Coeff(ResSave(i).Temp.Par);
+ 
         ResSave(i).Temp.In       = ResSave(i).CW.In;
         
         ResSave(i).Temp          = ResSave(i).Temp.Met.Norm(ResSave(i).Temp);   
@@ -53,15 +275,9 @@
         tic
         ResSave(i).Temp.Sol      = Chi23OPO_Runge_Kuarong_mex(ResSave(i).Temp,Runge);
         toc
-    end
-%%
-  
-    
-%   Res.Stat.Stab          = Stability_Switcher(Res.Stat);
-%%
-        Plot_Res_temp(ResSave(1));   
-%
-%%
+
+
+end
 function Plot_Frog(ResSave,wd)
     
     

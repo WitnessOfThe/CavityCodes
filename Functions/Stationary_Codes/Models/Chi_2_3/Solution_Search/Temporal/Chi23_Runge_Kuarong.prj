@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2018b">
-  <configuration build-checksum="1558759662" file="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.prj" location="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal" name="Chi23_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="88635201" file="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.prj" location="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal" name="Chi23_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -32,7 +32,7 @@
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
-      <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
+      <param.VerificationStatus>option.VerificationStatus.Inactive</param.VerificationStatus>
       <param.EnableMexProfiling>false</param.EnableMexProfiling>
       <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
       <param.CustomSourceCode />
@@ -775,6 +775,7 @@
     <param.objective>option.objective.c</param.objective>
     <param.WorkflowStep>workflowSummary</param.WorkflowStep>
     <param.TestSnippets>
+      <item>Chi23_Runge_Kuarong(ResSave.Temp,Runge)</item>
       <item>Chi23_Runge_Kuarong(Temp,Runge)</item>
       <item>Chi23_Runge_Kuarong(ResSave(i).Temp,Runge)</item>
       <item>Chi23_Runge_Kuarong(Res.Temp,Runge)</item>
@@ -802,7 +803,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>2463845981</param.AnnotationChecksum>
+    <param.AnnotationChecksum>4260017393</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -811,12 +812,12 @@
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen/mex/Chi23_Runge_Kuarong</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>1558759662</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>1754743591</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\Chi23_Runge_Kuarong</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>302166809</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>Chi23_Runge_Kuarong(ResSave(i).Temp,Runge)</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;605304588&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;211153385&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
     <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
@@ -1009,7 +1010,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}/Chi23_Runge_Kuarong.m">
-        <Marker>1623235259628</Marker>
+        <Marker>1624022732658</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
@@ -1037,20 +1038,23 @@
               <Field Name="Do" typeId="5" />
               <Field Name="De" typeId="5" />
               <Field Name="Finess" typeId="4" />
+              <Field Name="Finess_e" typeId="4" />
               <Field Name="H_Star" typeId="4" />
-              <Field Name="W_Star" typeId="4" />
+              <Field Name="Wf_Star" typeId="4" />
+              <Field Name="Ws_Star" typeId="4" />
               <Field Name="Omega_Star" typeId="4" />
               <Field Name="eps" typeId="4" />
               <Field Name="delta_o" typeId="4" />
               <Field Name="N" typeId="4" />
+              <Field Name="kMI" typeId="6" />
               <Field Name="W" typeId="4" />
               <Field Name="mu_bl" typeId="4" />
-              <Field Name="kMI" typeId="6" />
-              <Field Name="delta" typeId="4" />
               <Field Name="delta_e" typeId="4" />
-              <Field Name="H" typeId="4" />
+              <Field Name="H_f" typeId="4" />
+              <Field Name="H_s" typeId="4" />
               <Field Name="Omega_f" typeId="7" />
               <Field Name="Omega_s" typeId="7" />
+              <Field Name="d" typeId="4" />
               <Field Name="Psi_Start" typeId="8" />
               <Field Name="t_start" typeId="4" />
             </Field>
@@ -1063,7 +1067,8 @@
               <Field Name="k" typeId="9" />
             </Field>
             <Field Name="Eq" typeId="2">
-              <Field Name="H" typeId="4" />
+              <Field Name="H_f" typeId="4" />
+              <Field Name="H_s" typeId="4" />
               <Field Name="delta_o" typeId="4" />
               <Field Name="delta_e" typeId="4" />
               <Field Name="eps" typeId="4" />
@@ -1093,7 +1098,7 @@
             <type typeId="0">
               <Class>struct</Class>
               <Size>1 x 1</Size>
-              <Value>ResSave(i).Temp</Value>
+              <Value>ResSave.Temp</Value>
               <InitialValue />
               <UserDefined>true</UserDefined>
               <TypeName />
@@ -1148,7 +1153,7 @@
             </type>
             <type typeId="6">
               <Class>double</Class>
-              <Size>1 x 30</Size>
+              <Size>1 x 31</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1166,7 +1171,7 @@
             </type>
             <type typeId="8">
               <Class>double</Class>
-              <Size>1 x 512</Size>
+              <Size>1 x 256</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1175,7 +1180,7 @@
             </type>
             <type typeId="9">
               <Class>double</Class>
-              <Size>1 x 256</Size>
+              <Size>1 x 128</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1184,7 +1189,7 @@
             </type>
             <type typeId="10">
               <Class>double</Class>
-              <Size>1 x 512</Size>
+              <Size>1 x 256</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1193,7 +1198,7 @@
             </type>
             <type typeId="11">
               <Class>double</Class>
-              <Size>1 x 256</Size>
+              <Size>1 x 128</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>

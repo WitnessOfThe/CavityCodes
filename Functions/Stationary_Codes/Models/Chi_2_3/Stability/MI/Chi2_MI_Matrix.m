@@ -3,8 +3,8 @@ function  M = Chi2_MI_Matrix(CW,i,j)
     switch func2str(CW.Met.MI_Matrix)
         
         case 'Chi2_MI_Matrix'
-            Psi_o = abs(CW.Sol.Omega(j)./CW.In.Omega_Star*CW.In.H_Star);
-            Psi_e = abs(CW.Sol.Omega(j).^2/CW.In.Omega_s/CW.In.gam2o); 
+            Psi_o = CW.Sol.Psi_o;%abs(CW.Sol.Omega(j)./CW.In.Omega_Star*CW.In.H_Star);
+            Psi_e = CW.Sol.Psi_e;%abs(CW.Sol.Omega(j).^2/CW.In.Omega_s/CW.In.gam2o); 
             
         case 'Chi23_MI_Matrix'
             

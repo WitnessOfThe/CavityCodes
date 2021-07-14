@@ -3,29 +3,34 @@
 %%
     Res = Set_Up_Methods_For_Chi23_Paper;
     
-%%
     
-    Res.CW.In         = Params_LiNbd;
+    Res.CW.In         = Params_LiNbd_FR_OPO;
     Res.CW.In.delta_o = 0;
     Res.CW.In.N       = 150;
-    Res.CW.In.W       = 7000*Res.CW.In.W_Star;
+    Res.CW.In.W       = 7000*Res.CW.In.Ws_Star;
+    Res.CW.In.mu_bl   = 0;
     
-    NNP               = 750;%
-    NND               = 750;%
+%%    
+    NNP               = 1000;%
+    NND               = 1000;%
     
     
-    kvector             = [0:100];
-    epsilon_vector      =  [-50,0,5,50]*Res.CW.In.ko;   
+    kvector             =  [0:30];
+    epsilon_vector      =  [0]*Res.CW.In.ko;   
     
-    omega_max           =  50;
-    g_max               =  50;
+%    omega_max           =  75;
+ %   g_max               =  75;
+    H_max               =  12;
+    delta_min           = -12;
+    delta_max           =  32;
     
-    delta_min           = -50;
-    delta_max           =  50;
-    for i =1:4
-    tic
-    Save_Omega(i)          = GetMiGPlane(Res,epsilon_vector(i),g_max,delta_max,delta_min,kvector,NNP,NND);
-    toc
+    for i =1:3
+        tic
+     %  Save_Omega(i)          = GetOPOGPlane(Res,epsilon_vector(i),g_max,delta_max,delta_min,kvector,NNP,NND);
+        Save_Omega(i)          = GetMiDegenNO_OPOPlane(Res,epsilon_vector(i),H_max,delta_max,delta_min,kvector,NNP,NND);
+     
+     %   Save_Omega(i)          = GetMiDegenOPOPlane(Res,epsilon_vector(i),H_max,delta_max,delta_min,kvector,NNP,NND);
+        toc
     end    
 %     for i =1:20
 %     tic
@@ -57,8 +62,7 @@
 %     false,'Display','none','UseParallel',false,'SpecifyObjectiveGradient',false,...
 %     'Algorithm','trust-region-dogleg','FunValCheck','on',...
 %     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-10));
-
-%%
+%
 
 %% Omega_Scan
   save(strcat('Mi_Omega_Turing','eps=p25m25','Delta=m100p100'),'Save_Omega');%,'_eps=',num2str(Res.CW.In.eps/2/pi)
@@ -272,15 +276,117 @@ function Save_Omega = GetMiGPlane(Res,epsilon_vector,g_max,delta_max,delta_min,k
             ReLam           = zeros(NNP,NND);
             
             parfor i_p = 1:NNP
+                
                 CWW = CW;
+                
                 for i_d = 1:NND
 
                     CWW.In.delta_o     = delta_vector(i_d);
                     CWW            = CWW.Met.Norm(CWW);
                     
-                    CWW.Sol.Omega      = abs(sqrt(abs(CWW.In.Omega_s)*g_vector(i_p)));      
-                    
+                    %%CWW.Sol.Omega      = abs(sqrt(abs(CWW.In.Omega_s)*g_vector(i_p)));      
+                    CWW.Sol.Psi_o = 0;
+                    CWW.Sol.Psi_e = g_vector(i_p)/CWW.In.gam2o;
                     [Mumber(i_p,i_d),ReMax(i_p,i_d)] =  Evaluate_MI_Omega(CWW);
+                    %
+                end  
+
+            end
+            
+            kMI(ik).Res                  = Res;        
+            kMI(ik).Mumber               = Mumber;
+            kMI(ik).ReMax               = ReMax;
+            
+        end
+        
+        Save_Omega(ii).kMI = kMI;
+        
+    end
+
+end
+function Save_Omega = GetMiDegenOPOPlane(Res,epsilon_vector,H_max,delta_max,delta_min,kvector,NNP,NND)
+
+    for ii = 1:size(epsilon_vector,2)
+        
+        Res.CW.In.eps       = epsilon_vector(ii);
+        delta_vector        = linspace(delta_max(ii),delta_min(ii),NND)*Res.CW(1).In.ko;
+        H_vec               = linspace(0.001,H_max(ii),NNP);
+        
+        Save_Omega(ii).epsilon = epsilon_vector(ii);
+        Save_Omega(ii).delta   = delta_vector;
+        Save_Omega(ii).G       = H_vec;
+        
+        for ik =1:size(kvector,2)
+            
+            CW              = Res.CW;
+            CW.In.kMI       = kvector(ik); 
+            Mumber          = zeros(NNP,NND);
+            ReLam           = zeros(NNP,NND);
+            
+            parfor i_p = 1:NNP
+                
+                CWW = CW;
+                CWW.In.W = H_vec(i_p).^2*CW.In.ko.^2/CW.In.gam2o.^2/CW.In.eta/CW.In.Finess_e*pi;
+                
+                for i_d = 1:NND
+
+                    CWW.In.delta_o = (delta_vector(i_d)+CWW.In.eps)/2;
+%                    CWW            = CWW.Met.Norm(CWW);
+                    CWW            = Chi23_Stat_OPO_AnalyticsTurings(CWW);
+                    if isnan(CWW.Sol.PsiF(1))
+                         Mumber(i_p,i_d) = NaN;
+                         ReMax(i_p,i_d) = NaN;
+                    else
+                        CWW.Sol.Psi_o  = CWW.Sol.PsiF(1);
+                        CWW.Sol.Psi_e  = CWW.Sol.PsiS(1);
+                        [Mumber(i_p,i_d),ReMax(i_p,i_d)] =  Evaluate_MI_Omega(CWW);                        
+                    end
+                    %
+                end  
+
+            end
+            
+            kMI(ik).Res                  = Res;        
+            kMI(ik).Mumber               = Mumber;
+            kMI(ik).ReMax               = ReMax;
+            
+        end
+        
+        Save_Omega(ii).kMI = kMI;
+        
+    end
+
+end
+function Save_Omega = GetMiDegenNO_OPOPlane(Res,epsilon_vector,H_max,delta_max,delta_min,kvector,NNP,NND)
+
+    for ii = 1:size(epsilon_vector,2)
+        
+        Res.CW.In.eps       = epsilon_vector(ii);
+        delta_vector        = linspace(delta_max(ii),delta_min(ii),NND)*Res.CW(1).In.ko;
+        H_vec               = linspace(0.4,H_max(ii),NNP);
+        
+        Save_Omega(ii).epsilon = epsilon_vector(ii);
+        Save_Omega(ii).delta   = delta_vector;
+        Save_Omega(ii).G       = H_vec;
+        
+        for ik =1:size(kvector,2)
+            
+            CW              = Res.CW;
+            CW.In.kMI       = kvector(ik); 
+            Mumber          = zeros(NNP,NND);
+            ReLam           = zeros(NNP,NND);
+            
+            parfor i_p = 1:NNP
+                
+                CWW = CW;
+                CWW.In.W = H_vec(i_p).^2*CW.In.ko.^2/CW.In.gam2o.^2/CW.In.eta/CW.In.Finess_e*pi;
+                
+                for i_d = 1:NND
+
+                    CWW.In.delta_o = (delta_vector(i_d)+CWW.In.eps)/2;
+                    CWW            = Chi2_CW_OPOSingleField(CWW);
+                    [Mumber(i_p,i_d),ReMax(i_p,i_d)] =  Evaluate_MI_Omega(CWW);                        
+
                     %
                 end  
 
@@ -301,7 +407,7 @@ function [Mumber,Lam] =  Evaluate_MI_Omega(CW)
     
     CW            = CW.Met.Norm(CW);
     CW.Stab       = Chi23_MI(CW);
-%    [~,1]       = max(abs(CW.Sol.Omega));
+    
     [ReLam]         = max(real(CW.Stab.Value),[],'all');
     [i1,i2]     = find(real(CW.Stab.Value) == ReLam);
     Lam         = CW.Stab.Value(i1(1),i2(1));
@@ -311,33 +417,6 @@ function [Mumber,Lam] =  Evaluate_MI_Omega(CW)
     else
         Mumber = 0;
     end
-%    Mumber        = sum(sum(uniquetol(real(Res.CW.Stab(ind).Value))>1E-6));
-    
-    
-%     if Mumber > 0
-%         
-%         [ir,ic]         = find(Res.CW.Stab(ind).Value > 0);  
-%         
-%         k               = Res.CW.Space.k(ir);
-%         k               = k(k>=0);               
-%         vectors         = zeros(4,length(ir));
-%         value           = zeros(1,length(ir));
-%         
-%         for iv = 1:length(ir)
-% 
-%             value(iv)     = Res.CW.Stab(ind).Value(ir(iv),ic(iv));
-%             vectors(:,iv) = Res.CW.Stab(ind).Vector(ir(iv)).V(:,ic(iv));
-% 
-%         end
-%         
-%         
-%     else
-%                 
-%         value     = NaN;
-%         k         = NaN;        
-%         vectors   = NaN;
-%         
-%     end
 end
     
 
@@ -450,5 +529,50 @@ function [Mumber] =  Evaluate_MI_PowerCHi23(Res,Ext)
 %         
 %     end
     
+end
+function Save_Omega = GetMne(Res,epsilon_vector,g_max,delta_max,delta_min,kvector,NNP,NND)
+
+    for ii = 1:size(epsilon_vector,2)
+        
+        Res.CW.In.eps       = epsilon_vector(ii);
+        delta_vector        = linspace(delta_max(ii),delta_min(ii),NND)*Res.CW(1).In.ko;
+        g_vector            = linspace(0.001,g_max(ii),NNP)*Res.CW(1).In.ko;
+        
+        Save_Omega(ii).epsilon = epsilon_vector(ii);
+        Save_Omega(ii).delta   = delta_vector;
+        Save_Omega(ii).G       = g_vector;
+        
+        for ik =1:size(kvector,2)
+            
+            CW              = Res.CW;
+            CW.In.kMI       = kvector(ik); 
+            Mumber          = zeros(NNP,NND);
+            ReLam           = zeros(NNP,NND);
+            
+            parfor i_p = 1:NNP
+                CWW = CW;
+                for i_d = 1:NND
+
+                    CWW.In.delta_o     = delta_vector(i_d);
+                    CWW            = CWW.Met.Norm(CWW);
+                    
+                    CWW.Sol.Omega      = abs(sqrt(abs(CWW.In.Omega_s)*g_vector(i_p)));      
+                    
+                    [Mumber(i_p,i_d),ReMax(i_p,i_d)] =  Evaluate_MI_Omega(CWW);
+                    %
+                end  
+
+            end
+            
+            kMI(ik).Res                  = Res;        
+            kMI(ik).Mumber               = Mumber;
+            kMI(ik).ReMax               = ReMax;
+            
+        end
+        
+        Save_Omega(ii).kMI = kMI;
+        
+    end
+
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

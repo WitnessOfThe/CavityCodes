@@ -3,7 +3,11 @@ function Stat = Chi23_Stat_Normalization(Stat)
 
     Fundamental_Constants;
     N         = Stat.In.N;
-    Stat.Space  = Define_Space_Cavity(N,2*pi/Stat.In.mu_bl);
+    if Stat.In.mu_bl ==0 
+        Stat.Space  = Define_Space_Cavity(N,2*pi);
+    else
+        Stat.Space  = Define_Space_Cavity(N,2*pi/Stat.In.mu_bl);
+    end
         
 %%
 

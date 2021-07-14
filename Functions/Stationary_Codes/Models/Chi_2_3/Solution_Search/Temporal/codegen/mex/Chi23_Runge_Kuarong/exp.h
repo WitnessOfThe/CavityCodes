@@ -24,7 +24,7 @@
 #include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void b_exp(creal_T x[512]);
+extern void b_exp(creal_T x[256]);
 
 #endif
 

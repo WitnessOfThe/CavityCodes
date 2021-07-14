@@ -1,7 +1,7 @@
 function Stab = Chi23_Bloch_Stability(Stat)
             
-    n = [-floor(Stat.In.mu_bl/2):1:floor(Stat.In.mu_bl/2)];
-    if Stat.In.mu_bl == 1
+    n = 0;% [-floor(Stat.In.mu_bl/2):1:floor(Stat.In.mu_bl/2)];
+    if Stat.In.mu_bl == 1 || Stat.In.mu_bl == 0
         i =1;
         Stat.In.n                     = n(i);
         

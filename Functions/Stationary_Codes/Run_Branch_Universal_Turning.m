@@ -19,6 +19,10 @@ function Stat = Run_Branch_Universal_Turning(Stat)
                 Stat_1          =   BranchTurning([real(ifft(Stat.Sol.Psi_o)),imag(ifft(Stat.Sol.Psi_o)),real(ifft(Stat.Sol.Psi_e)),imag(ifft(Stat.Sol.Psi_e)),Stat.Sol.V/Stat.Space.N]*Stat.Space.N,x_0,Stat, 1);                
                 Stat_2          =   BranchTurning([real(ifft(Stat.Sol.Psi_o)),imag(ifft(Stat.Sol.Psi_o)),real(ifft(Stat.Sol.Psi_e)),imag(ifft(Stat.Sol.Psi_e)),Stat.Sol.V/Stat.Space.N]*Stat.Space.N,x_0,Stat,-1);
                 
+            case   'Chi23_Full_Dispersion_Equation_RS_OPO'
+                
+                Stat_1          =   BranchTurning([real(ifft(Stat.Sol.Psi_o)),imag(ifft(Stat.Sol.Psi_o)),real(ifft(Stat.Sol.Psi_e)),imag(ifft(Stat.Sol.Psi_e)),Stat.Sol.V/Stat.Space.N]*Stat.Space.N,x_0,Stat, 1);                
+                Stat_2          =   BranchTurning([real(ifft(Stat.Sol.Psi_o)),imag(ifft(Stat.Sol.Psi_o)),real(ifft(Stat.Sol.Psi_e)),imag(ifft(Stat.Sol.Psi_e)),Stat.Sol.V/Stat.Space.N]*Stat.Space.N,x_0,Stat,-1);
         end
         
         

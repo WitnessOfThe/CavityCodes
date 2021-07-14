@@ -150,6 +150,12 @@
                             Stat.In.delta     = Stat.In.kappa*Stat.Eq.delta;
                             Stat.In.P         = Stat.In.W_WStar*pi/(Stat.In.eta*Stat.In.D(1)/Stat.In.kappa)*Stat.In.kappa/Stat.In.gamma; 
                             Stat = Stat.Met.Norm(Stat);
+                case 'Fin_Dlog'
+                            Stat.Eq.Fin_Dlog     = x;
+                            Stat.In.kappa     = Stat.In.D(2)/10^(Stat.Eq.Fin_Dlog);
+                            Stat.In.delta     = Stat.In.kappa*Stat.Eq.delta;
+                            Stat.In.P         = Stat.In.W_WStar*pi/(Stat.In.eta*Stat.In.D(1)/Stat.In.kappa)*Stat.In.kappa/Stat.In.gamma; 
+                            Stat = Stat.Met.Norm(Stat);
                 otherwise
                     
                     Stat.Eq.(Stat.Par.variable) = x;

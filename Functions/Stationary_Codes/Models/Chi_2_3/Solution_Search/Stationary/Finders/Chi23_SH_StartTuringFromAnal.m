@@ -4,7 +4,6 @@
         Stat = Stat.Met.Norm(Stat);
         Stat(2) =Stat;
         dphi    = 2*pi/100;
-        
         for i = 1:2
             
             ii      = 0;
@@ -25,12 +24,16 @@
                     
                 end
 
-                Stat(i).Sol.Psi_o(2)   = CW.Sol.PsiF(i).*exp(1i*phi);
-                Stat(i).Sol.Psi_o(end) = conj(Stat(i).Sol.Psi_o(2)).*exp(1i*phi);
+                if Stat(i).In.mu_bl ~= 0
+                    Stat(i).Sol.Psi_o(2)   = CW.Sol.PsiF(i).*exp(1i*phi);
+                    Stat(i).Sol.Psi_o(end) = conj(Stat(i).Sol.Psi_o(2)).*exp(1i*phi);
 
-                Stat(i).Sol.Psi_e(1)   = CW.Sol.PsiS(i);
-                Stat(i).Sol.Psi_o(1)   = CW.Sol.PsiFo(i);
-
+                    Stat(i).Sol.Psi_e(1)   = CW.Sol.PsiS(i);
+                    Stat(i).Sol.Psi_o(1)   = CW.Sol.PsiFo(i);
+                else
+                    Stat(i).Sol.Psi_e(1)   = CW.Sol.PsiS(i);
+                    Stat(i).Sol.Psi_o(1)   = CW.Sol.PsiF(i);
+                end
                 Psi_o           = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
                 Psi_e           = ifft(Stat(i).Sol.Psi_e*Stat(i).Space.N);
 
@@ -48,10 +51,16 @@
                 Stat(i).Sol.Exitflag= Exitflag;
                 
                 
-                if abs(Stat(i).Sol.Psi_o(2)) > 1E-4 && eps_f <Stat(i).Par.Newton_tol
+                if Stat(i).In.mu_bl ~= 0
+                    if abs(Stat(i).Sol.Psi_o(2)) > 1E-4 && eps_f <Stat(i).Par.Newton_tol
                     
-                   Flag = 1;
+                       Flag = 1;
                     
+                    end
+                else
+                    if  abs(Stat(i).Sol.Psi_o(1)) > 1E-8 && eps_f <Stat(i).Par.Newton_tol
+                       Flag = 1;
+                    end                    
                 end
 
             end

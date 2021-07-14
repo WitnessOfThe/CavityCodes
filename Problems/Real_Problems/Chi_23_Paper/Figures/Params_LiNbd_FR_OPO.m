@@ -1,14 +1,14 @@
 function In = Params_LiNbd_FR_OPO
 
     In.eta             = 0.5;                                
-    In.ko             = 2*pi*1E6;                                
-    In.ke             = 2*pi*4E6;       
+    In.ko             = 2*pi*1.4E6;                                
+    In.ke             = 2*pi*7E6;       
     
     In.gam2o          = 2*pi*300E6;
     In.gam2e          = 2*pi*300E6;
     
-    In.gam3o          = 0;%2*pi*300E3;
-    In.gam3e          = 0;%2*pi*300E3;
+    In.gam3o          = 2*pi*600E3;
+    In.gam3e          = 2*pi*600E3;
     
     In.Do              = 2*pi*[16.92E9,-65E3];% Dispersion Coefficients,-4E3
     In.De              = 2*pi*[15.86E9,-144E3];% Dispersion Coefficients,-4E3

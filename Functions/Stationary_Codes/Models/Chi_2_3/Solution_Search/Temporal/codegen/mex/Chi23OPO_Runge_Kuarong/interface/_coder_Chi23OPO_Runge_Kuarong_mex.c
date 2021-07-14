@@ -10,23 +10,27 @@
  */
 
 /* Include files */
+#include "Chi23OPO_Runge_Kuarong.h"
 #include "_coder_Chi23OPO_Runge_Kuarong_mex.h"
-#include "Chi23OPO_Runge_Kuarong_data.h"
-#include "Chi23OPO_Runge_Kuarong_initialize.h"
 #include "Chi23OPO_Runge_Kuarong_terminate.h"
 #include "_coder_Chi23OPO_Runge_Kuarong_api.h"
-#include "rt_nonfinite.h"
+#include "Chi23OPO_Runge_Kuarong_initialize.h"
+#include "Chi23OPO_Runge_Kuarong_data.h"
+
+/* Function Declarations */
+static void c_Chi23OPO_Runge_Kuarong_mexFun(int32_T nlhs, mxArray *plhs[1],
+  int32_T nrhs, const mxArray *prhs[2]);
 
 /* Function Definitions */
-void Chi23OPO_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T
-  nrhs, const mxArray *prhs[2])
+static void c_Chi23OPO_Runge_Kuarong_mexFun(int32_T nlhs, mxArray *plhs[1],
+  int32_T nrhs, const mxArray *prhs[2])
 {
+  const mxArray *outputs[1];
   emlrtStack st = { NULL,              /* site */
     NULL,                              /* tls */
     NULL                               /* prev */
   };
 
-  const mxArray *outputs[1];
   st.tls = emlrtRootTLSGlobal;
 
   /* Check for proper number of arguments. */
@@ -41,7 +45,7 @@ void Chi23OPO_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T
   }
 
   /* Call the function. */
-  Chi23OPO_Runge_Kuarong_api(prhs, outputs);
+  Chi23OPO_Runge_Kuarong_api(prhs, nlhs, outputs);
 
   /* Copy over outputs to the caller. */
   emlrtReturnArrays(1, plhs, outputs);
@@ -50,13 +54,13 @@ void Chi23OPO_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T
 void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs, const mxArray
                  *prhs[])
 {
-  mexAtExit(&Chi23OPO_Runge_Kuarong_atexit);
+  mexAtExit(Chi23OPO_Runge_Kuarong_atexit);
 
   /* Module initialization. */
   Chi23OPO_Runge_Kuarong_initialize();
 
   /* Dispatch the entry-point. */
-  Chi23OPO_Runge_Kuarong_mexFunction(nlhs, plhs, nrhs, prhs);
+  c_Chi23OPO_Runge_Kuarong_mexFun(nlhs, plhs, nrhs, prhs);
 
   /* Module termination. */
   Chi23OPO_Runge_Kuarong_terminate();
