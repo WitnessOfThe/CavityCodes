@@ -1,10 +1,10 @@
 function Stab = Chi23_MI(CW)
         
-    for j = 1:size(CW.Sol.Omega,1)
+    for j = 1:size(CW.Sol.Psi_o,1)
         
         Stab(j).Value    = zeros(size(CW.In.kMI,2),4);
         
-        if ~isnan(CW.Sol.Omega(j)) 
+        if ~isnan(CW.Sol.Psi_o(j)) 
             
             for i = 1:size(CW.In.kMI,2)
                 

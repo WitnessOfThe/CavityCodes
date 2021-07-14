@@ -27,7 +27,7 @@ function Res = Set_Up_Methods_For_Chi23_Paper
 %     L_L.CW.Met.Plot.Dressed_State = @Plot_LLE_Dressed_State;
 %     
 %% From turn to turn
-    Res.Stat.Met.Equation             = @Chi23_Full_Dispersion_Equation_RS; %% Equation to solve
+    Res.Stat.Met.Equation             = @Chi23_Full_Dispersion_Equation_RS_OPO; %% Equation to solve
     Res.Stat.Met.Liniar_Decomposition = @Chi23_Full_Dispersion_Liniar_Decomposition_RS; %% Quasi_Netwon Matrix
     Res.Stat.Met.Preconditioner       = @Chi23_Full_Dispersion_Preconditioner_RS;%% Optimization
     Res.Stat.Met.Newton               = @Newton_Manual_bicgstab;
@@ -168,7 +168,7 @@ end
                end
            end
              
-           Logic.rCW         = sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
+           Logic.rCW         = 0;%sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
            Logic.MaxIter     = i > Stat(1).Par.i_max;           
            FlagReduce        = (Logic.Smooth + Logic.Resid) > 0 ;
            FlagStop          = Logic.MaxIter + Logic.rCW + Logic.Stop;

@@ -1,8 +1,8 @@
 function In = Params_LiNbd_FR_OPO
 
     In.eta             = 0.5;                                
-    In.ko             = 2*pi*1E6;                                
-    In.ke             = 2*pi*4E6;       
+    In.ko             = 2*pi*1.4E6;                                
+    In.ke             = 2*pi*7E6;       
     
     In.gam2o          = 2*pi*300E6;
     In.gam2e          = 2*pi*300E6;

@@ -1,4 +1,4 @@
- function Stat = Chi23_OPO_StartTuringFromAnal(CW,Stat)
+ function [Stat,CW] = Chi23_OPO_StartTuringFromAnal(CW,Stat)
     
         CW   = Chi23_Stat_OPO_AnalyticsTurings(CW);
         Stat = Stat.Met.Norm(Stat);
@@ -24,12 +24,21 @@
                    break;
                     
                 end
+                if Stat(i).In.mu_bl ~= 0
+                    
+                    Stat(i).Sol.Psi_o(2)   = CW.Sol.PsiF(i).*exp(1i*phi);
+                    Stat(i).Sol.Psi_o(end) = abs(CW.Sol.PsiF(i)).*CW.Sol.PsiF(i)*exp(1i*phi)./Stat(i).Sol.Psi_o(2);
 
-                Stat(i).Sol.Psi_o(2)   = CW.Sol.PsiF(i).*exp(1i*phi);
-                Stat(i).Sol.Psi_o(end) = conj(Stat(i).Sol.Psi_o(2)).*CW.Sol.expA(i);
+                    Stat(i).Sol.Psi_e(1)   = CW.Sol.PsiS(i);
+              %      Stat(i).Sol.Psi_o(1)   = CW.Sol.PsiFo(i);
+                else
+                    Stat(i).Sol.Psi_o(1)   = CW.Sol.PsiF(i).*exp(1i*phi);
+                 %   Stat(i).Sol.Psi_o(end) = abs(CW.Sol.PsiF(i)).*CW.Sol.PsiF(i)*exp(1i*phi)./Stat(i).Sol.Psi_o(2);
 
-                Stat(i).Sol.Psi_e(1)   = CW.Sol.PsiS(i);
+                    Stat(i).Sol.Psi_e(1)   = CW.Sol.PsiS(i);
+                end
 
+ 
                 Psi_o           = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
                 Psi_e           = ifft(Stat(i).Sol.Psi_e*Stat(i).Space.N);
 
@@ -47,10 +56,16 @@
                 Stat(i).Sol.Exitflag= Exitflag;
                 
                 
-                if abs(Stat(i).Sol.Psi_o(2)) > 1E-4
+                if Stat(i).In.mu_bl ~= 0
+                    if abs(Stat(i).Sol.Psi_o(2)) > 1E-4 && eps_f <Stat(i).Par.Newton_tol
                     
-                   Flag = 1;
+                       Flag = 1;
                     
+                    end
+                else
+                    if  abs(Stat(i).Sol.Psi_o(1)) > 1E-8 && eps_f <Stat(i).Par.Newton_tol
+                       Flag = 1;
+                    end                    
                 end
 
             end
