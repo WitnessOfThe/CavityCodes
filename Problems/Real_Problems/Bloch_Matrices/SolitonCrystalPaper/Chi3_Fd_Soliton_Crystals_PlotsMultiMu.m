@@ -4,7 +4,6 @@
 %% Define Input Parameters in Physical Units
 
     R       =  Set_Up_Methods_For_Bloch_Matrices;
-    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Input Parameters for CaF
 
@@ -39,7 +38,9 @@
     R.Stat(1).Par.step_dec         = 0.2;
     R.Stat(1).Par.step_tol         = 1E-9;
     R.Stat(1).Par.step_inc         = 1.01;  
-    R.Stat.Par.i_max                = 500;
+    R.Stat.Par.i_max               = 500;
+%%
+    MP                             =
 
 %%    
     R.CW.In.delta    = R.CW.In.kappa*W_WStar;

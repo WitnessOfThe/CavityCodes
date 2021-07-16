@@ -120,19 +120,19 @@
                 end
             end
                        
-            
-            switch L_L.Par.Stability
-                
-                case 1
-                    
-                    L_L_1(i).Stab                 = Stability_Switcher(L_L_1(i));
-                    
-                case 0
-                    
-                    L_L_1(i).Stab.E_values  = NaN;
-                    L_L_1(i).Stab.E_vectors = NaN;
-                    
-            end
+%             
+%             switch L_L.Par.Stability
+%                 
+%                 case 1
+%                     
+%                     L_L_1(i).Stab                 = Stability_Switcher(L_L_1(i));
+%                     
+%                 case 0
+%                     
+%                     L_L_1(i).Stab.E_values  = NaN;
+%                     L_L_1(i).Stab.E_vectors = NaN;
+%                     
+%             end
                                    
         end
         

@@ -79,13 +79,13 @@ end
                        
                    if  sign(Logic.Dir.d12) == sign(Logic.Dir.d11) 
                        if Logic.Dir.d11 <=1
-                          Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.2;
+                          Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.3;
                        end
                        if Logic.Dir.d11 > 1
                            if abs(Logic.Dir.d12) >= abs(Logic.Dir.d11)
-                                Logic.Smooth      = abs(Logic.Dir.d12)/abs(Logic.Dir.d11) >= 1.1;
+                                Logic.Smooth      = abs(Logic.Dir.d12)/abs(Logic.Dir.d11) >= 1.3;
                            else
-                                Logic.Smooth      = abs(Logic.Dir.d11)/abs(Logic.Dir.d12) >= 1.1;
+                                Logic.Smooth      = abs(Logic.Dir.d11)/abs(Logic.Dir.d12) >= 1.3;
                            end
                        end
                        

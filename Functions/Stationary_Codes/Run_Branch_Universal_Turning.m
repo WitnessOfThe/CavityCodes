@@ -26,14 +26,16 @@ function Stat = Run_Branch_Universal_Turning(Stat)
         end
         
         
+        Stat.Logic      = NaN;
     if size(Stat_1,2) ~= 0 && size(Stat_2,2) ~= 0
-        Stat            =   [fliplr(Stat_1),Stat_2];
+        Stat            =   [fliplr(Stat_1),Stat];
+        Stat            =   [Stat,Stat_2];
     end
     if size(Stat_1,2) == 0
-        Stat            =   Stat_2;
+        Stat            =   [Stat,Stat_2];
     end
     if size(Stat_2,2) == 0
-        Stat            =   [fliplr(Stat_1)];
+        Stat            =   [fliplr(Stat_1),Stat];
     end
  
 end
