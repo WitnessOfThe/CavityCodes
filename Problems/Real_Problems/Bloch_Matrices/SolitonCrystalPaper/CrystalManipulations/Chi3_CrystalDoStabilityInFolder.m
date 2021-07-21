@@ -13,9 +13,7 @@ function PerformStability(SSSP,iSt)
 
     NaiSt= IndexToChar(iSt+26^2*27+26);
     Stat = importdata(strcat(SSSP,NaiSt{1},'.mat'));
-    if ~isfield(Stat,'Stab')
-        Stat.Stab = Stability_Switcher(Stat);
-    end
+    Stat.Stab = Stability_Switcher(Stat);
     save(strcat(SSSP,NaiSt{1},'.mat'),'Stat');
     
 end

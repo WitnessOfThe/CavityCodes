@@ -29,26 +29,17 @@ function Crystal = ReadData(SSSP,iSt)
     Crystal.Eq   = Stat.Eq;
     Crystal.Sol  = Stat.Sol;
     
-    if isfield(Stat,'Stab')
-        
-        Crystal.Stab.NMode = sum(sum(real(Stat.Stab.Values(:,:)>0)));
-        Crystal.Stab.MaxRe = max(max(real(Stat.Stab.Values(:,:))));
-        Crystal.Stab.kmax  = max(max(real(Stat.Stab.Values(:,:))));
-        
-        if real(Crystal.Stab.MaxRe) > 1
-
-            [t_raw,t_col]      = find(real(Stat.Stab.Values(:,:)) == Crystal.Stab.MaxRe);
-            Crystal.Stab.MaxRe = Stat.Stab.Values(t_raw(1),t_col(1));
-            Crystal.Stab.kmax  = Stat.Stab.k(t_raw(1));
-            Crystal.Stab.lamk0 = Stat.Stab.Values(1,real(Stat.Stab.Values(1,:))  == max( real(Stat.Stab.Values(1,:))) );
-        else
-
-            Crystal.Stab.MaxRe = 0;
-            Crystal.Stab.kmax  = NaN;
-        end
+    Crystal.Stab.NMode = sum(sum(real(Stat.Stab.Values(:,:)>0)));
+    Crystal.Stab.MaxRe = max(max(real(Stat.Stab.Values(:,:))));
     
+    if real(Crystal.Stab.MaxRe) > 1
+        
+        [t_raw,t_col]      = find(real(Stat.Stab.Values(:,:)) == Crystal.Stab.MaxRe);
+        Crystal.Stab.MaxRe = Stat.Stab.Values(t_raw(1),t_col(1));
+        
     else
-        Crystal.Stab.NMode = NaN;
-        Crystal.Stab.MaxRe = NaN;
+        
+        Crystal.Stab.MaxRe = 0;
+        
     end
 end

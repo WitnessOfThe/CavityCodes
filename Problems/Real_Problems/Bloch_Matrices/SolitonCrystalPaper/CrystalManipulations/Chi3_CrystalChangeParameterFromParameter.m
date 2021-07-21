@@ -18,21 +18,21 @@ function ScanParameter(Stat,Var,SSSP)
            case 'FD'
                
                Stat.Par.variable         = 'Fin_Dlog';
-               Stat.Par.first_step       = 25E-3;
-               Stat.Par.max_step         = 5E-3;
+               Stat.Par.first_step       = 1E-2;
+               Stat.Par.max_step         = 0.25E-1;
                Stat.Par.i_max            = 3000;
-               Stat.Par.step_tol         = 1E-12;
+               Stat.Par.step_tol         = 1E-4;
                Stat.Par.step_inc         = 1.1;  
                Stat.Par.Newton_iter      = 30;  
+               Stat.Par.Newton_tol       = 8E-13;         
                Stat.Sol.Stab             = NaN;
-               Stat.Par.step_dec         = 0.1;  
+               Stat.Par.step_dec         = 0.5;  
                Stat                      = Stat(1).Met.Norm(Stat);
                x_0                       = Stat.Eq.Fin_Dlog;
                Stat.Met.Newton_Fail_Check    = @fail_Stat_checkFD;
-              Stat = Run_Branch_Universal_Turning(Stat);
                
-            %   Stat                      = BranchTurning([real(Stat.Sol.Psi_k)...
-                %   ,imag(Stat.Sol.Psi_k)]*Stat.Space.N,x_0,Stat,-1);
+               Stat                      = BranchTurning([real(Stat.Sol.Psi_k)...
+                   ,imag(Stat.Sol.Psi_k)]*Stat.Space.N,x_0,Stat,1);
                
                
            case 'delta'
@@ -44,6 +44,7 @@ function ScanParameter(Stat,Var,SSSP)
                Stat.Par.step_tol         = 1E-5;
                Stat.Par.step_inc         = 1.1;  
                Stat.Par.Newton_iter      = 100;  
+               Stat.Par.Newton_tol       = 8E-13;         
                Stat.Sol.Stab             = NaN;
                Stat.Par.step_dec         = 0.5;  
                Stat                      = Stat(1).Met.Norm(Stat);
@@ -214,8 +215,7 @@ end
              
            Logic.step        = x_step <Stat(end).Par.step_tol;
            Logic.rCW         = sum(abs(Stat(end).Sol.Psi_k(2:end)).^2) <= 1E-10;
-           Logic.MaxIter     = i > Stat(1).Par.i_max;   
-           Logic.FD_max      = Stat(end).Eq.Fin_Dlog <-3;
+           Logic.MaxIter     = i > Stat(1).Par.i_max;           
            FlagReduce        = (Logic.Smooth + Logic.Resid+ Logic.rCW) > 0 ;
-           FlagStop          = Logic.MaxIter  + Logic.Stop+Logic.step+Logic.FD_max;
+           FlagStop          = Logic.MaxIter  + Logic.Stop+Logic.step;
      end
