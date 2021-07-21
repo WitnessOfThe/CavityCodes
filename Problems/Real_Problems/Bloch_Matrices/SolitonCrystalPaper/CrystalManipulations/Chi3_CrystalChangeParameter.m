@@ -8,13 +8,13 @@ function Stat  = Chi3_CrystalChangeParameter(R,MP,Var)
            case 'FD'
                
                Stat.Par.variable         = 'Fin_Dlog';
-               Stat.Par.first_step       = 0.1E-1;
+               Stat.Par.first_step       = 0.025E-1;
                Stat.Par.max_step         = 0.1E-1;
                Stat.Par.i_max            = 3000;
-               Stat.Par.step_tol         = 1E-4;
+               Stat.Par.step_tol         = 1E-6;
                Stat.Par.step_inc         = 1.1;  
                Stat.Par.Newton_iter      = 30;  
-               Stat.Par.Newton_tol       = 1.1E-12;         
+               Stat.Par.Newton_tol       = 1.1E-10;         
                Stat.Sol.Stab             = NaN;
                Stat.Par.step_dec         = 0.5;  
                Stat                      = Stat(1).Met.Norm(Stat);
@@ -27,13 +27,13 @@ function Stat  = Chi3_CrystalChangeParameter(R,MP,Var)
                SP = strcat(SP,'/FDScan/');
            case 'delta'
                Stat.Par.variable         = 'delta';
-               Stat.Par.first_step       = 0.01;
+               Stat.Par.first_step       = 0.001;
                Stat.Par.max_step         = 0.01;
                Stat.Par.i_max            = 3000;
                Stat.Par.step_tol         = 1E-4;
                Stat.Par.step_inc         = 1.1;  
                Stat.Par.Newton_iter      = 100;  
-               Stat.Par.Newton_tol       = 1E-12;         
+               Stat.Par.Newton_tol       = 1E-10;         
                Stat.Sol.Stab             = NaN;
                Stat.Par.step_dec         = 0.5;  
                Stat                      = Stat(1).Met.Norm(Stat);
