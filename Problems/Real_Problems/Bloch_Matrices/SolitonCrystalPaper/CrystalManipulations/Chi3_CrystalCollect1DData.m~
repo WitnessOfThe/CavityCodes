@@ -2,7 +2,7 @@ function CrystalTrack =  Chi3_CrystalCollect1DData(SSSP)
 
     NN = numel(dir(strcat(SSSP,'*.mat')));
     
-    parfor iSt = 1:NN
+    for iSt = 1:NN
         
         CrystalTrack(iSt) = ReadData(SSSP,iSt);     
         
@@ -28,7 +28,6 @@ function Crystal = ReadData(SSSP,iSt)
     Crystal.In   = Stat.In;
     Crystal.Eq   = Stat.Eq;
     Crystal.Sol  = Stat.Sol;
-    
     if isfield(Stat,'Stab')
         Crystal.Stab.NMode = sum(sum(real(Stat.Stab.Values(:,:)>0)));
         Crystal.Stab.MaxRe = max(max(real(Stat.Stab.Values(:,:))));
@@ -37,15 +36,12 @@ function Crystal = ReadData(SSSP,iSt)
 
             [t_raw,t_col]      = find(real(Stat.Stab.Values(:,:)) == Crystal.Stab.MaxRe);
             Crystal.Stab.MaxRe = Stat.Stab.Values(t_raw(1),t_col(1));
-            Crystal.Stab.lamk0 = Stat.Stab.Values(1,real(Stat.Stab.Values(1,:)) == max( real(Stat.Stab.Values(1,:))) );
+
         else
 
             Crystal.Stab.MaxRe = 0;
 
         end
     
-    else
-        Crystal.Stab.NMode = NaN;
-        Crystal.Stab.MaxRe = NaN;
     end
 end
