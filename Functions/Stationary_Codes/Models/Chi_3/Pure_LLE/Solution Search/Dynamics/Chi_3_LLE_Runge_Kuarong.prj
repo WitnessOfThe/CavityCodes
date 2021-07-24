@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2018b">
-  <configuration build-checksum="1541416902" file="C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.prj" location="C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics" name="Chi_3_LLE_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="3512368481" file="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution Search/Dynamics/Chi_3_LLE_Runge_Kuarong.prj" location="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution Search/Dynamics" name="Chi_3_LLE_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -16,7 +16,6 @@
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
       <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
-      <param.DynamicMemoryAllocationInterface>option.DynamicMemoryAllocationInterface.AUTO</param.DynamicMemoryAllocationInterface>
       <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
       <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
       <param.PreserveArrayDimensions>false</param.PreserveArrayDimensions>
@@ -27,10 +26,9 @@
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
       <param.ReservedNameArray />
       <param.EnableDebugging>false</param.EnableDebugging>
-      <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.LaunchReport>false</param.LaunchReport>
-      <param.ReportInfoVarName />
+      <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
@@ -53,10 +51,7 @@
       <param.EchoExpressions>true</param.EchoExpressions>
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
-      <param.InlineStackLimit>1000000</param.InlineStackLimit>
-      <param.InlineBetweenUserFunctions>option.InlineBetweenUserFunctions.Speed</param.InlineBetweenUserFunctions>
-      <param.InlineBetweenUserAndMathWorksFunctions>option.InlineBetweenUserAndMathWorksFunctions.Speed</param.InlineBetweenUserAndMathWorksFunctions>
-      <param.InlineBetweenMathWorksFunctions>option.InlineBetweenMathWorksFunctions.Speed</param.InlineBetweenMathWorksFunctions>
+      <param.InlineStackLimit>4000</param.InlineStackLimit>
       <param.EnableMemcpy>true</param.EnableMemcpy>
       <param.MemcpyThreshold>64</param.MemcpyThreshold>
       <param.EnableOpenMP>true</param.EnableOpenMP>
@@ -66,9 +61,6 @@
       <param.EnableJIT>false</param.EnableJIT>
       <param.EnableJITSilentBailOut>false</param.EnableJITSilentBailOut>
       <param.CheckForIssuesJIT>true</param.CheckForIssuesJIT>
-      <param.EnableGitSupport>false</param.EnableGitSupport>
-      <param.EnableAutoCommit>false</param.EnableAutoCommit>
-      <param.RepositoryStyle>option.RepositoryStyle.Auto</param.RepositoryStyle>
       <unset>
         <param.BuiltInstrumentedMex />
         <param.RanInstrumentedMex />
@@ -85,7 +77,6 @@
         <param.EnableVariableSizing />
         <param.DynamicMemoryAllocation />
         <param.DynamicMemoryAllocationThreshold />
-        <param.DynamicMemoryAllocationInterface />
         <param.RowMajor />
         <param.HighlightPotentialRowMajorIssues />
         <param.PreserveArrayDimensions />
@@ -96,10 +87,9 @@
         <param.MATLABSourceComments />
         <param.ReservedNameArray />
         <param.EnableDebugging />
-        <param.ReportPotentialDifferences />
         <param.GenerateReport />
         <param.LaunchReport />
-        <param.ReportInfoVarName />
+        <param.ReportPotentialDifferences />
         <param.DefaultTestFile />
         <param.MergeInstrumentationResults />
         <param.VerificationMode />
@@ -122,9 +112,6 @@
         <param.InlineThreshold />
         <param.InlineThresholdMax />
         <param.InlineStackLimit />
-        <param.InlineBetweenUserFunctions />
-        <param.InlineBetweenUserAndMathWorksFunctions />
-        <param.InlineBetweenMathWorksFunctions />
         <param.EnableMemcpy />
         <param.MemcpyThreshold />
         <param.EnableOpenMP />
@@ -134,12 +121,10 @@
         <param.EnableJIT />
         <param.EnableJITSilentBailOut />
         <param.CheckForIssuesJIT />
-        <param.EnableGitSupport />
-        <param.EnableAutoCommit />
-        <param.RepositoryStyle />
       </unset>
     </profile>
     <profile key="profile.c">
+      <param.grt.GenCodeOnly>false</param.grt.GenCodeOnly>
       <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
       <param.SpecifiedWorkingFolder />
       <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
@@ -152,7 +137,6 @@
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
       <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
-      <param.DynamicMemoryAllocationInterface>option.DynamicMemoryAllocationInterface.AUTO</param.DynamicMemoryAllocationInterface>
       <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
       <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
       <param.PreserveArrayDimensions>false</param.PreserveArrayDimensions>
@@ -164,32 +148,13 @@
       <param.CommentStyle />
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
       <param.MATLABFcnDesc />
+      <param.DataTypeReplacement />
       <param.ConvertIfToSwitch />
       <param.PreserveExternInFcnDecls />
       <param.EnableSignedLeftShifts />
       <param.EnableSignedRightShifts />
       <param.ParenthesesLevel />
       <param.MaxIdLength />
-      <param.HeaderGuardStyle />
-      <param.DataTypeReplacement />
-      <param.EnableCustomReplacementTypes />
-      <param.ReplacementTypes.double />
-      <param.ReplacementTypes.single />
-      <param.ReplacementTypes.uint8 />
-      <param.ReplacementTypes.uint16 />
-      <param.ReplacementTypes.uint32 />
-      <param.ReplacementTypes.uint64 />
-      <param.ReplacementTypes.int8 />
-      <param.ReplacementTypes.int16 />
-      <param.ReplacementTypes.int32 />
-      <param.ReplacementTypes.int64 />
-      <param.ReplacementTypes.char />
-      <param.ReplacementTypes.logical />
-      <param.ReplacementTypes.ImportCustomTypes />
-      <param.ReplacementTypes.HeaderFiles />
-      <param.CppInterfaceStyle>option.CppInterfaceStyle.Functions</param.CppInterfaceStyle>
-      <param.CppInterfaceClassName />
-      <param.CustomFileNameStr />
       <param.CustomSymbolStrGlobalVar>$M$N</param.CustomSymbolStrGlobalVar>
       <param.CustomSymbolStrType>$M$N</param.CustomSymbolStrType>
       <param.CustomSymbolStrField>$M$N</param.CustomSymbolStrField>
@@ -201,23 +166,21 @@
       <param.ReservedNameArray />
       <param.RuntimeChecks>false</param.RuntimeChecks>
       <param.Verbose />
-      <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.GenerateCodeMetricsReport />
       <param.GenerateCodeReplacementReport />
       <param.HighlightPotentialDataTypeIssues />
       <param.LaunchReport>false</param.LaunchReport>
-      <param.ReportInfoVarName />
+      <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.SILDebugging />
       <param.SILPILCheckConstantInputs />
       <param.SILPILSyncGlobalData />
       <param.CodeExecutionProfiling />
-      <param.CodeProfilingInstrumentation />
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.RanPilSilVerification>false</param.RanPilSilVerification>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
-      <param.VerificationStatus>option.VerificationStatus.Inactive</param.VerificationStatus>
+      <param.VerificationStatus />
       <param.CustomSourceCode />
       <param.CustomHeaderCode />
       <param.CustomInitializer />
@@ -240,11 +203,11 @@
       <param.HardwareVendor.Production>Generic</param.HardwareVendor.Production>
       <param.HardwareType.Production>MATLAB Host Computer</param.HardwareType.Production>
       <param.HWDeviceType.Production />
-      <var.instance.enabled.Production>true</var.instance.enabled.Production>
+      <var.instance.enabled.Production />
       <param.HardwareSizeChar.Production>8</param.HardwareSizeChar.Production>
       <param.HardwareSizeShort.Production>16</param.HardwareSizeShort.Production>
       <param.HardwareSizeInt.Production>32</param.HardwareSizeInt.Production>
-      <param.HardwareSizeLong.Production>32</param.HardwareSizeLong.Production>
+      <param.HardwareSizeLong.Production>64</param.HardwareSizeLong.Production>
       <param.HardwareSizeLongLong.Production>64</param.HardwareSizeLongLong.Production>
       <param.HardwareSizeFloat.Production>32</param.HardwareSizeFloat.Production>
       <param.HardwareSizeDouble.Production>64</param.HardwareSizeDouble.Production>
@@ -265,7 +228,7 @@
       <param.HardwareSizeChar.Target>8</param.HardwareSizeChar.Target>
       <param.HardwareSizeShort.Target>16</param.HardwareSizeShort.Target>
       <param.HardwareSizeInt.Target>32</param.HardwareSizeInt.Target>
-      <param.HardwareSizeLong.Target>32</param.HardwareSizeLong.Target>
+      <param.HardwareSizeLong.Target>64</param.HardwareSizeLong.Target>
       <param.HardwareSizeLongLong.Target>64</param.HardwareSizeLongLong.Target>
       <param.HardwareSizeFloat.Target>32</param.HardwareSizeFloat.Target>
       <param.HardwareSizeDouble.Target>64</param.HardwareSizeDouble.Target>
@@ -279,29 +242,26 @@
       <param.HardwareAtomicIntegerSize.Target>option.HardwareAtomicIntegerSize.Char</param.HardwareAtomicIntegerSize.Target>
       <param.HardwareAtomicFloatSize.Target>option.HardwareAtomicFloatSize.None</param.HardwareAtomicFloatSize.Target>
       <param.HardwareDivisionRounding.Target>option.HardwareDivisionRounding.Zero</param.HardwareDivisionRounding.Target>
-      <var.SuppressHardwareChange>false</var.SuppressHardwareChange>
       <param.CastingMode />
       <param.IndentStyle />
       <param.IndentSize />
       <param.ColumnLimit />
-      <param.grt.GenCodeOnly>false</param.grt.GenCodeOnly>
       <param.ConstantFoldingTimeout>40000</param.ConstantFoldingTimeout>
       <param.CompileTimeRecursionLimit>50</param.CompileTimeRecursionLimit>
       <param.EnableRuntimeRecursion>true</param.EnableRuntimeRecursion>
-      <param.RunInitializeFcn />
-      <param.IncludeInitializeFcn />
       <param.IncludeTerminateFcn />
       <param.GenerateExampleMain>option.GenerateExampleMain.GenerateCodeOnly</param.GenerateExampleMain>
       <param.PreserveVariableNames>option.PreserveVariableNames.None</param.PreserveVariableNames>
+      <param.CCompilerOptimization />
+      <param.CCompilerCustomOptimizations />
       <param.GenerateMakefile />
-      <param.BuildToolEnable />
+      <param.BuildToolEnable>false</param.BuildToolEnable>
+      <param.MakeCommand />
+      <param.TemplateMakefile />
       <param.BuildToolConfiguration />
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
-      <param.InlineStackLimit>1000000</param.InlineStackLimit>
-      <param.InlineBetweenUserFunctions>option.InlineBetweenUserFunctions.Speed</param.InlineBetweenUserFunctions>
-      <param.InlineBetweenUserAndMathWorksFunctions>option.InlineBetweenUserAndMathWorksFunctions.Speed</param.InlineBetweenUserAndMathWorksFunctions>
-      <param.InlineBetweenMathWorksFunctions>option.InlineBetweenMathWorksFunctions.Speed</param.InlineBetweenMathWorksFunctions>
+      <param.InlineStackLimit>4000</param.InlineStackLimit>
       <param.EnableStrengthReduction />
       <param.EnableMemcpy>true</param.EnableMemcpy>
       <param.MemcpyThreshold>64</param.MemcpyThreshold>
@@ -314,19 +274,17 @@
       <param.CustomBLASCallback />
       <param.GenerateDefaultInSwitch />
       <param.EnableTraceability />
-      <param.UseECoderFeatures>false</param.UseECoderFeatures>
-      <param.EnableGitSupport>false</param.EnableGitSupport>
-      <param.EnableAutoCommit>false</param.EnableAutoCommit>
-      <param.RepositoryStyle>option.RepositoryStyle.Auto</param.RepositoryStyle>
-      <param.psCustomPrjState />
+      <param.UseECoderFeatures />
+      <param.psCustomPrjState>false</param.psCustomPrjState>
       <param.psCustomProjectFile />
-      <param.psCheckConfValue />
-      <param.psUniqueOutPutState />
-      <param.psOpenResultsState />
-      <param.psProductModeValue />
-      <param.psQuickConfValue />
-      <param.psOutputFolder />
+      <param.psCheckConfValue>option.psCheckConfValue.onWarnCheckConfDlg</param.psCheckConfValue>
+      <param.psUniqueOutPutState>true</param.psUniqueOutPutState>
+      <param.psOpenResultsState>true</param.psOpenResultsState>
+      <param.psProductModeValue>option.psProductModeValue.codeProver</param.psProductModeValue>
+      <param.psQuickConfValue>option.psQuickConfValue.proj</param.psQuickConfValue>
+      <param.psOutputFolder>results_$codegenName$</param.psOutputFolder>
       <unset>
+        <param.grt.GenCodeOnly />
         <param.WorkingFolder />
         <param.SpecifiedWorkingFolder />
         <param.BuildFolder />
@@ -339,7 +297,6 @@
         <param.EnableVariableSizing />
         <param.DynamicMemoryAllocation />
         <param.DynamicMemoryAllocationThreshold />
-        <param.DynamicMemoryAllocationInterface />
         <param.RowMajor />
         <param.HighlightPotentialRowMajorIssues />
         <param.PreserveArrayDimensions />
@@ -351,32 +308,13 @@
         <param.CommentStyle />
         <param.MATLABSourceComments />
         <param.MATLABFcnDesc />
+        <param.DataTypeReplacement />
         <param.ConvertIfToSwitch />
         <param.PreserveExternInFcnDecls />
         <param.EnableSignedLeftShifts />
         <param.EnableSignedRightShifts />
         <param.ParenthesesLevel />
         <param.MaxIdLength />
-        <param.HeaderGuardStyle />
-        <param.DataTypeReplacement />
-        <param.EnableCustomReplacementTypes />
-        <param.ReplacementTypes.double />
-        <param.ReplacementTypes.single />
-        <param.ReplacementTypes.uint8 />
-        <param.ReplacementTypes.uint16 />
-        <param.ReplacementTypes.uint32 />
-        <param.ReplacementTypes.uint64 />
-        <param.ReplacementTypes.int8 />
-        <param.ReplacementTypes.int16 />
-        <param.ReplacementTypes.int32 />
-        <param.ReplacementTypes.int64 />
-        <param.ReplacementTypes.char />
-        <param.ReplacementTypes.logical />
-        <param.ReplacementTypes.ImportCustomTypes />
-        <param.ReplacementTypes.HeaderFiles />
-        <param.CppInterfaceStyle />
-        <param.CppInterfaceClassName />
-        <param.CustomFileNameStr />
         <param.CustomSymbolStrGlobalVar />
         <param.CustomSymbolStrType />
         <param.CustomSymbolStrField />
@@ -388,18 +326,16 @@
         <param.ReservedNameArray />
         <param.RuntimeChecks />
         <param.Verbose />
-        <param.ReportPotentialDifferences />
         <param.GenerateReport />
         <param.GenerateCodeMetricsReport />
         <param.GenerateCodeReplacementReport />
         <param.HighlightPotentialDataTypeIssues />
         <param.LaunchReport />
-        <param.ReportInfoVarName />
+        <param.ReportPotentialDifferences />
         <param.SILDebugging />
         <param.SILPILCheckConstantInputs />
         <param.SILPILSyncGlobalData />
         <param.CodeExecutionProfiling />
-        <param.CodeProfilingInstrumentation />
         <param.DefaultTestFile />
         <param.MergeInstrumentationResults />
         <param.RanPilSilVerification />
@@ -430,7 +366,6 @@
         <param.HardwareSizeChar.Production />
         <param.HardwareSizeShort.Production />
         <param.HardwareSizeInt.Production />
-        <param.HardwareSizeLong.Production />
         <param.HardwareSizeLongLong.Production />
         <param.HardwareSizeFloat.Production />
         <param.HardwareSizeDouble.Production />
@@ -444,36 +379,32 @@
         <param.HardwareSizeChar.Target />
         <param.HardwareSizeShort.Target />
         <param.HardwareSizeInt.Target />
-        <param.HardwareSizeLong.Target />
         <param.HardwareSizeLongLong.Target />
         <param.HardwareSizeFloat.Target />
         <param.HardwareSizeDouble.Target />
         <param.HardwareEndianness.Target />
         <param.HardwareAtomicIntegerSize.Target />
         <param.HardwareAtomicFloatSize.Target />
-        <var.SuppressHardwareChange />
         <param.CastingMode />
         <param.IndentStyle />
         <param.IndentSize />
         <param.ColumnLimit />
-        <param.grt.GenCodeOnly />
         <param.ConstantFoldingTimeout />
         <param.CompileTimeRecursionLimit />
         <param.EnableRuntimeRecursion />
-        <param.RunInitializeFcn />
-        <param.IncludeInitializeFcn />
         <param.IncludeTerminateFcn />
         <param.GenerateExampleMain />
         <param.PreserveVariableNames />
+        <param.CCompilerOptimization />
+        <param.CCompilerCustomOptimizations />
         <param.GenerateMakefile />
         <param.BuildToolEnable />
+        <param.MakeCommand />
+        <param.TemplateMakefile />
         <param.BuildToolConfiguration />
         <param.InlineThreshold />
         <param.InlineThresholdMax />
         <param.InlineStackLimit />
-        <param.InlineBetweenUserFunctions />
-        <param.InlineBetweenUserAndMathWorksFunctions />
-        <param.InlineBetweenMathWorksFunctions />
         <param.EnableStrengthReduction />
         <param.EnableMemcpy />
         <param.MemcpyThreshold />
@@ -487,9 +418,6 @@
         <param.GenerateDefaultInSwitch />
         <param.EnableTraceability />
         <param.UseECoderFeatures />
-        <param.EnableGitSupport />
-        <param.EnableAutoCommit />
-        <param.RepositoryStyle />
         <param.psCustomPrjState />
         <param.psCustomProjectFile />
         <param.psCheckConfValue />
@@ -548,7 +476,6 @@
       <param.hdl.ResourceSharing />
       <param.hdl.ConstantMultiplierOptimization />
       <param.hdl.LoopOptimization />
-      <param.hdl.AggressiveDataflowConversion />
       <param.GenerateComments>true</param.GenerateComments>
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
       <param.hdl.VHDLFileExt />
@@ -720,7 +647,6 @@
         <param.hdl.ResourceSharing />
         <param.hdl.ConstantMultiplierOptimization />
         <param.hdl.LoopOptimization />
-        <param.hdl.AggressiveDataflowConversion />
         <param.GenerateComments />
         <param.MATLABSourceComments />
         <param.hdl.VHDLFileExt />
@@ -855,13 +781,19 @@
       <item>Chi_3_LLE_Runge_Kuarong(Res.Temp,N_Mode,Runge);</item>
       <item>Chi_3_LLE_Runge_Kuarong(CaF.Temp,N_mode,Runge);</item>
     </param.TestSnippets>
+    <param.DefaultImportExportVariable>config</param.DefaultImportExportVariable>
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}\Chi_3_LLE_Runge_Kuarong_mex.mexw64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}/Chi_3_LLE_Runge_Kuarong_mex.mexa64</param.outputfile>
     <param.version>R2012a</param.version>
-    <param.HasECoderFeatures>false</param.HasECoderFeatures>
+    <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.HasGpuCoder>true</param.HasGpuCoder>
-    <var.HasNeuralNetworkToolbox>false</var.HasNeuralNetworkToolbox>
+    <var.HasNeuralNetworkToolbox>true</var.HasNeuralNetworkToolbox>
+    <param.newGlobals>
+      <Globals>
+        <idpTable />
+      </Globals>
+    </param.newGlobals>
     <param.mex.mainhtml />
     <param.grt.mainhtml />
     <param.CallGeneratedCodeFromTest>true</param.CallGeneratedCodeFromTest>
@@ -872,42 +804,35 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>3523908733</param.AnnotationChecksum>
+    <param.AnnotationChecksum>3747910346</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
     <var.redirectedInputTypeData />
     <var.DismissScreener>true</var.DismissScreener>
     <param.unifiedParamStorage />
-    <var.gc.lastOutputRoot>codegen\mex\Chi_3_LLE_Runge_Kuarong</var.gc.lastOutputRoot>
+    <var.gc.lastOutputRoot>codegen/mex/Chi_3_LLE_Runge_Kuarong</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>1475367626</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>2951132838</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\Chi_3_LLE_Runge_Kuarong</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>1468038987</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>Chi_3_LLE_Runge_Kuarong(Res.Temp,Res.Temp.In.N_mode,Runge)</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;2835959414&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution Search/Dynamics/Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;4205799249&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution Search/Dynamics/Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
     <var.isGpuCoder>false</var.isGpuCoder>
     <var.notGpuCoder>true</var.notGpuCoder>
     <var.boundToGui>true</var.boundToGui>
-    <var.isConfigDialog>false</var.isConfigDialog>
-    <var.ecoderEnabled>false</var.ecoderEnabled>
     <param.mex.outputfile>Chi_3_LLE_Runge_Kuarong_mex</param.mex.outputfile>
     <param.grt.outputfile>Chi_3_LLE_Runge_Kuarong</param.grt.outputfile>
     <param.artifact>option.target.artifact.mex</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}\Chi_3_LLE_Runge_Kuarong_mex.mexw64</param.outputfile>
-    <param.CppNamespace />
-    <param.CppPackagesToNamespaces>true</param.CppPackagesToNamespaces>
-    <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
-    <param.CppPreserveClasses>true</param.CppPreserveClasses>
+    <param.outputfile>${PROJECT_ROOT}/Chi_3_LLE_Runge_Kuarong_mex.mexa64</param.outputfile>
     <param.gpu.Enabled>false</param.gpu.Enabled>
     <param.gpu.KernelNamePrefix />
     <param.gpu.SelectCudaDevice>-1</param.gpu.SelectCudaDevice>
-    <param.gpu.MaxKernelDepth>0</param.gpu.MaxKernelDepth>
     <param.gpu.MallocMode>discrete</param.gpu.MallocMode>
     <param.gpu.MallocThreshold>200</param.gpu.MallocThreshold>
     <param.gpu.StackLimitPerThread>1024</param.gpu.StackLimitPerThread>
@@ -923,17 +848,13 @@
     <var.hasGpu>true</var.hasGpu>
     <var.isDeepLearningForMatlabCoderEnabled>true</var.isDeepLearningForMatlabCoderEnabled>
     <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
-    <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
+    <var.hideTensorRT>false</var.hideTensorRT>
     <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
     <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
     <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
     <param.tensorrt.DataPath />
-    <param.tensorrt.NumCalibrationBatches>0</param.tensorrt.NumCalibrationBatches>
+    <param.tensorrt.NumCalibrationBatches>1</param.tensorrt.NumCalibrationBatches>
     <param.cudnn.AutoTuning>true</param.cudnn.AutoTuning>
-    <param.cudnn.DataType>option.cudnn.datatype.fp32</param.cudnn.DataType>
-    <param.cudnn.CalibrationResultFile />
-    <param.arm-compute.ArmComputeVersion>option.arm-compute.version.19_05</param.arm-compute.ArmComputeVersion>
-    <param.arm-compute.ArmArchitecture>option.arm-compute.architecture.unspecified</param.arm-compute.ArmArchitecture>
     <param.TargetLang>option.TargetLang.C</param.TargetLang>
     <param.EnableAutoExtrinsicCalls>true</param.EnableAutoExtrinsicCalls>
     <param.UsePreconditions>false</param.UsePreconditions>
@@ -983,6 +904,7 @@
     <param.FixedPointUseDesignRanges>false</param.FixedPointUseDesignRanges>
     <unset>
       <param.objective />
+      <param.DefaultImportExportVariable />
       <param.ExternalFcnMajority />
       <param.UseGlobals />
       <param.outputfile />
@@ -1011,19 +933,12 @@
       <param.configImportActive />
       <var.isGpuCoder />
       <var.notGpuCoder />
-      <var.isConfigDialog />
-      <var.ecoderEnabled />
       <param.mex.outputfile />
       <param.grt.outputfile />
       <param.artifact />
-      <param.CppNamespace />
-      <param.CppPackagesToNamespaces />
-      <param.CppNamespaceForMathworksCode />
-      <param.CppPreserveClasses />
       <param.gpu.Enabled />
       <param.gpu.KernelNamePrefix />
       <param.gpu.SelectCudaDevice />
-      <param.gpu.MaxKernelDepth />
       <param.gpu.MallocMode />
       <param.gpu.MallocThreshold />
       <param.gpu.StackLimitPerThread />
@@ -1039,17 +954,13 @@
       <var.hasGpu />
       <var.isDeepLearningForMatlabCoderEnabled />
       <param.deeplearning.TargetLib />
-      <var.cfiTargetLibSuppression />
+      <var.hideTensorRT />
       <var.hasMatlabDeepLearningSupportPackage />
       <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />
       <param.cudnn.AutoTuning />
-      <param.cudnn.DataType />
-      <param.cudnn.CalibrationResultFile />
-      <param.arm-compute.ArmComputeVersion />
-      <param.arm-compute.ArmArchitecture />
       <param.TargetLang />
       <param.EnableAutoExtrinsicCalls />
       <param.UsePreconditions />
@@ -1098,82 +1009,83 @@
       <param.FixedPointUseDesignRanges />
     </unset>
     <fileset.entrypoints>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi_3_LLE_Runge_Kuarong.m">
-        <Marker>1610685281834</Marker>
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/Chi_3_LLE_Runge_Kuarong.m">
+        <Marker>1626987642661</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
     <fileset.inputtypes>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi_3_LLE_Runge_Kuarong.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}/Chi_3_LLE_Runge_Kuarong.m">
         <Inputs fileName="Chi_3_LLE_Runge_Kuarong.m" functionName="Chi_3_LLE_Runge_Kuarong" nargout="1">
           <Input Name="Temp" typeId="0">
             <Field Name="Met" typeId="1" />
-            <Field Name="Par" typeId="0">
-              <Field Name="Runge_Type" typeId="2" />
-              <Field Name="dt" typeId="3" />
-              <Field Name="s_t" typeId="3" />
-              <Field Name="T" typeId="3" />
-              <Field Name="dd" typeId="3" />
-              <Field Name="CW_num" typeId="3" />
+            <Field Name="Par" typeId="2">
+              <Field Name="Runge_Type" typeId="3" />
+              <Field Name="dt" typeId="4" />
+              <Field Name="s_t" typeId="4" />
+              <Field Name="T" typeId="4" />
+              <Field Name="dd" typeId="4" />
+              <Field Name="CW_num" typeId="4" />
             </Field>
-            <Field Name="In" typeId="0">
-              <Field Name="eta" typeId="3" />
-              <Field Name="omega" typeId="4" />
-              <Field Name="omega_p" typeId="3" />
+            <Field Name="In" typeId="2">
+              <Field Name="eta" typeId="4" />
+              <Field Name="omega_p" typeId="4" />
               <Field Name="D" typeId="5" />
-              <Field Name="omega_int" typeId="4" />
-              <Field Name="gamma" typeId="3" />
-              <Field Name="range" typeId="3" />
-              <Field Name="N_mode" typeId="3" />
-              <Field Name="mu_bl" typeId="3" />
-              <Field Name="kappa" typeId="3" />
-              <Field Name="delta" typeId="3" />
-              <Field Name="P" typeId="3" />
-              <Field Name="Finess" typeId="3" />
-              <Field Name="Fin_D" typeId="3" />
-              <Field Name="H" typeId="3" />
-              <Field Name="W" typeId="3" />
-              <Field Name="W_Star" typeId="3" />
-              <Field Name="W_WStar" typeId="3" />
-              <Field Name="Psi_Start" typeId="6" />
-              <Field Name="t_start" typeId="3" />
+              <Field Name="gamma" typeId="4" />
+              <Field Name="range" typeId="4" />
+              <Field Name="kappa" typeId="4" />
+              <Field Name="W_WStar" typeId="4" />
+              <Field Name="delta" typeId="4" />
+              <Field Name="mu_bl" typeId="4" />
+              <Field Name="P" typeId="4" />
+              <Field Name="N_mode" typeId="4" />
+              <Field Name="omega" typeId="6" />
+              <Field Name="omega_int" typeId="6" />
+              <Field Name="Finess" typeId="4" />
+              <Field Name="Fin_D" typeId="4" />
+              <Field Name="H" typeId="4" />
+              <Field Name="W" typeId="4" />
+              <Field Name="W_Star" typeId="4" />
+              <Field Name="Psi_Start" typeId="7" />
+              <Field Name="t_start" typeId="4" />
             </Field>
-            <Field Name="Space" typeId="0">
-              <Field Name="N" typeId="3" />
-              <Field Name="lenght" typeId="3" />
-              <Field Name="dphi" typeId="3" />
-              <Field Name="phi" typeId="7" />
-              <Field Name="dk" typeId="3" />
-              <Field Name="k" typeId="7" />
+            <Field Name="Space" typeId="2">
+              <Field Name="N" typeId="4" />
+              <Field Name="lenght" typeId="4" />
+              <Field Name="dphi" typeId="4" />
+              <Field Name="phi" typeId="6" />
+              <Field Name="dk" typeId="4" />
+              <Field Name="k" typeId="6" />
             </Field>
-            <Field Name="Eq" typeId="0">
-              <Field Name="delta" typeId="3" />
-              <Field Name="kappa" typeId="3" />
-              <Field Name="gamma_3" typeId="3" />
-              <Field Name="D" typeId="8" />
-              <Field Name="h" typeId="3" />
-              <Field Name="omega_j" typeId="9" />
-              <Field Name="gamma_Kerr" typeId="7" />
-              <Field Name="mask" typeId="7" />
-              <Field Name="kappa_vector" typeId="7" />
-              <Field Name="mode_range" typeId="10" />
-              <Field Name="L" typeId="9" />
-              <Field Name="norm" typeId="3" />
+            <Field Name="Eq" typeId="2">
+              <Field Name="Fin_Dlog" typeId="4" />
+              <Field Name="delta" typeId="4" />
+              <Field Name="kappa" typeId="4" />
+              <Field Name="gamma_3" typeId="4" />
+              <Field Name="D" typeId="5" />
+              <Field Name="h" typeId="4" />
+              <Field Name="omega_j" typeId="7" />
+              <Field Name="gamma_Kerr" typeId="6" />
+              <Field Name="mask" typeId="6" />
+              <Field Name="kappa_vector" typeId="6" />
+              <Field Name="mode_range" typeId="8" />
+              <Field Name="L" typeId="7" />
+              <Field Name="norm" typeId="4" />
             </Field>
           </Input>
-          <Input Name="Runge" typeId="0">
-            <Field Name="b" typeId="11" />
-            <Field Name="a" typeId="12" />
-            <Field Name="c" typeId="12" />
-            <Field Name="s" typeId="3" />
+          <Input Name="Runge" typeId="9">
+            <Field Name="b" typeId="10" />
+            <Field Name="a" typeId="11" />
+            <Field Name="c" typeId="11" />
+            <Field Name="s" typeId="4" />
           </Input>
           <idpTable>
             <type typeId="0">
               <Class>struct</Class>
               <Size>1 x 1</Size>
-              <Value />
+              <Value>Temp</Value>
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <TypeName />
               <Extern>false</Extern>
               <HeaderFile />
@@ -1184,32 +1096,34 @@
               <Size>0 x 0</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
             <type typeId="2">
+              <Class>struct</Class>
+              <Size>1 x 1</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>true</UserDefined>
+              <TypeName />
+              <Extern>false</Extern>
+              <HeaderFile />
+              <Alignment>-1</Alignment>
+            </type>
+            <type typeId="3">
               <Class>char</Class>
               <Size>1 x 12</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
             </type>
-            <type typeId="3">
+            <type typeId="4">
               <Class>double</Class>
               <Size>1 x 1</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
-              <Complex>false</Complex>
-              <Sparse>false</Sparse>
-            </type>
-            <type typeId="4">
-              <Class>double</Class>
-              <Size>1 x 256</Size>
-              <Value />
-              <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
@@ -1218,70 +1132,63 @@
               <Size>1 x 2</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
             <type typeId="6">
               <Class>double</Class>
-              <Size>1 x 256</Size>
+              <Size>1 x 512</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
-              <Complex>true</Complex>
+              <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
             <type typeId="7">
               <Class>double</Class>
-              <Size>1 x :1024</Size>
+              <Size>1 x 512</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
-              <Complex>false</Complex>
+              <UserDefined>true</UserDefined>
+              <Complex>true</Complex>
               <Sparse>false</Sparse>
             </type>
             <type typeId="8">
               <Class>double</Class>
-              <Size>1 x :6</Size>
+              <Size>1 x 400</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
             <type typeId="9">
-              <Class>double</Class>
-              <Size>1 x :1024</Size>
-              <Value />
+              <Class>struct</Class>
+              <Size>1 x 1</Size>
+              <Value>Runge</Value>
               <InitialValue />
-              <UserDefined>false</UserDefined>
-              <Complex>true</Complex>
-              <Sparse>false</Sparse>
+              <UserDefined>true</UserDefined>
+              <TypeName />
+              <Extern>false</Extern>
+              <HeaderFile />
+              <Alignment>-1</Alignment>
             </type>
             <type typeId="10">
               <Class>double</Class>
-              <Size>1 x :600</Size>
+              <Size>3 x 3</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
             <type typeId="11">
               <Class>double</Class>
-              <Size>3 x 3</Size>
-              <Value />
-              <InitialValue />
-              <UserDefined>false</UserDefined>
-              <Complex>false</Complex>
-              <Sparse>false</Sparse>
-            </type>
-            <type typeId="12">
-              <Class>double</Class>
               <Size>1 x 3</Size>
               <Value />
               <InitialValue />
-              <UserDefined>false</UserDefined>
+              <UserDefined>true</UserDefined>
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
@@ -1290,14 +1197,19 @@
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Chi_3_LLE_Runge_Kuarong_mex.mexw64" optional="false">C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong_mex.mexw64</file>
+      <file location="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution Search/Dynamics" name="Chi_3_LLE_Runge_Kuarong_mex.mexa64" optional="false">/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution Search/Dynamics/Chi_3_LLE_Runge_Kuarong_mex.mexa64</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2020b</root>
+      <root>/usr/local/matlab/r2018b</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
+        <toolbox name="embeddedcoder" />
         <toolbox name="gpucoder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="polyspacebugfinder" />
+        <toolbox name="neuralnetwork" />
       </toolboxes>
       <toolbox>
         <matlabcoder>
@@ -1305,24 +1217,49 @@
         </matlabcoder>
       </toolbox>
       <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
         <gpucoder>
           <enabled>true</enabled>
         </gpucoder>
       </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <polyspacebugfinder>
+          <enabled>true</enabled>
+        </polyspacebugfinder>
+      </toolbox>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
     </matlab>
     <platform>
-      <unix>false</unix>
+      <unix>true</unix>
       <mac>false</mac>
-      <windows>true</windows>
+      <windows>false</windows>
       <win2k>false</win2k>
       <winxp>false</winxp>
       <vista>false</vista>
-      <linux>false</linux>
+      <linux>true</linux>
       <solaris>false</solaris>
-      <osver>10.0</osver>
+      <osver>4.15.0-121-generic</osver>
       <os32>false</os32>
       <os64>true</os64>
-      <arch>win64</arch>
+      <arch>glnxa64</arch>
       <matlab>true</matlab>
     </platform>
   </configuration>

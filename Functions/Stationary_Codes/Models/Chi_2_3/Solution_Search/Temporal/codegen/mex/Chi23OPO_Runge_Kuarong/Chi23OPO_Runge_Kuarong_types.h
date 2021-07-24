@@ -100,14 +100,13 @@ typedef struct {
   real_T delta_o;
   real_T N;
   real_T kMI[31];
-  real_T delta_e2;
   real_T W;
   real_T delta_e;
   real_T H_f;
   real_T H_s;
   creal_T Omega_f;
   creal_T Omega_s;
-  real_T Psi_Start[512];
+  real_T Psi_Start[64];
   real_T t_start;
 } struct2_T;
 
@@ -120,9 +119,9 @@ typedef struct {
   real_T N;
   real_T lenght;
   real_T dphi;
-  real_T phi[256];
+  real_T phi[32];
   real_T dk;
-  real_T k[256];
+  real_T k[32];
 } struct3_T;
 
 #endif                                 /*typedef_struct3_T*/
@@ -135,7 +134,6 @@ typedef struct {
   real_T H_s;
   real_T delta_o;
   real_T delta_e;
-  real_T delta_e2;
   real_T eps;
   real_T ko;
   real_T ke;
@@ -147,10 +145,10 @@ typedef struct {
   real_T De[2];
   real_T d;
   real_T norm;
-  real_T mode_range[512];
-  creal_T Lo[256];
-  creal_T Le[256];
-  creal_T L[512];
+  real_T mode_range[64];
+  creal_T Lo[32];
+  creal_T Le[32];
+  creal_T L[64];
 } struct4_T;
 
 #endif                                 /*typedef_struct4_T*/

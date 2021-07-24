@@ -115,7 +115,7 @@
         toc
     end
     %%
-      mu_vec              = 13%;[7,13,27,29,43,59,60,78,73,83];
+      mu_vec              = 1;%;[7,13,27,29,43,59,60,78,73,83];
    
     for imu =1:size(mu_vec,2)
         tic
@@ -123,13 +123,14 @@
         RR = R;
         RR.Stat.In.mu_bl     = mu_vec(imu);
         SP                   = Chi3_CrystalPathGenerator(RR.Stat,MP);     
-       SS(imu).Stat = Chi3_CrystalChangeParameter(RR,MP,'delta');
+ %       SS(imu).Stat = Chi3_CrystalChangeParameter(RR,MP,'delta');
     %   Chi3_CrystalDoStabilityInFolder(strcat(SP,'FDScan/'));
-       Chi3_CrystalDoStabilityInFolder(strcat(SP,'deltaScan/'));
+  %     Chi3_CrystalDoStabilityInFolder(strcat(SP,'deltaScan/'));
  %        Chi3_CrystalDoStabilityInManyFolders(strcat(SP,'FDScan/'),'delta');
 %         Chi3_CrystalDoStabilityInManyFolders(strcat(SP,'FDScan/','FD');
 
 %        Crystals(imu).Tracks = Chi3_CrystalCollect1DData(strcat(SP,'FDScan/'));
+        Crystals = Chi3_CrystalCollect2DData(strcat(SP),'FDScan/','delta',25);
 
 %        Chi3_CrystalChangeParameterFromParameter(strcat(SP,'FDScan/'),'delta');
         imu
@@ -150,7 +151,7 @@
 %         Chi3_CrystalDoStabilityInManyFolders(strcat(SP,'FDScan/','FD');
 
 %        Crystals(imu).Tracks = Chi3_CrystalCollect1DData(strcat(SP,'FDScan/'));
-        Crystals(imu).Tracks = Chi3_CrystalCollect1DData(strcat(SP,'deltaScan/'));
+        Crystals(imu).Tracks = Chi3_CrystalCollect1DData(strcat(SP,'FDScan/'));
 
 %        Chi3_CrystalChangeParameterFromParameter(strcat(SP,'FDScan/'),'delta');
         imu
@@ -166,8 +167,35 @@
         Chi3_CrystalCollect2DData(strcat(SP),'FDScan/','delta');
         
     end
+%% StartDynamicsFromFolder
+    Par.N  = 2^9;
+    Par.NN = 200;
+    Par.T  = 5E3;
+    mu_vec              = [14,7,1];
+    
+    for i = 1:3
+        
+        R.Stat.In.mu_bl     = mu_vec(i);%[1,7,14,28,14*3]
+        SP                  = Chi3_CrystalPathGenerator(R.Stat,MP);    
+        Chi3_CrystalStartDynamicsFromMultiFolder(strcat(SP,'FDScan/'),'delta',Par);
+        
+    end
+%% ReadDynamicsFolder
+
+    Par.N  = 2^9;
+    Par.NN = 200;
+    Par.T  = 1;
+    mu_vec              = [14,7,1];
+%%    
+    for i = 1:1
+        
+        R.Stat.In.mu_bl     = mu_vec(i);%[1,7,14,28,14*3]
+        SP                  = Chi3_CrystalPathGenerator(R.Stat,MP);    
+        Crystals = Chi3_CrystalReadDynamicsFromMultiFolder(strcat(SP,'FDScan/'),'delta');
+        
+    end
 %%
-    clear dd Peak
+    clear dd Peak;
     for iSt =1:size(Stat,2)
         dd(iSt) = Stat(iSt).Eq.Fin_Dlog;
         Peak(iSt) = log10(Stat(iSt).Sol.eps_f);%log10(abs(Stat(iSt).Sol.Psi_k(2)).^2);

@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2018b">
-  <configuration build-checksum="2586250038" file="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.prj" location="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal" name="Chi23OPO_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="1339213827" file="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.prj" location="/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal" name="Chi23OPO_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -774,7 +774,9 @@
     </profile>
     <param.objective>option.objective.c</param.objective>
     <param.WorkflowStep>workflowSummary</param.WorkflowStep>
-    <param.TestSnippets />
+    <param.TestSnippets>
+      <item>Chi23OPO_Runge_Kuarong(R.Temp,Runge)</item>
+    </param.TestSnippets>
     <param.DefaultImportExportVariable>config</param.DefaultImportExportVariable>
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
@@ -798,7 +800,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>4115547553</param.AnnotationChecksum>
+    <param.AnnotationChecksum>4133226717</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -807,12 +809,12 @@
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen/mex/Chi23OPO_Runge_Kuarong</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>4084301069</var.gc.preBuildChecksum>
-    <var.cfi.lastOutputRoot>codegen\mex\Chi23OPO_Runge_Kuarong</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>1994705770</var.cfi.preBuildChecksum>
-    <var.lastCfiTestSnippet>Chi23OPO_Runge_Kuarong(ResSave(i).Temp,Runge)</var.lastCfiTestSnippet>
+    <var.gc.preBuildChecksum>2708837928</var.gc.preBuildChecksum>
+    <var.cfi.lastOutputRoot>codegen/mex/Chi23OPO_Runge_Kuarong</var.cfi.lastOutputRoot>
+    <var.cfi.preBuildChecksum>4242212189</var.cfi.preBuildChecksum>
+    <var.lastCfiTestSnippet>Chi23OPO_Runge_Kuarong(R.Temp,Runge)</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;154438234&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;3748957899&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
     <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
@@ -898,7 +900,6 @@
     <param.FixedPointUseDesignRanges>false</param.FixedPointUseDesignRanges>
     <unset>
       <param.objective />
-      <param.TestSnippets />
       <param.DefaultImportExportVariable />
       <param.ExternalFcnMajority />
       <param.UseGlobals />
@@ -1006,7 +1007,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}/Chi23OPO_Runge_Kuarong.m">
-        <Marker>1625594168076</Marker>
+        <Marker>1627143797028</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench>
@@ -1045,7 +1046,6 @@
               <Field Name="delta_o" typeId="4" />
               <Field Name="N" typeId="4" />
               <Field Name="kMI" typeId="6" />
-              <Field Name="delta_e2" typeId="4" />
               <Field Name="W" typeId="4" />
               <Field Name="delta_e" typeId="4" />
               <Field Name="H_f" typeId="4" />
@@ -1068,7 +1068,6 @@
               <Field Name="H_s" typeId="4" />
               <Field Name="delta_o" typeId="4" />
               <Field Name="delta_e" typeId="4" />
-              <Field Name="delta_e2" typeId="4" />
               <Field Name="eps" typeId="4" />
               <Field Name="ko" typeId="4" />
               <Field Name="ke" typeId="4" />
@@ -1169,7 +1168,7 @@
             </type>
             <type typeId="8">
               <Class>double</Class>
-              <Size>1 x 512</Size>
+              <Size>1 x 64</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1178,7 +1177,7 @@
             </type>
             <type typeId="9">
               <Class>double</Class>
-              <Size>1 x 256</Size>
+              <Size>1 x 32</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1187,7 +1186,7 @@
             </type>
             <type typeId="10">
               <Class>double</Class>
-              <Size>1 x 256</Size>
+              <Size>1 x 32</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1196,7 +1195,7 @@
             </type>
             <type typeId="11">
               <Class>double</Class>
-              <Size>1 x 512</Size>
+              <Size>1 x 64</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>

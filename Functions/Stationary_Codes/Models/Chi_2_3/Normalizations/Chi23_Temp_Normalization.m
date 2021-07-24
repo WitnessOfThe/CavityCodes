@@ -23,9 +23,9 @@ function Temp = Chi23_Temp_Normalization(Temp)
     Temp.In.Omega_Star    =  sqrt(2*Temp.In.ke*Temp.In.ko);
     
 %%
-    Temp.Eq.delta_o         = Temp.In.delta_o/norm;x
+    Temp.Eq.delta_o         = Temp.In.delta_o/norm;
     Temp.Eq.delta_e         = Temp.In.delta_e/norm;
-    Temp.Eq.delta_e2        =  Temp.In.delta_e2/norm;
+%    Temp.Eq.delta_e2        =  Temp.In.delta_e2/norm;
     Temp.Eq.eps             = Temp.In.eps/norm;
     
     Temp.Eq.ko             = Temp.In.ko/norm;                                

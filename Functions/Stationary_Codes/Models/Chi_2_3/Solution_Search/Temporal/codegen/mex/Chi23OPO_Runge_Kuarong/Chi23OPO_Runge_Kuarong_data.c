@@ -28,12 +28,22 @@ emlrtContext emlrtContextGlobal = { true,/* bFirstTime */
   NULL                                 /* fSigMem */
 };
 
+emlrtRSInfo b_emlrtRSI = { 3,          /* lineNo */
+  "Chi23OPO_Runge_Kuarong",            /* fcnName */
+  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.m"/* pathName */
+};
+
 emlrtRSInfo c_emlrtRSI = { 6,          /* lineNo */
   "ref",                               /* fcnName */
   "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/ref.m"/* pathName */
 };
 
 emlrtRSInfo d_emlrtRSI = { 63,         /* lineNo */
+  "Chi23OPO_Runge_Kuarong",            /* fcnName */
+  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.m"/* pathName */
+};
+
+emlrtRSInfo e_emlrtRSI = { 77,         /* lineNo */
   "Chi23OPO_Runge_Kuarong",            /* fcnName */
   "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.m"/* pathName */
 };

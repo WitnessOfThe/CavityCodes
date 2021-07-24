@@ -24,8 +24,8 @@
 #include "Chi23OPO_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void FFTWApi_fft1d(const creal_T data[256], boolean_T isInverse, creal_T
-  y[256]);
+extern void FFTWApi_fft1d(const creal_T data[32], boolean_T isInverse, creal_T
+  y[32]);
 
 #endif
 

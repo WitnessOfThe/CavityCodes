@@ -9,12 +9,8 @@ SRC_FILES =  \
 	Chi23OPO_Runge_Kuarong_initialize.c \
 	Chi23OPO_Runge_Kuarong_terminate.c \
 	Chi23OPO_Runge_Kuarong.c \
-	exp.c \
 	ifft.c \
-	fft.c \
 	FFTWApi.c \
-	abs.c \
-	power.c \
 	fft1.c \
 	_coder_Chi23OPO_Runge_Kuarong_info.c \
 	_coder_Chi23OPO_Runge_Kuarong_api.c \

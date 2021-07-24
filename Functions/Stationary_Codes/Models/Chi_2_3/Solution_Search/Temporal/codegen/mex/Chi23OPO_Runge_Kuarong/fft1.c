@@ -14,14 +14,14 @@
 #include "rt_nonfinite.h"
 #include "Chi23OPO_Runge_Kuarong.h"
 #include "fft1.h"
-#include "fft.h"
+#include "FFTWApi.h"
 
 /* Function Definitions */
-void b_fft(const creal_T x[256], creal_T y[256])
+void fft(const creal_T x[32], creal_T y[32])
 {
-  creal_T dcv2[256];
-  c_fft(x, dcv2);
-  memcpy(&y[0], &dcv2[0], sizeof(creal_T) << 8);
+  creal_T dcv1[32];
+  FFTWApi_fft1d(x, false, dcv1);
+  memcpy(&y[0], &dcv1[0], sizeof(creal_T) << 5);
 }
 
 /* End of code generation (fft1.c) */

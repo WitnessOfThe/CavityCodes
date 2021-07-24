@@ -103,7 +103,8 @@
     k_e(1:N)    = 1i*Fac_plus(1:N).*(fft(Eq.gam2o.*conj(Psio).*Psie +  Eq.gam3o.*(abs(Psio).^2 + 2*abs(Psie).^2).*Psio )  );
     k_e(N+1:2*N)= 1i*Fac_plus(N+1:2*N).*(fft(Eq.gam2e.*Psio.^2 +Eq.gam3e.*(2*abs(Psio).^2 + abs(Psie).^2).*Psie)  );
     
-    k_e(N+2)      = k_e(N+2) + N.*Fac_plus(N+2).*1/2*Eq.ke*Eq.H_s*exp(-1i*t*(real(Eq.Le(2)) - Eq.delta_e2) );
+    k_e(N+1)      = k_e(N+1) + N.*Fac_plus(N+1).*1/2*Eq.ke*Eq.H_s;
+%    k_e(N+2)      = k_e(N+2) + N.*Fac_plus(N+2).*1/2*Eq.ke*Eq.H_s*exp(-1i*t*(real(Eq.Le(2)) - Eq.delta_e2) );
 %    k_e(end)      = k_e(end) + N.*Fac_plus(end).*1/2*Eq.ke*Eq.H_s.*exp(-1i*t*(real(Eq.Le(end)) + Eq.delta_e) );
 
     

@@ -9,13 +9,12 @@ SRC_FILES =  \
 	Chi_3_LLE_Runge_Kuarong_initialize.c \
 	Chi_3_LLE_Runge_Kuarong_terminate.c \
 	Chi_3_LLE_Runge_Kuarong.c \
-	exp.c \
-	eml_int_forloop_overflow_check.c \
+	ifft.c \
 	fft.c \
 	FFTWApi.c \
-	mod.c \
-	sum.c \
-	nullAssignment.c \
+	abs.c \
+	power.c \
+	fft1.c \
 	_coder_Chi_3_LLE_Runge_Kuarong_info.c \
 	_coder_Chi_3_LLE_Runge_Kuarong_api.c \
 	_coder_Chi_3_LLE_Runge_Kuarong_mex.c \
@@ -51,8 +50,8 @@ SYS_INCLUDE = $(ML_INCLUDES)
 
 # Additional includes
 
-SYS_INCLUDE += -I "/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution\ Search/Dynamics/codegen/mex/Chi_3_LLE_Runge_Kuarong"
-SYS_INCLUDE += -I "/u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution\ Search/Dynamics"
+SYS_INCLUDE += -I "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution\ Search/Dynamics/codegen/mex/Chi_3_LLE_Runge_Kuarong"
+SYS_INCLUDE += -I "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution\ Search/Dynamics"
 SYS_INCLUDE += -I "./interface"
 SYS_INCLUDE += -I "$(MATLAB_ROOT)/extern/include"
 SYS_INCLUDE += -I "."
@@ -110,10 +109,10 @@ CPPFLAGS = $(CXX_FLAGS) -std=c++11   $(USER_INCLUDE) $(SYS_INCLUDE)
 
 # Additional sources
 
-%.$(OBJEXT) : /u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution\ Search/Dynamics/%.c
+%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution\ Search/Dynamics/%.c
 	$(CC) $(CCFLAGS) "$<"
 
-%.$(OBJEXT) : /u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution\ Search/Dynamics/codegen/mex/Chi_3_LLE_Runge_Kuarong/%.c
+%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution\ Search/Dynamics/codegen/mex/Chi_3_LLE_Runge_Kuarong/%.c
 	$(CC) $(CCFLAGS) "$<"
 
 %.$(OBJEXT) : interface/%.c
@@ -121,10 +120,10 @@ CPPFLAGS = $(CXX_FLAGS) -std=c++11   $(USER_INCLUDE) $(SYS_INCLUDE)
 
 
 
-%.$(OBJEXT) : /u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution\ Search/Dynamics/%.cpp
+%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution\ Search/Dynamics/%.cpp
 	$(CXX) $(CPPFLAGS) "$<"
 
-%.$(OBJEXT) : /u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution\ Search/Dynamics/codegen/mex/Chi_3_LLE_Runge_Kuarong/%.cpp
+%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution\ Search/Dynamics/codegen/mex/Chi_3_LLE_Runge_Kuarong/%.cpp
 	$(CXX) $(CPPFLAGS) "$<"
 
 %.$(OBJEXT) : interface/%.cpp
@@ -132,10 +131,10 @@ CPPFLAGS = $(CXX_FLAGS) -std=c++11   $(USER_INCLUDE) $(SYS_INCLUDE)
 
 
 
-%.$(OBJEXT) : /u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution\ Search/Dynamics/%.cu
+%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution\ Search/Dynamics/%.cu
 	$(CC) $(CCFLAGS) "$<"
 
-%.$(OBJEXT) : /u/p/dp710/Documents/MATLAB/Matlab_Repo/Problems/Cavity_Codes/Problems/Chi_3/Pure_LLE/Solution\ Search/Dynamics/codegen/mex/Chi_3_LLE_Runge_Kuarong/%.cu
+%.$(OBJEXT) : /home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution\ Search/Dynamics/codegen/mex/Chi_3_LLE_Runge_Kuarong/%.cu
 	$(CC) $(CCFLAGS) "$<"
 
 %.$(OBJEXT) : interface/%.cu

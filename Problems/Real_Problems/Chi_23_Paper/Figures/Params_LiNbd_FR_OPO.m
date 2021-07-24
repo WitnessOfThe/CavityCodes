@@ -7,8 +7,8 @@ function In = Params_LiNbd_FR_OPO
     In.gam2o          = 2*pi*300E6;
     In.gam2e          = 2*pi*300E6;
     
-    In.gam3o          = 2*pi*600E3;
-    In.gam3e          = 2*pi*600E3;
+    In.gam3o          = 0;%2*pi*600E3;
+    In.gam3e          = 0;%2*pi*600E3;
     
     In.Do              = 2*pi*[16.92E9,-65E3];% Dispersion Coefficients,-4E3
     In.De              = 2*pi*[15.86E9,-144E3];% Dispersion Coefficients,-4E3

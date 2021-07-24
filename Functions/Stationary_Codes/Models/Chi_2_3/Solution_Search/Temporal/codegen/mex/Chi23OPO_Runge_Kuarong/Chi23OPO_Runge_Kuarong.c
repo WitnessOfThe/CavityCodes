@@ -10,30 +10,17 @@
  */
 
 /* Include files */
-#include <string.h>
 #include "mwmathutil.h"
+#include <string.h>
 #include "rt_nonfinite.h"
 #include "Chi23OPO_Runge_Kuarong.h"
 #include "ifft.h"
 #include "fft1.h"
 #include "Chi23OPO_Runge_Kuarong_emxutil.h"
-#include "exp.h"
-#include "power.h"
-#include "abs.h"
 #include "Chi23OPO_Runge_Kuarong_data.h"
 
 /* Variable Definitions */
 static emlrtRSInfo emlrtRSI = { 33,    /* lineNo */
-  "Chi23OPO_Runge_Kuarong",            /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo b_emlrtRSI = { 3,   /* lineNo */
-  "Chi23OPO_Runge_Kuarong",            /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo e_emlrtRSI = { 77,  /* lineNo */
   "Chi23OPO_Runge_Kuarong",            /* fcnName */
   "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23OPO_Runge_Kuarong.m"/* pathName */
 };
@@ -204,7 +191,7 @@ static emlrtDCInfo emlrtDCI = { 39,    /* lineNo */
 };
 
 static emlrtBCInfo g_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   39,                                  /* lineNo */
   40,                                  /* colNo */
   "F_e",                               /* aName */
@@ -221,7 +208,7 @@ static emlrtDCInfo b_emlrtDCI = { 40,  /* lineNo */
 };
 
 static emlrtBCInfo h_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   40,                                  /* lineNo */
   38,                                  /* colNo */
   "F_e",                               /* aName */
@@ -238,7 +225,7 @@ static emlrtDCInfo c_emlrtDCI = { 40,  /* lineNo */
 };
 
 static emlrtBCInfo i_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   40,                                  /* lineNo */
   53,                                  /* colNo */
   "F_e",                               /* aName */
@@ -421,7 +408,7 @@ static emlrtBCInfo m_emlrtBCI = { 1,   /* iFirst */
 };
 
 static emlrtBCInfo n_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   93,                                  /* lineNo */
   12,                                  /* colNo */
   "E_f",                               /* aName */
@@ -438,7 +425,7 @@ static emlrtDCInfo u_emlrtDCI = { 93,  /* lineNo */
 };
 
 static emlrtBCInfo o_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   87,                                  /* lineNo */
   50,                                  /* colNo */
   "E_f",                               /* aName */
@@ -472,7 +459,7 @@ static emlrtDCInfo w_emlrtDCI = { 87,  /* lineNo */
 };
 
 static emlrtBCInfo q_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   71,                                  /* lineNo */
   62,                                  /* colNo */
   "E_temp",                            /* aName */
@@ -506,7 +493,7 @@ static emlrtDCInfo y_emlrtDCI = { 71,  /* lineNo */
 };
 
 static emlrtBCInfo s_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   87,                                  /* lineNo */
   17,                                  /* colNo */
   "E_f",                               /* aName */
@@ -523,7 +510,7 @@ static emlrtDCInfo ab_emlrtDCI = { 87, /* lineNo */
 };
 
 static emlrtBCInfo t_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   71,                                  /* lineNo */
   21,                                  /* colNo */
   "E_temp",                            /* aName */
@@ -550,7 +537,7 @@ static emlrtBCInfo u_emlrtBCI = { -1,  /* iFirst */
 };
 
 static emlrtBCInfo v_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   93,                                  /* lineNo */
   38,                                  /* colNo */
   "shift_back",                        /* aName */
@@ -567,7 +554,7 @@ static emlrtDCInfo cb_emlrtDCI = { 93, /* lineNo */
 };
 
 static emlrtBCInfo w_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   93,                                  /* lineNo */
   38,                                  /* colNo */
   "E_f",                               /* aName */
@@ -577,7 +564,7 @@ static emlrtBCInfo w_emlrtBCI = { 1,   /* iFirst */
 };
 
 static emlrtBCInfo x_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   33,                                  /* lineNo */
   9,                                   /* colNo */
   "E_f",                               /* aName */
@@ -594,7 +581,7 @@ static emlrtDCInfo db_emlrtDCI = { 33, /* lineNo */
 };
 
 static emlrtBCInfo y_emlrtBCI = { 1,   /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   87,                                  /* lineNo */
   46,                                  /* colNo */
   "E_f",                               /* aName */
@@ -621,7 +608,7 @@ static emlrtBCInfo ab_emlrtBCI = { -1, /* iFirst */
 };
 
 static emlrtBCInfo bb_emlrtBCI = { 1,  /* iFirst */
-  512,                                 /* iLast */
+  64,                                  /* iLast */
   71,                                  /* lineNo */
   55,                                  /* colNo */
   "E_temp",                            /* aName */
@@ -647,7 +634,107 @@ static emlrtBCInfo cb_emlrtBCI = { -1, /* iFirst */
   0                                    /* checkKind */
 };
 
+/* Function Declarations */
+static void Chi_3_LLE_Kuar_ins(const creal_T F_Psi[64], const creal_T Fac_plus
+  [64], const creal_T Fac_minus[64], real_T Eq_H_s, real_T Eq_ke, real_T
+  Eq_gam2o, real_T Eq_gam2e, real_T Eq_gam3o, real_T Eq_gam3e, creal_T k_e[64]);
+
 /* Function Definitions */
+static void Chi_3_LLE_Kuar_ins(const creal_T F_Psi[64], const creal_T Fac_plus
+  [64], const creal_T Fac_minus[64], real_T Eq_H_s, real_T Eq_ke, real_T
+  Eq_gam2o, real_T Eq_gam2e, real_T Eq_gam3o, real_T Eq_gam3e, creal_T k_e[64])
+{
+  int32_T k;
+  creal_T b_F_Psi[32];
+  creal_T Psio[32];
+  creal_T Psie[32];
+  real_T im;
+  real_T z1[32];
+  creal_T b_z1[32];
+  real_T Eq_gam2o_re;
+  real_T Eq_gam2o_im;
+  for (k = 0; k < 32; k++) {
+    b_F_Psi[k].re = F_Psi[k].re * Fac_minus[k].re - F_Psi[k].im * Fac_minus[k].
+      im;
+    b_F_Psi[k].im = F_Psi[k].re * Fac_minus[k].im + F_Psi[k].im * Fac_minus[k].
+      re;
+  }
+
+  ifft(b_F_Psi, Psio);
+  for (k = 0; k < 32; k++) {
+    b_F_Psi[k].re = F_Psi[32 + k].re * Fac_minus[32 + k].re - F_Psi[32 + k].im *
+      Fac_minus[32 + k].im;
+    b_F_Psi[k].im = F_Psi[32 + k].re * Fac_minus[32 + k].im + F_Psi[32 + k].im *
+      Fac_minus[32 + k].re;
+  }
+
+  ifft(b_F_Psi, Psie);
+  for (k = 0; k < 32; k++) {
+    im = muDoubleScalarHypot(Psio[k].re, Psio[k].im);
+    z1[k] = im * im;
+  }
+
+  for (k = 0; k < 32; k++) {
+    im = muDoubleScalarHypot(Psie[k].re, Psie[k].im);
+    Eq_gam2o_re = Eq_gam2o * Psio[k].re;
+    Eq_gam2o_im = Eq_gam2o * -Psio[k].im;
+    b_F_Psi[k].re = (Eq_gam2o_re * Psie[k].re - Eq_gam2o_im * Psie[k].im) +
+      Eq_gam3o * (z1[k] + 2.0 * (im * im)) * Psio[k].re;
+    b_F_Psi[k].im = (Eq_gam2o_re * Psie[k].im + Eq_gam2o_im * Psie[k].re) +
+      Eq_gam3o * (z1[k] + 2.0 * (im * im)) * Psio[k].im;
+  }
+
+  fft(b_F_Psi, b_z1);
+  for (k = 0; k < 32; k++) {
+    Eq_gam2o_re = 0.0 * Fac_plus[k].re - Fac_plus[k].im;
+    im = 0.0 * Fac_plus[k].im + Fac_plus[k].re;
+    k_e[k].re = Eq_gam2o_re * b_z1[k].re - im * b_z1[k].im;
+    k_e[k].im = Eq_gam2o_re * b_z1[k].im + im * b_z1[k].re;
+  }
+
+  for (k = 0; k < 32; k++) {
+    b_z1[k].re = Psio[k].re * Psio[k].re - Psio[k].im * Psio[k].im;
+    b_z1[k].im = Psio[k].re * Psio[k].im + Psio[k].im * Psio[k].re;
+    im = muDoubleScalarHypot(Psio[k].re, Psio[k].im);
+    z1[k] = im * im;
+  }
+
+  for (k = 0; k < 32; k++) {
+    im = muDoubleScalarHypot(Psie[k].re, Psie[k].im);
+    b_F_Psi[k].re = Eq_gam2e * b_z1[k].re + Eq_gam3e * (2.0 * z1[k] + im * im) *
+      Psie[k].re;
+    b_F_Psi[k].im = Eq_gam2e * b_z1[k].im + Eq_gam3e * (2.0 * z1[k] + im * im) *
+      Psie[k].im;
+  }
+
+  fft(b_F_Psi, b_z1);
+  for (k = 0; k < 32; k++) {
+    Eq_gam2o_re = 0.0 * Fac_plus[32 + k].re - Fac_plus[32 + k].im;
+    im = 0.0 * Fac_plus[32 + k].im + Fac_plus[32 + k].re;
+    k_e[32 + k].re = Eq_gam2o_re * b_z1[k].re - im * b_z1[k].im;
+    k_e[32 + k].im = Eq_gam2o_re * b_z1[k].im + im * b_z1[k].re;
+  }
+
+  im = 32.0 * Fac_plus[32].re;
+  Eq_gam2o_im = 32.0 * Fac_plus[32].im;
+  if (Eq_gam2o_im == 0.0) {
+    Eq_gam2o_re = im / 2.0;
+    im = 0.0;
+  } else if (im == 0.0) {
+    Eq_gam2o_re = 0.0;
+    im = Eq_gam2o_im / 2.0;
+  } else {
+    Eq_gam2o_re = im / 2.0;
+    im = Eq_gam2o_im / 2.0;
+  }
+
+  k_e[32].re += Eq_ke * Eq_gam2o_re * Eq_H_s;
+  k_e[32].im += Eq_ke * im * Eq_H_s;
+
+  /*     k_e(N+2)      = k_e(N+2) + N.*Fac_plus(N+2).*1/2*Eq.ke*Eq.H_s*exp(-1i*t*(real(Eq.Le(2)) - Eq.delta_e2) ); */
+  /*     k_e(end)      = k_e(end) + N.*Fac_plus(end).*1/2*Eq.ke*Eq.H_s.*exp(-1i*t*(real(Eq.Le(end)) + Eq.delta_e) ); */
+}
+
 void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
   struct5_T *Runge, struct6_T *Sol)
 {
@@ -666,30 +753,21 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
   real_T re_tmp;
   real_T im;
   real_T im_tmp;
-  creal_T y[512];
+  creal_T y[64];
   real_T r;
-  creal_T F_e[512];
-  creal_T exp_minus_omega_contents[1536];
-  creal_T exp_plus_omega_contents[1536];
+  creal_T F_e[64];
+  creal_T exp_minus_omega_contents[192];
+  creal_T exp_plus_omega_contents[192];
   emxArray_creal_T *b_d;
   emxArray_int32_T *r0;
   int32_T ni;
   int32_T i1;
-  creal_T E_temp[512];
+  creal_T E_temp[64];
   int32_T iv0[2];
   int32_T iv1[2];
-  creal_T b_F_e[256];
-  creal_T Psio[256];
-  creal_T Psie[256];
-  creal_T k_e[512];
-  real_T dv0[256];
-  real_T dv1[256];
-  real_T dv2[256];
-  real_T dv3[256];
-  creal_T dcv0[256];
-  real_T dv4[256];
-  real_T dv5[256];
-  creal_T dc0;
+  creal_T b_exp_plus_omega_contents[64];
+  creal_T b_exp_minus_omega_contents[64];
+  creal_T b_E_temp[64];
   int32_T i2;
   int32_T b_i2;
   int32_T i3;
@@ -697,26 +775,14 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
   boolean_T rEQ0;
   int32_T iv2[2];
   int32_T tmp_size[2];
-  real_T dv6[256];
-  real_T dv7[256];
-  creal_T tmp_data[512];
-  real_T dv8[256];
-  real_T dv9[256];
+  creal_T tmp_data[64];
   emlrtStack st;
-  emlrtStack b_st;
   st.prev = sp;
   st.tls = sp->tls;
-  b_st.prev = &st;
-  b_st.tls = st.tls;
   emlrtHeapReferenceStackEnterFcnR2012b(sp);
   emxInit_cuint8_T(sp, &d, 2, &emlrtRTEI, true);
   b0 = false;
   b1 = false;
-  st.site = &b_emlrtRSI;
-  st.site = &b_emlrtRSI;
-  st.site = &b_emlrtRSI;
-  st.site = &b_emlrtRSI;
-  st.site = &b_emlrtRSI;
   i0 = d->size[0] * d->size[1];
   if (!(Runge->s >= 0.0)) {
     emlrtNonNegativeCheckR2012b(Runge->s, &f_emlrtDCI, sp);
@@ -762,7 +828,7 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
   /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
   for (i = 0; i < 3; i++) {
     q = Runge->a[i];
-    for (k = 0; k < 512; k++) {
+    for (k = 0; k < 64; k++) {
       re_tmp = 0.0 * Temp->Eq.L[k].re;
       im_tmp = 0.0 * Temp->Eq.L[k].im;
       re = dt * (q * (re_tmp - (-Temp->Eq.L[k].im)));
@@ -816,7 +882,7 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
   }
 
   /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-  for (k = 0; k < 512; k++) {
+  for (k = 0; k < 64; k++) {
     re = Temp->Par.dt * (0.0 * Temp->Eq.L[k].re - (-Temp->Eq.L[k].im));
     im = Temp->Par.dt * (0.0 * Temp->Eq.L[k].im + -Temp->Eq.L[k].re);
     y[k].re = re;
@@ -926,7 +992,6 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
   emxInit_int32_T(sp, &r0, 1, &j_emlrtRTEI, true);
   for (ni = 0; ni < i0; ni++) {
     st.site = &emlrtRSI;
-    re_tmp = Temp->In.t_start + (1.0 + (real_T)ni) * dt;
     i1 = b_d->size[0] * b_d->size[1];
     b_d->size[0] = d->size[0];
     b_d->size[1] = d->size[1];
@@ -940,7 +1005,7 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
     }
 
     /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-    memcpy(&E_temp[0], &F_e[0], sizeof(creal_T) << 9);
+    memcpy(&E_temp[0], &F_e[0], sizeof(creal_T) << 6);
     i1 = d->size[0];
     if (1 > i1) {
       emlrtDynamicBoundsCheckR2012b(1, 1, i1, &f_emlrtBCI, &st);
@@ -958,99 +1023,23 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
     iv0[1] = r0->size[0];
     if (!b1) {
       iv1[0] = 1;
-      iv1[1] = 512;
+      iv1[1] = 64;
       b1 = true;
     }
 
     emlrtSubAssignSizeCheckR2012b(&iv0[0], 2, &iv1[0], 2, &b_emlrtECI, &st);
-    for (i1 = 0; i1 < 256; i1++) {
-      b_F_e[i1].re = F_e[i1].re * exp_minus_omega_contents[3 * i1].re - F_e[i1].
-        im * exp_minus_omega_contents[3 * i1].im;
-      b_F_e[i1].im = F_e[i1].re * exp_minus_omega_contents[3 * i1].im + F_e[i1].
-        im * exp_minus_omega_contents[3 * i1].re;
+    for (i1 = 0; i1 < 64; i1++) {
+      b_exp_plus_omega_contents[i1] = exp_plus_omega_contents[3 * i1];
+      b_exp_minus_omega_contents[i1] = exp_minus_omega_contents[3 * i1];
     }
 
-    ifft(b_F_e, Psio);
-    for (i1 = 0; i1 < 256; i1++) {
-      b_F_e[i1].re = F_e[256 + i1].re * exp_minus_omega_contents[3 * (256 + i1)]
-        .re - F_e[256 + i1].im * exp_minus_omega_contents[3 * (256 + i1)].im;
-      b_F_e[i1].im = F_e[256 + i1].re * exp_minus_omega_contents[3 * (256 + i1)]
-        .im + F_e[256 + i1].im * exp_minus_omega_contents[3 * (256 + i1)].re;
-    }
-
-    ifft(b_F_e, Psie);
-    memset(&k_e[0], 0, sizeof(creal_T) << 9);
-    b_abs(Psio, dv0);
-    power(dv0, dv1);
-    b_abs(Psie, dv2);
-    power(dv2, dv3);
-    for (i1 = 0; i1 < 256; i1++) {
-      ind_s = Temp->Eq.gam2o * Psio[i1].re;
-      q = Temp->Eq.gam2o * -Psio[i1].im;
-      b_F_e[i1].re = (ind_s * Psie[i1].re - q * Psie[i1].im) + Temp->Eq.gam3o *
-        (dv1[i1] + 2.0 * dv3[i1]) * Psio[i1].re;
-      b_F_e[i1].im = (ind_s * Psie[i1].im + q * Psie[i1].re) + Temp->Eq.gam3o *
-        (dv1[i1] + 2.0 * dv3[i1]) * Psio[i1].im;
-    }
-
-    b_fft(b_F_e, dcv0);
-    for (i1 = 0; i1 < 256; i1++) {
-      re = 0.0 * exp_plus_omega_contents[3 * i1].re - exp_plus_omega_contents[3 *
-        i1].im;
-      im = 0.0 * exp_plus_omega_contents[3 * i1].im + exp_plus_omega_contents[3 *
-        i1].re;
-      k_e[i1].re = re * dcv0[i1].re - im * dcv0[i1].im;
-      k_e[i1].im = re * dcv0[i1].im + im * dcv0[i1].re;
-    }
-
-    b_power(Psio, dcv0);
-    b_abs(Psio, dv4);
-    power(dv4, dv1);
-    b_abs(Psie, dv5);
-    power(dv5, dv3);
-    for (i1 = 0; i1 < 256; i1++) {
-      b_F_e[i1].re = Temp->Eq.gam2e * dcv0[i1].re + Temp->Eq.gam3e * (2.0 *
-        dv1[i1] + dv3[i1]) * Psie[i1].re;
-      b_F_e[i1].im = Temp->Eq.gam2e * dcv0[i1].im + Temp->Eq.gam3e * (2.0 *
-        dv1[i1] + dv3[i1]) * Psie[i1].im;
-    }
-
-    b_fft(b_F_e, dcv0);
-    for (i1 = 0; i1 < 256; i1++) {
-      re = 0.0 * exp_plus_omega_contents[3 * (256 + i1)].re -
-        exp_plus_omega_contents[3 * (256 + i1)].im;
-      im = 0.0 * exp_plus_omega_contents[3 * (256 + i1)].im +
-        exp_plus_omega_contents[3 * (256 + i1)].re;
-      k_e[256 + i1].re = re * dcv0[i1].re - im * dcv0[i1].im;
-      k_e[256 + i1].im = re * dcv0[i1].im + im * dcv0[i1].re;
-    }
-
-    ind_s = Temp->Eq.Le[1].re - Temp->Eq.delta_e2;
-    dc0.re = ind_s * (re_tmp * 0.0);
-    dc0.im = ind_s * -re_tmp;
-    b_exp(&dc0);
-    ind_s = 256.0 * exp_plus_omega_contents[771].re;
-    q = 256.0 * exp_plus_omega_contents[771].im;
-    if (q == 0.0) {
-      re = ind_s / 2.0;
-      im = 0.0;
-    } else if (ind_s == 0.0) {
-      re = 0.0;
-      im = q / 2.0;
-    } else {
-      re = ind_s / 2.0;
-      im = q / 2.0;
-    }
-
-    re = Temp->Eq.H_s * (Temp->Eq.ke * re);
-    im = Temp->Eq.H_s * (Temp->Eq.ke * im);
-    k_e[257].re += re * dc0.re - im * dc0.im;
-    k_e[257].im += re * dc0.im + im * dc0.re;
-
-    /*     k_e(end)      = k_e(end) + N.*Fac_plus(end).*1/2*Eq.ke*Eq.H_s.*exp(-1i*t*(real(Eq.Le(end)) + Eq.delta_e) ); */
+    Chi_3_LLE_Kuar_ins(F_e, b_exp_plus_omega_contents,
+                       b_exp_minus_omega_contents, Temp->Eq.H_s, Temp->Eq.ke,
+                       Temp->Eq.gam2o, Temp->Eq.gam2e, Temp->Eq.gam3o,
+                       Temp->Eq.gam3e, b_E_temp);
     i = r0->size[0];
     for (i1 = 0; i1 < i; i1++) {
-      b_d->data[b_d->size[0] * r0->data[i1]] = k_e[i1];
+      b_d->data[b_d->size[0] * r0->data[i1]] = b_E_temp[i1];
     }
 
     i1 = (int32_T)(Runge->s + -1.0);
@@ -1072,25 +1061,25 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
         }
 
         if (Runge->b[(i3 + 3 * (i4 - 1)) - 1] != 0.0) {
-          q = dt * Runge->b[(i2 + 3 * i) + 1];
+          ind_s = dt * Runge->b[(i2 + 3 * i) + 1];
           loop_ub = b_d->size[1];
           i3 = b_d->size[0];
           if ((i4 < 1) || (i4 > i3)) {
             emlrtDynamicBoundsCheckR2012b(i4, 1, i3, &e_emlrtBCI, &st);
           }
 
-          for (i3 = 0; i3 < 512; i3++) {
-            ind_s = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i3]);
-            if (Temp->Eq.mode_range[i3] != ind_s) {
+          for (i3 = 0; i3 < 64; i3++) {
+            q = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i3]);
+            if (Temp->Eq.mode_range[i3] != q) {
               emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &fb_emlrtDCI, &st);
             }
 
             k = (int32_T)Temp->Eq.mode_range[i3];
-            if ((k < 1) || (k > 512)) {
-              emlrtDynamicBoundsCheckR2012b(k, 1, 512, &bb_emlrtBCI, &st);
+            if ((k < 1) || (k > 64)) {
+              emlrtDynamicBoundsCheckR2012b(k, 1, 64, &bb_emlrtBCI, &st);
             }
 
-            if (Temp->Eq.mode_range[i3] != ind_s) {
+            if (Temp->Eq.mode_range[i3] != q) {
               emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &fb_emlrtDCI, &st);
             }
 
@@ -1098,17 +1087,17 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
               emlrtDynamicBoundsCheckR2012b(k, 1, loop_ub, &cb_emlrtBCI, &st);
             }
 
-            k_e[i3].re = E_temp[k - 1].re + q * b_d->data[(i4 + b_d->size[0] *
-              (k - 1)) - 1].re;
-            if (Temp->Eq.mode_range[i3] != ind_s) {
+            b_E_temp[i3].re = E_temp[k - 1].re + ind_s * b_d->data[(i4 +
+              b_d->size[0] * (k - 1)) - 1].re;
+            if (Temp->Eq.mode_range[i3] != q) {
               emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &x_emlrtDCI, &st);
             }
 
-            if ((k < 1) || (k > 512)) {
-              emlrtDynamicBoundsCheckR2012b(k, 1, 512, &q_emlrtBCI, &st);
+            if ((k < 1) || (k > 64)) {
+              emlrtDynamicBoundsCheckR2012b(k, 1, 64, &q_emlrtBCI, &st);
             }
 
-            if (Temp->Eq.mode_range[i3] != ind_s) {
+            if (Temp->Eq.mode_range[i3] != q) {
               emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &y_emlrtDCI, &st);
             }
 
@@ -1116,31 +1105,31 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
               emlrtDynamicBoundsCheckR2012b(k, 1, loop_ub, &r_emlrtBCI, &st);
             }
 
-            k_e[i3].im = E_temp[k - 1].im + q * b_d->data[(i4 + b_d->size[0] *
-              (k - 1)) - 1].im;
+            b_E_temp[i3].im = E_temp[k - 1].im + ind_s * b_d->data[(i4 +
+              b_d->size[0] * (k - 1)) - 1].im;
           }
 
-          for (i3 = 0; i3 < 512; i3++) {
-            ind_s = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i3]);
-            if (Temp->Eq.mode_range[i3] != ind_s) {
+          for (i3 = 0; i3 < 64; i3++) {
+            q = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i3]);
+            if (Temp->Eq.mode_range[i3] != q) {
               emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &bb_emlrtDCI, &st);
             }
 
             i4 = (int32_T)Temp->Eq.mode_range[i3];
-            if ((i4 < 1) || (i4 > 512)) {
-              emlrtDynamicBoundsCheckR2012b(i4, 1, 512, &t_emlrtBCI, &st);
+            if ((i4 < 1) || (i4 > 64)) {
+              emlrtDynamicBoundsCheckR2012b(i4, 1, 64, &t_emlrtBCI, &st);
             }
 
-            E_temp[i4 - 1].re = k_e[i3].re;
-            if (Temp->Eq.mode_range[i3] != ind_s) {
+            E_temp[i4 - 1].re = b_E_temp[i3].re;
+            if (Temp->Eq.mode_range[i3] != q) {
               emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &bb_emlrtDCI, &st);
             }
 
-            if ((i4 < 1) || (i4 > 512)) {
-              emlrtDynamicBoundsCheckR2012b(i4, 1, 512, &t_emlrtBCI, &st);
+            if ((i4 < 1) || (i4 > 64)) {
+              emlrtDynamicBoundsCheckR2012b(i4, 1, 64, &t_emlrtBCI, &st);
             }
 
-            E_temp[i4 - 1].im = k_e[i3].im;
+            E_temp[i4 - 1].im = b_E_temp[i3].im;
           }
         }
 
@@ -1167,116 +1156,41 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
       iv0[1] = r0->size[0];
       if (!b0) {
         iv2[0] = 1;
-        iv2[1] = 512;
+        iv2[1] = 64;
         b0 = true;
       }
 
       emlrtSubAssignSizeCheckR2012b(&iv0[0], 2, &iv2[0], 2, &emlrtECI, &st);
-      b_st.site = &e_emlrtRSI;
-      b_i2 = 2 + i2;
+      b_i2 = (int32_T)(2U + i2);
       if ((b_i2 < 1) || (b_i2 > 3)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 3, &d_emlrtBCI, &b_st);
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 3, &d_emlrtBCI, &st);
       }
 
-      b_i2 = 2 + i2;
+      for (b_i2 = 0; b_i2 < 64; b_i2++) {
+        b_exp_plus_omega_contents[b_i2] = exp_plus_omega_contents[(i2 + 3 * b_i2)
+          + 1];
+      }
+
+      b_i2 = (int32_T)(2U + i2);
       if ((b_i2 < 1) || (b_i2 > 3)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 3, &c_emlrtBCI, &b_st);
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 3, &c_emlrtBCI, &st);
       }
 
-      for (b_i2 = 0; b_i2 < 256; b_i2++) {
-        b_F_e[b_i2].re = E_temp[b_i2].re * exp_minus_omega_contents[(i2 + 3 *
-          b_i2) + 1].re - E_temp[b_i2].im * exp_minus_omega_contents[(i2 + 3 *
-          b_i2) + 1].im;
-        b_F_e[b_i2].im = E_temp[b_i2].re * exp_minus_omega_contents[(i2 + 3 *
-          b_i2) + 1].im + E_temp[b_i2].im * exp_minus_omega_contents[(i2 + 3 *
-          b_i2) + 1].re;
+      for (b_i2 = 0; b_i2 < 64; b_i2++) {
+        b_exp_minus_omega_contents[b_i2] = exp_minus_omega_contents[(i2 + 3 *
+          b_i2) + 1];
       }
 
-      ifft(b_F_e, Psio);
-      for (b_i2 = 0; b_i2 < 256; b_i2++) {
-        b_F_e[b_i2].re = E_temp[256 + b_i2].re * exp_minus_omega_contents[(i2 +
-          3 * (256 + b_i2)) + 1].re - E_temp[256 + b_i2].im *
-          exp_minus_omega_contents[(i2 + 3 * (256 + b_i2)) + 1].im;
-        b_F_e[b_i2].im = E_temp[256 + b_i2].re * exp_minus_omega_contents[(i2 +
-          3 * (256 + b_i2)) + 1].im + E_temp[256 + b_i2].im *
-          exp_minus_omega_contents[(i2 + 3 * (256 + b_i2)) + 1].re;
-      }
-
-      ifft(b_F_e, Psie);
-      memset(&k_e[0], 0, sizeof(creal_T) << 9);
-      b_abs(Psio, dv6);
-      power(dv6, dv1);
-      b_abs(Psie, dv7);
-      power(dv7, dv3);
-      for (b_i2 = 0; b_i2 < 256; b_i2++) {
-        ind_s = Temp->Eq.gam2o * Psio[b_i2].re;
-        q = Temp->Eq.gam2o * -Psio[b_i2].im;
-        b_F_e[b_i2].re = (ind_s * Psie[b_i2].re - q * Psie[b_i2].im) +
-          Temp->Eq.gam3o * (dv1[b_i2] + 2.0 * dv3[b_i2]) * Psio[b_i2].re;
-        b_F_e[b_i2].im = (ind_s * Psie[b_i2].im + q * Psie[b_i2].re) +
-          Temp->Eq.gam3o * (dv1[b_i2] + 2.0 * dv3[b_i2]) * Psio[b_i2].im;
-      }
-
-      b_fft(b_F_e, dcv0);
-      for (b_i2 = 0; b_i2 < 256; b_i2++) {
-        re = 0.0 * exp_plus_omega_contents[(i2 + 3 * b_i2) + 1].re -
-          exp_plus_omega_contents[(i2 + 3 * b_i2) + 1].im;
-        im = 0.0 * exp_plus_omega_contents[(i2 + 3 * b_i2) + 1].im +
-          exp_plus_omega_contents[(i2 + 3 * b_i2) + 1].re;
-        k_e[b_i2].re = re * dcv0[b_i2].re - im * dcv0[b_i2].im;
-        k_e[b_i2].im = re * dcv0[b_i2].im + im * dcv0[b_i2].re;
-      }
-
-      b_power(Psio, dcv0);
-      b_abs(Psio, dv8);
-      power(dv8, dv1);
-      b_abs(Psie, dv9);
-      power(dv9, dv3);
-      for (b_i2 = 0; b_i2 < 256; b_i2++) {
-        b_F_e[b_i2].re = Temp->Eq.gam2e * dcv0[b_i2].re + Temp->Eq.gam3e * (2.0 *
-          dv1[b_i2] + dv3[b_i2]) * Psie[b_i2].re;
-        b_F_e[b_i2].im = Temp->Eq.gam2e * dcv0[b_i2].im + Temp->Eq.gam3e * (2.0 *
-          dv1[b_i2] + dv3[b_i2]) * Psie[b_i2].im;
-      }
-
-      b_fft(b_F_e, dcv0);
-      for (b_i2 = 0; b_i2 < 256; b_i2++) {
-        re = 0.0 * exp_plus_omega_contents[(i2 + 3 * (256 + b_i2)) + 1].re -
-          exp_plus_omega_contents[(i2 + 3 * (256 + b_i2)) + 1].im;
-        im = 0.0 * exp_plus_omega_contents[(i2 + 3 * (256 + b_i2)) + 1].im +
-          exp_plus_omega_contents[(i2 + 3 * (256 + b_i2)) + 1].re;
-        k_e[256 + b_i2].re = re * dcv0[b_i2].re - im * dcv0[b_i2].im;
-        k_e[256 + b_i2].im = re * dcv0[b_i2].im + im * dcv0[b_i2].re;
-      }
-
-      dc0.re = (Temp->Eq.Le[1].re - Temp->Eq.delta_e2) * (re_tmp * 0.0);
-      dc0.im = (Temp->Eq.Le[1].re - Temp->Eq.delta_e2) * -re_tmp;
-      b_exp(&dc0);
-      ind_s = 256.0 * exp_plus_omega_contents[i2 + 772].re;
-      q = 256.0 * exp_plus_omega_contents[i2 + 772].im;
-      if (q == 0.0) {
-        re = ind_s / 2.0;
-        im = 0.0;
-      } else if (ind_s == 0.0) {
-        re = 0.0;
-        im = q / 2.0;
-      } else {
-        re = ind_s / 2.0;
-        im = q / 2.0;
-      }
-
-      re = Temp->Eq.H_s * (Temp->Eq.ke * re);
-      im = Temp->Eq.H_s * (Temp->Eq.ke * im);
-      k_e[257].re += re * dc0.re - im * dc0.im;
-      k_e[257].im += re * dc0.im + im * dc0.re;
-
-      /*     k_e(end)      = k_e(end) + N.*Fac_plus(end).*1/2*Eq.ke*Eq.H_s.*exp(-1i*t*(real(Eq.Le(end)) + Eq.delta_e) ); */
+      Chi_3_LLE_Kuar_ins(E_temp, b_exp_plus_omega_contents,
+                         b_exp_minus_omega_contents, Temp->Eq.H_s, Temp->Eq.ke,
+                         Temp->Eq.gam2o, Temp->Eq.gam2e, Temp->Eq.gam3o,
+                         Temp->Eq.gam3e, b_E_temp);
       i = r0->size[0];
       for (b_i2 = 0; b_i2 < i; b_i2++) {
-        b_d->data[(i2 + b_d->size[0] * r0->data[b_i2]) + 1] = k_e[b_i2];
+        b_d->data[(i2 + b_d->size[0] * r0->data[b_i2]) + 1] = b_E_temp[b_i2];
       }
 
-      memcpy(&E_temp[0], &F_e[0], sizeof(creal_T) << 9);
+      memcpy(&E_temp[0], &F_e[0], sizeof(creal_T) << 6);
       if (*emlrtBreakCheckR2012bFlagVar != 0) {
         emlrtBreakCheckR2012b(&st);
       }
@@ -1292,25 +1206,25 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
       }
 
       if (Runge->c[b_i2 - 1] != 0.0) {
-        q = dt * Runge->c[i];
+        ind_s = dt * Runge->c[i];
         loop_ub = b_d->size[1];
         i3 = b_d->size[0];
         if ((b_i2 < 1) || (b_i2 > i3)) {
           emlrtDynamicBoundsCheckR2012b(b_i2, 1, i3, &emlrtBCI, &st);
         }
 
-        for (i3 = 0; i3 < 512; i3++) {
-          ind_s = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i3]);
-          if (Temp->Eq.mode_range[i3] != ind_s) {
+        for (i3 = 0; i3 < 64; i3++) {
+          q = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i3]);
+          if (Temp->Eq.mode_range[i3] != q) {
             emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &eb_emlrtDCI, &st);
           }
 
           i4 = (int32_T)Temp->Eq.mode_range[i3];
-          if ((i4 < 1) || (i4 > 512)) {
-            emlrtDynamicBoundsCheckR2012b(i4, 1, 512, &y_emlrtBCI, &st);
+          if ((i4 < 1) || (i4 > 64)) {
+            emlrtDynamicBoundsCheckR2012b(i4, 1, 64, &y_emlrtBCI, &st);
           }
 
-          if (Temp->Eq.mode_range[i3] != ind_s) {
+          if (Temp->Eq.mode_range[i3] != q) {
             emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &eb_emlrtDCI, &st);
           }
 
@@ -1318,17 +1232,17 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
             emlrtDynamicBoundsCheckR2012b(i4, 1, loop_ub, &ab_emlrtBCI, &st);
           }
 
-          k_e[i3].re = F_e[i4 - 1].re + q * b_d->data[(b_i2 + b_d->size[0] * (i4
-            - 1)) - 1].re;
-          if (Temp->Eq.mode_range[i3] != ind_s) {
+          b_E_temp[i3].re = F_e[i4 - 1].re + ind_s * b_d->data[(b_i2 + b_d->
+            size[0] * (i4 - 1)) - 1].re;
+          if (Temp->Eq.mode_range[i3] != q) {
             emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &v_emlrtDCI, &st);
           }
 
-          if ((i4 < 1) || (i4 > 512)) {
-            emlrtDynamicBoundsCheckR2012b(i4, 1, 512, &o_emlrtBCI, &st);
+          if ((i4 < 1) || (i4 > 64)) {
+            emlrtDynamicBoundsCheckR2012b(i4, 1, 64, &o_emlrtBCI, &st);
           }
 
-          if (Temp->Eq.mode_range[i3] != ind_s) {
+          if (Temp->Eq.mode_range[i3] != q) {
             emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i3], &w_emlrtDCI, &st);
           }
 
@@ -1336,31 +1250,31 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
             emlrtDynamicBoundsCheckR2012b(i4, 1, loop_ub, &p_emlrtBCI, &st);
           }
 
-          k_e[i3].im = F_e[i4 - 1].im + q * b_d->data[(b_i2 + b_d->size[0] * (i4
-            - 1)) - 1].im;
+          b_E_temp[i3].im = F_e[i4 - 1].im + ind_s * b_d->data[(b_i2 + b_d->
+            size[0] * (i4 - 1)) - 1].im;
         }
 
-        for (b_i2 = 0; b_i2 < 512; b_i2++) {
-          ind_s = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[b_i2]);
-          if (Temp->Eq.mode_range[b_i2] != ind_s) {
+        for (b_i2 = 0; b_i2 < 64; b_i2++) {
+          q = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[b_i2]);
+          if (Temp->Eq.mode_range[b_i2] != q) {
             emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &db_emlrtDCI, &st);
           }
 
           i3 = (int32_T)Temp->Eq.mode_range[b_i2];
-          if ((i3 < 1) || (i3 > 512)) {
-            emlrtDynamicBoundsCheckR2012b(i3, 1, 512, &x_emlrtBCI, &st);
+          if ((i3 < 1) || (i3 > 64)) {
+            emlrtDynamicBoundsCheckR2012b(i3, 1, 64, &x_emlrtBCI, &st);
           }
 
-          F_e[i3 - 1].re = k_e[b_i2].re;
-          if (Temp->Eq.mode_range[b_i2] != ind_s) {
+          F_e[i3 - 1].re = b_E_temp[b_i2].re;
+          if (Temp->Eq.mode_range[b_i2] != q) {
             emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &ab_emlrtDCI, &st);
           }
 
-          if ((i3 < 1) || (i3 > 512)) {
-            emlrtDynamicBoundsCheckR2012b(i3, 1, 512, &s_emlrtBCI, &st);
+          if ((i3 < 1) || (i3 > 64)) {
+            emlrtDynamicBoundsCheckR2012b(i3, 1, 64, &s_emlrtBCI, &st);
           }
 
-          F_e[i3 - 1].im = k_e[b_i2].im;
+          F_e[i3 - 1].im = b_E_temp[b_i2].im;
         }
       }
 
@@ -1369,97 +1283,97 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
       }
     }
 
-    for (i1 = 0; i1 < 512; i1++) {
-      ind_s = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i1]);
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+    for (i1 = 0; i1 < 64; i1++) {
+      q = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i1]);
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &cb_emlrtDCI, &st);
       }
 
       b_i2 = (int32_T)Temp->Eq.mode_range[i1];
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &v_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &v_emlrtBCI, &st);
       }
 
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &cb_emlrtDCI, &st);
       }
 
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &w_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &w_emlrtBCI, &st);
       }
 
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &cb_emlrtDCI, &st);
       }
 
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &v_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &v_emlrtBCI, &st);
       }
 
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &cb_emlrtDCI, &st);
       }
 
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &w_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &w_emlrtBCI, &st);
       }
 
       E_temp[i1].re = y[b_i2 - 1].re * F_e[b_i2 - 1].re - y[b_i2 - 1].im *
         F_e[b_i2 - 1].im;
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &cb_emlrtDCI, &st);
       }
 
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &v_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &v_emlrtBCI, &st);
       }
 
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &cb_emlrtDCI, &st);
       }
 
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &w_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &w_emlrtBCI, &st);
       }
 
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &cb_emlrtDCI, &st);
       }
 
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &v_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &v_emlrtBCI, &st);
       }
 
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &cb_emlrtDCI, &st);
       }
 
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &w_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &w_emlrtBCI, &st);
       }
 
       E_temp[i1].im = y[b_i2 - 1].re * F_e[b_i2 - 1].im + y[b_i2 - 1].im *
         F_e[b_i2 - 1].re;
     }
 
-    for (i1 = 0; i1 < 512; i1++) {
-      ind_s = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i1]);
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+    for (i1 = 0; i1 < 64; i1++) {
+      q = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i1]);
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &db_emlrtDCI, &st);
       }
 
       b_i2 = (int32_T)Temp->Eq.mode_range[i1];
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &x_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &x_emlrtBCI, &st);
       }
 
       F_e[b_i2 - 1].re = E_temp[i1].re;
-      if (Temp->Eq.mode_range[i1] != ind_s) {
+      if (Temp->Eq.mode_range[i1] != q) {
         emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &u_emlrtDCI, &st);
       }
 
-      if ((b_i2 < 1) || (b_i2 > 512)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &n_emlrtBCI, &st);
+      if ((b_i2 < 1) || (b_i2 > 64)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &n_emlrtBCI, &st);
       }
 
       F_e[b_i2 - 1].im = E_temp[i1].im;
@@ -1503,8 +1417,8 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
         }
 
         loop_ub = (int32_T)Temp->Space.N;
-        if ((loop_ub < 1) || (loop_ub > 512)) {
-          emlrtDynamicBoundsCheckR2012b(loop_ub, 1, 512, &g_emlrtBCI, sp);
+        if ((loop_ub < 1) || (loop_ub > 64)) {
+          emlrtDynamicBoundsCheckR2012b(loop_ub, 1, 64, &g_emlrtBCI, sp);
         }
       }
 
@@ -1559,8 +1473,8 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
         }
 
         b_i2 = (int32_T)(Temp->Space.N + 1.0);
-        if ((b_i2 < 1) || (b_i2 > 512)) {
-          emlrtDynamicBoundsCheckR2012b(b_i2, 1, 512, &h_emlrtBCI, sp);
+        if ((b_i2 < 1) || (b_i2 > 64)) {
+          emlrtDynamicBoundsCheckR2012b(b_i2, 1, 64, &h_emlrtBCI, sp);
         }
 
         b_i2--;
@@ -1569,8 +1483,8 @@ void Chi23OPO_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
         }
 
         i3 = (int32_T)d0;
-        if ((i3 < 1) || (i3 > 512)) {
-          emlrtDynamicBoundsCheckR2012b(i3, 1, 512, &i_emlrtBCI, sp);
+        if ((i3 < 1) || (i3 > 64)) {
+          emlrtDynamicBoundsCheckR2012b(i3, 1, 64, &i_emlrtBCI, sp);
         }
       }
 

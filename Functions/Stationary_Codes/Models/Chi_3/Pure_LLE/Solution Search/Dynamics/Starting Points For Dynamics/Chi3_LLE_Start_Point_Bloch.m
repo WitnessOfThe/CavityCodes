@@ -1,5 +1,5 @@
 function L_L =  Chi3_LLE_Start_Point_Bloch(L_L)
-
+    
     L_L.Temp.In.Psi_Start             = zeros(1,L_L.Temp.Space.N);
     L_L.Temp.In.Psi_Start(1)          = L_L.Stat.Sol.Psi_k(1);
     

@@ -3,27 +3,25 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * fft.c
+ * abs.c
  *
- * Code generation for function 'fft'
+ * Code generation for function 'abs'
  *
  */
 
 /* Include files */
+#include "mwmathutil.h"
 #include "rt_nonfinite.h"
 #include "Chi_3_LLE_Runge_Kuarong.h"
-#include "fft.h"
-#include "FFTWApi.h"
+#include "abs.h"
 
 /* Function Definitions */
-void c_fft(const creal_T x[512], creal_T y[512])
+void b_abs(const creal_T x[512], real_T y[512])
 {
-  FFTWApi_fft1d(x, false, y);
+  int32_T k;
+  for (k = 0; k < 512; k++) {
+    y[k] = muDoubleScalarHypot(x[k].re, x[k].im);
+  }
 }
 
-void fft(const creal_T x[512], creal_T y[512])
-{
-  FFTWApi_fft1d(x, true, y);
-}
-
-/* End of code generation (fft.c) */
+/* End of code generation (abs.c) */

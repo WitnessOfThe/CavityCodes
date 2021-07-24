@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * _coder_Chi_3_LLE_Runge_Kuarong_mex.h
+ * abs.h
  *
- * Code generation for function '_coder_Chi_3_LLE_Runge_Kuarong_mex'
+ * Code generation for function 'abs'
  *
  */
 
-#ifndef _CODER_CHI_3_LLE_RUNGE_KUARONG_MEX_H
-#define _CODER_CHI_3_LLE_RUNGE_KUARONG_MEX_H
+#ifndef ABS_H
+#define ABS_H
 
 /* Include files */
 #include <math.h>
@@ -24,10 +24,8 @@
 #include "Chi_3_LLE_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs, const
-  mxArray *prhs[]);
-extern emlrtCTX mexFunctionCreateRootTLS(void);
+extern void b_abs(const creal_T x[512], real_T y[512]);
 
 #endif
 
-/* End of code generation (_coder_Chi_3_LLE_Runge_Kuarong_mex.h) */
+/* End of code generation (abs.h) */

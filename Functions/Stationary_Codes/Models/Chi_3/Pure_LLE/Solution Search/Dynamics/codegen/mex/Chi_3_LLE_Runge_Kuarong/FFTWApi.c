@@ -11,12 +11,12 @@
 
 /* Include files */
 #include "rt_nonfinite.h"
-#include "Chi23OPO_Runge_Kuarong.h"
+#include "Chi_3_LLE_Runge_Kuarong.h"
 #include "FFTWApi.h"
 #include "emlrt.h"
 
 /* Function Definitions */
-void FFTWApi_fft1d(const creal_T data[32], boolean_T isInverse, creal_T y[32])
+void FFTWApi_fft1d(const creal_T data[512], boolean_T isInverse, creal_T y[512])
 {
   int32_T b_isInverse;
   emlrtFFTWSetNumThreads(36);
@@ -26,7 +26,7 @@ void FFTWApi_fft1d(const creal_T data[32], boolean_T isInverse, creal_T y[32])
     b_isInverse = -1;
   }
 
-  emlrtFFTW_1D_C2C((real_T *)&data[0], (real_T *)&y[0], 1, 32, 32, 1,
+  emlrtFFTW_1D_C2C((real_T *)&data[0], (real_T *)&y[0], 1, 512, 512, 1,
                    b_isInverse);
 }
 
