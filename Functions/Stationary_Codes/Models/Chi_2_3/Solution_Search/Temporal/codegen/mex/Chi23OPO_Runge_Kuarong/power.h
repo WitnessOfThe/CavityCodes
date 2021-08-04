@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * Chi23OPO_Runge_Kuarong_terminate.h
+ * power.h
  *
- * Code generation for function 'Chi23OPO_Runge_Kuarong_terminate'
+ * Code generation for function 'power'
  *
  */
 
-#ifndef CHI23OPO_RUNGE_KUARONG_TERMINATE_H
-#define CHI23OPO_RUNGE_KUARONG_TERMINATE_H
+#ifndef POWER_H
+#define POWER_H
 
 /* Include files */
 #include <math.h>
@@ -24,9 +24,9 @@
 #include "Chi23OPO_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void Chi23OPO_Runge_Kuarong_atexit(void);
-extern void Chi23OPO_Runge_Kuarong_terminate(void);
+extern void b_power(const creal_T a[128], creal_T y[128]);
+extern void power(const real_T a[128], real_T y[128]);
 
 #endif
 
-/* End of code generation (Chi23OPO_Runge_Kuarong_terminate.h) */
+/* End of code generation (power.h) */

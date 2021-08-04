@@ -25,11 +25,16 @@
                         /R.Stat.In.kappa)*R.Stat.In.kappa/R.Stat.In.gamma;    
                     
     R.CW.In           = R.Stat.In;
-    R.Stat.Par.Newton_tol       = 3E-10;         
+    R.Stat.Par.Equation_string      = 'Kerr_Full_Dispersion';    
+    R.Stat.Met.Newton               = @Newton_Manual_bicgstab;
+
+    R.Stat(1).Par.Newton_tol       = 1E-10;  
+    R.Stat(1).Par.Stability        = 0;    
+    R.Stat(1).Par.Newton_iter      = 200;
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    R.Stat.In.N_mode  = 2^6;
+    R.Stat.In.N_mode  = 2^8;
     R.CW.In.N_mode    = 2^8;
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -54,11 +59,20 @@
     end
 %% Create a single Crystal
 
-   Res = Chi3_CrystalCreator(R,MP,0);
+   Res = Chi3_CrystalCreator(R,MP,0);%% Create From CW
+%%
+
+   TempLocation = '/home/dp710/GitHubData/CHICrystals/CrystalMu=14_Fd=0.001_Delta=1.95_Power=2/FDScan/AAEP_Parameterdelta/Dynamics/AACD.mat';
+   Res = Chi3_CrystalFromDynamics(R,TempLocation,MP);%% Create From Temp
  
 %% Change Parameter Of The Crystal
 
     Stat = Chi3_CrystalChangeParameter(R,MP,'FD');
+%%
+    MP   = strcat('/home/dp710/GitHubData/CHICrystals/FromDyn/');
+%    SP  = Chi3_CrystalPathGenerator(Res.Stat,MP);
+    Stat = Chi3_CrystalChangeParameter(Res,MP,'delta');
+
 %% Stability of Parameter
     Chi3_CrystalDoStabilityInFolder(strcat(SP,'FDScan/'));
 %%  Make a scan From changed Parameter Point  
@@ -171,9 +185,9 @@
     Par.N  = 2^9;
     Par.NN = 200;
     Par.T  = 5E3;
-    mu_vec              = [14,7,1];
+    mu_vec              = [7,1];
     
-    for i = 1:3
+    for i = 1:2
         
         R.Stat.In.mu_bl     = mu_vec(i);%[1,7,14,28,14*3]
         SP                  = Chi3_CrystalPathGenerator(R.Stat,MP);    
@@ -187,6 +201,7 @@
     Par.T  = 1;
     mu_vec              = [14,7,1];
 %%    
+    mu_vec              = [14];
     for i = 1:1
         
         R.Stat.In.mu_bl     = mu_vec(i);%[1,7,14,28,14*3]

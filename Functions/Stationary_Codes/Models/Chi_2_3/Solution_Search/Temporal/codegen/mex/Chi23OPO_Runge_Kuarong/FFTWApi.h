@@ -3,14 +3,14 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * Chi23OPO_Runge_Kuarong_terminate.h
+ * FFTWApi.h
  *
- * Code generation for function 'Chi23OPO_Runge_Kuarong_terminate'
+ * Code generation for function 'FFTWApi'
  *
  */
 
-#ifndef CHI23OPO_RUNGE_KUARONG_TERMINATE_H
-#define CHI23OPO_RUNGE_KUARONG_TERMINATE_H
+#ifndef FFTWAPI_H
+#define FFTWAPI_H
 
 /* Include files */
 #include <math.h>
@@ -24,9 +24,9 @@
 #include "Chi23OPO_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void Chi23OPO_Runge_Kuarong_atexit(void);
-extern void Chi23OPO_Runge_Kuarong_terminate(void);
+extern void FFTWApi_fft1d(const creal_T data[128], boolean_T isInverse, creal_T
+  y[128]);
 
 #endif
 
-/* End of code generation (Chi23OPO_Runge_Kuarong_terminate.h) */
+/* End of code generation (FFTWApi.h) */

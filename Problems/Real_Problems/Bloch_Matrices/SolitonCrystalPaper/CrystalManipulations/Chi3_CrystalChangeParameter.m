@@ -8,19 +8,20 @@ function Stat  = Chi3_CrystalChangeParameter(R,MP,Var)
            case 'FD'
                
                Stat.Par.variable         = 'Fin_Dlog';
-               Stat.Par.first_step       = 0.025E-1;
-               Stat.Par.max_step         = 0.1E-1;
+               Stat.Par.first_step       = 0.5E-1;
+               Stat.Par.max_step         = 0.5E-1;
                Stat.Par.i_max            = 3000;
-               Stat.Par.step_tol         = 1E-6;
+               Stat.Par.step_tol         = 1E-16;
                Stat.Par.step_inc         = 1.1;  
                Stat.Par.Newton_iter      = 30;  
-               Stat.Par.Newton_tol       = 1.1E-10;         
+               Stat.Par.Newton_tol       = 1.1E-12;         
                Stat.Sol.Stab             = NaN;
-               Stat.Par.step_dec         = 0.5;  
+               Stat.Par.step_dec         = 0.1;  
                Stat                      = Stat(1).Met.Norm(Stat);
                x_0                       = Stat.Eq.Fin_Dlog;
                Stat.Met.Newton_Fail_Check    = @fail_Stat_checkFD;
                
+         %      Stat = Run_Branch_Universal_Turning(Stat);
                Stat                      = BranchTurning([real(Stat.Sol.Psi_k)...
                    ,imag(Stat.Sol.Psi_k)]*Stat.Space.N,x_0,Stat,1);
                
@@ -190,12 +191,15 @@ end
                    Logic.TurnTime      = abs(Logic.Dir.d12) > 15 && Logic.Smooth == 0;
                    
                    if Logic.Dir.d12 == 0
+                        Logic.Smooth      = 0;
                        Logic.TurnTime     = 1;
                    end
                    if isnan(Logic.Dir.d12)
+                        Logic.Smooth      = 0;
                        Logic.TurnTime     = 1;
                    end
                    if isinf(Logic.Dir.d12)
+                        Logic.Smooth      = 0;                       
                        Logic.TurnTime     = 1;
                    end
                end

@@ -3,7 +3,7 @@ function Res = Set_Up_Methods_For_Bloch_Matrices
     Res.Met.Norm           = @Chi_3_LLE_Normalization_Bloch; % Method which Apply
     Res.CW.Met.Norm        = @Chi_3_LLE_Normalization; % Method which Apply
     Res.Temp.Met.Norm      = @Chi_3_LLE_Normalization_Bloch; % Method which Apply
-    Res.Stat.Met.Norm      = @Chi_3_LLE_Normalization_Bloch; % Method which Apply
+    Res.Stat.Met.Norm      = @Chi_3_LLE_Normalization_BlochStat; % Method which Apply
     
     Res.CW.Met.MI_Matrix   = @Chi_3_LLE_MI_Matrix;     % Method which define
     % MI matrix to solve
@@ -27,7 +27,7 @@ function Res = Set_Up_Methods_For_Bloch_Matrices
     Res.Stat.Met.Preconditioner_Mod       = @LLE_Zero_Velocity_Predonditioner_TurnDelta;
     
     Res.Stat.Met.Newton_Matrix         = @Chi3_LLE_Bloch_Stat_Newton_Matrix;
-    
+    Res.Stat.Met.Newton                 = @Newton_Manual_bicgstab;
     Res.Stat.Met.Prop_Gen              = @Chi3_LLE_Stat_Prop_Gen;
     Res.Stat.Met.Ev_Stat_From_Dyn      = @Stat_In_Guess_Chi_3_LLE_From_Dyn;
     Res.Stat.Met.Stab_Method           = @LLE_Bloch_Full_Stability;  

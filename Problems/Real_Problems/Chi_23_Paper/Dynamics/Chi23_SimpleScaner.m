@@ -9,15 +9,15 @@
     Res.CW.In         = Params_LiNbd_FR_OPO;
     Res.CW.In.eps     = 0;%-Res.CW.In.ko*10;
     Res.CW.In.delta_o = Res.CW.In.ko;
-    Res.CW.In.N       = 2^5;
+    Res.CW.In.N       = 2^7;
     Res.CW.In.kMI     = [0:30];
     
 %%
     
     Res.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
-    Res.Temp.Par.dt            = 5E-4;
-    Res.Temp.Par.s_t           = 0.1;
-    Res.Temp.Par.T             = 1000;
+    Res.Temp.Par.dt            = 1E-4;
+    Res.Temp.Par.s_t           = 10;
+    Res.Temp.Par.T             = 5000;
     
     Res.Temp.Par.dd            = Res.Temp.Par.T/Res.Temp.Par.s_t;
     Res.Temp.Par.CW_num        = 1;
@@ -27,9 +27,9 @@
  mu  = 1;
  mu1 =  125;
  mu2 = -125;
- eps_vector =  -125*Res.CW.In.ko;%mu*(Res.CW.In.De(1) -Res.CW.In.Do(1)) +1/2*(mu^2*Res.CW.In.De(2)- Res.CW.In.Do(2)*(mu1^2+mu2^2));%;[0]*Res.CW.In.ko;
- dd         = - eps_vector/Res.CW.In.ko+linspace(0.25,0.25,24);%(-1/2*(mu^2*Res.CW.In.De(2)- Res.CW.In.Do(2)*(mu1^2+mu2^2)))/Res.CW.In.ko(1); 
- W          =  60E-6;
+ eps_vector =  16.5^2*abs(Res.CW.In.Do(2));%mu*(Res.CW.In.De(1) -Res.CW.In.Do(1)) +1/2*(mu^2*Res.CW.In.De(2)- Res.CW.In.Do(2)*(mu1^2+mu2^2));%;[0]*Res.CW.In.ko;
+ dd         =  [-13.8:0.01:-12.025];% - 40      - eps_vector/Res.CW.In.ko+%(-1/2*(mu^2*Res.CW.In.De(2)- Res.CW.In.Do(2)*(mu1^2+mu2^2)))/Res.CW.In.ko(1); 
+ W          = 60E-6;
  
 %%    
     p = gcp;
@@ -38,7 +38,7 @@
         
             
             for ip =1:size(W,2)            
-                
+                tic
                  parfor id = 1:size(dd,2)
                   %   tic
                      R           = Res;
@@ -49,33 +49,35 @@
                    %  toc
                      ResSave(id) = RunStartingSimple(R);
                     
-                end    
+                 end    
+                toc
             end
         
     end
     
 %%
 for id =1:size(ResSave,2)
-     ddelta(id)  = ResSave(id).Temp.Eq.delta_e;
-     Psi_o(id,:) = ResSave(id).Temp.Sol.Psio(end-1,:);
-     Psi_e(id,:) = ResSave(id).Temp.Sol.Psie(end-1,:);
+     S.ddelta(id)  = ResSave(id).Temp.Eq.delta_e;
+     S.Psi_o(id,:) = ResSave(id).Temp.Sol.Psio(end-1,:);
+     S.Psi_e(id,:) = ResSave(id).Temp.Sol.Psie(end-1,:);
 end
-    figure;plot(sum(abs(Psi_e(:,:)).^2+abs(Psi_o).^2,2)); 
 %%
-    id = 1;
+    figure;plot(S.ddelta,sum(abs(S.Psi_e(:,:)).^2+abs(S.Psi_o).^2,2)); 
+%%
+    id = 125;
 %    figure;plot(ResSave(id).Temp.Sol.t(1:end-1),abs(ResSave(id).Temp.Sol.Psie(1:end-1,end))); 
     figure;plot(fftshift(ResSave(1).Temp.Space.k),fftshift(10*log10(abs(ResSave(id).Temp.Sol.Psio(end-1,:)).^2))); 
-    ylim([-100,0])
-    figure;plot((ResSave(1).Temp.Space.phi),abs(ifft(ResSave(id).Temp.Sol.Psio(end-1,:))).^2); 
+    ylim([-75,-25])
+    figure;plot((ResSave(1).Temp.Space.phi),abs(ifft(ResSave(   id).Temp.Sol.Psie(end-1,:))).^2); 
     figure;pcolor(fftshift(ResSave(1).Temp.Space.k),ResSave(id).Temp.Sol.t(1:end-1),10*log10(abs(fftshift(ResSave(id).Temp.Sol.Psio(1:end-1,:),2)).^2));shading interp     
     caxis([-100,0])
     figure;pcolor(fftshift(ResSave(1).Temp.Space.k),ResSave(id).Temp.Sol.t(100:end-1),abs(ifft(ResSave(id).Temp.Sol.Psio(100:end-1,:),[],2)).^2);shading interp     
 
 %%
-    figure;pcolor(10*log10(abs(fftshift(Psi_o,2)).^2).');shading interp     
-    caxis([-100,0])%dd,[-32:31]
+    figure;pcolor(10*log10(abs(fftshift(S.Psi_o,2)).^2).');shading flat     
+    caxis([-75,-25])%dd,[-32:31]
 %%
-    id = [7,11];
+    id = [52];
 %    figure;plot(ResSave(id).Temp.Sol.t(1:end-1),abs(ResSave(id).Temp.Sol.Psie(1:end-1,end))); 
     figure;hold on
     plot(fftshift(ResSave(1).Temp.Space.k),fftshift(10*log10(abs(ResSave(id(1)).Temp.Sol.Psio(end-1,:)).^2))); 
@@ -108,9 +110,9 @@ function R = RunStartingSimple(R)
     R.Temp.Met      = [];
     
 
-    tic
+   
     R.Temp.Sol      = Chi23OPO_Runge_Kuarong_mex(R.Temp,Runge);
-    toc
+ 
 
 end
 function RunStartingPoints(id,iCW,SPS)

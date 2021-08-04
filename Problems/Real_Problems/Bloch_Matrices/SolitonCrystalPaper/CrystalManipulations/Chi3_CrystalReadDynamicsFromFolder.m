@@ -27,6 +27,6 @@ function Crystal = ReadData(SSSP)
     
     Crystal.In   = Temp.In;
     Crystal.Eq   = Temp.Eq;
-    Crystal.Sol.Psi  = Temp.Sol.Psi(end,:);
-  
+    Crystal.Sol  = Temp.Sol;
+    
 end

@@ -11,6 +11,8 @@ SRC_FILES =  \
 	Chi23OPO_Runge_Kuarong.c \
 	ifft.c \
 	FFTWApi.c \
+	abs.c \
+	power.c \
 	fft1.c \
 	_coder_Chi23OPO_Runge_Kuarong_info.c \
 	_coder_Chi23OPO_Runge_Kuarong_api.c \
