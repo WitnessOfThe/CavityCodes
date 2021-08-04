@@ -11,12 +11,12 @@
 
     CW.In         = Params_SiN_For_Crytal_Paper;
     CW.In.range   = 2^6;
-          
+    CW.In.kappa   = CW.In.D(2)/0.5;      
 %%
 
     NN                  = 1000;
     delta_vector        = CW.In.kappa*linspace(-6,6,NN);
-    W_WStar             = 8;
+    W_WStar             = 60;
     CW.In.P             = W_WStar*pi/(CW.In.eta*CW.In.D(1)/CW.In.kappa)*CW.In.kappa/CW.In.gamma;  
     CW.In.N_mode         = 2^8;
     
@@ -30,7 +30,7 @@
     
     plot(R.d/CW.In.kappa,R.g/CW.In.kappa,'LineStyle','none','Marker','.','Parent',ax,'Color','m');
 % %     
-    for ii =1:30
+    for ii =1:60
         
         plot(delta_vector/CW.In.kappa,R.Tongue_b1(:,ii)/CW.In.kappa,'Color',[0,0,0],'LineWidth',0.25,'Parent',ax);
         plot(delta_vector/CW.In.kappa,R.Tongue_b2(:,ii)/CW.In.kappa,'Color',[0.00,0.00,1.00],'LineWidth',0.5,'Parent',ax);

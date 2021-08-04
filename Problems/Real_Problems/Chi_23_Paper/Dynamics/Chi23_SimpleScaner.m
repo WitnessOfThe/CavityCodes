@@ -27,9 +27,9 @@
  mu  = 1;
  mu1 =  125;
  mu2 = -125;
- eps_vector =  10*Res.CW.In.ko;%mu*(Res.CW.In.De(1) -Res.CW.In.Do(1)) +1/2*(mu^2*Res.CW.In.De(2)- Res.CW.In.Do(2)*(mu1^2+mu2^2));%;[0]*Res.CW.In.ko;
- dd         = - eps_vector/Res.CW.In.ko+[-2:0.081:2];%(-1/2*(mu^2*Res.CW.In.De(2)- Res.CW.In.Do(2)*(mu1^2+mu2^2)))/Res.CW.In.ko(1); 
- W          =  100E-6;
+ eps_vector =  -125*Res.CW.In.ko;%mu*(Res.CW.In.De(1) -Res.CW.In.Do(1)) +1/2*(mu^2*Res.CW.In.De(2)- Res.CW.In.Do(2)*(mu1^2+mu2^2));%;[0]*Res.CW.In.ko;
+ dd         = - eps_vector/Res.CW.In.ko+linspace(0.25,0.25,24);%(-1/2*(mu^2*Res.CW.In.De(2)- Res.CW.In.Do(2)*(mu1^2+mu2^2)))/Res.CW.In.ko(1); 
+ W          =  60E-6;
  
 %%    
     p = gcp;
@@ -62,7 +62,7 @@ for id =1:size(ResSave,2)
 end
     figure;plot(sum(abs(Psi_e(:,:)).^2+abs(Psi_o).^2,2)); 
 %%
-    id = 22;
+    id = 1;
 %    figure;plot(ResSave(id).Temp.Sol.t(1:end-1),abs(ResSave(id).Temp.Sol.Psie(1:end-1,end))); 
     figure;plot(fftshift(ResSave(1).Temp.Space.k),fftshift(10*log10(abs(ResSave(id).Temp.Sol.Psio(end-1,:)).^2))); 
     ylim([-100,0])
@@ -75,7 +75,7 @@ end
     figure;pcolor(10*log10(abs(fftshift(Psi_o,2)).^2).');shading interp     
     caxis([-100,0])%dd,[-32:31]
 %%
-    id = [9,18];
+    id = [7,11];
 %    figure;plot(ResSave(id).Temp.Sol.t(1:end-1),abs(ResSave(id).Temp.Sol.Psie(1:end-1,end))); 
     figure;hold on
     plot(fftshift(ResSave(1).Temp.Space.k),fftshift(10*log10(abs(ResSave(id(1)).Temp.Sol.Psio(end-1,:)).^2))); 

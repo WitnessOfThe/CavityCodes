@@ -43,12 +43,6 @@ build $builddir/Chi23OPO_Runge_Kuarong_terminate.o : cc $root/Chi23OPO_Runge_Kua
 build $builddir/Chi23OPO_Runge_Kuarong.o : cc $root/Chi23OPO_Runge_Kuarong.c
 build $builddir/ifft.o : cc $root/ifft.c
 build $builddir/fft.o : cc $root/fft.c
-build $builddir/mod.o : cc $root/mod.c
-build $builddir/eml_int_forloop_overflow_check.o : cc $root/eml_int_forloop_overflow_check.c
-build $builddir/abs.o : cc $root/abs.c
-build $builddir/power.o : cc $root/power.c
-build $builddir/sum.o : cc $root/sum.c
-build $builddir/nullAssignment.o : cc $root/nullAssignment.c
 build $builddir/_coder_Chi23OPO_Runge_Kuarong_api.o : cc $root/interface/_coder_Chi23OPO_Runge_Kuarong_api.c
 build $builddir/_coder_Chi23OPO_Runge_Kuarong_mex.o : cc $root/interface/_coder_Chi23OPO_Runge_Kuarong_mex.c
 build $builddir/Chi23OPO_Runge_Kuarong_emxutil.o : cc $root/Chi23OPO_Runge_Kuarong_emxutil.c
@@ -56,4 +50,4 @@ build $builddir/_coder_Chi23OPO_Runge_Kuarong_info.o : cc $root/interface/_coder
 build $builddir/c_mexapi_version.o : cc $matlabdir/extern/version/c_mexapi_version.c
 
 # Link
-build $root\Chi23OPO_Runge_Kuarong_mex.mexw64 : link $builddir/Chi23OPO_Runge_Kuarong_data.o $builddir/rt_nonfinite.o $builddir/Chi23OPO_Runge_Kuarong_initialize.o $builddir/Chi23OPO_Runge_Kuarong_terminate.o $builddir/Chi23OPO_Runge_Kuarong.o $builddir/ifft.o $builddir/fft.o $builddir/mod.o $builddir/eml_int_forloop_overflow_check.o $builddir/abs.o $builddir/power.o $builddir/sum.o $builddir/nullAssignment.o $builddir/_coder_Chi23OPO_Runge_Kuarong_api.o $builddir/_coder_Chi23OPO_Runge_Kuarong_mex.o $builddir/Chi23OPO_Runge_Kuarong_emxutil.o $builddir/_coder_Chi23OPO_Runge_Kuarong_info.o $builddir/c_mexapi_version.o 
+build $root\Chi23OPO_Runge_Kuarong_mex.mexw64 : link $builddir/Chi23OPO_Runge_Kuarong_data.o $builddir/rt_nonfinite.o $builddir/Chi23OPO_Runge_Kuarong_initialize.o $builddir/Chi23OPO_Runge_Kuarong_terminate.o $builddir/Chi23OPO_Runge_Kuarong.o $builddir/ifft.o $builddir/fft.o $builddir/_coder_Chi23OPO_Runge_Kuarong_api.o $builddir/_coder_Chi23OPO_Runge_Kuarong_mex.o $builddir/Chi23OPO_Runge_Kuarong_emxutil.o $builddir/_coder_Chi23OPO_Runge_Kuarong_info.o $builddir/c_mexapi_version.o 

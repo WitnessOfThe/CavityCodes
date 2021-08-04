@@ -9,24 +9,18 @@
  *
  */
 
-#ifndef FFT_H
-#define FFT_H
+#pragma once
 
 /* Include files */
+#include "rtwtypes.h"
+#include "emlrt.h"
+#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tmwtypes.h"
-#include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi23OPO_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void c_fft(const creal_T x[256], creal_T y[256]);
-extern void fft(const creal_T x[256], creal_T y[256]);
-
-#endif
+void fft(const creal_T x[32], creal_T y[32]);
 
 /* End of code generation (fft.h) */

@@ -9,24 +9,19 @@
  *
  */
 
-#ifndef _CODER_CHI23OPO_RUNGE_KUARONG_API_H
-#define _CODER_CHI23OPO_RUNGE_KUARONG_API_H
+#pragma once
 
 /* Include files */
+#include "rtwtypes.h"
+#include "emlrt.h"
+#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tmwtypes.h"
-#include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi23OPO_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void Chi23OPO_Runge_Kuarong_api(const mxArray * const prhs[2], int32_T
-  nlhs, const mxArray *plhs[1]);
-
-#endif
+void Chi23OPO_Runge_Kuarong_api(const mxArray * const prhs[2], const mxArray
+  *plhs[1]);
 
 /* End of code generation (_coder_Chi23OPO_Runge_Kuarong_api.h) */
