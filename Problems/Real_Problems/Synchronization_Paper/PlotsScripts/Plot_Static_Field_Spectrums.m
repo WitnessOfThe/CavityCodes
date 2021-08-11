@@ -17,7 +17,7 @@ function  Plot_Static_Field_Spectrums(Stat,ax)
     
     
     Write_2 = strcat('V$/2\pi$=',num2str(Stat.Sol.V*Stat.Eq.norm),'Hz');
-    Write_1 = strcat('Err=',num2str(Stat.Sol.eps));
+    Write_1 = strcat('Err=',num2str(Stat.Sol.eps_f));
     
     text(0,max(abs(Psi_2))*0.9, Write_1,'FontSize',10,'Parent',ax(1),'Interpreter','latex');
     

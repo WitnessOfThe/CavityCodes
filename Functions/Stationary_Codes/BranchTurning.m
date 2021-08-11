@@ -38,6 +38,7 @@
                 L_L_1(i)   = step_eq(L_L_1(i),x);
                   
                 %evalute solution
+                
                 [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,L_L_1(i));
 
                 [i,norm(eps_f),x_step]
@@ -63,7 +64,7 @@
                     
                 
                 L_L_1(i).Logic = Logic;
-                
+                L_L_1(i).Logic.Turning = 0;
                  
                 if FlagReduce
                     
@@ -81,8 +82,8 @@
                 end
                                 
                 if Logic.TurnTime  == 1 && FlagReduce == 0
-                                        Exitflag = 0;
-                           break;          
+                    %                    Exitflag = 0;
+                     %      break;          
       
                        for it = 1:size(L_L_1,2)
                          maxvec(it) = real(L_L_1(it).Sol.Psi_k(1));
@@ -108,6 +109,7 @@
                         Exitflag = 0;
                         break;
                      end
+                       x_step =   x_step
 %                     i  = i + 1;
 %                     L_L_1(i) = L_L_Turn(end);
 %                     
@@ -183,7 +185,7 @@
                     + (Stat.Logic.Dir.y3-Stat.Logic.Dir.y2); 
             end
             
-            smcoeff   = 1.3;
+            smcoeff   = 1.0;
             
             while ii < 1400
                 
@@ -204,11 +206,11 @@
                         ,ii,abs(Stat(ii).Eq.(Stat(ii).Par.variable)-Stat(ii-1).Eq.(Stat(ii-1).Par.variable)));
                  end
                  
-                 Stat(ii).Logic = LogicT;
+                 Stat(ii).Logic         = LogicT;
                  Stat(ii).Logic.Turning = 1;
                  
                  
-                 if abs(Stat(ii).Logic.Dir.d11) < 1 && ii > 10
+                 if abs(Stat(ii).Logic.Dir.d11) < 2 && ii > 10 && Stat(ii).Logic.Dir.d11 ~= 0
                      break;
                  end       
                  if Stat(ii).Logic.rCW 
@@ -253,8 +255,10 @@
                   
             end
  %% if something wrong
+ 
             devec =  [];   
             maxvec = [];
+            
             for it = 1:size(Stat,2)
                 maxvec(it) = real(Stat(it).Sol.Psi_k(1));
                 devec(it) =  Stat(it).Eq.(Stat(it).Par.variable);

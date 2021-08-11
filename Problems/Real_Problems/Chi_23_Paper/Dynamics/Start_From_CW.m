@@ -16,7 +16,7 @@
     
 %%
     
-    Res.CW.In         = Params_LiNbd;
+    Res.CW.In         = Params_JuanjuanLiNbd;
     Res.CW.In.eps     = -Res.CW.In.ko*50;%-Res.CW.In.ko*10;
     Res.CW.In.delta_o = Res.CW.In.ko*9.5;
     Res.CW.In.N       = 2^8;
@@ -139,7 +139,7 @@
     
 %   Res.Stat.Stab          = Stability_Switcher(Res.Stat);
 %%
-        Plot_Res_temp(ResSave(116));   
+        Plot_Res_temp(ResSave(70));   
 %%
     for i=1:size(ResSave,2)
         delta(i)    = ResSave(i).Temp.Eq.delta_o;

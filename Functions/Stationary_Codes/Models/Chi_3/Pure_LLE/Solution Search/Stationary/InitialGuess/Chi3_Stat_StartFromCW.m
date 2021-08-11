@@ -1,6 +1,6 @@
  function [Res,coeff] = Chi3_Stat_StartFromCW(Res)
   
-    coeff_bound_s = [0,3.25];
+    coeff_bound_s = [0,3];
     Flag = false;
             
     Res.CW            = Res.CW.Met.Solve(Res.CW);
