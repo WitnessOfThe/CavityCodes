@@ -82,11 +82,11 @@
                 end
                                 
                 if Logic.TurnTime  == 1 && FlagReduce == 0
-                    %                    Exitflag = 0;
-                     %      break;          
+%                           Exitflag = 0;
+%                           break;          
       
-                       for it = 1:size(L_L_1,2)
-                         maxvec(it) = real(L_L_1(it).Sol.Psi_k(1));
+                      for it = 1:size(L_L_1,2)
+                         maxvec(it) = real(L_L_1(it).Sol.Psi_o(1));
                          devec(it) =  L_L_1(it).Eq.(L_L_1(it).Par.variable);
                       end
 
@@ -168,7 +168,8 @@
         end
        
         function [Slv,Stat] = Turning_Regime(Slv_Start,Stat)
-            Slv  = [0,Slv_Start(2:end)];
+%            Slv  = [0,Slv_Start(2:end)];
+             Slv  = [Slv_Start(1:end),0];
             
             Stat.Met.Equation             = L_L.Met.Equation_Mod;             
             Stat.Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition_Mod;
@@ -179,10 +180,10 @@
             
             if Stat.Logic.Dir.y3-Stat.Logic.Dir.y2 ~= 0 || ~isnan(Stat.Logic.Dir.d12)
                 Stat(ii).Eq.PsioMax = Stat(ii).Logic.Dir.y3 ...
-                    + Stat.Logic.Dir.y2-Stat.Logic.Dir.y1; 
+                    + Stat.Logic.Dir.y3-Stat.Logic.Dir.y2; 
             else
                                Stat(ii).Eq.PsioMax = Stat(ii).Logic.Dir.y3 ...
-                    + (Stat.Logic.Dir.y3-Stat.Logic.Dir.y2); 
+                    + (Stat.Logic.Dir.y2-Stat.Logic.Dir.y1); 
             end
             
             smcoeff   = 1.0;
@@ -260,7 +261,7 @@
             maxvec = [];
             
             for it = 1:size(Stat,2)
-                maxvec(it) = real(Stat(it).Sol.Psi_k(1));
+                maxvec(it) = real(Stat(it).Sol.Psi_o(1));
                 devec(it) =  Stat(it).Eq.(Stat(it).Par.variable);
             end
             

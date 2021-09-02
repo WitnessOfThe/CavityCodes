@@ -10,17 +10,16 @@
 %% Input Parameters for CaF
 
     R.Stat.In              = Params_SiN_For_Crytal_Paper;%Params_SiN_For_Crytal_Paper;    
-    R.Stat.In.mu_bl        = 1;   
     R.Stat.Par.CW_num      = 3;
-    R.Stat.In.kappa        = R.Stat.In.D(2)/0.017;   %%/0.017
+    R.Stat.In.kappa        = R.Stat.In.D(2)/0.05;   %%/0.017
     
-    W_WStar             = 2;   
+    W_WStar           = 2;   
     
     R.Stat.In.P       = W_WStar*pi/(R.Stat.In.eta*R.Stat.In.D(1)/R.Stat.In.kappa)*R.Stat.In.kappa/R.Stat.In.gamma;    
     R.CW.In           = R.Stat.In;
     
-    R.Stat.In.N_mode  = 2^9;
-    R.CW.In.N_mode    = 2^9;
+    R.Stat.In.N_mode  = 2^10;
+    R.CW.In.N_mode    = 2^7;
     
 %% Stationary Coefficeints
 
@@ -28,7 +27,7 @@
     R.Stat.Par.Equation_string      = 'Kerr_Full_Dispersion';    
     R.Stat.Met.Newton               = @Newton_Manual_bicgstab;
 
-    R.Stat(1).Par.Newton_tol       = 3E-11;  
+    R.Stat(1).Par.Newton_tol       = 1E-13;  
     R.Stat(1).Par.Turning          =    0;
     R.Stat(1).Par.variable         = 'delta';  %%'Pump Power';
     R.Stat(1).Par.bot_boundary     = -1E8; % bottom boundary for delta to search in normalized units
@@ -36,35 +35,96 @@
     
     R.Stat(1).Par.Stability        = 0;
     
-    R.Stat(1).Par.Newton_iter      = 150;
-    R.Stat(1).Par.first_step       = 1E-4;
-    R.Stat(1).Par.max_step         = 0.01;
-    R.Stat(1).Par.step_dec         = 0.2;
-    R.Stat(1).Par.step_tol         = 1E-16;
+    R.Stat(1).Par.Newton_iter      = 100;
+    R.Stat(1).Par.first_step       = 0.9E-2;
+    R.Stat(1).Par.max_step         = 1E-2;
+    R.Stat(1).Par.step_dec         = 0.2; 
+    R.Stat(1).Par.step_tol         = 1E-17;
     R.Stat(1).Par.step_inc         = 1.1;  
-    R.Stat.Par.i_max               = 12000;
+    R.Stat.Par.i_max               = 16000;
+    
+%%
+    R.CW.In.delta    = R.CW.In.kappa*2;
+ 
+%%  StraitForward  
+% 
+%     R.CW.In.mu_bl  = 4;   
+%     R = Chi3_Stat_StartFromCW(R);
+%     R.Stat.Stab                 = Stability_Switcher(R.Stat);
+%     
+%     R.Stat  = R.Stat.Met.Norm(R.Stat);
+%     x_0     = R.Stat.Eq.(R.Stat.Par.variable);
+%     
+%     Stat_1  =   BranchTurning3Step([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,1);
+%     Stat_2  =   BranchTurning3Step([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,-1);
+%%
+%     for imu = 1
+%         R.CW.In.mu_bl  = imu;   
+%         R = Chi3_Stat_StartFromCW(R);
+%         R.Stat.Stab                 = Stability_Switcher(R.Stat);
+% 
+%         R.Stat  = R.Stat.Met.Norm(R.Stat);
+%         x_0     = R.Stat.Eq.(R.Stat.Par.variable);
+% % % 
+%        Stat_1  =   BranchTurning3Step([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,1);
+%        Stat_2  =   BranchTurning3Step([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,-1);
+%        
+%         Stat = [fliplr(Stat_1),Stat_2];%fliplr(Stat_1),fliplr(Stat_1),
+% %        
+%        parfor i =1:size(Stat,2)
+%             Stat(i).Stab                 = Stability_Switcher(Stat(i));
+%        end
+%        RR(imu).Stat = Stat;
+%     end
+% %%
+%        ii      = 31;
+%        x_0     = Stat_x(ii).Eq.(R.Stat.Par.variable);
+%        Stat_x  = BranchTurning3Step([real(Stat_x(ii).Sol.Psi_k),imag(Stat_x(ii).Sol.Psi_k)]*Stat_x(ii).Space.N,x_0,Stat_x(ii),-1);
 
-%%    
-    R.CW.In.delta    = R.CW.In.kappa*1.95;
-
+%%
+    Nphi = 400;
+    phi  = linspace(0,pi-2*pi/Nphi,Nphi);
+    R.CW.In.mu_bl  = 1;   
     R = Chi3_Stat_StartFromCW(R);
-    R.Stat.Stab                 = Stability_Switcher(R.Stat);
+    Psi_k0 = R.Stat(1).Sol.Psi_k;
     
-    R.Stat  = R.Stat.Met.Norm(R.Stat);
-    x_0     = R.Stat.Eq.(R.Stat.Par.variable);
+    for iphi = 1:Nphi   
+        
+        Psi_k0 = R.Stat(1).Sol.Psi_k;
+        Psi_k0(1) =Psi_k0(1)- R.CW.Sol.Psi(3);
+        Psi_k = Psi_k0;
     
-%    Stat_1  =   BranchTurning([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,1);
-    Stat_2  =   BranchTurning3Step([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,-1);
-    %%
-    parfor i =1:1:size(Stat_2,2)
-         Stat_2(i).Stab                 = Stability_Switcher(Stat_2(i));
-         i             
+    for i =1:1
+        
+        Psi_k = Psi_k + Psi_k0.*exp(1i*R.Stat.Space.k*i*phi(iphi));
+
     end
+    
+        Psi_k(1) =Psi_k(1)+ R.CW.Sol.Psi(3);
+    
+%    Psi = ifft(Psi_k);
+ %   Psi = Psi + Psi.*exp(1i*R.Stat.Space.phi*pi/16);
+  %  Psi.*exp(1i*R.Stat.Space.phi*pi/8)
+%    R.Stat.Stab                 = Stability_Switcher(R.Stat);
+    
+        R.Stat  = R.Stat.Met.Norm(R.Stat);
+        x_0     = R.Stat.Eq.(R.Stat.Par.variable);
+        [Slv,eps_f(iphi),Exitflag] = Newton_Switcher([real(Psi_k),imag(Psi_k)]*R.Stat.Space.N,R.Stat);            
+        StatShift(iphi)           = R.Stat.Met.Prop_Gen(Slv,R.Stat);  
+        StatShift(iphi).Sol.eps_f = eps_f(iphi);
+    end
+    R.Stat = StatShift(36);
+    Stat_1  =   BranchTurning3Step([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,1);
+  %  Stat_2  =   BranchTurning3Step([real(R.Stat.Sol.Psi_k),imag(R.Stat.Sol.Psi_k)]*R.Stat.Space.N,x_0,R.Stat,-1);
+%     parfor i =1:1:size(Stat_2,2)
+%          Stat_2(i).Stab                 = Stability_Switcher(Stat_2(i));
+%          i             
+%     end
 %%
     parfor i =1:size(Stat_1,2)
          Stat_1(i).Stab                 = Stability_Switcher(Stat_1(i));
          i
-    end
+    end  
 %%
 
     f1 = figure('Position',[0,0,700,300],'Color',[1,1,1]);
@@ -80,20 +140,21 @@
     hold(axb(3),'on');
 
     
-   Plot_Static_Branch([Stat_2],axb);
+   Plot_Static_Branch([Stat_1],axb);%,Stat_6 Stat_2,Stat_6,
   %  Plot_Static_Branch(Stat_2,axb);
   % Plot_Static_Branch_Stable([Stat_2],axb);
  %  Plot_Static_Branch_Stable(Stat_2,axb);
-   axb(3).YLim  = [-0.05,0.05];
+%   axb(3).YLim  = [-0.05,0.05];
    clear f1
    clear axb
    clear Panel1
+%%   
+   
+ %  save(strcat('mu=',num2str(R.CW.In.mu_bl),'_Defect,2'),'Stat_2','Stat_1');   
 %%
      Stat1 = Chi3_Start_FromBlochVector(R.Stat,3);
 %%
- Psi = TransferToResontor(Stat_2(1).Sol.Psi_k,Stat_2(1).In.mu_bl);
-
-%%
+     Psi = TransferToResontor(Stat_2(1).Sol.Psi_k,Stat_2(1).In.mu_bl);
     
 %%
     fstable = figure('Position',[0,0,1400,900]/2,'Color',[1,1,1]);
@@ -101,13 +162,13 @@
     axb(1)  =  nexttile(P1,1,[1,1]);  
     axb(2)  =  nexttile(P1,2,[1,1]);  
     axb(3)  =  nexttile(P1,3,[1,1]);  
-    Plot_Stability(Stat_1(1),axb)
+    Plot_Stability(Stat(1),axb)
     axb(1).YLim = [-2,2];
     axb(2).YLim = [0,0.001];
     axb(3).YLim = [-2,2];
-   clear fstable 
-   clear axb
-   clear P1 
+    clear fstable 
+    clear axb
+    clear P1 
     
 %%
 
@@ -121,13 +182,13 @@
 %     axb(6)  =  nexttile(P1,6,[1,1]);  
 %     axb(7)  =  nexttile(P1,7,[1,1]);  
 %     axb(8)  =  nexttile(P1,8,[1,1]);  
-    Plot_Vector(Stat_2(317), 0,axb(1:4),63)
+    Plot_Vector(Stat(1), 0,axb(1:4),4)
 %    Plot_Vector(Stat_1(1),-3,axb(5:8))
    clear fstable 
    clear P1
    clear axb 
 
-%%
+
 
    
 %%
@@ -207,7 +268,7 @@ function  Plot_Static_Branch(Stat_1,ax)
     delta =  NaN(1,size(Stat_1,2));
     SmParam =  NaN(1,size(Stat_1,2));    
     for i = 1:size(Stat_1,2)
-        Peak(i)    = sum(abs((Stat_1(i).Sol.Psi_k(2:end).*Stat_1(i).Space.N)).^2);
+        Peak(i)    =  sum(abs(Stat_1(i).Sol.Psi_k(1:end)).^2);%Stat_1(i).Sol.Dir.d1;
         SmParam(i) = real(Stat_1(i).Sol.Psi_k(1));
         delta(i) = Stat_1(i).Eq.delta;
     end
@@ -231,7 +292,7 @@ function  Plot_Static_Branch_Stable(Stat_1,ax)
     ReLambda = NaN(size(Stat_1,2),100);
     for i = 1:size(Stat_1,2)
         
-        Peak(i)       = max(abs(ifft(Stat_1(i).Sol.Psi_k.*Stat_1(i).Space.N)).^2);
+        Peak(i)       = sum(abs(ifft(Stat_1(i).Sol.Psi_k(2:end).*Stat_1(i).Space.N)).^2);
         SmParam(i)    = real(Stat_1(i).Sol.V);
         delta(i)      = Stat_1(i).Eq.delta;
         ReLambda(i,:) = maxk(real(reshape(Stat_1(i).Stab.Values.', 1, [])),100);

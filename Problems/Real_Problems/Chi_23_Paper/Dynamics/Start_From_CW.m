@@ -139,14 +139,15 @@
     
 %   Res.Stat.Stab          = Stability_Switcher(Res.Stat);
 %%
-        Plot_Res_temp(ResSave(70));   
+        Plot_Res_temp(ResSave(65));   
 %%
     for i=1:size(ResSave,2)
         delta(i)    = ResSave(i).Temp.Eq.delta_o;
         PowerF(i)= sum(abs(ResSave(i).Temp.Sol.Psio(end-1,2:end)).^2);
     end
-figure;
-plot(delta,PowerF,'LineStyle','none','Marker','.')
+    figure;
+    plot(delta,PowerF,'LineStyle','none','Marker','.')
+    
 %% гауссов импульс умножить на кусок пси потом фурье (фу) (функция вигнера xfrog) 
 
 %%

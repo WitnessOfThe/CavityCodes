@@ -6,6 +6,11 @@ function Stat = Chi3_LLE_Stat_Prop_Gen(x0,Stat)
             
             Stat.Sol.V     = 0;
             Stat.Sol.Psi_k = (x0(1:Stat.Space.N) + 1i*x0(Stat.Space.N+1:2*Stat.Space.N))/Stat.Space.N;
+%             FF             = ifft(Stat.Sol.Psi_k);
+%             [~,ind]        = max(abs(FF));
+%             FF             = circshift(FF,ind);
+%             
+          %  Stat.Sol.Psi_k = fft(FF);
             
         case 'LLE_Full_Dispersion_Equation'
             

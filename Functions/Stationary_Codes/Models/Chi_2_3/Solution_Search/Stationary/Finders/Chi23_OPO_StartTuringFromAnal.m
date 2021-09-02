@@ -2,8 +2,7 @@
     
         CW   = Chi23_Stat_OPO_AnalyticsTurings(CW);
         Stat = Stat.Met.Norm(Stat);
-   %     Stat(2) =Stat;
-        dphi    = 2*pi/100;
+        dphi = 2*pi/100;
         
         for i = 1:1
             

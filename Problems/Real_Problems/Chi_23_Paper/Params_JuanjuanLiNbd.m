@@ -1,8 +1,8 @@
 function In = Params_JuanjuanLiNbd
 
     In.eta             = 0.5;                                
-    In.ko             = 2*pi*644E6;                                
-    In.ke             = 2*pi*483E6; %2*pi*4E6      
+    In.ko             = 2*pi*644E6*2;                                
+    In.ke             = 2*pi*483E6*2; %2*pi*4E6      
     
     In.gam2o          = 2*pi*6.4274e+09;
     In.gam2e          = 2*pi*6.4274e+09;

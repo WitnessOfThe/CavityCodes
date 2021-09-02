@@ -1,6 +1,6 @@
  function [Res,coeff] = Chi3_Stat_StartFromCW(Res)
   
-    coeff_bound_s = [0,3];
+    coeff_bound_s = [0.1,1];
     Flag = false;
             
     Res.CW            = Res.CW.Met.Solve(Res.CW);
@@ -18,7 +18,7 @@
     
         
     coeff_bound = coeff_bound_s;
-    ii          = 0;
+    ii          = 0;    
     d = 1E-1;    
     
     while Flag == 0
@@ -29,8 +29,8 @@
         Res                 = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(Res);
         ii                  = ii + 1;
         
-        Logic.p1            = Res.Stat.Sol.Exitflag >= 0;
-        Logic.p2            = sum(abs(Res.Stat.Sol.Psi_k(2))) > 1E-4;
+        Logic.p1            = Res.Stat.Sol.eps_f < Res.Stat(1).Par.Newton_tol ;
+        Logic.p2            = sum(abs(Res.Stat.Sol.Psi_k([2:end]))) > 1E-6;
 
         if (Logic.p1 && Logic.p2) || (ii == 100)
             

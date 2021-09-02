@@ -1,4 +1,4 @@
-function [varargout] = polarPcolor(R,theta,Z,varargin)
+function [varargout] = polarPcolor(R,theta,Z,ax,varargin)
 % [h,c] = polarPcolor1(R,theta,Z,varargin) is a pseudocolor plot of matrix 
 % Z for a vector radius R and a vector angle theta. 
 % The elements of Z specify the color in each cell of the 
@@ -140,7 +140,7 @@ thetaMin=min(theta);
 thetaMax =max(theta);
     
 % Definition of the mesh
-cax = newplot;
+cax =ax;
 Rrange = rMax - rMin; % get the range for the radius
 [rNorm] = getRnorm(Rscale,Origin,R,Rrange); % getRnorm is a nested function
 YY = (rNorm)'*cosd(theta);
@@ -169,12 +169,12 @@ if ~ishold(cax);
 end
 
 %% PLot colorbar if specified
-if colBar==1,
-    c =colorbar('location','WestOutside');
-    caxis([quantile(Z(:),0.01),quantile(Z(:),0.99)])
-else
-    c = [];
-end
+% if colBar==1,
+%     c =colorbar('location','WestOutside');
+%     caxis([quantile(Z(:),0.01),quantile(Z(:),0.99)])
+% else
+%     c = [];
+% end
 
 %% Outputs
 nargoutchk(0,2)
