@@ -2,13 +2,13 @@ function In = Params_LiNbd
 
     In.eta             = 0.5;                                
     In.ko             = 2*pi*1E6;                                
-    In.ke             = 2*pi*4E6; %      
+    In.ke             = 2*pi*2E6; %2*pi*4E6      
     
     In.gam2o          = 2*pi*300E6;
     In.gam2e          = 2*pi*300E6;
     
-    In.gam3o          = 0;%2*pi*300E3;
-    In.gam3e          = 0;%2*pi*300E3;
+    In.gam3o          = 2*pi*300E3;
+    In.gam3e          = 2*pi*300E3;
     
     In.Do              = 2*pi*[21E9,-100E3];% Dispersion Coefficients,-4E3
     In.De              = 2*pi*[20E9,-200E3];% Dispersion Coefficients,-4E3

@@ -11,12 +11,12 @@
     Res.CW.In.mu_bl   = 0;
     
 %%    
-    NNP               = 1000;%
-    NND               = 1000;%
+    NNP               = 200;%
+    NND               = 200;%
     
     
     kvector             =  [0:100];
-    epsilon_vector      =  [-150,-100,-75,-50,-25,-10,-5,0]*1E9*2*pi;
+    epsilon_vector      =  [-20]*1E9*2*pi;
     
     omega_max           =  50;
  %   g_max               =  75;
@@ -32,12 +32,12 @@
      %   Save_Omega(i)          = GetMiDegenNO_OPOPlane(Res,epsilon_vector(i),H_max,delta_max,delta_min,kvector,NNP,NND);
      
 %        Save_Omega(i)          = GetMiDegenOPOPlane(Res,epsilon_vector(i),H_max,delta_max,delta_min,kvector,NNP,NND);
-        Save_Omega(i) = Chi23_GetMiOmegaPlane(Res,epsilon_vector(i),omega_max,delta_max,delta_min,kvector,NNP,NND);
-%           Res.CW.Met.MI_Matrix  = @Chi23_MI_Matrix; 
- %       Save_Power23(i)    = Chi23_GetMiPowerPlane(Res,epsilon_vector(i),Power_max,delta_max,delta_min,kvector,NNP,NND);
+        Res.CW.Met.MI_Matrix  = @Chi23_MI_Matrix; 
+        Save_Power23(i)    = Chi23_GetMiPowerPlane(Res,epsilon_vector(i),Power_max,delta_max,delta_min,kvector,NNP,NND);
         Res.CW.Met.MI_Matrix  = @Chi2_MI_Matrix; 
         Save_Power2(i)    = Chi23_GetMiPowerPlane(Res,epsilon_vector(i),Power_max,delta_max,delta_min,kvector,NNP,NND);
-%       toc
+%        Save_Omega(i) = GetMiOmegaPlane(Res,epsilon_vector(i),omega_max,delta_max,delta_min,kvector,NNP,NND);
+        toc
     end    
 %     for i =1:20
 %     tic

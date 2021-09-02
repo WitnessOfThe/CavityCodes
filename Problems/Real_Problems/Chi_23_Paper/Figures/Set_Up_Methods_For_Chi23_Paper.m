@@ -31,7 +31,7 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.Stat.Met.Liniar_Decomposition = @Chi23_Full_Dispersion_Liniar_Decomposition_RS; %% Quasi_Netwon Matrix
     Res.Stat.Met.Preconditioner       = @Chi23_Full_Dispersion_Preconditioner_RS;%% Optimization
     Res.Stat.Met.Newton               = @Newton_Manual_bicgstab;
-%% Methods for turning      
+%% Methods for turning    
     Res.Stat.Met.Equation_Mod             = @Chi23_Full_Dispersion_Equation_RS_delta;
     Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Full_Dispersion_Liniar_Decomposition_RS_delta;
     Res.Stat.Met.Preconditioner_Mod       = @Chi23_Full_Dispersion_Preconditioner_RS_delta;
@@ -41,7 +41,7 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.Stat.Met.Stab_Matrix          = @Chi23_Bloch_Stability_Matrix;    
     Res.Stat.Met.Stab_Method          = @Chi23_Bloch_Stability;
     Res.Stat.Met.Prop_Gen             = @Chi23_Stat_Prop_Gen;
-    Res.Stat.Met.Newton_Fail_Check    = @fail_3stepStat_check;
+    Res.Stat.Met.Newton_Fail_Check    = @fail_Stat_check;
     Res.Stat.Met.Newton_Turning_Fail_Check   = @fail_Stat_Turning_check;
 %     L_L.Stat.Met.Ev_Stat_From_Dyn     = @Stat_In_Guess_Chi_3_LLE_From_Dyn;
 
@@ -184,76 +184,4 @@ end
         end
         PsioMax  = Peak_Val(end)+sg*(Peak_Val(end) - Peak_Val(end-1));
     end
-function [FlagReduce,FlagStop,Logic] = fail_3stepStat_check(Stat,x_step,i)
-     
-                     
-               
-%               if  abs(Stat.Sol.Dir.d12) == sign(Logic.Dir.d11) 
-%                   if Logic.Dir.d11 <= 1
-%                      Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.45;
-%                   end
-%                   if Logic.Dir.d11 > 1
-%                       if abs(Logic.Dir.d12) >= abs(Logic.Dir.d11)
-%                            Logic.Smooth      = abs(Logic.Dir.d12)/abs(Logic.Dir.d11) >= 1.5;
-%                       else
-%                            Logic.Smooth      = abs(Logic.Dir.d11)/abs(Logic.Dir.d12) >= 1.5;
-%                       end
-%                   end
-%               end                   
-%                    if  sign(Logic.Dir.d12) ~= sign(Logic.Dir.d11)
-%                       
-%                        Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.5;
-%                                               
-%                    end
-
-               Logic.Stop        =             0;
-               Logic.zero_step   =   x_step == 0;
-               Logic.Resid       =   Stat(end).Sol.eps_f > Stat(end).Par.Newton_tol;                
-    
-               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) > 5;
-               Logic.Smooth      = 0; 
-                   
-               if i>2 
-                   
-                   if abs(abs(Stat.Sol.Dir.d1)) == 0
-                       
-                      Logic.TurnTime      = 1;
-                      
-                   end
-                   
-                   if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.2
-                       
-                      Logic.Smooth       = 1;
-                      
-                   end                   
-                   
-               end
-                   
-               if x_step ==0
-               
-                    Logic.Stop    = 1;
-                    
-               end
-               
-               Logic.step        = x_step <Stat(end).Par.step_tol;
-               
-               if Logic.TurnTime
-                   
-                   Logic.Smooth = 0;
-
-               end
-                   if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 10
-                       
-                      Logic.Smooth       = 1;
-                      
-                   end                   
-               
-               Logic.rCW         = sum(abs(Stat(end).Sol.Psi_o(1:end)).^2) <= 1E-10;
-               Logic.MaxIter     = i > Stat(1).Par.i_max;      
-           
-               FlagReduce        = (Logic.Smooth + Logic.Resid) > 0 ;
-               FlagStop          = Logic.MaxIter  + Logic.Stop+Logic.rCW+Logic.step;
-           
-     end
-    
  

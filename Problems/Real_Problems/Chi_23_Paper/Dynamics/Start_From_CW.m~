@@ -17,10 +17,10 @@
 %%
     
     Res.CW.In         = Params_JuanjuanLiNbd;
-    Res.CW.In.eps     = -2*pi*150E9;%-Res.CW.In.ko*10;
+    Res.CW.In.eps     = -2*pi*75E9;%-Res.CW.In.ko*10;
     Res.CW.In.delta_o = Res.CW.In.ko*9.5;
     Res.CW.In.N       = 2^8;
-    Res.CW.In.W       = 65E-3;
+    Res.CW.In.W       = 35E-3;
     Res.CW.In.mu_bl   = 1;
     
 %%
@@ -56,14 +56,14 @@
     Res.Temp.Par.Runge_Type    = 'Runge SSPRK3';    
     Res.Temp.Par.dt            = 1E-3/2;
     Res.Temp.Par.s_t           = 0.1;
-    Res.Temp.Par.T             = 800;
+    Res.Temp.Par.T             = 300;
     
     Res.Temp.Par.dd            = Res.Temp.Par.T/Res.Temp.Par.s_t;
     Res.Temp.Par.CW_num        = 1;
     Runge                      = Define_Runge_Coeff(Res.Temp.Par);
     
  %%
-    delta_vector      = linspace(-0.22,1.94,36);
+    delta_vector      = linspace(-0.13,1.49,72);
     
     delta_stary       = -15*ones(1,length(delta_vector));
     NN = length(delta_vector);
