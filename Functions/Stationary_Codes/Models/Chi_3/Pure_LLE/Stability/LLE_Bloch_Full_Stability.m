@@ -4,12 +4,9 @@ function Stab = LLE_Bloch_Full_Stability(Stat)
 
         Stab.k      = [0:1:floor(Stat.In.mu_bl)/2];    
         Stab.Values = zeros(size(Stab.k,2),2*Stat.Space.N);
-        
     else
-        
         Stab.k      = 0;    
         Stab.Values = zeros(size(Stab.k,2),2*Stat.Space.N);
-        
     end
     for i = 1:size(Stab.k,2)
         

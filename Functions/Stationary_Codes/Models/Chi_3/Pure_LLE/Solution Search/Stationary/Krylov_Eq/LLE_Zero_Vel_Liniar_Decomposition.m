@@ -4,11 +4,6 @@
        psi_hat        = Psi(1:L_L.Space.N).' + 1i*Psi(L_L.Space.N+1:2*L_L.Space.N).';
         
        f_psi          = ifft(psi_hat);    
-       
-       [~,max_ind]    = max(abs(f_psi));
-     %  f_psi          = circshift(f_psi,max_ind);
-     %  psi_hat        = fft(psi_hat);
-        
        abs_psi_2      = abs(f_psi).^2;
         
 %%

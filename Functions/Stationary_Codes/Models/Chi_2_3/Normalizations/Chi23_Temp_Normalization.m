@@ -43,10 +43,10 @@ function Temp = Chi23_Temp_Normalization(Temp)
     
     Temp.Eq.norm            = norm;
     tt = [Temp.Space.k,Temp.Space.k];
-    Temp.Eq.mode_range      =     find( tt < 150 & tt > -150);
+    Temp.Eq.mode_range      =     find( tt < 230 & tt > -230);
     
 %%
-    Temp.Eq.Lo              = Temp.Eq.delta_o + Temp.Space.k.^2*1/2*Temp.Eq.Do(2) - 1i*Temp.Eq.ko/2;
-    Temp.Eq.Le              = Temp.Eq.delta_e + Temp.Space.k.*Temp.Eq.d + Temp.Space.k.^2*1/2*Temp.Eq.De(2) - 1i*Temp.Eq.ke/2;
+    Temp.Eq.Lo              = Temp.Eq.delta_o + Temp.Space.k.^2*1/2*Temp.Eq.Do(2)+ Temp.Space.k.^3*1/2/3*Temp.Eq.Do(3) + Temp.Space.k.^4*1/2/3/4*Temp.Eq.Do(4)- 1i*Temp.Eq.ko/2;
+    Temp.Eq.Le              = Temp.Eq.delta_e + Temp.Space.k.*Temp.Eq.d + Temp.Space.k.^3*1/2/3*Temp.Eq.De(3) + Temp.Space.k.^4*1/2/3/4*Temp.Eq.De(4)+ Temp.Space.k.^2*1/2*Temp.Eq.De(2) - 1i*Temp.Eq.ke/2;
     Temp.Eq.L               = [Temp.Eq.Lo,Temp.Eq.Le];
 end

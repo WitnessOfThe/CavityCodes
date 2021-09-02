@@ -7,16 +7,14 @@
         
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
         f_psi               = ifft(mask.*psi_hat);
-        [~,max_ind]         = max(abs(f_psi));
-%        f_psi               = circshift(f_psi,max_ind);
-        
- %       psi_hat             = fft(psi_hat);
         
         abs_psi_2           = abs(f_psi).^2;
         
+        [~,max_ind]         = max(abs_psi_2);
  
+     
+        
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         Nonliniar_term =    1i.*fft(abs_psi_2.*f_psi).*L_L.Eq.gamma_Kerr;
