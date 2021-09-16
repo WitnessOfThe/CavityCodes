@@ -1,4 +1,4 @@
-    function f = Chi23_Full_Dispersion_Equation_RS(x,Stat)
+   function f = Chi23_Full_Dispersion_Equation_RS(x,Stat)
     
         mask                = Stat.Eq.mask;
             
@@ -9,7 +9,7 @@
                                1i*x(3*Stat.Space.N+1:4*Stat.Space.N);
          
         V               = x(end);   %    
-        [~,ind]         = max(abs(real(xo)));
+        [~,ind]         = max(real(xo));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

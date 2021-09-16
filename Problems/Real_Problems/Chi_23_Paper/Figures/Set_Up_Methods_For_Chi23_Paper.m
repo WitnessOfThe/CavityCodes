@@ -5,7 +5,12 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.Stat.Met.Norm      = @Chi23_Stat_Normalization;
     
 %%    
+    Res.Stat.Met.Newton_Matrix     = @Chi23_CW_Newton_Matrix;
+    Res.Stat.Met.Newton_Matrix_Mod     = @Chi23_CW_Newton_Matrix_delta;
+    
     Res.CW.Met.Newton_Matrix     = @Chi23_CW_Newton_Matrix;
+    Res.CW.Met.Newton_Matrix_Mod     = @Chi23_CW_Newton_Matrix_delta;
+    
     Res.CW.Met.MI                = @Chi23_MI;
     Res.CW.Met.MI_Matrix         = @Chi2_MI_Matrix;
 %    Res.CW.Met.MI_Matrix_Chi2    = @Chi23_MI_Matrix;
@@ -27,22 +32,30 @@ function Res = Set_Up_Methods_For_Chi23_Paper
 %     L_L.CW.Met.Plot.Dressed_State = @Plot_LLE_Dressed_State;
 %     
 %% From turn to turn
-    Res.Stat.Met.Equation             = @Chi23_Full_Dispersion_Equation_RS_OPO; %% Equation to solve
+    Res.Stat.Met.Equation             = @Chi23_Full_Dispersion_Equation_RS; %% Equation to solve
     Res.Stat.Met.Liniar_Decomposition = @Chi23_Full_Dispersion_Liniar_Decomposition_RS; %% Quasi_Netwon Matrix
     Res.Stat.Met.Preconditioner       = @Chi23_Full_Dispersion_Preconditioner_RS;%% Optimization
+    
+ %   Res.Stat.Met.Equation             = @Chi23_Zero_Mode_Equation; %% Equation to solve
+ %   Res.Stat.Met.Liniar_Decomposition = @Chi23_Zero_Mode_Liniar_Decomposition_RS; %% Quasi_Netwon Matrix
+  %  Res.Stat.Met.Preconditioner       = @Chi23_Zero_Mode_Preconditioner;%% Optimization
     Res.Stat.Met.Newton               = @Newton_Manual_bicgstab;
+    Res.CW.Met.Newton               = @fsolve;
+    
 %% Methods for turning    
-    Res.Stat.Met.Equation_Mod             = @Chi23_Full_Dispersion_Equation_RS_delta;
-    Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Full_Dispersion_Liniar_Decomposition_RS_delta;
-    Res.Stat.Met.Preconditioner_Mod       = @Chi23_Full_Dispersion_Preconditioner_RS_delta;
-    Res.Stat.Met.Evaluate_trend           = @Peak_Trend;%% MaybeMeansNothing
+  %  Res.Stat.Met.Equation_Mod             = @Chi23_Zero_Mode_Equation_RS_delta;
+   % Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Zero_Mode_Liniar_Decomposition_RS_delta;
+    %Res.Stat.Met.Preconditioner_Mod       = @Chi23_Zero_Mode_Preconditioner_RS_delta;
+  Res.Stat.Met.Equation_Mod             = @Chi23_Full_Dispersion_Equation_RS_delta;
+  Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Full_Dispersion_Liniar_Decomposition_RS_delta;
+  Res.Stat.Met.Preconditioner_Mod       = @Chi23_Full_Dispersion_Preconditioner_RS_delta;    %Res.Stat.Met.Evaluate_trend           = @Peak_Trend;%% MaybeMeansNothing
     
 %%    
     Res.Stat.Met.Stab_Matrix          = @Chi23_Bloch_Stability_Matrix;    
     Res.Stat.Met.Stab_Method          = @Chi23_Bloch_Stability;
     Res.Stat.Met.Prop_Gen             = @Chi23_Stat_Prop_Gen;
-    Res.Stat.Met.Newton_Fail_Check    = @fail_Stat_check;
-    Res.Stat.Met.Newton_Turning_Fail_Check   = @fail_Stat_Turning_check;
+    Res.Stat.Met.Newton_Fail_Check    = @fail_3stepStat_check;
+  %  Res.Stat.Met.Newton_Turning_Fail_Check   = @fail_Stat_Turning_check;
 %     L_L.Stat.Met.Ev_Stat_From_Dyn     = @Stat_In_Guess_Chi_3_LLE_From_Dyn;
 
 %                                      
@@ -57,7 +70,7 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.CW.Par.Equation_string  = 'Chi23_CW';
     Res.CW.Met.Equation         = @Chi23_CW;
     Res.CW.Met.InitialGuess     = @Chi_3_Stat_In_Guess_Chi_3_LLE_From_CW;    
-    Res.CW.Met.Newton           = @fsolve;%'fsolve'
+ %   Res.Stat.Met.Newton           = @fsolve;%'fsolve'
 
     Res.CW.Par.variable         = 'delta_o';  %%'Pump Power';
     Res.CW.Par.first_step       = 0.05; % step for delta measured in delta/kappa
@@ -101,77 +114,78 @@ end
 
     end
     
-    function [FlagReduce,FlagStop,Logic] = fail_Stat_check(Stat,i,x_step)
-     
-           
-           Logic.Dir.d2    = NaN;
-           Logic.Dir.d11   = NaN;
-           Logic.Dir.d12   = NaN;
-           
-           Logic.Smooth    = 0;
-           Logic.zero_step = 0;
-           Logic.TurnTime  = 0;
-           Logic.Stop      = 0;
-           Logic.Resid     =   Stat(end).Sol.eps_f > Stat(end).Par.Newton_tol;
-           
-           if i >= 2
-               
-               Logic.Dir.y2 = max(abs(ifft(Stat(2).Sol.Psi_o)*Stat(2).Space.N).^2);
-               Logic.Dir.y1 = max(abs(ifft(Stat(1).Sol.Psi_o)*Stat(1).Space.N).^2);
-               
-               Logic.Dir.x2 = Stat(2).Eq.(Stat(2).Par.variable);
-               Logic.Dir.x1 = Stat(1).Eq.(Stat(2).Par.variable);
-               
-               Logic.Dir.d11 = (Logic.Dir.y2 - Logic.Dir.y1)/(Logic.Dir.x2 - Logic.Dir.x1);
-           
-               Logic.zero_step   = x_step == 0;
-               
-               if i >= 3
+   function [FlagReduce,FlagStop,Logic] = fail_3stepStat_check(Stat,x_step,i)
 
-                   Logic.Dir.y3  = max(abs(ifft(Stat(3).Sol.Psi_o)*Stat(3).Space.N).^2);
-                   
-                   Logic.Dir.x3  = Stat(3).Eq.(Stat(3).Par.variable);
-                   Logic.Dir.d12 = (Logic.Dir.y3 - Logic.Dir.y2)/(Logic.Dir.x3 - Logic.Dir.x2);                   
-                   Logic.Dir.d2  = (Logic.Dir.d12 - Logic.Dir.d11)/(Logic.Dir.x3 - Logic.Dir.x1);
-                   
-                       
-                   if  sign(Logic.Dir.d12) == sign(Logic.Dir.d11) 
-                       if Logic.Dir.d11 <=0.5
-                          Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.05;
-                       end
-                       if Logic.Dir.d11 >0.5
-                           if abs(Logic.Dir.d12) >= abs(Logic.Dir.d11)
-                                Logic.Smooth      = abs(Logic.Dir.d12)/abs(Logic.Dir.d11) >= 1.1;
-                           else
-                                Logic.Smooth      = abs(Logic.Dir.d11)/abs(Logic.Dir.d12) >= 1.1;
-                           end
-                       end
-                       
-                   end
-                   
-                   if  sign(Logic.Dir.d12) ~= sign(Logic.Dir.d11)
-                      
-                       Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.05;
-                                              
+
+
+%               if  abs(Stat.Sol.Dir.d12) == sign(Logic.Dir.d11) 
+%                   if Logic.Dir.d11 <= 1
+%                      Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.45;
+%                   end
+%                   if Logic.Dir.d11 > 1
+%                       if abs(Logic.Dir.d12) >= abs(Logic.Dir.d11)
+%                            Logic.Smooth      = abs(Logic.Dir.d12)/abs(Logic.Dir.d11) >= 1.5;
+%                       else
+%                            Logic.Smooth      = abs(Logic.Dir.d11)/abs(Logic.Dir.d12) >= 1.5;
+%                       end
+%                   end
+%               end                   
+%                    if  sign(Logic.Dir.d12) ~= sign(Logic.Dir.d11)
+%                       
+%                        Logic.Smooth      = abs(abs(Logic.Dir.d12)-abs(Logic.Dir.d11)) >= 0.5;
+%                                               
+%                    end
+               Logic.Smooth      = 0; 
+               Logic.Stop        =             0;
+               Logic.zero_step   =   x_step == 0;
+               Logic.Resid       =   Stat(end).Sol.eps_f > Stat(end).Par.Newton_tol;                
+
+               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) > 1;
+               if Logic.TurnTime
+                   if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.1
+                          Logic.TurnTime     =0;
+                          Logic.Smooth       = 1;
+
+                   end                   
+               end   
+
+               if i>2 
+
+                   if abs(abs(Stat.Sol.Dir.d1)) == 0
+
+                      Logic.TurnTime      = 1;
+
                    end
 
-                   Logic.TurnTime      = abs(Logic.Dir.d12) > 50 && Logic.Smooth == 0;
-                   if Logic.Dir.d12 == 0
-                       Logic.TurnTime     = 1;
-                   end
-                   if isnan(Logic.Dir.d12)
-                       Logic.TurnTime     = 1;
-                   end
-                   if isinf(Logic.Dir.d12)
-                       Logic.TurnTime     = 1;
-                   end
+
+%                    if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 10
+% 
+%                       Logic.Smooth       = 1;
+% 
+%                    end                   
+
                end
-           end
-             
-           Logic.rCW         = 0;%sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
-           Logic.MaxIter     = i > Stat(1).Par.i_max;           
-           FlagReduce        = (Logic.Smooth + Logic.Resid) > 0 ;
-           FlagStop          = Logic.MaxIter + Logic.rCW + Logic.Stop;
+
+               if x_step ==0
+
+                    Logic.Stop    = 1;
+
+               end
+
+               Logic.step        = x_step <Stat(end).Par.step_tol;
+
+%                if Logic.TurnTime
+% 
+%                    Logic.Smooth = 0;
+% 
+%                end
+               Logic.rCW         = sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
+               Logic.MaxIter     = i > Stat(1).Par.i_max;      
+               Logic.bb     = Stat(end).Eq.(Stat(1).Par.variable) < Stat(1).Par.bot_boundary;
+               Logic.tb     = Stat(end).Eq.(Stat(1).Par.variable) > Stat(1).Par.top_boundary;
+               FlagReduce        = (Logic.Smooth + Logic.Resid) > 0 ;
+               FlagStop          = Logic.MaxIter  + Logic.Stop+Logic.rCW+Logic.step+Logic.bb + Logic.tb;
+
      end
      %%
     function PsioMax =  Peak_Trend(Stat,sg)

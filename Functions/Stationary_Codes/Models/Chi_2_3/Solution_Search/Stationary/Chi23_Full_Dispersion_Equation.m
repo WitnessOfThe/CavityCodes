@@ -20,7 +20,7 @@
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-        Pump(1) = 1i/2*Stat.Eq.ko*Stat.In.H*Stat.Space.N;
+        Pump(1) = 1i/2*Stat.Eq.ko*Stat.In.H_f*Stat.Space.N;
         
         L1     = (Stat.Eq.Lo - V*Stat.Space.k).*xo;
         NL1    =  - fft(Stat.Eq.gam2o.*xeS.*conj(xoS)+ ...
@@ -30,8 +30,8 @@
         NL2    =  - fft(Stat.Eq.gam2e.*xoS.^2 + ...
                       Stat.Eq.gam3e.*(2*abs(xoS).^2 + abs(xeS).^2).*xeS );
  
-        f_1    = mask.*( L1 + NL1 );
-        f_1(1) = f_1(1) + Pump;
+        f_1    = mask.*( L1 + NL1+ Pump );
+        f_1 = f_1 ;
         
         f_2    = mask.*( L2 + NL2 );
         f_3    = ifft(mask.*1i.*Stat.Space.k.*fft(abs_psi2),'symmetric');

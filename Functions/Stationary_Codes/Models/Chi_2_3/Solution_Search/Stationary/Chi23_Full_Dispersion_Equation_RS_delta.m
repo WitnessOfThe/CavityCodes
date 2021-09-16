@@ -14,8 +14,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         
-        abs_psi2        = abs(xo).^2;
-        [~,ind]         = max(abs(real(xo)));
+         [~,ind]         = max(abs(real(xo)));
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -30,10 +29,10 @@
         NL2    =  - (Stat.Eq.gam2e.*xo.^2  + ...
                         Stat.Eq.gam3e.*(2*abs(xo).^2 + abs(xe).^2).*xe);
         
-        Pump   = 1i/2*Stat.Eq.ke*Stat.In.H_s;
+        Pump   = 1i/2*Stat.Eq.ko*Stat.In.H_f;
 
-        f_1    = ( L1 + NL1 );        
-        f_2    = ( L2 + NL2 + Pump );
+        f_1    = ( L1 + NL1+ Pump );        
+        f_2    = ( L2 + NL2  );
         
         f_3    = ifft(1i.*Stat.Space.k.*fft(real(xo)),'symmetric');
         

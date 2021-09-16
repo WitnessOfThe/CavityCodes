@@ -1,9 +1,9 @@
 function Res = Chi23_Stat_StartFromCW(Res)
     
-    coeff_start = 1E-2;
+    coeff_start = 0.0;
     Flag = false;
         
-   W                 = [Res.CW.In.W/ Res.CW.In.W_Star, Res.CW.In.W/ Res.CW.In.W_Star];
+   W                 = [Res.CW.In.W/ Res.CW.In.Wf_Star, Res.CW.In.W/ Res.CW.In.Wf_Star];
    delta             = [10,Res.CW.In.delta_o/Res.CW.In.ko];
     
     Res.CW            = Chi23_CW_Track_fromLower2Point(Res.CW,W,delta);
@@ -20,7 +20,7 @@ function Res = Chi23_Stat_StartFromCW(Res)
         
     Res.CW.Met.MI_Matrix   = @Chi23_MI_Matrix;
     Res.CW.Stab            =  Chi23_MI(Res.CW);
-        dd = 5E-3;
+        dd = 0.5E-1;
     coeff = coeff_start-dd;
     for i_try = 1:1
         

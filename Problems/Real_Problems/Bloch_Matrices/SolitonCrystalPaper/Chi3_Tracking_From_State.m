@@ -162,7 +162,7 @@
     axb(1)  =  nexttile(P1,1,[1,1]);  
     axb(2)  =  nexttile(P1,2,[1,1]);  
     axb(3)  =  nexttile(P1,3,[1,1]);  
-    Plot_Stability(Stat(1),axb)
+    Plot_Stability(RR(22).Stat(end),axb)
     axb(1).YLim = [-2,2];
     axb(2).YLim = [0,0.001];
     axb(3).YLim = [-2,2];

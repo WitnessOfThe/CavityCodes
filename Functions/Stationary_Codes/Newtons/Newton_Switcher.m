@@ -11,21 +11,23 @@ function [x0,eps_f,Output]    = Newton_Switcher(x0,Stat)
             
         case 'fsolve'
             
-            if Stat.Par.Change_Space == 1
+%            if Stat.Par.Change_Space == 1
                 
-                Psi_theta           = ifft( x0(1:Stat.Space.N) + 1i*x0(Stat.Space.N+1:Stat.Space.N*2));
-                Stat.Eq.Dir         = Finite_Derivatives(Stat.Space.N,Stat.Space.dphi);
-                [x0,eps_f,Output,~] = Stat.Met.Newton(@(x)Stat.Met.Newton_Matrix(Stat,x),[real(Psi_theta),imag(Psi_theta)],Stat.Par.fsolveoptions);
-                eps_f = sum(abs(eps_f));           
-                Psi_m               = fft( x0(1:Stat.Space.N) + 1i*x0(Stat.Space.N+1:Stat.Space.N*2));
-                x0                  = [real(Psi_m),imag(Psi_m)];
+ %               Psi_theta           = ifft( x0(1:Stat.Space.N) + 1i*x0(Stat.Space.N+1:Stat.Space.N*2));
+ %               Stat.Eq.Dir         = Finite_Derivatives(Stat.Space.N,Stat.Space.dphi);
+  %              [x0,eps_f,Output,~] = Stat.Met.Newton(@(x)Stat.Met.Newton_Matrix(Stat,x),[real(Psi_theta),imag(Psi_theta)],Stat.Par.fsolveoptions);
+   %             eps_f = sum(abs(eps_f));           
+    %            Psi_m               = fft( x0(1:Stat.Space.N) + 1i*x0(Stat.Space.N+1:Stat.Space.N*2));
+     %           x0                  = [real(Psi_m),imag(Psi_m)];
                 
-            else
+%            else
                 
+%                [x0,eps_f,Output,~] = Stat.Met.Newton(@(x)Stat.Met.Newton_Matrix(Stat,x),x0,Stat.Par.fsolveoptions);
+%                eps_f = sum(abs(eps_f));
+                
+%            end
                 [x0,eps_f,Output,~] = Stat.Met.Newton(@(x)Stat.Met.Newton_Matrix(Stat,x),x0,Stat.Par.fsolveoptions);
-                eps_f = sum(abs(eps_f));           
-                
-            end
+                eps_f = sum(abs(eps_f));
             
     end
         

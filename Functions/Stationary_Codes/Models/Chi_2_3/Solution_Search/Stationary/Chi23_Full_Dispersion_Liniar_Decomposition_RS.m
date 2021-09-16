@@ -57,7 +57,7 @@
 %         
 %     end
     
-    function f = Chi23_Full_Dispersion_Liniar_Decomposition_RS(x,Psi,Stat)
+     function f = Chi23_Full_Dispersion_Liniar_Decomposition_RS(x,Psi,Stat)
                 
         xo                  = (x(1:Stat.Space.N) +...
                                          1i*x(Stat.Space.N+1:2*Stat.Space.N)).';
@@ -77,7 +77,7 @@
         
         V               = Psi(end);
         
-        [~,max_ind]     = max(abs(real(Psio)));
+        [~,max_ind]     = max(real(Psio));
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -87,7 +87,7 @@
         NL1     =  - (Stat.Eq.gam2o.*( Psie.*conj(xo) + conj(Psio).*xe ) +...
                   Stat.Eq.gam3o.*(...
                  2*(abs(Psio).^2 + abs(Psie).^2 ).*xo + Psio.^2.*conj(xo) + ...
-                         2*conj(Psie).*Psio.*xo + 2*Psio.*Psie.*conj(xe)));
+                         2*conj(Psie).*Psio.*xe + 2*Psio.*Psie.*conj(xe)));
         
         L2      = ifft( fft(xe).*(Stat.Eq.Le - V*Stat.Space.k) - Stat.Space.k.*xV.*fft(Psie) );
         

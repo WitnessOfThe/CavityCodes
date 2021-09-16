@@ -50,8 +50,12 @@ function Stat = Chi23_Stat_Normalization(Stat)
     
 %%    
     Stat.Eq.mask            =ones(1,Stat.In.N);%[ones(1,100),zeros(1,Stat.In.N-200),ones(1,100)];%ones(1,Stat.In.N);%[ones(1,200),zeros(1,Stat.In.N-400),ones(1,200)];%[ones(1,Stat.In.N/2-Stat.Space.N/4),zeros(1,Stat.Space.N/4),zeros(1,Stat.Space.N/4),ones(1,Stat.In.N/2-Stat.Space.N/4)];
-
-    Stat.Eq.Lo              = Stat.Eq.mask.*(Stat.Eq.delta_o + Stat.Space.k.^2*1/2*Stat.Eq.Do(2) - 1i*Stat.Eq.ko/2);
-    Stat.Eq.Le              = Stat.Eq.mask.*(Stat.Eq.delta_e + Stat.Space.k.*Stat.Eq.d + Stat.Space.k.^2*1/2*Stat.Eq.De(2) - 1i*Stat.Eq.ke/2);
+    if N == 1
+        Stat.Eq.Lo              = Stat.Eq.mask.*(Stat.Eq.delta_o - 1i*Stat.Eq.ko/2);
+        Stat.Eq.Le              = Stat.Eq.mask.*(Stat.Eq.delta_e - 1i*Stat.Eq.ke/2);
+    else
+        Stat.Eq.Lo              = Stat.Eq.mask.*(Stat.Eq.delta_o + Stat.Space.k.^2*1/2*Stat.Eq.Do(2) - 1i*Stat.Eq.ko/2);
+        Stat.Eq.Le              = Stat.Eq.mask.*(Stat.Eq.delta_e + Stat.Space.k.*Stat.Eq.d + Stat.Space.k.^2*1/2*Stat.Eq.De(2) - 1i*Stat.Eq.ke/2);
+    end
     
 end

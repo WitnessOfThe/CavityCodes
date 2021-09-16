@@ -7,12 +7,12 @@
 
     CW.In         = Params_SiN_For_Crytal_Paper;
     CW.In.range   = 2^8;
-    CW.In.N_mode  = 2^8;
+    CW.In.N_mode  = 2^10;
           
 %%
-    NN          = 10000;
-    FdVector    = linspace(1E-3,2,NN);
-    W_WStar     = 5;
+    NN          = 5000;
+    FdVector    = 1./(linspace(0.005,100,NN));
+    W_WStar     = 2;
     CW.In.delta = -CW.In.kappa*1.5;
     
 %%
@@ -69,57 +69,64 @@ W_WStar =2;
         [muMax(i)]       = Get_PeakMu(CWW);
         i
     end
+ %%
+         CWW              = CW;
+        CWW.In.kappa     = CWW.In.D(2)/0.005;
+        CWW.In.delta     = CWW.In.kappa*W_WStar;
+        CWW.In.P         = W_WStar*pi/(CWW.In.eta*CWW.In.D(1)/CWW.In.kappa)*CWW.In.kappa/CWW.In.gamma;  
+        tt       = Get_PeakMu(CWW);
+ 
 %%
-    NN = 100;
-    CW.In.delta  = CW.In.kappa*2;
-    CW.In.P      = W_WStar*pi/(CW.In.eta*CW.In.D(1)/CW.In.kappa)*CW.In.kappa/CW.In.gamma;  
-    CW           = CW.Met.Solve(CW);        
-%    D2_Vector    = 2*pi*linspace(1E3,1E5,NN);
- %   Kappa_Vector = 2*pi*linspace(1E7,1E9,NN);
-    F_Vector  = linspace(1,1E4,NN);
-    Fd_Vector = linspace(1E-4,0.5,NN);
-    
-    parfor iFd = 1:NN
-        
-        CWW              = CW;
-        for iFF = 1:NN
-            
-            CWW.In.kappa     = CWW.In.D(1)/F_Vector(iFF);
-            CWW.In.D(2)      = CWW.In.kappa*Fd_Vector(iFd);
-        
-            CWW.In.delta     = CWW.In.kappa*2;
-            CWW.In.P         = W_WStar*pi/(CWW.In.eta*CWW.In.D(1)/CWW.In.kappa)*CWW.In.kappa/CWW.In.gamma;  
-            [F_D(iFd,iFF)]   = CWW.In.D(2)/CWW.In.kappa;
-            [F(iFd,iFF)]     = CWW.In.D(1)/CWW.In.kappa;
-            [muMax(iFd,iFF),W(iFd,iFF),H(iFd,iFF)] = Get_PeakMu(CWW);
-           
-        end
-        iFd 
-    end
+%     NN = 100;
+%     CW.In.delta  = CW.In.kappa*2;
+%     CW.In.P      = W_WStar*pi/(CW.In.eta*CW.In.D(1)/CW.In.kappa)*CW.In.kappa/CW.In.gamma;  
+%     CW           = CW.Met.Solve(CW);        
+% %    D2_Vector    = 2*pi*linspace(1E3,1E5,NN);
+%  %   Kappa_Vector = 2*pi*linspace(1E7,1E9,NN);
+%     F_Vector  = linspace(1,1E4,NN);
+%     Fd_Vector = linspace(1E-4,0.5,NN);
+%     
+%     parfor iFd = 1:NN
+%         
+%         CWW              = CW;
+%         for iFF = 1:NN
+%             
+%             CWW.In.kappa     = CWW.In.D(1)/F_Vector(iFF);
+%             CWW.In.D(2)      = CWW.In.kappa*Fd_Vector(iFd);
+%         
+%             CWW.In.delta     = CWW.In.kappa*2;
+%             CWW.In.P         = W_WStar*pi/(CWW.In.eta*CWW.In.D(1)/CWW.In.kappa)*CWW.In.kappa/CWW.In.gamma;  
+%             [F_D(iFd,iFF)]   = CWW.In.D(2)/CWW.In.kappa;
+%             [F(iFd,iFF)]     = CWW.In.D(1)/CWW.In.kappa;
+%             [muMax(iFd,iFF),W(iFd,iFF),H(iFd,iFF)] = Get_PeakMu(CWW);
+%            
+%         end
+%         iFd 
+%     end
 %%
 
     %%
-    h = 700;
-     f1 = figure('Position',[0,0,700,400],'Color',[1,1,1]);
-    
-    Panel1 = tiledlayout(1,4,'TileSpacing','none','Padding','none');
-    
-    axb(1) =  nexttile(Panel1,1,[1,1]);  
-    axb(2) =  nexttile(Panel1,2,[1,1]);  
-    axb(3) =  nexttile(Panel1,3,[1,1]);  
-    axb(4) =  nexttile(Panel1,4,[1,1]);  
-    
-    pcolor(F,F_D,abs(muMThr),'Parent',axb(1));
-    pcolor(F,F_D,deltaThr,'Parent',axb(2));
-    pcolor(F,F_D,10*log10(abs(WThr)),'Parent',axb(3));
-    pcolor(F,F_D,10*log10(abs(H2Thr)),'Parent',axb(4));
-
-    for i = 1:size(axb,2)
-        shading(axb(i),'flat');
-        axb(i).XLabel.String = '$\mathcal{F}$';
-        axb(i).YLabel.String = '$\mathcal{F}_d$';
-        axes_Style(axb(i))
-    end
+%     h = 700;
+%      f1 = figure('Position',[0,0,700,400],'Color',[1,1,1]);
+%     
+%     Panel1 = tiledlayout(1,4,'TileSpacing','none','Padding','none');
+%     
+%     axb(1) =  nexttile(Panel1,1,[1,1]);  
+%     axb(2) =  nexttile(Panel1,2,[1,1]);  
+%     axb(3) =  nexttile(Panel1,3,[1,1]);  
+%     axb(4) =  nexttile(Panel1,4,[1,1]);  
+%     
+%     pcolor(F,F_D,abs(muMThr),'Parent',axb(1));
+%     pcolor(F,F_D,deltaThr,'Parent',axb(2));
+%     pcolor(F,F_D,10*log10(abs(WThr)),'Parent',axb(3));
+%     pcolor(F,F_D,10*log10(abs(H2Thr)),'Parent',axb(4));
+% 
+%     for i = 1:size(axb,2)
+%         shading(axb(i),'flat');
+%         axb(i).XLabel.String = '$\mathcal{F}$';
+%         axb(i).YLabel.String = '$\mathcal{F}_d$';
+%         axes_Style(axb(i))
+%     end
 %%
 h = 700;
  f1 = figure('Position',[325.8,440.6,1050,300],'Color',[1,1,1]);
@@ -128,12 +135,17 @@ h = 700;
     
     axb(1) =  nexttile(Panel1,1,[1,1]);  
     axb(2) =  nexttile(Panel1,2,[1,1]);  
+    hold(axb(2),'on')
     axb(3) =  nexttile(Panel1,3,[1,1]);  
+    hold(axb(3),'on')
 %    axb(4) =  nexttile(Panel1,4,[1,1]);  
     
-    semilogy(delta,FdVector,'Parent',axb(1),'Color',[0,0,0]);
-    loglog(abs(mu),FdVector,'Parent',axb(2),'Color',[0,0,0]);
-    loglog(abs(muMax),FdVector,'Parent',axb(3),'Color',[0,0,0]);
+    plot(delta,FdVector,'Parent',axb(1),'Color',[0,0,0]);
+    Rho = 1./FdVector;
+    plot(abs(mu),FdVector,'Parent',axb(2),'Color',[1,0,0],'LineStyle','none','Marker','.');
+    plot(sqrt(Rho*(1+sqrt(2*CW.In.gamma*CW.In.H.^2/CW.In.kappa-1))),FdVector,'Parent',axb(2),'Color',[1,0,0]);
+    loglog(abs(muMax),FdVector,'Parent',axb(2),'Color',[0,0,1],'LineStyle','none','Marker','.');
+    plot(sqrt(2*Rho*(2*CW.In.gamma*CW.In.H.^2/CW.In.kappa+sqrt((2*CW.In.gamma*CW.In.H.^2/CW.In.kappa).^2+1/4))),FdVector,'Parent',axb(2),'Color',[0,0,1]);
     
     axb(1).XLabel.String = '$\delta_{Thr}/\kappa$';
 
@@ -145,6 +157,10 @@ h = 700;
 %     axb(2).YTickLabelRotation = 90;
 
     axb(2).XLabel.String = '$\mu_{Thr}$';
+    axb(2).XAxis.Scale = 'log';
+    axb(2).YAxis.Scale = 'log';
+    axb(3).XAxis.Scale = 'log';
+    axb(3).YAxis.Scale = 'log';
  %   axb(2).YTickLabelRotation = 90;
     
     axb(3).XLabel.String = '$\mu_{max}$';
@@ -213,10 +229,17 @@ function [mu,delta,W,H2] = Get_MuDeltaTreshold(CW)
         end
     end
 end
-function [mu,W,H] = Get_PeakMu(CW)   
+function [mu] = Get_PeakMu(CW)   
         CW                  = MI(CW);
-        [~,ind]             = max(max(real(CW.Stab(1).Value),[],2));
-        mu                  = CW.Space.k(ind);
+  %      [~,ind]             = %max((,[],2));
+        k1                  = CW.Space.k(real(CW.Stab(1).Value(:,1))>1E-6);
+        k2                  = CW.Space.k(real(CW.Stab(1).Value(:,2))>1E-6);
+        tt = max(abs([k1,k2]));
+        if isempty(tt)
+            mu                  = NaN;
+        else
+            mu                  = tt(1);
+        end
         W                   = CW.In.W;
         H                   = CW.In.H;
 end
