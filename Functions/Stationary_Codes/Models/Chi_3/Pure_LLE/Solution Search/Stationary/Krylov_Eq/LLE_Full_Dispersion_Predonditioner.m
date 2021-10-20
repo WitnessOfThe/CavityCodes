@@ -1,6 +1,6 @@
     function M = LLE_Full_Dispersion_Predonditioner(t,L_L,x0)
     
-        ddt = 10^4;        
+        ddt = 10^8;        
         
         L   =  L_L.Eq.mask.*(1i.*L_L.Space.k.*x0(end) - 1i*L_L.Eq.L);
   %%      

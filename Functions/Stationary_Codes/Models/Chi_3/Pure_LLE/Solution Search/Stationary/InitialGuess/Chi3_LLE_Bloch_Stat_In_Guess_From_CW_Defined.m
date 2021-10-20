@@ -36,7 +36,7 @@ function L_L = Chi3_LLE_Bloch_Stat_In_Guess_From_CW_Defined(L_L)
         
         L_L.Stat(i).In.t_start      = 0;
         
-        vel =  1E-2;% (imag(L_L.CW.Stab(L_L.Stat(i).Par.CW_num).Value(ind(2)))        - imag(L_L.CW.Stab(L_L.Stat(i).Par.CW_num).Value(ind(1))))/2/L_L.Stat(i).In.mu_bl/L_L.Stat(i).Space.N;
+        vel =  (imag(L_L.CW.Stab(L_L.Stat(i).Par.CW_num).Value(ind(2)))        - imag(L_L.CW.Stab(L_L.Stat(i).Par.CW_num).Value(ind(1))))/2/L_L.Stat(i).In.mu_bl/L_L.Stat(i).Space.N;
         switch func2str(L_L.Stat.Met.Equation)
             
             

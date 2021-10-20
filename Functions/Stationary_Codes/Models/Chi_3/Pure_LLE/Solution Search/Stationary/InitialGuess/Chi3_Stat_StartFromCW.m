@@ -1,6 +1,6 @@
  function [Res,coeff] = Chi3_Stat_StartFromCW(Res)
   
-    coeff_bound_s = [0,3.25];
+    coeff_bound_s = [0,3];
     Flag = false;
             
     Res.CW            = Res.CW.Met.Solve(Res.CW);
@@ -32,7 +32,7 @@
         Logic.p1            = Res.Stat.Sol.Exitflag >= 0;
         Logic.p2            = sum(abs(Res.Stat.Sol.Psi_k(2))) > 1E-4;
 
-        if (Logic.p1 && Logic.p2) || (ii == 100)
+        if (Logic.p1 && Logic.p2) || (ii == 30)
             
             Flag =1;
             break;
@@ -59,4 +59,4 @@
 
     end
 
-  end
+   end

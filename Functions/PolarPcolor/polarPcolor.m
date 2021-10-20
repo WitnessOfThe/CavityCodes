@@ -1,4 +1,4 @@
-function [varargout] = polarPcolor(R,theta,Z,ax,varargin)
+function [varargout] = polarPcolor(R,theta,Z,cax,varargin)
 % [h,c] = polarPcolor1(R,theta,Z,varargin) is a pseudocolor plot of matrix 
 % Z for a vector radius R and a vector angle theta. 
 % The elements of Z specify the color in each cell of the 
@@ -121,7 +121,7 @@ end
 % case where dimension is reversed
 Nrr = numel(R);
 Noo = numel(theta);
-if isequal(size(Z),[Noo,Nrr]) && Noo~=Nrr,
+if isequal(size(Z),[Noo,Nrr]) && Noo~=Nrr
     Z=Z';
 end
 
@@ -140,29 +140,29 @@ thetaMin=min(theta);
 thetaMax =max(theta);
     
 % Definition of the mesh
-cax =ax;
+%cax =;
 Rrange = rMax - rMin; % get the range for the radius
 [rNorm] = getRnorm(Rscale,Origin,R,Rrange); % getRnorm is a nested function
 YY = (rNorm)'*cosd(theta);
 XX = (rNorm)'*sind(theta);
 
 
-h = mesh(XX,YY,Z,'parent',cax);
+h = pcolor(XX,YY,Z,'parent',cax);
 
 if ~isempty(ncolor)
     cmap = feval(myColorMap,ncolor);
-    colormap(gca,cmap);
+    colormap(cax,cmap);
 else
-    colormap(gca,myColorMap);
+    colormap(cax,myColorMap);
 end
 
 % disp([max(R/Rrange),max(rNorm)])
 
-shading flat
+%shading interp
 set(cax,'dataaspectratio',[1 1 1]);axis off;
-if ~ishold(cax);
+if ~ishold(cax)
     % make a radial grid
-    hold(cax,'on')
+    hold(cax,'on');
     % Draw circles and spokes
  %   createSpokes(thetaMin,thetaMax,Ncircles,circPos,Nspokes);
     %createCircles(rMin,rMax,thetaMin,thetaMax,Ncircles,circPos,Nspokes)

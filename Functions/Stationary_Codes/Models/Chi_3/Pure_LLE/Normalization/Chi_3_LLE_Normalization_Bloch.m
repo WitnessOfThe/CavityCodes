@@ -57,10 +57,10 @@ function L_L = Chi_3_LLE_Normalization_Bloch(L_L)
     
         L_L.Eq.gamma_Kerr   =  L_L.Eq.gamma_3*ones(1,L_L.Space.N);
         
-        L_L.Eq.mask         =  [ones(1,200),zeros(1,L_L.Space.N-200*2+1),ones(1,200-1)];
+        L_L.Eq.mask         =  1;%[ones(1,200),zeros(1,L_L.Space.N-200*2+1),ones(1,200-1)];
         
         L_L.Eq.kappa_vector =  ones(1,L_L.Space.N)*L_L.Eq.kappa;
-        L_L.Eq.mode_range   =  [1:200,(L_L.Space.N-200+1):L_L.Space.N];
+        L_L.Eq.mode_range   =  1:L_L.Space.N;%[1:200,(L_L.Space.N-200+1):L_L.Space.N];
         L_L.Eq.L            =   L_L.Eq.omega_j  + L_L.Eq.delta;
         L_L.Eq.norm         =  coeff;
         

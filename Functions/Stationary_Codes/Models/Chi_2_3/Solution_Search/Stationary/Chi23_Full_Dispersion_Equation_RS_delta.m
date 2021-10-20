@@ -1,7 +1,5 @@
     function f = Chi23_Full_Dispersion_Equation_RS_delta(x,Stat)
-    
-        mask                = Stat.Eq.mask;
-            
+                
         xo                  = [Stat.Eq.PsioMax,x(2:Stat.Space.N)] + ...
                                  1i*x(Stat.Space.N+1:2*Stat.Space.N);
                              

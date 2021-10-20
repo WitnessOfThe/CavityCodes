@@ -12,7 +12,7 @@ function In = Params_AlN_Zheng
     In.gam3e          = 2*pi*3.6E9;
     
     In.Do              = 2*pi*[722E9,100E6];% Dispersion Coefficients,-4E3
-    In.De              = 2*pi*[700E9, 73E6];% Dispersion Coefficients,-4E3
+    In.De              = 2*pi*[700E9,138E6];% Dispersion Coefficients,-4E3
     
     In.Finess         = In.Do(1)/In.ko;
     In.Finess_e       = In.De(1)/In.ke;

@@ -26,6 +26,16 @@ function Stat = Chi23_Stat_Prop_Gen(x0,Stat)
             Stat.Eq.delta_o = Stat.Eq.delta_o + x0(1);            
             Stat.In.delta_o = (Stat.Eq.delta_o)*Stat.Eq.norm;
             Stat            = Stat.Met.Norm(Stat);
+        case 'Chi23_Full_Dispersion_Equation_RS_eps'
+            
+            Stat.Sol.Psi_o  = fft([Stat.Eq.PsioMax ,x0(2:Stat.Space.N)] + 1i*x0(Stat.Space.N+1:2*Stat.Space.N))/Stat.Space.N;
+            Stat.Sol.Psi_e  = fft(x0(2*Stat.Space.N+1:3*Stat.Space.N) + 1i*x0(3*Stat.Space.N+1:4*Stat.Space.N))/Stat.Space.N;
+            Stat.Sol.V      = x0(end);
+            
+            Stat.Eq.eps     = Stat.Eq.eps + x0(1);            
+            Stat.In.eps     = Stat.Eq.eps*Stat.Eq.norm;
+            Stat            = Stat.Met.Norm(Stat);
+            
         case 'Chi23_Zero_Mode_Equation'
             
             Stat.Sol.Psi_o  = x0(1)+1i*x0(2);

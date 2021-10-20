@@ -1,6 +1,6 @@
     function f = LLE_Full_Dispersion_Equation(x,L_L)
     
-        mask                = L_L.Eq.mask;
+        mask                = 1;
         
         psi_hat             = x(1:L_L.Space.N) +...
                                          1i*x(L_L.Space.N+1:2*L_L.Space.N);
@@ -12,7 +12,7 @@
         
         abs_psi_2           = abs(f_psi).^2;
         
-        [~,max_ind]         = max(abs_psi_2);
+        [~,max_ind]         = max(abs(real(f_psi)));
  
      
         
@@ -24,11 +24,11 @@
         Liniar_term    =    1i.*(L_L.Space.k.*V - L_L.Eq.L ).*psi_hat;%
         
         
-        Eq    = Liniar_term + Nonliniar_term +Pump;
+        Eq    = Liniar_term + Nonliniar_term + Pump;
         
         f_1   = mask.*real(Eq);
         f_2   = mask.*imag(Eq);
-        f_3   = ifft(mask.*1i.*L_L.Space.k.*fft(abs_psi_2),'symmetric');
+        f_3   = ifft(mask.*1i.*L_L.Space.k.*fft(real(f_psi)),'symmetric');
         
         f     = [f_1.';f_2.';f_3(max_ind).'];%\;
         

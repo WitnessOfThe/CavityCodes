@@ -1,12 +1,12 @@
     function g = LLE_Full_Dispersion_Liniar_Decomposition(x,Psi,L_L)
     
-        mask           = L_L.Eq.mask;
+        mask           = 1;
         psi_hat        = Psi(1:L_L.Space.N).' + 1i*Psi(L_L.Space.N+1:2*L_L.Space.N).';
         V              = Psi(end);%
         
         f_psi          = ifft(psi_hat);    
         abs_psi_2      = abs(f_psi).^2;
-        [~,max_ind]    = max(abs_psi_2);
+        [~,max_ind]    = max(abs(real(f_psi)));
         
 %%
 
@@ -29,7 +29,7 @@
                                         
         g_2(1:L_L.Space.N,1)   = imag(Eq);
         
-        g_3(1:L_L.Space.N,1)   = ifft(1i.*mask.'.*L_L.Space.k.'.*fft( f_psi.*conj(x_psi)+x_psi.*conj(f_psi) ) ,'symmetric');
+        g_3(1:L_L.Space.N,1)   = ifft(1i.*mask.'.*L_L.Space.k.'.*fft(real(x_psi) ) ,'symmetric');
         
         g     = [mask.'.*g_1;mask.'.*g_2;g_3(max_ind)];%
         

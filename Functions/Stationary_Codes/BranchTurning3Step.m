@@ -51,7 +51,7 @@
                     if i >= 2
                 
                         L_L_1(i)    = L_L_1(i-1);
-        
+            
                     end
                 end
                 
@@ -63,13 +63,13 @@
                 end
                                 
                 if Logic.TurnTime  == 1 && FlagReduce == 0
-%                          Exitflag = 0;
-%                           break;          
-      
+                 %  Exitflag = 0;
+                %      break;          
+      %
                      for it = 1:size(L_L_1,2)
-%                         maxvec(it) = real(L_L_1(it).Sol.Psi_k(1));
-                         Psi        =ifft(L_L_1(it).Sol.Psi_o*L_L_1(it).Space.N);
-                         maxvec(it) = real( Psi(1));
+                        maxvec(it) = real(L_L_1(it).Sol.Psi_k(1));
+              %           Psi        =ifft(L_L_1(it).Sol.Psi_o*L_L_1(it).Space.N);
+                      %   maxvec(it) = real( Psi(1));
                          devec(it) =  L_L_1(it).Eq.(L_L_1(it).Par.variable);
                       end
 
@@ -81,8 +81,8 @@
                      end
                      Nturn = size(L_L_Turn,2);
                      x =L_L_Turn(end).Eq.(L_L_Turn(end).Par.variable);
-       %              x_step = abs(L_L_Turn(end).Eq.(L_L_Turn(end).Par.variable)...
-        %                 -L_L_Turn(end-1).Eq.(L_L_Turn(end).Par.variable));
+                    x_step = abs(L_L_Turn(end).Eq.(L_L_Turn(end).Par.variable)...
+                        -L_L_Turn(end-1).Eq.(L_L_Turn(end).Par.variable));
                      sg = sign(L_L_Turn(end).Eq.(L_L_Turn(end).Par.variable)...
                          -L_L_Turn(end-1).Eq.(L_L_Turn(end).Par.variable));   
                      L_L_1(i+1:i+Nturn)   =  L_L_Turn;   
@@ -135,7 +135,7 @@
             Stat.Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition_Mod;
             Stat.Met.Preconditioner       = L_L.Met.Preconditioner_Mod;           
             
-            Stat.Met.Newton_Matrix       = L_L.Met.Newton_Matrix_Mod;            
+%            Stat.Met.Newton_Matrix       = L_L.Met.Newton_Matrix_Mod;            
             ii = 1;
             
             if  Stat(ii).Sol.Dir.d1 ~= 0
@@ -148,8 +148,8 @@
                  
             end
             
-            if  abs(stepPsi) < 1E-6
-                 stepPsi = sign(Stat(ii).Sol.Dir.d1s)*1e-6;
+            if  abs(stepPsi) < 1E-12
+                 stepPsi = sign(Stat(ii).Sol.Dir.d1s)*1e-12;
             end
             smcoeff   = 1.0;
             FlagStop =1;
@@ -160,7 +160,7 @@
                 Stat(ii) = Stat(ii-1);
                 StepStop = 1;
                 SlvStart = Slv;
-                stepPsi = stepPsi*1.1;
+                stepPsi = stepPsi*1.05;
                 
                 while StepStop
                     
@@ -174,7 +174,7 @@
                         Stat(ii) = Stat(ii-1);
                         Slv      = SlvStart;
                     else
-                    if (abs(Stat(ii).Sol.Dir.d1) < 0.5)&& ii> 5 %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
+                    if (abs(Stat(ii).Sol.Dir.d1) < 0.3)&& ii> 5 %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
                         FlagStop = 0;
                     end
 %                         if (abs(Stat(ii).Sol.Dir.d1) < 0.01) %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
@@ -187,9 +187,9 @@
             
  %% if something wrong
                       for it = 1:size(Stat,2)
-%                         maxvec(it) = real(L_L_1(it).Sol.Psi_k(1));
-                         Psi        = ifft(Stat(it).Sol.Psi_o*Stat(it).Space.N);
-                         maxvec(it) = real(Stat(it).Sol.Psi_o(1));
+                        maxvec(it) = real(Stat(it).Sol.Psi_k(1));
+%                         Psi        = ifft(Stat(it).Sol.Psi_o*Stat(it).Space.N);
+ %                        maxvec(it) = real(Stat(it).Sol.Psi_o(1));
                          devec(it)  =  Stat(it).Eq.(Stat(it).Par.variable);
                       end
 
@@ -205,9 +205,9 @@
             Stat(end).Met.Equation             = L_L.Met.Equation;             
             Stat(end).Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition;
             Stat(end).Met.Preconditioner       = L_L.Met.Preconditioner;    
-            Stat(end).Met.Newton_Matrix        = L_L.Met.Newton_Matrix;        
-%            Slv(1)                             = Stat(end).Eq.PsioMax*Stat(end).Space.N;
-            Slv(1)                             = Stat(end).Eq.PsioMax;
+ %           Stat(end).Met.Newton_Matrix        = L_L.Met.Newton_Matrix;        
+            Slv(1)                             = Stat(end).Eq.PsioMax*Stat(end).Space.N;
+      %      Slv(1)                             = Stat(end).Eq.PsioMax;
             [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,Stat(end));
             Stat(end)            = Stat(end).Met.Prop_Gen(Slv,Stat(end));                 
 
@@ -241,9 +241,9 @@
                 
                 Stat(i+1)         = Stat(i);
 %               x_vec(i)          = Stat(i).Eq.(Stat(i).Par.variable);
-%               y_vec(i)          = real(Stat(i).Sol.Psi_k(1));
-                Psi               = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
-                y_vec(i)          = real(Psi(1));
+               y_vec(i)          = real(Stat(i).Sol.Psi_k(1));
+ %               Psi               = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
+%                y_vec(i)          = real(Psi(1));
         end
         
         Stat = Stat(end);
@@ -270,13 +270,13 @@
         
         for i = 1:N_Step
             
-%                Stat(i).Eq.PsioMax = real(Stat(i).Sol.Psi_k(1)) + ...
- %                   + stepPsi; 
-                Psi               = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
+                Stat(i).Eq.PsioMax = real(Stat(i).Sol.Psi_k(1)) + ...
+                    + stepPsi; 
+    %            Psi               = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
     %            Psi               = real(Stat(i).Sol.Psi_o);
  
-                Stat(i).Eq.PsioMax =  real(Psi(1)) + ...
-                    + stepPsi;
+                %Stat(i).Eq.PsioMax =  real(Psi(1)) + ...
+               %     + stepPsi;
 
                 
                 [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,Stat(i));
@@ -293,9 +293,9 @@
                 
                 Stat(i+1)         = Stat(i);
                 x_vec(i)          = Stat(i).Eq.(Stat(i).Par.variable);
-%                y_vec(i)          = real(Stat(i).Sol.Psi_k(1));
-                Psi               = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
-                y_vec(i)          =  real(Psi(1));
+               y_vec(i)          = real(Stat(i).Sol.Psi_k(1));
+%                Psi               = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
+ %               y_vec(i)          =  real(Psi(1));
                 
         end
         
@@ -334,7 +334,22 @@
                 Stat.In.delta_o = (Stat.In.delta_e + Stat.In.eps)/2;
                 Stat            = Stat.Met.Norm(Stat);
                 
-            otherwise
+           case 'gam2o'
+                
+                Stat.Eq.gam2o = x;
+                Stat.Eq.gam2e = x;
+                
+                Stat.In.gam2o = Stat.Eq.gam2o*Stat.Eq.norm;
+                Stat.In.gam2e = Stat.Eq.gam2e*Stat.Eq.norm;
+                Stat            = Stat.Met.Norm(Stat);
+            case 'D3Kerr'
+                
+                Stat.In.D(3)      = x*Stat.Eq.norm;
+                Stat            = Stat.Met.Norm(Stat);
+
+
+                
+             otherwise
 
                 Stat.Eq.(Stat.Par.variable) = x;
                 Stat.In.(Stat.Par.variable) = Stat.Eq.norm*Stat.Eq.(Stat.Par.variable);

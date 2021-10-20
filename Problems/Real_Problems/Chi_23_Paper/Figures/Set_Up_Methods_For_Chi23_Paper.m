@@ -46,9 +46,9 @@ function Res = Set_Up_Methods_For_Chi23_Paper
   %  Res.Stat.Met.Equation_Mod             = @Chi23_Zero_Mode_Equation_RS_delta;
    % Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Zero_Mode_Liniar_Decomposition_RS_delta;
     %Res.Stat.Met.Preconditioner_Mod       = @Chi23_Zero_Mode_Preconditioner_RS_delta;
-  Res.Stat.Met.Equation_Mod             = @Chi23_Full_Dispersion_Equation_RS_delta;
-  Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Full_Dispersion_Liniar_Decomposition_RS_delta;
-  Res.Stat.Met.Preconditioner_Mod       = @Chi23_Full_Dispersion_Preconditioner_RS_delta;    %Res.Stat.Met.Evaluate_trend           = @Peak_Trend;%% MaybeMeansNothing
+  Res.Stat.Met.Equation_Mod             = @Chi23_Full_Dispersion_Equation_RS_eps;
+  Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Full_Dispersion_Liniar_Decomposition_RS_eps;
+  Res.Stat.Met.Preconditioner_Mod       = @Chi23_Full_Dispersion_Preconditioner_RS_delta;   
     
 %%    
     Res.Stat.Met.Stab_Matrix          = @Chi23_Bloch_Stability_Matrix;    
@@ -104,9 +104,9 @@ end
        else
            Logic.r_1 = abs(Stat(2).Sol.Omega) < abs(Stat(1).Sol.Omega);%sum(abs(Stat(i).Sol.Psi_k(2:end)).^2) <= 1E-10;
        end
-       Logic.r_2  = ~(Stat(end).Par.top_boundary > x) ;            
+       Logic.r_2  = ~(Stat(end).Par.top_boundary >= x) ;            
        Logic.r_3  =  Exitflag <= 0;
-       Logic.r_4  = ~(Stat(end).Par.bot_boundary < x);
+       Logic.r_4  = ~(Stat(end).Par.bot_boundary <= x);
        Logic.r_5  = 0;
        Logic.r_6  = i == Stat(1).Par.i_max;
 
@@ -140,10 +140,10 @@ end
                Logic.zero_step   =   x_step == 0;
                Logic.Resid       =   Stat(end).Sol.eps_f > Stat(end).Par.Newton_tol;                
 
-               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) > 1;
+               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) > 0.6;
                if Logic.TurnTime
-                   if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.1
-                          Logic.TurnTime     =0;
+                   if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.2
+                          Logic.TurnTime     = 0;
                           Logic.Smooth       = 1;
 
                    end                   
@@ -183,8 +183,8 @@ end
                Logic.MaxIter     = i > Stat(1).Par.i_max;      
                Logic.bb     = Stat(end).Eq.(Stat(1).Par.variable) < Stat(1).Par.bot_boundary;
                Logic.tb     = Stat(end).Eq.(Stat(1).Par.variable) > Stat(1).Par.top_boundary;
-               FlagReduce        = (Logic.Smooth + Logic.Resid) > 0 ;
-               FlagStop          = Logic.MaxIter  + Logic.Stop+Logic.rCW+Logic.step+Logic.bb + Logic.tb;
+               FlagReduce        = (Logic.Smooth + Logic.Resid+Logic.bb + Logic.tb) > 0 ;
+               FlagStop          = Logic.MaxIter  + Logic.Stop+Logic.rCW+Logic.step;
 
      end
      %%

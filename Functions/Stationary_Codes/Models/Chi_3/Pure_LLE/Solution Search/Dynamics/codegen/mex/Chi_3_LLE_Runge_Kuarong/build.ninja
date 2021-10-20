@@ -6,7 +6,7 @@ ninja_required_version = 1.3
 root = .
 builddir = $root/build/win64
 matlabdir = C:/Program Files/MATLAB/R2020b
-startdir = C:/Users/dp710/Documents/GitHub/CavityCodes/Problems/Chi_3/Pure_LLE/Solution Search/Dynamics
+startdir = C:/Users/dp710/Documents/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_3/Pure_LLE/Solution Search/Dynamics
 
 # Toolchain information
 cc = C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrset\bin\gcc
@@ -14,9 +14,9 @@ cxx = C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrse
 linker = C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrset\bin\gcc
 linkerxx = C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrset\bin\g++
 
-cflags =  -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\codegen\mex\Chi_3_LLE_Runge_Kuarong" -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics" -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\codegen\mex\Chi_3_LLE_Runge_Kuarong\interface" -I "C:\Program Files\MATLAB\R2020b\extern\include" -I "." -DMODEL=Chi_3_LLE_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1  
+cflags =  -c -fexceptions -fno-omit-frame-pointer -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c99 -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics\codegen\mex\Chi_3_LLE_Runge_Kuarong" -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics" -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics\codegen\mex\Chi_3_LLE_Runge_Kuarong\interface" -I "C:\Program Files\MATLAB\R2020b\extern\include" -I "." -DMODEL=Chi_3_LLE_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1  
 
-cxxflags =  -c -fexceptions -fno-omit-frame-pointer -std=c++11 -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c++11 -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\codegen\mex\Chi_3_LLE_Runge_Kuarong" -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics" -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\codegen\mex\Chi_3_LLE_Runge_Kuarong\interface" -I "C:\Program Files\MATLAB\R2020b\extern\include" -I "." -DMODEL=Chi_3_LLE_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1  
+cxxflags =  -c -fexceptions -fno-omit-frame-pointer -std=c++11 -m64 -DMATLAB_MEX_FILE  -DMATLAB_MEX_FILE -O2 -fwrapv -DNDEBUG -std=c++11 -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics\codegen\mex\Chi_3_LLE_Runge_Kuarong" -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics" -I "C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics\codegen\mex\Chi_3_LLE_Runge_Kuarong\interface" -I "C:\Program Files\MATLAB\R2020b\extern\include" -I "." -DMODEL=Chi_3_LLE_Runge_Kuarong_mex -D__USE_MINGW_ANSI_STDIO=1  
 
 ldflags =  -m64 -Wl,--no-undefined -shared -static -L"C:\Program Files\MATLAB\R2020b\extern\lib\win64\mingw64" -llibmx -llibmex -llibmat -lm -llibmwlapack -llibmwblas -o "Chi_3_LLE_Runge_Kuarong_mex.mexw64" -llibemlrt -llibcovrt -llibut -llibmwmathutil  -Wl,--version-script,Chi_3_LLE_Runge_Kuarong_mex.map
 
@@ -41,18 +41,13 @@ build $builddir/rt_nonfinite.o : cc $root/rt_nonfinite.c
 build $builddir/Chi_3_LLE_Runge_Kuarong_initialize.o : cc $root/Chi_3_LLE_Runge_Kuarong_initialize.c
 build $builddir/Chi_3_LLE_Runge_Kuarong_terminate.o : cc $root/Chi_3_LLE_Runge_Kuarong_terminate.c
 build $builddir/Chi_3_LLE_Runge_Kuarong.o : cc $root/Chi_3_LLE_Runge_Kuarong.c
-build $builddir/eml_int_forloop_overflow_check.o : cc $root/eml_int_forloop_overflow_check.c
 build $builddir/ifft.o : cc $root/ifft.c
 build $builddir/fft.o : cc $root/fft.c
-build $builddir/power.o : cc $root/power.c
-build $builddir/sum.o : cc $root/sum.c
-build $builddir/nullAssignment.o : cc $root/nullAssignment.c
 build $builddir/_coder_Chi_3_LLE_Runge_Kuarong_api.o : cc $root/interface/_coder_Chi_3_LLE_Runge_Kuarong_api.c
 build $builddir/_coder_Chi_3_LLE_Runge_Kuarong_mex.o : cc $root/interface/_coder_Chi_3_LLE_Runge_Kuarong_mex.c
-build $builddir/exp.o : cc $root/exp.c
 build $builddir/Chi_3_LLE_Runge_Kuarong_emxutil.o : cc $root/Chi_3_LLE_Runge_Kuarong_emxutil.c
 build $builddir/_coder_Chi_3_LLE_Runge_Kuarong_info.o : cc $root/interface/_coder_Chi_3_LLE_Runge_Kuarong_info.c
 build $builddir/c_mexapi_version.o : cc $matlabdir/extern/version/c_mexapi_version.c
 
 # Link
-build $root\Chi_3_LLE_Runge_Kuarong_mex.mexw64 : link $builddir/Chi_3_LLE_Runge_Kuarong_data.o $builddir/rt_nonfinite.o $builddir/Chi_3_LLE_Runge_Kuarong_initialize.o $builddir/Chi_3_LLE_Runge_Kuarong_terminate.o $builddir/Chi_3_LLE_Runge_Kuarong.o $builddir/eml_int_forloop_overflow_check.o $builddir/ifft.o $builddir/fft.o $builddir/power.o $builddir/sum.o $builddir/nullAssignment.o $builddir/_coder_Chi_3_LLE_Runge_Kuarong_api.o $builddir/_coder_Chi_3_LLE_Runge_Kuarong_mex.o $builddir/exp.o $builddir/Chi_3_LLE_Runge_Kuarong_emxutil.o $builddir/_coder_Chi_3_LLE_Runge_Kuarong_info.o $builddir/c_mexapi_version.o 
+build $root\Chi_3_LLE_Runge_Kuarong_mex.mexw64 : link $builddir/Chi_3_LLE_Runge_Kuarong_data.o $builddir/rt_nonfinite.o $builddir/Chi_3_LLE_Runge_Kuarong_initialize.o $builddir/Chi_3_LLE_Runge_Kuarong_terminate.o $builddir/Chi_3_LLE_Runge_Kuarong.o $builddir/ifft.o $builddir/fft.o $builddir/_coder_Chi_3_LLE_Runge_Kuarong_api.o $builddir/_coder_Chi_3_LLE_Runge_Kuarong_mex.o $builddir/Chi_3_LLE_Runge_Kuarong_emxutil.o $builddir/_coder_Chi_3_LLE_Runge_Kuarong_info.o $builddir/c_mexapi_version.o 

@@ -17,13 +17,15 @@ function L_L = Chi_3_LLE_Normalization_BlochStat(L_L)
                                                   L_L.In.D(i)/factorial(i);
            
        end
-       L_L.In.omega_int = 0;
+       L_L.In.omega_int_pl  = 0;
+       L_L.In.omega_int_mn =0;
        for i = 2:size(L_L.In.D,2)
             
-           L_L.In.omega_int = L_L.In.omega_int+(L_L.Space.k).^i.*L_L.In.D(i)/factorial(i);
+           L_L.In.omega_int_pl = L_L.In.omega_int_pl+(L_L.Space.k).^i.*L_L.In.D(i)/factorial(i);
+           L_L.In.omega_int_mn = L_L.In.omega_int_mn+(-L_L.Space.k).^i.*L_L.In.D(i)/factorial(i);
                
        end
-    
+    L_L.In.omega_int = L_L.In.omega_int_pl;
         L_L.In.Finess          = L_L.In.D(1)/L_L.In.kappa;
         L_L.In.Fin_D           = L_L.In.D(2)/L_L.In.kappa;
         L_L.Eq.Fin_Dlog        = log10(L_L.In.Fin_D);

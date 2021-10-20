@@ -1,21 +1,18 @@
     function f = Chi23_Full_Dispersion_Equation_RS_eps(x,Stat)
     
-        mask                = Stat.Eq.mask;
-            
-        xo                  = x(1:Stat.Space.N) + ...
+        xo                  = [Stat.Eq.PsioMax,x(2:Stat.Space.N)] + ...
                                  1i*x(Stat.Space.N+1:2*Stat.Space.N);
                              
         xe                  = x(2*Stat.Space.N+1:3*Stat.Space.N) + ...
                                1i*x(3*Stat.Space.N+1:4*Stat.Space.N);
         
-        V                   = x(end-1);   %    
-        depsilon            = x(end);   %    
+        V                   = x(end);   %    
+        depsilon            = x(1);   %    
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         
-        abs_psi2        = abs(xo).^2;
-        [~,ind]         = max(real(xo));
+         [~,ind]         = max(abs(real(xo)));
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -30,17 +27,13 @@
         NL2    =  - (Stat.Eq.gam2e.*xo.^2  + ...
                         Stat.Eq.gam3e.*(2*abs(xo).^2 + abs(xe).^2).*xe);
         
-        Pump   = 1i/2*Stat.Eq.ko*Stat.In.H;
+        Pump   = 1i/2*Stat.Eq.ko*Stat.In.H_f;
 
         f_1    = ( L1 + NL1 + Pump);        
         f_2    = ( L2 + NL2 );
         
         f_3    = ifft(1i.*Stat.Space.k.*fft(real(xo)),'symmetric');
         
-        [Max_o,max_ind] = max(abs_psi2);
-        
-        f_4    = Max_o - Stat.Eq.PsioMax;
-        
-        f     = [real(f_1).';imag(f_1).';real(f_2).';imag(f_2).';f_3(ind).';f_4];
+        f     = [real(f_1).';imag(f_1).';real(f_2).';imag(f_2).';f_3(ind).'];
         
     end
