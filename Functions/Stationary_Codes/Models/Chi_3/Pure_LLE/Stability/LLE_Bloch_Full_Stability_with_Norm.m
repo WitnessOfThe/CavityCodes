@@ -2,7 +2,7 @@ function Stab = LLE_Bloch_Full_Stability_with_Norm(St)
 
     if St.In.mu_bl ~= 1
         
-        k          = [-floor(St.In.mu_bl):0.25:floor(St.In.mu_bl)-1];    
+        k          = 0:1:St.In.mu_bl/2;    
         Values     = zeros(size(k,2),2*St.Space.N);
         ValuesStar = zeros(size(k,2),2*St.Space.N);
         
@@ -37,5 +37,25 @@ function Stab = LLE_Bloch_Full_Stability_with_Norm(St)
     Stab.Values     = Values;
     Stab.ValuesStar = ValuesStar;
     Stab.Vk         = Vk;
+    
+    clear Values 
+    clear ValuesStar
+    clear Vk
+    for ik = 1:size(Stab.Values,1)
+
+        [~,ind_tt]      = find(abs(imag((Stab.Values(ik,:))))   < 50 );
+        [~,ind_tt_Star] = find(abs(imag((Stab.Values(ik,:))))   < 50 );
+
+        Values(ik,1:size(ind_tt,2))          = Stab.Values(ik,ind_tt);
+        ValuesStar(ik,1:size(ind_tt_Star,2)) = Stab.ValuesStar(ik,ind_tt_Star);
+
+        Vk(ik).Vectors                  =  Stab.Vk(ik).Vectors(:,ind_tt);
+        Vk(ik).VectorsStar              =  Stab.Vk(ik).VectorsStar(:,ind_tt_Star);
+
+    end
+
+    Stab.Vk = Vk;
+    Stab.Values = Values;
+    Stab.ValuesStar = ValuesStar;
     
 end

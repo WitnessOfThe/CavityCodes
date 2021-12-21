@@ -63,11 +63,11 @@
                 end
                                 
                 if Logic.TurnTime  == 1 && FlagReduce == 0
-                 %  Exitflag = 0;
-                %      break;          
+                   Exitflag = 0;
+                      break;          
       %
-                     for it = 1:size(L_L_1,2)
-                        maxvec(it) = real(L_L_1(it).Sol.Psi_k(1));
+                     for it = 1:size(L_L_1,2) 
+                        maxvec(it) = y_eval(L_L_1(it));
               %           Psi        =ifft(L_L_1(it).Sol.Psi_o*L_L_1(it).Space.N);
                       %   maxvec(it) = real( Psi(1));
                          devec(it) =  L_L_1(it).Eq.(L_L_1(it).Par.variable);
@@ -81,14 +81,15 @@
                      end
                      Nturn = size(L_L_Turn,2);
                      x =L_L_Turn(end).Eq.(L_L_Turn(end).Par.variable);
-                    x_step = abs(L_L_Turn(end).Eq.(L_L_Turn(end).Par.variable)...
+                     x_step = abs(L_L_Turn(end).Eq.(L_L_Turn(end).Par.variable)...
                         -L_L_Turn(end-1).Eq.(L_L_Turn(end).Par.variable));
+                   % x_step = x_step/10;
                      sg = sign(L_L_Turn(end).Eq.(L_L_Turn(end).Par.variable)...
                          -L_L_Turn(end-1).Eq.(L_L_Turn(end).Par.variable));   
                      L_L_1(i+1:i+Nturn)   =  L_L_Turn;   
                      i = i + Nturn;
                      
-                     if L_L_Turn(end).Logic.Resid == 1 || L_L_Turn(end).Logic.rCW
+                     if L_L_Turn(end).Logic.Resid == 1 %|| L_L_Turn(end).Logic.rCW
                         Exitflag = 0;
                         break;
                      end
@@ -140,7 +141,7 @@
             
             if  Stat(ii).Sol.Dir.d1 ~= 0
                 
-                stepPsi = Stat(ii).Sol.Dir.d1*x_step/5;
+                stepPsi = Stat(ii).Sol.Dir.d1*x_step/2;
                 
             else
                 
@@ -149,7 +150,7 @@
             end
             
             if  abs(stepPsi) < 1E-12
-                 stepPsi = sign(Stat(ii).Sol.Dir.d1s)*1e-12;
+                 stepPsi = sign(Stat(ii).Sol.Dir.d1s)*1e-9;
             end
             smcoeff   = 1.0;
             FlagStop =1;
@@ -164,9 +165,9 @@
                 
                 while StepStop
                     
-                    StepStop = 0;
+                    StepStop                    = 0;
                     [Stat(ii),Slv,ExitflagTurn] = MakeNTurningSteps(stepPsi,Stat(ii),Slv);               
-                    [~,~,Logic] = L_L.Met.Newton_Fail_Check(Stat(ii),ii,stepPsi);
+                    [~,~,Logic]                 = L_L.Met.Newton_Fail_Check(Stat(ii),ii,stepPsi);
                     
                     if Logic.Resid 
                         StepStop = 1;
@@ -174,7 +175,7 @@
                         Stat(ii) = Stat(ii-1);
                         Slv      = SlvStart;
                     else
-                    if (abs(Stat(ii).Sol.Dir.d1) < 0.3)&& ii> 5 %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
+                    if (abs(Stat(ii).Sol.Dir.d1) < 0.1)&& ii> 5 %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
                         FlagStop = 0;
                     end
 %                         if (abs(Stat(ii).Sol.Dir.d1) < 0.01) %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
@@ -187,7 +188,7 @@
             
  %% if something wrong
                       for it = 1:size(Stat,2)
-                        maxvec(it) = real(Stat(it).Sol.Psi_k(1));
+                        maxvec(it) = y_eval(Stat(it));
 %                         Psi        = ifft(Stat(it).Sol.Psi_o*Stat(it).Space.N);
  %                        maxvec(it) = real(Stat(it).Sol.Psi_o(1));
                          devec(it)  =  Stat(it).Eq.(Stat(it).Par.variable);
@@ -205,9 +206,9 @@
             Stat(end).Met.Equation             = L_L.Met.Equation;             
             Stat(end).Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition;
             Stat(end).Met.Preconditioner       = L_L.Met.Preconditioner;    
- %           Stat(end).Met.Newton_Matrix        = L_L.Met.Newton_Matrix;        
+            Stat(end).Met.Newton_Matrix        = L_L.Met.Newton_Matrix;        
             Slv(1)                             = Stat(end).Eq.PsioMax*Stat(end).Space.N;
-      %      Slv(1)                             = Stat(end).Eq.PsioMax;
+ %           Slv(1)                             = Stat(end).Eq.PsioMax;
             [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,Stat(end));
             Stat(end)            = Stat(end).Met.Prop_Gen(Slv,Stat(end));                 
 
@@ -239,9 +240,11 @@
                     break;
                 end
                 
+                
                 Stat(i+1)         = Stat(i);
+                y_vec(i)          = y_eval(Stat(i));
 %               x_vec(i)          = Stat(i).Eq.(Stat(i).Par.variable);
-               y_vec(i)          = real(Stat(i).Sol.Psi_k(1));
+%               y_vec(i)          = real(Stat(i).Sol.Psi_k(1));
  %               Psi               = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
 %                y_vec(i)          = real(Psi(1));
         end
@@ -270,7 +273,7 @@
         
         for i = 1:N_Step
             
-                Stat(i).Eq.PsioMax = real(Stat(i).Sol.Psi_k(1)) + ...
+                Stat(i).Eq.PsioMax = y_eval(Stat(i)) + ...
                     + stepPsi; 
     %            Psi               = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
     %            Psi               = real(Stat(i).Sol.Psi_o);
@@ -293,7 +296,7 @@
                 
                 Stat(i+1)         = Stat(i);
                 x_vec(i)          = Stat(i).Eq.(Stat(i).Par.variable);
-               y_vec(i)          = real(Stat(i).Sol.Psi_k(1));
+                y_vec(i)          = y_eval(Stat(i));
 %                Psi               = ifft(Stat(i).Sol.Psi_o*Stat(i).Space.N);
  %               y_vec(i)          =  real(Psi(1));
                 
@@ -314,13 +317,21 @@
     function Stat   = step_eq(Stat,x)
 
         switch Stat.Par.variable
-            
+            case 'h'
+                
+%                Stat.Eq.h    = x;%;%%;*sqrt(L_L.In.gamma/L_L.In.kappa)
+          %      h = 1/2*Stat.In.kappa*Stat.In.H/Stat.Eq.norm
+                Stat.In.H           = x*Stat.Eq.norm*2/Stat.In.kappa;
+                Stat.In.P            = pi/(Stat.In.eta*Stat.In.Finess)*Stat.In.H^2;
+             %   Stat.In.P    = x*(1/2*Stat.In.kappa*sqrt(Stat.In.eta*Stat.In.Finess/pi)/Stat.Eq.norm).^-2;
+                Stat         = Stat.Met.Norm(Stat);
+
             case 'Fin_D'
                         Stat.In.Fin_D     = x;
                         Stat.In.kappa     = Stat.In.D(2)/Stat.In.Fin_D;
                         Stat.In.delta     = Stat.In.kappa*Stat.Eq.delta;
                         Stat.In.P         = Stat.In.W_WStar*pi/(Stat.In.eta*Stat.In.D(1)/Stat.In.kappa)*Stat.In.kappa/Stat.In.gamma; 
-                        Stat = Stat.Met.Norm(Stat);
+                        Stat              = Stat.Met.Norm(Stat);
             case 'Fin_Dlog'
                         Stat.Eq.Fin_Dlog     = x;
                         Stat.In.kappa     = Stat.In.D(2)/10^(Stat.Eq.Fin_Dlog);
@@ -357,4 +368,29 @@
 
         end
 
+    end
+    function y = y_eval(Stat)
+        switch func2str(Stat.Met.Equation)            
+            case 'Chi23_Zero_Mode_Equation'
+                y = real(Stat.Sol.Psi_o(1));
+            case 'Chi23_Zero_Mode_Equation_RS_delta'
+                y = real(Stat.Sol.Psi_o(1));
+            case 'Chi23_Full_Dispersion_Equation_RS'
+                Psi       = ifft(Stat(1).Sol.Psi_o*Stat(1).Space.N);
+                y          = real(Psi(1));
+            case 'Chi23_Full_Dispersion_Equation_RS_delta'
+                Psi       = ifft(Stat(1).Sol.Psi_o*Stat(1).Space.N);
+                y          = real(Psi(1));
+            case 'Chi23_Full_Dispersion_Equation_RS_OPO'
+                Psi       = ifft(Stat(1).Sol.Psi_o*Stat(1).Space.N);
+                y          = real(Psi(1));
+            case 'Chi23_Full_Dispersion_Equation_RS_delta_OPO'
+                Psi       = ifft(Stat(1).Sol.Psi_o*Stat(1).Space.N);
+                y          = real(Psi(1));
+            case 'LLE_Full_Dispersion_Equation'
+                y          = real(Stat(1).Sol.Psi_k(1));
+            case 'LLE_Full_Dispersion_Equation_Turndelta'
+                y          = real(Stat(1).Sol.Psi_k(1));
+
+        end
     end

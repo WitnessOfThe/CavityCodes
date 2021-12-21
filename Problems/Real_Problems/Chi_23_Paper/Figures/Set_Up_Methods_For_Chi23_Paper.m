@@ -140,32 +140,36 @@ end
                Logic.zero_step   =   x_step == 0;
                Logic.Resid       =   Stat(end).Sol.eps_f > Stat(end).Par.Newton_tol;                
 
-               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) > 0.6;
-               if Logic.TurnTime
-                   if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.2
-                          Logic.TurnTime     = 0;
-                          Logic.Smooth       = 1;
-
-                   end                   
-               end   
-
-               if i>2 
-
-                   if abs(abs(Stat.Sol.Dir.d1)) == 0
-
-                      Logic.TurnTime      = 1;
-
-                   end
-
-
-%                    if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 10
-% 
-%                       Logic.Smooth       = 1;
+               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) > 2;
+               
+               
+%                if Stat.Sol.Dir.d1s > 0.5
+%                    if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.5
+%                                Logic.Smooth       = 1; 
+%                    end                                      
+%                else
+%                    if sign(abs(Stat.Sol.Dir.d1)) == sign(abs(Stat.Sol.Dir.d1s))
+%                         if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.3
+%                                    Logic.Smooth       = 1; 
+%                          end                   
+%                    else
+%                         if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.05
+%                                    Logic.Smooth       = 1; 
+%                         end
+%                    end
+%                end
+               
+%                if Logic.TurnTime
+%                    if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.6
+%                           Logic.TurnTime     = 0;
+%                           Logic.Smooth       = 1;
 % 
 %                    end                   
+%                end   
 
-               end
-
+%              if abs(abs(Stat.Sol.Dir.d1)) ==0
+%                   Logic.TurnTime    = 1;
+%              end
                if x_step ==0
 
                     Logic.Stop    = 1;
@@ -179,10 +183,12 @@ end
 %                    Logic.Smooth = 0;
 % 
 %                end
-               Logic.rCW         = sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
-               Logic.MaxIter     = i > Stat(1).Par.i_max;      
+               Logic.rCW         = 0;%sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
+               Logic.MaxIter     = i > Stat(1).Par.i_max; 
+               
                Logic.bb     = Stat(end).Eq.(Stat(1).Par.variable) < Stat(1).Par.bot_boundary;
                Logic.tb     = Stat(end).Eq.(Stat(1).Par.variable) > Stat(1).Par.top_boundary;
+               
                FlagReduce        = (Logic.Smooth + Logic.Resid+Logic.bb + Logic.tb) > 0 ;
                FlagStop          = Logic.MaxIter  + Logic.Stop+Logic.rCW+Logic.step;
 

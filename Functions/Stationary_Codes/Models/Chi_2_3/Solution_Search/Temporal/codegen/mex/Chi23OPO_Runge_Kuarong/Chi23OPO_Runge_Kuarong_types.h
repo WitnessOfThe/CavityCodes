@@ -9,60 +9,13 @@
  *
  */
 
-#ifndef CHI23OPO_RUNGE_KUARONG_TYPES_H
-#define CHI23OPO_RUNGE_KUARONG_TYPES_H
+#pragma once
 
 /* Include files */
 #include "rtwtypes.h"
+#include "emlrt.h"
 
 /* Type Definitions */
-#ifndef typedef_emxArray_creal_T
-#define typedef_emxArray_creal_T
-
-typedef struct {
-  creal_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-} emxArray_creal_T;
-
-#endif                                 /*typedef_emxArray_creal_T*/
-
-#ifndef typedef_emxArray_cuint8_T
-#define typedef_emxArray_cuint8_T
-
-typedef struct {
-  cuint8_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-} emxArray_cuint8_T;
-
-#endif                                 /*typedef_emxArray_cuint8_T*/
-
-#ifndef struct_emxArray_int32_T
-#define struct_emxArray_int32_T
-
-struct emxArray_int32_T
-{
-  int32_T *data;
-  int32_T *size;
-  int32_T allocatedSize;
-  int32_T numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif                                 /*struct_emxArray_int32_T*/
-
-#ifndef typedef_emxArray_int32_T
-#define typedef_emxArray_int32_T
-
-typedef struct emxArray_int32_T emxArray_int32_T;
-
-#endif                                 /*typedef_emxArray_int32_T*/
-
 #ifndef typedef_struct1_T
 #define typedef_struct1_T
 
@@ -77,6 +30,32 @@ typedef struct {
 
 #endif                                 /*typedef_struct1_T*/
 
+#ifndef typedef_struct3_T
+#define typedef_struct3_T
+
+typedef struct {
+  real_T N;
+  real_T lenght;
+  real_T dphi;
+  real_T phi[256];
+  real_T dk;
+  real_T k[256];
+} struct3_T;
+
+#endif                                 /*typedef_struct3_T*/
+
+#ifndef typedef_struct5_T
+#define typedef_struct5_T
+
+typedef struct {
+  real_T b[9];
+  real_T a[3];
+  real_T c[3];
+  real_T s;
+} struct5_T;
+
+#endif                                 /*typedef_struct5_T*/
+
 #ifndef typedef_struct2_T
 #define typedef_struct2_T
 
@@ -88,8 +67,8 @@ typedef struct {
   real_T gam2e;
   real_T gam3o;
   real_T gam3e;
-  real_T Do[2];
-  real_T De[2];
+  real_T Do[4];
+  real_T De[4];
   real_T Finess;
   real_T Finess_e;
   real_T H_Star;
@@ -100,31 +79,18 @@ typedef struct {
   real_T delta_o;
   real_T N;
   real_T kMI[31];
+  real_T mu_bl;
   real_T W;
   real_T delta_e;
-  real_T H_f;
-  real_T H_s;
   creal_T Omega_f;
   creal_T Omega_s;
-  real_T Psi_Start[256];
+  real_T H_f;
+  real_T H_s;
+  creal_T Psi_Start[512];
   real_T t_start;
 } struct2_T;
 
 #endif                                 /*typedef_struct2_T*/
-
-#ifndef typedef_struct3_T
-#define typedef_struct3_T
-
-typedef struct {
-  real_T N;
-  real_T lenght;
-  real_T dphi;
-  real_T phi[128];
-  real_T dk;
-  real_T k[128];
-} struct3_T;
-
-#endif                                 /*typedef_struct3_T*/
 
 #ifndef typedef_struct4_T
 #define typedef_struct4_T
@@ -141,17 +107,54 @@ typedef struct {
   real_T gam2e;
   real_T gam3o;
   real_T gam3e;
-  real_T Do[2];
-  real_T De[2];
+  real_T Do[4];
+  real_T De[4];
   real_T d;
   real_T norm;
-  real_T mode_range[256];
-  creal_T Lo[128];
-  creal_T Le[128];
-  creal_T L[256];
+  real_T mode_range[512];
+  creal_T Lo[256];
+  creal_T Le[256];
+  creal_T L[512];
 } struct4_T;
 
 #endif                                 /*typedef_struct4_T*/
+
+#ifndef typedef_emxArray_creal_T
+#define typedef_emxArray_creal_T
+
+typedef struct {
+  creal_T *data;
+  int32_T *size;
+  int32_T allocatedSize;
+  int32_T numDimensions;
+  boolean_T canFreeData;
+} emxArray_creal_T;
+
+#endif                                 /*typedef_emxArray_creal_T*/
+
+#ifndef typedef_struct6_T
+#define typedef_struct6_T
+
+typedef struct {
+  emxArray_creal_T *Psio;
+  emxArray_creal_T *Psie;
+  emxArray_creal_T *t;
+} struct6_T;
+
+#endif                                 /*typedef_struct6_T*/
+
+#ifndef typedef_emxArray_cuint8_T
+#define typedef_emxArray_cuint8_T
+
+typedef struct {
+  cuint8_T *data;
+  int32_T *size;
+  int32_T allocatedSize;
+  int32_T numDimensions;
+  boolean_T canFreeData;
+} emxArray_cuint8_T;
+
+#endif                                 /*typedef_emxArray_cuint8_T*/
 
 #ifndef typedef_struct0_T
 #define typedef_struct0_T
@@ -164,29 +167,5 @@ typedef struct {
 } struct0_T;
 
 #endif                                 /*typedef_struct0_T*/
-
-#ifndef typedef_struct5_T
-#define typedef_struct5_T
-
-typedef struct {
-  real_T b[9];
-  real_T a[3];
-  real_T c[3];
-  real_T s;
-} struct5_T;
-
-#endif                                 /*typedef_struct5_T*/
-
-#ifndef typedef_struct6_T
-#define typedef_struct6_T
-
-typedef struct {
-  emxArray_creal_T *Psio;
-  emxArray_creal_T *Psie;
-  emxArray_creal_T *t;
-} struct6_T;
-
-#endif                                 /*typedef_struct6_T*/
-#endif
 
 /* End of code generation (Chi23OPO_Runge_Kuarong_types.h) */

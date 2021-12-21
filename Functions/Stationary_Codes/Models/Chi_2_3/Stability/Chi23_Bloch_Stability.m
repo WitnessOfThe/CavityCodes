@@ -23,7 +23,7 @@ function Stab = Chi23_Bloch_Stability(Stat)
         
         Stab(i).In.n                  = n(i);
         Stab(i).E_values              = diag(E_values_raw)*Stat.Eq.norm;
-       [~,in_im]                      = maxk(real(Stab(i).E_values),1);
+       [~,in_im]                      = maxk(real(Stab(i).E_values),10);
        Stab(i).E_vectors              = E_vectors_raw(:,in_im);%;
         
    %     Stab(i).E_values      = Stab(i).E_values(Sort_I);        
@@ -124,6 +124,8 @@ function Stab = Chi23_Bloch_Stability(Stat)
         
         Stab(i).In.n                  = n(i);
         Stab(i).E_values              = diag(E_values_raw)*Stat.Eq.norm;
+       [~,in_im]                      = maxk(real(Stab(i).E_values),10);
+       Stab(i).E_vectors              = E_vectors_raw(:,in_im);%;
 
     end
   

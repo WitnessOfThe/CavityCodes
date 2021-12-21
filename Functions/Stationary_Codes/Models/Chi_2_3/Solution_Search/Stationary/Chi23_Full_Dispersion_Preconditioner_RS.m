@@ -1,6 +1,6 @@
     function M = Chi23_Full_Dispersion_Preconditioner_RS(t,Stat,x0)
     
-        ddt = 10^3;        
+        ddt = 10^6;        
         
         Lo   =  Stat.Eq.mask.*(abs( Stat.Eq.Lo - Stat.Space.k.*x0(end) ));%
         Le   =  Stat.Eq.mask.*(abs( Stat.Eq.Le - Stat.Space.k.*x0(end) ));%

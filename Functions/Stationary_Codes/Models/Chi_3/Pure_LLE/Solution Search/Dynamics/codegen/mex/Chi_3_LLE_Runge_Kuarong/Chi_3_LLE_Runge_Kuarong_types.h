@@ -62,7 +62,7 @@ typedef struct {
 typedef struct {
   real_T eta;
   real_T omega_p;
-  real_T D[2];
+  real_T D[3];
   real_T gamma;
   real_T range;
   real_T kappa;
@@ -78,6 +78,8 @@ typedef struct {
   real_T W;
   real_T W_Star;
   real_T W_WStar;
+  real_T omega_int_pl[512];
+  real_T omega_int_mn[512];
   creal_T Psi_Start[512];
   real_T t_start;
 } struct2_T;
@@ -92,7 +94,7 @@ typedef struct {
   real_T delta;
   real_T kappa;
   real_T gamma_3;
-  real_T D[2];
+  real_T D[3];
   real_T h;
   creal_T omega_j[512];
   real_T gamma_Kerr[512];

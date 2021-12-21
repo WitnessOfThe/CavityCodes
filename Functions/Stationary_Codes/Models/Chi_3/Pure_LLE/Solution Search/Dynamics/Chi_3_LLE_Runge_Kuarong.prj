@@ -847,7 +847,7 @@
       </unset>
     </profile>
     <param.objective>option.objective.c</param.objective>
-    <param.WorkflowStep>workflowSummary</param.WorkflowStep>
+    <param.WorkflowStep>generateCode</param.WorkflowStep>
     <param.TestSnippets>
       <item>Chi_3_LLE_Runge_Kuarong(Res.Temp,Res.Temp.In.N_mode,Runge)</item>
       <item>Chi_3_LLE_Runge_Kuarong(Res.Temp,Runge)</item>
@@ -877,7 +877,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>2123619133</param.AnnotationChecksum>
+    <param.AnnotationChecksum>1723524107</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -886,12 +886,12 @@
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen\mex\Chi_3_LLE_Runge_Kuarong</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>3951286393</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>440687913</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\Chi_3_LLE_Runge_Kuarong</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>1468038987</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>Chi_3_LLE_Runge_Kuarong(Res.Temp,Res.Temp.In.N_mode,Runge)</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;538756182&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Problems\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;3961204358&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
     <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_3\Pure_LLE\Solution Search\Dynamics\Chi_3_LLE_Runge_Kuarong.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
@@ -1104,7 +1104,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi_3_LLE_Runge_Kuarong.m">
-        <Marker>1632753781797</Marker>
+        <Marker>1639158506005</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
@@ -1140,6 +1140,8 @@
               <Field Name="W" typeId="4" />
               <Field Name="W_Star" typeId="4" />
               <Field Name="W_WStar" typeId="4" />
+              <Field Name="omega_int_pl" typeId="6" />
+              <Field Name="omega_int_mn" typeId="6" />
               <Field Name="Psi_Start" typeId="7" />
               <Field Name="t_start" typeId="4" />
             </Field>
@@ -1169,8 +1171,8 @@
           </Input>
           <Input Name="Runge" typeId="8">
             <Field Name="b" typeId="9" />
-            <Field Name="a" typeId="10" />
-            <Field Name="c" typeId="10" />
+            <Field Name="a" typeId="5" />
+            <Field Name="c" typeId="5" />
             <Field Name="s" typeId="4" />
           </Input>
           <idpTable>
@@ -1223,7 +1225,7 @@
             </type>
             <type typeId="5">
               <Class>double</Class>
-              <Size>1 x 2</Size>
+              <Size>1 x 3</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1262,15 +1264,6 @@
             <type typeId="9">
               <Class>double</Class>
               <Size>3 x 3</Size>
-              <Value />
-              <InitialValue />
-              <UserDefined>true</UserDefined>
-              <Complex>false</Complex>
-              <Sparse>false</Sparse>
-            </type>
-            <type typeId="10">
-              <Class>double</Class>
-              <Size>1 x 3</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>

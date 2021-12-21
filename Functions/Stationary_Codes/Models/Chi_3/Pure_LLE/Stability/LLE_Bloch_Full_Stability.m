@@ -26,7 +26,7 @@ function Stab = LLE_Bloch_Full_Stability(Stat)
 %         end
 %        [~,in_im]                 = maxk(real(Stab.Values(i,:) ),1);        
 %
-        %Stab.Vk(i).Vectors        = Vectors_raw;%;
+     %   Stab.Vk(i).Vectors        = Vectors_raw;%;
         
     end
 

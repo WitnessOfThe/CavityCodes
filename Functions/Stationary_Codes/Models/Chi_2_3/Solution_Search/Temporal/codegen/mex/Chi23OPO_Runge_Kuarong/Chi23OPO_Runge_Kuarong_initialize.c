@@ -10,11 +10,10 @@
  */
 
 /* Include files */
-#include "rt_nonfinite.h"
-#include "Chi23OPO_Runge_Kuarong.h"
 #include "Chi23OPO_Runge_Kuarong_initialize.h"
-#include "_coder_Chi23OPO_Runge_Kuarong_mex.h"
 #include "Chi23OPO_Runge_Kuarong_data.h"
+#include "_coder_Chi23OPO_Runge_Kuarong_mex.h"
+#include "rt_nonfinite.h"
 
 /* Function Definitions */
 void Chi23OPO_Runge_Kuarong_initialize(void)
@@ -24,6 +23,7 @@ void Chi23OPO_Runge_Kuarong_initialize(void)
     NULL                               /* prev */
   };
 
+  mex_InitInfAndNan();
   mexFunctionCreateRootTLS();
   emlrtBreakCheckR2012bFlagVar = emlrtGetBreakCheckFlagAddressR2012b();
   st.tls = emlrtRootTLSGlobal;

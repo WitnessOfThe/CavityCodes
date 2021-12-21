@@ -7,11 +7,11 @@ function In = Params_LiNbd
     In.gam2o          = 2*pi*300E6;
     In.gam2e          = 2*pi*300E6;
     
-    In.gam3o          = 2*pi*300E3;
-    In.gam3e          = 2*pi*300E3;
+    In.gam3o          = 0;%2*pi*300E3;
+    In.gam3e          = 0;%2*pi*300E3;
     
-    In.Do              = 2*pi*[21E9,-100E3];% Dispersion Coefficients,-4E3
-    In.De              = 2*pi*[20E9,-200E3];% Dispersion Coefficients,-4E3
+    In.Do              = 2*pi*[21E9,-100E3,0,0];% Dispersion Coefficients,-4E3
+    In.De              = 2*pi*[20E9,-200E3,0,0];% Dispersion Coefficients,-4E3
     
     In.Finess         = In.Do(1)/In.ko;
     In.Finess_e       = In.De(1)/In.ke;

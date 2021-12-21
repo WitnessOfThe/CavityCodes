@@ -1,4 +1,4 @@
-    function CW = Chi2_CW(CW)
+        function CW = Chi2_CW(CW)
     
         CW         = CW.Met.Norm(CW);
                 

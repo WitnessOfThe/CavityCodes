@@ -19,6 +19,15 @@
        i=3;
            L_pl = L_pl + 1i*(1i)^i*( Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i) ;
            L_mn = L_mn + 1i*(1i)^i*(Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i);
+       i=4;
+           L_pl = L_pl - (1i)^i*(Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i) ;
+           L_mn = L_mn + (1i)^i*(Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i);
+       i=5;
+           L_pl = L_pl + 1i*(1i)^i*( Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i) ;
+           L_mn = L_mn + 1i*(1i)^i*(Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i);
+       i=6;
+           L_pl = L_pl - (1i)^i*(Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i) ;
+           L_mn = L_mn + (1i)^i*(Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i);
        
            L_pl = L_pl + 1i*1i*(Stat.Space.k+Stat.In.k)*Stat.Sol.V;
            L_mn = L_mn + 1i*1i*(Stat.Space.k+Stat.In.k)*Stat.Sol.V;

@@ -35,7 +35,7 @@ function Res = Chi23_Stat_StartFromCW(Res)
             Logic.p1            = Res.Stat.Sol.Exitflag >= 0;
             Logic.p2            = sum(abs(Res.Stat.Sol.Psi_o(2:end))) > 1E-3;
 
-            if (Logic.p1 && Logic.p2) || (ii == 50)
+            if (Logic.p1 && Logic.p2) || (ii == 500)
                 Flag =1;
                 break;
 
