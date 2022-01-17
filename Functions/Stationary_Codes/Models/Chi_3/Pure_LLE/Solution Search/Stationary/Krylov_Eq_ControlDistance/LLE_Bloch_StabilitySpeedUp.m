@@ -19,7 +19,7 @@ end
        L_pl(1:Stat.Space.N)  = Stat.Eq.delta*ones(1,Stat.Space.N);
        L_mn(1:Stat.Space.N)  = Stat.Eq.delta*ones(1,Stat.Space.N);
        
-    for    i = 2:3
+    for    i = 2:2
         
            L_pl(1:Stat.Space.N) = L_pl(1:Stat.Space.N) + ( Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i) ;
            L_mn (1:Stat.Space.N)= L_mn(1:Stat.Space.N) + (-Stat.Space.k-Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i);
@@ -62,7 +62,7 @@ end
        L_pl(1:Stat.Space.N)  = Stat.Eq.delta*ones(1,Stat.Space.N);
        L_mn(1:Stat.Space.N)  = Stat.Eq.delta*ones(1,Stat.Space.N);
        
-        for    i = 2:3
+        for    i = 2:2
 
                L_pl(1:Stat.Space.N) = L_pl(1:Stat.Space.N) + ( Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i) ;
                L_mn (1:Stat.Space.N)= L_mn(1:Stat.Space.N) + (-Stat.Space.k-Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i);

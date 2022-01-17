@@ -63,7 +63,7 @@
                 end
                                 
                 if Logic.TurnTime  == 1 && FlagReduce == 0
-                   Exitflag = 0;
+                  Exitflag = 0;
                       break;          
       %
                      for it = 1:size(L_L_1,2) 
@@ -391,6 +391,7 @@
                 y          = real(Stat(1).Sol.Psi_k(1));
             case 'LLE_Full_Dispersion_Equation_Turndelta'
                 y          = real(Stat(1).Sol.Psi_k(1));
-
+            case 'LLE_Zero_Velocity_Equation'
+                y          = real(Stat(1).Sol.Psi_k(1));                
         end
     end

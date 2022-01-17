@@ -4,6 +4,7 @@
 %% Define Input Parameters in Physical Units
 
     Res       = Set_Up_Methods_For_Bloch_Matrices;
+%%    
     CW        = Res.CW;
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -15,12 +16,13 @@
 %%
 
     NN                  = 1000;
-    delta_vector        = CW.In.kappa*linspace(-6,6,NN);
+    delta_vector        = CW.In.kappa*linspace(-6,-1,NN);
     W_WStar             = 8;
     CW.In.P             = W_WStar*pi/(CW.In.eta*CW.In.D(1)/CW.In.kappa)*CW.In.kappa/CW.In.gamma;  
     CW.In.N_mode         = 2^8;
     
-    R = Get_CW_Tongues(CW,delta_vector,NN);
+%    R   = Get_CW_Tongues(CW,delta_vector,NN);
+    Lambda = Get_MI_Scan(CW,delta_vector,6,NN);
     
 %%
     f  = figure('Color',[1,1,1]);hold on;
@@ -34,6 +36,9 @@
         
         plot(delta_vector/CW.In.kappa,R.Tongue_b1(:,ii)/CW.In.kappa,'Color',[0,0,0],'LineWidth',0.25,'Parent',ax);
         plot(delta_vector/CW.In.kappa,R.Tongue_b2(:,ii)/CW.In.kappa,'Color',[0.00,0.00,1.00],'LineWidth',0.5,'Parent',ax);
+
+        plot(delta_vector/CW.In.kappa,R.Tongue_S1(:,ii)/CW.In.kappa,'Color',[0,0,0],'LineWidth',0.25,'Parent',ax,'LineStyle','--');
+        plot(delta_vector/CW.In.kappa,R.Tongue_S2(:,ii)/CW.In.kappa,'Color',[0.00,0.00,1.00],'LineWidth',0.5,'Parent',ax,'LineStyle','--');
         
         [~,idd] = min(abs(R.Tongue_b2(:,ii).'/CW.In.kappa - R.g2/CW.In.kappa));
         plot(delta_vector(idd)/CW.In.kappa,R.Tongue_b2(idd,ii)/CW.In.kappa,'Marker','.','MarkerSize',10,'Parent',ax,'Color',[0,0,1]);        
@@ -64,10 +69,10 @@
     ax.XLim = [min( delta_vector ),max( delta_vector )]/CW.In.kappa;
     
     ax.XLabel.String = '$\delta/\kappa$';
-    ax.YLabel.String = '$g/\kappa$';
-    
+    ax.YLabel.String = '$g/\kappa$';   
     axes_Style(ax);
-    
+%%
+
 %% 
 function axes_Style(ax)
 
@@ -86,6 +91,9 @@ function Res = Get_CW_Tongues(CW,delta_vector,NN)
 
     Res.Tongue_b1 = zeros(NN,CW.In.N_mode/2);
     Res.Tongue_b2 = zeros(NN,CW.In.N_mode/2);
+    Res.Tongue_S1 = zeros(NN,CW.In.N_mode/2);
+    Res.Tongue_S2 = zeros(NN,CW.In.N_mode/2);
+    
     Res.delta_t  = delta_vector;
     Res.g        = NaN(3,NN);
 
@@ -94,9 +102,13 @@ function Res = Get_CW_Tongues(CW,delta_vector,NN)
         CW.In.delta    = delta_vector(i);
         CW             = CW.Met.Solve(CW);
         CW             = CW.Met.T_MI(CW);
-        Res.g(:,i)     = CW.Sol.g*CW.Eq.norm;
+        CW             = CW.Met.T_Syn(CW);
+        
+        Res.g(:,i)         = CW.Sol.g*CW.Eq.norm;
         Res.Tongue_b1(i,:) = CW.In.g_MI(1,1:CW.In.N_mode/2);
         Res.Tongue_b2(i,:) = CW.In.g_MI(2,1:CW.In.N_mode/2);
+        Res.Tongue_S1(i,:) = CW.In.g_Synch(1,1:CW.In.N_mode/2);
+        Res.Tongue_S2(i,:) = CW.In.g_Synch(2,1:CW.In.N_mode/2);
         
     end
     
@@ -125,5 +137,17 @@ function Res = Get_CW_Tongues(CW,delta_vector,NN)
     Res.g = [g1,g2,g3];
     Res.d = [d1,d2,d3];
 end
+function Lambda = Get_MI_Scan(CW,delta_vector,mu,NN)
+
+    Lambda = zeros(NN,2);
     
+    for i = 1:size(delta_vector,2)
+        
+        CW.In.delta    = delta_vector(i);
+        CW             = MI(CW);        
+        Lambda(i,:)    = CW.Stab(3).Value(CW.Space.k == mu,:);
+        
+    end
+    
+end
     

@@ -13,7 +13,7 @@ function Stab = LLE_Bloch_Full_Stability_with_Norm(St)
         ValuesStar = zeros(size(k,2),2*St.Space.N);
         
     end
-    parfor i = 1:size(k,2)
+    for i = 1:size(k,2)
         
         Stat                       = St;                     
         Stat.In.k                  = k(i);

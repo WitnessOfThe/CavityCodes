@@ -1,10 +1,10 @@
 function Res = Chi23_Stat_StartFromCW(Res)
     
-    coeff_start = 0.0;
+    coeff_start = 0;
     Flag = false;
         
    W                 = [Res.CW.In.W/ Res.CW.In.Wf_Star, Res.CW.In.W/ Res.CW.In.Wf_Star];
-   delta             = [10,Res.CW.In.delta_o/Res.CW.In.ko];
+   delta             = [-3,Res.CW.In.delta_o/Res.CW.In.ko];
     
     Res.CW            = Chi23_CW_Track_fromLower2Point(Res.CW,W,delta);
   %  Res.CW            = Res.CW.Met.Solve(Res.CW);
@@ -20,12 +20,13 @@ function Res = Chi23_Stat_StartFromCW(Res)
         
     Res.CW.Met.MI_Matrix   = @Chi23_MI_Matrix;
     Res.CW.Stab            =  Chi23_MI(Res.CW);
-        dd = 0.5E-1;
+        dd = 0.1;
     coeff = coeff_start-dd;
     for i_try = 1:1
         
         coeff_bound = coeff_start;
-            ii   = 0;
+        ii   = 0;
+        
         while Flag == 0
 
        %     coeff               = coeff_bound(1) + (coeff_bound(2) - coeff_bound(1))/2;
