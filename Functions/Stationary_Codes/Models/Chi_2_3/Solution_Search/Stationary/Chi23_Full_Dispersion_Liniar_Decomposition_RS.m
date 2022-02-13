@@ -77,7 +77,7 @@
         
         V               = Psi(end);
         
-        [~,max_ind]     = max(real(Psio));
+        [~,max_ind]     = max(abs(imag(Psio)));
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -99,7 +99,7 @@
             
         Eq2     = ( L2 + NL2 );
         
-        Eq3     = ifft(1i*Stat.Space.k.*fft( real(xo) ) ,'symmetric');
+        Eq3     = ifft(1i*Stat.Space.k.*fft( imag(xo) ) ,'symmetric');
         
         Eq1R = real(Eq1).';
         Eq1I = imag(Eq1).';

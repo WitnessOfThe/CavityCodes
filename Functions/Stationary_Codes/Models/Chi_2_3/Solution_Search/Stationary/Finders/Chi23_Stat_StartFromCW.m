@@ -1,10 +1,10 @@
 function Res = Chi23_Stat_StartFromCW(Res)
     
-    coeff_start = 0;
+    coeff_start = [0,100];
     Flag = false;
         
    W                 = [Res.CW.In.W/ Res.CW.In.Wf_Star, Res.CW.In.W/ Res.CW.In.Wf_Star];
-   delta             = [-3,Res.CW.In.delta_o/Res.CW.In.ko];
+   delta             = [0,Res.CW.In.delta_o/Res.CW.In.ko];
     
     Res.CW            = Chi23_CW_Track_fromLower2Point(Res.CW,W,delta);
   %  Res.CW            = Res.CW.Met.Solve(Res.CW);
@@ -21,7 +21,7 @@ function Res = Chi23_Stat_StartFromCW(Res)
     Res.CW.Met.MI_Matrix   = @Chi23_MI_Matrix;
     Res.CW.Stab            =  Chi23_MI(Res.CW);
         dd = 0.1;
-    coeff = coeff_start-dd;
+%    coeff = coeff_start-dd;
     for i_try = 1:1
         
         coeff_bound = coeff_start;
@@ -29,14 +29,14 @@ function Res = Chi23_Stat_StartFromCW(Res)
         
         while Flag == 0
 
-       %     coeff               = coeff_bound(1) + (coeff_bound(2) - coeff_bound(1))/2;
-            coeff               = coeff  + dd;
+            coeff               = coeff_bound(1) + (coeff_bound(2) - coeff_bound(1))/2;
+       %     coeff               = coeff  + dd;
             Res                 = Chi23_Turing_From_CW(Res,coeff);
             ii                  = ii + 1;
             Logic.p1            = Res.Stat.Sol.Exitflag >= 0;
             Logic.p2            = sum(abs(Res.Stat.Sol.Psi_o(2:end))) > 1E-3;
 
-            if (Logic.p1 && Logic.p2) || (ii == 500)
+            if (Logic.p1 && Logic.p2) || (ii == 44)
                 Flag =1;
                 break;
 
@@ -57,7 +57,7 @@ function Res = Chi23_Stat_StartFromCW(Res)
                 coeff_bound(2) = coeff;
 
             end
-
+ii
         end
         if Flag ~= 0
             break;

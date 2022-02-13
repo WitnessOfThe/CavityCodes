@@ -1,6 +1,6 @@
 function CW = Chi23_CW_Track_fromLower2Point(CW,W,delta)    
     
-    NN = 1000;
+    NN = 100;
     delta_vector          = linspace(delta(1),delta(2),NN);
     W_vector              = linspace(W(1),W(2),NN);
     
@@ -10,7 +10,7 @@ function CW = Chi23_CW_Track_fromLower2Point(CW,W,delta)
     CW                    = CW.Met.Solve_Chi2(CW); 
 
     [~,ind]               = min(abs(CW.Sol.Omega));
-
+%ind =2;
     CW.Sol.Omega      =  CW.Sol.Omega(ind);    
     CW.Sol.Psi_o      =  CW.Sol.Psi_o(ind);    
     CW.Sol.Psi_e      =  CW.Sol.Psi_e(ind);

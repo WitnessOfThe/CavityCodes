@@ -46,8 +46,8 @@ function Res = Set_Up_Methods_For_Chi23_Paper
   %  Res.Stat.Met.Equation_Mod             = @Chi23_Zero_Mode_Equation_RS_delta;
    % Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Zero_Mode_Liniar_Decomposition_RS_delta;
     %Res.Stat.Met.Preconditioner_Mod       = @Chi23_Zero_Mode_Preconditioner_RS_delta;
-  Res.Stat.Met.Equation_Mod             = @Chi23_Full_Dispersion_Equation_RS_eps;
-  Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Full_Dispersion_Liniar_Decomposition_RS_eps;
+  Res.Stat.Met.Equation_Mod             = @Chi23_Full_Dispersion_Equation_RS_delta;
+  Res.Stat.Met.Liniar_Decomposition_Mod = @Chi23_Full_Dispersion_Liniar_Decomposition_RS_delta;
   Res.Stat.Met.Preconditioner_Mod       = @Chi23_Full_Dispersion_Preconditioner_RS_delta;   
     
 %%    
@@ -88,7 +88,7 @@ function Res = Set_Up_Methods_For_Chi23_Paper
     Res.CW.Par.i_max            = 3000;
     
     Res.CW.Par.fsolveoptions     = optimoptions('fsolve','CheckGradients',...
-    false,'Display','none','UseParallel',false,'SpecifyObjectiveGradient',false,...
+   false,'Display','none','UseParallel',false,'SpecifyObjectiveGradient',false,...
     'Algorithm','trust-region-dogleg','FunValCheck','on',...
     'MaxIterations',1000,'StepTolerance',1E-25,'OptimalityTolerance',1E-25,'FunctionTolerance',10^(-15));
 
@@ -114,7 +114,7 @@ end
 
     end
     
-   function [FlagReduce,FlagStop,Logic] = fail_3stepStat_check(Stat,x_step,i)
+  function [FlagReduce,FlagStop,Logic] = fail_3stepStat_check(Stat,x_step,i)
 
 
 
@@ -140,7 +140,7 @@ end
                Logic.zero_step   =   x_step == 0;
                Logic.Resid       =   Stat(end).Sol.eps_f > Stat(end).Par.Newton_tol;                
 
-               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) > 2;
+               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) >220;
                
                
 %                if Stat.Sol.Dir.d1s > 0.5
@@ -158,13 +158,13 @@ end
 %                         end
 %                    end
 %                end
+                 if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 50
+                        Logic.TurnTime     = 0;
+                        Logic.Smooth       = 1;
+
+                 end                   
                
 %                if Logic.TurnTime
-%                    if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 0.6
-%                           Logic.TurnTime     = 0;
-%                           Logic.Smooth       = 1;
-% 
-%                    end                   
 %                end   
 
 %              if abs(abs(Stat.Sol.Dir.d1)) ==0
@@ -183,7 +183,7 @@ end
 %                    Logic.Smooth = 0;
 % 
 %                end
-               Logic.rCW         = 0;%sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
+               Logic.rCW         = sum(abs(Stat(end).Sol.Psi_o(2:end)).^2) <= 1E-10;
                Logic.MaxIter     = i > Stat(1).Par.i_max; 
                
                Logic.bb     = Stat(end).Eq.(Stat(1).Par.variable) < Stat(1).Par.bot_boundary;

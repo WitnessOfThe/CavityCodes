@@ -20,7 +20,7 @@ function f = Chi23_Full_Dispersion_Liniar_Decomposition_RS_delta(x,Psi,Stat)
     V               = Psi(end);
     delta           = Psi(1);
 
-    [~,ind_real]     = max(abs(real(Psio)));
+    [~,ind_real]     = max(abs(imag(Psio)));
         
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -44,7 +44,7 @@ function f = Chi23_Full_Dispersion_Liniar_Decomposition_RS_delta(x,Psi,Stat)
 
     Eq2     =  L2 + NL2;
 
-    Eq3     = ifft(1i*Stat.Space.k.*fft( real(xo) ) ,'symmetric');
+    Eq3     = ifft(1i*Stat.Space.k.*fft( imag(xo) ) ,'symmetric');
         
  %       Eq4     = conj(Psio(max_ind)).*xo(max_ind) + conj(xo(max_ind)).*Psio(max_ind);
         

@@ -10,7 +10,7 @@
         
 
         Check = sum(abs(fun) > Stat.Par.Newton_tol );
-        while Check > 0 %||abs(fun(end)) >= 1E-14
+        while Check > 0 ||abs(fun(end)) >= 1E-14
   %      [Stat.Eq.abs_psi2,Stat.Eq.ind] = max(abs(x0(1:Stat.Space.N)+1i*x0(Stat.Space.N+1:2*Stat.Space.N)).^2);
         
   %          [Stat.Eq.abs_psi2,Stat.Eq.ind] = max(abs(x0(1:Stat.Space.N)+1i*x0(Stat.Space.N+1:2*Stat.Space.N)).^2);
@@ -22,7 +22,7 @@
 %                 [dx,flag,relres,iter,resvec] = gmres(@(t)Stat.Met.Liniar_Decomposition...
 %                 (t,x0,Stat),Stat.Met.Equation(x0,Stat),[],1E-14);%%,...
 %          [dx,flag,relres,iter,resvec] =  bicgstab(@(t)Stat.Met.Liniar_Decomposition...
- %            (t,x0,Stat),Stat.Met.Equation(x0,Stat),10^-10,300,@(t)Stat.Met.Preconditioner(t,Stat,x0));%%,...
+ %            (t,x0,Stat),Stat.Met.Equation(x0,Stat),10^-20,300,@(t)Stat.Met.Preconditioner(t,Stat,x0));%%,...
  %                %
             %
             x0(1,1:end)     = x0.' - dx;

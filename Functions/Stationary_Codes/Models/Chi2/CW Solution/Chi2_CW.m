@@ -1,6 +1,6 @@
         function CW = Chi2_CW(CW)
     
-        CW         = CW.Met.Norm(CW);
+        CW         = Chi23_CW_Normalization(CW);
                 
 %        coef       = [4/CW.In.k_o^2/CW.In.Omega_S^2/abs(CW.In.Omega_e)^2,...
  %               4*abs(CW.In.Omega_o).^2/CW.In.k_o^2/CW.In.Omega_S^2*real(2/(CW.In.Omega_o*CW.In.Omega_e)),...

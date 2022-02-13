@@ -9,7 +9,7 @@
                                1i*x(3*Stat.Space.N+1:4*Stat.Space.N);
          
         V               = x(end);   %    
-        [~,ind]         = max(real(xo));
+        [~,ind]         = max(abs(imag(xo)));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -26,7 +26,7 @@
         f_2    = ( L2 + NL2 );
         
 %       f_3    = ifft(mask.*1i.*Stat.Space.k.*fft(x(1:Stat.Space.N)),'symmetric');
-       f_3    = ifft(1i.*Stat.Space.k.*fft(real(xo)),'symmetric');
+       f_3    = ifft(1i.*Stat.Space.k.*fft(imag(xo)),'symmetric');
                 
         f     = [real(f_1).';imag(f_1).';real(f_2).';imag(f_2).';f_3(ind).'];%\;
         

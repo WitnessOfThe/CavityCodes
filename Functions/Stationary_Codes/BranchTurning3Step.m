@@ -63,8 +63,8 @@
                 end
                                 
                 if Logic.TurnTime  == 1 && FlagReduce == 0
-                  Exitflag = 0;
-                      break;          
+         %         Exitflag = 0;
+          %            break;          
       %
                      for it = 1:size(L_L_1,2) 
                         maxvec(it) = y_eval(L_L_1(it));
@@ -148,7 +148,7 @@
                 stepPsi = Stat(ii).Sol.Dir.d1s*x_step;
                  
             end
-            
+             stepPsi =  stepPsi/10;
             if  abs(stepPsi) < 1E-12
                  stepPsi = sign(Stat(ii).Sol.Dir.d1s)*1e-9;
             end
@@ -161,7 +161,7 @@
                 Stat(ii) = Stat(ii-1);
                 StepStop = 1;
                 SlvStart = Slv;
-                stepPsi = stepPsi*1.05;
+                stepPsi = stepPsi*1.0;
                 
                 while StepStop
                     
@@ -173,9 +173,9 @@
                         StepStop = 1;
                         stepPsi  = stepPsi/2;
                         Stat(ii) = Stat(ii-1);
-                        Slv      = SlvStart;
+                        Slv      =SlvStart;
                     else
-                    if (abs(Stat(ii).Sol.Dir.d1) < 0.1)&& ii> 5 %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
+                    if (abs(Stat(ii).Sol.Dir.d1) <100) && ii> 5 %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
                         FlagStop = 0;
                     end
 %                         if (abs(Stat(ii).Sol.Dir.d1) < 0.01) %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
@@ -207,7 +207,7 @@
             Stat(end).Met.Liniar_Decomposition = L_L.Met.Liniar_Decomposition;
             Stat(end).Met.Preconditioner       = L_L.Met.Preconditioner;    
             Stat(end).Met.Newton_Matrix        = L_L.Met.Newton_Matrix;        
-            Slv(1)                             = Stat(end).Eq.PsioMax*Stat(end).Space.N;
+            Slv(1)                             = Stat(end).Eq.PsioMax;
  %           Slv(1)                             = Stat(end).Eq.PsioMax;
             [Slv,eps_f,Exitflag] = Newton_Switcher(Slv,Stat(end));
             Stat(end)            = Stat(end).Met.Prop_Gen(Slv,Stat(end));                 
