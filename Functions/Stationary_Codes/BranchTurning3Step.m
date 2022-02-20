@@ -161,7 +161,7 @@
                 Stat(ii) = Stat(ii-1);
                 StepStop = 1;
                 SlvStart = Slv;
-                stepPsi = stepPsi*1.0;
+                stepPsi = stepPsi*1.001;
                 
                 while StepStop
                     
@@ -175,7 +175,7 @@
                         Stat(ii) = Stat(ii-1);
                         Slv      =SlvStart;
                     else
-                    if (abs(Stat(ii).Sol.Dir.d1) <100) && ii> 5 %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
+                    if (abs(Stat(ii).Sol.Dir.d1) <50) && ii> 5 %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
                         FlagStop = 0;
                     end
 %                         if (abs(Stat(ii).Sol.Dir.d1) < 0.01) %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
