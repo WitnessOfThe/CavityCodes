@@ -161,7 +161,7 @@
                 Stat(ii) = Stat(ii-1);
                 StepStop = 1;
                 SlvStart = Slv;
-                stepPsi = stepPsi*1.001;
+                stepPsi = stepPsi*1.1;
                 
                 while StepStop
                     

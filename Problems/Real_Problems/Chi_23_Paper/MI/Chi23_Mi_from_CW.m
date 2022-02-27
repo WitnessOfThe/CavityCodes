@@ -1,4 +1,4 @@
-   clear all;
+    clear all;
 
 %%
     Res = Set_Up_Methods_For_Chi23_Paper;
