@@ -140,7 +140,7 @@ end
                Logic.zero_step   =   x_step == 0;
                Logic.Resid       =   Stat(end).Sol.eps_f > Stat(end).Par.Newton_tol;                
 
-               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) >3500;
+               Logic.TurnTime    = abs(Stat.Sol.Dir.d1) >300;
                
                
 %                if Stat.Sol.Dir.d1s > 0.5
@@ -159,11 +159,11 @@ end
 %                    end
 %                end
 
-%                 if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 505
- %                       Logic.TurnTime     = 0;
-  %                      Logic.Smooth       = 1;
-%
- %                end                   
+                if abs(abs(Stat.Sol.Dir.d1) - abs(Stat.Sol.Dir.d1s)) > 5305
+                       Logic.TurnTime     = 0;
+                       Logic.Smooth       = 1;
+
+                end                   
                
 %                if Logic.TurnTime
 %                end   
