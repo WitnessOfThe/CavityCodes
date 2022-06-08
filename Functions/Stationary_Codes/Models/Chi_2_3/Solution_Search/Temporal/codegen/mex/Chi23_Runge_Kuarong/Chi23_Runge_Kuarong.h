@@ -9,24 +9,21 @@
  *
  */
 
-#ifndef CHI23_RUNGE_KUARONG_H
-#define CHI23_RUNGE_KUARONG_H
+#pragma once
 
 /* Include files */
+#include "Chi23_Runge_Kuarong_types.h"
+#include "rtwtypes.h"
+#include "emlrt.h"
+#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tmwtypes.h"
-#include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void Chi23_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp,
-  const struct5_T *Runge, struct6_T *Sol);
-
-#endif
+void Chi23_Runge_Kuarong(Chi23_Runge_KuarongStackData *SD, const emlrtStack *sp,
+                         const struct0_T *Temp, const struct5_T *Runge,
+                         struct6_T *Sol);
 
 /* End of code generation (Chi23_Runge_Kuarong.h) */

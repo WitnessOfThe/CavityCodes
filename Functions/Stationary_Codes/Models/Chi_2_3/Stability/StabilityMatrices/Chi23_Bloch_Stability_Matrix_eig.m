@@ -71,5 +71,5 @@
                  + 2*( abs(Psio).^2 + abs(Psie).^2 ).*xe2 + conj(Psie).^2.*xe1) );
 
         f  = [fop,fom;
-              fep,fem]
+              fep,fem];
     end

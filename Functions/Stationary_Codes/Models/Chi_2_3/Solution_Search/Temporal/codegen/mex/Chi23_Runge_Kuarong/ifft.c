@@ -10,18 +10,14 @@
  */
 
 /* Include files */
-#include <string.h>
-#include "rt_nonfinite.h"
-#include "Chi23_Runge_Kuarong.h"
 #include "ifft.h"
-#include "FFTWApi.h"
+#include "rt_nonfinite.h"
 
 /* Function Definitions */
-void ifft(const creal_T x[128], creal_T y[128])
+void ifft(const creal_T x[1024], creal_T y[1024])
 {
-  creal_T dcv1[128];
-  FFTWApi_fft1d(x, true, dcv1);
-  memcpy(&y[0], &dcv1[0], sizeof(creal_T) << 7);
+  emlrtFFTWSetNumThreads(6);
+  emlrtFFTW_1D_C2C((real_T *)&x[0], (real_T *)&y[0], 1, 1024, 1024, 1, 1);
 }
 
 /* End of code generation (ifft.c) */

@@ -9,24 +9,20 @@
  *
  */
 
-#ifndef CHI23_RUNGE_KUARONG_TERMINATE_H
-#define CHI23_RUNGE_KUARONG_TERMINATE_H
+#pragma once
 
 /* Include files */
+#include "rtwtypes.h"
+#include "emlrt.h"
+#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tmwtypes.h"
-#include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void Chi23_Runge_Kuarong_atexit(void);
-extern void Chi23_Runge_Kuarong_terminate(void);
+void Chi23_Runge_Kuarong_atexit(void);
 
-#endif
+void Chi23_Runge_Kuarong_terminate(void);
 
 /* End of code generation (Chi23_Runge_Kuarong_terminate.h) */

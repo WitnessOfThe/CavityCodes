@@ -9,17 +9,19 @@
  *
  */
 
-#ifndef RTWTYPES_H
-#define RTWTYPES_H
+#pragma once
+
+/* Include files */
 #include "tmwtypes.h"
-/* 
+
+/*
  * TRUE/FALSE definitions
  */
 #ifndef TRUE
 #define TRUE (1U)
-#endif 
+#endif
 #ifndef FALSE
 #define FALSE (0U)
-#endif 
 #endif
+
 /* End of code generation (rtwtypes.h) */

@@ -41,14 +41,14 @@
             
             Sol.t(  ind_s )   = Temp.Par.dt*ni;
 
-            if 10*log10(sum(abs(Sol.Psio(ind_s,2:end)).^2)) <= -100 && (mod(ind_s,2) == 0)
+%            if 10*log10(sum(abs(Sol.Psio(ind_s,2:end)).^2)) <= -100 && (mod(ind_s,2) == 0)
 
-                    Sol.Psio(ind_s+1:end,:) = [];
-                    Sol.Psie(ind_s+1:end,:) = [];
-                    Sol.t(ind_s+1:end)     = [];                
-                    break;
+ %                   Sol.Psio(ind_s+1:end,:) = [];
+  %                  Sol.Psie(ind_s+1:end,:) = [];
+   %                 Sol.t(ind_s+1:end)     = [];                
+    %                break;
 
-            end
+     %       end
         
        end
        
@@ -103,7 +103,7 @@
     k_e(1:N)    = 1i*Fac_plus(1:N).*(fft(Eq.gam2o.*conj(Psio).*Psie +  Eq.gam3o.*(abs(Psio).^2 + 2*abs(Psie).^2).*Psio )  );
     k_e(N+1:2*N)= 1i*Fac_plus(N+1:2*N).*(fft(Eq.gam2e.*Psio.^2 +Eq.gam3e.*(2*abs(Psio).^2 + abs(Psie).^2).*Psie)  );
     
-    k_e(1)      = k_e(1) + N*Fac_plus(1).*1/2*Eq.ko*Eq.H_f;
+        k_e(1)      = k_e(1) + N*Fac_plus(1).*1/2*Eq.ko*Eq.H_f;
 
     
 end  
@@ -113,6 +113,6 @@ function     [nt,dt,dd] = ParSim(Par)
 
     dt = Par.dt;
     nt = Par.T/Par.dt;
-    dd = floor(Par.T/Par.s_t);  
+    dd = int32(floor(Par.T/Par.s_t));  
     
 end

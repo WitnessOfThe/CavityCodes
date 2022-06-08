@@ -10,971 +10,832 @@
  */
 
 /* Include files */
-#include <string.h>
-#include "mwmathutil.h"
-#include "rt_nonfinite.h"
 #include "Chi23_Runge_Kuarong.h"
-#include "exp.h"
-#include "abs.h"
-#include "power.h"
-#include "mod.h"
-#include "eml_int_forloop_overflow_check.h"
-#include "nullAssignment.h"
-#include "Chi23_Runge_Kuarong_emxutil.h"
-#include "fft1.h"
-#include "ifft.h"
 #include "Chi23_Runge_Kuarong_data.h"
+#include "Chi23_Runge_Kuarong_emxutil.h"
+#include "Chi23_Runge_Kuarong_types.h"
+#include "fft.h"
+#include "ifft.h"
+#include "rt_nonfinite.h"
+#include "mwmathutil.h"
+#include <string.h>
 
 /* Variable Definitions */
-static emlrtRSInfo emlrtRSI = { 48,    /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo b_emlrtRSI = { 47,  /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo c_emlrtRSI = { 46,  /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo d_emlrtRSI = { 44,  /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo e_emlrtRSI = { 33,  /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo f_emlrtRSI = { 3,   /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo g_emlrtRSI = { 6,   /* lineNo */
-  "ref",                               /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/ref.m"/* pathName */
-};
-
-static emlrtRSInfo h_emlrtRSI = { 63,  /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo i_emlrtRSI = { 77,  /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo j_emlrtRSI = { 99,  /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo k_emlrtRSI = { 100, /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo l_emlrtRSI = { 103, /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo m_emlrtRSI = { 104, /* lineNo */
-  "Chi23_Runge_Kuarong",               /* fcnName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pathName */
-};
-
-static emlrtRSInfo v_emlrtRSI = { 65,  /* lineNo */
-  "applyBinaryScalarFunction",         /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/applyBinaryScalarFunction.m"/* pathName */
-};
-
-static emlrtRSInfo w_emlrtRSI = { 189, /* lineNo */
-  "applyBinaryScalarFunction",         /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/applyBinaryScalarFunction.m"/* pathName */
-};
-
-static emlrtRSInfo y_emlrtRSI = { 16,  /* lineNo */
-  "abs",                               /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/elfun/abs.m"/* pathName */
-};
-
-static emlrtRSInfo ab_emlrtRSI = { 74, /* lineNo */
-  "applyScalarFunction",               /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/applyScalarFunction.m"/* pathName */
-};
-
-static emlrtRSInfo bb_emlrtRSI = { 49, /* lineNo */
-  "power",                             /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/ops/power.m"/* pathName */
-};
-
-static emlrtRSInfo cb_emlrtRSI = { 58, /* lineNo */
-  "power",                             /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/ops/power.m"/* pathName */
-};
-
-static emlrtRSInfo db_emlrtRSI = { 9,  /* lineNo */
-  "sum",                               /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/datafun/sum.m"/* pathName */
-};
-
-static emlrtRSInfo eb_emlrtRSI = { 64, /* lineNo */
-  "sumprod",                           /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/datafun/private/sumprod.m"/* pathName */
-};
-
-static emlrtRSInfo fb_emlrtRSI = { 134,/* lineNo */
-  "combineVectorElements",             /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/datafun/private/combineVectorElements.m"/* pathName */
-};
-
-static emlrtRSInfo gb_emlrtRSI = { 193,/* lineNo */
-  "combineVectorElements",             /* fcnName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/datafun/private/combineVectorElements.m"/* pathName */
-};
-
-static emlrtRTEInfo emlrtRTEI = { 3,   /* lineNo */
-  5,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo b_emlrtRTEI = { 25,/* lineNo */
-  5,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo c_emlrtRTEI = { 26,/* lineNo */
-  5,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo d_emlrtRTEI = { 28,/* lineNo */
-  5,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo e_emlrtRTEI = { 33,/* lineNo */
-  61,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo f_emlrtRTEI = { 63,/* lineNo */
-  13,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo g_emlrtRTEI = { 77,/* lineNo */
-  18,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo h_emlrtRTEI = { 39,/* lineNo */
-  29,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo i_emlrtRTEI = { 40,/* lineNo */
-  29,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo j_emlrtRTEI = { 44,/* lineNo */
-  33,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo k_emlrtRTEI = { 16,/* lineNo */
-  5,                                   /* colNo */
-  "abs",                               /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/elfun/abs.m"/* pName */
-};
-
-static emlrtRTEInfo l_emlrtRTEI = { 58,/* lineNo */
-  5,                                   /* colNo */
-  "power",                             /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/lib/matlab/ops/power.m"/* pName */
-};
-
-static emlrtRTEInfo m_emlrtRTEI = { 46,/* lineNo */
-  30,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo n_emlrtRTEI = { 47,/* lineNo */
-  30,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo o_emlrtRTEI = { 48,/* lineNo */
-  27,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo p_emlrtRTEI = { 1, /* lineNo */
-  20,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo q_emlrtRTEI = { 44,/* lineNo */
-  29,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo r_emlrtRTEI = { 65,/* lineNo */
-  27,                                  /* colNo */
-  "applyBinaryScalarFunction",         /* fName */
-  "/usr/local/matlab/r2018b/toolbox/eml/eml/+coder/+internal/applyBinaryScalarFunction.m"/* pName */
-};
-
-static emlrtBCInfo emlrtBCI = { -1,    /* iFirst */
-  -1,                                  /* iLast */
-  87,                                  /* lineNo */
-  90,                                  /* colNo */
-  "d",                                 /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtRTEInfo cb_emlrtRTEI = { 83,/* lineNo */
-  18,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtECInfo emlrtECI = { -1,    /* nDims */
-  77,                                  /* lineNo */
-  13,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtBCInfo b_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  77,                                  /* lineNo */
-  15,                                  /* colNo */
-  "d",                                 /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo c_emlrtBCI = { 1,   /* iFirst */
-  3,                                   /* iLast */
-  77,                                  /* lineNo */
-  88,                                  /* colNo */
-  "exp_minus_omega",                   /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo d_emlrtBCI = { 1,   /* iFirst */
-  3,                                   /* iLast */
-  77,                                  /* lineNo */
-  66,                                  /* colNo */
-  "exp_plus_omega",                    /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo e_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  71,                                  /* lineNo */
-  105,                                 /* colNo */
-  "d",                                 /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtRTEInfo db_emlrtRTEI = { 67,/* lineNo */
-  22,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtRTEInfo eb_emlrtRTEI = { 65,/* lineNo */
-  18,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtECInfo b_emlrtECI = { -1,  /* nDims */
-  63,                                  /* lineNo */
-  9,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtBCInfo f_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  63,                                  /* lineNo */
-  11,                                  /* colNo */
-  "d",                                 /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtRTEInfo fb_emlrtRTEI = { 31,/* lineNo */
-  14,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtDCInfo emlrtDCI = { 39,    /* lineNo */
-  40,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo g_emlrtBCI = { 1,   /* iFirst */
-  256,                                 /* iLast */
-  39,                                  /* lineNo */
-  40,                                  /* colNo */
-  "F_e",                               /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo b_emlrtDCI = { 40,  /* lineNo */
-  38,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo h_emlrtBCI = { 1,   /* iFirst */
-  256,                                 /* iLast */
-  40,                                  /* lineNo */
-  38,                                  /* colNo */
-  "F_e",                               /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo c_emlrtDCI = { 40,  /* lineNo */
-  53,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo i_emlrtBCI = { 1,   /* iFirst */
-  256,                                 /* iLast */
-  40,                                  /* lineNo */
-  53,                                  /* colNo */
-  "F_e",                               /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo d_emlrtDCI = { 39,  /* lineNo */
-  22,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo j_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  39,                                  /* lineNo */
-  22,                                  /* colNo */
-  "Sol.Psio",                          /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtECInfo c_emlrtECI = { -1,  /* nDims */
-  39,                                  /* lineNo */
-  13,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtBCInfo k_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  40,                                  /* lineNo */
-  22,                                  /* colNo */
-  "Sol.Psie",                          /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtECInfo d_emlrtECI = { -1,  /* nDims */
-  40,                                  /* lineNo */
-  13,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m"/* pName */
-};
-
-static emlrtBCInfo l_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  44,                                  /* lineNo */
-  42,                                  /* colNo */
-  "Sol.Psio",                          /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo m_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  44,                                  /* lineNo */
-  48,                                  /* colNo */
-  "Sol.Psio",                          /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo n_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  44,                                  /* lineNo */
-  50,                                  /* colNo */
-  "Sol.Psio",                          /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo e_emlrtDCI = { 3,   /* lineNo */
-  35,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo f_emlrtDCI = { 3,   /* lineNo */
-  35,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  4                                    /* checkKind */
-};
-
-static emlrtDCInfo g_emlrtDCI = { 3,   /* lineNo */
-  43,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo h_emlrtDCI = { 3,   /* lineNo */
-  43,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  4                                    /* checkKind */
-};
-
-static emlrtDCInfo i_emlrtDCI = { 25,  /* lineNo */
-  30,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo j_emlrtDCI = { 25,  /* lineNo */
-  30,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  4                                    /* checkKind */
-};
-
-static emlrtDCInfo k_emlrtDCI = { 25,  /* lineNo */
-  42,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo l_emlrtDCI = { 25,  /* lineNo */
-  42,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  4                                    /* checkKind */
-};
-
-static emlrtDCInfo m_emlrtDCI = { 26,  /* lineNo */
-  30,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo n_emlrtDCI = { 26,  /* lineNo */
-  42,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo o_emlrtDCI = { 28,  /* lineNo */
-  32,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo p_emlrtDCI = { 3,   /* lineNo */
-  5,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo q_emlrtDCI = { 3,   /* lineNo */
-  5,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  4                                    /* checkKind */
-};
-
-static emlrtDCInfo r_emlrtDCI = { 25,  /* lineNo */
-  5,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo s_emlrtDCI = { 26,  /* lineNo */
-  5,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtDCInfo t_emlrtDCI = { 28,  /* lineNo */
-  5,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo o_emlrtBCI = { 1,   /* iFirst */
-  3,                                   /* iLast */
-  85,                                  /* lineNo */
-  17,                                  /* colNo */
-  "Runge.c",                           /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo p_emlrtBCI = { 1,   /* iFirst */
-  3,                                   /* iLast */
-  69,                                  /* lineNo */
-  20,                                  /* colNo */
-  "Runge.b",                           /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo q_emlrtBCI = { 1,   /* iFirst */
-  256,                                 /* iLast */
-  93,                                  /* lineNo */
-  12,                                  /* colNo */
-  "E_f",                               /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  3                                    /* checkKind */
-};
-
-static emlrtDCInfo u_emlrtDCI = { 93,  /* lineNo */
-  12,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo r_emlrtBCI = { 1,   /* iFirst */
-  256,                                 /* iLast */
-  87,                                  /* lineNo */
-  50,                                  /* colNo */
-  "E_f",                               /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo v_emlrtDCI = { 87,  /* lineNo */
-  50,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo s_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  87,                                  /* lineNo */
-  93,                                  /* colNo */
-  "d",                                 /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo w_emlrtDCI = { 87,  /* lineNo */
-  93,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo t_emlrtBCI = { 1,   /* iFirst */
-  256,                                 /* iLast */
-  71,                                  /* lineNo */
-  62,                                  /* colNo */
-  "E_temp",                            /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo x_emlrtDCI = { 71,  /* lineNo */
-  62,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo u_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  71,                                  /* lineNo */
-  108,                                 /* colNo */
-  "d",                                 /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo y_emlrtDCI = { 71,  /* lineNo */
-  108,                                 /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo v_emlrtBCI = { 1,   /* iFirst */
-  256,                                 /* iLast */
-  87,                                  /* lineNo */
-  17,                                  /* colNo */
-  "E_f",                               /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  3                                    /* checkKind */
-};
-
-static emlrtDCInfo ab_emlrtDCI = { 87, /* lineNo */
-  17,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo w_emlrtBCI = { 1,   /* iFirst */
-  256,                                 /* iLast */
-  71,                                  /* lineNo */
-  21,                                  /* colNo */
-  "E_temp",                            /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  3                                    /* checkKind */
-};
-
-static emlrtDCInfo bb_emlrtDCI = { 71, /* lineNo */
-  21,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo x_emlrtBCI = { -1,  /* iFirst */
-  -1,                                  /* iLast */
-  42,                                  /* lineNo */
-  13,                                  /* colNo */
-  "Sol.t",                             /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo y_emlrtBCI = { 1,   /* iFirst */
-  256,                                 /* iLast */
-  93,                                  /* lineNo */
-  38,                                  /* colNo */
-  "shift_back",                        /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo cb_emlrtDCI = { 93, /* lineNo */
-  38,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo ab_emlrtBCI = { 1,  /* iFirst */
-  256,                                 /* iLast */
-  93,                                  /* lineNo */
-  38,                                  /* colNo */
-  "E_f",                               /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo bb_emlrtBCI = { 1,  /* iFirst */
-  256,                                 /* iLast */
-  33,                                  /* lineNo */
-  9,                                   /* colNo */
-  "E_f",                               /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  3                                    /* checkKind */
-};
-
-static emlrtDCInfo db_emlrtDCI = { 33, /* lineNo */
-  9,                                   /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo cb_emlrtBCI = { 1,  /* iFirst */
-  256,                                 /* iLast */
-  87,                                  /* lineNo */
-  46,                                  /* colNo */
-  "E_f",                               /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo eb_emlrtDCI = { 87, /* lineNo */
-  46,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo db_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  87,                                  /* lineNo */
-  46,                                  /* colNo */
-  "d",                                 /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtBCInfo eb_emlrtBCI = { 1,  /* iFirst */
-  256,                                 /* iLast */
-  71,                                  /* lineNo */
-  55,                                  /* colNo */
-  "E_temp",                            /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
-};
-
-static emlrtDCInfo fb_emlrtDCI = { 71, /* lineNo */
-  55,                                  /* colNo */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  1                                    /* checkKind */
-};
-
-static emlrtBCInfo fb_emlrtBCI = { -1, /* iFirst */
-  -1,                                  /* iLast */
-  71,                                  /* lineNo */
-  55,                                  /* colNo */
-  "d",                                 /* aName */
-  "Chi23_Runge_Kuarong",               /* fName */
-  "/home/dp710/GitHub/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m",/* pName */
-  0                                    /* checkKind */
+static emlrtRSInfo emlrtRSI = {
+    33,                    /* lineNo */
+    "Chi23_Runge_Kuarong", /* fcnName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pathName */
+};
+
+static emlrtRSInfo b_emlrtRSI = {
+    3,                     /* lineNo */
+    "Chi23_Runge_Kuarong", /* fcnName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pathName */
+};
+
+static emlrtRSInfo e_emlrtRSI = {
+    77,                                       /* lineNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fcnName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pathName */
+};
+
+static emlrtBCInfo emlrtBCI = {
+    -1,                                       /* iFirst */
+    -1,                                       /* iLast */
+    87,                                       /* lineNo */
+    90,                                       /* colNo */
+    "d",                                      /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtRTEInfo emlrtRTEI = {
+    83,                                       /* lineNo */
+    18,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtECInfo emlrtECI = {
+    -1,                                       /* nDims */
+    77,                                       /* lineNo */
+    13,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtBCInfo b_emlrtBCI = {
+    -1,                                       /* iFirst */
+    -1,                                       /* iLast */
+    77,                                       /* lineNo */
+    15,                                       /* colNo */
+    "d",                                      /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtBCInfo c_emlrtBCI = {
+    1,                                        /* iFirst */
+    3,                                        /* iLast */
+    77,                                       /* lineNo */
+    66,                                       /* colNo */
+    "exp_plus_omega",                         /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtBCInfo d_emlrtBCI = {
+    -1,                                       /* iFirst */
+    -1,                                       /* iLast */
+    71,                                       /* lineNo */
+    105,                                      /* colNo */
+    "d",                                      /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtRTEInfo b_emlrtRTEI = {
+    67,                                       /* lineNo */
+    22,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtRTEInfo c_emlrtRTEI = {
+    65,                                       /* lineNo */
+    18,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtECInfo b_emlrtECI = {
+    -1,                                       /* nDims */
+    63,                                       /* lineNo */
+    9,                                        /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtBCInfo e_emlrtBCI = {
+    -1,                                       /* iFirst */
+    -1,                                       /* iLast */
+    63,                                       /* lineNo */
+    11,                                       /* colNo */
+    "d",                                      /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtRTEInfo d_emlrtRTEI = {
+    31,                    /* lineNo */
+    14,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtDCInfo emlrtDCI = {
+    39,                    /* lineNo */
+    40,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo f_emlrtBCI = {
+    1,                     /* iFirst */
+    2048,                  /* iLast */
+    39,                    /* lineNo */
+    40,                    /* colNo */
+    "F_e",                 /* aName */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtDCInfo b_emlrtDCI = {
+    40,                    /* lineNo */
+    38,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo g_emlrtBCI = {
+    1,                     /* iFirst */
+    2048,                  /* iLast */
+    40,                    /* lineNo */
+    38,                    /* colNo */
+    "F_e",                 /* aName */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtDCInfo c_emlrtDCI = {
+    40,                    /* lineNo */
+    53,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo h_emlrtBCI = {
+    1,                     /* iFirst */
+    2048,                  /* iLast */
+    40,                    /* lineNo */
+    53,                    /* colNo */
+    "F_e",                 /* aName */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtDCInfo d_emlrtDCI = {
+    39,                    /* lineNo */
+    22,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo i_emlrtBCI = {
+    -1,                    /* iFirst */
+    -1,                    /* iLast */
+    39,                    /* lineNo */
+    22,                    /* colNo */
+    "Sol.Psio",            /* aName */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtECInfo c_emlrtECI = {
+    -1,                    /* nDims */
+    39,                    /* lineNo */
+    13,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtBCInfo j_emlrtBCI = {
+    -1,                    /* iFirst */
+    -1,                    /* iLast */
+    40,                    /* lineNo */
+    22,                    /* colNo */
+    "Sol.Psie",            /* aName */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtECInfo d_emlrtECI = {
+    -1,                    /* nDims */
+    40,                    /* lineNo */
+    13,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtDCInfo e_emlrtDCI = {
+    3,                     /* lineNo */
+    35,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo f_emlrtDCI = {
+    3,                     /* lineNo */
+    35,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    4       /* checkKind */
+};
+
+static emlrtDCInfo g_emlrtDCI = {
+    3,                     /* lineNo */
+    43,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo h_emlrtDCI = {
+    3,                     /* lineNo */
+    43,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    4       /* checkKind */
+};
+
+static emlrtDCInfo i_emlrtDCI = {
+    25,                    /* lineNo */
+    30,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo j_emlrtDCI = {
+    25,                    /* lineNo */
+    30,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    4       /* checkKind */
+};
+
+static emlrtDCInfo k_emlrtDCI = {
+    25,                    /* lineNo */
+    42,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo l_emlrtDCI = {
+    25,                    /* lineNo */
+    42,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    4       /* checkKind */
+};
+
+static emlrtDCInfo m_emlrtDCI = {
+    26,                    /* lineNo */
+    30,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo n_emlrtDCI = {
+    26,                    /* lineNo */
+    42,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo o_emlrtDCI = {
+    28,                    /* lineNo */
+    32,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo p_emlrtDCI = {
+    3,                     /* lineNo */
+    5,                     /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo q_emlrtDCI = {
+    25,                    /* lineNo */
+    5,                     /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo r_emlrtDCI = {
+    26,                    /* lineNo */
+    5,                     /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtDCInfo s_emlrtDCI = {
+    28,                    /* lineNo */
+    5,                     /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo k_emlrtBCI = {
+    1,                                        /* iFirst */
+    3,                                        /* iLast */
+    85,                                       /* lineNo */
+    25,                                       /* colNo */
+    "Runge.c",                                /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtBCInfo l_emlrtBCI = {
+    1,                                        /* iFirst */
+    3,                                        /* iLast */
+    69,                                       /* lineNo */
+    28,                                       /* colNo */
+    "Runge.b",                                /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtBCInfo m_emlrtBCI = {
+    1,                                        /* iFirst */
+    3,                                        /* iLast */
+    69,                                       /* lineNo */
+    31,                                       /* colNo */
+    "Runge.b",                                /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtBCInfo n_emlrtBCI = {
+    1,                                        /* iFirst */
+    2048,                                     /* iLast */
+    93,                                       /* lineNo */
+    12,                                       /* colNo */
+    "E_f",                                    /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    3       /* checkKind */
+};
+
+static emlrtDCInfo t_emlrtDCI = {
+    93,                                       /* lineNo */
+    12,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo o_emlrtBCI = {
+    1,                                        /* iFirst */
+    2048,                                     /* iLast */
+    87,                                       /* lineNo */
+    50,                                       /* colNo */
+    "E_f",                                    /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtDCInfo u_emlrtDCI = {
+    87,                                       /* lineNo */
+    50,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo p_emlrtBCI = {
+    -1,                                       /* iFirst */
+    -1,                                       /* iLast */
+    87,                                       /* lineNo */
+    93,                                       /* colNo */
+    "d",                                      /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtDCInfo v_emlrtDCI = {
+    87,                                       /* lineNo */
+    93,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo q_emlrtBCI = {
+    1,                                        /* iFirst */
+    2048,                                     /* iLast */
+    71,                                       /* lineNo */
+    62,                                       /* colNo */
+    "E_temp",                                 /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtDCInfo w_emlrtDCI = {
+    71,                                       /* lineNo */
+    62,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo r_emlrtBCI = {
+    -1,                                       /* iFirst */
+    -1,                                       /* iLast */
+    71,                                       /* lineNo */
+    108,                                      /* colNo */
+    "d",                                      /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtDCInfo x_emlrtDCI = {
+    71,                                       /* lineNo */
+    108,                                      /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo s_emlrtBCI = {
+    1,                                        /* iFirst */
+    2048,                                     /* iLast */
+    87,                                       /* lineNo */
+    17,                                       /* colNo */
+    "E_f",                                    /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    3       /* checkKind */
+};
+
+static emlrtDCInfo y_emlrtDCI = {
+    87,                                       /* lineNo */
+    17,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo t_emlrtBCI = {
+    1,                                        /* iFirst */
+    2048,                                     /* iLast */
+    71,                                       /* lineNo */
+    21,                                       /* colNo */
+    "E_temp",                                 /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    3       /* checkKind */
+};
+
+static emlrtDCInfo ab_emlrtDCI = {
+    71,                                       /* lineNo */
+    21,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtBCInfo u_emlrtBCI = {
+    -1,                    /* iFirst */
+    -1,                    /* iLast */
+    42,                    /* lineNo */
+    21,                    /* colNo */
+    "Sol.t",               /* aName */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtBCInfo v_emlrtBCI = {
+    1,                                        /* iFirst */
+    2048,                                     /* iLast */
+    93,                                       /* lineNo */
+    38,                                       /* colNo */
+    "shift_back",                             /* aName */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    0       /* checkKind */
+};
+
+static emlrtDCInfo bb_emlrtDCI = {
+    93,                                       /* lineNo */
+    38,                                       /* colNo */
+    "Chi23_Runge_Kuarong/Runge_Kuarong_step", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m", /* pName */
+    1       /* checkKind */
+};
+
+static emlrtRTEInfo e_emlrtRTEI = {
+    3,                     /* lineNo */
+    5,                     /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtRTEInfo f_emlrtRTEI = {
+    25,                    /* lineNo */
+    5,                     /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtRTEInfo g_emlrtRTEI = {
+    26,                    /* lineNo */
+    5,                     /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtRTEInfo h_emlrtRTEI = {
+    28,                    /* lineNo */
+    5,                     /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
+};
+
+static emlrtRTEInfo i_emlrtRTEI = {
+    33,                    /* lineNo */
+    61,                    /* colNo */
+    "Chi23_Runge_Kuarong", /* fName */
+    "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_"
+    "Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\Chi23_Runge_Kuaro"
+    "ng.m" /* pName */
 };
 
 /* Function Definitions */
-void Chi23_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
-  struct5_T *Runge, struct6_T *Sol)
+void Chi23_Runge_Kuarong(Chi23_Runge_KuarongStackData *SD, const emlrtStack *sp,
+                         const struct0_T *Temp, const struct5_T *Runge,
+                         struct6_T *Sol)
 {
-  emxArray_cuint8_T *d;
-  boolean_T b0;
-  boolean_T b1;
-  int32_T i0;
-  real_T d0;
-  int32_T loop_ub;
-  real_T dt;
-  real_T nt;
-  int32_T nx;
-  real_T b_Runge;
-  int32_T k;
-  creal_T shift_back_contents[256];
-  real_T re_tmp;
-  creal_T F_e[256];
-  real_T ind_s;
-  real_T re;
-  real_T im;
-  real_T r;
-  creal_T exp_minus_omega_contents[768];
-  creal_T exp_plus_omega_contents[768];
-  int32_T ni;
-  emxArray_creal_T *b_d;
-  emxArray_int32_T *r0;
-  emxArray_creal_T *x;
-  emxArray_real_T *a;
-  emxArray_real_T *z1;
-  emxArray_int32_T *r1;
-  emxArray_creal_T *b_Sol;
-  boolean_T exitg1;
-  creal_T E_temp[256];
-  int32_T iv0[2];
-  int32_T iv1[2];
-  creal_T b_F_e[128];
-  creal_T Psio[128];
-  creal_T Psie[128];
-  creal_T k_e[256];
-  real_T dv0[128];
-  real_T dv1[128];
-  real_T dv2[128];
-  real_T dv3[128];
-  creal_T dcv0[128];
-  real_T dv4[128];
-  real_T dv5[128];
-  int32_T i2;
-  int32_T i1;
-  int32_T b_i2;
-  int32_T c_d;
-  boolean_T guard1 = false;
-  int32_T iv2[2];
-  int32_T tmp_size[2];
-  creal_T tmp_data[256];
-  real_T dv6[128];
-  real_T dv7[128];
-  real_T dv8[128];
-  real_T dv9[128];
-  boolean_T overflow;
-  emlrtStack st;
   emlrtStack b_st;
-  emlrtStack c_st;
-  emlrtStack d_st;
-  emlrtStack e_st;
-  emlrtStack f_st;
+  emlrtStack st;
+  emxArray_creal_T *c_d;
+  emxArray_cuint8_T *d;
+  creal_T E_temp[2048];
+  creal_T F_e[2048];
+  creal_T k_e[2048];
+  creal_T Psie[1024];
+  creal_T Psio[1024];
+  creal_T b_F_e[1024];
+  creal_T b_y[1024];
+  creal_T b_E_temp[918];
+  creal_T *b_d_data;
+  cuint8_T *d_data;
+  real_T b_d;
+  real_T b_im;
+  real_T b_re;
+  real_T b_re_tmp;
+  real_T d1;
+  real_T d2;
+  real_T d3;
+  real_T dt_tmp_tmp;
+  real_T im;
+  real_T im_tmp;
+  real_T ind_s;
+  real_T nt;
+  real_T q;
+  real_T r;
+  real_T re;
+  real_T re_tmp;
+  real_T y;
+  int32_T iv[2];
+  int32_T iv1[2];
+  int32_T tmp_size[2];
+  int32_T b_i;
+  int32_T b_i2;
+  int32_T b_loop_ub;
+  int32_T i;
+  int32_T i1;
+  int32_T i2;
+  int32_T i3;
+  int32_T i4;
+  int32_T i5;
+  int32_T i6;
+  int32_T loop_ub;
+  int32_T ni;
+  boolean_T rEQ0;
   st.prev = sp;
   st.tls = sp->tls;
   b_st.prev = &st;
   b_st.tls = st.tls;
-  c_st.prev = &b_st;
-  c_st.tls = b_st.tls;
-  d_st.prev = &c_st;
-  d_st.tls = c_st.tls;
-  e_st.prev = &d_st;
-  e_st.tls = d_st.tls;
-  f_st.prev = &e_st;
-  f_st.tls = e_st.tls;
-  emlrtHeapReferenceStackEnterFcnR2012b(sp);
-  emxInit_cuint8_T(sp, &d, 2, &emlrtRTEI, true);
-  b0 = false;
-  b1 = false;
-  st.site = &f_emlrtRSI;
-  b_st.site = &g_emlrtRSI;
-  st.site = &f_emlrtRSI;
-  b_st.site = &g_emlrtRSI;
-  st.site = &f_emlrtRSI;
-  b_st.site = &g_emlrtRSI;
-  st.site = &f_emlrtRSI;
-  b_st.site = &g_emlrtRSI;
-  st.site = &f_emlrtRSI;
-  b_st.site = &g_emlrtRSI;
-  i0 = d->size[0] * d->size[1];
+  emlrtHeapReferenceStackEnterFcnR2012b((emlrtCTX)sp);
+  emxInit_cuint8_T(sp, &d, &e_emlrtRTEI);
+  st.site = &b_emlrtRSI;
+  st.site = &b_emlrtRSI;
+  st.site = &b_emlrtRSI;
+  st.site = &b_emlrtRSI;
+  st.site = &b_emlrtRSI;
   if (!(Runge->s >= 0.0)) {
-    emlrtNonNegativeCheckR2012b(Runge->s, &f_emlrtDCI, sp);
+    emlrtNonNegativeCheckR2012b(Runge->s, &f_emlrtDCI, (emlrtCTX)sp);
   }
-
-  if (Runge->s != (int32_T)muDoubleScalarFloor(Runge->s)) {
-    emlrtIntegerCheckR2012b(Runge->s, &e_emlrtDCI, sp);
+  b_d = (int32_T)muDoubleScalarFloor(Runge->s);
+  if (Runge->s != b_d) {
+    emlrtIntegerCheckR2012b(Runge->s, &e_emlrtDCI, (emlrtCTX)sp);
   }
-
+  i = d->size[0] * d->size[1];
   d->size[0] = (int32_T)Runge->s;
-  d0 = 2.0 * Temp->Space.N;
-  if (!(d0 >= 0.0)) {
-    emlrtNonNegativeCheckR2012b(d0, &h_emlrtDCI, sp);
+  emxEnsureCapacity_cuint8_T(sp, d, i, &e_emlrtRTEI);
+  d1 = 2.0 * Temp->Space.N;
+  if (!(d1 >= 0.0)) {
+    emlrtNonNegativeCheckR2012b(d1, &h_emlrtDCI, (emlrtCTX)sp);
   }
-
-  if (d0 != (int32_T)muDoubleScalarFloor(d0)) {
-    emlrtIntegerCheckR2012b(d0, &g_emlrtDCI, sp);
+  d2 = (int32_T)muDoubleScalarFloor(d1);
+  if (d1 != d2) {
+    emlrtIntegerCheckR2012b(d1, &g_emlrtDCI, (emlrtCTX)sp);
   }
-
-  d->size[1] = (int32_T)d0;
-  emxEnsureCapacity_cuint8_T(sp, d, i0, &emlrtRTEI);
-  if (Runge->s != (int32_T)muDoubleScalarFloor(Runge->s)) {
-    emlrtIntegerCheckR2012b(Runge->s, &p_emlrtDCI, sp);
+  i = d->size[0] * d->size[1];
+  d->size[1] = (int32_T)d1;
+  emxEnsureCapacity_cuint8_T(sp, d, i, &e_emlrtRTEI);
+  d_data = d->data;
+  if (Runge->s != b_d) {
+    emlrtIntegerCheckR2012b(Runge->s, &p_emlrtDCI, (emlrtCTX)sp);
   }
-
-  if (!(d0 >= 0.0)) {
-    emlrtNonNegativeCheckR2012b(d0, &q_emlrtDCI, sp);
+  if (d1 != d2) {
+    emlrtIntegerCheckR2012b(d1, &p_emlrtDCI, (emlrtCTX)sp);
   }
-
-  if (d0 != (int32_T)muDoubleScalarFloor(d0)) {
-    emlrtIntegerCheckR2012b(d0, &p_emlrtDCI, sp);
+  loop_ub = (int32_T)Runge->s * (int32_T)d1;
+  for (i = 0; i < loop_ub; i++) {
+    d_data[i].re = 0U;
+    d_data[i].im = 0U;
   }
-
-  loop_ub = (int32_T)Runge->s * (int32_T)d0;
-  for (i0 = 0; i0 < loop_ub; i0++) {
-    d->data[i0].re = 0U;
-    d->data[i0].im = 0U;
-  }
-
-  dt = Temp->Par.dt;
+  dt_tmp_tmp = Temp->Par.dt;
   nt = Temp->Par.T / Temp->Par.dt;
-
-  /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-  for (nx = 0; nx < 3; nx++) {
-    b_Runge = Runge->a[nx];
-    for (k = 0; k < 256; k++) {
-      re_tmp = 0.0 * Temp->Eq.L[k].re;
-      ind_s = 0.0 * Temp->Eq.L[k].im;
-      re = dt * (b_Runge * (re_tmp - (-Temp->Eq.L[k].im)));
-      im = dt * (b_Runge * (ind_s + -Temp->Eq.L[k].re));
+  /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   */
+  for (b_i = 0; b_i < 3; b_i++) {
+    q = Runge->a[b_i];
+    for (loop_ub = 0; loop_ub < 2048; loop_ub++) {
+      ind_s = Temp->Eq.L[loop_ub].im;
+      re_tmp = Temp->Eq.L[loop_ub].re;
+      b_re_tmp = 0.0 * re_tmp;
+      im_tmp = 0.0 * ind_s;
+      re = dt_tmp_tmp * (q * (b_re_tmp - (-ind_s)));
+      im = dt_tmp_tmp * (q * (im_tmp + -re_tmp));
       if (im == 0.0) {
         re = muDoubleScalarExp(re);
         im = 0.0;
-      } else if (muDoubleScalarIsInf(im) && muDoubleScalarIsInf(re) && (re < 0.0))
-      {
+      } else if (muDoubleScalarIsInf(im) && muDoubleScalarIsInf(re) &&
+                 (re < 0.0)) {
         re = 0.0;
         im = 0.0;
       } else {
@@ -982,17 +843,16 @@ void Chi23_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
         re = r * (r * muDoubleScalarCos(im));
         im = r * (r * muDoubleScalarSin(im));
       }
-
-      i0 = nx + 3 * k;
-      exp_minus_omega_contents[i0].re = re;
-      exp_minus_omega_contents[i0].im = im;
-      re = dt * (b_Runge * (re_tmp - Temp->Eq.L[k].im));
-      im = dt * (b_Runge * (ind_s + Temp->Eq.L[k].re));
+      i = b_i + 3 * loop_ub;
+      SD->f0.exp_minus_omega_contents[i].re = re;
+      SD->f0.exp_minus_omega_contents[i].im = im;
+      re = dt_tmp_tmp * (q * (b_re_tmp - ind_s));
+      im = dt_tmp_tmp * (q * (im_tmp + re_tmp));
       if (im == 0.0) {
         re = muDoubleScalarExp(re);
         im = 0.0;
-      } else if (muDoubleScalarIsInf(im) && muDoubleScalarIsInf(re) && (re < 0.0))
-      {
+      } else if (muDoubleScalarIsInf(im) && muDoubleScalarIsInf(re) &&
+                 (re < 0.0)) {
         re = 0.0;
         im = 0.0;
       } else {
@@ -1000,954 +860,673 @@ void Chi23_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp, const
         re = r * (r * muDoubleScalarCos(im));
         im = r * (r * muDoubleScalarSin(im));
       }
-
-      exp_plus_omega_contents[i0].re = re;
-      exp_plus_omega_contents[i0].im = im;
+      SD->f0.exp_plus_omega_contents[i].re = re;
+      SD->f0.exp_plus_omega_contents[i].im = im;
     }
-
     if (*emlrtBreakCheckR2012bFlagVar != 0) {
-      emlrtBreakCheckR2012b(sp);
+      emlrtBreakCheckR2012b((emlrtCTX)sp);
     }
   }
-
-  for (i0 = 0; i0 < 256; i0++) {
-    shift_back_contents[i0].re = Temp->Par.dt * (0.0 * Temp->Eq.L[i0].re -
-      (-Temp->Eq.L[i0].im));
-    shift_back_contents[i0].im = Temp->Par.dt * (0.0 * Temp->Eq.L[i0].im +
-      -Temp->Eq.L[i0].re);
-  }
-
-  b_exp(shift_back_contents);
-
-  /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-  memcpy(&F_e[0], &Temp->In.Psi_Start[0], sizeof(creal_T) << 8);
-  i0 = Sol->Psio->size[0] * Sol->Psio->size[1];
-  if (!(Temp->Par.dd >= 0.0)) {
-    emlrtNonNegativeCheckR2012b(Temp->Par.dd, &j_emlrtDCI, sp);
-  }
-
-  if (Temp->Par.dd != (int32_T)muDoubleScalarFloor(Temp->Par.dd)) {
-    emlrtIntegerCheckR2012b(Temp->Par.dd, &i_emlrtDCI, sp);
-  }
-
-  Sol->Psio->size[0] = (int32_T)Temp->Par.dd;
-  if (!(Temp->Space.N >= 0.0)) {
-    emlrtNonNegativeCheckR2012b(Temp->Space.N, &l_emlrtDCI, sp);
-  }
-
-  if (Temp->Space.N != (int32_T)muDoubleScalarFloor(Temp->Space.N)) {
-    emlrtIntegerCheckR2012b(Temp->Space.N, &k_emlrtDCI, sp);
-  }
-
-  Sol->Psio->size[1] = (int32_T)Temp->Space.N;
-  emxEnsureCapacity_creal_T(sp, Sol->Psio, i0, &b_emlrtRTEI);
-  if (Temp->Par.dd != (int32_T)muDoubleScalarFloor(Temp->Par.dd)) {
-    emlrtIntegerCheckR2012b(Temp->Par.dd, &r_emlrtDCI, sp);
-  }
-
-  if (Temp->Space.N != (int32_T)muDoubleScalarFloor(Temp->Space.N)) {
-    emlrtIntegerCheckR2012b(Temp->Space.N, &r_emlrtDCI, sp);
-  }
-
-  loop_ub = (int32_T)Temp->Par.dd * (int32_T)Temp->Space.N;
-  for (i0 = 0; i0 < loop_ub; i0++) {
-    Sol->Psio->data[i0].re = 0.0;
-    Sol->Psio->data[i0].im = 0.0;
-  }
-
-  i0 = Sol->Psie->size[0] * Sol->Psie->size[1];
-  if (Temp->Par.dd != (int32_T)muDoubleScalarFloor(Temp->Par.dd)) {
-    emlrtIntegerCheckR2012b(Temp->Par.dd, &m_emlrtDCI, sp);
-  }
-
-  Sol->Psie->size[0] = (int32_T)Temp->Par.dd;
-  if (Temp->Space.N != (int32_T)muDoubleScalarFloor(Temp->Space.N)) {
-    emlrtIntegerCheckR2012b(Temp->Space.N, &n_emlrtDCI, sp);
-  }
-
-  Sol->Psie->size[1] = (int32_T)Temp->Space.N;
-  emxEnsureCapacity_creal_T(sp, Sol->Psie, i0, &c_emlrtRTEI);
-  if (Temp->Par.dd != (int32_T)muDoubleScalarFloor(Temp->Par.dd)) {
-    emlrtIntegerCheckR2012b(Temp->Par.dd, &s_emlrtDCI, sp);
-  }
-
-  if (Temp->Space.N != (int32_T)muDoubleScalarFloor(Temp->Space.N)) {
-    emlrtIntegerCheckR2012b(Temp->Space.N, &s_emlrtDCI, sp);
-  }
-
-  loop_ub = (int32_T)Temp->Par.dd * (int32_T)Temp->Space.N;
-  for (i0 = 0; i0 < loop_ub; i0++) {
-    Sol->Psie->data[i0].re = 0.0;
-    Sol->Psie->data[i0].im = 0.0;
-  }
-
-  i0 = Sol->t->size[0] * Sol->t->size[1];
-  Sol->t->size[0] = 1;
-  if (Temp->Par.dd != (int32_T)muDoubleScalarFloor(Temp->Par.dd)) {
-    emlrtIntegerCheckR2012b(Temp->Par.dd, &o_emlrtDCI, sp);
-  }
-
-  Sol->t->size[1] = (int32_T)Temp->Par.dd;
-  emxEnsureCapacity_creal_T(sp, Sol->t, i0, &d_emlrtRTEI);
-  if (Temp->Par.dd != (int32_T)muDoubleScalarFloor(Temp->Par.dd)) {
-    emlrtIntegerCheckR2012b(Temp->Par.dd, &t_emlrtDCI, sp);
-  }
-
-  loop_ub = (int32_T)Temp->Par.dd;
-  for (i0 = 0; i0 < loop_ub; i0++) {
-    Sol->t->data[i0].re = 0.0;
-    Sol->t->data[i0].im = 0.0;
-  }
-
-  emlrtForLoopVectorCheckR2012b(1.0, 1.0, nt, mxDOUBLE_CLASS, (int32_T)nt,
-    &fb_emlrtRTEI, sp);
-  ni = 0;
-  emxInit_creal_T(sp, &b_d, 2, &e_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r0, 1, &p_emlrtRTEI, true);
-  emxInit_creal_T(sp, &x, 2, &j_emlrtRTEI, true);
-  emxInit_real_T(sp, &a, 2, &q_emlrtRTEI, true);
-  emxInit_real_T(sp, &z1, 2, &r_emlrtRTEI, true);
-  emxInit_int32_T(sp, &r1, 2, &m_emlrtRTEI, true);
-  emxInit_creal_T(sp, &b_Sol, 2, &j_emlrtRTEI, true);
-  exitg1 = false;
-  while ((!exitg1) && (ni <= (int32_T)nt - 1)) {
-    st.site = &e_emlrtRSI;
-    i0 = b_d->size[0] * b_d->size[1];
-    b_d->size[0] = d->size[0];
-    b_d->size[1] = d->size[1];
-    emxEnsureCapacity_creal_T(&st, b_d, i0, &e_emlrtRTEI);
-    loop_ub = d->size[0] * d->size[1];
-    for (i0 = 0; i0 < loop_ub; i0++) {
-      nx = d->data[i0].re;
-      k = d->data[i0].im;
-      b_d->data[i0].re = nx;
-      b_d->data[i0].im = k;
-    }
-
-    /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% */
-    memcpy(&E_temp[0], &F_e[0], sizeof(creal_T) << 8);
-    i0 = d->size[0];
-    if (1 > i0) {
-      emlrtDynamicBoundsCheckR2012b(1, 1, i0, &f_emlrtBCI, &st);
-    }
-
-    loop_ub = d->size[1];
-    i0 = r0->size[0];
-    r0->size[0] = loop_ub;
-    emxEnsureCapacity_int32_T(&st, r0, i0, &f_emlrtRTEI);
-    for (i0 = 0; i0 < loop_ub; i0++) {
-      r0->data[i0] = i0;
-    }
-
-    iv0[0] = 1;
-    iv0[1] = r0->size[0];
-    if (!b1) {
-      iv1[0] = 1;
-      iv1[1] = 256;
-      b1 = true;
-    }
-
-    emlrtSubAssignSizeCheckR2012b(&iv0[0], 2, &iv1[0], 2, &b_emlrtECI, &st);
-    b_st.site = &h_emlrtRSI;
-    for (i0 = 0; i0 < 128; i0++) {
-      b_F_e[i0].re = F_e[i0].re * exp_minus_omega_contents[3 * i0].re - F_e[i0].
-        im * exp_minus_omega_contents[3 * i0].im;
-      b_F_e[i0].im = F_e[i0].re * exp_minus_omega_contents[3 * i0].im + F_e[i0].
-        im * exp_minus_omega_contents[3 * i0].re;
-    }
-
-    c_st.site = &j_emlrtRSI;
-    ifft(b_F_e, Psio);
-    for (i0 = 0; i0 < 128; i0++) {
-      b_F_e[i0].re = F_e[128 + i0].re * exp_minus_omega_contents[3 * (128 + i0)]
-        .re - F_e[128 + i0].im * exp_minus_omega_contents[3 * (128 + i0)].im;
-      b_F_e[i0].im = F_e[128 + i0].re * exp_minus_omega_contents[3 * (128 + i0)]
-        .im + F_e[128 + i0].im * exp_minus_omega_contents[3 * (128 + i0)].re;
-    }
-
-    c_st.site = &k_emlrtRSI;
-    ifft(b_F_e, Psie);
-    memset(&k_e[0], 0, sizeof(creal_T) << 8);
-    b_abs(Psio, dv0);
-    power(dv0, dv1);
-    b_abs(Psie, dv2);
-    power(dv2, dv3);
-    for (i0 = 0; i0 < 128; i0++) {
-      b_Runge = Temp->Eq.gam2o * Psio[i0].re;
-      re_tmp = Temp->Eq.gam2o * -Psio[i0].im;
-      b_F_e[i0].re = (b_Runge * Psie[i0].re - re_tmp * Psie[i0].im) +
-        Temp->Eq.gam3o * (dv1[i0] + 2.0 * dv3[i0]) * Psio[i0].re;
-      b_F_e[i0].im = (b_Runge * Psie[i0].im + re_tmp * Psie[i0].re) +
-        Temp->Eq.gam3o * (dv1[i0] + 2.0 * dv3[i0]) * Psio[i0].im;
-    }
-
-    c_st.site = &l_emlrtRSI;
-    fft(b_F_e, dcv0);
-    for (i0 = 0; i0 < 128; i0++) {
-      re = 0.0 * exp_plus_omega_contents[3 * i0].re - exp_plus_omega_contents[3 *
-        i0].im;
-      im = 0.0 * exp_plus_omega_contents[3 * i0].im + exp_plus_omega_contents[3 *
-        i0].re;
-      k_e[i0].re = re * dcv0[i0].re - im * dcv0[i0].im;
-      k_e[i0].im = re * dcv0[i0].im + im * dcv0[i0].re;
-    }
-
-    b_power(Psio, dcv0);
-    b_abs(Psio, dv4);
-    power(dv4, dv1);
-    b_abs(Psie, dv5);
-    power(dv5, dv3);
-    for (i0 = 0; i0 < 128; i0++) {
-      b_F_e[i0].re = Temp->Eq.gam2e * dcv0[i0].re + Temp->Eq.gam3e * (2.0 *
-        dv1[i0] + dv3[i0]) * Psie[i0].re;
-      b_F_e[i0].im = Temp->Eq.gam2e * dcv0[i0].im + Temp->Eq.gam3e * (2.0 *
-        dv1[i0] + dv3[i0]) * Psie[i0].im;
-    }
-
-    c_st.site = &m_emlrtRSI;
-    fft(b_F_e, dcv0);
-    for (i0 = 0; i0 < 128; i0++) {
-      re = 0.0 * exp_plus_omega_contents[3 * (128 + i0)].re -
-        exp_plus_omega_contents[3 * (128 + i0)].im;
-      im = 0.0 * exp_plus_omega_contents[3 * (128 + i0)].im +
-        exp_plus_omega_contents[3 * (128 + i0)].re;
-      k_e[128 + i0].re = re * dcv0[i0].re - im * dcv0[i0].im;
-      k_e[128 + i0].im = re * dcv0[i0].im + im * dcv0[i0].re;
-    }
-
-    b_Runge = 128.0 * exp_plus_omega_contents[0].re;
-    re_tmp = 128.0 * exp_plus_omega_contents[0].im;
-    if (re_tmp == 0.0) {
-      re = b_Runge / 2.0;
-      im = 0.0;
-    } else if (b_Runge == 0.0) {
-      re = 0.0;
-      im = re_tmp / 2.0;
+  /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   */
+  for (loop_ub = 0; loop_ub < 2048; loop_ub++) {
+    ind_s = Temp->Eq.L[loop_ub].im;
+    re_tmp = Temp->Eq.L[loop_ub].re;
+    re = dt_tmp_tmp * (0.0 * re_tmp - (-ind_s));
+    im = dt_tmp_tmp * (0.0 * ind_s + -re_tmp);
+    SD->f0.y[loop_ub].re = re;
+    SD->f0.y[loop_ub].im = im;
+    if (im == 0.0) {
+      SD->f0.y[loop_ub].re = muDoubleScalarExp(re);
+      SD->f0.y[loop_ub].im = 0.0;
+    } else if (muDoubleScalarIsInf(im) && muDoubleScalarIsInf(re) &&
+               (re < 0.0)) {
+      SD->f0.y[loop_ub].re = 0.0;
+      SD->f0.y[loop_ub].im = 0.0;
     } else {
-      re = b_Runge / 2.0;
-      im = re_tmp / 2.0;
+      r = muDoubleScalarExp(re / 2.0);
+      SD->f0.y[loop_ub].re = r * (r * muDoubleScalarCos(im));
+      SD->f0.y[loop_ub].im = r * (r * muDoubleScalarSin(im));
     }
-
-    k_e[0].re += Temp->Eq.ko * re * Temp->Eq.H_f;
-    k_e[0].im += Temp->Eq.ko * im * Temp->Eq.H_f;
-    nx = r0->size[0];
-    for (i0 = 0; i0 < nx; i0++) {
-      b_d->data[b_d->size[0] * r0->data[i0]] = k_e[i0];
+    F_e[loop_ub] = Temp->In.Psi_Start[loop_ub];
+  }
+  if (!(Temp->Par.dd >= 0.0)) {
+    emlrtNonNegativeCheckR2012b(Temp->Par.dd, &j_emlrtDCI, (emlrtCTX)sp);
+  }
+  b_d = (int32_T)muDoubleScalarFloor(Temp->Par.dd);
+  if (Temp->Par.dd != b_d) {
+    emlrtIntegerCheckR2012b(Temp->Par.dd, &i_emlrtDCI, (emlrtCTX)sp);
+  }
+  i = Sol->Psio->size[0] * Sol->Psio->size[1];
+  loop_ub = (int32_T)Temp->Par.dd;
+  Sol->Psio->size[0] = (int32_T)Temp->Par.dd;
+  emxEnsureCapacity_creal_T(sp, Sol->Psio, i, &f_emlrtRTEI);
+  if (!(Temp->Space.N >= 0.0)) {
+    emlrtNonNegativeCheckR2012b(Temp->Space.N, &l_emlrtDCI, (emlrtCTX)sp);
+  }
+  d3 = (int32_T)muDoubleScalarFloor(Temp->Space.N);
+  if (Temp->Space.N != d3) {
+    emlrtIntegerCheckR2012b(Temp->Space.N, &k_emlrtDCI, (emlrtCTX)sp);
+  }
+  i = Sol->Psio->size[0] * Sol->Psio->size[1];
+  i1 = (int32_T)Temp->Space.N;
+  Sol->Psio->size[1] = (int32_T)Temp->Space.N;
+  emxEnsureCapacity_creal_T(sp, Sol->Psio, i, &f_emlrtRTEI);
+  if (Temp->Par.dd != b_d) {
+    emlrtIntegerCheckR2012b(Temp->Par.dd, &q_emlrtDCI, (emlrtCTX)sp);
+  }
+  if (Temp->Space.N != d3) {
+    emlrtIntegerCheckR2012b(Temp->Space.N, &q_emlrtDCI, (emlrtCTX)sp);
+  }
+  b_i = (int32_T)Temp->Par.dd * (int32_T)Temp->Space.N;
+  for (i = 0; i < b_i; i++) {
+    Sol->Psio->data[i].re = 0.0;
+    Sol->Psio->data[i].im = 0.0;
+  }
+  if (Temp->Par.dd != b_d) {
+    emlrtIntegerCheckR2012b(Temp->Par.dd, &m_emlrtDCI, (emlrtCTX)sp);
+  }
+  i = Sol->Psie->size[0] * Sol->Psie->size[1];
+  Sol->Psie->size[0] = (int32_T)Temp->Par.dd;
+  emxEnsureCapacity_creal_T(sp, Sol->Psie, i, &g_emlrtRTEI);
+  if (Temp->Space.N != d3) {
+    emlrtIntegerCheckR2012b(Temp->Space.N, &n_emlrtDCI, (emlrtCTX)sp);
+  }
+  i = Sol->Psie->size[0] * Sol->Psie->size[1];
+  Sol->Psie->size[1] = (int32_T)Temp->Space.N;
+  emxEnsureCapacity_creal_T(sp, Sol->Psie, i, &g_emlrtRTEI);
+  if (Temp->Par.dd != b_d) {
+    emlrtIntegerCheckR2012b(Temp->Par.dd, &r_emlrtDCI, (emlrtCTX)sp);
+  }
+  if (Temp->Space.N != d3) {
+    emlrtIntegerCheckR2012b(Temp->Space.N, &r_emlrtDCI, (emlrtCTX)sp);
+  }
+  for (i = 0; i < b_i; i++) {
+    Sol->Psie->data[i].re = 0.0;
+    Sol->Psie->data[i].im = 0.0;
+  }
+  i = Sol->t->size[0] * Sol->t->size[1];
+  Sol->t->size[0] = 1;
+  emxEnsureCapacity_creal_T(sp, Sol->t, i, &h_emlrtRTEI);
+  if (Temp->Par.dd != b_d) {
+    emlrtIntegerCheckR2012b(Temp->Par.dd, &o_emlrtDCI, (emlrtCTX)sp);
+  }
+  i = Sol->t->size[0] * Sol->t->size[1];
+  Sol->t->size[1] = (int32_T)Temp->Par.dd;
+  emxEnsureCapacity_creal_T(sp, Sol->t, i, &h_emlrtRTEI);
+  if (Temp->Par.dd != b_d) {
+    emlrtIntegerCheckR2012b(Temp->Par.dd, &s_emlrtDCI, (emlrtCTX)sp);
+  }
+  for (i = 0; i < loop_ub; i++) {
+    Sol->t->data[i].re = 0.0;
+    Sol->t->data[i].im = 0.0;
+  }
+  i = (int32_T)nt;
+  emlrtForLoopVectorCheckR2021a(1.0, 1.0, nt, mxDOUBLE_CLASS, (int32_T)nt,
+                                &d_emlrtRTEI, (emlrtCTX)sp);
+  if (0 <= (int32_T)nt - 1) {
+    b_loop_ub = d->size[0] * d->size[1];
+    i2 = (int32_T)(Runge->s + -1.0);
+    i3 = (int32_T)Runge->s;
+    y = Temp->Par.s_t / Temp->Par.dt;
+  }
+  emxInit_creal_T(sp, &c_d, &i_emlrtRTEI);
+  if (0 <= i - 1) {
+    q = 1024.0 * SD->f0.exp_plus_omega_contents[0].re;
+    re_tmp = 1024.0 * SD->f0.exp_plus_omega_contents[0].im;
+    if (re_tmp == 0.0) {
+      b_re = q / 2.0;
+      b_im = 0.0;
+    } else if (q == 0.0) {
+      b_re = 0.0;
+      b_im = re_tmp / 2.0;
+    } else {
+      b_re = q / 2.0;
+      b_im = re_tmp / 2.0;
     }
-
-    i0 = (int32_T)(Runge->s + -1.0);
-    emlrtForLoopVectorCheckR2012b(2.0, 1.0, Runge->s, mxDOUBLE_CLASS, (int32_T)
-      (Runge->s + -1.0), &eb_emlrtRTEI, &st);
-    for (i2 = 0; i2 < i0; i2++) {
-      i1 = (int32_T)(Runge->s - 1.0);
-      emlrtForLoopVectorCheckR2012b(1.0, 1.0, Runge->s - 1.0, mxDOUBLE_CLASS,
-        (int32_T)(Runge->s - 1.0), &db_emlrtRTEI, &st);
-      for (k = 0; k < i1; k++) {
-        b_i2 = (int32_T)(2U + i2);
-        if ((b_i2 < 1) || (b_i2 > 3)) {
-          emlrtDynamicBoundsCheckR2012b(b_i2, 1, 3, &p_emlrtBCI, &st);
+  }
+  for (ni = 0; ni < i; ni++) {
+    st.site = &emlrtRSI;
+    i4 = c_d->size[0] * c_d->size[1];
+    c_d->size[0] = d->size[0];
+    c_d->size[1] = d->size[1];
+    emxEnsureCapacity_creal_T(&st, c_d, i4, &i_emlrtRTEI);
+    b_d_data = c_d->data;
+    for (i4 = 0; i4 < b_loop_ub; i4++) {
+      b_d_data[i4].re = 0.0;
+      b_d_data[i4].im = d_data[i4].im;
+    }
+    /* %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+     */
+    memcpy(&E_temp[0], &F_e[0], 2048U * sizeof(creal_T));
+    if (1 > d->size[0]) {
+      emlrtDynamicBoundsCheckR2012b(1, 1, d->size[0], &e_emlrtBCI, &st);
+    }
+    iv[0] = 1;
+    iv[1] = d->size[1];
+    iv1[0] = 1;
+    iv1[1] = 2048;
+    emlrtSubAssignSizeCheckR2012b(&iv[0], 2, &iv1[0], 2, &b_emlrtECI, &st);
+    for (i4 = 0; i4 < 1024; i4++) {
+      b_d = F_e[i4].re;
+      nt = SD->f0.exp_minus_omega_contents[3 * i4].im;
+      im_tmp = F_e[i4].im;
+      r = SD->f0.exp_minus_omega_contents[3 * i4].re;
+      b_F_e[i4].re = b_d * r - im_tmp * nt;
+      b_F_e[i4].im = b_d * nt + im_tmp * r;
+    }
+    ifft(b_F_e, Psio);
+    for (i4 = 0; i4 < 1024; i4++) {
+      i5 = 3 * (i4 + 1024);
+      b_d = F_e[i4 + 1024].re;
+      nt = SD->f0.exp_minus_omega_contents[i5].im;
+      im_tmp = F_e[i4 + 1024].im;
+      r = SD->f0.exp_minus_omega_contents[i5].re;
+      b_F_e[i4].re = b_d * r - im_tmp * nt;
+      b_F_e[i4].im = b_d * nt + im_tmp * r;
+    }
+    ifft(b_F_e, Psie);
+    memset(&k_e[0], 0, 2048U * sizeof(creal_T));
+    for (loop_ub = 0; loop_ub < 1024; loop_ub++) {
+      b_d = Psie[loop_ub].re;
+      nt = Psie[loop_ub].im;
+      im_tmp = muDoubleScalarHypot(b_d, nt);
+      r = im_tmp * im_tmp;
+      re_tmp = Psio[loop_ub].re;
+      b_re_tmp = Psio[loop_ub].im;
+      im_tmp = muDoubleScalarHypot(re_tmp, b_re_tmp);
+      q = Temp->Eq.gam2o * re_tmp;
+      ind_s = Temp->Eq.gam2o * -b_re_tmp;
+      im_tmp = Temp->Eq.gam3o * (im_tmp * im_tmp + 2.0 * r);
+      b_F_e[loop_ub].re = (q * b_d - ind_s * nt) + im_tmp * re_tmp;
+      b_F_e[loop_ub].im = (q * nt + ind_s * b_d) + im_tmp * b_re_tmp;
+    }
+    fft(b_F_e, b_y);
+    for (loop_ub = 0; loop_ub < 1024; loop_ub++) {
+      ind_s = SD->f0.exp_plus_omega_contents[3 * loop_ub].im;
+      re_tmp = SD->f0.exp_plus_omega_contents[3 * loop_ub].re;
+      re = 0.0 * re_tmp - ind_s;
+      im = 0.0 * ind_s + re_tmp;
+      b_d = b_y[loop_ub].im;
+      nt = b_y[loop_ub].re;
+      k_e[loop_ub].re = re * nt - im * b_d;
+      k_e[loop_ub].im = re * b_d + im * nt;
+      b_d = Psio[loop_ub].re;
+      nt = Psio[loop_ub].im;
+      im_tmp = muDoubleScalarHypot(b_d, nt);
+      r = im_tmp * im_tmp;
+      re = b_d * b_d - nt * nt;
+      im_tmp = b_d * nt;
+      im = im_tmp + im_tmp;
+      b_y[loop_ub].re = re;
+      b_y[loop_ub].im = im;
+      b_d = Psie[loop_ub].re;
+      nt = Psie[loop_ub].im;
+      im_tmp = muDoubleScalarHypot(b_d, nt);
+      im_tmp = Temp->Eq.gam3e * (2.0 * r + im_tmp * im_tmp);
+      Psie[loop_ub].re = Temp->Eq.gam2e * re + im_tmp * b_d;
+      Psie[loop_ub].im = Temp->Eq.gam2e * im + im_tmp * nt;
+    }
+    fft(Psie, b_y);
+    for (i4 = 0; i4 < 1024; i4++) {
+      b_i = 3 * (i4 + 1024);
+      ind_s = SD->f0.exp_plus_omega_contents[b_i].im;
+      re_tmp = SD->f0.exp_plus_omega_contents[b_i].re;
+      re = 0.0 * re_tmp - ind_s;
+      im = 0.0 * ind_s + re_tmp;
+      b_d = b_y[i4].im;
+      nt = b_y[i4].re;
+      k_e[i4 + 1024].re = re * nt - im * b_d;
+      k_e[i4 + 1024].im = re * b_d + im * nt;
+    }
+    k_e[0].re += Temp->Eq.ko * b_re * Temp->Eq.H_f;
+    k_e[0].im += Temp->Eq.ko * b_im * Temp->Eq.H_f;
+    loop_ub = d->size[1];
+    for (i4 = 0; i4 < loop_ub; i4++) {
+      b_d_data[c_d->size[0] * i4] = k_e[i4];
+    }
+    emlrtForLoopVectorCheckR2021a(2.0, 1.0, Runge->s, mxDOUBLE_CLASS,
+                                  (int32_T)(Runge->s + -1.0), &c_emlrtRTEI,
+                                  &st);
+    if (0 <= i2 - 1) {
+      i6 = (int32_T)(Runge->s - 1.0);
+      iv1[0] = 1;
+      iv1[1] = 2048;
+    }
+    for (b_i2 = 0; b_i2 < i2; b_i2++) {
+      emlrtForLoopVectorCheckR2021a(1.0, 1.0, Runge->s - 1.0, mxDOUBLE_CLASS,
+                                    (int32_T)(Runge->s - 1.0), &b_emlrtRTEI,
+                                    &st);
+      for (loop_ub = 0; loop_ub < i6; loop_ub++) {
+        if (((int32_T)(b_i2 + 2U) < 1) || ((int32_T)(b_i2 + 2U) > 3)) {
+          emlrtDynamicBoundsCheckR2012b((int32_T)(b_i2 + 2U), 1, 3, &l_emlrtBCI,
+                                        &st);
         }
-
-        loop_ub = (int32_T)(1U + k);
-        if ((loop_ub < 1) || (loop_ub > 3)) {
-          emlrtDynamicBoundsCheckR2012b(loop_ub, 1, 3, &p_emlrtBCI, &st);
+        if (((int32_T)(loop_ub + 1U) < 1) || ((int32_T)(loop_ub + 1U) > 3)) {
+          emlrtDynamicBoundsCheckR2012b((int32_T)(loop_ub + 1U), 1, 3,
+                                        &m_emlrtBCI, &st);
         }
-
-        if (Runge->b[(b_i2 + 3 * (loop_ub - 1)) - 1] != 0.0) {
-          b_Runge = dt * Runge->b[(i2 + 3 * k) + 1];
-          c_d = b_d->size[1];
-          b_i2 = b_d->size[0];
-          if ((loop_ub < 1) || (loop_ub > b_i2)) {
-            emlrtDynamicBoundsCheckR2012b(loop_ub, 1, b_i2, &e_emlrtBCI, &st);
+        b_d = Runge->b[(b_i2 + 3 * loop_ub) + 1];
+        if (b_d != 0.0) {
+          q = dt_tmp_tmp * b_d;
+          if (((int32_T)(loop_ub + 1U) < 1) ||
+              ((int32_T)(loop_ub + 1U) > c_d->size[0])) {
+            emlrtDynamicBoundsCheckR2012b((int32_T)(loop_ub + 1U), 1,
+                                          c_d->size[0], &d_emlrtBCI, &st);
           }
-
-          for (b_i2 = 0; b_i2 < 256; b_i2++) {
-            re_tmp = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[b_i2]);
-            if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-              emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &fb_emlrtDCI,
-                &st);
+          for (i4 = 0; i4 < 918; i4++) {
+            b_d = Temp->Eq.mode_range[i4];
+            i5 = (int32_T)muDoubleScalarFloor(b_d);
+            if (b_d != i5) {
+              emlrtIntegerCheckR2012b(b_d, &w_emlrtDCI, &st);
             }
-
-            nx = (int32_T)Temp->Eq.mode_range[b_i2];
-            if ((nx < 1) || (nx > 256)) {
-              emlrtDynamicBoundsCheckR2012b(nx, 1, 256, &eb_emlrtBCI, &st);
+            b_i = (int32_T)b_d;
+            if ((b_i < 1) || (b_i > 2048)) {
+              emlrtDynamicBoundsCheckR2012b(b_i, 1, 2048, &q_emlrtBCI, &st);
             }
-
-            if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-              emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &fb_emlrtDCI,
-                &st);
+            if (b_i != i5) {
+              emlrtIntegerCheckR2012b(b_d, &x_emlrtDCI, &st);
             }
-
-            if ((nx < 1) || (nx > c_d)) {
-              emlrtDynamicBoundsCheckR2012b(nx, 1, c_d, &fb_emlrtBCI, &st);
+            if (b_i > c_d->size[1]) {
+              emlrtDynamicBoundsCheckR2012b(b_i, 1, c_d->size[1], &r_emlrtBCI,
+                                            &st);
             }
-
-            k_e[b_i2].re = E_temp[nx - 1].re + b_Runge * b_d->data[(loop_ub +
-              b_d->size[0] * (nx - 1)) - 1].re;
-            if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-              emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &x_emlrtDCI,
-                &st);
+            b_E_temp[i4].re =
+                E_temp[b_i - 1].re +
+                q * b_d_data[loop_ub + c_d->size[0] * (b_i - 1)].re;
+            if (b_i != i5) {
+              emlrtIntegerCheckR2012b(b_d, &w_emlrtDCI, &st);
             }
-
-            if ((nx < 1) || (nx > 256)) {
-              emlrtDynamicBoundsCheckR2012b(nx, 1, 256, &t_emlrtBCI, &st);
+            if (b_i > c_d->size[1]) {
+              emlrtDynamicBoundsCheckR2012b(b_i, 1, c_d->size[1], &r_emlrtBCI,
+                                            &st);
             }
-
-            if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-              emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &y_emlrtDCI,
-                &st);
-            }
-
-            if ((nx < 1) || (nx > c_d)) {
-              emlrtDynamicBoundsCheckR2012b(nx, 1, c_d, &u_emlrtBCI, &st);
-            }
-
-            k_e[b_i2].im = E_temp[nx - 1].im + b_Runge * b_d->data[(loop_ub +
-              b_d->size[0] * (nx - 1)) - 1].im;
+            b_E_temp[i4].im =
+                E_temp[b_i - 1].im +
+                q * b_d_data[loop_ub + c_d->size[0] * (b_i - 1)].im;
           }
-
-          for (b_i2 = 0; b_i2 < 256; b_i2++) {
-            re_tmp = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[b_i2]);
-            if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-              emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &bb_emlrtDCI,
-                &st);
+          for (i4 = 0; i4 < 918; i4++) {
+            b_d = Temp->Eq.mode_range[i4];
+            i5 = (int32_T)muDoubleScalarFloor(b_d);
+            if (b_d != i5) {
+              emlrtIntegerCheckR2012b(b_d, &ab_emlrtDCI, &st);
             }
-
-            loop_ub = (int32_T)Temp->Eq.mode_range[b_i2];
-            if ((loop_ub < 1) || (loop_ub > 256)) {
-              emlrtDynamicBoundsCheckR2012b(loop_ub, 1, 256, &w_emlrtBCI, &st);
+            b_i = (int32_T)b_d;
+            if ((b_i < 1) || (b_i > 2048)) {
+              emlrtDynamicBoundsCheckR2012b(b_i, 1, 2048, &t_emlrtBCI, &st);
             }
-
-            E_temp[loop_ub - 1].re = k_e[b_i2].re;
-            if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-              emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &bb_emlrtDCI,
-                &st);
+            E_temp[b_i - 1].re = b_E_temp[i4].re;
+            if (b_i != i5) {
+              emlrtIntegerCheckR2012b(b_d, &ab_emlrtDCI, &st);
             }
-
-            if ((loop_ub < 1) || (loop_ub > 256)) {
-              emlrtDynamicBoundsCheckR2012b(loop_ub, 1, 256, &w_emlrtBCI, &st);
-            }
-
-            E_temp[loop_ub - 1].im = k_e[b_i2].im;
+            E_temp[b_i - 1].im = b_E_temp[i4].im;
           }
         }
-
         if (*emlrtBreakCheckR2012bFlagVar != 0) {
           emlrtBreakCheckR2012b(&st);
         }
       }
-
-      i1 = b_d->size[0];
-      b_i2 = 2 + i2;
-      if ((b_i2 < 1) || (b_i2 > i1)) {
-        emlrtDynamicBoundsCheckR2012b(b_i2, 1, i1, &b_emlrtBCI, &st);
+      if ((b_i2 + 2 < 1) || (b_i2 + 2 > c_d->size[0])) {
+        emlrtDynamicBoundsCheckR2012b(b_i2 + 2, 1, c_d->size[0], &b_emlrtBCI,
+                                      &st);
       }
-
-      loop_ub = b_d->size[1];
-      i1 = r0->size[0];
-      r0->size[0] = loop_ub;
-      emxEnsureCapacity_int32_T(&st, r0, i1, &g_emlrtRTEI);
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        r0->data[i1] = i1;
+      iv[0] = 1;
+      iv[1] = c_d->size[1];
+      emlrtSubAssignSizeCheckR2012b(&iv[0], 2, &iv1[0], 2, &emlrtECI, &st);
+      b_st.site = &e_emlrtRSI;
+      if ((b_i2 + 2 < 1) || (b_i2 + 2 > 3)) {
+        emlrtDynamicBoundsCheckR2012b(b_i2 + 2, 1, 3, &c_emlrtBCI, &b_st);
       }
-
-      iv0[0] = 1;
-      iv0[1] = r0->size[0];
-      if (!b0) {
-        iv2[0] = 1;
-        iv2[1] = 256;
-        b0 = true;
+      for (i4 = 0; i4 < 1024; i4++) {
+        i5 = (b_i2 + 3 * i4) + 1;
+        b_d = E_temp[i4].re;
+        nt = SD->f0.exp_minus_omega_contents[i5].im;
+        im_tmp = E_temp[i4].im;
+        r = SD->f0.exp_minus_omega_contents[i5].re;
+        b_F_e[i4].re = b_d * r - im_tmp * nt;
+        b_F_e[i4].im = b_d * nt + im_tmp * r;
       }
-
-      emlrtSubAssignSizeCheckR2012b(&iv0[0], 2, &iv2[0], 2, &emlrtECI, &st);
-      b_st.site = &i_emlrtRSI;
-      i1 = 2 + i2;
-      if ((i1 < 1) || (i1 > 3)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 3, &d_emlrtBCI, &b_st);
-      }
-
-      i1 = 2 + i2;
-      if ((i1 < 1) || (i1 > 3)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 3, &c_emlrtBCI, &b_st);
-      }
-
-      for (i1 = 0; i1 < 128; i1++) {
-        b_F_e[i1].re = E_temp[i1].re * exp_minus_omega_contents[(i2 + 3 * i1) +
-          1].re - E_temp[i1].im * exp_minus_omega_contents[(i2 + 3 * i1) + 1].im;
-        b_F_e[i1].im = E_temp[i1].re * exp_minus_omega_contents[(i2 + 3 * i1) +
-          1].im + E_temp[i1].im * exp_minus_omega_contents[(i2 + 3 * i1) + 1].re;
-      }
-
-      c_st.site = &j_emlrtRSI;
       ifft(b_F_e, Psio);
-      for (i1 = 0; i1 < 128; i1++) {
-        b_F_e[i1].re = E_temp[128 + i1].re * exp_minus_omega_contents[(i2 + 3 *
-          (128 + i1)) + 1].re - E_temp[128 + i1].im * exp_minus_omega_contents
-          [(i2 + 3 * (128 + i1)) + 1].im;
-        b_F_e[i1].im = E_temp[128 + i1].re * exp_minus_omega_contents[(i2 + 3 *
-          (128 + i1)) + 1].im + E_temp[128 + i1].im * exp_minus_omega_contents
-          [(i2 + 3 * (128 + i1)) + 1].re;
+      for (i4 = 0; i4 < 1024; i4++) {
+        i5 = (b_i2 + 3 * (i4 + 1024)) + 1;
+        b_d = E_temp[i4 + 1024].re;
+        nt = SD->f0.exp_minus_omega_contents[i5].im;
+        im_tmp = E_temp[i4 + 1024].im;
+        r = SD->f0.exp_minus_omega_contents[i5].re;
+        b_F_e[i4].re = b_d * r - im_tmp * nt;
+        b_F_e[i4].im = b_d * nt + im_tmp * r;
       }
-
-      c_st.site = &k_emlrtRSI;
       ifft(b_F_e, Psie);
-      memset(&k_e[0], 0, sizeof(creal_T) << 8);
-      b_abs(Psio, dv6);
-      power(dv6, dv1);
-      b_abs(Psie, dv7);
-      power(dv7, dv3);
-      for (i1 = 0; i1 < 128; i1++) {
-        b_Runge = Temp->Eq.gam2o * Psio[i1].re;
-        re_tmp = Temp->Eq.gam2o * -Psio[i1].im;
-        b_F_e[i1].re = (b_Runge * Psie[i1].re - re_tmp * Psie[i1].im) +
-          Temp->Eq.gam3o * (dv1[i1] + 2.0 * dv3[i1]) * Psio[i1].re;
-        b_F_e[i1].im = (b_Runge * Psie[i1].im + re_tmp * Psie[i1].re) +
-          Temp->Eq.gam3o * (dv1[i1] + 2.0 * dv3[i1]) * Psio[i1].im;
+      memset(&k_e[0], 0, 2048U * sizeof(creal_T));
+      for (loop_ub = 0; loop_ub < 1024; loop_ub++) {
+        b_d = Psie[loop_ub].re;
+        nt = Psie[loop_ub].im;
+        im_tmp = muDoubleScalarHypot(b_d, nt);
+        r = im_tmp * im_tmp;
+        re_tmp = Psio[loop_ub].re;
+        b_re_tmp = Psio[loop_ub].im;
+        im_tmp = muDoubleScalarHypot(re_tmp, b_re_tmp);
+        q = Temp->Eq.gam2o * re_tmp;
+        ind_s = Temp->Eq.gam2o * -b_re_tmp;
+        im_tmp = Temp->Eq.gam3o * (im_tmp * im_tmp + 2.0 * r);
+        b_F_e[loop_ub].re = (q * b_d - ind_s * nt) + im_tmp * re_tmp;
+        b_F_e[loop_ub].im = (q * nt + ind_s * b_d) + im_tmp * b_re_tmp;
       }
-
-      c_st.site = &l_emlrtRSI;
-      fft(b_F_e, dcv0);
-      for (i1 = 0; i1 < 128; i1++) {
-        re = 0.0 * exp_plus_omega_contents[(i2 + 3 * i1) + 1].re -
-          exp_plus_omega_contents[(i2 + 3 * i1) + 1].im;
-        im = 0.0 * exp_plus_omega_contents[(i2 + 3 * i1) + 1].im +
-          exp_plus_omega_contents[(i2 + 3 * i1) + 1].re;
-        k_e[i1].re = re * dcv0[i1].re - im * dcv0[i1].im;
-        k_e[i1].im = re * dcv0[i1].im + im * dcv0[i1].re;
+      fft(b_F_e, b_y);
+      for (loop_ub = 0; loop_ub < 1024; loop_ub++) {
+        b_i = (b_i2 + 3 * loop_ub) + 1;
+        ind_s = SD->f0.exp_plus_omega_contents[b_i].im;
+        re_tmp = SD->f0.exp_plus_omega_contents[b_i].re;
+        re = 0.0 * re_tmp - ind_s;
+        im = 0.0 * ind_s + re_tmp;
+        b_d = b_y[loop_ub].im;
+        nt = b_y[loop_ub].re;
+        k_e[loop_ub].re = re * nt - im * b_d;
+        k_e[loop_ub].im = re * b_d + im * nt;
+        b_d = Psio[loop_ub].re;
+        nt = Psio[loop_ub].im;
+        im_tmp = muDoubleScalarHypot(b_d, nt);
+        r = im_tmp * im_tmp;
+        re = b_d * b_d - nt * nt;
+        im_tmp = b_d * nt;
+        im = im_tmp + im_tmp;
+        b_y[loop_ub].re = re;
+        b_y[loop_ub].im = im;
+        b_d = Psie[loop_ub].re;
+        nt = Psie[loop_ub].im;
+        im_tmp = muDoubleScalarHypot(b_d, nt);
+        im_tmp = Temp->Eq.gam3e * (2.0 * r + im_tmp * im_tmp);
+        Psie[loop_ub].re = Temp->Eq.gam2e * re + im_tmp * b_d;
+        Psie[loop_ub].im = Temp->Eq.gam2e * im + im_tmp * nt;
       }
-
-      b_power(Psio, dcv0);
-      b_abs(Psio, dv8);
-      power(dv8, dv1);
-      b_abs(Psie, dv9);
-      power(dv9, dv3);
-      for (i1 = 0; i1 < 128; i1++) {
-        b_F_e[i1].re = Temp->Eq.gam2e * dcv0[i1].re + Temp->Eq.gam3e * (2.0 *
-          dv1[i1] + dv3[i1]) * Psie[i1].re;
-        b_F_e[i1].im = Temp->Eq.gam2e * dcv0[i1].im + Temp->Eq.gam3e * (2.0 *
-          dv1[i1] + dv3[i1]) * Psie[i1].im;
+      fft(Psie, b_y);
+      for (i4 = 0; i4 < 1024; i4++) {
+        b_i = (b_i2 + 3 * (i4 + 1024)) + 1;
+        ind_s = SD->f0.exp_plus_omega_contents[b_i].im;
+        re_tmp = SD->f0.exp_plus_omega_contents[b_i].re;
+        re = 0.0 * re_tmp - ind_s;
+        im = 0.0 * ind_s + re_tmp;
+        b_d = b_y[i4].im;
+        nt = b_y[i4].re;
+        k_e[i4 + 1024].re = re * nt - im * b_d;
+        k_e[i4 + 1024].im = re * b_d + im * nt;
       }
-
-      c_st.site = &m_emlrtRSI;
-      fft(b_F_e, dcv0);
-      for (i1 = 0; i1 < 128; i1++) {
-        re = 0.0 * exp_plus_omega_contents[(i2 + 3 * (128 + i1)) + 1].re -
-          exp_plus_omega_contents[(i2 + 3 * (128 + i1)) + 1].im;
-        im = 0.0 * exp_plus_omega_contents[(i2 + 3 * (128 + i1)) + 1].im +
-          exp_plus_omega_contents[(i2 + 3 * (128 + i1)) + 1].re;
-        k_e[128 + i1].re = re * dcv0[i1].re - im * dcv0[i1].im;
-        k_e[128 + i1].im = re * dcv0[i1].im + im * dcv0[i1].re;
-      }
-
-      b_Runge = 128.0 * exp_plus_omega_contents[i2 + 1].re;
-      re_tmp = 128.0 * exp_plus_omega_contents[i2 + 1].im;
+      q = 1024.0 * SD->f0.exp_plus_omega_contents[b_i2 + 1].re;
+      re_tmp = 1024.0 * SD->f0.exp_plus_omega_contents[b_i2 + 1].im;
       if (re_tmp == 0.0) {
-        re = b_Runge / 2.0;
+        re = q / 2.0;
         im = 0.0;
-      } else if (b_Runge == 0.0) {
+      } else if (q == 0.0) {
         re = 0.0;
         im = re_tmp / 2.0;
       } else {
-        re = b_Runge / 2.0;
+        re = q / 2.0;
         im = re_tmp / 2.0;
       }
-
       k_e[0].re += Temp->Eq.ko * re * Temp->Eq.H_f;
       k_e[0].im += Temp->Eq.ko * im * Temp->Eq.H_f;
-      nx = r0->size[0];
-      for (i1 = 0; i1 < nx; i1++) {
-        b_d->data[(i2 + b_d->size[0] * r0->data[i1]) + 1] = k_e[i1];
+      loop_ub = c_d->size[1];
+      for (i4 = 0; i4 < loop_ub; i4++) {
+        b_d_data[(b_i2 + c_d->size[0] * i4) + 1] = k_e[i4];
       }
-
-      memcpy(&E_temp[0], &F_e[0], sizeof(creal_T) << 8);
+      memcpy(&E_temp[0], &F_e[0], 2048U * sizeof(creal_T));
       if (*emlrtBreakCheckR2012bFlagVar != 0) {
         emlrtBreakCheckR2012b(&st);
       }
     }
-
-    i0 = (int32_T)Runge->s;
-    emlrtForLoopVectorCheckR2012b(1.0, 1.0, Runge->s, mxDOUBLE_CLASS, (int32_T)
-      Runge->s, &cb_emlrtRTEI, &st);
-    for (nx = 0; nx < i0; nx++) {
-      i1 = (int32_T)(1U + nx);
-      if ((i1 < 1) || (i1 > 3)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 3, &o_emlrtBCI, &st);
+    emlrtForLoopVectorCheckR2021a(1.0, 1.0, Runge->s, mxDOUBLE_CLASS,
+                                  (int32_T)Runge->s, &emlrtRTEI, &st);
+    for (loop_ub = 0; loop_ub < i3; loop_ub++) {
+      if (((int32_T)(loop_ub + 1U) < 1) || ((int32_T)(loop_ub + 1U) > 3)) {
+        emlrtDynamicBoundsCheckR2012b((int32_T)(loop_ub + 1U), 1, 3,
+                                      &k_emlrtBCI, &st);
       }
-
-      if (Runge->c[i1 - 1] != 0.0) {
-        b_Runge = dt * Runge->c[nx];
-        c_d = b_d->size[1];
-        b_i2 = b_d->size[0];
-        if ((i1 < 1) || (i1 > b_i2)) {
-          emlrtDynamicBoundsCheckR2012b(i1, 1, b_i2, &emlrtBCI, &st);
+      b_d = Runge->c[loop_ub];
+      if (b_d != 0.0) {
+        q = dt_tmp_tmp * b_d;
+        if (((int32_T)(loop_ub + 1U) < 1) ||
+            ((int32_T)(loop_ub + 1U) > c_d->size[0])) {
+          emlrtDynamicBoundsCheckR2012b((int32_T)(loop_ub + 1U), 1,
+                                        c_d->size[0], &emlrtBCI, &st);
         }
-
-        for (b_i2 = 0; b_i2 < 256; b_i2++) {
-          re_tmp = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[b_i2]);
-          if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-            emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &eb_emlrtDCI, &st);
+        for (i4 = 0; i4 < 918; i4++) {
+          b_d = Temp->Eq.mode_range[i4];
+          i5 = (int32_T)muDoubleScalarFloor(b_d);
+          if (b_d != i5) {
+            emlrtIntegerCheckR2012b(b_d, &u_emlrtDCI, &st);
           }
-
-          loop_ub = (int32_T)Temp->Eq.mode_range[b_i2];
-          if ((loop_ub < 1) || (loop_ub > 256)) {
-            emlrtDynamicBoundsCheckR2012b(loop_ub, 1, 256, &cb_emlrtBCI, &st);
+          b_i = (int32_T)b_d;
+          if ((b_i < 1) || (b_i > 2048)) {
+            emlrtDynamicBoundsCheckR2012b(b_i, 1, 2048, &o_emlrtBCI, &st);
           }
-
-          if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-            emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &eb_emlrtDCI, &st);
+          if (b_i != i5) {
+            emlrtIntegerCheckR2012b(b_d, &v_emlrtDCI, &st);
           }
-
-          if ((loop_ub < 1) || (loop_ub > c_d)) {
-            emlrtDynamicBoundsCheckR2012b(loop_ub, 1, c_d, &db_emlrtBCI, &st);
+          if (b_i > c_d->size[1]) {
+            emlrtDynamicBoundsCheckR2012b(b_i, 1, c_d->size[1], &p_emlrtBCI,
+                                          &st);
           }
-
-          k_e[b_i2].re = F_e[loop_ub - 1].re + b_Runge * b_d->data[(i1 +
-            b_d->size[0] * (loop_ub - 1)) - 1].re;
-          if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-            emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &v_emlrtDCI, &st);
+          b_E_temp[i4].re = F_e[b_i - 1].re +
+                            q * b_d_data[loop_ub + c_d->size[0] * (b_i - 1)].re;
+          if (b_i != i5) {
+            emlrtIntegerCheckR2012b(b_d, &u_emlrtDCI, &st);
           }
-
-          if ((loop_ub < 1) || (loop_ub > 256)) {
-            emlrtDynamicBoundsCheckR2012b(loop_ub, 1, 256, &r_emlrtBCI, &st);
+          if (b_i > c_d->size[1]) {
+            emlrtDynamicBoundsCheckR2012b(b_i, 1, c_d->size[1], &p_emlrtBCI,
+                                          &st);
           }
-
-          if (Temp->Eq.mode_range[b_i2] != re_tmp) {
-            emlrtIntegerCheckR2012b(Temp->Eq.mode_range[b_i2], &w_emlrtDCI, &st);
-          }
-
-          if ((loop_ub < 1) || (loop_ub > c_d)) {
-            emlrtDynamicBoundsCheckR2012b(loop_ub, 1, c_d, &s_emlrtBCI, &st);
-          }
-
-          k_e[b_i2].im = F_e[loop_ub - 1].im + b_Runge * b_d->data[(i1 +
-            b_d->size[0] * (loop_ub - 1)) - 1].im;
+          b_E_temp[i4].im = F_e[b_i - 1].im +
+                            q * b_d_data[loop_ub + c_d->size[0] * (b_i - 1)].im;
         }
-
-        for (i1 = 0; i1 < 256; i1++) {
-          re_tmp = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i1]);
-          if (Temp->Eq.mode_range[i1] != re_tmp) {
-            emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &db_emlrtDCI, &st);
+        for (i4 = 0; i4 < 918; i4++) {
+          b_d = Temp->Eq.mode_range[i4];
+          i5 = (int32_T)muDoubleScalarFloor(b_d);
+          if (b_d != i5) {
+            emlrtIntegerCheckR2012b(b_d, &y_emlrtDCI, &st);
           }
-
-          b_i2 = (int32_T)Temp->Eq.mode_range[i1];
-          if ((b_i2 < 1) || (b_i2 > 256)) {
-            emlrtDynamicBoundsCheckR2012b(b_i2, 1, 256, &bb_emlrtBCI, &st);
+          b_i = (int32_T)b_d;
+          if ((b_i < 1) || (b_i > 2048)) {
+            emlrtDynamicBoundsCheckR2012b(b_i, 1, 2048, &s_emlrtBCI, &st);
           }
-
-          F_e[b_i2 - 1].re = k_e[i1].re;
-          if (Temp->Eq.mode_range[i1] != re_tmp) {
-            emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i1], &ab_emlrtDCI, &st);
+          F_e[b_i - 1].re = b_E_temp[i4].re;
+          if (b_i != i5) {
+            emlrtIntegerCheckR2012b(b_d, &y_emlrtDCI, &st);
           }
-
-          if ((b_i2 < 1) || (b_i2 > 256)) {
-            emlrtDynamicBoundsCheckR2012b(b_i2, 1, 256, &v_emlrtBCI, &st);
-          }
-
-          F_e[b_i2 - 1].im = k_e[i1].im;
+          F_e[b_i - 1].im = b_E_temp[i4].im;
         }
       }
-
       if (*emlrtBreakCheckR2012bFlagVar != 0) {
         emlrtBreakCheckR2012b(&st);
       }
     }
-
-    for (i0 = 0; i0 < 256; i0++) {
-      re_tmp = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i0]);
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &cb_emlrtDCI, &st);
+    for (i4 = 0; i4 < 918; i4++) {
+      b_d = Temp->Eq.mode_range[i4];
+      i5 = (int32_T)muDoubleScalarFloor(b_d);
+      if (b_d != i5) {
+        emlrtIntegerCheckR2012b(b_d, &bb_emlrtDCI, &st);
       }
-
-      i1 = (int32_T)Temp->Eq.mode_range[i0];
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &y_emlrtBCI, &st);
+      b_i = (int32_T)b_d;
+      if ((b_i < 1) || (b_i > 2048)) {
+        emlrtDynamicBoundsCheckR2012b(b_i, 1, 2048, &v_emlrtBCI, &st);
       }
-
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &cb_emlrtDCI, &st);
+      if (b_i != i5) {
+        emlrtIntegerCheckR2012b(b_d, &bb_emlrtDCI, &st);
       }
-
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &ab_emlrtBCI, &st);
+      nt = SD->f0.y[b_i - 1].re;
+      im_tmp = F_e[b_i - 1].im;
+      r = SD->f0.y[b_i - 1].im;
+      b_re_tmp = F_e[b_i - 1].re;
+      b_E_temp[i4].re = nt * b_re_tmp - r * im_tmp;
+      if (b_i != i5) {
+        emlrtIntegerCheckR2012b(b_d, &bb_emlrtDCI, &st);
       }
-
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &cb_emlrtDCI, &st);
-      }
-
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &y_emlrtBCI, &st);
-      }
-
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &cb_emlrtDCI, &st);
-      }
-
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &ab_emlrtBCI, &st);
-      }
-
-      E_temp[i0].re = shift_back_contents[i1 - 1].re * F_e[i1 - 1].re -
-        shift_back_contents[i1 - 1].im * F_e[i1 - 1].im;
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &cb_emlrtDCI, &st);
-      }
-
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &y_emlrtBCI, &st);
-      }
-
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &cb_emlrtDCI, &st);
-      }
-
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &ab_emlrtBCI, &st);
-      }
-
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &cb_emlrtDCI, &st);
-      }
-
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &y_emlrtBCI, &st);
-      }
-
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &cb_emlrtDCI, &st);
-      }
-
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &ab_emlrtBCI, &st);
-      }
-
-      E_temp[i0].im = shift_back_contents[i1 - 1].re * F_e[i1 - 1].im +
-        shift_back_contents[i1 - 1].im * F_e[i1 - 1].re;
+      b_E_temp[i4].im = nt * im_tmp + r * b_re_tmp;
     }
-
-    for (i0 = 0; i0 < 256; i0++) {
-      re_tmp = (int32_T)muDoubleScalarFloor(Temp->Eq.mode_range[i0]);
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &db_emlrtDCI, &st);
+    for (i4 = 0; i4 < 918; i4++) {
+      b_d = Temp->Eq.mode_range[i4];
+      i5 = (int32_T)muDoubleScalarFloor(b_d);
+      if (b_d != i5) {
+        emlrtIntegerCheckR2012b(b_d, &t_emlrtDCI, &st);
       }
-
-      i1 = (int32_T)Temp->Eq.mode_range[i0];
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &bb_emlrtBCI, &st);
+      b_i = (int32_T)b_d;
+      if ((b_i < 1) || (b_i > 2048)) {
+        emlrtDynamicBoundsCheckR2012b(b_i, 1, 2048, &n_emlrtBCI, &st);
       }
-
-      F_e[i1 - 1].re = E_temp[i0].re;
-      if (Temp->Eq.mode_range[i0] != re_tmp) {
-        emlrtIntegerCheckR2012b(Temp->Eq.mode_range[i0], &u_emlrtDCI, &st);
+      F_e[b_i - 1].re = b_E_temp[i4].re;
+      if (b_i != i5) {
+        emlrtIntegerCheckR2012b(b_d, &t_emlrtDCI, &st);
       }
-
-      if ((i1 < 1) || (i1 > 256)) {
-        emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &q_emlrtBCI, &st);
-      }
-
-      F_e[i1 - 1].im = E_temp[i0].im;
+      F_e[b_i - 1].im = b_E_temp[i4].im;
     }
-
     /* ,Runge,exp_plus_omega,exp_minus_omega,Temp,shift_back */
-    guard1 = false;
-    if (b_mod(1.0 + (real_T)ni, Temp->Par.s_t / Temp->Par.dt) == 0.0) {
-      ind_s = muDoubleScalarRound((1.0 + (real_T)ni) * Temp->Par.dt /
-        Temp->Par.s_t);
+    r = (real_T)ni + 1.0;
+    if (!(y == 0.0)) {
+      if (muDoubleScalarIsNaN(y)) {
+        r = rtNaN;
+      } else if (muDoubleScalarIsInf(y)) {
+        if (y < 0.0) {
+          r = y;
+        }
+      } else {
+        r = muDoubleScalarRem((real_T)ni + 1.0, y);
+        rEQ0 = (r == 0.0);
+        if ((!rEQ0) && (y > muDoubleScalarFloor(y))) {
+          q = muDoubleScalarAbs(((real_T)ni + 1.0) / y);
+          rEQ0 = !(muDoubleScalarAbs(q - muDoubleScalarFloor(q + 0.5)) >
+                   2.2204460492503131E-16 * q);
+        }
+        if (rEQ0) {
+          r = y * 0.0;
+        } else if (y < 0.0) {
+          r += y;
+        }
+      }
+    }
+    if (r == 0.0) {
+      b_re_tmp = ((real_T)ni + 1.0) * dt_tmp_tmp;
+      ind_s = muDoubleScalarRound(b_re_tmp / Temp->Par.s_t);
       if (1.0 > Temp->Space.N) {
         loop_ub = 0;
       } else {
-        if (Temp->Space.N != (int32_T)muDoubleScalarFloor(Temp->Space.N)) {
-          emlrtIntegerCheckR2012b(Temp->Space.N, &emlrtDCI, sp);
+        if (Temp->Space.N != d3) {
+          emlrtIntegerCheckR2012b(Temp->Space.N, &emlrtDCI, (emlrtCTX)sp);
         }
-
+        if ((i1 < 1) || (i1 > 2048)) {
+          emlrtDynamicBoundsCheckR2012b((int32_T)Temp->Space.N, 1, 2048,
+                                        &f_emlrtBCI, (emlrtCTX)sp);
+        }
         loop_ub = (int32_T)Temp->Space.N;
-        if ((loop_ub < 1) || (loop_ub > 256)) {
-          emlrtDynamicBoundsCheckR2012b(loop_ub, 1, 256, &g_emlrtBCI, sp);
-        }
       }
-
-      c_d = (int32_T)ind_s;
-      if (ind_s != c_d) {
-        emlrtIntegerCheckR2012b(ind_s, &d_emlrtDCI, sp);
+      if (ind_s != (int32_T)ind_s) {
+        emlrtIntegerCheckR2012b(ind_s, &d_emlrtDCI, (emlrtCTX)sp);
       }
-
-      i0 = Sol->Psio->size[0];
-      if ((c_d < 1) || (c_d > i0)) {
-        emlrtDynamicBoundsCheckR2012b(c_d, 1, i0, &j_emlrtBCI, sp);
+      if (((int32_T)ind_s < 1) || ((int32_T)ind_s > Sol->Psio->size[0])) {
+        emlrtDynamicBoundsCheckR2012b((int32_T)ind_s, 1, Sol->Psio->size[0],
+                                      &i_emlrtBCI, (emlrtCTX)sp);
       }
-
-      nx = Sol->Psio->size[1];
-      i0 = r0->size[0];
-      r0->size[0] = nx;
-      emxEnsureCapacity_int32_T(sp, r0, i0, &h_emlrtRTEI);
-      for (i0 = 0; i0 < nx; i0++) {
-        r0->data[i0] = i0;
-      }
-
       tmp_size[0] = 1;
       tmp_size[1] = loop_ub;
-      for (i0 = 0; i0 < loop_ub; i0++) {
-        if (F_e[i0].im == 0.0) {
-          tmp_data[i0].re = F_e[i0].re / Temp->Space.N;
-          tmp_data[i0].im = 0.0;
-        } else if (F_e[i0].re == 0.0) {
-          tmp_data[i0].re = 0.0;
-          tmp_data[i0].im = F_e[i0].im / Temp->Space.N;
-        } else {
-          tmp_data[i0].re = F_e[i0].re / Temp->Space.N;
-          tmp_data[i0].im = F_e[i0].im / Temp->Space.N;
-        }
-      }
-
-      iv0[0] = 1;
-      iv0[1] = r0->size[0];
-      emlrtSubAssignSizeCheckR2012b(&iv0[0], 2, &tmp_size[0], 2, &c_emlrtECI, sp);
-      for (i0 = 0; i0 < loop_ub; i0++) {
-        Sol->Psio->data[(c_d + Sol->Psio->size[0] * r0->data[i0]) - 1] =
-          tmp_data[i0];
-      }
-
-      if (Temp->Space.N + 1.0 > d0) {
-        i0 = 0;
-        i1 = 0;
-      } else {
-        if (Temp->Space.N + 1.0 != (int32_T)muDoubleScalarFloor(Temp->Space.N +
-             1.0)) {
-          emlrtIntegerCheckR2012b(Temp->Space.N + 1.0, &b_emlrtDCI, sp);
-        }
-
-        i0 = (int32_T)(Temp->Space.N + 1.0);
-        if ((i0 < 1) || (i0 > 256)) {
-          emlrtDynamicBoundsCheckR2012b(i0, 1, 256, &h_emlrtBCI, sp);
-        }
-
-        i0--;
-        if (d0 != (int32_T)muDoubleScalarFloor(d0)) {
-          emlrtIntegerCheckR2012b(d0, &c_emlrtDCI, sp);
-        }
-
-        i1 = (int32_T)d0;
-        if ((i1 < 1) || (i1 > 256)) {
-          emlrtDynamicBoundsCheckR2012b(i1, 1, 256, &i_emlrtBCI, sp);
-        }
-      }
-
-      b_i2 = Sol->Psie->size[0];
-      if ((c_d < 1) || (c_d > b_i2)) {
-        emlrtDynamicBoundsCheckR2012b(c_d, 1, b_i2, &k_emlrtBCI, sp);
-      }
-
-      loop_ub = Sol->Psie->size[1];
-      b_i2 = r0->size[0];
-      r0->size[0] = loop_ub;
-      emxEnsureCapacity_int32_T(sp, r0, b_i2, &i_emlrtRTEI);
-      for (b_i2 = 0; b_i2 < loop_ub; b_i2++) {
-        r0->data[b_i2] = b_i2;
-      }
-
-      tmp_size[0] = 1;
-      nx = i1 - i0;
-      tmp_size[1] = nx;
-      for (i1 = 0; i1 < nx; i1++) {
-        b_Runge = F_e[i0 + i1].re;
-        re_tmp = F_e[i0 + i1].im;
+      for (i4 = 0; i4 < loop_ub; i4++) {
+        q = F_e[i4].re;
+        re_tmp = F_e[i4].im;
         if (re_tmp == 0.0) {
-          tmp_data[i1].re = b_Runge / Temp->Space.N;
-          tmp_data[i1].im = 0.0;
-        } else if (b_Runge == 0.0) {
-          tmp_data[i1].re = 0.0;
-          tmp_data[i1].im = re_tmp / Temp->Space.N;
+          E_temp[i4].re = q / Temp->Space.N;
+          E_temp[i4].im = 0.0;
+        } else if (q == 0.0) {
+          E_temp[i4].re = 0.0;
+          E_temp[i4].im = re_tmp / Temp->Space.N;
         } else {
-          tmp_data[i1].re = b_Runge / Temp->Space.N;
-          tmp_data[i1].im = re_tmp / Temp->Space.N;
+          E_temp[i4].re = q / Temp->Space.N;
+          E_temp[i4].im = re_tmp / Temp->Space.N;
         }
       }
-
-      iv0[0] = 1;
-      iv0[1] = r0->size[0];
-      emlrtSubAssignSizeCheckR2012b(&iv0[0], 2, &tmp_size[0], 2, &d_emlrtECI, sp);
-      for (i0 = 0; i0 < nx; i0++) {
-        Sol->Psie->data[(c_d + Sol->Psie->size[0] * r0->data[i0]) - 1] =
-          tmp_data[i0];
+      iv[0] = 1;
+      iv[1] = Sol->Psio->size[1];
+      emlrtSubAssignSizeCheckR2012b(&iv[0], 2, &tmp_size[0], 2, &c_emlrtECI,
+                                    (emlrtCTX)sp);
+      for (i4 = 0; i4 < loop_ub; i4++) {
+        Sol->Psio->data[((int32_T)ind_s + Sol->Psio->size[0] * i4) - 1] =
+            E_temp[i4];
       }
-
-      i0 = Sol->t->size[1];
-      if ((c_d < 1) || (c_d > i0)) {
-        emlrtDynamicBoundsCheckR2012b(c_d, 1, i0, &x_emlrtBCI, sp);
-      }
-
-      Sol->t->data[c_d - 1].re = Temp->Par.dt * (1.0 + (real_T)ni);
-      i0 = Sol->t->size[1];
-      if ((c_d < 1) || (c_d > i0)) {
-        emlrtDynamicBoundsCheckR2012b(c_d, 1, i0, &x_emlrtBCI, sp);
-      }
-
-      Sol->t->data[c_d - 1].im = 0.0;
-      if (2 > Sol->Psio->size[1]) {
-        i0 = 1;
-        i1 = 1;
+      if (Temp->Space.N + 1.0 > d1) {
+        i4 = 0;
+        i5 = 0;
       } else {
-        i0 = Sol->Psio->size[1];
-        if (2 > i0) {
-          emlrtDynamicBoundsCheckR2012b(2, 1, i0, &m_emlrtBCI, sp);
+        if (Temp->Space.N + 1.0 !=
+            (int32_T)muDoubleScalarFloor(Temp->Space.N + 1.0)) {
+          emlrtIntegerCheckR2012b(Temp->Space.N + 1.0, &b_emlrtDCI,
+                                  (emlrtCTX)sp);
         }
-
-        i0 = 2;
-        i1 = Sol->Psio->size[1];
-        b_i2 = Sol->Psio->size[1];
-        if ((b_i2 < 1) || (b_i2 > i1)) {
-          emlrtDynamicBoundsCheckR2012b(b_i2, 1, i1, &n_emlrtBCI, sp);
+        if (((int32_T)(Temp->Space.N + 1.0) < 1) ||
+            ((int32_T)(Temp->Space.N + 1.0) > 2048)) {
+          emlrtDynamicBoundsCheckR2012b((int32_T)(Temp->Space.N + 1.0), 1, 2048,
+                                        &g_emlrtBCI, (emlrtCTX)sp);
         }
-
-        i1 = b_i2 + 1;
-      }
-
-      st.site = &d_emlrtRSI;
-      b_i2 = Sol->Psio->size[0];
-      if ((c_d < 1) || (c_d > b_i2)) {
-        emlrtDynamicBoundsCheckR2012b(c_d, 1, b_i2, &l_emlrtBCI, &st);
-      }
-
-      b_i2 = x->size[0] * x->size[1];
-      x->size[0] = 1;
-      loop_ub = i1 - i0;
-      x->size[1] = loop_ub;
-      emxEnsureCapacity_creal_T(&st, x, b_i2, &j_emlrtRTEI);
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        x->data[i1] = Sol->Psio->data[(c_d + Sol->Psio->size[0] * ((i0 + i1) - 1))
-          - 1];
-      }
-
-      b_st.site = &y_emlrtRSI;
-      nx = loop_ub - 1;
-      i1 = b_Sol->size[0] * b_Sol->size[1];
-      b_Sol->size[0] = 1;
-      b_Sol->size[1] = loop_ub;
-      emxEnsureCapacity_creal_T(&b_st, b_Sol, i1, &j_emlrtRTEI);
-      for (i1 = 0; i1 < loop_ub; i1++) {
-        b_Sol->data[i1] = Sol->Psio->data[(c_d + Sol->Psio->size[0] * ((i0 + i1)
-          - 1)) - 1];
-      }
-
-      i0 = a->size[0] * a->size[1];
-      a->size[0] = 1;
-      a->size[1] = b_Sol->size[1];
-      emxEnsureCapacity_real_T(&b_st, a, i0, &k_emlrtRTEI);
-      c_st.site = &ab_emlrtRSI;
-      if ((1 <= loop_ub) && (loop_ub > 2147483646)) {
-        d_st.site = &x_emlrtRSI;
-        check_forloop_overflow_error(&d_st);
-      }
-
-      for (k = 0; k <= nx; k++) {
-        a->data[k] = muDoubleScalarHypot(x->data[k].re, x->data[k].im);
-      }
-
-      st.site = &d_emlrtRSI;
-      b_st.site = &bb_emlrtRSI;
-      c_st.site = &cb_emlrtRSI;
-      i0 = z1->size[0] * z1->size[1];
-      z1->size[0] = 1;
-      z1->size[1] = a->size[1];
-      emxEnsureCapacity_real_T(&c_st, z1, i0, &l_emlrtRTEI);
-      d_st.site = &v_emlrtRSI;
-      nx = a->size[1];
-      e_st.site = &w_emlrtRSI;
-      overflow = ((1 <= z1->size[1]) && (z1->size[1] > 2147483646));
-      if (overflow) {
-        f_st.site = &x_emlrtRSI;
-        check_forloop_overflow_error(&f_st);
-      }
-
-      for (k = 0; k < nx; k++) {
-        z1->data[k] = a->data[k] * a->data[k];
-      }
-
-      st.site = &d_emlrtRSI;
-      b_st.site = &db_emlrtRSI;
-      c_st.site = &eb_emlrtRSI;
-      nx = z1->size[1];
-      if (z1->size[1] == 0) {
-        b_Runge = 0.0;
-      } else {
-        d_st.site = &fb_emlrtRSI;
-        b_Runge = z1->data[0];
-        e_st.site = &gb_emlrtRSI;
-        overflow = ((2 <= z1->size[1]) && (z1->size[1] > 2147483646));
-        if (overflow) {
-          f_st.site = &x_emlrtRSI;
-          check_forloop_overflow_error(&f_st);
+        i4 = (int32_T)(Temp->Space.N + 1.0) - 1;
+        if (d1 != d2) {
+          emlrtIntegerCheckR2012b(d1, &c_emlrtDCI, (emlrtCTX)sp);
         }
-
-        for (k = 2; k <= nx; k++) {
-          b_Runge += z1->data[k - 1];
+        if (((int32_T)d1 < 1) || ((int32_T)d1 > 2048)) {
+          emlrtDynamicBoundsCheckR2012b((int32_T)d1, 1, 2048, &h_emlrtBCI,
+                                        (emlrtCTX)sp);
+        }
+        i5 = (int32_T)d1;
+      }
+      if (((int32_T)ind_s < 1) || ((int32_T)ind_s > Sol->Psie->size[0])) {
+        emlrtDynamicBoundsCheckR2012b((int32_T)ind_s, 1, Sol->Psie->size[0],
+                                      &j_emlrtBCI, (emlrtCTX)sp);
+      }
+      tmp_size[0] = 1;
+      loop_ub = i5 - i4;
+      tmp_size[1] = loop_ub;
+      for (i5 = 0; i5 < loop_ub; i5++) {
+        b_i = i4 + i5;
+        q = F_e[b_i].re;
+        re_tmp = F_e[b_i].im;
+        if (re_tmp == 0.0) {
+          E_temp[i5].re = q / Temp->Space.N;
+          E_temp[i5].im = 0.0;
+        } else if (q == 0.0) {
+          E_temp[i5].re = 0.0;
+          E_temp[i5].im = re_tmp / Temp->Space.N;
+        } else {
+          E_temp[i5].re = q / Temp->Space.N;
+          E_temp[i5].im = re_tmp / Temp->Space.N;
         }
       }
-
-      st.site = &d_emlrtRSI;
-      if ((10.0 * muDoubleScalarLog10(b_Runge) <= -100.0) && (c_mod(ind_s) ==
-           0.0)) {
-        i0 = Sol->Psio->size[0];
-        i1 = r1->size[0] * r1->size[1];
-        r1->size[0] = 1;
-        loop_ub = i0 - c_d;
-        r1->size[1] = loop_ub;
-        emxEnsureCapacity_int32_T(sp, r1, i1, &m_emlrtRTEI);
-        for (i0 = 0; i0 < loop_ub; i0++) {
-          r1->data[i0] = (c_d + i0) + 1;
-        }
-
-        st.site = &c_emlrtRSI;
-        nullAssignment(&st, Sol->Psio, r1);
-        i0 = Sol->Psie->size[0];
-        i1 = r1->size[0] * r1->size[1];
-        r1->size[0] = 1;
-        loop_ub = i0 - c_d;
-        r1->size[1] = loop_ub;
-        emxEnsureCapacity_int32_T(sp, r1, i1, &n_emlrtRTEI);
-        for (i0 = 0; i0 < loop_ub; i0++) {
-          r1->data[i0] = (c_d + i0) + 1;
-        }
-
-        st.site = &b_emlrtRSI;
-        nullAssignment(&st, Sol->Psie, r1);
-        i0 = Sol->t->size[1];
-        i1 = r1->size[0] * r1->size[1];
-        r1->size[0] = 1;
-        loop_ub = i0 - c_d;
-        r1->size[1] = loop_ub;
-        emxEnsureCapacity_int32_T(sp, r1, i1, &o_emlrtRTEI);
-        for (i0 = 0; i0 < loop_ub; i0++) {
-          r1->data[i0] = (c_d + i0) + 1;
-        }
-
-        st.site = &emlrtRSI;
-        b_nullAssignment(&st, Sol->t, r1);
-        exitg1 = true;
-      } else {
-        guard1 = true;
+      iv[0] = 1;
+      iv[1] = Sol->Psie->size[1];
+      emlrtSubAssignSizeCheckR2012b(&iv[0], 2, &tmp_size[0], 2, &d_emlrtECI,
+                                    (emlrtCTX)sp);
+      for (i4 = 0; i4 < loop_ub; i4++) {
+        Sol->Psie->data[((int32_T)ind_s + Sol->Psie->size[0] * i4) - 1] =
+            E_temp[i4];
       }
-    } else {
-      guard1 = true;
+      if (((int32_T)ind_s < 1) || ((int32_T)ind_s > Sol->t->size[1])) {
+        emlrtDynamicBoundsCheckR2012b((int32_T)ind_s, 1, Sol->t->size[1],
+                                      &u_emlrtBCI, (emlrtCTX)sp);
+      }
+      Sol->t->data[(int32_T)ind_s - 1].re = b_re_tmp;
+      if (((int32_T)ind_s < 1) || ((int32_T)ind_s > Sol->t->size[1])) {
+        emlrtDynamicBoundsCheckR2012b((int32_T)ind_s, 1, Sol->t->size[1],
+                                      &u_emlrtBCI, (emlrtCTX)sp);
+      }
+      Sol->t->data[(int32_T)ind_s - 1].im = 0.0;
+      /*             if 10*log10(sum(abs(Sol.Psio(ind_s,2:end)).^2)) <= -100 &&
+       * (mod(ind_s,2) == 0) */
+      /*                    Sol.Psio(ind_s+1:end,:) = []; */
+      /*                   Sol.Psie(ind_s+1:end,:) = []; */
+      /*                  Sol.t(ind_s+1:end)     = [];                 */
+      /*                 break; */
+      /*        end */
     }
-
-    if (guard1) {
-      ni++;
-      if (*emlrtBreakCheckR2012bFlagVar != 0) {
-        emlrtBreakCheckR2012b(sp);
-      }
+    if (*emlrtBreakCheckR2012bFlagVar != 0) {
+      emlrtBreakCheckR2012b((emlrtCTX)sp);
     }
   }
-
-  emxFree_creal_T(&b_Sol);
-  emxFree_int32_T(&r1);
-  emxFree_real_T(&z1);
-  emxFree_real_T(&a);
-  emxFree_creal_T(&x);
-  emxFree_int32_T(&r0);
-  emxFree_creal_T(&b_d);
-  emxFree_cuint8_T(&d);
-  emlrtHeapReferenceStackLeaveFcnR2012b(sp);
+  emxFree_creal_T(sp, &c_d);
+  emxFree_cuint8_T(sp, &d);
+  emlrtHeapReferenceStackLeaveFcnR2012b((emlrtCTX)sp);
 }
 
 /* End of code generation (Chi23_Runge_Kuarong.c) */

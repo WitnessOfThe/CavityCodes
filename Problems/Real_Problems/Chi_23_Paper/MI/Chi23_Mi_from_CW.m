@@ -7,14 +7,14 @@
     
     Res.CW.In         = Params_JuanjuanLiNbd2nd;
     Res.CW.In.eps     = 2*pi*95E9;
-    Res.CW.In.delta_o = -1.16*Res.CW.In.ko;%-1.785*Res.CW.In.ko
-    Res.CW.In.W       =  50E-3;%2E4*Res.CW.In.W_Star;
+    Res.CW.In.delta_o = 0.1*Res.CW.In.ko;%-1.785*Res.CW.In.ko
+    Res.CW.In.W       =  200E-3;%2E4*Res.CW.In.W_Star;
     
-    Res.CW.In.kMI     = [1:16];
-    Res.CW.In.N       = [16];
+    Res.CW.In.kMI     = [1:100];
+    Res.CW.In.N       = [100];
     Res.CW            = Res.CW.Met.Norm(Res.CW);
 %%
-    delta_vector = linspace(-1.40,-1.5,100);
+    delta_vector = linspace(-0.5,1,50);
     [Omega,lambda] = Get_Chi2Mi(Res.CW,delta_vector);
 
 %%
@@ -24,8 +24,7 @@ figure;plot(delta_vector,Omega)
 %  figure;plot(Res.CW.In.kMI,(lambda(:,40)));
 %  figure;pcolor(delta_vector,(Res.CW.In.kMI),(lambda));shading interp;
  figure;hold on;
- for il =1:15
-
+ for il =36:36
     plot(delta_vector,(lambda(il,:)));
  end
  plot([min(delta_vector),max(delta_vector)],[0,0],'Color',[0,0,0])
@@ -36,7 +35,7 @@ function [Omega,lambda] = Get_Chi2Mi(CW,delta_vector)
         CW.In.delta_o = delta_vector(i)*CW.In.ko;
         CW            = CW.Met.Norm(CW);
 %
-        CW = Chi23_CW_Track_fromLower2Point(CW,[CW.In.W,CW.In.W]/CW.In.Wf_Star,[-2,delta_vector(i)])  ;  
+        CW = Chi23_CW_Track_fromLower2Point(CW,[CW.In.W,CW.In.W]/CW.In.Wf_Star,[2,delta_vector(i)])  ;  
       % CW            = CW.Met.Solve_Chi2(CW);
         [Omega(i),ind]       = max(CW.Sol.Omega);
         CW.Met.MI_Matrix=       @Chi23_MI_Matrix;

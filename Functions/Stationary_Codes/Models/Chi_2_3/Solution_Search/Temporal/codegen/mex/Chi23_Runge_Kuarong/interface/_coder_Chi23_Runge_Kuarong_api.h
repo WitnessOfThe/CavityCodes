@@ -9,24 +9,21 @@
  *
  */
 
-#ifndef _CODER_CHI23_RUNGE_KUARONG_API_H
-#define _CODER_CHI23_RUNGE_KUARONG_API_H
+#pragma once
 
 /* Include files */
+#include "Chi23_Runge_Kuarong_types.h"
+#include "rtwtypes.h"
+#include "emlrt.h"
+#include "mex.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "tmwtypes.h"
-#include "mex.h"
-#include "emlrt.h"
-#include "rtwtypes.h"
-#include "Chi23_Runge_Kuarong_types.h"
 
 /* Function Declarations */
-extern void Chi23_Runge_Kuarong_api(const mxArray * const prhs[2], int32_T nlhs,
-  const mxArray *plhs[1]);
-
-#endif
+void Chi23_Runge_Kuarong_api(Chi23_Runge_KuarongStackData *SD,
+                             const mxArray *const prhs[2],
+                             const mxArray **plhs);
 
 /* End of code generation (_coder_Chi23_Runge_Kuarong_api.h) */

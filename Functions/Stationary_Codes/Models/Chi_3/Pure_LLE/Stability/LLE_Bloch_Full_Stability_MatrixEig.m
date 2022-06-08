@@ -17,7 +17,7 @@
        L_pl  = Stat.Eq.delta;
        L_mn  = Stat.Eq.delta;
        
-    for    i = 2:3
+    for    i = 2:6
         
            L_pl = L_pl + ( Stat.Space.k+Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i) ;
            L_mn = L_mn + (-Stat.Space.k-Stat.In.k).^i.*Stat.Eq.D(i)/factorial(i);
@@ -45,6 +45,6 @@
                            FF*diag( Stat.Eq.gamma_Kerr.*(  conj(f_psi).^2 ) )*FI, FF*diag(  Stat.Eq.gamma_Kerr.*(2*abs(f_psi).^2) )*FI];
                    
         
-        g     = -1i.*(Linear_part+Nonlinear_part);
+        g     = (-1i.*(Linear_part+Nonlinear_part));
         
     end

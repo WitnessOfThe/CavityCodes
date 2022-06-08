@@ -10,20 +10,14 @@
  */
 
 /* Include files */
-#include "rt_nonfinite.h"
-#include "Chi23_Runge_Kuarong.h"
 #include "fft.h"
-#include "FFTWApi.h"
+#include "rt_nonfinite.h"
 
 /* Function Definitions */
-void c_fft(const creal_T x[256], creal_T y[256])
+void fft(const creal_T x[1024], creal_T y[1024])
 {
-  FFTWApi_fft1d(x, false, y);
-}
-
-void fft(const creal_T x[256], creal_T y[256])
-{
-  FFTWApi_fft1d(x, true, y);
+  emlrtFFTWSetNumThreads(6);
+  emlrtFFTW_1D_C2C((real_T *)&x[0], (real_T *)&y[0], 1, 1024, 1024, 1, -1);
 }
 
 /* End of code generation (fft.c) */

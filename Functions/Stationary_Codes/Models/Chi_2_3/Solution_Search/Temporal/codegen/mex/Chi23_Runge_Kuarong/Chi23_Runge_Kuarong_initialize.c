@@ -10,24 +10,24 @@
  */
 
 /* Include files */
-#include "rt_nonfinite.h"
-#include "Chi23_Runge_Kuarong.h"
 #include "Chi23_Runge_Kuarong_initialize.h"
-#include "_coder_Chi23_Runge_Kuarong_mex.h"
 #include "Chi23_Runge_Kuarong_data.h"
+#include "_coder_Chi23_Runge_Kuarong_mex.h"
+#include "rt_nonfinite.h"
 
 /* Function Definitions */
 void Chi23_Runge_Kuarong_initialize(void)
 {
-  emlrtStack st = { NULL,              /* site */
-    NULL,                              /* tls */
-    NULL                               /* prev */
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
   };
-
+  mex_InitInfAndNan();
   mexFunctionCreateRootTLS();
   emlrtBreakCheckR2012bFlagVar = emlrtGetBreakCheckFlagAddressR2012b();
   st.tls = emlrtRootTLSGlobal;
-  emlrtClearAllocCountR2012b(&st, false, 0U, 0);
+  emlrtClearAllocCountR2012b(&st, false, 0U, NULL);
   emlrtEnterRtStackR2012b(&st);
   emlrtFirstTimeR2012b(emlrtRootTLSGlobal);
 }

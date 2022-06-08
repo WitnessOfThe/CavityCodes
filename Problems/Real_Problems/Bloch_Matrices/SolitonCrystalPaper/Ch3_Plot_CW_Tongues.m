@@ -16,12 +16,12 @@
 %%
 
     NN                  = 1000;
-    delta_vector        = CW.In.kappa*linspace(-6,-1,NN);
-    W_WStar             = 8;
+    delta_vector        = CW.In.kappa*linspace(-6,2.2,NN);
+    W_WStar             = 2;
     CW.In.P             = W_WStar*pi/(CW.In.eta*CW.In.D(1)/CW.In.kappa)*CW.In.kappa/CW.In.gamma;  
     CW.In.N_mode         = 2^8;
     
-%    R   = Get_CW_Tongues(CW,delta_vector,NN);
+    R   = Get_CW_Tongues(CW,delta_vector,NN);
     Lambda = Get_MI_Scan(CW,delta_vector,6,NN);
     
 %%
