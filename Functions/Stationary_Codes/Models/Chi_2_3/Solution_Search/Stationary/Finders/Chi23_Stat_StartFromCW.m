@@ -1,10 +1,10 @@
 function Res = Chi23_Stat_StartFromCW(Res)
     
-    coeff_start = [0,4];
+    coeff_start = [0,3];
     Flag = false;
         
    W                 = [Res.CW.In.W/ Res.CW.In.Wf_Star, Res.CW.In.W/ Res.CW.In.Wf_Star];
-   delta             = [4,Res.CW.In.delta_o/Res.CW.In.ko];
+   delta             = [-4,Res.CW.In.delta_o/Res.CW.In.ko];
     
     Res.CW            = Chi23_CW_Track_fromLower2Point(Res.CW,W,delta);
   %  Res.CW            = Res.CW.Met.Solve(Res.CW);

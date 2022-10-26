@@ -21,10 +21,12 @@
 #include <string.h>
 
 /* Function Declarations */
-void Chi_3_LLE_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1], int32_T
-  nrhs, const mxArray *prhs[2]);
-MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
-  const mxArray *prhs[]);
+void Chi_3_LLE_Runge_Kuarong_mexFunction(int32_T nlhs, mxArray *plhs[1],
+                                         int32_T nrhs, const mxArray *prhs[2]);
+
+MEXFUNCTION_LINKAGE void mexFunction(int32_T nlhs, mxArray *plhs[],
+                                     int32_T nrhs, const mxArray *prhs[]);
+
 emlrtCTX mexFunctionCreateRootTLS(void);
 
 /* End of code generation (_coder_Chi_3_LLE_Runge_Kuarong_mex.h) */

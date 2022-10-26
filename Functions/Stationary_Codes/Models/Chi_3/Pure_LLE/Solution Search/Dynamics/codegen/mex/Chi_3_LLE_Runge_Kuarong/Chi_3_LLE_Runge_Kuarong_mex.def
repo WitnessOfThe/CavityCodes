@@ -7,16 +7,10 @@ Chi_3_LLE_Runge_Kuarong
 Chi_3_LLE_Runge_Kuarong_initialize
 Chi_3_LLE_Runge_Kuarong_terminate
 Chi_3_LLE_Runge_Kuarong_atexit
-emxEnsureCapacity_boolean_T
-emxFree_boolean_T
-emxFree_int32_T
-emxFree_cuint8_T
 emxEnsureCapacity_cuint8_T
 emxEnsureCapacity_creal_T
-emxEnsureCapacity_int32_T
+emxFree_cuint8_T
 emxInit_cuint8_T
-emxInit_int32_T
-emxInit_boolean_T
 emxFreeStruct_struct6_T
 emxFree_creal_T
 emxInitStruct_struct6_T

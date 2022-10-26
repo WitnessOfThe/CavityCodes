@@ -18,11 +18,11 @@
 /* Function Definitions */
 void Chi_3_LLE_Runge_Kuarong_atexit(void)
 {
-  emlrtStack st = { NULL,              /* site */
-    NULL,                              /* tls */
-    NULL                               /* prev */
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
   };
-
   mexFunctionCreateRootTLS();
   st.tls = emlrtRootTLSGlobal;
   emlrtEnterRtStackR2012b(&st);
@@ -33,11 +33,11 @@ void Chi_3_LLE_Runge_Kuarong_atexit(void)
 
 void Chi_3_LLE_Runge_Kuarong_terminate(void)
 {
-  emlrtStack st = { NULL,              /* site */
-    NULL,                              /* tls */
-    NULL                               /* prev */
+  emlrtStack st = {
+      NULL, /* site */
+      NULL, /* tls */
+      NULL  /* prev */
   };
-
   st.tls = emlrtRootTLSGlobal;
   emlrtLeaveRtStackR2012b(&st);
   emlrtDestroyRootTLS(&emlrtRootTLSGlobal);

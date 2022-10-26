@@ -21,7 +21,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void Chi_3_LLE_Runge_Kuarong_api(const mxArray * const prhs[2], const mxArray
-  *plhs[1]);
+void Chi_3_LLE_Runge_Kuarong_api(const mxArray *const prhs[2],
+                                 const mxArray **plhs);
 
 /* End of code generation (_coder_Chi_3_LLE_Runge_Kuarong_api.h) */

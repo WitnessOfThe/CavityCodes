@@ -21,6 +21,6 @@
 #include <string.h>
 
 /* Function Declarations */
-void fft(const creal_T x[512], creal_T y[512]);
+void fft(const creal_T x[256], creal_T y[256]);
 
 /* End of code generation (fft.h) */

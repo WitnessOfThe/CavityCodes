@@ -16,8 +16,8 @@ function In = Params_JuanjuanLiNbd2nd
     In.Do              = 2*pi*[286.24E9, 14E6,153E3,0];% Dispersion Coefficients,-4E3
     In.De              = 2*pi*[289.24E9,-18E6,-103E3,0];% Dispersion Coefficients,-4E3
 %%
-    In.Do              = 2*pi*[286.24E9, 14E6,0,0];% Dispersion Coefficients,-4E3
-    In.De              = 2*pi*[289.24E9,-18E6,0,0];% Dispersion Coefficients,-4E3
+  %  In.Do              = 2*pi*[286.24E9, 14E6,0,0];% Dispersion Coefficients,-4E3
+ %   In.De              = 2*pi*[289.24E9,-18E6,0,0];% Dispersion Coefficients,-4E3
 
     In.g2o             = 2*pi*1.2E6; 
     In.g2e             = 2*pi*1.2E6;

@@ -22,6 +22,7 @@
 
 /* Function Declarations */
 void Chi_3_LLE_Runge_Kuarong_atexit(void);
+
 void Chi_3_LLE_Runge_Kuarong_terminate(void);
 
 /* End of code generation (Chi_3_LLE_Runge_Kuarong_terminate.h) */

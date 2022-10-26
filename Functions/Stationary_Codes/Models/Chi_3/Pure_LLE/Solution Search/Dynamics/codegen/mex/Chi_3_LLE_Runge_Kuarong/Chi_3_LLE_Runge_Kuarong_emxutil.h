@@ -23,19 +23,26 @@
 
 /* Function Declarations */
 void emxEnsureCapacity_creal_T(const emlrtStack *sp, emxArray_creal_T *emxArray,
-  int32_T oldNumel, const emlrtRTEInfo *srcLocation);
-void emxEnsureCapacity_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T
-  *emxArray, int32_T oldNumel, const emlrtRTEInfo *srcLocation);
-void emxFreeStruct_struct6_T(struct6_T *pStruct);
-void emxFree_creal_T(emxArray_creal_T **pEmxArray);
-void emxFree_cuint8_T(emxArray_cuint8_T **pEmxArray);
-void emxInitStruct_struct6_T(const emlrtStack *sp, struct6_T *pStruct, const
-  emlrtRTEInfo *srcLocation, boolean_T doPush);
-void emxInit_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray, int32_T
-                     numDimensions, const emlrtRTEInfo *srcLocation, boolean_T
-                     doPush);
+                               int32_T oldNumel,
+                               const emlrtRTEInfo *srcLocation);
+
+void emxEnsureCapacity_cuint8_T(const emlrtStack *sp,
+                                emxArray_cuint8_T *emxArray, int32_T oldNumel,
+                                const emlrtRTEInfo *srcLocation);
+
+void emxFreeStruct_struct6_T(const emlrtStack *sp, struct6_T *pStruct);
+
+void emxFree_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray);
+
+void emxFree_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T **pEmxArray);
+
+void emxInitStruct_struct6_T(const emlrtStack *sp, struct6_T *pStruct,
+                             const emlrtRTEInfo *srcLocation);
+
+void emxInit_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray,
+                     const emlrtRTEInfo *srcLocation);
+
 void emxInit_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T **pEmxArray,
-                      int32_T numDimensions, const emlrtRTEInfo *srcLocation,
-                      boolean_T doPush);
+                      const emlrtRTEInfo *srcLocation);
 
 /* End of code generation (Chi_3_LLE_Runge_Kuarong_emxutil.h) */

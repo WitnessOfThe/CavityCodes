@@ -12,9 +12,9 @@ function Stab = LLE_Bloch_Full_Stability(Stat)
         
         Stat.In.k                     = Stab.k(i);
         
-        [Vectors_raw,Values_raw]  = eigs(@(x)Stat.Met.Stab_Matrix(x,Stat)...
-            ,2*Stat.Space.N,2*Stat.Space.N,'largestreal');
-%        [Vectors_raw,Values_raw]  = eig(Stat.Met.Stab_Matrix(Stat));
+%        [Vectors_raw,Values_raw]  = eig(@(x)Stat.Met.Stab_Matrix(x,Stat)...
+ %           ,2*Stat.Space.N,2*Stat.Space.N,'largestreal');
+        [Vectors_raw,Values_raw]  = eig(Stat.Met.Stab_Matrix(Stat));
                 
         Stab.Values(i,:)          = diag(Values_raw)*Stat.Eq.norm;   
 %         Stab.Snorm(i,:)           = zeros(1,2*Stat.Space.N);
