@@ -100,8 +100,8 @@
     Psie    = ifft(F_Psi(N+1:2*N).*Fac_minus(N+1:2*N));
     
     k_e         = complex(zeros(1,2*N));
-    k_e(1:N)    = 1i*Fac_plus(1:N).*(fft(Eq.gam2o.*conj(Psio).*Psie +  Eq.gam3o.*(abs(Psio).^2 + 2*abs(Psie).^2).*Psio )  );
-    k_e(N+1:2*N)= 1i*Fac_plus(N+1:2*N).*(fft(Eq.gam2e.*Psio.^2 +Eq.gam3e.*(2*abs(Psio).^2 + abs(Psie).^2).*Psie)  );
+    k_e(1:N)    = 1i*Fac_plus(1:N).*(Eq.gam2o.*fft(conj(Psio).*Psie)+  Eq.gam3o.*fft((abs(Psio).^2 + 2*abs(Psie).^2).*Psio )   );%
+    k_e(N+1:2*N)= 1i*Fac_plus(N+1:2*N).*(Eq.gam2e.*fft(Psio.^2) +Eq.gam3e.*fft((2*abs(Psio).^2 + abs(Psie).^2).*Psie) );% 
     
         k_e(1)      = k_e(1) + N*Fac_plus(1).*1/2*Eq.ko*Eq.H_f;
 

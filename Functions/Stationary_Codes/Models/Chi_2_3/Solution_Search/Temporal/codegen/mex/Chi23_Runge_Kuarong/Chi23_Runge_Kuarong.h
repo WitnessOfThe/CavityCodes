@@ -22,8 +22,7 @@
 #include <string.h>
 
 /* Function Declarations */
-void Chi23_Runge_Kuarong(Chi23_Runge_KuarongStackData *SD, const emlrtStack *sp,
-                         const struct0_T *Temp, const struct5_T *Runge,
-                         struct6_T *Sol);
+void Chi23_Runge_Kuarong(const emlrtStack *sp, const struct0_T *Temp,
+                         const struct7_T *Runge, struct8_T *Sol);
 
 /* End of code generation (Chi23_Runge_Kuarong.h) */

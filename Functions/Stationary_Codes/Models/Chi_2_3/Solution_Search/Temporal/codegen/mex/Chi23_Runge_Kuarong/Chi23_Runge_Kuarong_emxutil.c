@@ -104,7 +104,7 @@ void emxEnsureCapacity_cuint8_T(const emlrtStack *sp,
   }
 }
 
-void emxFreeStruct_struct6_T(const emlrtStack *sp, struct6_T *pStruct)
+void emxFreeStruct_struct8_T(const emlrtStack *sp, struct8_T *pStruct)
 {
   emxFree_creal_T(sp, &pStruct->Psio);
   emxFree_creal_T(sp, &pStruct->Psie);
@@ -137,7 +137,7 @@ void emxFree_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T **pEmxArray)
   }
 }
 
-void emxInitStruct_struct6_T(const emlrtStack *sp, struct6_T *pStruct,
+void emxInitStruct_struct8_T(const emlrtStack *sp, struct8_T *pStruct,
                              const emlrtRTEInfo *srcLocation)
 {
   emxInit_creal_T(sp, &pStruct->Psio, srcLocation);

@@ -30,13 +30,13 @@ void emxEnsureCapacity_cuint8_T(const emlrtStack *sp,
                                 emxArray_cuint8_T *emxArray, int32_T oldNumel,
                                 const emlrtRTEInfo *srcLocation);
 
-void emxFreeStruct_struct6_T(const emlrtStack *sp, struct6_T *pStruct);
+void emxFreeStruct_struct8_T(const emlrtStack *sp, struct8_T *pStruct);
 
 void emxFree_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray);
 
 void emxFree_cuint8_T(const emlrtStack *sp, emxArray_cuint8_T **pEmxArray);
 
-void emxInitStruct_struct6_T(const emlrtStack *sp, struct6_T *pStruct,
+void emxInitStruct_struct8_T(const emlrtStack *sp, struct8_T *pStruct,
                              const emlrtRTEInfo *srcLocation);
 
 void emxInit_creal_T(const emlrtStack *sp, emxArray_creal_T **pEmxArray,

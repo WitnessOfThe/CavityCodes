@@ -14,10 +14,10 @@
 #include "rt_nonfinite.h"
 
 /* Function Definitions */
-void fft(const creal_T x[1024], creal_T y[1024])
+void fft(const creal_T x[256], creal_T y[256])
 {
   emlrtFFTWSetNumThreads(6);
-  emlrtFFTW_1D_C2C((real_T *)&x[0], (real_T *)&y[0], 1, 1024, 1024, 1, -1);
+  emlrtFFTW_1D_C2C((real_T *)&x[0], (real_T *)&y[0], 1, 256, 256, 1, -1);
 }
 
 /* End of code generation (fft.c) */

@@ -3,7 +3,7 @@ function [CW,S] = Chi23_CW_TrackToPoint(CW,W,delta,NN)
     delta_vector          = linspace(delta(1),delta(2),NN);
     W_vector              = linspace(W(1),W(2),NN);
     
-    CW.In.W           = W(1)*CW.In.Wf_Star;        
+    CW.In.W           = W(1);        
     CW.In.delta       = delta(1)*CW.In.ko;        
     
     CW                = CW.Met.Solve_Chi2(CW); 
@@ -22,7 +22,7 @@ function [CW,S] = Chi23_CW_TrackToPoint(CW,W,delta,NN)
     for i_d = 1:NN
 
         CW.In.delta_o    = delta_vector(i_d)*CW.In.ko;            
-        CW.In.W          = W_vector(i_d)*CW.In.Wf_Star;            
+        CW.In.W          = W_vector(i_d);            
         CW               = CW.Met.Norm(CW);  
         [Slv,eps_f,~] = Newton_Switcher([real(CW.Sol.Psi_o(1)),imag(CW.Sol.Psi_o(1)),real(CW.Sol.Psi_e(1)),imag(CW.Sol.Psi_e(1))],CW);
         CW               = CW.Met.Prop_Gen(Slv,CW);          
