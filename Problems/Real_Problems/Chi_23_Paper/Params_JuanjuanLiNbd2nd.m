@@ -1,6 +1,6 @@
 function In = Params_JuanjuanLiNbd2nd
     Fundamental_Constants;
-    In.eta             = 0.5;                                
+    In.eta             = 0.3333333;                                
     In.ko             = 2*2*pi*300E6;                                
     In.ke             = 2*2*pi*800E6; %2*pi*4E6     e
     

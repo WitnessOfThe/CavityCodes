@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2021a">
-  <configuration build-checksum="1972741390" file="C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong.prj" location="C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal" name="Chi23_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="306256086" file="C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong_GPU.prj" location="C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal" name="Chi23_Runge_Kuarong_GPU" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -12,16 +12,16 @@
       <var.SimdQueryHardwareType>MATLAB Host Computer</var.SimdQueryHardwareType>
       <param.InstructionSetExtensionsAvailableInUI>true</param.InstructionSetExtensionsAvailableInUI>
       <param.InstructionSetExtensions>None</param.InstructionSetExtensions>
-      <param.ResponsivenessChecks>true</param.ResponsivenessChecks>
+      <param.ResponsivenessChecks>false</param.ResponsivenessChecks>
       <param.ExtrinsicCalls>true</param.ExtrinsicCalls>
-      <param.IntegrityChecks>true</param.IntegrityChecks>
+      <param.IntegrityChecks>false</param.IntegrityChecks>
       <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
-      <param.EnableAutoParallelization>false</param.EnableAutoParallelization>
+      <param.EnableAutoParallelization>true</param.EnableAutoParallelization>
       <param.NumberOfCpuThreads>0</param.NumberOfCpuThreads>
       <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.SyncAlways</param.GlobalDataSyncMethod>
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
-      <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
+      <param.DynamicMemoryAllocationThreshold>1073741824</param.DynamicMemoryAllocationThreshold>
       <param.DynamicMemoryAllocationInterface>option.DynamicMemoryAllocationInterface.AUTO</param.DynamicMemoryAllocationInterface>
       <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
       <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
@@ -44,7 +44,7 @@
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
-      <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
+      <param.VerificationStatus>option.VerificationStatus.FailedTest</param.VerificationStatus>
       <param.EnableMexProfiling>false</param.EnableMexProfiling>
       <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
       <param.CustomSourceCode />
@@ -64,20 +64,20 @@
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
       <param.InlineStackLimit>1000000</param.InlineStackLimit>
-      <param.InlineBetweenUserFunctions>option.InlineBetweenUserFunctions.Speed</param.InlineBetweenUserFunctions>
-      <param.InlineBetweenUserAndMathWorksFunctions>option.InlineBetweenUserAndMathWorksFunctions.Speed</param.InlineBetweenUserAndMathWorksFunctions>
-      <param.InlineBetweenMathWorksFunctions>option.InlineBetweenMathWorksFunctions.Speed</param.InlineBetweenMathWorksFunctions>
-      <param.EnableMemcpy>true</param.EnableMemcpy>
+      <param.InlineBetweenUserFunctions>option.InlineBetweenUserFunctions.Always</param.InlineBetweenUserFunctions>
+      <param.InlineBetweenUserAndMathWorksFunctions>option.InlineBetweenUserAndMathWorksFunctions.Always</param.InlineBetweenUserAndMathWorksFunctions>
+      <param.InlineBetweenMathWorksFunctions>option.InlineBetweenMathWorksFunctions.Always</param.InlineBetweenMathWorksFunctions>
+      <param.EnableMemcpy>false</param.EnableMemcpy>
       <param.MemcpyThreshold>64</param.MemcpyThreshold>
-      <param.EnableOpenMP>true</param.EnableOpenMP>
-      <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
+      <param.EnableOpenMP>false</param.EnableOpenMP>
+      <param.InitFltsAndDblsToZero>false</param.InitFltsAndDblsToZero>
       <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
-      <param.EnableCRICodeCoverage>true</param.EnableCRICodeCoverage>
+      <param.EnableCRICodeCoverage>false</param.EnableCRICodeCoverage>
       <param.EnableAutoParallelizationReporting>true</param.EnableAutoParallelizationReporting>
       <param.CacheDynamicArrayDataPointer>true</param.CacheDynamicArrayDataPointer>
       <param.EnableJIT>false</param.EnableJIT>
       <param.EnableJITSilentBailOut>false</param.EnableJITSilentBailOut>
-      <param.CheckForIssuesJIT>true</param.CheckForIssuesJIT>
+      <param.CheckForIssuesJIT>false</param.CheckForIssuesJIT>
       <param.EnableGitSupport>false</param.EnableGitSupport>
       <param.EnableAutoCommit>false</param.EnableAutoCommit>
       <param.RepositoryStyle>option.RepositoryStyle.Auto</param.RepositoryStyle>
@@ -177,11 +177,11 @@
       <param.PurelyIntegerCode />
       <param.SupportNonFinite />
       <param.LoopUnrollThreshold />
-      <param.EnableAutoParallelization>false</param.EnableAutoParallelization>
+      <param.EnableAutoParallelization>true</param.EnableAutoParallelization>
       <param.NumberOfCpuThreads>0</param.NumberOfCpuThreads>
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
-      <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
+      <param.DynamicMemoryAllocationThreshold>1073741824</param.DynamicMemoryAllocationThreshold>
       <param.DynamicMemoryAllocationInterface>option.DynamicMemoryAllocationInterface.AUTO</param.DynamicMemoryAllocationInterface>
       <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
       <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
@@ -204,7 +204,7 @@
       <param.CodeFormattingTool>option.CodeFormattingTool.Auto</param.CodeFormattingTool>
       <param.ClangFormatFile />
       <param.DataTypeReplacement />
-      <param.EnableCustomReplacementTypes>false</param.EnableCustomReplacementTypes>
+      <param.EnableCustomReplacementTypes />
       <param.ReplacementTypes.double />
       <param.ReplacementTypes.single />
       <param.ReplacementTypes.uint8 />
@@ -217,7 +217,7 @@
       <param.ReplacementTypes.int64 />
       <param.ReplacementTypes.char />
       <param.ReplacementTypes.logical />
-      <param.ReplacementTypes.ImportCustomTypes>false</param.ReplacementTypes.ImportCustomTypes>
+      <param.ReplacementTypes.ImportCustomTypes />
       <param.ReplacementTypes.HeaderFiles />
       <param.CppInterfaceStyle>option.CppInterfaceStyle.Functions</param.CppInterfaceStyle>
       <param.CppInterfaceClassName />
@@ -261,9 +261,9 @@
       <param.CustomSource />
       <param.CustomLibrary />
       <param.PostCodeGenCommand />
-      <param.TargetLangStandard>Auto</param.TargetLangStandard>
-      <param.CodeReplacementLibrary>None</param.CodeReplacementLibrary>
-      <param.DeprecatedCRLFlag>false</param.DeprecatedCRLFlag>
+      <param.TargetLangStandard />
+      <param.CodeReplacementLibrary />
+      <param.DeprecatedCRLFlag />
       <param.SameHardware>true</param.SameHardware>
       <param.Toolchain>Automatically locate an installed toolchain</param.Toolchain>
       <param.BuildConfiguration />
@@ -334,16 +334,16 @@
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
       <param.InlineStackLimit>1000000</param.InlineStackLimit>
-      <param.InlineBetweenUserFunctions>option.InlineBetweenUserFunctions.Speed</param.InlineBetweenUserFunctions>
-      <param.InlineBetweenUserAndMathWorksFunctions>option.InlineBetweenUserAndMathWorksFunctions.Speed</param.InlineBetweenUserAndMathWorksFunctions>
-      <param.InlineBetweenMathWorksFunctions>option.InlineBetweenMathWorksFunctions.Speed</param.InlineBetweenMathWorksFunctions>
+      <param.InlineBetweenUserFunctions>option.InlineBetweenUserFunctions.Always</param.InlineBetweenUserFunctions>
+      <param.InlineBetweenUserAndMathWorksFunctions>option.InlineBetweenUserAndMathWorksFunctions.Always</param.InlineBetweenUserAndMathWorksFunctions>
+      <param.InlineBetweenMathWorksFunctions>option.InlineBetweenMathWorksFunctions.Always</param.InlineBetweenMathWorksFunctions>
       <param.EnableStrengthReduction />
-      <param.EnableMemcpy>true</param.EnableMemcpy>
+      <param.EnableMemcpy>false</param.EnableMemcpy>
       <param.MemcpyThreshold>64</param.MemcpyThreshold>
-      <param.EnableOpenMP>true</param.EnableOpenMP>
-      <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
+      <param.EnableOpenMP>false</param.EnableOpenMP>
+      <param.InitFltsAndDblsToZero>false</param.InitFltsAndDblsToZero>
       <param.GenerateNonFiniteFilesIfUsed />
-      <param.PassStructByReference />
+      <param.PassStructByReference>false</param.PassStructByReference>
       <param.CustomLAPACKCallback />
       <param.CustomFFTCallback />
       <param.CustomBLASCallback />
@@ -910,18 +910,14 @@
         <param.hdl.GenerateXSGBlock />
       </unset>
     </profile>
-    <param.objective>option.objective.c</param.objective>
+    <param.objective>option.objective.gpu</param.objective>
     <param.WorkflowStep>workflowSummary</param.WorkflowStep>
     <param.TestSnippets>
-      <item>Chi23_Runge_Kuarong(R.Temp,Runge)</item>
-      <item>Chi23_Runge_Kuarong(ResSave.Temp,Runge)</item>
-      <item>Chi23_Runge_Kuarong(Temp,Runge)</item>
-      <item>Chi23_Runge_Kuarong(ResSave(i).Temp,Runge)</item>
-      <item>Chi23_Runge_Kuarong(Res.Temp,Runge)</item>
+      <item>Chi23_Runge_Kuarong_GPU(R.Temp,Runge)</item>
     </param.TestSnippets>
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}\Chi23_Runge_Kuarong_mex.mexw64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\Chi23_Runge_Kuarong_GPU_mex.mexw64</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.HasGpuCoder>true</param.HasGpuCoder>
@@ -941,39 +937,39 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>597207777</param.AnnotationChecksum>
+    <param.AnnotationChecksum>1218896794</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
     <var.redirectedInputTypeData />
     <var.DismissScreener>false</var.DismissScreener>
     <param.unifiedParamStorage />
-    <var.gc.lastOutputRoot>codegen\mex\Chi23_Runge_Kuarong</var.gc.lastOutputRoot>
+    <var.gc.lastOutputRoot>codegen\mex\Chi23_Runge_Kuarong_GPU</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>3038481532</var.gc.preBuildChecksum>
-    <var.cfi.lastOutputRoot>codegen\mex\Chi23_Runge_Kuarong</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>2638019989</var.cfi.preBuildChecksum>
-    <var.lastCfiTestSnippet>Chi23_Runge_Kuarong(R.Temp,Runge)</var.lastCfiTestSnippet>
+    <var.gc.preBuildChecksum>3831691375</var.gc.preBuildChecksum>
+    <var.cfi.lastOutputRoot>codegen\mex\Chi23_Runge_Kuarong_GPU</var.cfi.lastOutputRoot>
+    <var.cfi.preBuildChecksum>4288186666</var.cfi.preBuildChecksum>
+    <var.lastCfiTestSnippet>Chi23_Runge_Kuarong_GPU(R.Temp,Runge)</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;291747448&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong_GPU.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;650857739&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong_GPU.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
-    <var.isGpuCoder>false</var.isGpuCoder>
-    <var.notGpuCoder>true</var.notGpuCoder>
+    <var.isGpuCoder>true</var.isGpuCoder>
+    <var.notGpuCoder>false</var.notGpuCoder>
     <var.boundToGui>true</var.boundToGui>
     <var.isConfigDialog>false</var.isConfigDialog>
     <var.ecoderEnabled>true</var.ecoderEnabled>
-    <param.mex.outputfile>Chi23_Runge_Kuarong_mex</param.mex.outputfile>
-    <param.grt.outputfile>Chi23_Runge_Kuarong</param.grt.outputfile>
+    <param.mex.outputfile>Chi23_Runge_Kuarong_GPU_mex</param.mex.outputfile>
+    <param.grt.outputfile>Chi23_Runge_Kuarong_GPU</param.grt.outputfile>
     <param.artifact>option.target.artifact.mex</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}\Chi23_Runge_Kuarong_mex.mexw64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\Chi23_Runge_Kuarong_GPU_mex.mexw64</param.outputfile>
     <param.CppNamespace />
     <param.CppPackagesToNamespaces>true</param.CppPackagesToNamespaces>
     <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
     <param.CppPreserveClasses>true</param.CppPreserveClasses>
-    <param.gpu.Enabled>false</param.gpu.Enabled>
+    <param.gpu.Enabled>true</param.gpu.Enabled>
     <param.gpu.SelectCudaDevice>-1</param.gpu.SelectCudaDevice>
     <param.gpu.ComputeCapability>3.5</param.gpu.ComputeCapability>
     <param.gpu.CustomComputeCapability />
@@ -1007,7 +1003,7 @@
     <param.arm-compute.ArmArchitecture>option.arm-compute.architecture.unspecified</param.arm-compute.ArmArchitecture>
     <param.arm-compute.DataType>option.arm-compute.datatype.fp32</param.arm-compute.DataType>
     <param.arm-compute.CalibrationResultFile />
-    <param.TargetLang>option.TargetLang.C</param.TargetLang>
+    <param.TargetLang>option.TargetLang.CPP</param.TargetLang>
     <param.EnableAutoExtrinsicCalls>true</param.EnableAutoExtrinsicCalls>
     <param.EnableImplicitExpansion>true</param.EnableImplicitExpansion>
     <param.UsePreconditions>false</param.UsePreconditions>
@@ -1056,7 +1052,6 @@
     <var.FixedPointAnalysisMode>option.FixedPointAnalysisMode.Sim</var.FixedPointAnalysisMode>
     <param.FixedPointUseDesignRanges>false</param.FixedPointUseDesignRanges>
     <unset>
-      <param.objective />
       <param.ExternalFcnMajority />
       <param.UseGlobals />
       <param.outputfile />
@@ -1178,14 +1173,14 @@
       <param.FixedPointUseDesignRanges />
     </unset>
     <fileset.entrypoints>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi23_Runge_Kuarong.m">
-        <Marker>1667398394567</Marker>
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi23_Runge_Kuarong_GPU.m">
+        <Marker>1667493026524</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
     <fileset.inputtypes>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi23_Runge_Kuarong.m">
-        <Inputs fileName="Chi23_Runge_Kuarong.m" functionName="Chi23_Runge_Kuarong" nargout="1">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi23_Runge_Kuarong_GPU.m">
+        <Inputs fileName="Chi23_Runge_Kuarong_GPU.m" functionName="Chi23_Runge_Kuarong_GPU">
           <Input Name="Temp" typeId="0">
             <Field Name="Met" typeId="1" />
             <Field Name="Par" typeId="2">
@@ -1442,7 +1437,7 @@
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Chi23_Runge_Kuarong_mex.mexw64" optional="false">C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong_mex.mexw64</file>
+      <file location="${PROJECT_ROOT}" name="Chi23_Runge_Kuarong_GPU_mex.mexw64" optional="false">C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong_GPU_mex.mexw64</file>
     </build-deliverables>
     <workflow />
     <matlab>
