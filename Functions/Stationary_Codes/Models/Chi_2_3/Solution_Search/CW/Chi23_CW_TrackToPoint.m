@@ -4,7 +4,7 @@ function [CW,S] = Chi23_CW_TrackToPoint(CW,W,delta,NN)
     W_vector              = linspace(W(1),W(2),NN);
     
     CW.In.W           = W(1);        
-    CW.In.delta       = delta(1)*CW.In.ko;        
+%    CW.In.delta       = delta(1)*CW.In.ko;        
     
     CW                = CW.Met.Solve_Chi2(CW); 
     [~,ind]               = min(abs(CW.Sol.Omega));
@@ -18,7 +18,8 @@ function [CW,S] = Chi23_CW_TrackToPoint(CW,W,delta,NN)
     S.PsiO            = NaN(1,NN);
     S.PsiE            = NaN(1,NN);
     S.Omega           = NaN(1,NN);
-     S.delta          = delta_vector ;
+%    S.CW              = struct(1,NN);
+    S.delta          = delta_vector ;
     for i_d = 1:NN
 
         CW.In.delta_o    = delta_vector(i_d)*CW.In.ko;            
@@ -26,9 +27,11 @@ function [CW,S] = Chi23_CW_TrackToPoint(CW,W,delta,NN)
         CW               = CW.Met.Norm(CW);  
         [Slv,eps_f,~] = Newton_Switcher([real(CW.Sol.Psi_o(1)),imag(CW.Sol.Psi_o(1)),real(CW.Sol.Psi_e(1)),imag(CW.Sol.Psi_e(1))],CW);
         CW               = CW.Met.Prop_Gen(Slv,CW);          
-
+        [Slv,eps_f,~] = Newton_Switcher([real(CW.Sol.Psi_o(1)),imag(CW.Sol.Psi_o(1)),real(CW.Sol.Psi_e(1)),imag(CW.Sol.Psi_e(1))],CW);
+        CW               = CW.Met.Prop_Gen(Slv,CW);          
+        S.CW(i_d) = CW; 
         
-        if eps_f > 1E-5
+        if eps_f > 1E-7
             
             CW.Sol.Psi_o      =  NaN;    
             CW.Sol.Psi_e      =  NaN;
@@ -42,5 +45,7 @@ function [CW,S] = Chi23_CW_TrackToPoint(CW,W,delta,NN)
         S.Omega(i_d)           = CW.Sol.Omega;
         
     end
+            CW.In.delta_o    = delta_vector(end)*CW.In.ko;            
+
         
 end

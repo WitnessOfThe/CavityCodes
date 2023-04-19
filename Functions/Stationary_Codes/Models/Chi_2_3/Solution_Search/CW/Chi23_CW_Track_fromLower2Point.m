@@ -10,7 +10,7 @@ function CW = Chi23_CW_Track_fromLower2Point(CW,W,delta)
     CW                    = CW.Met.Solve_Chi2(CW); 
 
     [~,ind]               = min(abs(CW.Sol.Omega));
-ind =3;
+%    ind =3;
     CW.Sol.Omega      =  CW.Sol.Omega(ind);    
     CW.Sol.Psi_o      =  CW.Sol.Psi_o(ind);    
     CW.Sol.Psi_e      =  CW.Sol.Psi_e(ind);

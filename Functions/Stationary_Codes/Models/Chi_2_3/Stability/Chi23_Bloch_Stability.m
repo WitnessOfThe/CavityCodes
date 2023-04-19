@@ -1,6 +1,6 @@
 function Stab = Chi23_Bloch_Stability(Stat)
             
-     n = [0:1:floor(Stat.In.mu_bl/2)] ;%[-floor(Stat.In.mu_bl):1:floor(Stat.In.mu_bl)];
+     n = 0;%[0:1:floor(Stat.In.mu_bl/2)] ;%[-floor(Stat.In.mu_bl):1:floor(Stat.In.mu_bl)];
  %   if Stat.In.mu_bl == 1 || Stat.In.mu_bl == 0
  for i = 1:size(n,2)
 %        i =1;
@@ -17,7 +17,7 @@ function Stab = Chi23_Bloch_Stability(Stat)
             AA(:,ii) = Stat.Met.Stab_Matrix(AA(:,ii),Stat);
         end
         A = AA;
-      [E_vectors_raw,E_values_raw]  = eig(A);
+       [E_vectors_raw,E_values_raw]  = eig(A);
        
         E_vectors                     = (E_vectors_raw(1:Stat.Space.N,:))...
             + conj( E_vectors_raw(Stat.Space.N+1:2*Stat.Space.N,:));

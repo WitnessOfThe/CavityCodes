@@ -20,12 +20,16 @@
         
         L1     = ifft((Stat.Eq.Lo +   delta - V*Stat.Space.k).*fft(xo));
         
-        NL1    =  - (Stat.Eq.gam2o.*xe.*conj(xo) + ...
-                            Stat.Eq.gam3o.*(abs(xo).^2 + 2*abs(xe).^2).*xo);
+        NL1    =  - ifft(Stat.Eq.gam2o.*fft(xe.*conj(xo)) + ...
+                            Stat.Eq.gam3o.*fft((abs(xo).^2+2*abs(xe).^2).*xo) );
+%        NL1    =  - ifft(Stat.Eq.gam2o.*fft(xe.*conj(xo)) + ...
+ %                           Stat.Eq.gam3o.*fft((abs(xo).^2).*xo) );
         
         L2     = ifft((Stat.Eq.Le + 2*delta - V*Stat.Space.k).*fft(xe));
-        NL2    =  - (Stat.Eq.gam2e.*xo.^2  + ...
-                        Stat.Eq.gam3e.*(2*abs(xo).^2 + abs(xe).^2).*xe);
+        NL2    =  - ifft(Stat.Eq.gam2e.*fft(xo.^2)  +...
+                        Stat.Eq.gam3e.*fft((2*abs(xo).^2 + abs(xe).^2).*xe) ) ;
+ %       NL2    =  - ifft(Stat.Eq.gam2e.*fft(xo.^2)  +...
+  %                      Stat.Eq.gam3e.*fft((abs(xe).^2).*xe) ) ;
         
         Pump   = 1i/2*Stat.Eq.ko*Stat.In.H_f;
 

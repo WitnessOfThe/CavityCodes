@@ -1,0 +1,62 @@
+[
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "nvcc -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe \"--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type\" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I \"/usr/local/matlab/r2021b/simulink/include\" -I \"/usr/local/matlab/r2021b/toolbox/shared/simtargets\" MWCUFFTPlanManager.cpp -o build/glnxa64/MWCUFFTPlanManager.o",
+    "file": "MWCUFFTPlanManager.cpp",
+    "output": "build/glnxa64/MWCUFFTPlanManager.o"
+  },
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "nvcc -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe \"--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type\" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I \"/usr/local/matlab/r2021b/simulink/include\" -I \"/usr/local/matlab/r2021b/toolbox/shared/simtargets\" Chi_3_LLE_Kuar_ins_data.cu -o build/glnxa64/Chi_3_LLE_Kuar_ins_data.o",
+    "file": "Chi_3_LLE_Kuar_ins_data.cu",
+    "output": "build/glnxa64/Chi_3_LLE_Kuar_ins_data.o"
+  },
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "nvcc -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe \"--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type\" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I \"/usr/local/matlab/r2021b/simulink/include\" -I \"/usr/local/matlab/r2021b/toolbox/shared/simtargets\" rt_nonfinite.cu -o build/glnxa64/rt_nonfinite.o",
+    "file": "rt_nonfinite.cu",
+    "output": "build/glnxa64/rt_nonfinite.o"
+  },
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "nvcc -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe \"--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type\" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I \"/usr/local/matlab/r2021b/simulink/include\" -I \"/usr/local/matlab/r2021b/toolbox/shared/simtargets\" Chi_3_LLE_Kuar_ins_initialize.cu -o build/glnxa64/Chi_3_LLE_Kuar_ins_initialize.o",
+    "file": "Chi_3_LLE_Kuar_ins_initialize.cu",
+    "output": "build/glnxa64/Chi_3_LLE_Kuar_ins_initialize.o"
+  },
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "nvcc -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe \"--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type\" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I \"/usr/local/matlab/r2021b/simulink/include\" -I \"/usr/local/matlab/r2021b/toolbox/shared/simtargets\" Chi_3_LLE_Kuar_ins_terminate.cu -o build/glnxa64/Chi_3_LLE_Kuar_ins_terminate.o",
+    "file": "Chi_3_LLE_Kuar_ins_terminate.cu",
+    "output": "build/glnxa64/Chi_3_LLE_Kuar_ins_terminate.o"
+  },
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "nvcc -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe \"--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type\" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I \"/usr/local/matlab/r2021b/simulink/include\" -I \"/usr/local/matlab/r2021b/toolbox/shared/simtargets\" Chi_3_LLE_Kuar_ins.cu -o build/glnxa64/Chi_3_LLE_Kuar_ins.o",
+    "file": "Chi_3_LLE_Kuar_ins.cu",
+    "output": "build/glnxa64/Chi_3_LLE_Kuar_ins.o"
+  },
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "nvcc -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe \"--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type\" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I \"/usr/local/matlab/r2021b/simulink/include\" -I \"/usr/local/matlab/r2021b/toolbox/shared/simtargets\" interface/_coder_Chi_3_LLE_Kuar_ins_api.cu -o build/glnxa64/_coder_Chi_3_LLE_Kuar_ins_api.o",
+    "file": "interface/_coder_Chi_3_LLE_Kuar_ins_api.cu",
+    "output": "build/glnxa64/_coder_Chi_3_LLE_Kuar_ins_api.o"
+  },
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "nvcc -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe \"--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type\" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I \"/usr/local/matlab/r2021b/simulink/include\" -I \"/usr/local/matlab/r2021b/toolbox/shared/simtargets\" interface/_coder_Chi_3_LLE_Kuar_ins_mex.cu -o build/glnxa64/_coder_Chi_3_LLE_Kuar_ins_mex.o",
+    "file": "interface/_coder_Chi_3_LLE_Kuar_ins_mex.cu",
+    "output": "build/glnxa64/_coder_Chi_3_LLE_Kuar_ins_mex.o"
+  },
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c  interface/_coder_Chi_3_LLE_Kuar_ins_info.cpp -o build/glnxa64/_coder_Chi_3_LLE_Kuar_ins_info.o",
+    "file": "interface/_coder_Chi_3_LLE_Kuar_ins_info.cpp",
+    "output": "build/glnxa64/_coder_Chi_3_LLE_Kuar_ins_info.o"
+  },
+  {
+    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/codegen/mex/Chi_3_LLE_Kuar_ins",
+    "command": "nvcc -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe \"--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type\" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMW_CUDA_ARCH=350 -DMODEL=Chi_3_LLE_Kuar_ins_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I \"/usr/local/matlab/r2021b/simulink/include\" -I \"/usr/local/matlab/r2021b/toolbox/shared/simtargets\" cpp_mexapi_version.cpp -o build/glnxa64/cpp_mexapi_version.o",
+    "file": "cpp_mexapi_version.cpp",
+    "output": "build/glnxa64/cpp_mexapi_version.o"
+  }
+]

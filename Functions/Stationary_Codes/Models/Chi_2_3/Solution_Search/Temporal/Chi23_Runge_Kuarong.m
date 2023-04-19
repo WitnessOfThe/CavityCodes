@@ -1,5 +1,5 @@
     function Sol = Chi23_Runge_Kuarong(Temp,Runge)   
-
+   % coder.gpu.kernelfun;
     d            =  complex(zeros(Runge.s,2*Temp.Space.N));
     [nt,dt]      =                        ParSim(Temp.Par);
 
@@ -28,18 +28,18 @@
     Sol.t    = complex(zeros(1,Temp.Par.dd));
 
     
-    for ni = 1:nt 
+    for ni = 0:nt-1 
         
         F_e           = Runge_Kuarong_step(F_e,dt,t + ni*dt,d);%,Runge,exp_plus_omega,exp_minus_omega,Temp,shift_back
         
-        if ( mod(ni,Temp.Par.s_t/Temp.Par.dt ) == 0) && (ni ~= 0)
+        if ( mod(ni,Temp.Par.s_t/Temp.Par.dt ) == 0) %&& (ni ~= 0)
         
             ind_s                = round(ni*Temp.Par.dt/Temp.Par.s_t);
             
-            Sol.Psio(ind_s ,:) = F_e(1:Temp.Space.N)/Temp.Space.N;
-            Sol.Psie(ind_s ,:) = F_e(Temp.Space.N+1:2*Temp.Space.N)/Temp.Space.N;
+            Sol.Psio(ind_s+1 ,:) = F_e(1:Temp.Space.N)/Temp.Space.N;
+            Sol.Psie(ind_s+1 ,:) = F_e(Temp.Space.N+1:2*Temp.Space.N)/Temp.Space.N;
             
-            Sol.t(  ind_s )   = Temp.Par.dt*ni;
+            Sol.t(  ind_s+1 )   = Temp.Par.dt*ni;
 
 %            if 10*log10(sum(abs(Sol.Psio(ind_s,2:end)).^2)) <= -100 && (mod(ind_s,2) == 0)
 
@@ -103,7 +103,7 @@
     k_e(1:N)    = 1i*Fac_plus(1:N).*(Eq.gam2o.*fft(conj(Psio).*Psie)+  Eq.gam3o.*fft((abs(Psio).^2 + 2*abs(Psie).^2).*Psio )   );%
     k_e(N+1:2*N)= 1i*Fac_plus(N+1:2*N).*(Eq.gam2e.*fft(Psio.^2) +Eq.gam3e.*fft((2*abs(Psio).^2 + abs(Psie).^2).*Psie) );% 
     
-        k_e(1)      = k_e(1) + N*Fac_plus(1).*1/2*Eq.ko*Eq.H_f;
+    k_e(1)      = k_e(1) + N*Fac_plus(1).*1/2*Eq.ko*Eq.H_f;
 
     
 end  

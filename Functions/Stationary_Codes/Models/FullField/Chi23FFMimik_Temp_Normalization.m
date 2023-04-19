@@ -43,24 +43,57 @@ function Temp = Chi23FFMimik_Temp_Normalization(Temp)
     
     Temp.Eq.norm            = norm;
     tt                      = [Temp.Space.k,Temp.Space.k];
-    Temp.Eq.mode_range      =     find( tt < 256*2 & tt > -256*2);
+    Temp.Eq.mode_range      =     find( tt < 256*5 & tt > -256*5);
     
     ind_m1 = find(Temp.In.D.m == Temp.In.D.In.m_p);
     ind_m2 = find(Temp.In.D.m == 2*Temp.In.D.In.m_p-Temp.In.D.In.g);
     ind_m3 = find(Temp.In.D.m == 2*Temp.In.D.In.m_p);
 
-    mode_range_a = ind_m1-Temp.In.D.In.Nenv/2:ind_m1+Temp.In.D.In.Nenv/2-1;
-    mode_range_b = ind_m2-Temp.In.D.In.Nenv/2:ind_m2+Temp.In.D.In.Nenv/2-1;
-    mode_range_c = ind_m3-Temp.In.D.In.Nenv/2:ind_m3+Temp.In.D.In.Nenv/2-1;
+    ii = 0;
+    for ik = 1:Temp.Space.N
+        Statement = Temp.In.D.m ==  Temp.In.D.In.m_p + Temp.Space.k(ik);
+        if sum(Statement) ~= 0
+            ii = ii + 1;
+            mode_range_a(ii)    = find(Temp.In.D.m ==  Temp.In.D.In.m_p + Temp.Space.k(ik));
+            ind_range_k_a(ii)     = find(Temp.Space.k== Temp.Space.k(ik));
+        end
+    end
+    ii = 0;
+    for ik = 1:Temp.Space.N
+        Statement = Temp.In.D.m ==  2*Temp.In.D.In.m_p + Temp.Space.k(ik)-Temp.In.D.In.g;
+        if sum(Statement) ~= 0
+            ii = ii + 1;
+            mode_range_b(ii)    = find(Temp.In.D.m ==  2*Temp.In.D.In.m_p + Temp.Space.k(ik)-Temp.In.D.In.g);
+            ind_range_k_b(ii)     = find(Temp.Space.k== Temp.Space.k(ik));
+        end
+    end
+    ii = 0;
+    for ik = 1:Temp.Space.N
+        Statement = Temp.In.D.m ==  2*Temp.In.D.In.m_p + Temp.Space.k(ik);
+        if sum(Statement) ~= 0
+            ii = ii + 1;
+            mode_range_c(ii)    = find(Temp.In.D.m ==  2*Temp.In.D.In.m_p + Temp.Space.k(ik));
+            ind_range_k_c(ii)     = find(Temp.Space.k== Temp.Space.k(ik));
+        end
+    end
 
-    omega_a                 = ifftshift(Temp.In.D.omega(mode_range_a) - Temp.In.D.omega(ind_m1) - [-Temp.Space.N/2:Temp.Space.N/2-1].*Temp.In.D.D1(ind_m1));
-    omega_b                 = ifftshift(Temp.In.D.omega(mode_range_b) - Temp.In.D.omega(ind_m2) - [-Temp.Space.N/2:Temp.Space.N/2-1].*Temp.In.D.D1(ind_m1));
+    omega_a = zeros(1,Temp.Space.N);
+    omega_a(ind_range_k_a) = (Temp.In.D.omega(mode_range_a) - Temp.In.D.omega(ind_m1) - Temp.Space.k(ind_range_k_a).*Temp.In.D.D1(ind_m1));
 
-    Temp.Eq.gam2o          = ifftshift(Temp.In.D.gamma2(mode_range_a))/norm;  % /norm;
-    Temp.Eq.gam2e          = ifftshift(Temp.In.D.gamma2(mode_range_b))/norm;
+    omega_b = zeros(1,Temp.Space.N);
+    omega_b(ind_range_k_b) = (Temp.In.D.omega(mode_range_b) - Temp.In.D.omega(ind_m2) - Temp.Space.k(ind_range_k_b).*Temp.In.D.D1(ind_m1));
     
-    Temp.Eq.gam3o          = ifftshift(3*Temp.In.D.gamma3(mode_range_a))/norm;
-    Temp.Eq.gam3e          = ifftshift(3*Temp.In.D.gamma3(mode_range_c))/norm;
+    Temp.Eq.gam2o = zeros(1,Temp.Space.N);
+    Temp.Eq.gam2e = zeros(1,Temp.Space.N);
+    Temp.Eq.gam3o = zeros(1,Temp.Space.N);
+    Temp.Eq.gam3e = zeros(1,Temp.Space.N);
+
+    Temp.Eq.gam2o(ind_range_k_a)          =   Temp.In.D.gamma2(mode_range_a)/norm;
+    Temp.Eq.gam2e(ind_range_k_b)          =   Temp.In.D.gamma2(mode_range_b)/norm/2;
+
+    Temp.Eq.gam3o(ind_range_k_a)          = 3*Temp.In.D.gamma3(mode_range_a)/norm;
+    Temp.Eq.gam3e(ind_range_k_c)          = 3*Temp.In.D.gamma3(mode_range_c)/norm;
+
 
 %%
     Temp.Eq.Lo              = Temp.Eq.delta_o + omega_a/norm - 1i*Temp.Eq.ko/2;

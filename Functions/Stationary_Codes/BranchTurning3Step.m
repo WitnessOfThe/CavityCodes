@@ -174,8 +174,12 @@
                         stepPsi  = stepPsi/2;
                         Stat(ii) = Stat(ii-1);
                         Slv      =SlvStart;
+                        if  abs(stepPsi)< 1E-18
+                            StepStop = 0;
+                             FlagStop = 0;
+                        end
                     else
-                    if (abs(Stat(ii).Sol.Dir.d1) <10) && ii> 5 %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
+                    if ((abs(Stat(ii).Sol.Dir.d1) <10) && ii> 5) %|| stepPsi< 1E-18%&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
                         FlagStop = 0;
                     end
 %                         if (abs(Stat(ii).Sol.Dir.d1) < 0.01) %&& (Stat(ii).Sol.Dir.d1 ~= 0) && (ii >5)) || stepPsi < 1E-11
