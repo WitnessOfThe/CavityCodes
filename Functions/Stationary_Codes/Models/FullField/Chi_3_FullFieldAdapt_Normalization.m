@@ -13,7 +13,7 @@ function L_L = Chi_3_FullFieldAdapt_Normalization(L_L)
         L_L.In.Finess          = L_L.In.Do(1)/L_L.In.ko;
 %        L_L.In.Fin_D           = L_L.In.D(2)/L_L.In.kappa;
         
-        L_L.In.H            = sqrt(L_L.In.eta*L_L.In.Finess*L_L.In.W/pi/2);
+        L_L.In.H            = sqrt(L_L.In.eta*L_L.In.Finess*L_L.In.W/pi);
 %        L_L.In.W            = pi/(L_L.In.eta*L_L.In.Finess/2)*L_L.In.H^2;
         L_L.In.W_Star       = pi/(L_L.In.eta*L_L.In.Finess/2)*L_L.In.ko/L_L.In.gam3o;
         L_L.In.W_WStar      = L_L.In.W/ L_L.In.W_Star;
@@ -54,8 +54,7 @@ function L_L = Chi_3_FullFieldAdapt_Normalization(L_L)
         L_L.Eq.kappa_vector        = L_L.In.ko/coeff;
         L_L.Eq.gamma_3      = L_L.In.gam3o/coeff;
 %        L_L.Eq.D            = L_L.In.D/coeff;
-        L_L.Eq.h            = 1/2* L_L.In.ko*sqrt(L_L.In.Finess*L_L.In.W...
-             /pi*L_L.In.eta/2)/coeff;
+        L_L.Eq.h            = 1/2* L_L.In.ko* L_L.In.H /coeff;
          
 %        L_L.Eq.omega_j      =  (L_L.In.omega - L_L.In.omega_p... 
  %       - L_L.In.D(1)*L_L.Space.k)/coeff - 1i*L_L.Eq.kappa/2;  

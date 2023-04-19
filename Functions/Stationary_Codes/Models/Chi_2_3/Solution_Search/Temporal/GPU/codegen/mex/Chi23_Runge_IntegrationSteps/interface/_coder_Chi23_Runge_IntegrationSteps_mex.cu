@@ -39,13 +39,13 @@ emlrtCTX mexFunctionCreateRootTLS()
 void unsafe_Chi23_Runge_IntegrationSteps_mexFunction(int32_T nlhs,
                                                      mxArray *plhs[1],
                                                      int32_T nrhs,
-                                                     const mxArray *prhs[14])
+                                                     const mxArray *prhs[15])
 {
   const mxArray *outputs[1];
   // Check for proper number of arguments.
-  if (nrhs != 14) {
+  if (nrhs != 15) {
     emlrtErrMsgIdAndTxt(emlrtRootTLSGlobal, "EMLRT:runTime:WrongNumberOfInputs",
-                        5, 12, 14, 4, 28, "Chi23_Runge_IntegrationSteps");
+                        5, 12, 15, 4, 28, "Chi23_Runge_IntegrationSteps");
   }
   if (nlhs > 1) {
     emlrtErrMsgIdAndTxt(emlrtRootTLSGlobal,

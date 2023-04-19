@@ -34,6 +34,6 @@ emlrtCTX mexFunctionCreateRootTLS();
 void unsafe_Chi23_Runge_IntegrationSteps_mexFunction(int32_T nlhs,
                                                      mxArray *plhs[1],
                                                      int32_T nrhs,
-                                                     const mxArray *prhs[14]);
+                                                     const mxArray *prhs[15]);
 
 // End of code generation (_coder_Chi23_Runge_IntegrationSteps_mex.h)

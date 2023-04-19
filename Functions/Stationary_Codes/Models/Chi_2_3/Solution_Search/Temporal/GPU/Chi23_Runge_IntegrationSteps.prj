@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2021a">
-  <configuration build-checksum="3982089357" file="/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/Chi23_Runge_IntegrationSteps.prj" location="/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU" name="Chi23_Runge_IntegrationSteps" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="1837810" file="C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\GPU\Chi23_Runge_IntegrationSteps.prj" location="C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\GPU" name="Chi23_Runge_IntegrationSteps" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -17,7 +17,7 @@
       <param.IntegrityChecks>false</param.IntegrityChecks>
       <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
       <param.EnableAutoParallelization>true</param.EnableAutoParallelization>
-      <param.NumberOfCpuThreads>0</param.NumberOfCpuThreads>
+      <param.NumberOfCpuThreads>1</param.NumberOfCpuThreads>
       <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.SyncAlways</param.GlobalDataSyncMethod>
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
@@ -36,7 +36,7 @@
       <param.CppStyleConst>true</param.CppStyleConst>
       <param.EnableDebugging>false</param.EnableDebugging>
       <param.Verbosity>option.Verbosity.Info</param.Verbosity>
-      <param.ReportPotentialDifferences>true</param.ReportPotentialDifferences>
+      <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.HighlightImplicitExpansionIssues>true</param.HighlightImplicitExpansionIssues>
       <param.LaunchReport>false</param.LaunchReport>
@@ -98,7 +98,6 @@
         <param.IntegrityChecks />
         <param.SaturateOnIntegerOverflow />
         <param.EnableAutoParallelization />
-        <param.NumberOfCpuThreads />
         <param.GlobalDataSyncMethod />
         <param.EnableVariableSizing />
         <param.DynamicMemoryAllocation />
@@ -235,7 +234,7 @@
       <param.RuntimeChecks>false</param.RuntimeChecks>
       <param.Verbose />
       <param.Verbosity>option.Verbosity.Info</param.Verbosity>
-      <param.ReportPotentialDifferences>true</param.ReportPotentialDifferences>
+      <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.GenerateCodeMetricsReport>false</param.GenerateCodeMetricsReport>
       <param.GenerateCodeReplacementReport>false</param.GenerateCodeReplacementReport>
@@ -279,7 +278,7 @@
       <param.HardwareSizeChar.Production>8</param.HardwareSizeChar.Production>
       <param.HardwareSizeShort.Production>16</param.HardwareSizeShort.Production>
       <param.HardwareSizeInt.Production>32</param.HardwareSizeInt.Production>
-      <param.HardwareSizeLong.Production>64</param.HardwareSizeLong.Production>
+      <param.HardwareSizeLong.Production>32</param.HardwareSizeLong.Production>
       <param.HardwareSizeLongLong.Production>64</param.HardwareSizeLongLong.Production>
       <param.HardwareSizeFloat.Production>32</param.HardwareSizeFloat.Production>
       <param.HardwareSizeDouble.Production>64</param.HardwareSizeDouble.Production>
@@ -300,7 +299,7 @@
       <param.HardwareSizeChar.Target>8</param.HardwareSizeChar.Target>
       <param.HardwareSizeShort.Target>16</param.HardwareSizeShort.Target>
       <param.HardwareSizeInt.Target>32</param.HardwareSizeInt.Target>
-      <param.HardwareSizeLong.Target>64</param.HardwareSizeLong.Target>
+      <param.HardwareSizeLong.Target>32</param.HardwareSizeLong.Target>
       <param.HardwareSizeLongLong.Target>64</param.HardwareSizeLongLong.Target>
       <param.HardwareSizeFloat.Target>32</param.HardwareSizeFloat.Target>
       <param.HardwareSizeDouble.Target>64</param.HardwareSizeDouble.Target>
@@ -319,7 +318,7 @@
       <param.IndentStyle>option.IndentStyle.K&amp;R</param.IndentStyle>
       <param.IndentSize>2</param.IndentSize>
       <param.ColumnLimit>80</param.ColumnLimit>
-      <param.grt.GenCodeOnly>false</param.grt.GenCodeOnly>
+      <param.grt.GenCodeOnly>true</param.grt.GenCodeOnly>
       <param.ConstantFoldingTimeout>40000</param.ConstantFoldingTimeout>
       <param.CompileTimeRecursionLimit>50</param.CompileTimeRecursionLimit>
       <param.EnableRuntimeRecursion>true</param.EnableRuntimeRecursion>
@@ -479,6 +478,7 @@
         <param.HardwareSizeChar.Production />
         <param.HardwareSizeShort.Production />
         <param.HardwareSizeInt.Production />
+        <param.HardwareSizeLong.Production />
         <param.HardwareSizeLongLong.Production />
         <param.HardwareSizeFloat.Production />
         <param.HardwareSizeDouble.Production />
@@ -492,6 +492,7 @@
         <param.HardwareSizeChar.Target />
         <param.HardwareSizeShort.Target />
         <param.HardwareSizeInt.Target />
+        <param.HardwareSizeLong.Target />
         <param.HardwareSizeLongLong.Target />
         <param.HardwareSizeFloat.Target />
         <param.HardwareSizeDouble.Target />
@@ -503,7 +504,6 @@
         <param.IndentStyle />
         <param.IndentSize />
         <param.ColumnLimit />
-        <param.grt.GenCodeOnly />
         <param.ConstantFoldingTimeout />
         <param.CompileTimeRecursionLimit />
         <param.EnableRuntimeRecursion />
@@ -909,17 +909,18 @@
       </unset>
     </profile>
     <param.objective>option.objective.gpu</param.objective>
-    <param.WorkflowStep>verifyCompatibility</param.WorkflowStep>
+    <param.WorkflowStep>inputTypes</param.WorkflowStep>
     <param.TestSnippets>
-      <item>Chi23_Runge_IntegrationSteps(nt,dt,d,F_e,exp_plus_omega,exp_minus_omega,Runge,shift_back,gam2o,gam2e,gam3o,gam3e,H_f,mode_range);</item>
+      <item>Chi23_Runge_IntegrationSteps(nt,dt,d,F_e,exp_plus_omega,exp_minus_omega,Runge,t,shift_back,gam2o,gam2e,gam3o,gam3e,H_f,mode_range)</item>
+      <item>Chi23_Runge_IntegrationSteps(nt,dt,d,F_e,exp_plus_omega,exp_minus_omega,Runge,t,shift_back,gam2o,gam2e,gam3o,gam3e,H_f,ko,mode_range)</item>
     </param.TestSnippets>
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}/Chi23_Runge_IntegrationSteps_mex.mexa64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\Chi23_Runge_IntegrationSteps\Chi23_Runge_IntegrationSteps.lib</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.HasGpuCoder>true</param.HasGpuCoder>
-    <var.HasNeuralNetworkToolbox>true</var.HasNeuralNetworkToolbox>
+    <var.HasNeuralNetworkToolbox>false</var.HasNeuralNetworkToolbox>
     <param.mex.mainhtml />
     <param.grt.mainhtml />
     <param.CallGeneratedCodeFromTest>true</param.CallGeneratedCodeFromTest>
@@ -930,22 +931,22 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>3343282399</param.AnnotationChecksum>
+    <param.AnnotationChecksum>2214086810</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
     <var.redirectedInputTypeData />
     <var.DismissScreener>false</var.DismissScreener>
     <param.unifiedParamStorage />
-    <var.gc.lastOutputRoot>codegen/mex/Chi_3_LLE_Kuar_ins</var.gc.lastOutputRoot>
-    <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>3223882952</var.gc.preBuildChecksum>
-    <var.cfi.lastOutputRoot>codegen/mex/Chi23_Runge_IntegrationSteps</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>3982089357</var.cfi.preBuildChecksum>
-    <var.lastCfiTestSnippet>Chi23_Runge_IntegrationSteps(nt,dt,d,F_e,exp_plus_omega,exp_minus_omega,Runge,shift_back,gam2o,gam2e,gam3o,gam3e,H_f,mode_range);</var.lastCfiTestSnippet>
+    <var.gc.lastOutputRoot />
+    <var.gc.lastOutputType />
+    <var.gc.preBuildChecksum />
+    <var.cfi.lastOutputRoot>codegen\mex\Chi23_Runge_IntegrationSteps</var.cfi.lastOutputRoot>
+    <var.cfi.preBuildChecksum>1837810</var.cfi.preBuildChecksum>
+    <var.lastCfiTestSnippet>Chi23_Runge_IntegrationSteps(nt,dt,d,F_e,exp_plus_omega,exp_minus_omega,Runge,t,shift_back,gam2o,gam2e,gam3o,gam3e,H_f,mode_range)</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/Chi_3_LLE_Kuar_ins.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;693551000&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/Chi23_Runge_IntegrationSteps.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum />
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\GPU\Chi23_Runge_IntegrationSteps.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
@@ -956,8 +957,8 @@
     <var.ecoderEnabled>true</var.ecoderEnabled>
     <param.mex.outputfile>Chi23_Runge_IntegrationSteps_mex</param.mex.outputfile>
     <param.grt.outputfile>Chi23_Runge_IntegrationSteps</param.grt.outputfile>
-    <param.artifact>option.target.artifact.mex</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}/Chi23_Runge_IntegrationSteps_mex.mexa64</param.outputfile>
+    <param.artifact>option.target.artifact.lib</param.artifact>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\Chi23_Runge_IntegrationSteps\Chi23_Runge_IntegrationSteps.lib</param.outputfile>
     <param.CppNamespace />
     <param.CppPackagesToNamespaces>true</param.CppPackagesToNamespaces>
     <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
@@ -971,7 +972,7 @@
     <param.gpu.StackLimitPerThread>1024</param.gpu.StackLimitPerThread>
     <param.gpu.MaximumBlocksPerKernel>0</param.gpu.MaximumBlocksPerKernel>
     <param.gpu.Benchmarking>false</param.gpu.Benchmarking>
-    <param.gpu.SafeBuild>true</param.gpu.SafeBuild>
+    <param.gpu.SafeBuild>false</param.gpu.SafeBuild>
     <param.gpu.KernelNamePrefix />
     <param.gpu.CompilerFlags />
     <param.gpu.EnableCUBLAS>true</param.gpu.EnableCUBLAS>
@@ -981,9 +982,9 @@
     <var.checkIssuesGpu>true</var.checkIssuesGpu>
     <var.hasGpu>true</var.hasGpu>
     <var.isDeepLearningForMatlabCoderEnabled>true</var.isDeepLearningForMatlabCoderEnabled>
-    <param.deeplearning.EnableDeepLearning>true</param.deeplearning.EnableDeepLearning>
-    <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.cudnn</param.deeplearning.TargetLib>
-    <var.cfiTargetLibSuppression>true</var.cfiTargetLibSuppression>
+    <param.deeplearning.EnableDeepLearning>false</param.deeplearning.EnableDeepLearning>
+    <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
+    <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
     <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
     <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
     <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
@@ -1068,7 +1069,11 @@
       <var.redirectedInputTypeData />
       <var.DismissScreener />
       <param.unifiedParamStorage />
+      <var.gc.lastOutputRoot />
+      <var.gc.lastOutputType />
+      <var.gc.preBuildChecksum />
       <var.outdatedOnRestore />
+      <var.lastUserSourceChecksum />
       <param.forceMexBuild />
       <param.NoDefaultJIT />
       <param.configImportActive />
@@ -1078,7 +1083,6 @@
       <var.ecoderEnabled />
       <param.mex.outputfile />
       <param.grt.outputfile />
-      <param.artifact />
       <param.CppNamespace />
       <param.CppPackagesToNamespaces />
       <param.CppNamespaceForMathworksCode />
@@ -1103,6 +1107,7 @@
       <var.isDeepLearningForMatlabCoderEnabled />
       <param.deeplearning.EnableDeepLearning />
       <param.deeplearning.TargetLib />
+      <var.cfiTargetLibSuppression />
       <var.hasMatlabDeepLearningSupportPackage />
       <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
@@ -1164,13 +1169,13 @@
       <param.FixedPointUseDesignRanges />
     </unset>
     <fileset.entrypoints>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}/Chi23_Runge_IntegrationSteps.m">
-        <Marker>1667575953264</Marker>
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi23_Runge_IntegrationSteps.m">
+        <Marker>1667572904891</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
     <fileset.inputtypes>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}/Chi23_Runge_IntegrationSteps.m">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi23_Runge_IntegrationSteps.m">
         <Inputs fileName="Chi23_Runge_IntegrationSteps.m" functionName="Chi23_Runge_IntegrationSteps">
           <Input Name="nt" typeId="0" />
           <Input Name="dt" typeId="0" />
@@ -1190,7 +1195,7 @@
           <Input Name="gam3o" typeId="6" />
           <Input Name="gam3e" typeId="6" />
           <Input Name="H_f" typeId="7" />
-          <Input Name="mode_range" typeId="8" />
+          <Input Name="mode_range" typeId="7" />
           <idpTable>
             <type typeId="0">
               <Class>double</Class>
@@ -1270,32 +1275,20 @@
               <Sparse>false</Sparse>
               <Gpu>true</Gpu>
             </type>
-            <type typeId="8">
-              <Class>double</Class>
-              <Size>1 x 512</Size>
-              <Value />
-              <InitialValue />
-              <UserDefined>false</UserDefined>
-              <Complex>false</Complex>
-              <Sparse>false</Sparse>
-            </type>
           </idpTable>
         </Inputs>
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Chi23_Runge_IntegrationSteps_mex.mexa64" optional="false">/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU/Chi23_Runge_IntegrationSteps_mex.mexa64</file>
+      <file location="${PROJECT_ROOT}\codegen\lib\Chi23_Runge_IntegrationSteps" name="Chi23_Runge_IntegrationSteps.lib" optional="false">C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\GPU\codegen\lib\Chi23_Runge_IntegrationSteps\Chi23_Runge_IntegrationSteps.lib</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>/usr/local/matlab/r2021b</root>
+      <root>C:\Program Files\MATLAB\R2021b</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
         <toolbox name="embeddedcoder" />
         <toolbox name="gpucoder" />
-        <toolbox name="fixedpoint" />
-        <toolbox name="matlabhdlcoder" />
-        <toolbox name="neuralnetwork" />
       </toolboxes>
       <toolbox>
         <matlabcoder>
@@ -1312,35 +1305,20 @@
           <enabled>true</enabled>
         </gpucoder>
       </toolbox>
-      <toolbox>
-        <fixedpoint>
-          <enabled>true</enabled>
-        </fixedpoint>
-      </toolbox>
-      <toolbox>
-        <matlabhdlcoder>
-          <enabled>true</enabled>
-        </matlabhdlcoder>
-      </toolbox>
-      <toolbox>
-        <neuralnetwork>
-          <enabled>true</enabled>
-        </neuralnetwork>
-      </toolbox>
     </matlab>
     <platform>
-      <unix>true</unix>
+      <unix>false</unix>
       <mac>false</mac>
-      <windows>false</windows>
+      <windows>true</windows>
       <win2k>false</win2k>
       <winxp>false</winxp>
       <vista>false</vista>
-      <linux>true</linux>
+      <linux>false</linux>
       <solaris>false</solaris>
-      <osver>4.15.0-177-generic</osver>
+      <osver>10.0</osver>
       <os32>false</os32>
       <os64>true</os64>
-      <arch>glnxa64</arch>
+      <arch>win64</arch>
       <matlab>true</matlab>
     </platform>
   </configuration>

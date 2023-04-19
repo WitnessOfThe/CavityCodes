@@ -40,7 +40,7 @@ H_f(1)      = 1/2*Temp.Eq.ko*Temp.Eq.H_f*Temp.Space.N;
 %Temp.Eq.H_f;
 ko      = Temp.Eq.ko;
 mode_range = Temp.Eq.mode_range;
-   Chi23_Runge_IntegrationSteps(nt,dt,d,F_e,exp_plus_omega,exp_minus_omega,Runge,shift_back,gam2o,gam2e,gam3o,gam3e,H_f,mode_range); 
+   Chi23_Runge_IntegrationSteps(nt,dt,d,F_e,exp_plus_omega,exp_minus_omega,Runge,t,shift_back,gam2o,gam2e,gam3o,gam3e,H_f,ko,mode_range); 
 %    for ni = 1:nt 
         
  %       F_e           = Runge_Kuarong_step(F_e,dt,t + ni*dt,d);%,Runge,exp_plus_omega,exp_minus_omega,Temp,shift_back

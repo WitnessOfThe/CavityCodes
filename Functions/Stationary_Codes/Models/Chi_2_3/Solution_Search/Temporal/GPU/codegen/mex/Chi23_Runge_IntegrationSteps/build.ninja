@@ -1,34 +1,36 @@
-# CompilerName=gcc
+# CompilerName=msvcpp160
 # Mode=optim
 ninja_required_version = 1.3
 
 # Basic folders
 root = .
-builddir = $root/build/glnxa64
-matlabdir = /usr/local/matlab/r2021b
-startdir = /home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/GPU
+builddir = $root\build\win64
+matlabdir = C:\Program Files\MATLAB\R2021b
+startdir = C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\GPU
 
 # Toolchain information
-cc = gcc
-cxx = /usr/bin/g++
-linker = gcc
-linkerxx = /usr/bin/g++
+cc = cl
+cxx = cl
+linker = link
+linkerxx = link
 
-cflags =  -fexceptions -fPIC -fno-omit-frame-pointer -pthread -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c99 -I "$root" -I "$startdir" -I "$root/interface" -I "$matlabdir/extern/include" -I "." -DMW_CUDA_ARCH=350 -DMW_GPU_MEMORY_DEBUG -DMODEL=Chi23_Runge_IntegrationSteps_mex -DMW_NEEDS_VERSION_H -c 
+cflags =  /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMW_CUDA_ARCH=350 -DMW_GPU_MEMORY_DEBUG -DMODEL=Chi23_Runge_IntegrationSteps_mex -DMW_NEEDS_VERSION_H  
 
-cxxflags =  -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I "$root" -I "$startdir" -I "$root/interface" -I "$matlabdir/extern/include" -I "." -DMW_CUDA_ARCH=350 -DMW_GPU_MEMORY_DEBUG -DMODEL=Chi23_Runge_IntegrationSteps_mex -DMW_NEEDS_VERSION_H -c 
+cxxflags =   /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I "$root" /I "$startdir" /I "$root\interface" /I "$matlabdir\extern\include" /I "." -DMW_CUDA_ARCH=350 -DMW_GPU_MEMORY_DEBUG -DMODEL=Chi23_Runge_IntegrationSteps_mex -DMW_NEEDS_VERSION_H  
 
-ldflags =  -Xlinker --no-undefined  -shared -lstdc++ -Xlinker --as-needed -Xlinker -rpath-link,$matlabdir/bin/glnxa64 -L"$matlabdir/bin/glnxa64" -Xlinker -rpath-link,$matlabdir/extern/bin/glnxa64 -L"$matlabdir/extern/bin/glnxa64" -lMatlabDataArray -lmx -lmex -lm -lmat  -o Chi23_Runge_IntegrationSteps_mex.mexa64 -lemlrt -lcovrt -lut -lmwmathutil -arch sm_35  -lcudart -lcublas -lcusolver -lcufft -lcurand -lc -Xnvlink -w  -Wno-deprecated-gpu-targets
+ldflags =  -Xlinker /nologo -Xlinker /manifest -Xlinker /DLL -L"$matlabdir\extern\lib\win64\microsoft" libmx.lib libmex.lib libmat.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib libMatlabDataArray.lib libMatlabEngine.lib   libemlrt.lib libcovrt.lib libut.lib libmwmathutil.lib -arch sm_35  -L"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0\lib\x64" cudart.lib cublas.lib cusolver.lib cufft.lib curand.lib -Xnvlink -w  -Wno-deprecated-gpu-targets -Xlinker /NODEFAULTLIB:libcmt.lib
 
 # Build Rules
 rule cc
-    command = $cc $cflags $in -o $out
+    command = $cc $cflags $in /Fo$out
 
 rule cxx
-    command = $cxx $cxxflags $in -o $out
+    command = $cxx $cxxflags $in /Fo$out
 
 rule link
-    command = $linker $in $ldflags
+    command = $linker @$out.rsp $ldflags
+    rspfile = $out.rsp
+    rspfile_content = $in
 
 rule linkxx
     command = $linkerxx $in $ldflags
@@ -36,23 +38,25 @@ rule linkxx
 cudac = nvcc
 linkercuda = nvcc
 
-cudaflags =  -rdc=true -Wno-deprecated-gpu-targets -Xcompiler -fPIC,-ansi,-fexceptions,-fno-omit-frame-pointer,-pthread -Xcudafe "--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler -fvisibility=hidden -Xcompiler -std=c++11 -I "$root" -I "$startdir" -I "$root/interface" -I "$matlabdir/extern/include" -I "." -DMW_CUDA_ARCH=350 -DMW_GPU_MEMORY_DEBUG -DMODEL=Chi23_Runge_IntegrationSteps_mex -DMW_NEEDS_VERSION_H -c -arch sm_35  -I "$matlabdir/simulink/include" -I "$matlabdir/toolbox/shared/simtargets"
+cudaflags =  -c -rdc=true -Wno-deprecated-gpu-targets -Xcompiler "/wd 4819" -Xcompiler "/MD" -Xcudafe "--display_error_number --diag_suppress=2381 --diag_suppress=unsigned_compare_with_zero --diag_suppress=useless_type_qualifier_on_return_type" -D_GNU_SOURCE -DMATLAB_MEX_FILE -Xcompiler "/source-charset:utf-8" -I "$root" -I "$startdir" -I "$root\interface" -I "$matlabdir\extern\include" -I "." -DMW_CUDA_ARCH=350 -DMW_GPU_MEMORY_DEBUG -DMODEL=Chi23_Runge_IntegrationSteps_mex -DMW_NEEDS_VERSION_H  -arch sm_35  -I "$matlabdir/simulink/include" -I "$matlabdir/toolbox/shared/simtargets"
 rule cudac
     command = $cudac $cudaflags $in -o $out
 
 rule linkcuda
-    command = $linkercuda $in $ldflags
+    command = $linkercuda $ldflags -o $out $in
 
 # Build
-build $builddir/Chi23_Runge_IntegrationSteps_data.o : cudac $root/Chi23_Runge_IntegrationSteps_data.cu
-build $builddir/rt_nonfinite.o : cudac $root/rt_nonfinite.cu
-build $builddir/Chi23_Runge_IntegrationSteps_initialize.o : cudac $root/Chi23_Runge_IntegrationSteps_initialize.cu
-build $builddir/Chi23_Runge_IntegrationSteps_terminate.o : cudac $root/Chi23_Runge_IntegrationSteps_terminate.cu
-build $builddir/_coder_Chi23_Runge_IntegrationSteps_api.o : cudac $root/interface/_coder_Chi23_Runge_IntegrationSteps_api.cu
-build $builddir/_coder_Chi23_Runge_IntegrationSteps_mex.o : cudac $root/interface/_coder_Chi23_Runge_IntegrationSteps_mex.cu
-build $builddir/Chi23_Runge_IntegrationSteps.o : cudac $root/Chi23_Runge_IntegrationSteps.cu
-build $builddir/_coder_Chi23_Runge_IntegrationSteps_info.o : cxx $root/interface/_coder_Chi23_Runge_IntegrationSteps_info.cpp
-build $builddir/cpp_mexapi_version.o : cudac $root/cpp_mexapi_version.cpp
+build $builddir\MWCUFFTPlanManager.obj : cudac $root\MWCUFFTPlanManager.cpp
+build $builddir\Chi23_Runge_IntegrationSteps_data.obj : cudac $root\Chi23_Runge_IntegrationSteps_data.cu
+build $builddir\rt_nonfinite.obj : cudac $root\rt_nonfinite.cu
+build $builddir\Chi23_Runge_IntegrationSteps_initialize.obj : cudac $root\Chi23_Runge_IntegrationSteps_initialize.cu
+build $builddir\Chi23_Runge_IntegrationSteps_terminate.obj : cudac $root\Chi23_Runge_IntegrationSteps_terminate.cu
+build $builddir\_coder_Chi23_Runge_IntegrationSteps_api.obj : cudac $root\interface\_coder_Chi23_Runge_IntegrationSteps_api.cu
+build $builddir\_coder_Chi23_Runge_IntegrationSteps_mex.obj : cudac $root\interface\_coder_Chi23_Runge_IntegrationSteps_mex.cu
+build $builddir\Chi23_Runge_IntegrationSteps.obj : cudac $root\Chi23_Runge_IntegrationSteps.cu
+build $builddir\_coder_Chi23_Runge_IntegrationSteps_info.obj : cxx $root\interface\_coder_Chi23_Runge_IntegrationSteps_info.cpp
+build $builddir\MWErrorCodeUtils.obj : cudac $root\MWErrorCodeUtils.cpp
+build $builddir\cpp_mexapi_version.obj : cudac $root\cpp_mexapi_version.cpp
 
 # Link
-build $root/Chi23_Runge_IntegrationSteps_mex.mexa64 : linkcuda $builddir/Chi23_Runge_IntegrationSteps_data.o $builddir/rt_nonfinite.o $builddir/Chi23_Runge_IntegrationSteps_initialize.o $builddir/Chi23_Runge_IntegrationSteps_terminate.o $builddir/_coder_Chi23_Runge_IntegrationSteps_api.o $builddir/_coder_Chi23_Runge_IntegrationSteps_mex.o $builddir/Chi23_Runge_IntegrationSteps.o $builddir/_coder_Chi23_Runge_IntegrationSteps_info.o $builddir/cpp_mexapi_version.o 
+build $root\Chi23_Runge_IntegrationSteps_mex.mexw64 : linkcuda $builddir\MWCUFFTPlanManager.obj $builddir\Chi23_Runge_IntegrationSteps_data.obj $builddir\rt_nonfinite.obj $builddir\Chi23_Runge_IntegrationSteps_initialize.obj $builddir\Chi23_Runge_IntegrationSteps_terminate.obj $builddir\_coder_Chi23_Runge_IntegrationSteps_api.obj $builddir\_coder_Chi23_Runge_IntegrationSteps_mex.obj $builddir\Chi23_Runge_IntegrationSteps.obj $builddir\_coder_Chi23_Runge_IntegrationSteps_info.obj $builddir\MWErrorCodeUtils.obj $builddir\cpp_mexapi_version.obj 

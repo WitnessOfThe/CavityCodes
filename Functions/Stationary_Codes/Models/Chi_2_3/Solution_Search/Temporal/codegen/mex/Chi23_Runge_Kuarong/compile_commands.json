@@ -1,68 +1,74 @@
 [
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  Chi23_Runge_Kuarong_data.cpp -o build/glnxa64/Chi23_Runge_Kuarong_data.o",
-    "file": "Chi23_Runge_Kuarong_data.cpp",
-    "output": "build/glnxa64/Chi23_Runge_Kuarong_data.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   Chi23_Runge_Kuarong_data.c /Fobuild\\win64\\Chi23_Runge_Kuarong_data.obj",
+    "file": "Chi23_Runge_Kuarong_data.c",
+    "output": "build/win64/Chi23_Runge_Kuarong_data.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  rt_nonfinite.cpp -o build/glnxa64/rt_nonfinite.o",
-    "file": "rt_nonfinite.cpp",
-    "output": "build/glnxa64/rt_nonfinite.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   rt_nonfinite.c /Fobuild\\win64\\rt_nonfinite.obj",
+    "file": "rt_nonfinite.c",
+    "output": "build/win64/rt_nonfinite.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  Chi23_Runge_Kuarong_initialize.cpp -o build/glnxa64/Chi23_Runge_Kuarong_initialize.o",
-    "file": "Chi23_Runge_Kuarong_initialize.cpp",
-    "output": "build/glnxa64/Chi23_Runge_Kuarong_initialize.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   Chi23_Runge_Kuarong_initialize.c /Fobuild\\win64\\Chi23_Runge_Kuarong_initialize.obj",
+    "file": "Chi23_Runge_Kuarong_initialize.c",
+    "output": "build/win64/Chi23_Runge_Kuarong_initialize.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  Chi23_Runge_Kuarong_terminate.cpp -o build/glnxa64/Chi23_Runge_Kuarong_terminate.o",
-    "file": "Chi23_Runge_Kuarong_terminate.cpp",
-    "output": "build/glnxa64/Chi23_Runge_Kuarong_terminate.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   Chi23_Runge_Kuarong_terminate.c /Fobuild\\win64\\Chi23_Runge_Kuarong_terminate.obj",
+    "file": "Chi23_Runge_Kuarong_terminate.c",
+    "output": "build/win64/Chi23_Runge_Kuarong_terminate.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  Chi23_Runge_Kuarong.cpp -o build/glnxa64/Chi23_Runge_Kuarong.o",
-    "file": "Chi23_Runge_Kuarong.cpp",
-    "output": "build/glnxa64/Chi23_Runge_Kuarong.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   Chi23_Runge_Kuarong.c /Fobuild\\win64\\Chi23_Runge_Kuarong.obj",
+    "file": "Chi23_Runge_Kuarong.c",
+    "output": "build/win64/Chi23_Runge_Kuarong.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  ifft.cpp -o build/glnxa64/ifft.o",
-    "file": "ifft.cpp",
-    "output": "build/glnxa64/ifft.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   ifft.c /Fobuild\\win64\\ifft.obj",
+    "file": "ifft.c",
+    "output": "build/win64/ifft.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  fft.cpp -o build/glnxa64/fft.o",
-    "file": "fft.cpp",
-    "output": "build/glnxa64/fft.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   fft.c /Fobuild\\win64\\fft.obj",
+    "file": "fft.c",
+    "output": "build/win64/fft.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  interface/_coder_Chi23_Runge_Kuarong_api.cpp -o build/glnxa64/_coder_Chi23_Runge_Kuarong_api.o",
-    "file": "interface/_coder_Chi23_Runge_Kuarong_api.cpp",
-    "output": "build/glnxa64/_coder_Chi23_Runge_Kuarong_api.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   interface\\_coder_Chi23_Runge_Kuarong_api.c /Fobuild\\win64\\_coder_Chi23_Runge_Kuarong_api.obj",
+    "file": "interface/_coder_Chi23_Runge_Kuarong_api.c",
+    "output": "build/win64/_coder_Chi23_Runge_Kuarong_api.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  interface/_coder_Chi23_Runge_Kuarong_mex.cpp -o build/glnxa64/_coder_Chi23_Runge_Kuarong_mex.o",
-    "file": "interface/_coder_Chi23_Runge_Kuarong_mex.cpp",
-    "output": "build/glnxa64/_coder_Chi23_Runge_Kuarong_mex.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   interface\\_coder_Chi23_Runge_Kuarong_mex.c /Fobuild\\win64\\_coder_Chi23_Runge_Kuarong_mex.obj",
+    "file": "interface/_coder_Chi23_Runge_Kuarong_mex.c",
+    "output": "build/win64/_coder_Chi23_Runge_Kuarong_mex.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  interface/_coder_Chi23_Runge_Kuarong_info.cpp -o build/glnxa64/_coder_Chi23_Runge_Kuarong_info.o",
-    "file": "interface/_coder_Chi23_Runge_Kuarong_info.cpp",
-    "output": "build/glnxa64/_coder_Chi23_Runge_Kuarong_info.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   Chi23_Runge_Kuarong_emxutil.c /Fobuild\\win64\\Chi23_Runge_Kuarong_emxutil.obj",
+    "file": "Chi23_Runge_Kuarong_emxutil.c",
+    "output": "build/win64/Chi23_Runge_Kuarong_emxutil.obj"
   },
   {
-    "directory": "/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/codegen/mex/Chi23_Runge_Kuarong",
-    "command": "/usr/bin/g++ -fexceptions -fPIC -fno-omit-frame-pointer -pthread -std=c++11 -D_GNU_SOURCE -DMATLAB_MEX_FILE  -O2 -fwrapv -DNDEBUG -fvisibility=hidden -std=c++11 -I \".\" -I \"/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal\" -I \"./interface\" -I \"/usr/local/matlab/r2021b/extern/include\" -I \".\" -DMODEL=Chi23_Runge_Kuarong_mex -DMW_NEEDS_VERSION_H -c  /usr/local/matlab/r2021b/extern/version/cpp_mexapi_version.cpp -o build/glnxa64/cpp_mexapi_version.o",
-    "file": "/usr/local/matlab/r2021b/extern/version/cpp_mexapi_version.cpp",
-    "output": "build/glnxa64/cpp_mexapi_version.o"
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   interface\\_coder_Chi23_Runge_Kuarong_info.c /Fobuild\\win64\\_coder_Chi23_Runge_Kuarong_info.obj",
+    "file": "interface/_coder_Chi23_Runge_Kuarong_info.c",
+    "output": "build/win64/_coder_Chi23_Runge_Kuarong_info.obj"
+  },
+  {
+    "directory": "C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\\codegen\\mex\\Chi23_Runge_Kuarong",
+    "command": "cl /c /Zc:__cplusplus /Zp8 /GR /W3 /EHs /nologo /MD /D_CRT_SECURE_NO_DEPRECATE /D_SCL_SECURE_NO_DEPRECATE /D_SECURE_SCL=0   /DMATLAB_MEX_FILE  /DMATLAB_MEX_FILE /O2 /Oy- /DNDEBUG /fp:strict /source-charset:utf-8 /I \".\" /I \"C:\\Users\\dp710\\Documents\\GitHub\\CavityCodes\\Functions\\Stationary_Codes\\Models\\Chi_2_3\\Solution_Search\\Temporal\" /I \".\\interface\" /I \"C:\\Program Files\\MATLAB\\R2021b\\extern\\include\" /I \".\" -DMODEL=Chi23_Runge_Kuarong_mex   \"C:\\Program Files\\MATLAB\\R2021b\\extern\\version\\c_mexapi_version.c\" /Fobuild\\win64\\c_mexapi_version.obj",
+    "file": "C:/Program Files/MATLAB/R2021b/extern/version/c_mexapi_version.c",
+    "output": "build/win64/c_mexapi_version.obj"
   }
 ]

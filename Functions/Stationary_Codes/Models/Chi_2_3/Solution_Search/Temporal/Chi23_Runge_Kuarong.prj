@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2021a">
-  <configuration build-checksum="3461363831" file="/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.prj" location="/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal" name="Chi23_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="1972741390" file="C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong.prj" location="C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal" name="Chi23_Runge_Kuarong" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -44,7 +44,7 @@
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
-      <param.VerificationStatus>option.VerificationStatus.Inactive</param.VerificationStatus>
+      <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
       <param.EnableMexProfiling>false</param.EnableMexProfiling>
       <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
       <param.CustomSourceCode />
@@ -125,7 +125,6 @@
         <param.DefaultTestFile />
         <param.MergeInstrumentationResults />
         <param.VerificationMode />
-        <param.VerificationStatus />
         <param.EnableMexProfiling />
         <var.BuiltWithMexProfiling />
         <param.CustomSourceCode />
@@ -205,7 +204,7 @@
       <param.CodeFormattingTool>option.CodeFormattingTool.Auto</param.CodeFormattingTool>
       <param.ClangFormatFile />
       <param.DataTypeReplacement />
-      <param.EnableCustomReplacementTypes />
+      <param.EnableCustomReplacementTypes>false</param.EnableCustomReplacementTypes>
       <param.ReplacementTypes.double />
       <param.ReplacementTypes.single />
       <param.ReplacementTypes.uint8 />
@@ -218,7 +217,7 @@
       <param.ReplacementTypes.int64 />
       <param.ReplacementTypes.char />
       <param.ReplacementTypes.logical />
-      <param.ReplacementTypes.ImportCustomTypes />
+      <param.ReplacementTypes.ImportCustomTypes>false</param.ReplacementTypes.ImportCustomTypes>
       <param.ReplacementTypes.HeaderFiles />
       <param.CppInterfaceStyle>option.CppInterfaceStyle.Functions</param.CppInterfaceStyle>
       <param.CppInterfaceClassName />
@@ -262,9 +261,9 @@
       <param.CustomSource />
       <param.CustomLibrary />
       <param.PostCodeGenCommand />
-      <param.TargetLangStandard />
-      <param.CodeReplacementLibrary />
-      <param.DeprecatedCRLFlag />
+      <param.TargetLangStandard>Auto</param.TargetLangStandard>
+      <param.CodeReplacementLibrary>None</param.CodeReplacementLibrary>
+      <param.DeprecatedCRLFlag>false</param.DeprecatedCRLFlag>
       <param.SameHardware>true</param.SameHardware>
       <param.Toolchain>Automatically locate an installed toolchain</param.Toolchain>
       <param.BuildConfiguration />
@@ -280,7 +279,7 @@
       <param.HardwareSizeChar.Production>8</param.HardwareSizeChar.Production>
       <param.HardwareSizeShort.Production>16</param.HardwareSizeShort.Production>
       <param.HardwareSizeInt.Production>32</param.HardwareSizeInt.Production>
-      <param.HardwareSizeLong.Production>64</param.HardwareSizeLong.Production>
+      <param.HardwareSizeLong.Production>32</param.HardwareSizeLong.Production>
       <param.HardwareSizeLongLong.Production>64</param.HardwareSizeLongLong.Production>
       <param.HardwareSizeFloat.Production>32</param.HardwareSizeFloat.Production>
       <param.HardwareSizeDouble.Production>64</param.HardwareSizeDouble.Production>
@@ -301,7 +300,7 @@
       <param.HardwareSizeChar.Target>8</param.HardwareSizeChar.Target>
       <param.HardwareSizeShort.Target>16</param.HardwareSizeShort.Target>
       <param.HardwareSizeInt.Target>32</param.HardwareSizeInt.Target>
-      <param.HardwareSizeLong.Target>64</param.HardwareSizeLong.Target>
+      <param.HardwareSizeLong.Target>32</param.HardwareSizeLong.Target>
       <param.HardwareSizeLongLong.Target>64</param.HardwareSizeLongLong.Target>
       <param.HardwareSizeFloat.Target>32</param.HardwareSizeFloat.Target>
       <param.HardwareSizeDouble.Target>64</param.HardwareSizeDouble.Target>
@@ -480,6 +479,7 @@
         <param.HardwareSizeChar.Production />
         <param.HardwareSizeShort.Production />
         <param.HardwareSizeInt.Production />
+        <param.HardwareSizeLong.Production />
         <param.HardwareSizeLongLong.Production />
         <param.HardwareSizeFloat.Production />
         <param.HardwareSizeDouble.Production />
@@ -493,6 +493,7 @@
         <param.HardwareSizeChar.Target />
         <param.HardwareSizeShort.Target />
         <param.HardwareSizeInt.Target />
+        <param.HardwareSizeLong.Target />
         <param.HardwareSizeLongLong.Target />
         <param.HardwareSizeFloat.Target />
         <param.HardwareSizeDouble.Target />
@@ -911,14 +912,20 @@
     </profile>
     <param.objective>option.objective.c</param.objective>
     <param.WorkflowStep>workflowSummary</param.WorkflowStep>
-    <param.TestSnippets />
+    <param.TestSnippets>
+      <item>Chi23_Runge_Kuarong(R.Temp,Runge)</item>
+      <item>Chi23_Runge_Kuarong(ResSave.Temp,Runge)</item>
+      <item>Chi23_Runge_Kuarong(Temp,Runge)</item>
+      <item>Chi23_Runge_Kuarong(ResSave(i).Temp,Runge)</item>
+      <item>Chi23_Runge_Kuarong(Res.Temp,Runge)</item>
+    </param.TestSnippets>
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}/Chi23_Runge_Kuarong_mex.mexa64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\Chi23_Runge_Kuarong_mex.mexw64</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.HasGpuCoder>true</param.HasGpuCoder>
-    <var.HasNeuralNetworkToolbox>true</var.HasNeuralNetworkToolbox>
+    <var.HasNeuralNetworkToolbox>false</var.HasNeuralNetworkToolbox>
     <param.newGlobals>
       <Globals>
         <idpTable />
@@ -934,21 +941,22 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>2390995770</param.AnnotationChecksum>
+    <param.AnnotationChecksum>597207777</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
     <var.redirectedInputTypeData />
     <var.DismissScreener>false</var.DismissScreener>
     <param.unifiedParamStorage />
-    <var.gc.lastOutputRoot>codegen/mex/Chi23_Runge_Kuarong</var.gc.lastOutputRoot>
+    <var.gc.lastOutputRoot>codegen\mex\Chi23_Runge_Kuarong</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>3461363831</var.gc.preBuildChecksum>
-    <var.cfi.lastOutputRoot />
-    <var.cfi.preBuildChecksum />
+    <var.gc.preBuildChecksum>3038481532</var.gc.preBuildChecksum>
+    <var.cfi.lastOutputRoot>codegen\mex\Chi23_Runge_Kuarong</var.cfi.lastOutputRoot>
+    <var.cfi.preBuildChecksum>2638019989</var.cfi.preBuildChecksum>
+    <var.lastCfiTestSnippet>Chi23_Runge_Kuarong(R.Temp,Runge)</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;1569961937&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;291747448&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
@@ -960,7 +968,7 @@
     <param.mex.outputfile>Chi23_Runge_Kuarong_mex</param.mex.outputfile>
     <param.grt.outputfile>Chi23_Runge_Kuarong</param.grt.outputfile>
     <param.artifact>option.target.artifact.mex</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}/Chi23_Runge_Kuarong_mex.mexa64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\Chi23_Runge_Kuarong_mex.mexw64</param.outputfile>
     <param.CppNamespace />
     <param.CppPackagesToNamespaces>true</param.CppPackagesToNamespaces>
     <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
@@ -999,7 +1007,7 @@
     <param.arm-compute.ArmArchitecture>option.arm-compute.architecture.unspecified</param.arm-compute.ArmArchitecture>
     <param.arm-compute.DataType>option.arm-compute.datatype.fp32</param.arm-compute.DataType>
     <param.arm-compute.CalibrationResultFile />
-    <param.TargetLang>option.TargetLang.CPP</param.TargetLang>
+    <param.TargetLang>option.TargetLang.C</param.TargetLang>
     <param.EnableAutoExtrinsicCalls>true</param.EnableAutoExtrinsicCalls>
     <param.EnableImplicitExpansion>true</param.EnableImplicitExpansion>
     <param.UsePreconditions>false</param.UsePreconditions>
@@ -1049,7 +1057,6 @@
     <param.FixedPointUseDesignRanges>false</param.FixedPointUseDesignRanges>
     <unset>
       <param.objective />
-      <param.TestSnippets />
       <param.ExternalFcnMajority />
       <param.UseGlobals />
       <param.outputfile />
@@ -1073,8 +1080,6 @@
       <var.redirectedInputTypeData />
       <var.DismissScreener />
       <param.unifiedParamStorage />
-      <var.cfi.lastOutputRoot />
-      <var.cfi.preBuildChecksum />
       <var.outdatedOnRestore />
       <param.forceMexBuild />
       <param.NoDefaultJIT />
@@ -1124,6 +1129,7 @@
       <param.arm-compute.ArmArchitecture />
       <param.arm-compute.DataType />
       <param.arm-compute.CalibrationResultFile />
+      <param.TargetLang />
       <param.EnableAutoExtrinsicCalls />
       <param.EnableImplicitExpansion />
       <param.UsePreconditions />
@@ -1172,119 +1178,121 @@
       <param.FixedPointUseDesignRanges />
     </unset>
     <fileset.entrypoints>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}/Chi23_Runge_Kuarong.m">
-        <Marker>1675430933141</Marker>
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi23_Runge_Kuarong.m">
+        <Marker>1667398394567</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench />
     <fileset.inputtypes>
-      <file custom-data-expanded="false" value="${PROJECT_ROOT}/Chi23_Runge_Kuarong.m">
-        <Inputs fileName="Chi23_Runge_Kuarong.m" functionName="Chi23_Runge_Kuarong">
+      <file custom-data-expanded="false" value="${PROJECT_ROOT}\Chi23_Runge_Kuarong.m">
+        <Inputs fileName="Chi23_Runge_Kuarong.m" functionName="Chi23_Runge_Kuarong" nargout="1">
           <Input Name="Temp" typeId="0">
             <Field Name="Met" typeId="1" />
+            <Field Name="Par" typeId="2">
+              <Field Name="Runge_Type" typeId="3" />
+              <Field Name="dt" typeId="4" />
+              <Field Name="s_t" typeId="4" />
+              <Field Name="T" typeId="4" />
+              <Field Name="dd" typeId="4" />
+              <Field Name="CW_num" typeId="4" />
+            </Field>
             <Field Name="In" typeId="2">
-              <Field Name="eta" typeId="3" />
-              <Field Name="delta_o" typeId="3" />
-              <Field Name="W" typeId="3" />
-              <Field Name="ko" typeId="3" />
-              <Field Name="ke" typeId="3" />
-              <Field Name="eps" typeId="3" />
-              <Field Name="eps_2" typeId="3" />
-              <Field Name="eps_3" typeId="3" />
-              <Field Name="Do" typeId="3" />
-              <Field Name="De" typeId="3" />
-              <Field Name="gam2o" typeId="3" />
-              <Field Name="gam2e" typeId="3" />
-              <Field Name="gam3o" typeId="3" />
-              <Field Name="gam3e" typeId="3" />
-              <Field Name="Finess" typeId="3" />
-              <Field Name="Finess_e" typeId="3" />
-              <Field Name="H_Star" typeId="3" />
-              <Field Name="Wf_Star" typeId="3" />
-              <Field Name="Ws_Star" typeId="3" />
-              <Field Name="Omega_Star" typeId="3" />
+              <Field Name="eta" typeId="4" />
+              <Field Name="delta_o" typeId="4" />
+              <Field Name="W" typeId="4" />
+              <Field Name="ko" typeId="4" />
+              <Field Name="ke" typeId="4" />
+              <Field Name="eps" typeId="4" />
+              <Field Name="eps_2" typeId="4" />
+              <Field Name="Do" typeId="4" />
+              <Field Name="De" typeId="4" />
+              <Field Name="gam2o" typeId="4" />
+              <Field Name="gam2e" typeId="4" />
+              <Field Name="gam3o" typeId="4" />
+              <Field Name="gam3e" typeId="4" />
+              <Field Name="Finess" typeId="4" />
+              <Field Name="Finess_e" typeId="4" />
+              <Field Name="H_Star" typeId="4" />
+              <Field Name="Wf_Star" typeId="4" />
+              <Field Name="Ws_Star" typeId="4" />
+              <Field Name="Omega_Star" typeId="4" />
               <Field Name="D" typeId="2">
-                <Field Name="omega" typeId="4" />
-                <Field Name="m" typeId="4" />
-                <Field Name="D1" typeId="4" />
-                <Field Name="n_o" typeId="4" />
-                <Field Name="n_e" typeId="4" />
-                <Field Name="S" typeId="4" />
-                <Field Name="gamma2" typeId="4" />
-                <Field Name="gamma3" typeId="4" />
-                <Field Name="kappa" typeId="4" />
+                <Field Name="omega" typeId="5" />
+                <Field Name="m" typeId="5" />
+                <Field Name="D1" typeId="5" />
+                <Field Name="n_o" typeId="6" />
+                <Field Name="n_e" typeId="6" />
+                <Field Name="gamma2" typeId="5" />
+                <Field Name="gamma3" typeId="5" />
+                <Field Name="S" typeId="6" />
+                <Field Name="gamma2_SH" typeId="6" />
+                <Field Name="gamma2_OPO" typeId="6" />
+                <Field Name="kappa" typeId="5" />
                 <Field Name="In" typeId="2">
-                  <Field Name="eta" typeId="3" />
-                  <Field Name="delta" typeId="3" />
-                  <Field Name="m_p" typeId="3" />
-                  <Field Name="f_off" typeId="3" />
-                  <Field Name="W" typeId="3" />
-                  <Field Name="N" typeId="3" />
-                  <Field Name="Nenv" typeId="3" />
-                  <Field Name="g" typeId="3" />
+                  <Field Name="eta" typeId="4" />
+                  <Field Name="delta" typeId="4" />
+                  <Field Name="m_p" typeId="4" />
+                  <Field Name="W" typeId="4" />
+                  <Field Name="N" typeId="4" />
+                  <Field Name="Nenv" typeId="4" />
+                  <Field Name="g" typeId="4" />
                 </Field>
               </Field>
-              <Field Name="N_mode" typeId="3" />
-              <Field Name="N" typeId="3" />
-              <Field Name="kMI" typeId="5" />
-              <Field Name="mu_bl" typeId="3" />
-              <Field Name="delta_e" typeId="3" />
-              <Field Name="H_f" typeId="3" />
-              <Field Name="H_s" typeId="3" />
-              <Field Name="Omega_f" typeId="6" />
-              <Field Name="Omega_s" typeId="6" />
-              <Field Name="Psi_Start" typeId="7" />
-              <Field Name="t_start" typeId="3" />
-            </Field>
-            <Field Name="Par" typeId="2">
-              <Field Name="Runge_Type" typeId="8" />
-              <Field Name="dt" typeId="3" />
-              <Field Name="s_t" typeId="3" />
-              <Field Name="T" typeId="3" />
-              <Field Name="dd" typeId="3" />
-              <Field Name="CW_num" typeId="3" />
+              <Field Name="N_mode" typeId="4" />
+              <Field Name="N" typeId="4" />
+              <Field Name="kMI" typeId="7" />
+              <Field Name="mu_bl" typeId="4" />
+              <Field Name="delta" typeId="4" />
+              <Field Name="delta_e" typeId="4" />
+              <Field Name="H_f" typeId="4" />
+              <Field Name="H_s" typeId="4" />
+              <Field Name="Omega_f" typeId="8" />
+              <Field Name="Omega_s" typeId="8" />
+              <Field Name="d" typeId="4" />
+              <Field Name="Psi_Start" typeId="9" />
+              <Field Name="t_start" typeId="4" />
             </Field>
             <Field Name="Space" typeId="2">
-              <Field Name="N" typeId="3" />
-              <Field Name="lenght" typeId="3" />
-              <Field Name="dphi" typeId="3" />
-              <Field Name="phi" typeId="9" />
-              <Field Name="dk" typeId="3" />
-              <Field Name="k" typeId="9" />
+              <Field Name="N" typeId="4" />
+              <Field Name="lenght" typeId="4" />
+              <Field Name="dphi" typeId="4" />
+              <Field Name="phi" typeId="10" />
+              <Field Name="dk" typeId="4" />
+              <Field Name="k" typeId="10" />
             </Field>
             <Field Name="Eq" typeId="2">
-              <Field Name="H_f" typeId="3" />
-              <Field Name="H_s" typeId="3" />
-              <Field Name="delta_o" typeId="3" />
-              <Field Name="delta_e" typeId="3" />
-              <Field Name="eps" typeId="3" />
-              <Field Name="ko" typeId="3" />
-              <Field Name="ke" typeId="3" />
-              <Field Name="gam2o" typeId="9" />
-              <Field Name="gam2e" typeId="9" />
-              <Field Name="gam3o" typeId="9" />
-              <Field Name="gam3e" typeId="9" />
-              <Field Name="Do" typeId="3" />
-              <Field Name="De" typeId="3" />
-              <Field Name="d" typeId="3" />
-              <Field Name="norm" typeId="3" />
-              <Field Name="mode_range" typeId="10" />
-              <Field Name="Lo" typeId="11" />
-              <Field Name="Le" typeId="11" />
-              <Field Name="L" typeId="7" />
+              <Field Name="H_f" typeId="4" />
+              <Field Name="H_s" typeId="4" />
+              <Field Name="delta_o" typeId="4" />
+              <Field Name="delta_e" typeId="4" />
+              <Field Name="eps" typeId="4" />
+              <Field Name="ko" typeId="4" />
+              <Field Name="ke" typeId="4" />
+              <Field Name="gam2o" typeId="10" />
+              <Field Name="gam2e" typeId="10" />
+              <Field Name="gam3o" typeId="10" />
+              <Field Name="gam3e" typeId="10" />
+              <Field Name="Do" typeId="4" />
+              <Field Name="De" typeId="4" />
+              <Field Name="d" typeId="4" />
+              <Field Name="norm" typeId="4" />
+              <Field Name="mode_range" typeId="11" />
+              <Field Name="Lo" typeId="12" />
+              <Field Name="Le" typeId="12" />
+              <Field Name="L" typeId="9" />
             </Field>
           </Input>
-          <Input Name="Runge" typeId="12">
-            <Field Name="b" typeId="13" />
-            <Field Name="a" typeId="14" />
-            <Field Name="c" typeId="14" />
-            <Field Name="s" typeId="3" />
+          <Input Name="Runge" typeId="13">
+            <Field Name="b" typeId="14" />
+            <Field Name="a" typeId="15" />
+            <Field Name="c" typeId="15" />
+            <Field Name="s" typeId="4" />
           </Input>
           <idpTable>
             <type typeId="0">
               <Class>struct</Class>
               <Size>1 x 1</Size>
-              <Value>TempEnv(1)</Value>
+              <Value>R.Temp</Value>
               <InitialValue />
               <UserDefined>true</UserDefined>
               <TypeName />
@@ -1313,17 +1321,15 @@
               <Alignment>-1</Alignment>
             </type>
             <type typeId="3">
-              <Class>double</Class>
-              <Size>1 x 1</Size>
+              <Class>char</Class>
+              <Size>1 x 12</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
-              <Complex>false</Complex>
-              <Sparse>false</Sparse>
             </type>
             <type typeId="4">
               <Class>double</Class>
-              <Size>1 x 1309</Size>
+              <Size>1 x 1</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1332,7 +1338,7 @@
             </type>
             <type typeId="5">
               <Class>double</Class>
-              <Size>1 x 2</Size>
+              <Size>1 x 656</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1341,6 +1347,24 @@
             </type>
             <type typeId="6">
               <Class>double</Class>
+              <Size>1 x 1032</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
+              <Sparse>false</Sparse>
+            </type>
+            <type typeId="7">
+              <Class>double</Class>
+              <Size>1 x 2</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
+              <Sparse>false</Sparse>
+            </type>
+            <type typeId="8">
+              <Class>double</Class>
               <Size>1 x 1</Size>
               <Value />
               <InitialValue />
@@ -1348,7 +1372,7 @@
               <Complex>true</Complex>
               <Sparse>false</Sparse>
             </type>
-            <type typeId="7">
+            <type typeId="9">
               <Class>double</Class>
               <Size>1 x 512</Size>
               <Value />
@@ -1357,25 +1381,9 @@
               <Complex>true</Complex>
               <Sparse>false</Sparse>
             </type>
-            <type typeId="8">
-              <Class>char</Class>
-              <Size>1 x 12</Size>
-              <Value />
-              <InitialValue />
-              <UserDefined>true</UserDefined>
-            </type>
-            <type typeId="9">
-              <Class>double</Class>
-              <Size>1 x 256</Size>
-              <Value />
-              <InitialValue />
-              <UserDefined>true</UserDefined>
-              <Complex>false</Complex>
-              <Sparse>false</Sparse>
-            </type>
             <type typeId="10">
               <Class>double</Class>
-              <Size>1 x 512</Size>
+              <Size>1 x 256</Size>
               <Value />
               <InitialValue />
               <UserDefined>true</UserDefined>
@@ -1384,6 +1392,15 @@
             </type>
             <type typeId="11">
               <Class>double</Class>
+              <Size>1 x 512</Size>
+              <Value />
+              <InitialValue />
+              <UserDefined>true</UserDefined>
+              <Complex>false</Complex>
+              <Sparse>false</Sparse>
+            </type>
+            <type typeId="12">
+              <Class>double</Class>
               <Size>1 x 256</Size>
               <Value />
               <InitialValue />
@@ -1391,7 +1408,7 @@
               <Complex>true</Complex>
               <Sparse>false</Sparse>
             </type>
-            <type typeId="12">
+            <type typeId="13">
               <Class>struct</Class>
               <Size>1 x 1</Size>
               <Value>Runge</Value>
@@ -1402,7 +1419,7 @@
               <HeaderFile />
               <Alignment>-1</Alignment>
             </type>
-            <type typeId="13">
+            <type typeId="14">
               <Class>double</Class>
               <Size>3 x 3</Size>
               <Value />
@@ -1411,7 +1428,7 @@
               <Complex>false</Complex>
               <Sparse>false</Sparse>
             </type>
-            <type typeId="14">
+            <type typeId="15">
               <Class>double</Class>
               <Size>1 x 3</Size>
               <Value />
@@ -1425,18 +1442,15 @@
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Chi23_Runge_Kuarong_mex.mexa64" optional="false">/home/dp710/NewGitFolder/CavityCodes/Functions/Stationary_Codes/Models/Chi_2_3/Solution_Search/Temporal/Chi23_Runge_Kuarong_mex.mexa64</file>
+      <file location="${PROJECT_ROOT}" name="Chi23_Runge_Kuarong_mex.mexw64" optional="false">C:\Users\dp710\Documents\GitHub\CavityCodes\Functions\Stationary_Codes\Models\Chi_2_3\Solution_Search\Temporal\Chi23_Runge_Kuarong_mex.mexw64</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>/usr/local/matlab/r2021b</root>
+      <root>C:\Program Files\MATLAB\R2021b</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
         <toolbox name="embeddedcoder" />
         <toolbox name="gpucoder" />
-        <toolbox name="fixedpoint" />
-        <toolbox name="matlabhdlcoder" />
-        <toolbox name="neuralnetwork" />
       </toolboxes>
       <toolbox>
         <matlabcoder>
@@ -1453,35 +1467,20 @@
           <enabled>true</enabled>
         </gpucoder>
       </toolbox>
-      <toolbox>
-        <fixedpoint>
-          <enabled>true</enabled>
-        </fixedpoint>
-      </toolbox>
-      <toolbox>
-        <matlabhdlcoder>
-          <enabled>true</enabled>
-        </matlabhdlcoder>
-      </toolbox>
-      <toolbox>
-        <neuralnetwork>
-          <enabled>true</enabled>
-        </neuralnetwork>
-      </toolbox>
     </matlab>
     <platform>
-      <unix>true</unix>
+      <unix>false</unix>
       <mac>false</mac>
-      <windows>false</windows>
+      <windows>true</windows>
       <win2k>false</win2k>
       <winxp>false</winxp>
       <vista>false</vista>
-      <linux>true</linux>
+      <linux>false</linux>
       <solaris>false</solaris>
-      <osver>4.15.0-177-generic</osver>
+      <osver>10.0</osver>
       <os32>false</os32>
       <os64>true</os64>
-      <arch>glnxa64</arch>
+      <arch>win64</arch>
       <matlab>true</matlab>
     </platform>
   </configuration>

@@ -30,7 +30,7 @@
 void Chi23_Runge_IntegrationSteps(
     real_T nt, real_T dt, const creal_T d[1536], creal_T F_e[512],
     const creal_T exp_plus_omega[1536], const creal_T exp_minus_omega[1536],
-    const struct0_T *Runge, const creal_T shift_back[512],
+    const struct0_T *Runge, real_T t, const creal_T shift_back[512],
     const real_T gam2o[256], const real_T gam2e[256], const real_T gam3o[256],
     const real_T gam3e[256], const real_T H_f[512],
     const real_T mode_range[512]);

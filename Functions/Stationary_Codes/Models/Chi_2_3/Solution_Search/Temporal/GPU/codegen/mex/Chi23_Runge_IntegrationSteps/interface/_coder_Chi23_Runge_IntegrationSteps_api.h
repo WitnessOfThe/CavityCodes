@@ -26,7 +26,7 @@
 #endif
 
 // Function Declarations
-void c_Chi23_Runge_IntegrationSteps_(const mxArray *const prhs[14],
+void c_Chi23_Runge_IntegrationSteps_(const mxArray *const prhs[15],
                                      const mxArray *plhs[1]);
 
 // End of code generation (_coder_Chi23_Runge_IntegrationSteps_api.h)
